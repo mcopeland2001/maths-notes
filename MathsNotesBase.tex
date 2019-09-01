@@ -1,0 +1,62 @@
+\documentclass[12pt]{report}
+\usepackage{subfiles}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+
+
+\input{search.tex}
+
+\setlength{\parindent}{0em}
+\newcommand\chapterTitle\Huge
+\newcommand\sectionTitle\Large
+\newcommand\problem[1]{\paragraph{#1}}
+\newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
+
+\newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
+
+\DeclarePairedDelimiterX\setc[2]{\{}{\}}{\,#1 \,\;\delimsize\vert\;\, #2\,}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+\DeclareRobustCommand{\N}[1]{\mathbb{N}^{#1}}
+\DeclareRobustCommand{\R}[1]{\mathbb{R}^{#1}}
+\DeclareRobustCommand{\Z}[1]{\mathbb{Z}^{#1}}
+\DeclareRobustCommand{\C}[1]{\mathbb{C}^{#1}}
+\DeclareRobustCommand{\Q}[1]{\mathbb{Q}^{#1}}
+\DeclareRobustCommand{\F}[1]{\mathbb{F}^{#1}}
+
+\newcommand{\dotsuchthat}{\;\cdot\;}
+\newcommand{\suchthat}{\text{ s.t. }}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem*{definition}{Definition}
+\newtheorem{axiom}{Axiom}
+
+\newcommand{\labeledProposition}[2]{
+	\begin{proposition}
+	\expandafter\label{prop:#2}
+	{#1}
+	\end{proposition}
+}
+\def\propositionautorefname{Proposition}
+
+
+\title{Mathematics Notes}
+\date{\vspace{-6ex}}
+
+\begin{document}
+%\subfile{"Integration Techniques"}
+\subfile{limits}
+%\subfile{"Taylor Series"}
+\subfile{Further_Calculus_exam_notes.tex}
+\subfile{"Vector Spaces"}
+\end{document}

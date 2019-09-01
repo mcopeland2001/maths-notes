@@ -1,0 +1,88 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\newcommand*{\V}[1]{\vec{\bm{#1}}}
+\def\u{\vec{\bm{u}}}
+\def\v{\vec{\bm{v}}}
+\def\w{\vec{\bm{w}}}
+\def\0{\vec{\bm{0}}}
+
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}
+\searchableSubsection{\chapterTitle{Linear Algebra}}{linear algebra}{\bigskip\bigskip}
+
+\searchableSubsection{\sectionTitle{Matrix Algebra}}{linear algebra}{\bigskip}
+
+	\paragraph{If $A,B,C$ are matrices s.t. $AB = AC$, can we, in general, conclude that $B = C$?}
+	The answer is no, as the following example shows:
+	\begin{align*}
+		A = 
+		\begin{pmatrix}
+		0 & 0\\
+		1 & 1\\
+		\end{pmatrix},&&
+		B = 
+		\begin{pmatrix}
+		1 & -1\\
+		3 & 5\\
+		\end{pmatrix},&&
+		C = 
+		\begin{pmatrix}
+		8 & 0\\
+		-4 & 4\\
+		\end{pmatrix}
+	\end{align*}
+	\begin{align*}
+	A = B = 
+	\begin{pmatrix}
+	0 & 0\\
+	4 & 4\\
+	\end{pmatrix}
+	\end{align*}
+	
+	This is because multiplication by $A$ has no inverse (i.e. it's not a bijection and $A^{-1}$ does not exist) as we can see by the fact that $\vert{A}\vert = 0$.
+	
+	\paragraph{If $A,B,C$ are matrices s.t. $A + 5B = A + 5C$, can we, in general, conclude that $B = C$?}
+	The answer is yes because the matrix addition and scalar multiplication always have inverses. The inverse of $+ A$ is $- A$ and the inverse of scalar multiplication by $5$ is scalar multiplication by $\frac{1}{5}$. So we can say,
+	\begin{align*}
+	&& A + 5B &= A + 5C\\[8pt]
+	&\iff & A + 5B - A &= A + 5C - A\\[8pt]
+	&\iff & 5B &= 5C\\[8pt]
+	&\iff & \left(\frac{1}{5}\right)5B &= \left(\frac{1}{5}\right)5C\\[8pt]
+	&\iff & B &= C
+	\end{align*}
+	
+	\bigskip
+	\searchable{subsubsection}{\small{Let $X$ be the set of $n \times n$ real matrices. Define a relation $\sim$ on $X$ by:
+		\[ M \sim N \iff \exists \text{ an invertible } P \in X \suchthat N = P^{-1}MP. \]
+	Prove that $\sim$ is an equivalence relation.
+	}}{linear algebra, equivalence relations}{
+	\paragraph{Reflexivity:}
+	\begin{align*}
+	& N = I^{-1}NI \\
+	\therefore \; & N \sim N
+	\end{align*}
+	
+	\paragraph{Symmetry:}
+	\begin{align*}
+	& & N &= P^{-1}MP \\
+	&\iff & NP^{-1} &= P^{-1}M(PP^{-1}) \\
+	&\iff & NP^{-1} &= P^{-1}M \\
+	&\iff & PNP^{-1} &= (PP^{-1})M \\
+	&\iff & PNP^{-1} &= M \\
+	&\iff & R^{-1}NR &= M,\;\; R \in X\\
+	&\;\;\therefore & N \sim M &\iff M \sim N
+	\end{align*}
+	
+	\paragraph{Transitivity:}
+	\begin{align*}
+	& & N &= P^{-1}MP,\;\; M = Q^{-1}AQ \\
+	&\implies & N &= P^{-1}(Q^{-1}AQ)P \\
+	&\iff & N &= (P^{-1}Q^{-1})A(QP) \\
+	&\iff & N &= R^{-1}AR,\;\; R \in X\\
+	&\;\;\therefore & (N \sim M) & \wedge (M \sim Q) \iff (N \sim Q)
+	\end{align*}
+	}
+\end{document}

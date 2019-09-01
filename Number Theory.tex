@@ -1,0 +1,208 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+\searchableSubsection{\chapterTitle{Number Theory}}{number theory}{\bigskip\bigskip}
+
+	\searchableSubsection{\sectionTitle{Natural Numbers}}{number theory}{\bigskip}
+			
+			\searchableSubsection{Peano Axioms}{number theory}{\bigskip
+				\begin{axiom}{Closure under addition:}\\ For all $a,b \in \N{}$ we have $a + b \in \N{}$.	
+				\end{axiom}
+				\begin{axiom}{Closure under multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b \in \N{}$.
+				\end{axiom}
+				\begin{axiom}{Commutative Law for addition:}\\ For all $a,b \in \N{}$ we have $a + b = b + a$.
+				\end{axiom}
+				\begin{axiom}{Associative Law for addition:}\\ For all $a,b,c \in \N{}$ we have $(a + b) + c = a + (b + c)$.
+				\end{axiom}
+				\begin{axiom}{Commutative Law for multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b = b \times a$.
+				\end{axiom}
+				\begin{axiom}{Associative Law for multiplication:}\\ For all $a,b,c \in \N{}$ we have $(a \times b) \times c = a \times (b \times c)$.
+				\end{axiom}
+				\begin{axiom}{Multiplicative Identity:}\\ There is a special element of $\N{}$, denoted by 1, which has the property that for all $n \in \N{},\; n \times 1 = n$.
+				\end{axiom}
+				\begin{axiom}{Additive cancellation:}\\ For all $a,b,c \in \N{}$ if $a + c = b + c \text{ then } a = b$.
+				\end{axiom}
+				\begin{axiom}{Multiplicative cancellation:}\\ For all $a,b,c \in \N{}$ if $a \times c = b \times c \text{ then } a = b$.
+				\end{axiom}
+				\begin{axiom}{Distributive Law:}\\ For all $a,b,c \in \N{},\; a \times (b + c) = (a \times b) + (b \times c)$.
+				\end{axiom}
+				\begin{axiom}{Definition of "less than":}\\ For all $a,b \in \N{},\; a < b$ if and only if there is some $c \in \N{} \suchthat a + c = b$.
+				\end{axiom}
+				\begin{axiom}{Trichotomous property:}\\ For all $a,b \in \N{}$ exactly one of the following is true: $a = b,\; a < b,\; b < a$.
+				\end{axiom}
+			}
+		
+		\paragraph{Notation:} We also write $ab$ for $a \times b$.
+		
+		\searchableSubsection{Properties following from these axioms}{number theory}{\bigskip
+			
+			\labeledProposition{If $a,b \in \N{}$ satisfy $a \times b = a$, then $b = 1$.}{mult_identity_unique}
+				\begin{proof}
+				\begin{align*}
+				&& a \times b &= a = a \times 1 &\sidecomment{by Multiplicative Identity axiom}\\
+				&\iff & b \times a &= 1 \times a  &\sidecomment{by Commutative Law for multiplication}\\
+				&\iff & b &= 1  &\sidecomment{by Multiplicative cancellation}\\
+				\end{align*}
+				\end{proof}
+			
+			\labeledProposition{If $a,b,c \in \N{}$ and $a < b$ then $a \times c < b \times c$.}{less_than_mult_augment}
+				\begin{proof}
+				\begin{align*}
+				&& a < b &\implies a + d = b \text{ for some } d \in \N{} &\sidecomment{by Definition of "less than"}\\
+				&\therefore & b \times c &= (a + d) \times c = (a \times c) + (d \times c)  &\sidecomment{by Distributive Law}\\
+				&\therefore & a \times c &< (a \times c) + (d \times c) = b \times c  &\sidecomment{by defn. "less than" and closure}
+				\end{align*}
+				\end{proof}
+			
+			\labeledProposition{$1$ is the least element of $\N{}$.}{mult_identity_least_element}
+			\begin{proof}
+				Assume $m$ is the least element of $\N{}$. Then, also $m < 1$. So, by \autoref{prop:less_than_mult_augment},
+				\begin{align*}
+				m < 1 \implies m \times m < 1 \times m = m
+				\end{align*}
+				But, closure of multiplication and $m \times m < m$ together contradict the assumption that $m$ is the least element of $\N{}$.\\
+				Therefore $m$ cannot be less than $1$. Since we know that $1 \in \N{}$ and that the minimum element of $\N{}$, $m$, cannot be less than $1$, it follows that $1$ must be the minimum element of $\N{}$ and $m = 1$.
+			\end{proof}
+		}
+	
+	
+	\searchableSubsection{\sectionTitle{Integers}}{number theory}{\bigskip}
+
+		\searchableSubsection{Odd and Even Numbers}{number theory}{\bigskip
+			\begin{definition}
+			An \textbf{even} number, $n \in \Z{}$, is one that satisfies,
+			\[ \exists\,m \in \Z\; \cdot \; n = 2m \]
+			\end{definition}
+			
+			\begin{definition}
+			An \textbf{odd} number, $n \in \Z{}$, is one that satisfies,
+			\[ \exists\,m \in \Z\; \cdot \; n = 2m + 1 \]
+			\end{definition}
+			
+			\subsubsection{Consequences}
+			Sum of even numbers, $m + n$:
+			\begin{align*}
+			m + n &= 2k + 2l \hspace{15pt} \text{where $k,l \in \Z{}$} &\sidecomment{by defn. of even no.s $m,n$} \\
+				  &= 2(k + l) \\
+				  &= 2q      \hspace{15pt} \text{where $q \in \Z{}$}
+			\end{align*}
+			So $m + n$ is also even.
+			However, if $m + n$ is even:
+			\begin{align*}
+			m + n &= 2k \hspace{15pt} \text{where $k \in \Z{}$} &\sidecomment{by defn. of even $m + n$} \\
+			k &= \frac{m}{2} + \frac{n}{2}\\
+			\end{align*}
+			So $m$ and $n$ are not necessarily even. A counterexample is 
+			\[3 + 5 = 8 \iff \frac{3}{2} + \frac{5}{2} = 4 \]
+			To summarize:
+			\begin{itemize}
+			\item{$m,n$ even $ \implies m + n$ even}
+			\item{$m + n$ even $ \implies m,n$ even \wrong} 
+			\end{itemize}
+		}
+	
+		\searchableSubsection{The Fundamental Theorem of Arithmetic}{number theory}{\bigskip
+			\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
+			More formally, an integer, $p$, is prime if it is greater than 1 and,
+			\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
+			
+			\paragraph{Primality $ \implies $ Unique Prime Factorization:}
+			\begin{quote}
+			``Any number either is prime or is measured by some prime number.''\\
+			\textit{Euclid, Elements Book VII, Proposition 32}
+			\end{quote}
+			So, if an integer $n$ is not prime then,
+			\begin{align*} 
+			\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
+			\iff n = ab
+			\end{align*}
+			Then, for $a$ (the same applies to $b$),
+			\begin{align*}
+			\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
+			\iff n = cd
+			\end{align*}
+			We can continue to descend like this until we must eventually encounter one or more primes.
+			Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
+			\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
+			But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
+			
+			\paragraph{Proof of existence}
+			\begin{proof}
+			It must be shown that every integer greater than $ 1 $ is either prime or a product of primes. First, $ 2 $ is prime. Then, by strong induction, assume this is true for all numbers greater than $ 1 $ and less than $ n $. 
+			If $ n $ is prime, there is nothing more to prove. 
+			Otherwise, there are integers $ a, b $ where $ n = ab $, and $ 1 < a \leq b < n $. By the induction hypothesis, $ a = p_1p_2...p_j \text{ and } b = q_1q_2...q_k $ are products of primes. But then $ n = ab = p_1p_2...p_jq_1q_2...q_k $ is a product of primes.
+			\end{proof}
+		
+			\paragraph{Proof of uniqueness}
+			\begin{proof}
+			Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
+			\end{proof}
+		}
+	
+		\searchableSubsection{Some Proofs on the Integers}{number theory}{\bigskip
+			\labeledProposition{For any integer $m$, $\sqrt{m}$ is rational iff $m$ is a square, i.e. $m=a^2$ for some integer $a$.}{rationality_of_sqrt_integers}
+			To begin with we show the easier direction of implication: $(m = a^2) \implies$ ($\sqrt{m}$ is rational).
+			\begin{proof}
+			Assume $m,a,b \in \Z{}$.
+			\begin{align*}
+			m &= a^2 \\
+			\iff \sqrt{m} &= \abs{a} \\
+			&= a/b \text{ for } b = 1 \text{ or } -1. \qedhere
+			\end{align*}
+			\end{proof}
+			Now the other (harder) direction, ($\sqrt{m}$ is rational) $\implies (m = a^2)$.
+			\begin{proof}
+			Assume $m,a,b \in \Z{}$. ($\sqrt{m}$ is rational) can be formalized as:
+			\[ \exists\,m,a,b \in \Z{} \cdot (\sqrt{m} = \frac{a}{b}) \; \wedge \; \text{($a$ and $b$ are coprime)} \]
+			\begin{align*}
+			\sqrt{m} &= \frac{a}{b} \\[8pt]
+			\implies m &= \frac{a^2}{b^2} \\[8pt]
+			\iff mb^2 &= a^2 \\ 
+			\end{align*}
+			But $a$ and $b$ are coprime so they don't share any prime factors. This means that $a^2$ and $b^2$ also don't share any prime factors. So, if $\abs{b} > 1$, the prime factorization of $mb^2$ is necessarily different from that of $a^2$ meaning that $mb^2 \neq a^2$ contradicting the hypothesis of coprimality.
+			On the other hand, if $\abs{b} = 1$, then $b$ has no prime factors (its prime factorization is empty) and so $mb^2$ has the same prime factorization as $m$ which may be equal to that of $a^2$ in the case that $m = a^2$.
+			\end{proof}
+			\bigskip
+			
+			\bigskip
+			\labeledProposition{For all nonnegative integers $a > b$ the difference of squares $a^2 - b^2$ does not give a remainder of 2 when divided by 4.}{a_squared_minus_b_squared}
+			Beginner's attempt - try proof by contradiction:
+			\begin{align*}
+			a^2 - b^2 &= 4n + 2 \\
+			2k &= 4n + 2 &\sidecomment{by $a^2 - b^2$ even}\\
+			k &= 2n + 1 \implies \text{ $k$ is some odd number.}
+			\end{align*}
+			So, proof by contradiction is our first instinct but doesn't seem to get us anywhere.
+			Instead, proceed by cases:
+			\paragraph{Case $a, b$ are even:}
+			\begin{align*}
+			\exists\,k,l \in \Z\; \cdot \;a &= 2k, b = 2l \\
+			\implies a^2 - b^2 &= 4k^2 - 4l^2 \\
+			&= 4\left(k^2 - l^2\right) \\
+			&= 4m\; \text{ where } \;m \in \Z\;  \\
+			\end{align*}
+			So $4$ divides $a^2 - b^2$ with $0$ remainder.
+			\paragraph{Case $a, b$ are odd:}
+			\begin{align*}
+			\exists\,k,l \in \Z\; \cdot \;a &= 2k+1, b = 2l+1 \\
+			\implies a^2 - b^2 &= \left(4k^2 + 4k + 1\right) - \left(4l^2 + 4l + 1\right) \\
+			&= 4\left(k^2 + k - l^2 - l\right) \\
+			&= 4m\; \text{ where } \;m \in \Z\;  \\
+			\end{align*}
+			So, again, $4$ divides $a^2 - b^2$ with $0$ remainder.
+			\paragraph{Case $a$ even, $b$ odd:}
+			\begin{align*}
+			\exists\,k,l \in \Z\; \cdot \;a &= 2k, b = 2l+1 \\
+			\implies a^2 - b^2 &= 4k^2 - \left(4l^2 + 4l + 1\right) \\
+			&= 4\left(k^2 - l^2 - l\right) - 1 \\
+			&= 4m + 3\; \text{ where } \;m=k^2 - l^2 - l - 1 \in \Z\;  \\
+			\end{align*}
+			So, here, $4$ divides $a^2 - b^2$ with $3$ remainder. So the proposition is proven as we have proven all the possible cases.\\
+			There is also another approach given in the Cambridge University Discrete Mathematics lecture notes,
+			TODO
+		}
+		
+		
+\end{document}

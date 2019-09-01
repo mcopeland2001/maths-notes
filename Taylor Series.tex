@@ -1,0 +1,81 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+\chapter*{Taylor Series}
+
+\section*{Derivation of Taylor's Theorem}
+\bigskip
+
+	\subsection*{Rolle's Theorem}
+	Taken from \url{https://en.wikipedia.org/wiki/Rolle%27s_theorem#Standard_version_of_the_theorem}\\\\
+	If a real-valued function $f$ is continuous on a closed interval $[a, b]$ and differentiable on the open interval $(a, b)$ and $f(a) = f(b)$, then there exists at least one $c \in (a, b)$ such that $f'(c) = 0$.
+	
+	\subsection*{Mean Value Theorem}
+	Based on \url{https://en.wikipedia.org/wiki/Mean_value_theorem#Proof} \\\\
+	If a real-valued function $f$ is continuous on a closed interval $[a, b]$ and differentiable on the open interval $(a, b)$ and $f(a) \neq f(b)$, then we can define a number $M \in \mathbb{R}$ such that,
+	\[f(b) = f(a) + M(b-a)\]
+	then let $g(x) = f(x) - f(a) - M(x - a)$ so that $g'(x) = f'(x) - M$. Now, since by the definition of $M$, $g(a) = g(b) = 0$, we can apply Rolle's theorem so that,
+	\begin{align*}
+	g'(c) &= 0 \text{ for some } c \in (a, b) \\
+	\implies 0 &= f'(c) - M \\
+	\iff M &= f'(c) \\
+	\therefore f(b) &= f(a) + f'(c)(b - a) \text{ for some } c \in (a, b) \\
+	\end{align*}
+	
+	\subsection*{Taylor's Theorem}
+	Taken from \textit{Walter Rudin, Principles of Mathematical Analysis}.\\\\
+	Suppose $f$ is a real-valued function on $[a, b]$, $n$, is a positive integer, $f^(n-1)$ is continuous on $[a, b]$, $f^(n)$ exists for every $t \in (a, b)$. Let $\alpha, \beta$ be distinct points of [a, b], and define
+	\[ P(t) = \sum_{k = 0}^{n - 1}\frac{f^{(k)}(\alpha)}{k!}(t - \alpha)^k. \]
+	Then there exists a point between $\alpha$ and $\beta$ such that
+	\[ f(\beta) = P(\beta) + \frac{f^{(n)}(x)}{n!}(\beta - \alpha)^n. \]
+	
+	Note that if $n = 0$ this degenerates to the Mean Value Theorem:
+	\begin{align*}
+	f(\beta) &= \sum_{k = 0}^{0}\frac{f^{(k)}(\alpha)}{k!}(t - \alpha)^k + \frac{f^{(1)}(x)}{1!}(\beta - \alpha)^1 \\
+	&= \frac{f^{(0)}(\alpha)}{0!}(t - \alpha)^0 + \frac{f^{(1)}(x)}{1!}(\beta - \alpha)^1 \\
+	&= f(\alpha) + f'(x)(\beta - \alpha) \\
+	\end{align*}
+	
+		\subsubsection*{Proof}
+		Let M be the number defined by 
+			\[ f(\beta) = P(\beta) + M(\beta - \alpha)^n \]
+		and put
+			\[ g(t) = f(t) - P(t) - M(t - \alpha)^n \hspace*{20pt} (a \leq t \leq b). \]
+		We have to show that $n!M = f^{(n)}(x)$ for some $x$ between $\alpha$ and $\beta$. Taking the nth derivative of $g(t)$,
+			\[ g^{(n)}(t) = f^{(n)}(t) - n!M \hspace*{20pt} (a < t < b).\]
+		The proof will be complete if we can show that $g^{(n)}(x) = 0$ for some $x$ between $\alpha$ and $\beta$. Since $P^{(k)}(\alpha) = f^{(k)}(\alpha)$ for $k = 0,\ldots, n-1$ we have
+			\[ g(\alpha) = g'(\alpha) = \ldots = g^{(n - 1)}(\alpha) = 0. \]
+		Our choice of M shows that $g(\beta) = 0$, so that $g'(x_1) = 0$ for some $x_1 \in (\alpha, \beta)$ by the Mean Value Theorem. Since $g'(\alpha) = 0$ we conclude similarly that $g''(x_2) = 0$ for some $x_2 \in (\alpha, \beta)$. After n steps we arrive at the conclusion that $g^{(n)}(x_n) = 0$ for some $x_n \in (\alpha, x_{n-1})$, that is, between $\alpha$ and $\beta$.
+
+\bigskip		
+\section*{Examples of Taylor Series}
+\bigskip
+
+	\subsection*{$\cos{x} \text{ for x close to }0$}
+	Note: Taylor series at zero are also called Maclaurin series.
+	\begin{align*}
+	\cos{x} &= \cos{0} + (-\sin{0})x + \frac{(-\cos{0})}{2!}x^2 + \ldots \\
+	&= 1 - \frac{x^2}{2} + \ldots
+	\end{align*}
+	
+	
+	\subsection*{$\cos{2h} \text{ for h close to }0$}
+	
+	\begin{align*}
+	\cos{2h} \approx 1 - \frac{(2h)^2}{2} = 1 - 2h^2
+	\end{align*}
+	
+	Note that if we choose to differentiate wrt. h rather than (2h) then we get the same result,
+	\begin{align*}
+	\cos{2h} &= \cos{0} + (-2\sin{0})h + \frac{(-4\cos{0})}{2!}h^2 + \ldots \\
+		&= 1 - 2h^2 + \ldots \\
+	\end{align*}
+	
+
+\bigskip		
+\section*{Finite Maclaurin Series and the Binomial Theorem}
+\bigskip
+\end{document}

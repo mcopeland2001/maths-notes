@@ -1,0 +1,16 @@
+List of tags used in MathsNotes
+-------------------------------
+convergence
+exponential growth
+finding limits
+difference of cubes
+taylor series
+vector spaces
+polynomials
+vector problems
+number theory
+abstract algebra
+complex numbers
+periodic functions
+linear algebra
+equivalence relations

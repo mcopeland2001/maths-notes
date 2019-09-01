@@ -1,0 +1,60 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+
+
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}
+\searchableSubsection{\chapterTitle{Abstract Algebra}}{abstract algebra, complex numbers}{\bigskip\bigskip}
+	
+	\searchableSubsection{\sectionTitle{Fields}}{abstract algebra}{\bigskip}
+		
+		\bigskip
+		\searchableSubsection{Complex Numbers}{abstract algebra, complex numbers}{\bigskip
+			\labeledProposition{For every $\alpha \in \C{}$, there exists a unique $\beta \in \C{}$ such that $\alpha + \beta = 0$.}{unique_complex_additive_inverse}
+			\begin{proof}
+			By contradiction: Say there are two such elements, $\beta, \gamma$ such that,
+			\begin{align*}
+			\alpha + \beta &= 0 = \alpha + \gamma \\
+			(\alpha + \beta) + \beta &= (\alpha + \beta) + \gamma \\
+			0 + \beta &= \beta = 0 + \gamma = \gamma \qedhere\\
+			\end{align*}
+			\end{proof}
+			
+			\labeledProposition{For every $\alpha \in \C{}$ with $\alpha \neq 0$, there exists a unique $\beta \in \C{}$ such that $\alpha\beta = 1$.}{unique_complex_multiplicative_inverse}
+			\begin{proof}
+			By contradiction: Say there are two such elements, $\beta, \gamma$ then,
+			\begin{align*}
+			\alpha\beta &= 1 = \alpha\gamma \\
+			\beta &= \frac{1}{\alpha} = \gamma \qedhere\\
+			\end{align*}
+			\end{proof}
+		}
+		
+		\bigskip\bigskip
+		\searchableSubsection{Complex Numbers Problems}{abstract algebra, complex numbers}{\bigskip\bigskip}
+		
+		\searchable{subsubsection}{Find all the roots of $x^3 = 1$ for $x \in \C{}$}{complex numbers}{
+		Since $x^3 - 1 = (x - 1)(x^2 + x + 1)$, we have (via zero-factor theorem) possible roots from,
+		\[ x - 1 = 0 \iff x = 1 \]
+		\begin{align*}
+		x^2 + x + 1 &= 0
+		\implies x = \frac{-1 \pm \sqrt{-3}}{2} = \frac{-1 \pm \sqrt{3}\,i}{2}
+		\end{align*}
+		More generally,
+		\[ (a+bi)+(a-bi)=2a \] 
+		and since also,
+		\[ \left[\frac{-1 + \sqrt{3}\,i}{2}\right]^2 = \frac{-1 - \sqrt{3}\,i}{2} \]
+		as well as the reverse,
+		\[ \left[\frac{-1 - \sqrt{3}\,i}{2}\right]^2 = \frac{-1 + \sqrt{3}\,i}{2} \]
+		this means that if $x = \frac{-1 \pm \sqrt{3}\,i}{2}$ then $x^2 + x$ is of the form $(a+bi)+(a-bi) = 2a$ and so we have that $x^2 + x = -1 \iff x^2 + x + 1 = 0$.\\\\
+		In addition,
+		\[ (a+bi)(a-bi)=a^2+b^2 \]
+		which means that if $x = \frac{-1 \pm \sqrt{3}\,i}{2}$ then $x^3 = x^2x$ is of the form $(a+bi)(a-bi)=a^2+b^2$ so we have
+		that $x^3 = {\frac{-1}{2}}^2 + {\frac{\sqrt{3}}{2}}^2 = \frac{1}{4} + \frac{3}{4} = 1$.\\\\
+		So we see that - allowing for complex $x$ - the cubic polynomial $x^3 - 1$ has 3 roots as we should expect from the \href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Fundamental Theorem of Algebra} \textit{\color{red}{(is this the correct interpretation of this?)}}.
+		}
+
+\end{document}

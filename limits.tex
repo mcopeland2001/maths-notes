@@ -1,0 +1,40 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+\chapter*{Limits}
+
+\section*{Limits}
+\bigskip
+
+  \searchableSection{$\lim_{x\to\infty} \left[\left(x^3 + x^2\right)^\frac{1}{3} - x\right]$}{finding limits, difference of cubes}{
+  \begin{align*}
+  	\text{Using }\left(a^3 - b^3\right) &= \left(a - b\right)\left(a^2 + b^2 + ab\right) :\\[8pt]
+  	\left[\left(x^3 + x^2\right)^\frac{1}{3} - x\right] &= \left[\left(x^3 + x^2\right)^\frac{1}{3} - x\right]\cdot\frac{\left[\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}\right]}{\left[\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}\right]} \\[8pt]
+  		&= \frac{\left(x^3 + x^2\right) - x^3}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} \\[8pt]
+        &= \frac{x^2}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} \\[8pt]
+        &= \frac{\frac{1}{x^2}}{\frac{1}{x^2}}\cdot\frac{x^2}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} \\[8pt]
+        &= \frac{1}{\left(1 + \frac{1}{x}\right)^\frac{2}{3} + 1 + \frac{1}{x}\left(x^3 + x^2\right)^\frac{1}{3}} \\[8pt]
+        &= \frac{1}{\left(1 + \frac{1}{x}\right)^\frac{2}{3} + 1 + \left(1 + \frac{1}{x}\right)^\frac{1}{3}} \\[8pt]
+    \therefore \lim_{x\to\infty} \left[\left(x^3 + x^2\right)^\frac{1}{3} - x\right] &= \lim_{x\to\infty} \frac{1}{\left(1 + \frac{1}{x}\right)^\frac{2}{3} + 1 + \left(1 + \frac{1}{x}\right)^\frac{1}{3}}\\[8pt]
+    	&= \frac{1}{3} \\[8pt]
+  \end{align*}
+  }
+  
+
+  \searchableSection{$\frac{1 - \cos{2x}}{2x^2}$}{finding limits, taylor series}{
+  \begin{align*}
+  &\text{For the function, } &\\
+  	& g(x) = \begin{cases}
+				1 & x = 0 \\
+				\frac{1 - \cos{2x}}{2x^2} & x\neq 0 \\
+			\end{cases} \\
+  &\text{using the definition of the derivative and the Taylor series for cosine, find g$'$(0).} \\
+  & g'(0) = \lim_{x\to 0} \frac{g(x) - g(0)}{x - 0} = \lim_{x\to 0} \frac{\frac{1 - \cos{2x}}{2x^2} - 1}{x}\\
+  &\text{Taylor series for cos(2x)} &\\
+  \end{align*}
+  }
+  
+  
+\end{document}

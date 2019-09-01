@@ -1,0 +1,107 @@
+%\documentclass{report}
+% ----- search code ------
+\usepackage{ifthen}
+\usepackage{xifthen}
+\usepackage{tikz}
+\usepackage{xstring}
+
+
+% copied from: https://ipfs-sec.stackexchange.cloudflare-ipfs.com/tex/A/question/161590.html
+\newcommand*{\isinxp}[2]{\expandafter\isinxpp\expandafter{#1}{#2}}
+\newcommand*{\isinxpp}[2]{\isin {#1}{#2}}
+
+
+% copied from: https://tex.stackexchange.com/questions/122634/variable-persist-outside-environment
+\makeatletter
+\def\newglobalboolean#1{%
+  \expandafter\@ifdefinable\csname if#1\endcsname{%
+    \expandafter\let\csname if#1\endcsname\iffalse
+    \expandafter\def\csname #1true\endcsname{%
+      \global\expandafter\let\csname if#1\endcsname\iftrue
+    }%
+    \expandafter\def\csname #1false\endcsname{%
+      \global\expandafter\let\csname if#1\endcsname\iffalse
+    }%
+}}
+\makeatother
+
+
+
+\newglobalboolean{isSearchResult}
+
+\newcommand\processKeywords[3]{		
+	\setboolean{isSearchResult}{false}
+	\foreach \word in {#1} {
+		\ifthenelse{ \isinxp{\word}{#3} }
+			{ \setboolean{isSearchResult}{true} }
+	}
+	\ifthenelse{ \boolean{isSearchResult} }
+		{#2}
+}
+\newcommand\search[3]{
+	\processKeywords{#1}{#2}{#3}
+}
+
+\newcommand\nosearch[2]{#2}
+\providecommand\searchResult\nosearch
+
+\newcommand{\tags}[1]{
+	%\begin{footnotesize}
+	{ \tiny{(tags: #1)} }
+	%\textit{tags: {#1}}
+	%\end{footnotesize}
+}
+\newcommand{\searchableSubsection}[3]{
+	\searchResult{#2}{
+		\subsection*{#1 \tags{#2}}
+			{#3}
+	}
+}
+\newcommand{\searchableSection}[3]{
+	\searchResult{#2}{
+		\section*{#1}\tags{#2}
+			{#3}
+	}
+}
+
+\newcommand\relay[2]{%
+  \expandafter\csname #1\endcsname*{#2}%
+}
+
+\newcommand{\searchable}[4]{
+	\searchResult{#3}{
+		\expandafter\csname #1\endcsname*{#2 \tiny{(tags: #3)}}%\tags{#3}
+			{#4}
+	}
+}
+
+%\renewcommand\searchResult[2]{\search{#1}{#2}{subsection 2 tag}}
+
+% -------- test code --------------
+%\iffalse 
+\begin{document}
+%\searchableSection{Section 1}{subsection 1 tag, subsection 2 tag}{
+
+	\searchableSubsection{\huge{Section 1}}{subsection 1 tag, subsection 2 tag}{}
+	
+	\searchableSubsection{Subsection 1}{subsection 1 tag}{
+		blah blah blah, blah blah blah
+	}
+	
+	\searchableSubsection{Subsection 2}{subsection 2 tag}{
+		blah blah blah, blah blah blah
+	}
+	
+%}
+\end{document}
+%\fi
+
+\iffalse % blows up with 'no line to end here' error because of // at the beginning of subsection content
+\begin{document}
+%\searchable{section}{Section Title}{some tags}{
+	\searchable{subsection}{Subsection Title}{some subsection tags}{//
+		blah blah blah, blah blah blah
+	}
+%} 
+\end{document}
+\fi

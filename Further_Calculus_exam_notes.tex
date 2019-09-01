@@ -1,0 +1,55 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}
+\chapter*{Further Calculus exam notes}
+
+\section*{}
+\bigskip
+
+	\searchableSection{Verify that $\int_0^1{\sin{x^p}}dx$ is convergent for all p.}{convergence}{
+	\paragraph*{$p=0$:}
+	When $p = 0$ the integral is constant and so the integral is convergent in this case.
+	\paragraph*{$p \ne 0$:}
+	For the cases where $p\ne0$, we make the substitution $y=x^p$ so that $x=y^{\frac{1}{p}}$ and $dx = \frac{1}{p}y^{\frac{1}{p} - 1}$ to see that:
+	
+	\subparagraph*{When $p>0$, we have}
+	\[ \int_0^1{\sin{(x^p)}}dx = \frac{1}{p}\int_0^1{\sin{(y)}y^{\frac{1}{p} - 1}}dy \]
+	We now note that near $y=0$, the integrand is positive and, if we compare with $y^{\frac{1}{p}}$, then we have
+	\[ \lim_{y\to0^+}{\frac{\sin{y}}{y}} = 1 \]
+	and so, as $p>0 \implies \frac{1}{p}>0$ and so the integral
+	\[ \int_0^1{ y^{\frac{1}{p}} }dy \]
+	is convergent, by the LCT, the given integral is convergent.
+	
+	\subparagraph*{When $p<0$, we have}
+	\[ \int_0^1{\sin{x^p}}dx = \frac{1}{p}\int_\infty^1{\sin{(y)}y^{\frac{1}{p} - 1}}dy = -\frac{1}{p}\int_1^\infty{\sin{(y)}y^{\frac{1}{p} - 1}}dy \]
+	Since, for all $y \geq 1$
+	\[ \vert{\sin{(y)}y^{\frac{1}{p} - 1}}\vert \leq y^{\frac{1}{p} - 1} \]
+	and so, as $p<0$ we have
+	\[ \int_1^\infty{y^{\frac{1}{p} - 1}}dy = \left[py^{\frac{1}{p}}\right]_1^\infty = p \]
+	which is finite and so the given integral is absolutely convergent.
+	}
+
+	\bigskip\bigskip\bigskip
+	\searchableSection{Show that, for $\beta > 0$, the function $f(t) = t^{\beta}\ln{t}$ is of exponential growth at most $\gamma$ for any $\gamma > 0$}{exponential growth}{\bigskip
+	
+	Need to show that for any $\gamma > 0$
+	\[ \vert{t^{\beta}\ln{t}}\vert \leq Me^{\gamma{t}} \]
+	for some $M > 0$. First note that for any $\gamma > 0$,
+	\begin{align*}
+	\lim_{t\to\infty}{\frac{t^{\beta}\ln{t}}{e^{\gamma{t}}}} &= \left(\lim_{t\to\infty}{\frac{t^{\beta}}{e^{\frac{\gamma{t}}{2}}}}\right)
+	\left(\lim_{t\to\infty}{\frac{\ln{t}}{e^\frac{\gamma{t}}{2}}}\right)\\[8pt]
+	&= \left(\lim_{t\to\infty}{\frac{\beta{!}}{\left(\frac{\gamma}{2}\right)^{\beta}e^{\frac{\gamma{t}}{2}}}}\right)\left(\lim_{t\to\infty}{\frac{1}{t\left(\frac{\gamma}{2}\right)e^\frac{\gamma{t}}{2}}}\right)\\[8pt]
+	&= \left(0\right)\left(0\right) = 0\\[8pt]
+	\end{align*}
+	This means that there is some value of $t$, say $T$, which, if $t > T$, then
+	\[ t^{\beta}\ln{t} < e^{\gamma{t}} \]
+	Note, in this question $f(t) = 0$ as a continuity "fix". In addition to that $t^{\beta}\ln{t}$ is continuous for $t \geq 0$ as $t^{\beta}$ and $\ln{t}$ are both continuous for $t > 0$. This means that for $0 \leq t \leq T$ we can find the maximum value of $\vert{f(t)}\vert$ over this interval and denote it $M_T$. Then, since $e^{\gamma{t}} \geq 1$ for any $t \geq 0 $ we have,
+	\[ \vert{f(t)}\vert \leq Me^{\gamma{t}} \]
+	where $M = max{1, M_T}$. Consequently, for $t \geq 0 $, $f(t)$ does indeed have exponential growth at most $\gamma$ for any $\gamma > 0$.
+	}
+
+
+\end{document}
