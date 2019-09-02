@@ -102,6 +102,31 @@
 			\item{$m + n$ even $ \implies m,n$ even \wrong} 
 			\end{itemize}
 		}
+		
+
+		\searchableSubsection{Divisibility and Primes}{number theory}{\bigskip
+			\subsubsection{Greatest Common Divisor \tiny{(also called Highest Common Factor)}}
+			The greatest common divisor of 16 and 6 can be visualized as follows:
+			\begin{align*}			
+			\vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$16 = 6 \times 2 + 4$}\\			
+			\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$6 = 4 \times 1 + 2$}\\		
+			\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{green}{\cdot\, \cdot} \vert &&\sidecomment{$4 = 2 \times 2 + 0$}\\		
+			\end{align*}
+			This implies the algorithm:		
+			\begin{align*}
+			\textbf{gcd}(&a, b):\\
+				&\text{if }\; b == 0\; \text{ then}\\
+				&\;\;\;\;\text{return } \; a\\
+				&\text{else}\\
+				&\;\;\;\;\text{return } \;\textbf{gcd}(b, b \bmod a)\\
+				&\text{end if}					
+			\end{align*}
+			
+			\labeledProposition{For non-zero integers $a$ and $b$, if $a = bq + r$ where $q,r \in \Z{}$, then $gcd(a, b) = gcd(b, r) = gcd(b, a \bmod b)$.}{gcd_remainder}
+				\begin{proof}
+				$(a \bmod b) = r = a - bq$. For any $m \suchthat m \divides a \text{ and } m \divides b$ we must also have $m \divides (a - bq)$ so the set of divisors of $a$ and $b$ is a subset of the set of divisors of $b$ and $r = (a \bmod b)$. Conversely, for any $m \suchthat m \divides b \text{ and } m \divides r = (a \bmod b)$ we have that $m \divides (bq + r) = a$ so the set of divisors of $b$ and $r = (a \bmod b)$ is a subset of the set of divisors of $a$ and $b$. So the sets are equal proving that they must have the same maximum element - the greatest common divisor.
+				\end{proof}
+		}
 	
 		\searchableSubsection{The Fundamental Theorem of Arithmetic}{number theory}{\bigskip
 			\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
