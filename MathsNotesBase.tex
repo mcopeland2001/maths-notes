@@ -1,4 +1,5 @@
 \documentclass[12pt]{report}
+
 \usepackage{subfiles}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -11,6 +12,13 @@
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{enumitem}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
 
 
 
@@ -56,10 +64,24 @@
 \title{Mathematics Notes}
 \date{\vspace{-6ex}}
 
+
 \begin{document}
-%\subfile{"Integration Techniques"}
-\subfile{limits}
-%\subfile{"Taylor Series"}
-\subfile{Further_Calculus_exam_notes.tex}
+\maketitle
+\subfile{"Abstract Algebra"}
+\newpage
+\subfile{"Number Theory"}
+\newpage
 \subfile{"Vector Spaces"}
+\newpage
+\subfile{"Linear Algebra"}
+\subfile{"LinearAlgebraOfPolynomials"}
+\newpage
+\subfile{"Integration Techniques"}
+\newpage
+\subfile{limits}
+\newpage
+\subfile{"Taylor Series"}
+\newpage
+\subfile{Further_Calculus_exam_notes.tex}
+
 \end{document}
