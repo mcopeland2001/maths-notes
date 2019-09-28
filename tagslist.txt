@@ -14,3 +14,4 @@ complex numbers
 periodic functions
 linear algebra
 equivalence relations
+absolute value

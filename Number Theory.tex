@@ -229,5 +229,47 @@
 			TODO
 		}
 		
+		\searchableSubsection{Absolute Value}{absolute value}{\bigskip
+			\[ \vert{x}\vert \ge x, \vert{y}\vert \ge y	\implies \vert{x}\vert + \vert{y}\vert \ge x + y \]
+			\begin{align*}			
+				\vert{x + y}\vert =
+					\begin{cases} 
+				      \vert{x}\vert + \vert{y}\vert & x,y \geq 0 \\
+				      \vert{ -\vert{x}\vert + \vert{y}\vert }\vert & x < 0,y \geq 0 \\
+				      \vert{ \vert{x}\vert - \vert{y}\vert }\vert & x \geq 0,y < 0 \\
+				      \vert{ -(\vert{x}\vert + \vert{y}\vert) }\vert & x,y < 0
+				   \end{cases}
+				\iff
+					\begin{cases} 
+						\vert{ \vert{x}\vert + \vert{y}\vert }\vert & x,y \geq 0 \text{ or } x,y < 0) \\
+						\vert{ \vert{x}\vert - \vert{y}\vert }\vert & x < 0,y \geq 0 \text{ or } x \geq 0,y < 0 \\
+					\end{cases}
+			\end{align*}
+			\bigskip
+			Clearly, $\vert{ \vert{x}\vert + \vert{y}\vert }\vert \ge \vert{ \vert{x}\vert - \vert{y}\vert }\vert$ so that,
+			\[ \vert{x + y}\vert \leq \vert{ \vert{x}\vert + \vert{y}\vert }\vert = \vert{x}\vert + \vert{y}\vert \]
+			and this is known as the "triangle inequality".\bigskip
+			
+			\labeledProposition{$\vert{x - y}\vert \leq \vert{x - z}\vert + \vert{y - z}\vert$}{asdfa}
+			\begin{proof}
+			\begin{align*}
+				\vert{x - y}\vert = \vert{(x - z) + (z - y)}\vert \leq \vert{x - z}\vert + \vert{z - y}\vert = \vert{x - z}\vert + \vert{y - z}\vert
+			\end{align*}
+			\end{proof}
+			
+			\labeledProposition{$\vert{x - y}\vert \geq \vert{ \vert{x}\vert - \vert{y}\vert }\vert$}{asdfa}
+			\begin{proof}
+			Need to show $-\vert{x - y}\vert \leq \vert{x}\vert - \vert{y}\vert \leq \vert{x - y}\vert$. So, prove as two separate inequalities:
+			\begin{align*}				
+				&&\vert{y}\vert = \vert{x + (y - x)}\vert &\leq \vert{x}\vert + \vert{y - x}\vert \\
+				&\iff &-\vert{y - x}\vert = -\vert{x - y}\vert &\leq \vert{x}\vert - \vert{y}\vert \\
+			\end{align*}
+			\begin{align*}				
+				&&\vert{x}\vert = \vert{(x - y) + y}\vert &\leq \vert{x - y}\vert + \vert{y}\vert \\
+				&\iff &\vert{x}\vert - \vert{y}\vert &\leq \vert{x - y}\vert
+			\end{align*}
+			\end{proof}
+		}
+		
 		
 \end{document}
