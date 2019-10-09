@@ -7,8 +7,81 @@
 
 
 \begin{document}
-\searchableSubsection{\chapterTitle{Abstract Algebra}}{abstract algebra, complex numbers}{\bigskip\bigskip}
+\searchableSubsection{\chapterTitle{Algebra}}{abstract algebra, complex numbers}{\bigskip\bigskip}
+
+	\searchableSubsection{\sectionTitle{Abstract Algebra}}{abstract algebra}{\bigskip}
 	
+	\bigskip\bigskip
+	\searchableSubsection{Groups}{abstract algebra}{\bigskip
+		
+		\begin{definition}
+		A binary operation is a function,\\
+		\[ f:G \times G \mapsto G \]
+		which - by the definition of a function - maps a unique tuple from $G \times G$ to a unique value in the codomain $G$.
+		\end{definition}
+		\bigskip
+		
+		\begin{definition}
+		Let $G$ be a set and $*$ a binary operation on $G$ and denote this ($G,*$). Then ($G,*$) is a \textbf{group} if:
+		\paragraph*{closure} $\forall x,y \in G, x * y \in G$;
+		\paragraph*{associativity} $\forall x,y,z \in G, (x * y) * z = x * (y * z)$;
+		\paragraph*{identity} $\exists e \in G \suchthat \forall x \in G, e*x = x*e = x$;
+		\paragraph*{inverse} $\forall x \in G, \exists x^{-1} \in G \suchthat x * x^{-1} = x^{-1} * x = e$.
+		\end{definition}
+		These are known as the \textit{group axioms}.
+		
+		\bigskip\smallskip
+		\begin{definition}
+		The group is an \textbf{Abelian group} if it has the additional property:	
+		\paragraph*{commutativity} $\forall x,y \in G, x * y = y * x \in G$.
+		\end{definition}
+		
+		\bigskip\smallskip
+		\paragraph{Notation} from here on we will use juxtaposition notation for the group operation (so $xy = x * y$) and (usually) $1$ for the identity element instead of $e$. This is known as \textit{multiplicative notation}.
+		
+		\bigskip\bigskip
+		\subsubsection{Corollaries of the group axioms}
+		The group operation is defined to map a unique tuple in $G \times G$ to a unique value in $G$ we have,
+		\[ a = b \iff (c, a) = (c, b) \implies f((c, a)) = f((c, b)) \iff ca = cb \]
+		\[ \therefore a = b \implies ca = cb \]
+		
+		Then, using all the group axioms - associativity, inverse and identity,
+		\[ ca = cb \implies \inv{c}(ca) = \inv{c}(cb) \iff (\inv{c}c)a = (\inv{c}c)b \iff 1a = 1b \iff a = b \]
+		
+		Therefore we have the principle of cancellation,
+		\[ ca = cb \implies a = b \]
+		\textit{Note} that, since we have used the axioms of inverse and identity and the definitions of these require these elements to exhibit these properties from both the left and the right, the principle of cancellation can also be shown from both the left and the right. So, also,
+		\[ ac = bc \implies a = b \]
+		
+		\bigskip
+		There are (at least) two approaches to finding the other consequences of the group axioms.\\\\
+		\paragraph*{First approach.} We begin by noticing that the law of cancellation implies that,
+		\subparagraph*{unique identity and inverses}$\forall a,x,b \in G, ax = b$ has a unique solution because,
+		\[ ax = ax' \iff x = x' \]
+		That unique solution is $a^{-1}b$. If $b=a$ we have $ax=a$ and $x$, by identity axiom, is an identity element. Since, the solution to this equation - $x$ - is unique, it follows that there is a unique value that is the identity element. Then, if we let $b$ be this unique identity element we have $ax=1$ and the unique solution, $x$, is the inverse of a, i.e. $\inv{a}$. Therefore, the inverses of group elements are also unique.
+		
+		\paragraph*{Second approach.} This approach begins by showing the uniqueness of the identity element solely using the defintion of the identity. Here, for clarity, we revert to using $e$ to denote the identity element.
+		\subparagraph*{unique identity} Assume there are two identity elements, $e, e'$. Then, by the definition of the identity $ee' = e'e = e = e'$ so that there is a single value that has the property of the identity element.\\\\
+		Then, using the definition of the inverse we have,
+		\subparagraph{unique inverses} Assume there are two distinct inverses of an element $a$: $\inv{a}$ and $a'$. Then, 
+		\begin{align*}
+		&& a\inv{a} = 1 &= aa' &\sidecomment{defn. of inverse, uniqueness of identity}\\
+		& \iff & \inv{a} &= a' &\sidecomment{law of cancellation}
+		\end{align*}
+		\bigskip\bigskip
+
+		\paragraph*{Some Examples of Groups}
+		\begin{itemize}
+		\item{ ($\R{} \setminus \{0\}, \times)$ } is a group whereas ($\R{}, \times)$ is not a group because $0$ has no multiplicative inverse.
+		\item{ ($\R{}, +)$ } is a group.
+		\end{itemize}
+	}
+	
+	
+	
+	
+	
+	\pagebreak
 	\searchableSubsection{\sectionTitle{Fields}}{abstract algebra}{\bigskip}
 		
 		\bigskip

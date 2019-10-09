@@ -1,5 +1,6 @@
 \documentclass[MathsNotesBase.tex]{subfiles}
 
+
 \newcommand*{\V}[1]{\vec{\bm{#1}}}
 \def\u{\vec{\bm{u}}}
 \def\v{\vec{\bm{v}}}
@@ -15,44 +16,182 @@
 
 \searchableSubsection{\sectionTitle{Matrix Algebra}}{linear algebra}{\bigskip}
 
-	\paragraph{If $A,B,C$ are matrices s.t. $AB = AC$, can we, in general, conclude that $B = C$?}
-	The answer is no, as the following example shows:
-	\begin{align*}
-		A = 
+	\searchableSubsection{Basic properties of Matrix Algebra}{linear algebra}{\bigskip\bigskip
+	
+		\subsubsection{\small{If $A,B,C$ are matrices s.t. $AB = AC$, can we, in general, conclude that $B = C$?}}
+		The answer is no, as the following example shows:
+		\begin{align*}
+			A = 
+			\begin{pmatrix}
+			0 & 0\\
+			1 & 1\\
+			\end{pmatrix},&&
+			B = 
+			\begin{pmatrix}
+			1 & -1\\
+			3 & 5\\
+			\end{pmatrix},&&
+			C = 
+			\begin{pmatrix}
+			8 & 0\\
+			-4 & 4\\
+			\end{pmatrix}
+		\end{align*}
+		\begin{align*}
+		A = B = 
 		\begin{pmatrix}
 		0 & 0\\
-		1 & 1\\
-		\end{pmatrix},&&
-		B = 
-		\begin{pmatrix}
-		1 & -1\\
-		3 & 5\\
-		\end{pmatrix},&&
-		C = 
-		\begin{pmatrix}
-		8 & 0\\
-		-4 & 4\\
+		4 & 4\\
 		\end{pmatrix}
-	\end{align*}
-	\begin{align*}
-	A = B = 
-	\begin{pmatrix}
-	0 & 0\\
-	4 & 4\\
-	\end{pmatrix}
-	\end{align*}
+		\end{align*}
+		
+		This is because multiplication by $A$ has no inverse (i.e. it's not a bijection and $A^{-1}$ does not exist) as we can see by the fact that $\vert{A}\vert = 0$.
+		
+		\subsubsection{\small{If $A,B,C$ are matrices s.t. $A + 5B = A + 5C$, can we, in general, conclude that $B = C$?}}
+		The answer is yes because the matrix addition and scalar multiplication always have inverses. The inverse of $+ A$ is $- A$ and the inverse of scalar multiplication by $5$ is scalar multiplication by $\frac{1}{5}$. So we can say,
+		\begin{align*}
+		&& A + 5B &= A + 5C\\[8pt]
+		&\iff & A + 5B - A &= A + 5C - A\\[8pt]
+		&\iff & 5B &= 5C\\[8pt]
+		&\iff & \left(\frac{1}{5}\right)5B &= \left(\frac{1}{5}\right)5C\\[8pt]
+		&\iff & B &= C
+		\end{align*}
+		
+		
+		
+		\subsubsection*{Matrix multiplication}
+		Multiplication of matrices proceeds as a collection of dot-products of individual vectors. As a result, its properties are largely dependent on the properties of the dot-product. These are:
+		\newcommand\vx{\V{x}}
+		\newcommand\vy{\V{y}}
+		\newcommand\vz{\V{z}}
+		\begin{itemize}
+		\item[]{If $\V{x} = (a, b)^{T}$ and $\V{y} = (e, g)^{T}$ then the dot-product $\langle \V{x}, \V{y} \rangle = ae + bg$ and,}
+		\item{$\langle \vx, \vy \rangle = \langle \vy, \vx \rangle$}
+		\item{$\alpha\langle \vx, \vy \rangle = \langle \alpha \vx, \vy \rangle = \langle \vx, \alpha \vy \rangle$}
+		\item{$\langle \vx+\vy, \vz \rangle = \langle \vx, \vz \rangle + \langle \vy, \vz \rangle$}
+		\item{$\langle \vx, \vx \rangle \geq 0$ and $\langle \vx, \vx \rangle = 0 \iff \vx = 0$}
+		\end{itemize}
+		
+		Matrix multiplication treats the two operand matrices as collections of vectors with the first matrix having the vectors as rows and the second having the vectors as columns.
+		\begin{align*}
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			e & f \\
+			g & h \\
+			\end{bmatrix}
+			&=
+			\begin{bmatrix}
+			ae + bg & af + bh \\
+			ce + dg & cf + dh \\
+			\end{bmatrix}
+		\end{align*}
+		This difference in orientation of the vectors in the two operands results in the multiplication not being commutative - the order matters. So, the first property of the dot-product is not preserved but the others are preserved (albeit with a slight modification for the last one).
+		\begin{align*}						
+			\alpha
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			e & f \\
+			g & h \\
+			\end{bmatrix}
+			&=
+			\begin{bmatrix}
+			\alpha a & \alpha b \\
+			\alpha c & \alpha d \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			e & f \\
+			g & h \\
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+			\alpha(ae + bg) & \alpha(af + bh) \\
+			\alpha(ce + dg) & \alpha(cf + dh) \\
+			\end{bmatrix}
+			=
+			\alpha
+			\begin{bmatrix}
+			ae + bg & af + bh \\
+			ce + dg & cf + dh \\
+			\end{bmatrix}		
+		\end{align*}
+		
+		\begin{align*}
+			\left(
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+			e & f \\
+			g & h \\
+			\end{bmatrix}
+			\right)
+			\begin{bmatrix}
+			a+e & b+f\\
+			c+g & d+h
+			\end{bmatrix}
+			&=
+			\begin{bmatrix}
+			i\,{\left(a+e\right)}+k\,{\left(b+f\right)} & j\,{\left(a+e\right)}+l\,{\left(b+f\right)}\\
+			i\,{\left(c+g\right)}+k\,{\left(d+h\right)} & j\,{\left(c+g\right)}+l\,{\left(d+h\right)}\\
+			\end{bmatrix}
+		\end{align*}
+		
+		\begin{align*}
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}^{T}
+			=
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			a & c \\
+			b & d \\
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+			a^{2} + b^{2} & ac + bd \\
+			ac + bd & c^{2} + d^{2} \\
+			\end{bmatrix}		
+		\end{align*}
+		\\\\
+		So, to summarize:
+		\begin{itemize}
+		\item[]{If $A,B,C$ are matrices and $\alpha$ is a scalar then,}
+		\item{$\alpha AB = (\alpha A)B = A(\alpha B) = \alpha(AB)$}
+		\item{$(A + B)C = C(A + B) = AC + BC$}
+		\item{$AA^{T}$ is a symmetric matrix with positive values along the diagonal}
+		\end{itemize}
+		
+		
+		\subsubsection*{Matrix transpose}
+		Denote the $i$th row of the matrix $A$ as $A[i:]$ and the $j$th column of the matrix $B$ as $B[j:]$ and a matrix whose components at $(i,j)$ are the dot-products of the $i$th row of the matrix $A$ with the $j$th column of the matrix $B$ as $(\langle A[i:], B[:j] \rangle)$. Then,
+		\begin{align*}
+		(AB)^{T} = (\langle A[i:], B[:j] \rangle)^{T} = (\langle A[j:], B[:i] \rangle) \\
+		B^{T}A^{T} = (\langle B^{T}[i:], A^{T}[:j] \rangle) = (\langle B[:i], A[j:] \rangle)
+		\end{align*}
+		So, $(AB)^{T} = B^{T}A^{T}$. A consequence of this is that,
+		\begin{align*}
+		&& I = A\inv{A} &= (AA^{-1})^{T} = (A^{-1})^{T}A^{T} \\
+		& \iff & I\inv{(A^{T})} &= (A^{-1})^{T}A^{T}\inv{(A^{T})} \\
+		& \iff & \inv{(A^{T})} &= (A^{-1})^{T}
+		\end{align*}
+	}
 	
-	This is because multiplication by $A$ has no inverse (i.e. it's not a bijection and $A^{-1}$ does not exist) as we can see by the fact that $\vert{A}\vert = 0$.
-	
-	\paragraph{If $A,B,C$ are matrices s.t. $A + 5B = A + 5C$, can we, in general, conclude that $B = C$?}
-	The answer is yes because the matrix addition and scalar multiplication always have inverses. The inverse of $+ A$ is $- A$ and the inverse of scalar multiplication by $5$ is scalar multiplication by $\frac{1}{5}$. So we can say,
-	\begin{align*}
-	&& A + 5B &= A + 5C\\[8pt]
-	&\iff & A + 5B - A &= A + 5C - A\\[8pt]
-	&\iff & 5B &= 5C\\[8pt]
-	&\iff & \left(\frac{1}{5}\right)5B &= \left(\frac{1}{5}\right)5C\\[8pt]
-	&\iff & B &= C
-	\end{align*}
 	
 	\bigskip
 	\searchable{subsubsection}{\small{Let $X$ be the set of $n \times n$ real matrices. Define a relation $\sim$ on $X$ by:

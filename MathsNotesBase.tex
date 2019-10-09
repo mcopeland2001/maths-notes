@@ -20,6 +20,10 @@
 \usepackage{epstopdf}
 \usepackage[table]{xcolor}
 
+\usepackage{titlesec}
+
+\titleformat*{\subparagraph}{\small\bfseries}
+
 
 
 \input{search.tex}
@@ -44,6 +48,7 @@
 \DeclareRobustCommand{\C}[1]{\mathbb{C}^{#1}}
 \DeclareRobustCommand{\Q}[1]{\mathbb{Q}^{#1}}
 \DeclareRobustCommand{\F}[1]{\mathbb{F}^{#1}}
+\DeclareRobustCommand{\inv}[1]{{#1}^{-1}}
 
 \newcommand{\dotsuchthat}{\;\cdot\;}
 \newcommand{\suchthat}{\text{ s.t. }}
@@ -51,6 +56,7 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem*{definition}{Definition}
 \newtheorem{axiom}{Axiom}
+\newtheorem*{corollary}{Corollary}
 
 \newcommand{\labeledProposition}[2]{
 	\begin{proposition}
