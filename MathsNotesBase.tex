@@ -50,8 +50,14 @@
 \DeclareRobustCommand{\F}[1]{\mathbb{F}^{#1}}
 \DeclareRobustCommand{\inv}[1]{{#1}^{-1}}
 
+\newcommand*{\V}[1]{\vec{\bm{#1}}}
 \newcommand{\dotsuchthat}{\;\cdot\;}
 \newcommand{\suchthat}{\text{ s.t. }}
+\newcommand{\notation}[1]{\noindent\fbox{%
+    \parbox{\textwidth}{%
+        \textbf{Notation}: #1
+    }%
+}}
 
 \newtheorem{proposition}{Proposition}
 \newtheorem*{definition}{Definition}

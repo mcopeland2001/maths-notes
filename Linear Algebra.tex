@@ -1,7 +1,6 @@
 \documentclass[MathsNotesBase.tex]{subfiles}
 
 
-\newcommand*{\V}[1]{\vec{\bm{#1}}}
 \def\u{\vec{\bm{u}}}
 \def\v{\vec{\bm{v}}}
 \def\w{\vec{\bm{w}}}
@@ -17,6 +16,19 @@
 \searchableSubsection{\sectionTitle{Matrix Algebra}}{linear algebra}{\bigskip}
 
 	\searchableSubsection{Basic properties of Matrix Algebra}{linear algebra}{\bigskip\bigskip
+	
+		\begin{definition}
+		Matrix \textbf{equality} is defined component-wise so that if $A = B$ then $A$ and $B$ must have the same dimension as well as equal values in each component.
+		\end{definition}
+		\begin{definition}
+		An \textbf{identity} element $e$ is defined as $ea = ae = a$.
+		\end{definition}
+		The definition of an identity element above is in any context (not just for matrices). For matrices this has certain consequences.
+		\labeledProposition{Identity matrices must be square}{square_identity}
+		\begin{proof}
+		For a matrix $A$ and an identity matrix $I$, $AI = IA = A$ which means that $AI$, $IA$ and $A$ must all have the same dimensions. If $A$ is of dimension $m \times n$ then $I$ must have dimension $n \times m$ but then $AI$ has dimension $m \times m$ while $IA$ has dimension $n \times n$. We conclude that $m = n$ and both matrices are square.
+		\end{proof}
+		 
 	
 		\subsubsection{\small{If $A,B,C$ are matrices s.t. $AB = AC$, can we, in general, conclude that $B = C$?}}
 		The answer is no, as the following example shows:
@@ -177,7 +189,7 @@
 		\item{$AA^{T}$ is a symmetric matrix with positive values along the diagonal}
 		\end{itemize}
 		
-		
+		\bigskip
 		\subsubsection*{Matrix transpose}
 		Denote the $i$th row of the matrix $A$ as $A[i:]$ and the $j$th column of the matrix $B$ as $B[j:]$ and a matrix whose components at $(i,j)$ are the dot-products of the $i$th row of the matrix $A$ with the $j$th column of the matrix $B$ as $(\langle A[i:], B[:j] \rangle)$. Then,
 		\begin{align*}
@@ -190,38 +202,237 @@
 		& \iff & I\inv{(A^{T})} &= (A^{-1})^{T}A^{T}\inv{(A^{T})} \\
 		& \iff & \inv{(A^{T})} &= (A^{-1})^{T}
 		\end{align*}
+		
+		\bigskip
+		\subsubsection*{Matrix inverse}
+		\begin{definition}
+		Inverse property is if $ \exists \text{ a matrix } B \suchthat AB = BA = I $ then $B$ is the \textbf{inverse} of $A$.
+		\end{definition}
+		This definition is inherently bound up with the definition of the identity ($\exists \text{ a matrix } I \suchthat AI = IA = A$) and both define the identity and inverse elements as commutatively producing their result under matrix multiplication. Since matrix multiplication is not, in general, commutative there is no guarantee that if $AB = I$ then $BA = I$. An example of this failing is,
+		\begin{align*}
+			A = 
+			\begin{bmatrix}
+			1 & 2 \\
+			\end{bmatrix},\;
+			&B =
+			\begin{bmatrix}
+			1 \\
+			0 \\
+			\end{bmatrix}
+			\\[10pt]
+			AB = 
+			\begin{bmatrix}
+			1 \\
+			\end{bmatrix} = I_1,\;
+			&BA =
+			\begin{bmatrix}
+			1 & 2 \\
+			0 & 0 \\
+			\end{bmatrix} \neq I_2
+		\end{align*}
+		
+		But we could have guessed this because \autoref{prop:square_identity} showed that identity matrices must be square and its product with a matrix must be defined from both the left and the right, i.e. $IA = AI = A$ meaning that the matrix $A$ must have the same dimensions as $I$. So, for non-square matrices, no identity can exist. If there is no identity, then the inverse is not defined either.
+		
+		\labeledProposition{If the inverses of the matrices $A$ and $B$ both exist then so does the inverse of the product $AB$ and it is equal to $\inv{B}\inv{A}$.}{existence_inverse_product}
+		\begin{proof}
+		\begin{align*}
+		& 	  &	(AB)\inv{(AB)} &= I \\
+		&\iff &	(\inv{A}A)B\inv{(AB)} &= \inv{A}I \\
+		&\iff &	(\inv{B}B)\inv{(AB)} &= \inv{B}\inv{A} \\
+		&\iff &	\inv{(AB)} &= \inv{B}\inv{A} \\
+		\end{align*}
+		and since $\inv{B}$ and $\inv{A}$ both exist then their product exists.
+		Furthermore, this holds for a product of any finite sequence of invertible matrices $A_1A_2\cdots A_n$ which can easily be shown by induction on the associative product.
+		\end{proof}
+	}
+	
+	\searchableSubsection{Matrices as linear transformations}{linear algebra}{\bigskip
+		
+		\subsubsection{Multiplying a vector by a matrix on the left: $ A\V{x} = \V{y} $}
+		Left multiplication of a matrix $A$ of dimension $m \times n$ on a column vector $\V{x}$ of dimension $n \times 1$ transforms it to a column vector $\V{y}$ of dimension $m \times 1$.
+		\begin{align*}
+			\begin{bmatrix}
+			a_{11} & \cdots & a_{1n} \\
+			\vdots & \vdots & \vdots \\
+			a_{m1} & \cdots & a_{mn} \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			x_1 \\
+			\vdots \\
+			\vdots \\
+			x_n \\
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+			y_1 \\
+			\vdots \\
+			y_m \\
+			\end{bmatrix}
+		\end{align*}
+		This can be thought of a function from the space of n-dimensional vectors from which $\V{x}$ is drawn to the space of m-dimensional vectors in which $\V{y}$ resides. So, for real-valued vectors, the function would be a function \mbox{$f:\R{n} \mapsto \R{m}$} such that,
+		\[ f(x_1,\cdots,x_n) = \V{y} =
+					\begin{bmatrix}
+					y_1 \\
+					\vdots \\
+					y_m \\
+					\end{bmatrix} \]
+		Or else, this could be thought of as $m$ n-ary functions of the form $f:\R{n} \mapsto \R{}$,
+		\begin{align*}
+		f_1(x_1,\cdots,x_n) &= a_{11}x_1 + \cdots + a_{1n}x_n = y_1 \\
+		\vdots \\
+		f_m(x_1,\cdots,x_n) &= a_{m1}x_1 + \cdots + a_{mn}x_n = y_m \\
+		\end{align*}
+		In this case, each row of the matrix is a real-valued function in $n$ variables. Each of these functions is \textit{homogenous linear} (a function of the form $a_1x_1 + \cdots + a_kx_k + c$ for scalars $a_1,\cdots,a_k,c$ and $c = 0$) and so the system of functions is called a \textit{linear transformation}.\\
+		
+		\subsubsection{Multiplying a matrix of vectors by a matrix on the left: $ AX = Y $}
+		Looking at the matrix as a linear transformation from one co-ordinate space to another, consider $AX = Y$ where $X$ is a matrix - which may be considered a collection of vectors - transformed by the matrix $A$ into the matrix - or collection of vectors - $Y$.\\
+		We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D transformation matrix $A$, into its image in the destination space $Y$.	
+		
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		     3  &   2 \\
+		     1  &   4 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		     0   &  1  &   1  &   0 \\
+		     0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		Y = 
+		\begin{bmatrix}   
+		     0  &   3  &   5  &   2 \\
+		     0  &   1  &   5  &   4	\\
+		\end{bmatrix}
+		\end{align*}
+		
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/linear_transformation.png}
+		\end{center}
+	}
+	
+	\pagebreak
+	\searchableSubsection{Elementary Matrices and Row Operations}{linear algebra}{\bigskip
+		\notation{The \textbf{matrix units} - matrices with a single non-zero component whose value is 1 are traditionally named $\bm{e_{ij}}$ where $i,j$ is the matrix co-ordinate of the 1.}\\\\
+		An arbitrary matrix $A = (a_{ij})$ may be expressed as a sum of such unit matrices as $A = a_{11}e_{11} + \cdots + a_{nn}e_{nn}$.
+		\[
+		e_{ij} = 
+		\begin{bmatrix}
+		\cdots & \cdots & \cdots \\
+		\vdots & \vdots & \vdots \\
+		\cdots & 1 & \cdots \\
+		\vdots & \vdots & \vdots \\
+		\cdots & \cdots & \cdots \\
+		\end{bmatrix}
+		\]
+		So matrix units can be used to analyse matrix addition but to analyse matrix multiplication some square matrices called \textbf{elementary matrices} are more useful.\\
+		
+		Multiplying a matrix from the left (so doing row operations), there are 3 types of elementary matrix:
+		\subsubsection*{Adding rows: $\bm{ I + ae_{ij}\;\;\;\; \text{ for } i \neq j }$}
+			\[
+			\begin{bmatrix}
+			1 	&  &  	&	\\
+			 	& \cdot & a & \\
+			 	&  & \cdot & 	\\
+			 	&  & 	& 1	\\
+			\end{bmatrix}
+			\]
+			This adds $a$ times some row to another row.
+			
+		\subsubsection*{Swapping rows: $\bm{ I + e_{ij} + e_{ji} - e_{ii} - e_{jj}\;\;\;\; \text{ for } i \neq j }$}
+			\[
+			\begin{bmatrix}
+			1 	&  &  	&	\\
+			 	& 0 & 1 & \\
+			 	& 1 & 0 & 	\\
+			 	&  & 	& 1	\\
+			\end{bmatrix}
+			\]
+			This swaps the rows $i$ and $j$.
+		
+		\subsubsection*{Scalar-multiplying a row: $\bm{ I + (c - 1)e_{ii}\;\;\;\; \text{ for } c \neq 0 }$}
+			\[
+			\begin{bmatrix}
+			1 	&  &  	&	\\
+			 	& \cdot &  & \\
+			 	&  & c 	& 	\\
+			 	&  & 	& 1	\\
+			\end{bmatrix}
+			\]
+			This multiplies row $i$ by $c$.
+		
+		\bigskip	
+		\labeledProposition{Elementary matrices are invertible and their inverses are also elementary matrices.}{elementary_invertible}
+		\begin{proof} Proceed by cases on the 3 elementary types of elementary matrices.
+		~\paragraph{Case $\bm{ I + ae_{ij} }$}  If $R_i$ is row $i$ and $R_j$ is row $j$, then this matrix performs $R_i + aR_j$. Clearly this can be "undone" by performing $R_i - aR_j$. So the matrix, $I - ae_{ij}$ is the inverse and clearly this is also an elementary matrix of the same type.
+		\paragraph{Case $\bm{ I - e_{ii} - e{jj} + e_{ij} + e_{ji} }$} This matrix swaps 2 rows in a permutation that is its own inverse.
+		\paragraph{Case $\bm{ I + (c - 1)e_{ii} }$} This matrix performs $cR_i$ and so it is "undone" by performing $\inv{c}R_i$ (which for a real-valued matrix would be $\left(\frac{1}{c}\right)R_i$) and this inverse matrix is also an elementary matrix of the same type. 
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{Suppose $AX = B$ and a series of elementary row operations on $[A \;\vert\; B]$ produces $[A' \;\vert\; B']$, then the solutions of $A'X = B'$ are the same as those of $AX = B$.}{row_reduced_equivalence}
+		\begin{proof}
+		First note that the series of elementary row operations is described as multiplication on the left by a series of elementary matrices say, $E_1, E_2, \cdots , E_n$ so that,
+		\[ [A' \;\vert\; B'] = [(E_n\cdots E_2E_1)A \;\vert\; (E_n\cdots E_2E_1)B] \]
+		Now, let $(E_n\cdots E_2E_1) = E$ and notice that, since each of the individual $E_i$ is invertible the product of them is also invertible by \autoref{prop:existence_inverse_product} so,
+		\[ A'X = B' \iff EAX = EB \]
+		and the existence of the inverse $E^{-1}$ means that the law of cancellation is in effect so,
+		\[ EAX = EB \iff AX = B \]
+		\[ \therefore A'X = B' \iff AX = B \]
+		\end{proof}
+		
+		\labeledProposition{Let $A$ be a square matrix. The following conditions are equivalent:
+			\begin{itemize}
+			\item{$A$ can be reduced to the identity by a sequence of elementary row operations.}
+			\item{$A$ is a product of elementary matrices.}
+			\item{$A$ is invertible.}
+			\item{The system of homogeneous equations $AX = 0$ has only the trivial solution $X = 0$.}
+			\end{itemize}		
+		}{matrix_equivalent_properties}
+		\begin{proof}
+			If $A$ can be reduced to the identity by a sequence of elementary row operations then,
+			\[ (E_n\cdots E_2E_1)A = I \]
+			and by \autoref{prop:elementary_invertible} and \autoref{prop:existence_inverse_product} the matrix $(E_n\cdots E_2E_1)$ is invertible so,
+			\[ A = \inv{(E_n\cdots E_2E_1)}I = \inv{(E_n\cdots E_2E_1)} = \inv{E_1}\inv{E_2}\cdots \inv{E_n} \]
+			and, also by \autoref{prop:elementary_invertible}, $A$ is a product of elementary matrices and is invertible.\\
+			Furthermore, if $AX = 0$ then $X = \inv{A}0 = 0$ - i.e. the only solution to $AX = 0$ is $X = 0$.
+		\end{proof}
 	}
 	
 	
-	\bigskip
-	\searchable{subsubsection}{\small{Let $X$ be the set of $n \times n$ real matrices. Define a relation $\sim$ on $X$ by:
-		\[ M \sim N \iff \exists \text{ an invertible } P \in X \suchthat N = P^{-1}MP. \]
-	Prove that $\sim$ is an equivalence relation.
-	}}{linear algebra, equivalence relations}{
-	\paragraph{Reflexivity:}
-	\begin{align*}
-	& N = I^{-1}NI \\
-	\therefore \; & N \sim N
-	\end{align*}
+	\pagebreak
+	\searchableSubsection{Relations on matrices}{linear algebra}{\bigskip\bigskip
 	
-	\paragraph{Symmetry:}
-	\begin{align*}
-	& & N &= P^{-1}MP \\
-	&\iff & NP^{-1} &= P^{-1}M(PP^{-1}) \\
-	&\iff & NP^{-1} &= P^{-1}M \\
-	&\iff & PNP^{-1} &= (PP^{-1})M \\
-	&\iff & PNP^{-1} &= M \\
-	&\iff & R^{-1}NR &= M,\;\; R \in X\\
-	&\;\;\therefore & N \sim M &\iff M \sim N
-	\end{align*}
-	
-	\paragraph{Transitivity:}
-	\begin{align*}
-	& & N &= P^{-1}MP,\;\; M = Q^{-1}AQ \\
-	&\implies & N &= P^{-1}(Q^{-1}AQ)P \\
-	&\iff & N &= (P^{-1}Q^{-1})A(QP) \\
-	&\iff & N &= R^{-1}AR,\;\; R \in X\\
-	&\;\;\therefore & (N \sim M) & \wedge (M \sim Q) \iff (N \sim Q)
-	\end{align*}
+		\searchable{subsubsection}{\small{Let $X$ be the set of $n \times n$ real matrices. Define a relation $\sim$ on $X$ by:
+			\[ M \sim N \iff \exists \text{ an invertible } P \in X \suchthat N = P^{-1}MP. \]
+		Prove that $\sim$ is an equivalence relation.
+		}}{linear algebra, equivalence relations}{
+		\paragraph{Reflexivity:}
+		\begin{align*}
+		& N = I^{-1}NI \\
+		\therefore \; & N \sim N
+		\end{align*}
+		
+		\paragraph{Symmetry:}
+		\begin{align*}
+		& & N &= P^{-1}MP \\
+		&\iff & NP^{-1} &= P^{-1}M(PP^{-1}) \\
+		&\iff & NP^{-1} &= P^{-1}M \\
+		&\iff & PNP^{-1} &= (PP^{-1})M \\
+		&\iff & PNP^{-1} &= M \\
+		&\iff & R^{-1}NR &= M,\;\; R \in X\\
+		&\;\;\therefore & N \sim M &\iff M \sim N
+		\end{align*}
+		
+		\paragraph{Transitivity:}
+		\begin{align*}
+		& & N &= P^{-1}MP,\;\; M = Q^{-1}AQ \\
+		&\implies & N &= P^{-1}(Q^{-1}AQ)P \\
+		&\iff & N &= (P^{-1}Q^{-1})A(QP) \\
+		&\iff & N &= R^{-1}AR,\;\; R \in X\\
+		&\;\;\therefore & (N \sim M) & \wedge (M \sim Q) \iff (N \sim Q)
+		\end{align*}
+		}
 	}
+	
 \end{document}
