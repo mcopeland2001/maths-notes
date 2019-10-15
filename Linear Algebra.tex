@@ -6,6 +6,31 @@
 \def\w{\vec{\bm{w}}}
 \def\0{\vec{\bm{0}}}
 
+\newcommand{\exampleMatrixTwoDTransform}{
+We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D transformation matrix $A$, into its image in the destination space, $Y$ in $\R{2}$.
+	\begin{align*}
+	A =
+	\begin{bmatrix}    
+	3  &   2 \\
+	1  &   4 \\		
+	\end{bmatrix}
+	,\; X = 
+	\begin{bmatrix}  
+	0   &  1  &   1  &   0 \\
+	0   &  0  &   1  &   1	\\	
+	\end{bmatrix} \\[10pt]
+	AX = Y = 
+	\begin{bmatrix}   
+	0  &   3  &   5  &   2 \\
+	0  &   1  &   5  &   4	\\
+	\end{bmatrix}
+	\end{align*}
+	
+	\begin{center}
+	\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/linear_transformation.png}
+	\end{center}
+}
+
 
 \date{\vspace{-6ex}}
 
@@ -286,28 +311,187 @@
 		
 		\subsubsection{Multiplying a matrix of vectors by a matrix on the left: $ AX = Y $}
 		Looking at the matrix as a linear transformation from one co-ordinate space to another, consider $AX = Y$ where $X$ is a matrix - which may be considered a collection of vectors - transformed by the matrix $A$ into the matrix - or collection of vectors - $Y$.\\
-		We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D transformation matrix $A$, into its image in the destination space $Y$.	
+					
+		\exampleMatrixTwoDTransform
+		
+		\subsubsection{Types of Transformations}
+		There are 3 basic types of transformation:
+		\begin{itemize}
+		\item{\textbf{Rigid body} - preserves distances and angles.
+			\subitem{Examples: translation and rotation.}
+		}
+		\item{\textbf{Conformal} - preserves angles.
+			\subitem{Examples: translation, rotation and uniform scaling.}
+		}
+		\item{\textbf{Affine} - preserves parallelism.
+			\subitem{Examples: translation, rotation, uniform and non-uniform scaling, shearing and reflection.}
+		}
+		\end{itemize}
+		
+		\subsubsection{Rigid Body}
+		\subparagraph{Translation}
+		So as to perform the translation as multiplication by a transformation matrix we take the approach of homogeneous coordinates (see:\url{https://en.wikipedia.org/wiki/Homogeneous_coordinates}) so we form matrix with the identity in the first two columns and then a third column with the translation vector. Then, we add a row of ones to the vectors we will translate.
 		
 		\begin{align*}
 		A =
 		\begin{bmatrix}    
-		     3  &   2 \\
-		     1  &   4 \\		
+		1 & 0  & 3 \\
+		0 & 1  & 4 \\		
 		\end{bmatrix}
 		,\; X = 
 		\begin{bmatrix}  
-		     0   &  1  &   1  &   0 \\
-		     0   &  0  &   1  &   1	\\	
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		1   &  1  &   1  &   1	\\	
 		\end{bmatrix} \\[10pt]
-		Y = 
+		AX = Y = 
 		\begin{bmatrix}   
-		     0  &   3  &   5  &   2 \\
-		     0  &   1  &   5  &   4	\\
+		3  &   4  &   4  &   3 \\
+		4  &   4  &   5  &   5	\\
 		\end{bmatrix}
 		\end{align*}
 		
 		\begin{center}
-		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/linear_transformation.png}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/translation.png}
+		\end{center}
+		
+		\subparagraph{Rotation}
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		\cos{\theta}  &  -\sin{\theta} \\
+		\sin{\theta}  &  \cos{\theta} \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   0.5253  &  -0.3256  &  -0.8509 \\
+		0  &   0.8509  &   1.3762  &   0.5253	\\
+		\end{bmatrix}
+		\end{align*}
+	
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/rotation.png}
+		\end{center}
+		
+		\subsubsection{Conformal}
+		\subparagraph{Uniform Scaling}
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		3  &  0 \\
+		0  &  3 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   3  &  3  &  0 \\
+		0  &   0  &  3  &  3 \\
+		\end{bmatrix}
+		\end{align*}
+	
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/uniform_scaling.png}
+		\end{center}
+		
+		\subsubsection{Affine}
+		\subparagraph{Non-uniform Scaling}
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		2  &  0 \\
+		0  &  3 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   2  &  2  &  0 \\
+		0  &   0  &  3  &  3 \\
+		\end{bmatrix}
+		\end{align*}
+	
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/non_uniform_scaling.png}
+		\end{center}
+		
+		\subparagraph{Shearing}
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		1  &  1 \\
+		0  &  1 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   1  &  2  &  1 \\
+		0  &   0  &  1  &  1 \\
+		\end{bmatrix}
+		\end{align*}
+	
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/shearing1.png}
+		\end{center}
+		
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		1  &  1 \\
+		0.2  &  1 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   1  &  2  &  1 \\
+		0  &   0.2  &  1.2  &  1 \\
+		\end{bmatrix}
+		\end{align*}
+	
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/shearing2.png}
+		\end{center}
+		
+		\subparagraph{Reflection}
+		\begin{align*}
+		A =
+		\begin{bmatrix}    
+		1  &  0 \\
+		0  &  -1 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   1  &  1  &  0 \\
+		0  &   0  &  -1  &  -1 \\
+		\end{bmatrix}
+		\end{align*}
+	
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/reflection.png}
 		\end{center}
 	}
 	
@@ -397,6 +581,32 @@
 			and, also by \autoref{prop:elementary_invertible}, $A$ is a product of elementary matrices and is invertible.\\
 			Furthermore, if $AX = 0$ then $X = \inv{A}0 = 0$ - i.e. the only solution to $AX = 0$ is $X = 0$.
 		\end{proof}
+	}
+	
+	
+	
+	\pagebreak
+	\searchableSubsection{Determinants}{linear algebra}{\bigskip
+		The determinant of a $1 \times 1$ matrix is just its unique component entry,
+		\[ det
+		\begin{bmatrix}
+		{a}\\
+		\end{bmatrix} 
+		= a \]
+		and the determinant of a $2 \times 2$ matrix is given by the formula,
+		\[ det 
+		\begin{bmatrix}
+		a & b \\
+		c & d \\
+		\end{bmatrix}
+		= ad - bc \]
+		\\
+		Returning to our example of a 2d operator:\\
+		
+		\exampleMatrixTwoDTransform
+		
+		We see that $det\; A = 10$ and the parallelogram, $Y$, that is the image of the unit square, $X$, under the transformation represented by $A$ has area,
+		\[ \text{area } = b \cdot h = \vert\langle 3, 1 \rangle \vert \cdot \vert \langle 2-3, 4-1 \rangle\vert = \sqrt{10} \cdot \sqrt{10} = 10 \]
 	}
 	
 	
