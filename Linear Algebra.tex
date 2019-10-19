@@ -330,13 +330,14 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		\subsubsection{Rigid Body}
 		\subparagraph{Translation}
-		So as to perform the translation as multiplication by a transformation matrix we take the approach of homogeneous coordinates (see:\url{https://en.wikipedia.org/wiki/Homogeneous_coordinates}) so we form matrix with the identity in the first two columns and then a third column with the translation vector. Then, we add a row of ones to the vectors we will translate.
+		So as to perform the translation as multiplication by a transformation matrix we take the approach of homogeneous coordinates (see:\url{https://en.wikipedia.org/wiki/Homogeneous_coordinates}) so we form matrix with the identity in the first two columns and then a third column with the translation vector. Then, we add a row of ones to the vectors we will translate and the output vectors also have a $1$ in the third row that is ignored.
 		
 		\begin{align*}
 		A =
 		\begin{bmatrix}    
 		1 & 0  & 3 \\
-		0 & 1  & 4 \\		
+		0 & 1  & 4 \\
+		0 & 0  & 1 \\		
 		\end{bmatrix}
 		,\; X = 
 		\begin{bmatrix}  
@@ -348,6 +349,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\begin{bmatrix}   
 		3  &   4  &   4  &   3 \\
 		4  &   4  &   5  &   5	\\
+		1   &  1  &   1  &   1	\\
 		\end{bmatrix}
 		\end{align*}
 		
@@ -587,13 +589,15 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 	
 	\pagebreak
 	\searchableSubsection{Determinants}{linear algebra}{\bigskip
+		\subsubsection{$\bm{1 \times 1}$}
 		The determinant of a $1 \times 1$ matrix is just its unique component entry,
 		\[ det
 		\begin{bmatrix}
 		{a}\\
 		\end{bmatrix} 
 		= a \]
-		and the determinant of a $2 \times 2$ matrix is given by the formula,
+		\subsubsection{$\bm{2 \times 2}$}
+		The determinant of a $2 \times 2$ matrix is given by the formula,
 		\[ det 
 		\begin{bmatrix}
 		a & b \\
@@ -607,6 +611,150 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		We see that $det\; A = 10$ and the parallelogram, $Y$, that is the image of the unit square, $X$, under the transformation represented by $A$ has area,
 		\[ \text{area } = b \cdot h = \vert\langle 3, 1 \rangle \vert \cdot \vert \langle 2-3, 4-1 \rangle\vert = \sqrt{10} \cdot \sqrt{10} = 10 \]
+	
+		And the determinant would be $0$ in the case that the columns were proportional (representing co-linear vectors) and the determinant would be negative if the orientation of the output vectors were reversed \wrt the input vectors.\\
+		So, if we swap either the columns or the rows of the transformation matrix, $A$, the determinant comes out $-10$.
+		
+		\subsubsection{Swapping the columns:}
+		\begin{align*}
+		Ac =
+		\begin{bmatrix}    
+		2  &   3 \\
+		4  &   1 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   2  &   5  &   3 \\
+		0  &   4  &   5  &   1	\\
+		\end{bmatrix}
+		\end{align*}
+		
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/linear_transformation.png}
+		\end{center}
+		
+		Note that the result looks exactly the same - it's just that now the x-vector $\langle 1, 0 \rangle$, produces $\langle 4, 2 \rangle$ and the y-vector, $\langle 0, 1 \rangle$ produces $\langle 3, 1 \rangle$.
+			
+		\subsubsection{Swapping the rows:}
+		\begin{align*}
+		Ar =
+		\begin{bmatrix}    
+		1  &   4 \\
+		3  &   2 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   1  &   5  &   4 \\
+		0  &   3  &   5  &   2	\\
+		\end{bmatrix}
+		\end{align*}
+		
+		\begin{center}
+		\includegraphics[scale=0.85]{resources/img/GeometryOfMatrices_images/row_swap.png}
+		\end{center}
+		
+		Note that if we swap \textbf{both} the columns and the rows then we get back to a transformation with determinant $10$.
+		\begin{align*}
+		Ar =
+		\begin{bmatrix}    
+		1  &   4 \\
+		3  &   2 \\		
+		\end{bmatrix}
+		,\; X = 
+		\begin{bmatrix}  
+		0   &  1  &   1  &   0 \\
+		0   &  0  &   1  &   1	\\	
+		\end{bmatrix} \\[10pt]
+		AX = Y = 
+		\begin{bmatrix}   
+		0  &   1  &   5  &   4 \\
+		0  &   3  &   5  &   2	\\
+		\end{bmatrix}
+		\end{align*}
+		
+		which produces the same parallelogram as the previous one but with columns reversed.
+		\subparagraph{Summary} So we find that,
+		\begin{align*}
+		\begin{bmatrix}    
+		3  &   2 \\
+		1  &   4 \\		
+		\end{bmatrix},
+		\begin{bmatrix}    
+		4  &   1 \\
+		2  &   3 \\		
+		\end{bmatrix}
+		\text{ have determinant } > 0\\[10pt]
+		\begin{bmatrix}    
+		2  &   3 \\
+		4  &   1 \\		
+		\end{bmatrix},
+		\begin{bmatrix}    
+		1  &   4 \\
+		3  &   2 \\		
+		\end{bmatrix}
+		\text{ have determinant } < 0\\[10pt]
+		\end{align*}
+		
+		If the product of the components on the diagonal of the matrix is greater than the components on the bottom-left to top-right diagonal then the determinant is $> 0$, if the reverse is true then the determinant is $< 0$, and if they are equal then the determinant $= 0$.\\
+		Note that, for the determinant to be $0$ in our example, we need something like $det A = (4 \times 3) - (4 \times 3)$ which, due to the commutativity of multiplication can be achieved by both,
+		\begin{align*}
+		\begin{bmatrix}    
+		4  &   3 \\
+		4  &   3 \\		
+		\end{bmatrix},
+		\begin{bmatrix}    
+		4  &   4 \\
+		3  &   3 \\		
+		\end{bmatrix}
+		\end{align*}
+		but in both cases the columns are proportional and therefore co-linear.
+		
+		\subsubsection{$\bm{n \times n}$}
+		The determinant of an $n \times n$ matrix is defined recursively as:
+		\begin{itemize}
+		\item{if $n = 1$ then $det\, A = a_{11}$, i.e. the determinant is equal to the sole component.}
+		\item{else if $n > 1$ then, defining $A_{ij}$ as the matrix formed by leaving out the $i$th row and the $j$th column,
+				\[ det\, A = a_{11}det\, A_{11} - a_{12}det\, A_{12} + \cdots \pm a_{1n}det\, A_{1n} \]}
+		\end{itemize}
+		
+		In the $n = 2$ case, each $det\, A_{ij}$ has $n = 1$ and so is simply equal to the sole component that is neither on the same row or column as the component $a_{ij}$ that is multiplying it. This feature of the determinant calculation continues recursively for higher dimension matrices so that the calculation is always comprised of terms that are a product of components on each of the different columns and rows. In fact, it comprises the products of all such possible combinations of components.\\
+		For example, when $n = 2$ the only combinations are,
+		\[ \{\{1,1\}, \{2,2\}\} \text{ and } \{\{1,2\}, \{2,1\} \]
+		so there are only 2 terms in the determinant calculation.\\
+		When $n = 3$ the possible combinations are,
+		\begin{align*}
+			&\{\{1,1\}, \{2,2\}, \{3,3\}\},\; \{\{1,1\}, \{3,2\}, \{2,3\}\},\\
+			&\{\{1,2\}, \{2,1\}, \{3,3\}\},\; \{\{1,2\}, \{3,1\}, \{2,3\}\},\\
+			&\{\{1,3\}, \{2,1\}, \{3,2\}\},\; \{\{1,3\}, \{3,1\}, \{2,2\}\} 
+		\end{align*}
+		so there are 6 terms in the determinant calculation.
+		
+		\subsubsection{Consequences}
+		From this feature of the calculation we can see a number of the important properties of the determinant.
+		
+		\labeledProposition{$det\, I = 1$}{determinant_of_identity}
+		\begin{proof}
+		Whatever the dimension of the identity matrix there will be only one combination of rows and columns that is the diagonal along which the $1$s of the identity matrix reside. So, there will be a single term of the determinant calculation that is a product of $1$s and all other terms will contain at $0$s. In addition, the term that is along the diagonal has a positive sign in the determinant calculation. Therefore the result is $1$.         
+		\end{proof}
+		
+		\labeledProposition{$det\, A$ is linear in the rows of the matrix}{linearity_of_determinant}
+		\begin{proof}
+		If $p$ and $q$ are row vectors and we have matrices $A_p, A_q, A_{pq}$ in which are present, respectively, the row vector $p$, the one $q$, and the row $p + q$, then linearity implies that $det\, A_{pq} = det\, A_{p} + det\, A_{q}$. This can be seen since every term of the determinant calculation of $A_{pq}$ will contain one of the components in the row $p+q$. So each term of the calculation will take the form,
+		\[ (p + q)a_{ij}\cdots a_{mn} = p(a_{ij}\cdots a_{mn}) + q(a_{ij}\cdots a_{mn}) \]
+		The other implication of linearity is that - if a row is multiplied by a scalar, $c$, to produce $A_c$ then $det\, A_c = c\,det\,A$. Using a similar reasoning to the previous argument we have each term of the determinant taking the form,
+		\[ c\,a_{ij}\cdots a_{mn} \]
+		which obviously results in the determinant being multiplied by $c$.
+		\end{proof}
 	}
 	
 	
