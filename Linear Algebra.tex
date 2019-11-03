@@ -847,7 +847,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 	
 		\labeledProposition{A linear operator A on $\R{n}$ is invertible if and only if $det\,A \neq 0$}{invertible_non_zero_determinant}
 		\begin{proof}
-			If $A$ is invertible then, $A\inv{A} = I$ and, using $det\,I = 1$ and \autoref{prop:determinant_of_matrix_product}, we have,
+			If $A$ is invertible then, $A\inv{A} = I$ and, using \autoref{prop:determinant_of_identity} and \autoref{prop:determinant_of_matrix_product}, we have,
 			\[ det\,A\inv{A} = det\,A \cdot det\,\inv{A} = 1 \]
 			so $det\,A$ cannot be $0$.
 			\paragraph{} Furthermore, if the columns of $A$ are not independent then there is some linear combination of the columns that produces $\0$. Since, by \autoref{prop:adding_columns_determinant_unchanged} we know that adding multiples of columns to other columns leaves the determinant unchanged, this means that the determinant is equal to the determinant of a matrix with $\0$ as a column. Such a matrix has determinant 0, so the determinant of $A$ is also 0.
@@ -856,6 +856,32 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\begin{corollary}
 			For invertible matrices, \[ det\,\inv{A} = \frac{1}{det\,A} \]
 		\end{corollary}
+	
+		\begin{corollary}
+			The determinant is the only function that has the described properties.
+		\end{corollary}
+		\begin{proof}
+			Every matrix, $A$, can be transformed by multiplication by elementary matrices to a row-reduced form, $R$, which is either the identity matrix - in the case that $A$ is invertible - or a matrix with the last row zeroes - in the case where $A$ is not invertible. So, the determinant of the row-reduced matrix, $R$, is either 1 or 0. Meanwhile, the determinants of the elementary matrices are:
+			\begin{itemize}
+				\item{Add multiple of row to another row}  - determinant is 1 because this operation maintains the determinant of the identity.
+				\item{Swap two rows - determinant is -1} - determinant is -1 because this operation multiplies the determinant of the identity by -1.
+				\item{Multiply a row by some scalar $c$}  - determinant is $c$ because this operation multiplies the determinant of the identity by $c$.
+			\end{itemize}
+			So, we have,
+			\[ R = E_1E_2 \cdots E_nA \implies det\,R = det\,E_1E_2 \cdots E_n \cdot det\,A \]
+			where $det\,E_1E_2 \cdots E_n$ is a known, non-zero quantity - say $d_e$. Since the determinant of $R$ is either 0 or 1 this leaves the determinant of $A$ being either 0 or $\frac{1}{d_e}$.
+			\paragraph{}So, the value of the determinant of an arbitrary matrix, $A$, is wholly determined by the properties described.
+		\end{proof}
+	}
+
+	\pagebreak
+	\searchableSubsection{Permuatation Matrices}{linear algebra}{\bigskip
+		\textcolor{red}{TODO?}
+	}
+
+	\pagebreak
+	\searchableSubsection{Cramer's Rule}{linear algebra}{\bigskip
+		\textcolor{red}{TODO}
 	}
 	
 	
