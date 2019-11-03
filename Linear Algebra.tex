@@ -875,8 +875,35 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 	}
 
 	\pagebreak
-	\searchableSubsection{Permuatation Matrices}{linear algebra}{\bigskip
-		\textcolor{red}{TODO?}
+	\searchableSubsection{Permutation Matrices}{linear algebra}{\bigskip
+		\begin{definition}
+			A permutation $p$ is a bijective map from a set $S$ to itself. If a matrix $P$ is the matrix associated with a permutation $p$ then:
+			\begin{itemize}
+				\item{the $j$th column of the matrix is the basis vector $e_{p(j)}$,}
+				\item{$P$ is a sum of the matrix units, $P = e_{p(1)1} + e_{p(2)2} + \cdots + e_{p(n)n} = \sum_j e_{p(j)j} $.}
+			\end{itemize}
+		\end{definition}
+		
+		\labeledProposition{If $P,Q$ are permutation matrices associated with the permutations $p,q$ then the matrix that corresponds to the permutation $p \circ q$ is $PQ$}{perm_composition_product_perm_matrices}
+		\begin{proof}
+			$pq(i) = p(q(i))$ and $PQX = P(QX)$
+		\end{proof}
+		
+		\labeledProposition{A permutation matrix $P$ is invertible and its inverse is the transpose, $\inv{P} = P^T$}{}
+		\begin{proof}
+			A left-multiplying permutation matrix for a permutation, $p$, maps each row from the input matrix using a column $j$ in the permutation matrix, to the output row, $p(j)$. Since the permutation, by definition, is bijective, we know that this mapping is one-to-one and invertible. If we transpose the matrix $P$ to $P^T$, swapping rows and columns in the permutation matrix, then the new matrix, $P^T$ maps input rows $p(j)$ into output rows $j$ which is clearly the inverse permutation.
+		\end{proof}
+		
+		Since a permutation matrix is a the result of permuting the rows of the identity matrix, clearly, its determinant is $\pm 1$. A permutation is referred to as \textit{odd} or \textit{even} depending on whether its determinant is -1 or 1 respectively. Its determinant is called the \textit{sign of the permutation},
+		\[ sign\,p = det\,p = \pm 1 \]
+		
+		The determinant of an arbitrary $n \times n$ matrix can be described as,
+		\begin{align*}
+			det\,A &= \sum_{p}\left[ det\,\sum_j a_{p(j)j} e_{p(j)j} \right] \\
+				   &= \sum_{p}\left[ (a_{p(1)1} \cdots a_{p(n)n}) \cdot\, det\,\sum_j e_{p(j)j} \right] \\
+				   &= \sum_{p}\left[ (a_{p(1)1} \cdots a_{p(n)n}) \cdot\, det\,P \right] \\
+				   &= \sum_{p}\left[ (sign\,p)(a_{p(1)1} \cdots a_{p(n)n}) \right]
+		\end{align*}
 	}
 
 	\pagebreak
