@@ -904,11 +904,49 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 				   &= \sum_{p}\left[ (a_{p(1)1} \cdots a_{p(n)n}) \cdot\, det\,P \right] \\
 				   &= \sum_{p}\left[ (sign\,p)(a_{p(1)1} \cdots a_{p(n)n}) \right]
 		\end{align*}
+		This is the same formula as earlier and is known as the \textit{complete expansion} of the determinant.
 	}
 
 	\pagebreak
 	\searchableSubsection{Cramer's Rule}{linear algebra}{\bigskip
-		\textcolor{red}{TODO}
+		Expansion by minors on the jth column:
+		\[ det\,A  = (-1)^{j+1}a_{1j}\,det\,A_{1j} + (-1)^{j+2}a_{2j}\,det\,A_{2j} + \cdots + (-1)^{j+n}a_{nj}\,det\,A_{nj} \]
+		Expansion by minors on the ith row:
+		\[ det\,A  = (-1)^{i+1}a_{i1}\,det\,A_{i1} + (-1)^{i+2}a_{i2}\,det\,A_{i2} + \cdots + (-1)^{i+n}a_{in}\,det\,A_{in} \]
+		\begin{definition}
+			If we form a matrix with elements $\alpha_{ij} = (-1)^{i+j}\,det\,A_{ij}$ and then transpose it we get the \textbf{adjoint matrix}.
+		\end{definition}
+		\notation{The adjoint of $A$ is denoted $adj\,A$.}\\\\
+		Following we use $[x]$ to denote a matrix as distinguished from a scalar.\\\\
+		Let $d = det\,A$. Then, if we multiply the adjoint matrix of $[A]$ by $[A]$ we get,
+		\[ [adj\,A][A] = 
+			\begin{bmatrix}
+			d &&&&& \\
+			& d &&&& \\
+			&& \cdot &&& \\
+			&&& \cdot && \\
+			&&&& \cdot & \\
+			&&&&& d \\
+			\end{bmatrix}
+		\]
+		The off-diagonal elements come out zero because they involve a determinant calculation that involves the same row (or column) repeated and so those determinants are zero.
+		\begin{theorem}
+			\[ [adj\,A][A] = (det\,A)[I] = [A][adj\,A] \]
+		\end{theorem}
+		
+		\begin{corollary}
+			\[ \frac{1}{det\,A}[adj\,A][A] = [I] \iff [\inv{A}] = \frac{1}{det\,A}[adj\,A] \]
+		\end{corollary}
+		\bigskip
+
+		This formulation of the inverse of a matrix can be used to write the solution to a system of linear equations (reverting to the normal notation) $AX = B$ as, multiplying on the left by $\inv{A}$,
+		\[ X = \inv{A}B = \frac{1}{det\,A}(adj\,A)B \]
+		so that $X$ is a vector whose components, $x_j$, are expressed as,
+		\begin{align*}
+		x_j &= \frac{1}{det\,A}(b_1\alpha_{1j} + \cdots + b_n\alpha_{nj}) \\[6pt]
+			&= \frac{1}{det\,A}(b_1(-1)^{1+j}\,det\,A_{1j} + \cdots + b_n(-1)^{n+j}\,det\,A_{nj})
+		\end{align*}
+		which is the expansion by minors of $A$ on the $j$th column but with the components $a_{ij}$ of $A$ replaced with the components of the vector $B$, divided by the determinant of $A$.
 	}
 	
 	
