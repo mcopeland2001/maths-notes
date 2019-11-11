@@ -126,6 +126,16 @@
 				\begin{proof}
 				$(a \bmod b) = r = a - bq$. For any $m \suchthat m \divides a \text{ and } m \divides b$ we must also have $m \divides (a - bq)$ so the set of divisors of $a$ and $b$ is a subset of the set of divisors of $b$ and $r = (a \bmod b)$. Conversely, for any $m \suchthat m \divides b \text{ and } m \divides r = (a \bmod b)$ we have that $m \divides (bq + r) = a$ so the set of divisors of $b$ and $r = (a \bmod b)$ is a subset of the set of divisors of $a$ and $b$. So the sets are equal proving that they must have the same maximum element - the greatest common divisor.
 				\end{proof}
+			
+			\labeledProposition{If $d = gcd(a, b)$ then there is no integer linear combination of $a$ and $b$ that equals any positive value less than $d$.}{gcd_min_linear_combination}
+			\begin{proof}
+				Assume $d = gcd(a,b)$ and that $\exists\, e < d \in \N{}, m,n \in \Z{} \suchthat e = am + bn$. Then,
+				\begin{align*}
+					&&e = am + bn &= dz_1m + dz_2n = d(z_1m + z_2n) \hspace{10pt} \text{ for } z_1, z_2 \in \Z{} \\
+					&\iff &z_1m + z_2n &= \frac{e}{d} \not\in \Z{}
+				\end{align*}
+				But this is impossible as, by the definition of the integers, $z_1m + z_2n \in \Z{}$.
+			\end{proof}
 		}
 	
 		\searchableSubsection{The Fundamental Theorem of Arithmetic}{number theory}{\bigskip

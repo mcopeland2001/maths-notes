@@ -74,7 +74,45 @@
 		\begin{itemize}
 		\item{ ($\R{} \setminus \{0\}, \times)$ } is a group whereas ($\R{}, \times)$ is not a group because $0$ has no multiplicative inverse.
 		\item{ ($\R{}, +)$ } is a group.
+		\item{ The set of $n \times n$ invertible matrices is called the General Linear group and denoted $GL_n$  }
 		\end{itemize}
+			\subsubsection{Permutations and Symmetric Groups}\bigskip
+		\begin{definition}
+			A \textbf{permutation} is a bijection from a set to itself. Since permutations are bijective, they are invertible and since they are functions, function composition defines an associative law of composition over them. As a result, they form a group. 
+		\end{definition}
+		\begin{definition}
+			The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions.
+		\end{definition} 
+		\notation{The symmetric group over the integers from 1 to n is denoted $S_n$.}\\
+		\subparagraph{$\bm{S_2}$}
+		The symmetric group $S_2$ consists of the two elements $i$ and $\tau$ which are, respectively, the identity map and the transposition which interchanges 1 and 2. The group composition law is described by the fact that the identity map is the identity of the composition and by the relation $\tau\tau = \tau^2 = i$. Which results in the multiplication table:	
+		\[
+		\begin{aligned}
+			i &\cdot i &&= i \\
+			i &\cdot \tau &&= \tau \\		
+			\tau &\cdot i &&= \tau \\
+			\tau &\cdot \tau &&= i \\
+		\end{aligned}
+		\]
+		Note that the law of composition is commutative.
+		\subparagraph{$\bm{S_3}$}
+		The symmetric group $S_3$ contains $3!$ elements. It is the smallest group whose law of composition is not commutative. It can be described using any two permutations of $\{1, 2, 3\}$. For example, if we take,
+		\begin{align*}
+			x =
+			\begin{bmatrix}
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+			1 & 0 & 0 \\
+			\end{bmatrix},\;
+			y =
+			\begin{bmatrix}
+			0 & 1 & 0 \\
+			1 & 0 & 0 \\
+			0 & 0 & 1 \\
+			\end{bmatrix}
+		\end{align*}
+		Then the permutations are,
+		\[ \{1, x, x^2, y, xy, x^2y\} = \setc{x^iy^j}{0 \leq i \leq 2,\; 0 \leq j \leq 1} \]
 	}
 	
 	
