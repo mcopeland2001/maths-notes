@@ -113,9 +113,31 @@
 		\end{align*}
 		Then the permutations are,
 		\[ \{1, x, x^2, y, xy, x^2y\} = \setc{x^iy^j}{0 \leq i \leq 2,\; 0 \leq j \leq 1} \]
+		These are the elements of the group. The composition law over these elements is the function composition of these permutation functions and its multiplication table is characterized by the rules:
+		\begin{align*}
+			x^3 = 1,\; y^2 = 1,\; yx = x^2y
+		\end{align*}
+		These are derived directly from the permutations themselves. Note that this composition law is not associative as $yx \neq xy$. \\
+		Any product of the elements $x,y$ and of their inverses can be brought into the form $x^iy^j$ with $i,j$ taking the ranges given above by repeated application of the above rules. To do so, we move all occurrences of $y$  to the right side using the last relation and bring the exponents into the indicated ranges using the first two relations:
+		\begin{align*} 
+			\inv{x}y^3x^2y &= x^2yx^2y = x^2(yx)xy = x^2(x^2y)xy = x^4(yx)y\\
+						&= x^4(x^2y)y = x^6y^2 = (x^3)^2y^2 = 1 \cdot 1 = 1
+		\end{align*}
+		Rules like these that determine a complete multiplication table are called \textit{defining relations} for the group.
 	}
 	
 	
+	\bigskip\bigskip
+	\searchableSubsection{Subgroups}{abstract algebra}{\bigskip
+		\begin{definition}
+			A subset $H$ of a group $G$ is called a \textbf{subgroup} if it has the following properties:
+			\begin{itemize}
+				\item{\textbf{Closure:}} If $a \in H$ and $b \in H$ then $ab \in H$.
+				\item{\textbf{Identity:}} $1 \in H$.
+				\item{\textbf{Inverses:}} If $a \in H$ then $\inv{a} \in H$.
+			\end{itemize}
+		\end{definition}
+	}
 	
 	
 	
