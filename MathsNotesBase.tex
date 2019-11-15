@@ -77,6 +77,16 @@
 }
 \def\propositionautorefname{Proposition}
 
+\newcommand{\boxeddefinition}[1]{\bigskip
+	\noindent\fbox{%
+		\parbox{\textwidth}{%
+			\begin{definition}
+				#1
+			\end{definition}	
+		}%
+	}\bigskip
+}
+
 
 \title{Mathematics Notes}
 \date{\vspace{-6ex}}
