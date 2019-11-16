@@ -58,10 +58,11 @@
 \newcommand{\suchthat}{\text{ s.t. }}
 \newcommand{\wrt}{w.r.t.\;}
 \newcommand{\notation}[1]{\noindent\fbox{%
-    \parbox{\textwidth}{%
-        \textbf{Notation}: #1
-    }%
-}}
+		\parbox{\textwidth}{%
+		        \textbf{Notation}: #1
+		    }%
+		}\bigskip
+}
 
 \newtheorem*{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
@@ -77,8 +78,7 @@
 }
 \def\propositionautorefname{Proposition}
 
-\newcommand{\boxeddefinition}[1]{\bigskip
-	\noindent\fbox{%
+\newcommand{\boxeddefinition}[1]{\noindent\fbox{%
 		\parbox{\textwidth}{%
 			\begin{definition}
 				#1

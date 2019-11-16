@@ -14,30 +14,32 @@
 	\bigskip\bigskip
 	\searchableSubsection{Groups}{abstract algebra}{\bigskip
 		
-		\begin{definition}
-		A binary operation is a function,\\
+		\boxeddefinition{
+		A binary operation is a function,
 		\[ f:G \times G \mapsto G \]
 		which - by the definition of a function - maps a unique tuple from $G \times G$ to a unique value in the codomain $G$.
-		\end{definition}
+		}
 		\bigskip
 		
-		\begin{definition}
+		\boxeddefinition{
 		Let $G$ be a set and $*$ a binary operation on $G$ and denote this ($G,*$). Then ($G,*$) is a \textbf{group} if:
 		\paragraph*{closure} $\forall x,y \in G, x * y \in G$;
 		\paragraph*{associativity} $\forall x,y,z \in G, (x * y) * z = x * (y * z)$;
 		\paragraph*{identity} $\exists e \in G \suchthat \forall x \in G, e*x = x*e = x$;
-		\paragraph*{inverse} $\forall x \in G, \exists x^{-1} \in G \suchthat x * x^{-1} = x^{-1} * x = e$.
-		\end{definition}
-		These are known as the \textit{group axioms}.
+		\paragraph*{inverse} $\forall x \in G, \exists x^{-1} \in G \suchthat x * x^{-1} = x^{-1} * x = e$.\\\\
+		These are known as the \textbf{group axioms}.
+		}
+		
+		
 		
 		\bigskip\smallskip
-		\begin{definition}
+		\boxeddefinition{
 		The group is an \textbf{Abelian group} if it has the additional property:	
 		\paragraph*{commutativity} $\forall x,y \in G, x * y = y * x \in G$.
-		\end{definition}
+		}
 		
-		\bigskip\smallskip
-		\paragraph{Notation} from here on we will use juxtaposition notation for the group operation (so $xy = x * y$) and (usually) $1$ for the identity element instead of $e$. This is known as \textit{multiplicative notation}.
+		\bigskip\smallskip 
+		\notation{from here on we will use juxtaposition notation for the group operation (so $xy = x * y$) and (usually) $1$ for the identity element instead of $e$. This is known as \textit{multiplicative notation}.}
 		
 		\bigskip\bigskip
 		\subsubsection{Corollaries of the group axioms}
@@ -77,12 +79,12 @@
 		\item{ The set of $n \times n$ invertible matrices is called the General Linear group and denoted $GL_n$  }
 		\end{itemize}
 			\subsubsection{Permutations and Symmetric Groups}\bigskip
-		\begin{definition}
+		\boxeddefinition{
 			A \textbf{permutation} is a bijection from a set to itself. Since permutations are bijective, they are invertible and since they are functions, function composition defines an associative law of composition over them. As a result, they form a group. 
-		\end{definition}
-		\begin{definition}
+		}
+		\boxeddefinition{
 			The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions.
-		\end{definition} 
+		}
 		\notation{The symmetric group over the integers from 1 to n is denoted $S_n$.}\\
 		\subparagraph{$\bm{S_2}$}
 		The symmetric group $S_2$ consists of the two elements $i$ and $\tau$ which are, respectively, the identity map and the transposition which interchanges 1 and 2. The group composition law is described by the fact that the identity map is the identity of the composition and by the relation $\tau\tau = \tau^2 = i$. Which results in the multiplication table:	
@@ -127,16 +129,16 @@
 	}
 	
 	
-	\bigskip\bigskip
+	\pagebreak
 	\searchableSubsection{Subgroups}{abstract algebra}{\bigskip
-		\begin{definition}
+		\boxeddefinition{
 			A subset $H$ of a group $G$ is called a \textbf{subgroup} if it has the following properties:
 			\begin{itemize}
 				\item{\textbf{Closure:}} If $a \in H$ and $b \in H$ then $ab \in H$.
 				\item{\textbf{Identity:}} $1 \in H$.
 				\item{\textbf{Inverses:}} If $a \in H$ then $\inv{a} \in H$.
 			\end{itemize}
-		\end{definition}
+		}
 		These conditions show that the subset $H$ is a group with respect to the \textit{induced law of composition} created by applying the law of composition of $G$ on the members of $H$. Note that the associative property is not mentioned because the associativity of the composition of members of $G$ automatically carries over to $H$.\\\\
 		
 		\noindent\fbox{%
@@ -204,7 +206,6 @@
 		\begin{corollary}
 			It follows from $S$ being a subgroup of $\Z{+}$ and from \autoref{prop:bZ_subgroup} that $S$ has the form $m\Z{}$ where $m$ is the smallest positive integer such that $x^m = 1$. Therefore, in $H$, the $m$ elements $1, x, x^2, \cdots , x^{m-1}$ are all different and any element in $H$ will simplify to one of them: for $n \in S$, $n = mq + r$ such that $x^n = (x^m)^qx^r = 1^qx^r = x^r$.
 		\end{corollary}
-		%\\\\
 		
 		\boxeddefinition{The \textbf{order} of a group $G$ is the number of distinct elements it contains where an object and its inverse are not considered - for this purpose - distinct. It is typically denoted $\vert G \vert$.\\
 			An element of a group is said to have \textbf{order} $m$ (possibly infinity) if the cyclic subgroup it generates has order $m$. This means that $m$ is the smallest positive integer with the property $x^m = 1$ or, if the order is infinite, that, $x^m \neq 1$ for all $m \neq 0$.
@@ -254,32 +255,117 @@
 		And $a' = e'a' = a'e'$ means that $e'$ is the identity in $G'$. Furthermore, the order of elements in $G$ and $G'$ will also be the same as,
 		\[ a^n = e \iff e' = \phi(e) = \phi(a^n) = \phi(a)^n = (a')^n \]
 		
-		Since two isomorphic groups have the same properties, it is often convenient to identify them with each other when speaking informally. For example, the symmetric group $S_n$ of permutations of $\{1,\cdots,n\}$ is isomorphic to the group of permutation matrices, a subgroup of $GL_n(\R{})$ and we often blur the distinction between these two groups.
+		Since two isomorphic groups have the same properties, it is often convenient to identify them with each other when speaking informally. For example, the symmetric group $S_n$ of permutations of $\{1,\cdots,n\}$ is isomorphic to the group of permutation matrices, a subgroup of $GL_n(\R{})$ and we often blur the distinction between these two groups.\\
+		
+		\notation{Sometimes when two groups are isomorphic this is indicated using the notation,
+			\[G \approx G'\]
+		}
 	
 		\subsubsection{Examples}
-		Let $G$ be the set of real matrices of the form,
-		\[
-			\begin{bmatrix}
+		\begin{itemize}
+			\item{
+				Let $C = \{ \cdots, a^{-2}, a^{-1}, 1, a, a^2, \cdots \}$ be an infinite cyclic group. Then the map,
+				\[ \phi : \Z{+} \longmapsto C \; \suchthat \; \phi(n) = a^n \]
+				is an isomorphism where the preservation of the respective laws of composition can be seen as,
+				\[ \phi(m + n) = a^{m + n} = a^ma^n = \phi(m)\phi(n) \]
+			}
+			\item{Let $G$ be the set of real matrices of the form,
+				\[
+				\begin{bmatrix}
 				1 & x 	\\
 				0 & 1 	\\
-			\end{bmatrix} 
-		\]
-		This is a subgroup of $GL_2(\R{})$ and so, its law of composition is the same as that of $GL_2(\R{})$, i.e. matrix multiplication.
-		\[
-			\begin{bmatrix}
+				\end{bmatrix} 
+				\]
+				This is a subgroup of $GL_2(\R{})$ and so, its law of composition is the same as that of $GL_2(\R{})$, i.e. matrix multiplication.
+				\[
+				\begin{bmatrix}
 				1 & x 	\\
 				0 & 1 	\\
-			\end{bmatrix}
-			\begin{bmatrix}
+				\end{bmatrix}
+				\begin{bmatrix}
 				1 & y 	\\
 				0 & 1 	\\
-			\end{bmatrix} = 
-			\begin{bmatrix}
+				\end{bmatrix} = 
+				\begin{bmatrix}
 				1 & x + y\\
 				0 & 1 	\\
-			\end{bmatrix}
-		\]
-		So, $G$ is isomorphic to $\R{+}$, the additive group of reals.
+				\end{bmatrix}
+				\]
+				So, $G$ is isomorphic to $\R{+}$, the additive group of reals.
+			}
+			\item{Any two cyclic groups of the same order are isomorphic because, if
+				\[ G = \{1, x, x^2, \cdots, x^{n-1}\}, G' = \{1, y, y^2, \cdots, y^{n-1}\} \]
+				are two cyclic groups of order $n$ then the map $\phi(x^i) = y^i$ is an isomorphism.
+			}
+		\end{itemize}
+		
+		\boxeddefinition{The groups isomorphic to a given group $G$ form what is called the \textbf{isomorphism class} of $G$. Groups are often classified into isomorphism classes, for example, there is one isomorphism class of groups of order 3 and there are two classes of groups of order 4 and five classes of 12.}
+		
+		\subsubsection{Automorphisms}
+		\boxeddefinition{The domain and codomain of an isomorphism can be the same set of objects so that $\phi : G \longmapsto G$. This is known as an \textbf{automorphism}.}
+		\paragraph{Example}
+		Let $G = \{1, x, x^2\}$ be a cyclic group of order 3 so that $x^3 = 1$. The transposition which interchanges $x$ and $x^2$ is an automorphism of $G$,
+		\[\begin{array}{*6c}
+			&1 &&\longmapsto &&1 \\
+			&x &&\longmapsto &&x^2 \\
+			&x^2 &&\longmapsto &&x \\
+		\end{array}\]
+		This is because $x$ and $x^2$ have the same order because $x^3 = 1$ and also $(x^2)^3 = x^6 = (x^3)^2 = 1^2 = 1$ and so the law of composition is preserved.
+		\paragraph{Conjugation}
+		The most important example of automorphism is conjugation.\\\\
+		\boxeddefinition{\textbf{Conjugation} by $b \in G$ is the map from $G$ to itself defined by,
+			\[ \phi(a) = ba\inv{b} \]
+			with the result that,
+			\[ ba = \phi(a)b \]
+			so that we can think of conjugation of $a$ by $b$ as the way that we need to change $a$ if we want to move the multiplication by $b$ to the other side.
+		}
+		This is an automorphism because it
+		\begin{itemize}
+			\item{is compatible with law of composition, 
+				\[ \phi(xy) = bxy\inv{b} = bx\inv{b}by\inv{b} = \phi(x)\phi(y) \]
+			}
+			\item{has an inverse so it is bijective, 
+				\[ (\inv{\phi} \circ \phi)(a) = \inv{\phi}(\phi(a)) = \inv{b}(ba\inv{b})b = (\inv{b}b)a(\inv{b}b) = a \]
+				Note that this is different from the inverse element of $a$ corresponding under the mapping $\phi$,
+				\[ \phi(a)\phi(\inv{a}) = ba\inv{b}b\inv{a}\inv{b} = ba(1)\inv{a}\inv{b} = b(1)\inv{b} = 1 \]
+			}
+		\end{itemize}
+		Another thing to note is that - in an abelian group where the composition law is commutative - conjugation becomes the identity map,
+		\[ ba = ab \iff ba\inv{b} = a \iff \phi(a) = a \]
+	}
+
+	
+	\bigskip\bigskip
+	\searchableSubsection{Homomorphisms}{abstract algebra}{\bigskip
+		\boxeddefinition{A \textbf{homomorphism} is a mapping (not necessarily bijective) between two groups, $\phi : G \longmapsto G'$, such that,
+			\[ \phi(ab) = \phi(a)\phi(b) \text{ for all } a,b \in G \]
+			where $ab$ represents composition according to the law of composition of $G$ and $\phi(a)\phi(b)$ represents composition according to the law of composition of $G'$. 
+		}
+		So, the difference between a \textit{homomorphism} and a \textit{isomorphism} is that the latter is bijective whereas the former is not. As a result, a \textit{homomorphism} may be one-way only.
+		
+		\paragraph{Examples of homomorphisms}
+		\begin{itemize}
+			\item{
+				Let $C = \{ a^{n-1}, \cdots, a^{-2}, a^{-1}, 1, a, a^2, \cdots, a^{n-1} \}$ be a finite cyclic group. Then the map,
+				\[ \phi : \Z{+} \longmapsto C \; \suchthat \; \phi(n) = a^n \]
+				is a homomorphism. Note that if $C$ were an infinite cyclic group then this would be an isomorphism. 
+			}
+			\item{the sign of a permutation $sign : S_n \longmapsto {\pm1}$}
+			\item{the determinant function $det : GL_n(\R{}) \longmapsto \R{\times}$}
+			\item{an arguably trivial example is called the \textit{inclusion} map $i : H \longmapsto G$ of a subgroup $H$ into a group $G$, defined by $i(x) = x$. It functions as the identity for elements in the subgroup $H$ but, since it is not surjective, there is no inverse mapping.}
+		\end{itemize}
+		
+		\subsubsection{Image of a homomorphism}
+		Since a homomorphism is not bijective it has an image different to the codomain group,
+		\[ im \; \phi = \setc{x \in G'}{\exists a \in G \suchthat \phi(a) = x} \]
+		and it is a subgroup of the codomain group $G'$.\\\\
+		\notation{The image of the mapping $\phi$ with domain $G$ is sometimes denoted $\phi(G)$.}
+		
+		\subsubsection{Kernel of a homomorphism}
+		\boxeddefinition{The \textbf{kernel} of a homomorphism is the set of elements in the domain that are mapped to the identity,
+			\[ ker \; \phi = \setc{a \in G}{\phi(a) = e'} \]
+		}
+		The kernel can also be described as the \textit{reverse image} of the identity. (what's that?)
 	}
 	
 	
