@@ -16,7 +16,7 @@
 		
 		\boxeddefinition{
 		A binary operation is a function,
-		\[ f:G \times G \mapsto G \]
+		\[ f:G \times G \longmapsto G \]
 		which - by the definition of a function - maps a unique tuple from $G \times G$ to a unique value in the codomain $G$.
 		}
 		\bigskip
@@ -245,12 +245,24 @@
 	
 	\bigskip\bigskip
 	\searchableSubsection{Isomorphisms}{abstract algebra}{\bigskip
-		\boxeddefinition{An \textbf{isomorphism} is a bijection between two groups that preserves the structure of the groups by being compatible with the law of composition of both groups. More formally, two groups are \textbf{isomorphic} if there exists a bijection $\phi : G \mapsto G'$ such that,
+		\boxeddefinition{An \textbf{isomorphism} is a bijection between two groups that preserves the structure of the groups by being compatible with the law of composition of both groups. More formally, two groups are \textbf{isomorphic} if there exists a bijection $\phi : G \longmapsto G'$ such that,
 			\[ \phi(ab) = \phi(a)\phi(b) \text{ for all } a,b \in G \]
 			where $ab$ represents composition according to the law of composition of $G$ and $\phi(a)\phi(b)$ represents composition according to the law of composition of $G'$.
 		}
 	
-		As a consequence of this sole property that, across the bijection, the respective laws of composition are preserved, all other properties of the groups are also preserved. For example, if $e \in G$ is the identity of $G$ mapped to an element $e' = \phi(e) \in G'$, then for any $a \in G$ mapped to $a' = \phi(a) \in G'$,
+		\labeledProposition{As a consequence of this sole property that, across the bijection, the respective laws of composition are preserved, all other properties of the groups are also preserved.}{isomorphism_preserves_structure}
+		\begin{proof}
+			Let $e' = \phi(e) \in G'$, then,
+			\begin{itemize}
+				\item{Since $G'$ is a group, it is closed under its law of composition and so $ \phi(ab) = \phi(a)\phi(b) \in G' $ which shows that if $ab \in G$ then $\phi(ab) \in G'$.}
+				\item{$ e' = \phi(e) = \phi(ee) = \phi(e)\phi(e) = e'e' $ which implies that $e'$ is the identity in $G'$ so that $\phi$ maps the identity in $G$ to the identity in $G'$.}
+				\item{Since $G'$ is a group, every element in $G'$ has an inverse so, 
+					\[ e' = \phi(e) = \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) \iff \inv{\phi(a)} = \phi(\inv{a}) \]
+					which shows that $\phi$ maps $\inv{a} \in G$ to $\inv{\phi(a)} \in G'$.}
+			\end{itemize}
+		\end{proof}
+		
+		 For example, if $e \in G$ is the identity of $G$ mapped to an element $ e' = \phi(e) \in G' $, then for any $a \in G$ mapped to $a' = \phi(a) \in G'$,
 		\[ a' = \phi(a) = \phi(ea) = \phi(e)\phi(a) = e'a' \]
 		And $a' = e'a' = a'e'$ means that $e'$ is the identity in $G'$. Furthermore, the order of elements in $G$ and $G'$ will also be the same as,
 		\[ a^n = e \iff e' = \phi(e) = \phi(a^n) = \phi(a)^n = (a')^n \]
@@ -365,7 +377,13 @@
 		\boxeddefinition{The \textbf{kernel} of a homomorphism is the set of elements in the domain that are mapped to the identity,
 			\[ ker \; \phi = \setc{a \in G}{\phi(a) = e'} \]
 		}
-		The kernel can also be described as the \textit{reverse image} of the identity. (what's that?)
+		The kernel of a homomorphism is a subgroup of the domain group $G$. This can be seen as if $a,b \in ker \; \phi$ then,
+		
+		\begin{itemize}
+			\item{closure: $ \phi(ab) = \phi(a)\phi(b) = e' \cdot e' = e' \iff ab \in ker \; \phi $ }
+			\item{identity: $ \phi(e) = \phi(ee) = \phi(e)\phi(e) \iff  $ }
+			\item{inverses: $ \phi(e) = \phi(a\inv{a}) = \phi(a)\phi(\inv{a})  $}
+		\end{itemize}
 	}
 	
 	
