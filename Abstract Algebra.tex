@@ -252,12 +252,23 @@
 	
 		\labeledProposition{As a consequence of this sole property that, across the bijection, the respective laws of composition are preserved, all other properties of the groups are also preserved.}{isomorphism_preserves_structure}
 		\begin{proof}
-			Let $e' = \phi(e) \in G'$, then,
+			Let $e' = \phi(e) \in G'$ and $1'$ be the identity element in $G'$ then,
 			\begin{itemize}
 				\item{Since $G'$ is a group, it is closed under its law of composition and so $ \phi(ab) = \phi(a)\phi(b) \in G' $ which shows that if $ab \in G$ then $\phi(ab) \in G'$.}
-				\item{$ e' = \phi(e) = \phi(ee) = \phi(e)\phi(e) = e'e' $ which implies that $e'$ is the identity in $G'$ so that $\phi$ maps the identity in $G$ to the identity in $G'$.}
-				\item{Since $G'$ is a group, every element in $G'$ has an inverse so, 
-					\[ e' = \phi(e) = \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) \iff \inv{\phi(a)} = \phi(\inv{a}) \]
+				\item{
+					Since $G'$ is a group, it has the inverses property that every element has an inverse so,
+					\begin{align*}
+						 &&e' &= \phi(e) = \phi(ee) = \phi(e)\phi(e) = e'e' \\
+						 &\iff &\inv{(e')}e' &= (\inv{(e')}e')e' &\sidecomment{using the inverses property of $G'$}\\
+						 &\iff &1' &= e'
+					\end{align*}
+					which implies that $e'$ is the identity in $G'$ so that $\phi$ maps the identity in $G$ to the identity in $G'$.}
+				\item{We can use the fact just shown that $\phi(e) = e' = 1'$ to show,
+					\begin{align*}
+						&&1' = e' = \phi(e) &= \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) \\
+						&\iff &\inv{\phi(a)}1' &= \phi(\inv{a})\phi(a)\phi(\inv{a}) &\sidecomment{using the inverses property of $G'$}\\
+						&\iff &\inv{\phi(a)} &= \phi(\inv{a})
+					\end{align*}
 					which shows that $\phi$ maps $\inv{a} \in G$ to $\inv{\phi(a)} \in G'$.}
 			\end{itemize}
 		\end{proof}
@@ -356,34 +367,81 @@
 		So, the difference between a \textit{homomorphism} and a \textit{isomorphism} is that the latter is bijective whereas the former is not. As a result, a \textit{homomorphism} may be one-way only.
 		
 		\paragraph{Examples of homomorphisms}
-		\begin{itemize}
-			\item{
-				Let $C = \{ a^{n-1}, \cdots, a^{-2}, a^{-1}, 1, a, a^2, \cdots, a^{n-1} \}$ be a finite cyclic group. Then the map,
+		\begin{exe}
+			\ex {	Let $C = \{ a^{n-1}, \cdots, a^{-2}, a^{-1}, 1, a, a^2, \cdots, a^{n-1} \}$ be a finite cyclic group. Then the map,
 				\[ \phi : \Z{+} \longmapsto C \; \suchthat \; \phi(n) = a^n \]
-				is a homomorphism. Note that if $C$ were an infinite cyclic group then this would be an isomorphism. 
-			}
-			\item{the sign of a permutation $sign : S_n \longmapsto {\pm1}$}
-			\item{the determinant function $det : GL_n(\R{}) \longmapsto \R{\times}$}
-			\item{an arguably trivial example is called the \textit{inclusion} map $i : H \longmapsto G$ of a subgroup $H$ into a group $G$, defined by $i(x) = x$. It functions as the identity for elements in the subgroup $H$ but, since it is not surjective, there is no inverse mapping.}
-		\end{itemize}
+				is a homomorphism. Note that if $C$ were an infinite cyclic group then this would be an isomorphism. }\label{ex_finite_cyclic_group}
+			\ex {the sign of a permutation $ sign : S_n \longmapsto {\pm1} $}\label{ex_sign_permutation}
+			\ex {the determinant function $ det : GL_n(\R{}) \longmapsto \R{\times} $}\label{ex_determinant}
+			\ex {an arguably trivial example is called the \textit{inclusion} map $i : H \longmapsto G$ of a subgroup $H$ into a group $G$, defined by $i(x) = x$. It functions as the identity for elements in the subgroup $H$ but, since it is not surjective, there is no inverse mapping.}\label{ex_inclusion_map}
+		\end{exe}
+	
+		
 		
 		\subsubsection{Image of a homomorphism}
 		Since a homomorphism is not bijective it has an image different to the codomain group,
 		\[ im \; \phi = \setc{x \in G'}{\exists a \in G \suchthat \phi(a) = x} \]
-		and it is a subgroup of the codomain group $G'$.\\\\
+		The image of a homomorphism is a subgroup of the codomain group $G'$ because the homomorphism preserves the group structure as described in \autoref{prop:isomorphism_preserves_structure}.\\\\
 		\notation{The image of the mapping $\phi$ with domain $G$ is sometimes denoted $\phi(G)$.}
 		
 		\subsubsection{Kernel of a homomorphism}
 		\boxeddefinition{The \textbf{kernel} of a homomorphism is the set of elements in the domain that are mapped to the identity,
-			\[ ker \; \phi = \setc{a \in G}{\phi(a) = e'} \]
+			\[ ker \; \phi = \setc{a \in G}{\phi(a) = 1'} \]
 		}
-		The kernel of a homomorphism is a subgroup of the domain group $G$. This can be seen as if $a,b \in ker \; \phi$ then,
-		
-		\begin{itemize}
-			\item{closure: $ \phi(ab) = \phi(a)\phi(b) = e' \cdot e' = e' \iff ab \in ker \; \phi $ }
-			\item{identity: $ \phi(e) = \phi(ee) = \phi(e)\phi(e) \iff  $ }
-			\item{inverses: $ \phi(e) = \phi(a\inv{a}) = \phi(a)\phi(\inv{a})  $}
-		\end{itemize}
+	
+		\labeledProposition{The kernel of a homomorphism is a subgroup of the domain group $G$.}{homomorphism_kernel_subgroup}
+		\begin{proof}
+			If $a,b \in ker \; \phi$ then,
+			\begin{itemize}
+				\item{closure: $ \phi(ab) = \phi(a)\phi(b) = 1' \cdot 1' = 1' $ which shows that 
+					\[ a,b \in ker \; \phi \implies ab \in ker \; \phi. \] }
+				\item{identity: By \autoref{prop:isomorphism_preserves_structure}, $ 1' = e' = \phi(e) $ and so $e \in ker \; \phi $.}
+				\item{inverses: Since $ a \in ker \; \phi $, then 
+					\begin{align*}
+					&&1' = e' &= \phi(e) = \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) = 1'\phi(\inv{a}) \\
+					&\iff &1' &= \phi(\inv{a})
+					\end{align*}
+					so that $ a \in ker \; \phi \iff \inv{a} \in ker \; \phi $.}
+			\end{itemize}
+		\end{proof}
+	
+		\subsubsection{Examples of Kernels of Homomorphisms}
+		\begin{exe}
+			\ex The determinant function \ref{ex_determinant}, $ det : GL_n(\R{}) \longmapsto \R{\times} $ - has a kernel,
+			\[ \setc{\text{real $n\times n$ matrices $A$}}{det \, A = 1}, \]
+			which is a subgroup of $GL_n(\R{})$ known as the \textit{special linear group} $SL_nn(\R{})$.
+			\label{ex_special_lin_group}
+			\ex The sign of a permutation \ref{ex_sign_permutation} has a kernel that is the set of \textit{even} permutations,
+			\[ A_n = \{\text{even permutations}\}, \]
+			which is a subgroup of the symmetric group $S_n$ and is known as the \textit{alternating group}, $A_n$.
+			\label{ex_alternating_group}
+			\ex The map from the additive group of integers to a finite cyclic group \ref{ex_finite_cyclic_group},
+			\[ \phi : \Z{+} \longmapsto C \; \suchthat \; \phi(n) = a^n \]
+			has the kernel,
+			\[ ker \; \phi = \setc{n \in \Z{+}}{a^n = 1} \]
+			which has been proven to be a subgroup in \autoref{prop:cyclic_powers_add_subgroup_integers}.
+			\label{ex_kernel_cyclic_powers}
+		\end{exe}
+	
+		\bigskip
+		\subsubsection{Normal Subgroups}
+		\boxeddefinition{A subgroup $N$ of a group $G$ is called a \textbf{normal subgroup} if it has the property that,
+			\[ \forall \, a \in N, b \in G, \; ba\inv{b} \in N  \]
+			which is to say, that the conjugate by any element of $G$ of any element in $N$ is also in $N$.
+		}
+		\subsubsection{Examples of Normal Subgroups}
+		\begin{exe}
+			\ex{The kernel of a homomorphism is a normal subgroup because,
+				\begin{align*}
+					&& a \in ker \; \phi \iff \phi(a) &= 1 \\
+					&\implies & \phi(ba\inv{a}) &= \phi(a) \cdot 1 \cdot \phi(\inv{a}) \\
+					&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
+					&\iff & \phi(ba\inv{a}) &= 1.
+				\end{align*}
+				}\label{ex_kernel_homomorphism}
+				So $SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$ and $A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.
+		\end{exe}
+		Any subgroup of an abelian group is normal because when the composition law is commutative $ba = ab \iff ba\inv{b} = ab\inv{b} = a$
 	}
 	
 	
