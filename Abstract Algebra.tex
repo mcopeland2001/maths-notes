@@ -97,7 +97,7 @@
 		\end{aligned}
 		\]
 		Note that the law of composition is commutative.
-		\subparagraph{$\bm{S_3}$}
+		\subparagraph{$\bm{S_3}$}\label{S_3}
 		The symmetric group $S_3$ contains $3!$ elements. It is the smallest group whose law of composition is not commutative. It can be described using any two permutations of $\{1, 2, 3\}$. For example, if we take,
 		\begin{align*}
 			x =
@@ -254,18 +254,17 @@
 		\begin{proof}
 			Let $e' = \phi(e) \in G'$ and $1'$ be the identity element in $G'$ then,
 			\begin{itemize}
-				\item{Since $G'$ is a group, it is closed under its law of composition and so $ \phi(ab) = \phi(a)\phi(b) \in G' $ which shows that if $ab \in G$ then $\phi(ab) \in G'$.}
 				\item{
 					Since $G'$ is a group, it has the inverses property that every element has an inverse so,
 					\begin{align*}
-						 &&e' &= \phi(e) = \phi(ee) = \phi(e)\phi(e) = e'e' \\
+						 &&e' &= \phi(e) = \phi(ee) = \phi(e)\phi(e) = e'e' &\sidecomment{using preservation of law of composition}\\
 						 &\iff &\inv{(e')}e' &= (\inv{(e')}e')e' &\sidecomment{using the inverses property of $G'$}\\
 						 &\iff &1' &= e'
 					\end{align*}
 					which implies that $e'$ is the identity in $G'$ so that $\phi$ maps the identity in $G$ to the identity in $G'$.}
 				\item{We can use the fact just shown that $\phi(e) = e' = 1'$ to show,
 					\begin{align*}
-						&&1' = e' = \phi(e) &= \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) \\
+						&&1' = e' = \phi(e) &= \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) &\sidecomment{using preservation of law of composition}\\
 						&\iff &\inv{\phi(a)}1' &= \phi(\inv{a})\phi(a)\phi(\inv{a}) &\sidecomment{using the inverses property of $G'$}\\
 						&\iff &\inv{\phi(a)} &= \phi(\inv{a})
 					\end{align*}
@@ -316,13 +315,16 @@
 				\]
 				So, $G$ is isomorphic to $\R{+}$, the additive group of reals.
 			}
-			\item{Any two cyclic groups of the same order are isomorphic because, if
-				\[ G = \{1, x, x^2, \cdots, x^{n-1}\}, G' = \{1, y, y^2, \cdots, y^{n-1}\} \]
-				are two cyclic groups of order $n$ then the map $\phi(x^i) = y^i$ is an isomorphism.
-			}
 		\end{itemize}
 		
 		\boxeddefinition{The groups isomorphic to a given group $G$ form what is called the \textbf{isomorphism class} of $G$. Groups are often classified into isomorphism classes, for example, there is one isomorphism class of groups of order 3 and there are two classes of groups of order 4 and five classes of 12.}
+		
+		\labeledProposition{There is only one isomorphism class for each order of cyclic group.}{one_class_per_cyclic_order}
+		\begin{proof}
+			Any two cyclic groups of the same order are isomorphic because, if
+			\[ G = \{1, x, x^2, \cdots, x^{n-1}\}, \; G' = \{1, y, y^2, \cdots, y^{n-1}\} \]
+			are two cyclic groups of order $n$ then the map $\phi(x^i) = y^i$ is an isomorphism.
+		\end{proof}
 		
 		\subsubsection{Automorphisms}
 		\boxeddefinition{The domain and codomain of an isomorphism can be the same set of objects so that $\phi : G \longmapsto G$. This is known as an \textbf{automorphism}.}
@@ -438,10 +440,221 @@
 					&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
 					&\iff & \phi(ba\inv{a}) &= 1.
 				\end{align*}
+				So,
+				\begin{xlist}
+					\ex{$SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$;}
+					\ex{$A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.}
+				\end{xlist}
 				}\label{ex_kernel_homomorphism}
-				So $SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$ and $A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.
+			\ex{Any subgroup of an abelian group is normal because when the composition law is commutative, as was mentioned in the section on conjugation,
+				 \[ ba = ab \iff ba\inv{b} = ab\inv{b} = a \]
+				 so that conjugation becomes the identity map and so, trivially, all conjugates of elements in a subgroup are also in the subgroup.
+			 }\label{ex_abelian_subgroup}	
 		\end{exe}
-		Any subgroup of an abelian group is normal because when the composition law is commutative $ba = ab \iff ba\inv{b} = ab\inv{b} = a$
+		Subgroups of non-abelian groups, however, need not be normal. For example,
+		\begin{exe}
+			\ex{Group $T$ of invertible upper triangular matrices is not a normal subgroup of $GL_2(\R{})$. To show this note,
+				\[
+					A = \begin{bmatrix}
+					1 & 1 \\
+					0 & 1
+					\end{bmatrix},
+					B = \begin{bmatrix}
+					0 & 1 \\
+					1 & 0
+					\end{bmatrix},
+					BA\inv{B} = \begin{bmatrix}
+					1 & 0 \\
+					1 & 1
+					\end{bmatrix}
+				\]
+				where $A \in T, B \in GL_2(\R{})$ but $BA\inv{B} \not\in T$.
+			}
+		\end{exe}
+	
+		\subsubsection{The center of a group}
+		\boxeddefinition{The \textbf{center} of a group $G$ is the set of elements that commute with every element of $G$,
+			\[ Z = \setc{z \in G}{zx = xz, \; \forall x \in G} \]
+		}
+		\notation{The \textbf{center} of a group $G$ may be denoted by $Z$ or by $Z(G)$.}
+		For example,
+		\begin{exe}
+			\ex{The center of the general linear group $GL_n(\R{})$ is the group of \textit{scalar matrices} of the form $cI$ for $c \in \R{}$, i.e. matrices of the form,
+				\[
+				\begin{bmatrix}
+				c & 0 \\
+				0 & c
+				\end{bmatrix}
+				\]
+				in $GL_2(\R{})$.
+				Note that, for \textit{diagonal} matrices whose elements on the main diagonal are all non-zero but not-necessarily equal as in \textit{scalar} matrices, multiplication is commutative with other diagonal matrices but not generally so with other matrices in the general linear group.
+			}
+		\end{exe}
+	}
+
+
+	\bigskip\bigskip
+	\searchableSubsection{Equivalence Relations and Partitions}{abstract algebra}{\bigskip
+		\notation{In the following treatment of equivalence relations we will use the notation $a \sim b$ to denote the equivalence of $a$ and $b$; $\overline{a}$ to indicate the equivalence class of $a$; and $\overline{S}$ to indicate the partition of $S$ comprised of equivalence classes such as the class $\overline{a} = \overline{b}$ which includes both $a$ and $b$.}
+		Any map of sets $\phi: S \longmapsto T$ defines an equivalence relation on the domain $S$ such that $a \sim b$ iff $\phi(a) = \phi(b)$. We will refer to this as the \textit{equivalence relation determined by the map}. The corresponding partition is made up of the sets of elements in the domain $S$ that are mapped to the same element in the codomain $T$.\\\\
+		\boxeddefinition{Let $\phi: S \longmapsto T$ be a map, then the \textbf{inverse image} of an element $t \in T$ is defined as,
+			\[ \inv{\phi}(t) = \setc{s \in S}{\phi(s) = t} \]
+			and can also be applied to a set $U \in T$ as,
+			\[ \inv{\phi}(U) = \setc{s \in S}{\phi(s) \in U} \]
+			Note that in this notation, $\inv{\phi}$ \textbf{does not indicate an inverse function} as the inverse of the function may not exist but the inverse image is nevertheless defined.\\
+			The inverse images - the sets $\inv{\phi}(t)$ for all $t \in T$ - may also be called the \textbf{fibres} of the map $\phi$.
+		}
+		Clearly, the non-empty fibres of the map $\phi$ form a partition of $S$. We can express this partition of $S$ as a bijection, that we shall call $\overline{\phi}$, between the fibres of $\phi$ in $S$ and the element of the image of $S$ to which their members are mapped,
+		\[ \overline{\phi}: \overline{S} \longmapsto im \; \phi \]
+		so that,
+		\[ \overline{\phi}(\overline{s}) = \phi(s). \]
+		
+		\begin{figure}[h!]
+			\includegraphics[width=\linewidth]{resources/img/group_homomorphism_schematic.png}
+			\caption{A schematic diagram of a group homomorphism}
+		\end{figure}
+	
+		\subsubsection{Congruence}
+		Since a homomorphism maps the identity to the identity and inverses to inverses (\autoref{prop:isomorphism_preserves_structure}), we can deduce that the inverse image of the identity in $G'$ is going to contain at least the identity of $G$ and that the inverse image of an element $\inv{(a')} \in G'$ will contain at least the element $\inv{a} \in G$. So, in terms of equivalence classes we can say that, for a homomorphism $\phi$,
+		\[ 1 = e \in \inv{\phi}(1') \implies \overline{\phi}(\overline{1}) = 1' \]
+		\[ \inv{a} \in \inv{\phi}(\inv{(a')}) \implies \overline{\phi}(\overline{\inv{a}}) = \inv{(a')} \]
+
+		\boxeddefinition{The equivalence relation determined by a homomorphism is known as \textbf{congruence} and is commonly denoted using $\equiv$ instead of $\sim$. For a homomorphism $\phi$,
+			\[ a \equiv b \iff \phi(a) = \phi(b). \]
+			Since $\phi$ is a homomorphism we also have,
+			\[ a \equiv b \iff \phi(ac) = \phi(bc), \; \phi(\inv{a}) = \phi(\inv{b}). \]
+			More generally, a \textbf{congruence relation} is an equivalence relation on an algebraic structure (such as a group, ring, or vector space) that is compatible with the structure in the sense that algebraic operations done with equivalent elements will yield equivalent elements.
+		}
+		\subsubsection{Congruence Examples}
+		\begin{exe}
+			\ex{The modulus function of complex numbers forms a homomorphism from the multiplicative group of complex numbers to the multiplicative group of reals,
+				\[ \phi : \C{\times} \longmapsto \R{\times} \suchthat \phi(a) = \abs{a} \]
+				and the induced equivalence relation is $a \equiv b \iff \abs{a} = \abs{b}$. The fibres of this map are the concentric circles about 0. They are in bijective correspondence with elements of $im \; \phi$, the set of positive reals.
+			}
+		\end{exe}
+	
+		\labeledProposition{If $\phi : G \longmapsto G'$ is a group homomorphism with kernel $N$ then, for $a,b \in G$,
+			\[\phi(a) = \phi(b) \iff \exists n \in N, \suchthat b = an  \]
+			or, equivalently, $\inv{a}b \in N$.
+		}{kernel_elements_relate_congruent_elements}
+		\begin{proof}
+			\begin{align*}
+				&& b &= an  \\
+				&\implies & \phi(b) &= \phi(an) \\
+				&\implies & \phi(b) &= \phi(a)\phi(n) &\sidecomment{by homomorphism property} \\
+				&\implies & \phi(b) &= \phi(a)1' &\sidecomment{n is in the kernel} \\
+				&\implies & \phi(b) &= \phi(a) \\
+			\end{align*}
+			\begin{align*}
+				&& \phi(b) &= \phi(a) \\
+				&\implies & \inv{\phi(a)}\phi(b) &= 1'  &\sidecomment{codomain is a group so has inverses} \\
+				&\implies & \phi(\inv{a})\phi(b) &= 1' &\sidecomment{by \autoref{prop:isomorphism_preserves_structure}} \\
+				&\implies & \phi(\inv{a}b) &= 1' &\sidecomment{by homomorphism property} \\
+				&\implies & \inv{a}b &= n \in N \\
+				&\implies & b &= an \\
+			\end{align*}
+		\end{proof}
+	
+		\begin{corollary}
+			A group homomorphism is injective if and only if its kernel is the trivial subgroup $\{1\}$. So, a homomorphism is an isomorhpism if its kernel contains only the identity and its image is the whole of the codomain (i.e. it's surjective). 
+		\end{corollary}
+	}
+
+	
+	\pagebreak
+	\searchableSubsection{Cosets}{abstract algebra}{\bigskip
+		The set of elements of the form $an$ - described in \autoref{prop:kernel_elements_relate_congruent_elements} - is denoted by $aN$ and is called a \textit{coset} of $N$ in $G$.\\\\
+		\boxeddefinition{A coset can be defined for any subgroup $H$ of a group $G$. A \textbf{left coset} is a subset of the form,
+			\[ aH = \setc{ah}{h \in H}. \]
+		}
+		Note that the arbitrary subgroup $H$ could also be thought of as a coset $1H = H$ and also that the left cosets $aH$ are equivalence classes for the congruence relation,
+			\[ a \equiv b \iff b = ah, \; h \in H. \]
+		This is a congruence because, for some arbitrary $c \in G$,
+			\[ 1 \equiv c \iff \exists h \in H \suchthat c = 1h = h. \]
+		That's to say, the elements that are congruent to the identity are precisely the members of the subgroup $H$ so that it plays a similar role to the kernel $N$ in \autoref{prop:kernel_elements_relate_congruent_elements}. Furthermore, since the congruence relation is an equivalence relation it forms a partition of the domain $G$.
+		
+		\labeledProposition{The left cosets of a subgroup partition the group.}{cosets_partition_group}
+		\begin{proof}
+			The left cosets are equivalence classes and, as a result, they partition the group.
+		\end{proof}
+	
+		\subsubsection{Examples of cosets}
+		\begin{exe}
+			\ex{The coset of an element with the kernel $N$,
+				\[ aN = \setc{g \in G}{g = an, \; n \in N} \]
+				is the set of all elements that are \textit{congruent} to $a$. The \textit{congruence classes} are precisely the cosets $aN$ for each $a \in G$. They are also the \textit{fibres} of the homomorphic map.
+			}\label{ex_coset_with_kernel}
+			\ex \ref{S_3} Continuing the example of the symmetric group $S_3$ represented as 
+				\[ G = \{1, x, x^2, y, xy, x^2y\} \]
+				with group multiplication rules, 
+				\[ x^3 = 1, y^2 = 1, yx = x^2y. \]
+				The element $xy$ has order 2 so it generates a cyclic subgroup $H = \{1, xy\}$ of order 2. The left cosets of $H$ in $G$ are the three sets,
+				\[ \{1,xy\} = 1H = xyH, \; \{x, x^2y\} = xH = x^2yH, \; \{x^2, y\} = x^2H = yH. \]
+				Note that they do partition the group $G$. Also, notice that the cosets $aH$ for $a \in H$ produce the subgroup $H$ itself as should be expected as the group properties of the subgroup dictate that all products of its elements are already present in the subgroup. For this reason, the cosets $aH$ that are distinct from $H$ are those such that $a \not\in H$.\label{ex_S_3}
+		\end{exe}
+	
+		\subsubsection{The index of a subgroup}
+		\boxeddefinition{The \textbf{index} of a subgroup is the number of left cosets it forms in the parent group.}
+		\notation{The \textbf{index} of a subgroup $H$ in $G$ is denoted by $[G:H]$.}
+		\\\\
+		In the example (\ref{ex_S_3}) the index of $H$ is 3. Note that if $G$ were to contain infinitely many elements then the index of a subgroup may also be infinite.\\
+		
+		\labeledProposition{Each coset $aH$ has the same number of elements as $H$.}{coset_cardinality_equal_to_subgroup}
+		\begin{proof}
+			As usual, equal cardinality is demonstrated by showing the existence of a bijection. It is clear that there is a bijective map between the subgroup $H$ and any coset $aH$ because the map $H \longmapsto aH$ is,
+			\begin{itemize}
+				\item{injective because $ah = ah' \implies h = h'$;}
+				\item{surjective because every $ah \in aH$ is mapped to by some $h \in H$.}
+			\end{itemize}
+		\end{proof}
+	
+		\subsubsection{Lagrange's Theorem}
+		Since the left cosets of $H$ in $G$ form a partition of $G$ and their order is the same as that of $H$ we see that the order of $G$ is the order of $H$ multiplied by its index in $G$. This results in a formula known as the \textit{Counting Formula} as follows,
+		\[ \cardinality{G} = \cardinality{H} \cdot [G:H]. \]
+		If $G$ is of infinite order and $H$ is finite, then the index of $H$ in $G$ will be infinite.
+		
+		\begin{theorem}
+			\textbf{Lagrange's Theorem: } Let $G$ be a finite group, and let $H$ be a subgroup of $G$. The order of $H$ divides the order of $G$.
+		\end{theorem}
+		\begin{corollary}
+			Suppose that a group $G$ has $p$ elements and that $p$ is a prime integer. Let $a \in G$ be any element, not the identity. Then $G$ is the cyclic group $\{1, a, \dots , a^{p-1}\}$ generated by $a$.
+		\end{corollary}
+		\begin{proof}
+			Since $a \neq 1$ by selection, it has order greater than 1. Since its order must divide the order of $G$, which is prime, its order is equal to the order of $G$, $p$. So, the order of the nonidentity element $a$ is the same as the order of $G$ and so it generates the whole group.
+		\end{proof}
+		\begin{corollary}
+			All groups with some prime order, $p$, are in the same isomorphism class.
+		\end{corollary}
+		\begin{proof}
+			Any group with prime order $p$ is the cyclic group of order $p$ and by \autoref{prop:one_class_per_cyclic_order} there is only a single isomorphism class for each cyclic group of a given order.
+		\end{proof}
+		
+		The Counting Formula can also be applied when a homomorphism is given. Let $\phi : G \longmapsto G'$ be a homomorphism. As we saw in coset example \ref{ex_coset_with_kernel}, the left cosets of $ker \; \phi$ are the fibres of the map $\phi$. They are in bijective correspondence with the elements of the image. Therefore,
+		\[ [G : ker \; \phi] = \cardinality{im \; \phi}. \]
+		Which implies that,
+		\begin{corollary}
+			If $\phi : G \longmapsto G'$ is a homomorphism of finite groups then,
+			\[ \cardinality{G} = \cardinality{ker \; \phi} \cdot \cardinality{im \; \phi}. \]
+			As a result, $\cardinality{ker \; \phi}$ divides $\cardinality{G}$, and $\cardinality{im \; \phi}$ divides both $\cardinality{G}$ and $\cardinality{G'}$.
+		\end{corollary}
+	
+		\subsubsection{Right Cosets}
+		Right cosets also exist and are defined as,
+		 \[ Ha = \setc{g \in G}{g = ha, \; h \in H} \]
+		and these are equivalence classes for the \textit{right congruence} relation,
+		\[ a \equiv b \iff b = ha, \; h \in H. \]
+		Right cosets are not necessarily the same as left cosets. For instance, continuing the example in \ref{ex_S_3}, the right cosets of the subgroup $\{1, xy\}$ of $S_3$ are,
+		\[ \{1, xy\} = H1 = Hxy, \; \{x, y\} = Hx = H, \; \{x^2, x^2y\} = Hx^2 = Hx^2y. \]
+		Note that this generates a different partition of $G$ then was generated by the left cosets.
+		
+		\labeledProposition{A subset $H$ of a group $G$ is normal if and only if every left coset is also a right coset. If $H$ is normal then,
+			 \[ \forall a \in G, \, aH = Ha. \]}{normal_subgroups_equal_cosets}
+		\begin{proof}
+			Suppose that $H$ is normal. For any $h \in H$ and any $a \in G$,
+			\[ ah = (ah\inv{a})a. \]
+			Since $H$ is normal, the conjugate by $h$ of $a$ is also in $H$, that's to say, $ ah\inv{a} \in H $ which implies that $ (ah\inv{a})a \in Ha $. Therefore, any arbitrary member of $aH$ is also a member of $Ha$. Clearly, the same proof also works in the other direction so that any member of $Ha$ is also a member of $aH$ and the two cosets are equal. So, we have shown that ($H$ is normal) $\implies$ (left and right cosets of $H$ are equal). \\
+			Now we need to show that (left and right cosets of $H$ are equal) $\implies$ ($H$ is normal). Firstly, clearly the above logic doesn't apply if $H$ is not normal; there will be at least one element whose conjugate is not in $H$ so $aH \neq Ha$. However, it could still be the case that each left coset is also a right coset if, for every $a$ in $G$, there is some $b$ in $G$ such that $aH = Hb$. However, this is not possible because $aH$ and $Ha$ both contain $a$ which means that in a given partition of $G$ they must be the same partition. So $aH \neq Ha$ implies that the partitions are different; $Ha$ creates different equivalence classes. Therefore  (left and right cosets of $H$ are equal) $\implies$ ($H$ is normal).
+		\end{proof} 
 	}
 	
 	
