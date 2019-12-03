@@ -1,0 +1,59 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+
+
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}
+\searchableSubsection{\chapterTitle{Analysis}}{analysis}{\bigskip\bigskip}
+
+	\searchableSubsection{\sectionTitle{Limits}}{analysis}{\bigskip}
+	
+	\bigskip\bigskip
+	\searchableSubsection{Definitions of the Types of Limit}{analysis}{\bigskip
+		\subsubsection{Problems with the informal description of a limit}
+		If we say that a sequence tends to some value $L$ when the terms of the sequence \textit{gets closer and closer to} $L$ we have the following problems:
+		\begin{itemize}
+			\item{that the sequence gets closer and closer to many numbers so that this does not specify a single specific limit.}
+			\item{that the sequence can have a limit but it's not the case that every term is closer than the previous term to the limit. For example,
+				\[ a_{2k} = 1/k, \; a_{2k - 1} = \frac{1}{k+1} \]
+				tends to 0 but $ a_{2k} > a_{2k - 1} $.
+			}
+		\end{itemize}
+		\bigskip
+		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend} to $L$ or have the \textbf{limit} $L$ iff,
+			\[ \forall \epsilon > 0 \in \R{} ,\, \exists n \in \N{} \suchthat \forall n' > n ,\, \abs{a_{n'} - L} < \epsilon. \]
+		}
+		\notation{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{$\epsilon$-neighbourhood of $L$}.}
+		
+		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend to infinity} iff,
+			\[ \forall M > 0 \in \R{} ,\, \exists n \in \N{} \suchthat \forall n' > n ,\, a_{n'} > M \]
+			and \textbf{tend to minus-infinity} iff,
+			\[ \forall M < 0 \in \R{} ,\, \exists n \in \N{} \suchthat \forall n' > n ,\, a_{n'} < M. \]
+		}
+	
+		\notation{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
+	}
+	
+	
+	\bigskip
+	\searchableSubsection{Examples of Convergence and Divergence}{analysis}{\bigskip
+		\subsubsection{Non-convergent Oscillation}
+		The sequence $ a_n = (-1)^n $ is divergent despite always remaining bounded within the interval $ [-1, 1] $ as it neither converges to 1 or to -1.
+			
+		\subsubsection{Limit of an Infinite Recurrence}
+		Take the sequence given by,
+		\[ a_1 = 1, \; a_{n+1} = \frac{a_n}{2} + \frac{3}{2a_n} \;\; (n \ge 1). \]
+		Assume there is an equilibrium value, $a^*$, then
+		\begin{align*}
+		&&a^* &= \frac{a^*}{2} + \frac{3}{2a^*}  \\
+		&\iff &2(a^*)^2  &= (a^*)^2 + 3  &\sidecomment{}\\
+		&\iff &(a^*)^2  &= 3  &\sidecomment{}\\
+		&\iff &a^*  &= \sqrt{3}  &\sidecomment{}\\
+		\end{align*}
+		So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction.
+	}
+
+\end{document}
