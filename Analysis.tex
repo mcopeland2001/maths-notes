@@ -24,17 +24,17 @@
 		\end{itemize}
 		\bigskip
 		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend} to $L$ or have the \textbf{limit} $L$ iff,
-			\[ \forall \epsilon > 0 \in \R{} ,\, \exists n \in \N{} \suchthat \forall n' > n ,\, \abs{a_{n'} - L} < \epsilon. \]
+			\[ \forall \epsilon > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \abs{a_{n} - L} < \epsilon. \]
 		}
-		\notation{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{$\epsilon$-neighbourhood of $L$}.}
+		\nomenclature{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{$\epsilon$-neighbourhood of $L$}.}
 		
 		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend to infinity} iff,
-			\[ \forall M > 0 \in \R{} ,\, \exists n \in \N{} \suchthat \forall n' > n ,\, a_{n'} > M \]
+			\[ \forall M > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} > M \]
 			and \textbf{tend to minus-infinity} iff,
-			\[ \forall M < 0 \in \R{} ,\, \exists n \in \N{} \suchthat \forall n' > n ,\, a_{n'} < M. \]
+			\[ \forall M < 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} < M. \]
 		}
 	
-		\notation{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
+		\nomenclature{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
 	}
 	
 	
@@ -54,6 +54,48 @@
 		&\iff &a^*  &= \sqrt{3}  &\sidecomment{}\\
 		\end{align*}
 		So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction.
+	}
+
+	\bigskip\bigskip
+	\searchableSubsection{Properties of Limits}{analysis}{\bigskip
+		\labeledProposition{A sequence has at most one limit. In other words, a sequence can only converge, if at all, to a single unique value.}{uniqueness_of_limits}
+		\begin{proof}
+			Let $L$ and $L'$ both be limits of the sequence $a_n$, and the constant $\alpha = L - L'$. Then,
+			\[ \forall \epsilon > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \abs{a_{n} - L} < \epsilon \] and
+			\[ \forall \epsilon' > 0 \in \R{} ,\, \exists N' \in \N{} \suchthat \forall n' > N' ,\, \abs{a_{n'} - L'} < \epsilon'. \]
+			But also we have,
+			\[ \abs{a_n - L'} = \abs{(a_n - L) + (L - L')} = \abs{(L - L') + (a_n - L)} \]
+			and using the triangle inequality,
+			\begin{align*}
+			&& \abs{L - L'} = \abs{(L - L') + (a_n - L) - (a_n - L)} &\leq \abs{(L - L') + (a_n - L)} + \abs{-(a_n - L)} \\
+			&\iff & \abs{L - L'}  &\leq \abs{(L - L') + (a_n - L)} + \abs{a_n - L}\\
+			&\iff & \abs{L - L'} - \abs{a_n - L}  &\leq \abs{(L - L') + (a_n - L)}\\
+			&\iff & \abs{\alpha} - \abs{a_n - L}  &\leq \abs{\alpha + (a_n - L)}\\
+			\end{align*}
+			Since $\alpha = L - L'$ is constant we can consider the situation when $\epsilon = \frac{\abs{\alpha}}{2}$ then we have that,
+			\begin{align*}
+			&& \exists N \in \N{} \suchthat \forall n > N ,\, \abs{a_{n} - L} &< \epsilon = \frac{\abs{\alpha}}{2} \\
+			&\iff &  -\abs{a_{n} - L} &> -\frac{\abs{\alpha}}{2}  &\sidecomment{}\\
+			&\iff & \abs{\alpha} - \abs{a_{n} - L} &> \abs{\alpha} - \frac{\abs{\alpha}}{2}  &\sidecomment{}\\
+			&\iff & \abs{\alpha} - \abs{a_{n} - L} &> \frac{\abs{\alpha}}{2}.  &\sidecomment{}\\
+			\end{align*}
+			Combining this with the previous result gives, for $\forall n > N$,
+			\[ \frac{\abs{\alpha}}{2} < \abs{\alpha} - \abs{(a_n - L)}  \leq \abs{\alpha + (a_n - L)} = \abs{a_n - L'} \]
+			which, by rearranging a little, is,
+			\[ \forall n > N,\, \abs{a_n - L'} > \frac{\abs{\alpha}}{2}. \]
+			But this means that if we also choose $\epsilon' = \frac{\abs{\alpha}}{2}$ then there is no $N'$ such that $\forall n' > N' ,\, \abs{a_{n'} - L'} < \epsilon'$ which contradicts the hypothesis that $L'$ is also a limit of $a_n$.
+		\end{proof}
+		\begin{proof}
+			Another quicker way of proving the proposition is by letting $ \epsilon = \epsilon' = \frac{\abs{\alpha}}{2} $ so that,
+			\[ 2\epsilon = \abs{\alpha} = \abs{L - L'} = \abs{L - a_n + a_n - L'} \leq \abs{L - a_n} + \abs{a_n - L'} = \abs{a_n - L} + \abs{a_n - L'} \]
+			which gives us,
+			\[ 2\epsilon \leq \abs{a_n - L} + \abs{a_n - L'}. \]
+			But by the limit definition,
+			\[ \abs{a_n - L} + \abs{a_n - L'} < \epsilon + \epsilon' \]
+			and since we have set $ \epsilon = \epsilon' $ then,
+			\[ \abs{a_n - L} + \abs{a_n - L'} < 2\epsilon \]
+			which contradicts $ 2\epsilon \leq \abs{a_n - L} + \abs{a_n - L'} $.
+		\end{proof}
 	}
 
 \end{document}
