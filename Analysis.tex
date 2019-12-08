@@ -9,6 +9,92 @@
 \begin{document}
 \searchableSubsection{\chapterTitle{Analysis}}{analysis}{\bigskip\bigskip}
 
+	\searchableSubsection{\sectionTitle{Supremum and Infimum}}{analysis}{\bigskip}
+	
+	\bigskip\bigskip
+	\searchableSubsection{Definitions}{analysis}{\bigskip
+		\boxeddefinition{An upper bound on a set A is a value $x$ such that,
+			\[ \forall a \in A, \, a \leq x \]
+			and a lower bound is similarly defined as a value $y$ such that,
+			\[ \forall a \in A, \, a \geq y. \]
+			A set is said to be \textbf{upper-bounded} if there exists some upper-bound on the set and is said to be \textbf{lower-bounded} if there exists some lower bound on the set. If there exists both upper and lower bounds then the set is said to be \textbf{bounded}.
+		}
+		\boxeddefinition{The \textbf{supremum} of a upper-bounded set $A$ is a value $\sigma_A$ such that $\sigma_A$ is an upper bound on $A$ and, 
+			\[ \sigma_A' < \sigma_A \iff \exists a \in A \suchthat a > \sigma_A' \]
+			which is to say that if $\sigma_A' < \sigma_A$ then $\sigma_A'$ is not an upper bound on $A$ and, if $\sigma_A'$ is not an upper bound on $A$ then it must be less that $\sigma_A$ since $\sigma_A$ is an upper bound on A.\\
+			An alternative, equivalent definition is,
+			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a > \sigma_A - \epsilon. \]
+		}
+		\boxeddefinition{The \textbf{infimum} of a lower-bounded set $A$ is defined similarly to the supremum: as a value $\tau_A$ such that $\tau_A$ is a lower bound on $A$ and, 
+			\[ \tau_A' > \tau_A \iff \exists a \in A \suchthat a < \tau_A' \]
+			or alternatively,
+			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a < \tau_A + \epsilon. \]
+		}
+		\notation{The supremum of $A$ is denoted $sup \, A$ and the infimum is denoted $inf \, A$.}
+	}
+	\searchableSubsection{Deductions using the supremum and infimum}{analysis}{\bigskip
+		\labeledProposition{If a bounded set $A \subset \R{}$ has the property that,
+			\[ \forall x,y \in A, \logicsep \abs{x - y} < 1 \]
+			then it follows that,
+			\[ (sup \, A - inf \, A) \leq 1. \]
+		}{sup_minus_inf_max_difference}
+		\begin{proof}
+			Let $ \sigma_A = sup \, A $ and $ \tau_A = inf \, A $ and \WLOG assume that $x > y$. By the definitions of the supremum and infimum we have,
+			\begin{align*}
+			&& \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x > \sigma_A - \epsilon) \wedge (y < \tau_A + \epsilon)  \\
+			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x > \sigma_A - \epsilon) \wedge (-y > -\tau_A - \epsilon)  &\sidecomment{}\\
+			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x - y) > (\sigma_A - \tau_A) - 2\epsilon  &\sidecomment{}\\
+			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x - y) + 2\epsilon > (\sigma_A - \tau_A)  &\sidecomment{}\\
+			&\iff & \exists x,y \in A &\logicsep (x - y) \geq (\sigma_A - \tau_A)  &\sidecomment{}
+			\end{align*}
+			Now suppose, for contradiction, that $ (\sigma_A - \tau_A) > 1 $. Then,
+			\begin{align*}
+			&& \exists x,y \in A \logicsep (x - y) &\geq (\sigma_A - \tau_A) > 1  \\
+			&\iff & \exists x,y \in A \logicsep (x - y) &> 1  &\sidecomment{}\\
+			\end{align*}
+			which contradicts the set property that $ \forall x,y \in A, \, \abs{x - y} < 1 $. So this shows that $ (\sigma_A - \tau_A) \leq 1 $.
+			\bigskip
+			
+			Note also that since $\sigma_A$ and $\tau_A$ are, respectively, upper- and lower-bounds on $A$, we also have that,
+			\begin{align*}
+			&& \forall x,y \in A &\logicsep (x \leq \sigma_A) \wedge (y \geq \tau_A) \\
+			&\iff & \forall x,y \in A &\logicsep (x \leq \sigma_A) \wedge (-y \leq -\tau_A)  &\sidecomment{}\\
+			&\iff & \forall x,y \in A &\logicsep (x - y) \leq \sigma_A - \tau_A  &\sidecomment{}
+			\end{align*}
+			Since we only know that $A$ is bounded, we don't know if the supremum and infimum are maximum and minimum or external to $A$. So, this result is intuitive because the maximum difference between members of $A$ is equal to the difference between the supremum and infimum when they are inside $A$ and is less than this when one or both is external to $A$.\\
+			If we were to put this together with the previous result that $ \exists x,y \in A \logicsep (x - y) \geq (\sigma_A - \tau_A) $ then we might conclude that,
+			\[ \exists x,y \in A \logicsep (x - y) = (\sigma_A - \tau_A). \]
+			However, the actual meaning of this is unclear (at least to me right now) because, if all we know is that we are dealing with a bound set, we do not know if the set is open or closed and so the maximum difference of two elements may be equal to the difference of the supremum and infimum or what? What is the value in the case of an open set? There is no such maximum in this case so we cannot say that there exists two such elements.\\
+			Taking this concrete example: the set property $ \forall x,y \in A, \logicsep \abs{x - y} < 1 $ means that there is no maximum value of $ \abs{x - y} $.
+		\end{proof}
+		\bigskip
+		\labeledProposition{Let $A \subset \R{}$ be a bounded set and let $B$ be the set defined by
+			\[ B = \setc{b}{b = f(a), \; a \in A} \]
+			where the function $f$ is some strictly monotonic function.
+			Then it follows that,
+			\[ sup \, B = f(sup \, A). \]
+		}{monotonic_functions_preserve_supremum}
+		\begin{proof}
+			A is bounded and so $\sigma_A = sup \, A$ exists. So, using the supremum properties we have,
+			\begin{align*}
+			&& \forall a \in A \logicsep a &\leq \sigma_A  \\
+			&\iff & \forall a \in A \logicsep f(a)  &\leq f(\sigma_A)  &\sidecomment{by monotonicity of f}\\
+			&\iff & \forall b \in B \logicsep b  &\leq f(\sigma_A) 
+			\end{align*}
+			which is to say that $\sigma_B = f(\sigma_A)$ is an upper bound on $B$.\\
+			Furthermore, using the other supremum property, we have that,
+			\begin{align*}
+			&& \sigma_A' < \sigma_A &\implies \exists a \in A \suchthat a > \sigma_A' \\
+			&\iff & f(\sigma_A') < f(\sigma_A)  &\implies \exists a \in A \suchthat f(a) > f(\sigma_A')  &\sidecomment{by strict monotonicity of f}\\
+			&\iff & \sigma_B' < \sigma_B  &\implies \exists b \in B \suchthat b > \sigma_B'.	
+			\end{align*}
+			Therefore $\sigma_B$ satisfies both requirements of the supremum and we have shown that,
+			\[ sup \, B = f(sup \, A). \]
+		\end{proof}
+	}
+	
+	
+	\pagebreak
 	\searchableSubsection{\sectionTitle{Limits}}{analysis}{\bigskip}
 	
 	\bigskip\bigskip
