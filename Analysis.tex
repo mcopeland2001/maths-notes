@@ -21,10 +21,29 @@
 		}
 		\boxeddefinition{The \textbf{supremum} of a upper-bounded set $A$ is a value $\sigma_A$ such that $\sigma_A$ is an upper bound on $A$ and, 
 			\[ \sigma_A' < \sigma_A \iff \exists a \in A \suchthat a > \sigma_A' \]
-			which is to say that if $\sigma_A' < \sigma_A$ then $\sigma_A'$ is not an upper bound on $A$ and, if $\sigma_A'$ is not an upper bound on $A$ then it must be less that $\sigma_A$ since $\sigma_A$ is an upper bound on A.\\
+			which is to say that if $\sigma_A' < \sigma_A$ then $\sigma_A'$ is not an upper bound on $A$ and, if $\sigma_A'$ is not an upper bound on $A$ then it must be less than $\sigma_A$ since $\sigma_A$ is an upper bound on A.\\
 			An alternative, equivalent definition is,
 			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a > \sigma_A - \epsilon. \]
 		}
+		\paragraph{Issue} Note that there is an apparent paradox here: This second definition implies that
+		\begin{align*}
+			&&  \forall \epsilon > 0 \logicsep \exists a \in A &\suchthat a + \epsilon > \sigma_A  \\
+			&\iff &\exists a \in A &\suchthat a \geq \sigma_A  &\sidecomment{}
+		\end{align*}
+		which result, when combined with the upper-bound property, gives
+		\begin{align*}
+			&& \exists a \in A &\suchthat (a \geq \sigma_A) \wedge (a \leq \sigma_A) \\
+			&\iff &\exists a \in A &\suchthat a = \sigma_A  &\sidecomment{}
+		\end{align*}
+		which says that there is always an element in the bounded set that is equal to the supremum. This is not correct - the supremum may be in the set or external to it.\\
+		The initial implication is not true, however. We cannot infer that ${ \exists a \in A \suchthat a \geq \sigma_A }$. This can be seen with another rearrangement,
+		\begin{align*}
+			&&  \forall \epsilon > 0 \logicsep \exists a \in A &\suchthat a + \epsilon > \sigma_A  \\
+			&\iff &\forall \epsilon > 0 \logicsep \exists a \in A &\suchthat \epsilon > \sigma_A - a  &\sidecomment{}
+		\end{align*}
+		which shows us that for any positive epsilon there needs to be an $a$ close enough to the value of $\sigma_A$ that the difference in their values is less than epsilon. Since $a$ can approach arbitrarily close to $\sigma_A$ this is achievable for any positive epsilon. This property seems to be equivalent to the fact that $\sigma_A$ is a \textit{limit point} of $A$ but that will be covered properly in Topology.
+		\bigskip\bigskip
+		
 		\boxeddefinition{The \textbf{infimum} of a lower-bounded set $A$ is defined similarly to the supremum: as a value $\tau_A$ such that $\tau_A$ is a lower bound on $A$ and, 
 			\[ \tau_A' > \tau_A \iff \exists a \in A \suchthat a < \tau_A' \]
 			or alternatively,
@@ -34,7 +53,7 @@
 	}
 	\searchableSubsection{Deductions using the supremum and infimum}{analysis}{\bigskip
 		\labeledProposition{If a bounded set $A \subset \R{}$ has the property that,
-			\[ \forall x,y \in A, \logicsep \abs{x - y} < 1 \]
+			\[ \forall x,y \in A \logicsep \abs{x - y} < 1 \]
 			then it follows that,
 			\[ (sup \, A - inf \, A) \leq 1. \]
 		}{sup_minus_inf_max_difference}
@@ -44,28 +63,17 @@
 			&& \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x > \sigma_A - \epsilon) \wedge (y < \tau_A + \epsilon)  \\
 			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x > \sigma_A - \epsilon) \wedge (-y > -\tau_A - \epsilon)  &\sidecomment{}\\
 			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x - y) > (\sigma_A - \tau_A) - 2\epsilon  &\sidecomment{}\\
-			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x - y) + 2\epsilon > (\sigma_A - \tau_A)  &\sidecomment{}\\
-			&\iff & \exists x,y \in A &\logicsep (x - y) \geq (\sigma_A - \tau_A)  &\sidecomment{}
 			\end{align*}
-			Now suppose, for contradiction, that $ (\sigma_A - \tau_A) > 1 $. Then,
+			Now suppose, for contradiction, that $ (\sigma_A - \tau_A) > 1 $ then we can say that,
+			\[ \exists r > 0 \logicsep (\sigma_A - \tau_A) = 1 + r. \] 
+			If we then constrict $\epsilon$ such that,
+			\[ \epsilon < \frac{r}{2} \iff 2\epsilon < r \iff r - 2\epsilon > 0 \]
+			then the previous result tells us that, for $ 0 < \epsilon < \frac{r}{2} $,
 			\begin{align*}
-			&& \exists x,y \in A \logicsep (x - y) &\geq (\sigma_A - \tau_A) > 1  \\
-			&\iff & \exists x,y \in A \logicsep (x - y) &> 1  &\sidecomment{}\\
+			&& \exists x,y \in A &\logicsep (x - y) > (\sigma_A - \tau_A) - 2\epsilon  \\
+			&\iff & \exists x,y \in A &\logicsep (x - y) > 1 + r - 2\epsilon > 1  &\sidecomment{}
 			\end{align*}
 			which contradicts the set property that $ \forall x,y \in A, \, \abs{x - y} < 1 $. So this shows that $ (\sigma_A - \tau_A) \leq 1 $.
-			\bigskip
-			
-			Note also that since $\sigma_A$ and $\tau_A$ are, respectively, upper- and lower-bounds on $A$, we also have that,
-			\begin{align*}
-			&& \forall x,y \in A &\logicsep (x \leq \sigma_A) \wedge (y \geq \tau_A) \\
-			&\iff & \forall x,y \in A &\logicsep (x \leq \sigma_A) \wedge (-y \leq -\tau_A)  &\sidecomment{}\\
-			&\iff & \forall x,y \in A &\logicsep (x - y) \leq \sigma_A - \tau_A  &\sidecomment{}
-			\end{align*}
-			Since we only know that $A$ is bounded, we don't know if the supremum and infimum are maximum and minimum or external to $A$. So, this result is intuitive because the maximum difference between members of $A$ is equal to the difference between the supremum and infimum when they are inside $A$ and is less than this when one or both is external to $A$.\\
-			If we were to put this together with the previous result that $ \exists x,y \in A \logicsep (x - y) \geq (\sigma_A - \tau_A) $ then we might conclude that,
-			\[ \exists x,y \in A \logicsep (x - y) = (\sigma_A - \tau_A). \]
-			However, the actual meaning of this is unclear (at least to me right now) because, if all we know is that we are dealing with a bound set, we do not know if the set is open or closed and so the maximum difference of two elements may be equal to the difference of the supremum and infimum or what? What is the value in the case of an open set? There is no such maximum in this case so we cannot say that there exists two such elements.\\
-			Taking this concrete example: the set property $ \forall x,y \in A, \logicsep \abs{x - y} < 1 $ means that there is no maximum value of $ \abs{x - y} $.
 		\end{proof}
 		\bigskip
 		\labeledProposition{Let $A \subset \R{}$ be a bounded set and let $B$ be the set defined by
@@ -98,7 +106,7 @@
 	\searchableSubsection{\sectionTitle{Limits}}{analysis}{\bigskip}
 	
 	\bigskip\bigskip
-	\searchableSubsection{Definitions of the Types of Limit}{analysis}{\bigskip
+	\searchableSubsection{Limits of sequences}{analysis}{\bigskip
 		\subsubsection{Problems with the informal description of a limit}
 		If we say that a sequence tends to some value $L$ when the terms of the sequence \textit{gets closer and closer to} $L$ we have the following problems:
 		\begin{itemize}
@@ -112,7 +120,7 @@
 		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend} to $L$ or have the \textbf{limit} $L$ iff,
 			\[ \forall \epsilon > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \abs{a_{n} - L} < \epsilon. \]
 		}
-		\nomenclature{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{$\epsilon$-neighbourhood of $L$}.}
+		\boxeddefinition{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{\mbox{$\epsilon$-neighbourhood of $L$}}.}
 		
 		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend to infinity} iff,
 			\[ \forall M > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} > M \]
@@ -120,30 +128,27 @@
 			\[ \forall M < 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} < M. \]
 		}
 	
-		\nomenclature{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
-	}
-	
-	
-	\bigskip
-	\searchableSubsection{Examples of Convergence and Divergence}{analysis}{\bigskip
-		\subsubsection{Non-convergent Oscillation}
-		The sequence $ a_n = (-1)^n $ is divergent despite always remaining bounded within the interval $ [-1, 1] $ as it neither converges to 1 or to -1.
+		\boxeddefinition{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
+		
+		\subsubsection{Examples of Convergence and Divergence}\bigskip
+			\begin{exe}
+				\ex {\textbf{Non-convergent Oscillation}\\\\
+				The sequence $ a_n = (-1)^n $ is divergent despite always remaining bounded within the interval $ [-1, 1] $ as it neither converges to 1 or to -1.}\label{ex:flipping_sign}
+				\ex {\textbf{Limit of an Infinite Recurrence}\\\\
+					Take the sequence given by,
+					\[ a_1 = 1, \; a_{n+1} = \frac{a_n}{2} + \frac{3}{2a_n} \;\; (n \ge 1). \]
+					Assume there is an equilibrium value, $a^*$, then
+					\begin{align*}
+						&&a^* &= \frac{a^*}{2} + \frac{3}{2a^*}  \\
+						&\iff &2(a^*)^2  &= (a^*)^2 + 3  &\sidecomment{}\\
+						&\iff &(a^*)^2  &= 3  &\sidecomment{}\\
+						&\iff &a^*  &= \sqrt{3}  &\sidecomment{}\\
+					\end{align*}
+					So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction.
+				}\label{ex:infinite_recurrence}
+			\end{exe}
 			
-		\subsubsection{Limit of an Infinite Recurrence}
-		Take the sequence given by,
-		\[ a_1 = 1, \; a_{n+1} = \frac{a_n}{2} + \frac{3}{2a_n} \;\; (n \ge 1). \]
-		Assume there is an equilibrium value, $a^*$, then
-		\begin{align*}
-		&&a^* &= \frac{a^*}{2} + \frac{3}{2a^*}  \\
-		&\iff &2(a^*)^2  &= (a^*)^2 + 3  &\sidecomment{}\\
-		&\iff &(a^*)^2  &= 3  &\sidecomment{}\\
-		&\iff &a^*  &= \sqrt{3}  &\sidecomment{}\\
-		\end{align*}
-		So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction.
-	}
-
-	\bigskip\bigskip
-	\searchableSubsection{Properties of Limits}{analysis}{\bigskip
+		\bigskip	
 		\labeledProposition{A sequence has at most one limit. In other words, a sequence can only converge, if at all, to a single unique value.}{uniqueness_of_limits}
 		\begin{proof}
 			Let $L$ and $L'$ both be limits of the sequence $a_n$, and the constant $\alpha = L - L'$. Then,
@@ -182,6 +187,57 @@
 			\[ \abs{a_n - L} + \abs{a_n - L'} < 2\epsilon \]
 			which contradicts $ 2\epsilon \leq \abs{a_n - L} + \abs{a_n - L'} $.
 		\end{proof}
+	
+		\bigskip\bigskip
+		\boxeddefinition{If $a_n$ is a sequence and $ S = \setc{a_n}{n \in \N{}} $ then $a_n$ is said to be \textbf{bounded below} if $S$ has a lower bound and \textbf{bounded above} if $S$ has an upper bound, and \textbf{bounded} if it is bounded above and below.}
+		
+		\bigskip
+		\labeledProposition{Any convergent sequence is bounded.}{convergent_seqs_bounded}
+		\begin{proof}
+			Firstly, we need to prove that any finite sequence is bounded. We can do this simply by observing that any finite set of numbers,
+			\[ S = \{a_1, a_2, \dots , a_n\} \]
+			is a well-founded set and so has a minimum and a maximum.\\
+			Now, let $a_n$ be an arbitrary convergent sequence so that,
+			\[ \forall \epsilon > 0 \logicsep \exists N \in \N{} \logicsep \forall n > N \logicsep \abs{a_n - L} < \epsilon \]
+			for some $L \in \R{}$.\\\\
+			Then, let $S_{max}$ and $S_{min}$ be the maximum and minimum respectively of the first $N$ terms of $a_n$, $S = \{a_1, a_2, \dots , a_N\}$, and,
+			\[ \exists \epsilon > 0 \logicsep \forall n > N \logicsep \abs{a_n - L} < \epsilon \]
+			so that, for $n > N$, the sequence $a_n$ is bounded in the $\epsilon$-neighbourhood of $L$.\\
+			So, if we define ${ m = min\{S_{min}, L - \epsilon\} }$ and ${ M = max\{S_{max}, L + \epsilon\} }$, then the whole sequence $a_n$ for all $n \in \N{}$ is bounded below by $m$ and bounded above by $M$.\\
+			Therefore $a_n$ is bounded. 
+		\end{proof}
+	
+		\bigskip
+		\boxeddefinition{An \textbf{increasing} sequence is a sequence $a_n$ such that,
+			\[ \forall n \in \N{} \logicsep a_{n+1} \geq a_n \]
+			and \textbf{decreasing} if,
+			\[ \forall n \in \N{} \logicsep a_{n+1} \leq a_n \]
+			and \textbf{monotonic} if either increasing or decreasing.
+		}
+		
+		\bigskip
+		\labeledProposition{Any increasing sequence that is bounded above has a limit.}{increasing_bounded_seqs_have_limit}
+		\begin{proof}
+			Let $a_n$ be an increasing sequence that is bounded above. Then,
+			\[ \forall n \in \N{} \logicsep a_{n+1} \geq a_n \]
+			and let ${ S = \setc{a_n}{n \in \N{}} }$. Since $a_n$ is bounded above it has a supremum. Let $ \sigma = sup \; S $ so that,
+			\[ \forall a_n \in S \logicsep a_n \leq \sigma \eqand \forall \epsilon > 0 \logicsep \exists a_n \in S \logicsep a_n > \sigma - \epsilon. \]
+			Therefore, for some arbitrary fixed $\epsilon > 0$,
+			\[ \exists a_n \in S \logicsep a_n > \sigma - \epsilon \] 
+			and setting $ N = n $ so that $ a_N > \sigma - \epsilon $, we have,
+			\[ \forall n > N \in \N{} \logicsep a_n > a_N > \sigma - \epsilon \]
+			and so, recalling that $\sigma$ is an upper bound on $S$,
+			\begin{align*}
+			&& \exists N \in \N{} \logicsep \forall n > N &\logicsep (a_n > \sigma - \epsilon) \wedge (a_n \leq \sigma) \\
+			&\iff &\exists N \in \N{} \logicsep \forall n > N &\logicsep a_n \leq \sigma < a_n + \epsilon  &\sidecomment{}\\
+			&\iff &\exists N \in \N{} \logicsep \forall n > N &\logicsep 0 \leq \sigma - a_n < \epsilon  &\sidecomment{}\\
+			&\implies &\exists N \in \N{} \logicsep \forall n > N &\logicsep \abs{\sigma - a_n} < \epsilon.
+			\end{align*}
+			But $\epsilon$ was an arbitrary positive value so,
+			\[ \forall \epsilon > 0 \logicsep \exists N \in \N{} \logicsep \forall n > N \logicsep \abs{\sigma - a_n} < \epsilon \]
+			and $\sigma$ is, therefore, the limit of $a_n.$
+		\end{proof}
 	}
+	
 
 \end{document}
