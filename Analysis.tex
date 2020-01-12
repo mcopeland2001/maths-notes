@@ -192,11 +192,18 @@
 		\boxeddefinition{If $a_n$ is a sequence and $ S = \setc{a_n}{n \in \N{}} $ then $a_n$ is said to be \textbf{bounded below} if $S$ has a lower bound and \textbf{bounded above} if $S$ has an upper bound, and \textbf{bounded} if it is bounded above and below.}
 		
 		\bigskip
+		\begin{lemma}
+			Any finite set of elements from an ordered field has a minimum and a maximum.
+		\end{lemma}
+		\begin{proof}
+			This can be proven quite easily using induction. Taking the base case of a set of cardinality one, clearly there is a maximum and a minimum both of which are the sole element of the set. Then, the induction step is to say, given a set $S$ that has a maximum, $s_{max}$, and a minimum, $s_{min}$, if we add a new element $e$, then if $e$ is greater than $s_{max}$ it is the maximum of the new set and if it is less than $s_{min}$ it is the minimum of the new set. Otherwise, the previous maximum and minimum also pertain to the new set. Therefore, adding a new element to a set that has a maximum and a minimum creates a new set with a maximum and a minimum.
+		\end{proof}
+		\bigskip
 		\labeledProposition{Any convergent sequence is bounded.}{convergent_seqs_bounded}
 		\begin{proof}
-			Firstly, we need to prove that any finite sequence is bounded. We can do this simply by observing that any finite set of numbers,
+			Firstly, we need to prove that any finite sequence is bounded. We can do this simply by observing that any finite set of elements from an ordered field,
 			\[ S = \{a_1, a_2, \dots , a_n\} \]
-			is a well-founded set and so has a minimum and a maximum.\\
+			has a minimum and a maximum.\\
 			Now, let $a_n$ be an arbitrary convergent sequence so that,
 			\[ \forall \epsilon > 0 \logicsep \exists N \in \N{} \logicsep \forall n > N \logicsep \abs{a_n - L} < \epsilon \]
 			for some $L \in \R{}$.\\\\
@@ -225,17 +232,43 @@
 			Therefore, for some arbitrary fixed $\epsilon > 0$,
 			\[ \exists a_n \in S \logicsep a_n > \sigma - \epsilon \] 
 			and setting $ N = n $ so that $ a_N > \sigma - \epsilon $, we have,
-			\[ \forall n > N \in \N{} \logicsep a_n > a_N > \sigma - \epsilon \]
+			\[ \forall n > N \in \N{} \logicsep a_n \geq a_N > \sigma - \epsilon \]
 			and so, recalling that $\sigma$ is an upper bound on $S$,
 			\begin{align*}
-			&& \exists N \in \N{} \logicsep \forall n > N &\logicsep (a_n > \sigma - \epsilon) \wedge (a_n \leq \sigma) \\
-			&\iff &\exists N \in \N{} \logicsep \forall n > N &\logicsep a_n \leq \sigma < a_n + \epsilon  &\sidecomment{}\\
-			&\iff &\exists N \in \N{} \logicsep \forall n > N &\logicsep 0 \leq \sigma - a_n < \epsilon  &\sidecomment{}\\
-			&\implies &\exists N \in \N{} \logicsep \forall n > N &\logicsep \abs{\sigma - a_n} < \epsilon.
+			&& \exists N \logicsep \forall n > N \in \N{} &\logicsep (a_n > \sigma - \epsilon) \wedge (a_n \leq \sigma) \\
+			&\iff &\exists N \logicsep \forall n > N \in \N{} &\logicsep a_n \leq \sigma < a_n + \epsilon  &\sidecomment{}\\
+			&\iff &\exists N \logicsep \forall n > N \in \N{} &\logicsep 0 \leq \sigma - a_n < \epsilon  &\sidecomment{}\\
+			&\implies &\exists N \logicsep \forall n > N \in \N{} &\logicsep \abs{\sigma - a_n} < \epsilon.
 			\end{align*}
 			But $\epsilon$ was an arbitrary positive value so,
-			\[ \forall \epsilon > 0 \logicsep \exists N \in \N{} \logicsep \forall n > N \logicsep \abs{\sigma - a_n} < \epsilon \]
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\sigma - a_n} < \epsilon \]
 			and $\sigma$ is, therefore, the limit of $a_n.$
+		\end{proof}
+		
+		\bigskip
+		\begin{corollary}
+			Any increasing sequence that is bounded above converges to the supremum of its elements (terms, values, etc.).
+		\end{corollary}
+		\begin{corollary}
+			A decreasing sequence that is bounded below converges to the infimum of its elements.
+		\end{corollary}
+	}
+
+	\bigskip\bigskip
+	\searchableSubsection{Algebra of limits}{analysis}{\bigskip
+		\labeledProposition{
+			Let $a_n$ and $b_n$ be convergent sequences with limits $ a $ and $ b $,
+			respectively. Let $ C $ be a real number and let $ k $ be a positive integer. Then as $n \to \infty$,
+			\begin{enumerate}[label=\alph*)]
+				\item{$ Ca_n \to Ca $}
+				\item{$ \abs{a_n} \to \abs{a} $}
+				\item{$ a_n + b_n \to a + b $}
+				\item{$ a_nb_n \to ab $}
+				\item{$ a_n^k \to a^k $}
+				\item{if, for all $n,\, b_n \neq 0$ and $b \neq 0$, then $\frac{1}{b_n} \to \frac{1}{b}$}.
+			\end{enumerate}
+		}{limit_properties}	
+		\begin{proof}
 		\end{proof}
 	}
 	
