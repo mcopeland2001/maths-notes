@@ -1,0 +1,1 @@
+pdflatex -synctex=1 -interaction=nonstopmode --output-directory=build -jobname="%~1" "\renewcommand\searchResult[2]{\search{#1}{#2}{%~1}}\input MathsNotesBase"
