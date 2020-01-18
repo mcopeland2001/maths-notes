@@ -3,7 +3,10 @@
 \usepackage{subfiles}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{centernot}
+\usepackage{listings}
 \usepackage{graphicx}
+\usepackage[obeyspaces]{url}
 \usepackage{hyperref}
 \usepackage[latin1]{inputenc}
 \usepackage{color}
@@ -30,6 +33,14 @@
 \titleformat*{\subparagraph}{\small\bfseries}
 
 
+\lstset{ % docs: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle={\small\ttfamily},		% the size of the fonts that are used for the code
+	frame=tb,	                  % adds a frame around the code
+	tabsize=2	                   	% sets default tabsize to 2 spaces
+}
+
+
 
 \input{search.tex}
 
@@ -46,8 +57,6 @@
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
 
 \DeclarePairedDelimiterX\setc[2]{\{}{\}}{\,#1 \,\;\delimsize\vert\;\, #2\,}
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 \DeclareRobustCommand{\N}[1]{\mathbb{N}^{#1}}
 \DeclareRobustCommand{\R}[1]{\mathbb{R}^{#1}}
 \DeclareRobustCommand{\Z}[1]{\mathbb{Z}^{#1}}
@@ -57,7 +66,10 @@
 \DeclareRobustCommand{\inv}[1]{{#1}^{-1}}
 \DeclareRobustCommand{\logicsep}{\;.\;}
 
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\cardinality}{\abs}
+\newcommand{\norm}{\abs}
+
 \newcommand*{\V}[1]{\vec{\bm{#1}}}
 \newcommand{\dotsuchthat}{\;\cdot\;}
 \newcommand{\suchthat}{\text{ s.t. }}
@@ -76,7 +88,7 @@
 	}\bigskip
 }
 
-\newtheorem*{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem*{definition}{Definition}
 \newtheorem{axiom}{Axiom}
@@ -90,6 +102,14 @@
 	\end{proposition}
 }
 \def\propositionautorefname{Proposition}
+
+\newcommand{\labeledTheorem}[2]{
+	\begin{theorem}
+		\expandafter\label{theo:#2}
+		{#1}
+	\end{theorem}
+}
+\def\propositionautorefname{Theorem}
 
 \newcommand{\boxeddefinition}[1]{\noindent\fbox{%
 		\parbox{\textwidth}{%

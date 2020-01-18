@@ -255,7 +255,7 @@
 	}
 
 	\bigskip\bigskip
-	\searchableSubsection{Algebra of limits}{analysis}{\bigskip
+	\searchableSubsection{Algebra of limits of sequences}{analysis}{\bigskip
 		\labeledProposition{
 			Let $a_n$ and $b_n$ be convergent sequences with limits $ a $ and $ b $,
 			respectively. Let $ C $ be a real number and let $ k $ be a positive integer. Then as $n \to \infty$,
@@ -267,8 +267,114 @@
 				\item{$ a_n^k \to a^k $}
 				\item{if, for all $n,\, b_n \neq 0$ and $b \neq 0$, then $\frac{1}{b_n} \to \frac{1}{b}$}.
 			\end{enumerate}
-		}{limit_properties}	
+			\smallskip
+		}{seq_limit_properties}	
 		\begin{proof}
+			We prove each property individually in the given order.
+			
+			\subsubsection{Proof of (a) $ Ca_n \to Ca $} 
+			If $ C = 0 $ then $ Ca_n = 0 = Ca $ for all $n$ and the proposition holds trivially. If $ C \neq 0 $ then, since $a_n \to a$,
+			\[ \forall \epsilon' > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a_n - a} < \epsilon'. \]
+			Now let $ \epsilon = \abs{C}\epsilon' $. Then,
+			\begin{align*}
+			&& \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} &\logicsep \abs{C}\abs{a_n - a} < \abs{C}\epsilon' = \epsilon  \\
+			&\iff & \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} &\logicsep \abs{Ca_n - Ca} < \epsilon. &\sidecomment{$\abs{x}\abs{y} = \abs{xy}$} \\
+			\end{align*}
+			
+			\subsubsection{Proof of (b) $ \abs{a_n} \to \abs{a} $} 
+			\begin{align*}
+			&& \abs{a_n} = \abs{a_n - a + a} &\leq \abs{a_n - a} + \abs{a}  &\sidecomment{the "triangle inequality"}\\
+			&\iff & \abs{a_n} - \abs{a} &\leq \abs{a_n - a}. &\sidecomment{(1)} \\
+			\end{align*}
+			\begin{align*}
+			&& \abs{a} = \abs{a - a_n + a_n} &\leq \abs{a - a_n} + \abs{a_n}  &\sidecomment{the "triangle inequality"}\\
+			&\iff & \abs{a} - \abs{a_n} &\leq \abs{a - a_n} = \abs{a_n - a} &\sidecomment{} \\
+			&\iff & \abs{a_n} - \abs{a} &\geq -\abs{a_n - a}. &\sidecomment{(2)} \\
+			\end{align*}
+			Putting (1) and (2) together we have,
+			\begin{align*}
+			&& -\abs{a_n - a} &\leq \abs{a_n} - \abs{a} \leq \abs{a_n - a} &\sidecomment{the "triangle inequality"}\\
+			&\iff & \abs{\abs{a_n} - \abs{a}} &\leq \abs{a_n - a}. \\
+			\end{align*}
+			The fact that $a_n$ converges to $a$ implies that $ \abs{a_n - a} $ converges to zero. Since it is an upper bound on the value of ${ \abs{\abs{a_n} - \abs{a}} }$, the value ${ \abs{\abs{a_n} - \abs{a}} }$ must also converge to zero. Specifically any value of $ n, \epsilon $ such that ${ \abs{a_n - a} < \epsilon }$ will also satisfy ${ \abs{\abs{a_n} - \abs{a}} \leq \abs{a_n - a} < \epsilon }$.
+			
+			\subsubsection{Proof of (c) $ a_n + b_n \to a + b $}
+			Using, again, the "triangle inequality",
+			\[ \abs{(a_n + b_n) - (a + b)} = \abs{(a_n - a) + (b_n - b)} \leq \abs{a_n - a} + \abs{b_n - b}. \]
+			So, ${ \abs{a_n - a} + \abs{b_n - b} }$ is an upper bound on the value of ${ \abs{(a_n + b_n) - (a + b)} }$. If we take any arbitrary ${ \epsilon > 0 }$ then,
+			\[ \exists N_1 \logicsep \forall n > N_1 \in \N{} \logicsep \abs{a_n - a} < \frac{\epsilon}{2} \]
+			and
+			\[ \exists N_2 \logicsep \forall n > N_2 \in \N{} \logicsep \abs{b_n - b} < \frac{\epsilon}{2}. \]
+			Then, if we take $ N = max\{N_1, N_2\} $, we have,
+			\[ \forall n > N \in \N{} \logicsep \abs{(a_n + b_n) - (a + b)} \leq \abs{a_n - a} + \abs{b_n - b} < \epsilon. \]
+			
+			\subsubsection{Proof of (d) $ a_nb_n \to ab $}
+			\begin{align*}
+			&& \abs{a_nb_n - ab} = \abs{a_nb_n - ab_n + ab_n - ab} &\leq \abs{b_n(a_n - a)} + \abs{a(b_n - b)}  &\sidecomment{the "triangle inequality"}\\
+			&\iff & \abs{a_nb_n - ab} &\leq \abs{b_n}\abs{a_n - a} + \abs{a}\abs{b_n - b}  &\sidecomment{} \\
+			\end{align*}
+			Since $b_n$ converges, by \autoref{prop:convergent_seqs_bounded}, it is bounded. Therefore, $\abs{b_n}$ has some upper bound which we shall call $B$. Then,
+			\[ \forall \epsilon > 0 \logicsep \exists N_1 \logicsep \forall n > N_1 \in \N{} \logicsep \abs{a_n - a} < \frac{\epsilon}{2B} \]
+			and
+			\[ \forall \epsilon > 0 \logicsep \exists N_2 \logicsep \forall n > N_2 \in \N{} \logicsep \abs{b_n - b} < \frac{\epsilon}{2\abs{a}}. \]
+			Now, let ${ N = max{N_1, N_2}. }$ Then,
+			\[ \forall n > N \in \N{} \logicsep B\abs{a_n - a} + \abs{a}\abs{b_n - b} < \epsilon. \]
+			
+			\subsubsection{Proof of (e) $ a_n^k \to a^k $}
+			Using (d) - and because $k$ is a positive integer - we can do induction on the power $k$.\\
+			Base cases 0 and 1 are clearly true as ${ k = 0 }$ results in $a_n$ being the constant 1 for all $n$ and so trivially converges to ${ a = 1 }$; and ${ k = 1 }$ results in the same sequence as $a_n$.\\
+			So, we perform the induction step for ${ k \geq 2 }$. Then, by the induction hypothesis, ${ a_n^{k-1} \to a^{k-1} }$. But ${ a_n^k = a_n^{k-1}a_n }$ and, by (d) and the induction hypothesis, we have that ${ a_n^{k-1}a_n \to a^{k-1}a = a^k }$. Therefore, ${ a_n^k \to a^k. }$
+			
+			\subsubsection{Proof of (f) $ \forall n \logicsep b_n, b \neq 0 \implies \frac{1}{b_n} \to \frac{1}{b} $}
+			Again invoking \autoref{prop:convergent_seqs_bounded} and letting the upper bound on the sequence $b_n$ be $B$,
+			\[ \abs{\frac{1}{b_n} - \frac{1}{b}} = \abs{\frac{b - b_n}{b_nb}} = \abs{\frac{b_n - b}{b_nb}} = \frac{ \abs{b_n - b} }{ \abs{b_n}\abs{b} } \leq \frac{1}{B\abs{b}}\abs{b_n - b}. \]
+			Now, since $\frac{1}{B\abs{b}}$ is a constant we can define the constant ${ C = \frac{1}{B\abs{b}} }$ and then we see that in (a) we have already proven that ${ C\abs{b_n - b} }$ converges to 0. In (a) we used that to prove that ${ Cb_n \to Cb }$ but here it proves that ${ \frac{1}{b_n} \to \frac{1}{b}. }$
+		\end{proof}
+	}
+
+	\bigskip\bigskip
+	\searchableSubsection{Some important limits of sequences}{analysis}{\bigskip
+		Note that, in the following, $n \in \N{}$. 
+		\labeledTheorem{If ${ \abs{a} < 1 }$ then ${ \lim_{n \to \infty} a^n = 0. }$}{geom_prog_common_ratio_less_than_one_tends_to_zero}
+		\begin{proof}
+			First of all, note that if ${ \abs{a} = 0 }$ then ${ a = 0 = a^n }$ for all n and so the limit holds trivially. For this reason, from here on, we will consider only the case where ${ a \neq 0 }$.\\
+			There are 3 parts to this proof:
+			\begin{enumerate}
+				\item{${ \abs{a} < 1 \implies \lim_{n \to \infty} \abs{a}^n = 0, }$ }\label{geom_prog_common_ratio_less_than_one_tends_to_zero_1}
+				\item{for ${ n \in \N{} }$, ${ \abs{a}^n = \abs{a^n}, }$ }
+				\item{${ \lim_{n \to \infty} \abs{a^n} = 0 \implies \lim_{n \to \infty} a^n = 0 }$.}
+			\end{enumerate}
+			\subsubsection{1. ${ \bm{\abs{a} < 1 \implies \lim_{n \to \infty} \abs{a}^n = 0} }$} 
+			One way to prove this is to show that,
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\abs{a}^n - 0} = \abs{a}^n < \epsilon. \]
+			We can show this by "reverse engineering" the value of $N$ from the requirement that ${ \abs{a}^n }$ be less than $\epsilon$,
+			\[ \abs{a}^n < \epsilon \iff n\ln{\abs{a}} < \ln{\epsilon} \iff n > \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } \]
+			with the last step changing the direction of the inequality because we divide by $\ln{\abs{a}}$ which - remembering that ${ \abs{a} < 1 }$ - is a negative value. So, in this way, we have shown that ${ N = \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } }$ is a general formula that relates a value of $N$ with the required property with any arbitrary $\epsilon$.\\\\
+			An alternative way to show this, using algebra of limits of sequences, is as follows: Let $x_n$ be the sequence ${ x_n = \abs{a}^n }$. Then, because ${ 0 < \abs{a} < 1 }$,
+			\[ x_{n+1} = x_n \cdot x = \abs{a}^n\abs{a} < \abs{a}^n = x_n \]
+			so that $x_n$ is a decreasing sequence. Additionally, ${ \forall n \in \R{} \logicsep \abs{a}^n \geq 0 }$ so 0 is a lower bound on the sequence. Therefore, the sequence converges to a limit (note we haven't yet established that 0 is the limit - only that it is a candidate). Furthermore, ${ x_{n+1} = \abs{a}^{n+1} = \abs{a}^n\abs{a} }$ and, if ${ x_n \to L }$ then ${ x_{n+1} \to L }$ also. But, putting these two facts together, along with property (d) of limits of sequences, means that,
+			\[ L = \lim_{n \to \infty} \abs{a}^{n+1} = \lim_{n \to \infty} \abs{a}^n\abs{a} = (\lim_{n \to \infty} \abs{a}^n)(\lim_{n \to \infty} \abs{a}) = \abs{a}(\lim_{n \to \infty} \abs{a}^n) = \abs{a}L. \]
+			So,
+			\[ L = \abs{a}L \iff L(1 - \abs{a}) = 0 \]
+			and, since we know that ${ \abs{a} \neq 1 }$, therefore $L$ must be 0.
+			
+			\subsubsection{2. for ${\bm{ n \in \N{},\; \abs{a}^n = \abs{a^n} }}$} 
+			For ${ a \in \R{}, n \in \N{} }$ it's easy to see that ${ \abs{a}\abs{a}\dots\abs{a} = \abs{aa \dots a} }$.\\
+			In actual fact, this appears to hold even for ${ n \in \Q{} }$, e.g.
+			\[ \abs{ (-1)^{\frac{1}{2}} } = \abs{i} = 1 = \abs{ 1^{\frac{1}{2}} } = \abs{1} = 1 \]
+			but this should be checked when studying complex numbers more thoroughly. Also, the base $a$, can it also be complex?
+			
+			\subsubsection{3. ${\bm{ \lim_{n \to \infty} \abs{a^n} = 0 \implies \lim_{n \to \infty} a^n = 0 }}$}
+			This can be proved directly from the definition of the limit.
+			\begin{align*}
+			&& \lim_{n \to \infty} \abs{a^n} = 0 &\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\abs{a^n} - 0} < \epsilon  \\
+			&&&\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a^n} < \epsilon  &\sidecomment{} \\[3pt]
+			&&&\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a^n - 0} < \epsilon  &\sidecomment{} \\[3pt]
+			&&&\iff \lim_{n \to \infty} a^n = 0.  &\sidecomment{} \\
+			\end{align*}
+			Bear in mind that, in general, ${ \lim_{n \to \infty} \abs{x_n} = L \centernot\implies \lim_{n \to \infty} x_n = L }$. For example, if $x_n$ converges to $-L$ then $\abs{x_n}$ will converge to $L$.\\
+			%\href{\url{https://github.com/mcopeland2001/maths-notes/blob/master/Number Theory.tex}}{code example}
+			%\lstinputlisting[language=Python]{./resources/code/python/converge_to_minus_2.py}
 		\end{proof}
 	}
 	
