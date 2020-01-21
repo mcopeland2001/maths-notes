@@ -29,12 +29,12 @@
 
 \titleformat*{\subparagraph}{\small\bfseries}
 
-
+% default formatting for code listings
 \lstset{ % docs: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
-	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	backgroundcolor=\color{white},   	% choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
 	basicstyle={\small\ttfamily},		% the size of the fonts that are used for the code
-	frame=tb,	                  % adds a frame around the code
-	tabsize=2	                   	% sets default tabsize to 2 spaces
+	frame=tb,	                  		% adds a frame around the code
+	tabsize=2	                   		% sets default tabsize to 2 spaces
 }
 
 
@@ -106,7 +106,9 @@
 		{#1}
 	\end{theorem}
 }
-\def\propositionautorefname{Theorem}
+\def\theoremautorefname{Theorem}
+
+\def\exautorefname{Example}
 
 \newcommand{\boxeddefinition}[1]{\noindent\fbox{%
 		\parbox{\textwidth}{%

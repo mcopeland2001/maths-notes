@@ -142,9 +142,9 @@
 						&&a^* &= \frac{a^*}{2} + \frac{3}{2a^*}  \\
 						&\iff &2(a^*)^2  &= (a^*)^2 + 3  &\sidecomment{}\\
 						&\iff &(a^*)^2  &= 3  &\sidecomment{}\\
-						&\iff &a^*  &= \sqrt{3}  &\sidecomment{}\\
+						&\iff &a^*  &= \sqrt{3}  &\sidecomment{$\forall n, a_n \geq 0$}\\
 					\end{align*}
-					So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction.
+					So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction. Note, however, that the fact that there is an equilibrium value does \textit{not}, by itself, prove that this sequence converges (although this sequence does).
 				}\label{ex:infinite_recurrence}
 			\end{exe}
 			
@@ -333,48 +333,148 @@
 	}
 
 	\bigskip\bigskip
-	\searchableSubsection{Some important limits of sequences}{analysis}{\bigskip
-		Note that, in the following, $n \in \N{}$. 
+	\searchableSubsection{Some theorems on limits of sequences}{analysis}{\bigskip 
 		\labeledTheorem{If ${ \abs{a} < 1 }$ then ${ \lim_{n \to \infty} a^n = 0. }$}{geom_prog_common_ratio_less_than_one_tends_to_zero}
 		\begin{proof}
 			First of all, note that if ${ \abs{a} = 0 }$ then ${ a = 0 = a^n }$ for all n and so the limit holds trivially. For this reason, from here on, we will consider only the case where ${ a \neq 0 }$.\\
 			There are 3 parts to this proof:
 			\begin{enumerate}
-				\item{${ \abs{a} < 1 \implies \lim_{n \to \infty} \abs{a}^n = 0, }$ }\label{geom_prog_common_ratio_less_than_one_tends_to_zero_1}
-				\item{for ${ n \in \N{} }$, ${ \abs{a}^n = \abs{a^n}, }$ }
+				\item{${ \abs{a} < 1 \implies \lim_{n \to \infty} \abs{a}^n = 0, }$ }
+				\item{${ \abs{a}^n = \abs{a^n}, }$ }
 				\item{${ \lim_{n \to \infty} \abs{a^n} = 0 \implies \lim_{n \to \infty} a^n = 0 }$.}
 			\end{enumerate}
-			\subsubsection{1. ${ \bm{\abs{a} < 1 \implies \lim_{n \to \infty} \abs{a}^n = 0} }$} 
-			One way to prove this is to show that,
-			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\abs{a}^n - 0} = \abs{a}^n < \epsilon. \]
-			We can show this by "reverse engineering" the value of $N$ from the requirement that ${ \abs{a}^n }$ be less than $\epsilon$,
-			\[ \abs{a}^n < \epsilon \iff n\ln{\abs{a}} < \ln{\epsilon} \iff n > \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } \]
-			with the last step changing the direction of the inequality because we divide by $\ln{\abs{a}}$ which - remembering that ${ \abs{a} < 1 }$ - is a negative value. So, in this way, we have shown that ${ N = \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } }$ is a general formula that relates a value of $N$ with the required property with any arbitrary $\epsilon$.\\\\
-			An alternative way to show this, using algebra of limits of sequences, is as follows: Let $x_n$ be the sequence ${ x_n = \abs{a}^n }$. Then, because ${ 0 < \abs{a} < 1 }$,
-			\[ x_{n+1} = x_n \cdot x = \abs{a}^n\abs{a} < \abs{a}^n = x_n \]
-			so that $x_n$ is a decreasing sequence. Additionally, ${ \forall n \in \R{} \logicsep \abs{a}^n \geq 0 }$ so 0 is a lower bound on the sequence. Therefore, the sequence converges to a limit (note we haven't yet established that 0 is the limit - only that it is a candidate). Furthermore, ${ x_{n+1} = \abs{a}^{n+1} = \abs{a}^n\abs{a} }$ and, if ${ x_n \to L }$ then ${ x_{n+1} \to L }$ also. But, putting these two facts together, along with property (d) of limits of sequences, means that,
-			\[ L = \lim_{n \to \infty} \abs{a}^{n+1} = \lim_{n \to \infty} \abs{a}^n\abs{a} = (\lim_{n \to \infty} \abs{a}^n)(\lim_{n \to \infty} \abs{a}) = \abs{a}(\lim_{n \to \infty} \abs{a}^n) = \abs{a}L. \]
-			So,
-			\[ L = \abs{a}L \iff L(1 - \abs{a}) = 0 \]
-			and, since we know that ${ \abs{a} \neq 1 }$, therefore $L$ must be 0.
+			\begin{enumerate}
+			\item{${ \bm{\abs{a} < 1 \implies \lim_{n \to \infty} \abs{a}^n = 0} }$}\label{geom_prog_common_ratio_less_than_one_tends_to_zero_1}
+			\subitem{
+				It would be natural to prove this by showing that,
+				\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\abs{a}^n - 0} = \abs{a}^n < \epsilon. \]
+				We can show this by "reverse engineering" the value of $N$ from the requirement that ${ \abs{a}^n }$ be less than $\epsilon$,
+				\[ \abs{a}^n < \epsilon \iff n\ln{\abs{a}} < \ln{\epsilon} \iff n > \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } \]
+				with the last step changing the direction of the inequality because we divide by $\ln{\abs{a}}$ which - remembering that ${ \abs{a} < 1 }$ - is a negative value. So, in this way, we have shown that ${ N = \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } }$ is a general formula that relates a value of $N$ with the required property with any arbitrary $\epsilon$.\\
+				However, this proof is not valid because it uses the concept of the logarithm which requires a lot of analysis that has not been proven at this stage. Since we are trying to build the fundamental basis of analysis, at this point we can only concepts that are pre-requisites (axiomatic) in analysis or have been proven at this stage.
+			}
+			\subitem{
+				An alternative way to show this, using the properties of limits of sequences just proven, is as follows: Let $x_n$ be the sequence ${ x_n = \abs{a}^n }$. Then, because ${ 0 < \abs{a} < 1 }$,
+				\[ x_{n+1} = x_n \cdot x = \abs{a}^n\abs{a} < \abs{a}^n = x_n \]
+				so that $x_n$ is a decreasing sequence. Additionally, ${ \forall n \in \R{} \logicsep \abs{a}^n \geq 0 }$ so 0 is a lower bound on the sequence. Therefore, the sequence converges to a limit (note we haven't yet established that 0 is the limit - only that it is a candidate). Furthermore, ${ x_{n+1} = \abs{a}^{n+1} = \abs{a}^n\abs{a} }$ and, if ${ x_n \to L }$ then ${ x_{n+1} \to L }$ also. But, putting these two facts together, along with property (d) of limits of sequences, means that,
+				\[ L = \lim_{n \to \infty} \abs{a}^{n+1} = \lim_{n \to \infty} \abs{a}^n\abs{a} = (\lim_{n \to \infty} \abs{a}^n)(\lim_{n \to \infty} \abs{a}) = \abs{a}(\lim_{n \to \infty} \abs{a}^n) = \abs{a}L. \]
+				So,
+				\[ L = \abs{a}L \iff L(1 - \abs{a}) = 0 \]
+				and, since we know that ${ \abs{a} \neq 1 }$, therefore $L$ must be 0.
+			}
 			
-			\subsubsection{2. for ${\bm{ n \in \N{},\; \abs{a}^n = \abs{a^n} }}$} 
-			For ${ a \in \R{}, n \in \N{} }$ it's easy to see that ${ \abs{a}\abs{a}\dots\abs{a} = \abs{aa \dots a} }$.\\
-			In actual fact, this appears to hold even for ${ n \in \Q{} }$, e.g.
-			\[ \abs{ (-1)^{\frac{1}{2}} } = \abs{i} = 1 = \abs{ 1^{\frac{1}{2}} } = \abs{1} = 1 \]
-			but this should be checked when studying complex numbers more thoroughly. Also, the base $a$, can it also be complex?
+			\item{${\bm{ \abs{a}^n = \abs{a^n} }}$}\label{geom_prog_common_ratio_less_than_one_tends_to_zero_2}
+			\subitem{
+				For ${ a \in \R{}, n \in \N{} }$ it's easy to see that ${ \abs{a}\abs{a}\dots\abs{a} = \abs{aa \dots a} }$.\\
+				In actual fact, this appears to hold even for ${ n \in \Q{} }$, e.g.
+				\[ \abs{ (-1)^{\frac{1}{2}} } = \abs{i} = 1 = \abs{ 1^{\frac{1}{2}} } = \abs{1} = 1 \]
+				but this should be checked when studying complex numbers more thoroughly. Also, the base $a$, can it also be complex?
+			}
 			
-			\subsubsection{3. ${\bm{ \lim_{n \to \infty} \abs{a^n} = 0 \implies \lim_{n \to \infty} a^n = 0 }}$}
-			This can be proved directly from the definition of the limit.
-			\begin{align*}
-			&& \lim_{n \to \infty} \abs{a^n} = 0 &\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\abs{a^n} - 0} < \epsilon  \\
-			&&&\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a^n} < \epsilon  &\sidecomment{} \\[3pt]
-			&&&\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a^n - 0} < \epsilon  &\sidecomment{} \\[3pt]
-			&&&\iff \lim_{n \to \infty} a^n = 0.  &\sidecomment{} \\
-			\end{align*}
+			\item{${\bm{ \lim_{n \to \infty} \abs{a^n} = 0 \implies \lim_{n \to \infty} a^n = 0 }}$}
+			\subitem{
+				This can be proved directly from the definition of the limit.
+				\begin{align*}
+				&& \lim_{n \to \infty} \abs{a^n} = 0 &\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{\abs{a^n} - 0} < \epsilon  \\
+				&&&\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a^n} < \epsilon  &\sidecomment{} \\[3pt]
+				&&&\iff \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a^n - 0} < \epsilon  &\sidecomment{} \\[3pt]
+				&&&\iff \lim_{n \to \infty} a^n = 0.  &\sidecomment{} \\
+				\end{align*}
+			}
+			\end{enumerate}
+								
 			Bear in mind that, in general, ${ \lim_{n \to \infty} \abs{x_n} = L \centernot\implies \lim_{n \to \infty} x_n = L }$. For example, if $x_n$ converges to $-L$ then $\abs{x_n}$ will converge to $L$.\\
-			\href{https://github.com/mcopeland2001/maths-notes/blob/master/resources/code/python/converge_to_minus_2.py}{\scriptsize\ttfamily{code example}}
+			\href{https://github.com/mcopeland2001/maths-notes/blob/master/resources/code/python/converge_to_minus_2.py}{\scriptsize\ttfamily{code example}}\\\\
+			
+			Furthermore, the example \ref{ex:infinite_recurrence} showed how the fact of $a_n$ and $a_{n+1}$ converging to the same limit produces - when the sequence is expressed as a recurrence - an equilibrium value.
 		\end{proof}
+	
+		\subsubsection{The Sandwich Theorem}
+		\labeledProposition{Let ${ a_n, b_n, c_n }$ be sequences such that,
+			\[ \text{for all } n,\; a_n \leq b_n \leq c_n \hspace{10pt} \text{and} \hspace{10pt} \lim_{n \to \infty} a_n = L = \lim_{n \to \infty} c_n. \]
+			Then ${ \lim_{n \to \infty} b_n = L. }$
+		}{sandwich_theorem}
+		\begin{proof}
+			${ \lim_{n \to \infty} a_n = L }$ means that,
+			\begin{align*}
+			&& \forall \epsilon > 0 \logicsep \exists N_1 \logicsep \forall n > N_1 \in \N{} &\logicsep \abs{a_n - L} < \epsilon  &\sidecomment{} \\
+			&\iff & \forall \epsilon > 0 \logicsep \exists N_1 \logicsep \forall n > N_1 \in \N{} &\logicsep -\epsilon < a_n - L < \epsilon  &\sidecomment{} \\
+			&\iff & \forall \epsilon > 0 \logicsep \exists N_1 \logicsep \forall n > N_1 \in \N{} &\logicsep L - \epsilon < a_n < L + \epsilon.  &\sidecomment{}
+			\end{align*}
+			By the same reasoning we also have,
+			\[ \forall \epsilon > 0 \logicsep \exists N_2 \logicsep \forall n > N_2 \in \N{} \logicsep L - \epsilon < c_n < L + \epsilon. \]
+			So, if we let ${ N = max\{N_1, N_2\} }$ then we have,
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep L - \epsilon < a_n, c_n < L + \epsilon \]
+			and since we also know that ${ a_n \leq b_n \leq c_n }$ it follows that,
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep L - \epsilon < a_n \leq b_n \leq c_n < L + \epsilon. \]
+			This shows that,
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{b_n - L} < \epsilon. \]
+		\end{proof}
+	
+		\subsubsection{An example application of the Sandwich Theorem}
+		\begin{exe}
+			\ex {\textbf{Prove that ${\bm{ \abs{x} < 1 \implies \lim_{n \to \infty} x^n = 0 }}$}\\\\
+				We have already proven this using the properties of limits in \autoref{theo:geom_prog_common_ratio_less_than_one_tends_to_zero} but here we are going to prove it using the Sandwich Theorem.\\
+				\begin{proof}
+					Firstly, as we showed in \ref{geom_prog_common_ratio_less_than_one_tends_to_zero_2}, ${ \abs{x^n - 0} = \abs{x^n} = \abs{x}^n. }$ So to show that $x^n$ tends to zero we can show that $\abs{x}^n$ tends to zero. So, \WLOG we take ${ x > 0 }$ (since ${ x = 0 }$ makes the proposition trivially true). Then, notice that ${ 0 < x < 1 \implies x = \frac{1}{1 + h} }$ for some ${ h > 0 }$. Then, we can show inductively that ${ (1 + h)^n \geq 1 + hn }$ as follows.\\
+					\paragraph{Base cases 0, 1:} ${ (1 + h)^0 = 1 = 1 + h(0), \; (1 + h)^1 = 1 + h = 1 + h(1). }$
+					\paragraph{Induction step ${\bm{ k > 1 }}$}
+					\begin{align*}
+					&& (1 + h)^k  &\geq 1 + hk  \\
+					&\iff & (1 + h)(1 + h)^k  &\geq (1 + h)(1 + hk) &\sidecomment{} \\
+					&\iff & (1 + h)^{k+1}  &\geq 1 + hk + h + h^2k = 1 + h(k + 1) + h^2k > 1 + h(k + 1) &\sidecomment{} \\
+					\end{align*}
+					This result implies that,
+					\[ x^n = \frac{1}{(1 + h)^n} \leq \frac{1}{1 + hn} \]
+					so that,
+					\[ 0 < x^n \leq \frac{1}{1 + hn}. \]
+					Since $h$ is some fixed value, clearly,
+					\[ \lim_{n \to \infty} \frac{1}{1 + hn} = 0 \]
+					and, obviously, the limit of the constant 0 is always 0 so, by the Sandwich Theorem,
+					\[ \lim_{n \to \infty} x^n = 0. \]
+				\end{proof}
+			}\label{ex:geom_prog_common_ratio_less_than_one_tends_to_zero}
+		\end{exe}
+	}
+
+	\pagebreak
+	\searchableSubsection{Subsequences}{analysis}{\bigskip
+		\boxeddefinition{Let ${ (a_n)_{n \in \N{}} }$ be a sequence and consider some strictly increasing natural
+			numbers ${ (k_1, k_2, k_3, \dots) }$ that is, ${ (k_1 < k_2 < k_3 < k_4 < \dots). }$ Then the sequence ${ (a_{k_n})_{n \in \N{}} }$ is
+			called a \textbf{subsequence} of the sequence ${ (a_n)_{n \in \N{}} }$.\\
+			Note that a \textbf{subsequence} is always infinite (I think).
+		}
+	
+		\labeledTheorem{If $a_n$ is a sequence that tends to a limit, then any subsequence of it tends to the same limit.}{subseq_tends_to_same_limit}
+		\begin{proof}
+			Firstly, notice that if the $n$th index of some subsequence is $k_n$ then $k_n \geq n$ (because the subsequence can only skip terms of the original - it can't add in terms). So then, if we have a sequence $a_n$ that tends to a limit $a$ and an arbitrary subsequence $a_{k_n}$ then,
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a_n - a} < \epsilon \implies \abs{a_{k_n} - a} < \epsilon \]
+			because ${ k_n \geq n > N }$.
+		\end{proof}
+	
+		\labeledTheorem{Every sequence has a monotonic subsequence.}{every_seq_has_monotonic_subseq}
+		\begin{proof}
+			Either there is an infinite number of terms that are greater than all the following terms or there is not. If there is not, then after the last such term all terms have a term that follows them that is greater than or equal to them.\\
+			In the first case we have a strict monotonic decreasing sequence and in the second we have a non-strict monotonic increasing sequence.
+		\end{proof}
+	
+		If we put this theorem together with what we learned about bounded sequences in \autoref{prop:increasing_bounded_seqs_have_limit} and its corollaries - that monotonic bounded sequences are convergent - then we get one of the most famous results in analysis, The Bolzano-Weierstrass Theorem.
+		
+		\labeledTheorem{\textbf{The Bolzano-Weierstrass Theorem}\\
+			Every bounded sequence has a convergent subsequence.
+		}{every_bounded_seq_has_convergent_subseq}
+	}
+
+	\pagebreak
+	\searchableSubsection{Some problems on limits of sequences}{analysis}{\bigskip
+		\subsubsection{\small{ Let ${ (a_n)_{n \in \N{}} }$ be a sequence, and let ${ (b_n)_{n \in \N{}} }$ be the sequence defined by ${ b_n = \abs{a_n} }$ for ${ n \in \N{} }$. Which of the following two statements implies the other? }}
+		\textbf{\small{ 
+			\begin{enumerate}[label=\alph*)]
+				\item{${ (a_n) }$ converges.}
+				\item{${ (b_n) }$ converges.}
+			\end{enumerate}
+		}}
+		Answer: ${ a_n }$ converges ${ \implies b_n }$ converges also but ${ b_n }$ converges ${ \centernot\implies a_n }$ converges. The latter non-implication is easy to see if one thinks of a sequence that consists of two subsequences that converge to 2 and -2. Then, their absolute value would converge to 2 but their values do not converge. Remember \autoref{theo:subseq_tends_to_same_limit}, for a sequence to converge to a limit, every subsequence of it must converge to the same limit.
 	}
 	
 
