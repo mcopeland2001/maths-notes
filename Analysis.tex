@@ -474,8 +474,109 @@
 				\item{${ (b_n) }$ converges.}
 			\end{enumerate}
 		}}
-		Answer: ${ a_n }$ converges ${ \implies b_n }$ converges also but ${ b_n }$ converges ${ \centernot\implies a_n }$ converges. The latter non-implication is easy to see if one thinks of a sequence that consists of two subsequences that converge to 2 and -2. Then, their absolute value would converge to 2 but their values do not converge. Remember \autoref{theo:subseq_tends_to_same_limit}, for a sequence to converge to a limit, every subsequence of it must converge to the same limit.
+		Answer: ${ a_n }$ converges ${ \implies b_n }$ converges also but ${ b_n }$ converges ${ \centernot\implies a_n }$ converges.\\
+		The first implication is because,
+		\begin{align*}
+		&& \abs{a_n} = \abs{a_n - a + a} &\leq \abs{a_n - a} + \abs{a}  \\
+		&\iff &  \abs{a_n} - \abs{a} &\leq \abs{a_n - a}  &\sidecomment{} \\
+		\end{align*}
+		\begin{align*}
+		&& \abs{a} = \abs{a - a_n + a_n} &\leq \abs{a_n - a} + \abs{a_n}  \\
+		&\iff & \abs{a} - \abs{a_n} &\leq \abs{a_n - a}  &\sidecomment{} \\
+		&\iff & \abs{a_n} - \abs{a} &\geq -\abs{a_n - a}  &\sidecomment{} \\
+		\end{align*}
+		which both together imply that ${ \abs{ \abs{a_n} - \abs{a} } \leq \abs{a_n - a} }$.\\
+		The latter non-implication is easy to see if one thinks of a sequence that consists of two subsequences that converge to 2 and -2. Then, their absolute value would converge to 2 but their values do not converge. Remember \autoref{theo:subseq_tends_to_same_limit}, for a sequence to converge to a limit, every subsequence of it must converge to the same limit.
 	}
 	
+	\bigskip\bigskip
+	\searchableSubsection{Limits of functions}{analysis}{\bigskip
+		\subsubsection{Definition of the limit of a function}
+		\boxeddefinition{Let ${ f: \R{} \mapsto \R{} }$ be a function. We say that $L$ is the \textbf{limit of ${\bm{ f(x) }}$ as ${\bm{ x }}$ approaches ${\bm{ a }}$} if, for each ${ \epsilon > 0 }$ there exists ${ \delta > 0 }$ such that,
+			\[ 0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon. \]
+		}
+		\boxeddefinition{Let ${ f: \R{} \mapsto \R{} }$ be a function. We say that \textbf{${\bm{ f(x) }}$ tends to infinity as ${\bm{ x }}$ approaches ${\bm{ a }}$} if, for each ${ K }$ there exists ${ \delta > 0 }$ such that,
+			\[ 0 < \abs{x - a} < \delta \implies f(x) > K. \]
+		}
+	
+		\subsubsection{Examples of limits of functions}
+		\begin{exe}
+			\ex {\textbf{Prove that if ${\bm{ f: \R{} \mapsto \R{} \suchthat f(x) = x^2 + x }}$ then ${\bm{ \lim_{x \to 2} f(x) = 6 }}$.}\\\\
+				Let ${ 0 < \abs{x - 2} <\delta }$ and consider some arbitrary ${ \epsilon > 0 }$. Then we have,
+				\[ \abs{(x^2 + x) - 6} = \abs{(x - 2)(x + 3)} \leq \abs{x - 2}\abs{x + 3} < \delta \abs{x + 3}. \]
+				It's tempting at this point to say that, since we are examining the behaviour when $x$ approaches 2 so we can assume ${ x \approx 2 \iff (x+3) \approx 5 }$ and then we can set ${ \delta = \frac{\epsilon}{6} }$ so that,
+				\[ 0 < \abs{x - 2} < \delta = \frac{\epsilon}{6} \implies \abs{f(x) - 6} < \frac{\abs{x + 3}}{6} \epsilon < \epsilon. \]
+				\textit{However}, there is a subtle logical problem here: We have considered any arbitrary ${ \epsilon > 0 }$, meaning that $\epsilon$ could be large. Then, when we set ${ \delta = \frac{\epsilon}{6} }$ we linked the value of $\delta$ to that of $\epsilon$ so that $\delta$ may also be arbitrarily large. But ${ 0 < \abs{x - 2} < \delta }$ so that ${ \abs{x - 2} }$ may be arbitrarily large also. This contradicts the assumption that ${ x \approx 2 }$ and so the argument we have here is only valid for small $\epsilon$.\\\\
+				So, we need an alternative approach. Consider that,
+				\[ \abs{x + 3} = \abs{x - 2 + 2 + 3} \leq \abs{x - 2} + \abs{2 + 3} = \abs{x - 2} + 5 < \delta + 5. \]
+				This means that,
+				\[ \abs{(x^2 + x) - 6} < \delta \abs{x + 3} < \delta (\delta + 5). \]
+				But note, do \textbf{not} start trying to solve a quadratic. There is a much better way.\\\\
+				Now - here comes the clever bit - if we set ${ \delta = min\{1, \frac{\epsilon}{6}\} }$ then \textit{both} 1 and $\frac{\epsilon}{6}$ are an upper bound on the value of $\delta$ so that we can say,
+				\[ \abs{(x^2 + x) - 6} < \delta (\delta + 5) \leq 6 \delta \leq 6 \frac{\epsilon}{6} = \epsilon. \]
+			}
+		\end{exe}
+	
+		\bigskip
+		\subsubsection{Algebra of limits of functions}
+		\labeledTheorem{Let ${ f, g : \R{} \mapsto \R{} }$ be two functions and $c$ be any real number. Suppose that ${ \lim_{x \to a} f(x) = L }$ and ${ \lim_{x \to a} g(x) = M }$. Then,
+			\begin{enumerate}
+				\item{${ \lim_{x \to a} (cf)(x) = cL }$}
+				\item{${ \lim_{x \to a} (\abs{f})(x) = \abs{L} }$}
+				\item{${ \lim_{x \to a} (f + g)(x) = L + M }$}
+				\item{${ \lim_{x \to a} (f - g)(x) = L - M }$}
+				\item{${ \lim_{x \to a} f(x)g(x) = LM }$}
+				\item{${ \lim_{x \to a} (f / g)(x) = L/M }$ provided ${ g(x) \neq 0 }$ for any $x$ in the neighbourhood of $a$.}
+			\end{enumerate}
+		}{func_limit_properties}
+		\begin{proof}
+			see: \href{http://tutorial.math.lamar.edu/Classes/CalcI/LimitProofs.aspx}{Lamar University - Paul's Online Notes - Proofs of limit properties}
+		\end{proof}
+	
+		\bigskip
+		\subsubsection{One-sided limits}
+		\boxeddefinition{Let ${ f : \R{} \to \R{} }$ be a function. We say that $L$ is the \textbf{limit of ${\bm{ f(x) }}$ as ${\bm{ x }}$ approaches ${\bm{ a }}$ from the left (or from below)}, denoted by ${ \lim_{x \to a^-} f(x) = L }$, if for each ${ \epsilon > 0 }$, there exists ${ \delta > 0 }$ such that,
+				\[ a - \delta < x < a \implies \abs{f(x) - L} < \epsilon. \]
+		}
+		\subsubsection{Limits at infinity}
+		\boxeddefinition{Let ${ f : \R{} \to \R{} }$ be a function. We say that $L$ is the \textbf{limit of ${\bm{ f(x) }}$ as ${\bm{ x }}$ approaches ${\bm{ \infty }}$}, denoted by ${ \lim_{x \to \infty} f(x) = L }$, if for each ${ \epsilon > 0 }$, there exists ${ M > 0 }$ such that,
+			\[ x \geq M \implies \abs{f(x) - L} < \epsilon. \]
+		}
+	}
+
+	\pagebreak
+	\searchableSubsection{Continuity}{analysis}{\bigskip
+		\boxeddefinition{A function is \textbf{continuous} at a point $a$ if $f(a)$ is defined and is equal to the value of ${ \lim_{x \to a} f(x) }$.}
+		\boxeddefinition{A function is \textbf{continuous} if it is continuous at every point $a$.}
+		\boxeddefinition{A function is \textbf{continuous} on the closed interval ${ [a, b] }$ if it is continuous at every point in the open interval ${ (a, b) }$ and:
+			\begin{itemize}
+				\item{${ \lim_{x \to a^+} f(x) = f(a) }$;}
+				\item{${ \lim_{x \to b^-} f(x) = f(b) }$.}
+			\end{itemize}
+		}
+	
+		\labeledTheorem{Let ${ f,g : \R{} \to \R{} }$ be functions that are continuous at ${ a \in R }$ and $ c $ be
+			any real number. Then ${ \abs{f}, (cf), (f - g), (f + g), (f(x)g(x)) }$ are all continuous at $ a $, and
+			${ (f/g)  }$ is continuous provided ${ g(x) \neq 0 }$ for any $ x $ in some neighbourhood of $ a $.}{}
+		\begin{proof}
+			This follows from the algebra of limits of functions given in \autoref{theo:func_limit_properties}.
+		\end{proof}
+	
+		\begin{corollary}
+			It follows then that every polynomial is continuous. This can be seen as the most simple polynomial is a constant - which is clearly continuous; also ${ f(x) = x }$ is clearly continuous. Then powers of $x$ are continuous as they are products of continuous functions and when multiplied by coefficients this is a constant multiplying a continuous function so the resultant function is continuous. Then any polynomial is a summation of such terms so the result is continuous as the sum of continuous functions is continuous.
+		\end{corollary}
+	
+		\labeledTheorem{If $ g $ is a function which is continuous at $ a $, and $ f $ is a function which is
+			continuous at $ g(a) $. Then ${ (f \circ g)  }$ is continuous at $ a $.}{comps_continuous_functions_are_continuous}
+		\begin{proof}
+			Continuity of $f$ at $g(a)$ guarantees that for any ${ \epsilon > 0 }$ there exists some ${ \delta' > 0 }$ such that ${ \abs{x' - g(a)} < \delta' \implies \abs{f(x') - f(g(a))} < \epsilon }$ and continuity of $g$ at $a$ guarantees that for any ${ \delta' > 0 }$ there exists some ${ \delta > 0 }$ such that ${ \abs{x - a} < \delta \implies \abs{g(x) - g(a)} = \abs{x' - g(a)} < \delta' }$.
+		\end{proof}
+	
+		\subsubsection{Unifying continuity of functions with sequences}
+		We now give an alternative definition of continuity which ties in the concept of limits for sequences.
+		\labeledTheorem{A function $ f $ is continuous at $ a $ if and only if for each sequence $ (x_n) $ such that ${ \lim_{n \to \infty} x_n = a  }$ we have ${ \lim_{n \to \infty} f(x_n) = f(a) }$.}{}
+		\begin{proof}
+		\end{proof}
+	}
 
 \end{document}
