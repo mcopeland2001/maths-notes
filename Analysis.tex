@@ -574,8 +574,27 @@
 	
 		\subsubsection{Unifying continuity of functions with sequences}
 		We now give an alternative definition of continuity which ties in the concept of limits for sequences.
-		\labeledTheorem{A function $ f $ is continuous at $ a $ if and only if for each sequence $ (x_n) $ such that ${ \lim_{n \to \infty} x_n = a  }$ we have ${ \lim_{n \to \infty} f(x_n) = f(a) }$.}{}
+		\labeledTheorem{A function $ f $ is continuous at $ a $ if and only if for each sequence $ (x_n) $ such that ${ \lim_{n \to \infty} x_n = a  }$ we have ${ \lim_{n \to \infty} f(x_n) = f(a) }$.}{continuity_of_functions_over_sequences}
+		\note{
+			Before the proof, an important point to note is that this theorem applies to "each sequence" with the described limit. This is important as it is possible to find an individual sequence such that the inference is not valid. For example, the constant sequence ${ \forall n \in \N{} \logicsep x_n = a }$ clearly tends to $a$ as ${ n \to \infty }$ but this would not imply continuity of $f$ as the limit of $f(x_n)$ for such a sequence would amount to saying that ${ f(a) = f(a) }$. The definition of continuity is assertion of the equality of the limit of $f$ over values in the neighbourhood of $a$ (but not at $a$ itself) with the value of $f$ at $a$. So, continuity is implied by the fact that the limit of $f(x_n)$ for the constant sequence $x_n = a$ is equal to the limit of $f(x_n)$ for all other sequences $x_n$ whose limit is $a$.\\
+			Another way of looking at it is that $f$ is continuous at $a$ because the limit there equals $f(a)$ however the argument converges to $a$.
+		}
 		\begin{proof}
+			Breaking it down into two propositions we have,
+			\begin{equation}
+				(\forall x_n \suchthat \lim_{n \to \infty} x_n = a) \; \lim_{n \to \infty} f(x_n) = f(a) \tag{$P_1$}
+			\end{equation}
+			\begin{equation}
+				\forall \epsilon > 0 \logicsep \exists \delta \logicsep 0 < \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \tag{$P_2$}
+			\end{equation}
+			and we need to show that ${ P_1 \iff P_2. }$\\\\
+			So, to begin with we'll show that ${ P_1 \implies P_2. }$ Unpacking the statement ${ \lim_{n \to \infty} f(x_n) = f(a) }$ we have,
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon \]
+			which tells us that for every ${ \epsilon > 0 }$ there is an $N$ such that the statement holds true for the range of $n$ above $N$. But since this is the case for all sequences $x_n$ such that ${ \lim_{n \to \infty} x_n = a }$ we also have
+			\[ \forall \delta > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{x_n - a} < \delta \]
+			so that the range of $n$ such that the statement about $f(x_n)$ holds true will also fall inside some range such that there is a $\delta$ for which ${ \abs{x_n - a} < \delta }$. And, since this is true \textit{whenever} we have a sequence $x_n$ such as this, we can say that proposition $P_1$ amounts to
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
+			We can see that this is almost the same as the assertion of continuity of $f$, proposition $P_2$, \textit{but not quite}. The difference is worth noting. The difference is that continuity is only asserted over values of $x$ such that ${ 0 < \abs{x - a} }$ TODO: change the definition of continuity !
 		\end{proof}
 	}
 
