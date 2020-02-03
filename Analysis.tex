@@ -351,7 +351,7 @@
 				We can show this by "reverse engineering" the value of $N$ from the requirement that ${ \abs{a}^n }$ be less than $\epsilon$,
 				\[ \abs{a}^n < \epsilon \iff n\ln{\abs{a}} < \ln{\epsilon} \iff n > \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } \]
 				with the last step changing the direction of the inequality because we divide by $\ln{\abs{a}}$ which - remembering that ${ \abs{a} < 1 }$ - is a negative value. So, in this way, we have shown that ${ N = \frac{ \ln{\epsilon} }{ \ln{\abs{a}} } }$ is a general formula that relates a value of $N$ with the required property with any arbitrary $\epsilon$.\\
-				However, this proof is not valid because it uses the concept of the logarithm which requires a lot of analysis that has not been proven at this stage. Since we are trying to build the fundamental basis of analysis, at this point we can only concepts that are pre-requisites (axiomatic) in analysis or have been proven at this stage.
+				However, this proof is not valid because it uses the concept of the logarithm which requires a lot of analysis that has not been proven at this stage. Since we are trying to build the fundamental basis of analysis, at this point we can only use concepts that are pre-requisites (axiomatic) in analysis or have been proven at this stage.
 			}
 			\subitem{
 				An alternative way to show this, using the properties of limits of sequences just proven, is as follows: Let $x_n$ be the sequence ${ x_n = \abs{a}^n }$. Then, because ${ 0 < \abs{a} < 1 }$,
@@ -546,11 +546,26 @@
 
 	\pagebreak
 	\searchableSubsection{Continuity}{analysis}{\bigskip
-		\boxeddefinition{A function is \textbf{continuous} at a point $a$ if $f(a)$ is defined and is equal to the value of ${ \lim_{x \to a} f(x) }$.}
-		\boxeddefinition{A function is \textbf{continuous} if it is continuous at every point $a$.}
-		\boxeddefinition{A function is \textbf{continuous} on the closed interval ${ [a, b] }$ if it is continuous at every point in the open interval ${ (a, b) }$ and:
+		\boxeddefinition{
+			A function $ f $ is \textbf{continuous at a point ${\bm{ a }}$} if
 			\begin{itemize}
-				\item{${ \lim_{x \to a^+} f(x) = f(a) }$;}
+				\item{$f(a)$ is defined,}
+				\item{${ \lim_{x \to a} f(x) = f(a) }$.}
+			\end{itemize}
+			\smallskip
+			More formally, the definition of ${ \lim_{x \to a} f(x) = L }$ is,
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \suchthat 0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon. \]
+			But if $f(a)$ is defined then,
+			\[ 0 = \abs{x - a} \implies x = a \implies f(x) = f(a) \implies \abs{f(x) - f(a)} = 0. \]
+			Therefore, if ${ \lim_{x \to a} f(x) = f(a) }$, then
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \suchthat \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon. \]		
+		}
+		
+		\boxeddefinition{A function is \textbf{continuous} if it is \textbf{continuous at every point}.}
+		\boxeddefinition{A function is \textbf{continuous on the closed interval ${\bm{ [a, b] }}$} if it is
+			\begin{itemize}
+				\item{continuous at every point in the open interval ${ (a, b) }$,}
+				\item{${ \lim_{x \to a^+} f(x) = f(a) }$,}
 				\item{${ \lim_{x \to b^-} f(x) = f(b) }$.}
 			\end{itemize}
 		}
@@ -571,6 +586,9 @@
 		\begin{proof}
 			Continuity of $f$ at $g(a)$ guarantees that for any ${ \epsilon > 0 }$ there exists some ${ \delta' > 0 }$ such that ${ \abs{x' - g(a)} < \delta' \implies \abs{f(x') - f(g(a))} < \epsilon }$ and continuity of $g$ at $a$ guarantees that for any ${ \delta' > 0 }$ there exists some ${ \delta > 0 }$ such that ${ \abs{x - a} < \delta \implies \abs{g(x) - g(a)} = \abs{x' - g(a)} < \delta' }$.
 		\end{proof}
+		\begin{corollary}
+			${ \lim_{x \to a} (f \circ g)(x) = \lim_{x \to a} f(g(x)) = f(\lim_{x \to a} g(x)) }$
+		\end{corollary}
 	
 		\subsubsection{Unifying continuity of functions with sequences}
 		We now give an alternative definition of continuity which ties in the concept of limits for sequences.
@@ -585,17 +603,134 @@
 				(\forall x_n \suchthat \lim_{n \to \infty} x_n = a) \; \lim_{n \to \infty} f(x_n) = f(a) \tag{$P_1$}
 			\end{equation}
 			\begin{equation}
-				\forall \epsilon > 0 \logicsep \exists \delta \logicsep 0 < \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \tag{$P_2$}
+				\forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \tag{$P_2$}
 			\end{equation}
 			and we need to show that ${ P_1 \iff P_2. }$\\\\
-			So, to begin with we'll show that ${ P_1 \implies P_2. }$ Unpacking the statement ${ \lim_{n \to \infty} f(x_n) = f(a) }$ we have,
-			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon \]
-			which tells us that for every ${ \epsilon > 0 }$ there is an $N$ such that the statement holds true for the range of $n$ above $N$. But since this is the case for all sequences $x_n$ such that ${ \lim_{n \to \infty} x_n = a }$ we also have
-			\[ \forall \delta > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{x_n - a} < \delta \]
-			so that the range of $n$ such that the statement about $f(x_n)$ holds true will also fall inside some range such that there is a $\delta$ for which ${ \abs{x_n - a} < \delta }$. And, since this is true \textit{whenever} we have a sequence $x_n$ such as this, we can say that proposition $P_1$ amounts to
-			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
-			We can see that this is almost the same as the assertion of continuity of $f$, proposition $P_2$, \textit{but not quite}. The difference is worth noting. The difference is that continuity is only asserted over values of $x$ such that ${ 0 < \abs{x - a} }$ TODO: change the definition of continuity !
+			So, to begin with we'll assume  show that ${ P_1 \implies P_2. }$\\
+			Unpacking $P_1$ we have a function $f$ such that
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon \tag{1} \] 
+			where $x_n$ is a sequence such that
+			\[ \forall \delta > 0 \logicsep \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta. \tag{2} \]
+			Then, if we choose a particular ${ \epsilon > 0 }$, there exists some $N$ such that for all ${ n > N }$ we have ${ \abs{f(x_n) - f(a)} < \epsilon. }$ Now there will also be some $N' \leq N$ so that ${ \forall n > N, \; n > N' }$ and so there is some $\delta$ such that ${ \abs{x_n - a} < \delta }$. Since $P_1$ says that this is the case \textit{whenever} we have an $x_n$ such as this, $P_1$ may be rewritten as
+			\[ \forall \epsilon > 0 \logicsep (\exists N \logicsep \forall n > N \in \N{}) \logicsep \exists \delta > 0 \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
+			Now, if we remove reference to the number of the term of the sequences - ${ N,n }$ - we have
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
+			which is the statement of continuity of $f$ in $P_2$.
+			\\\\
+			Next we prove ${ P_2 \implies P_1. }$\\
+			So now we begin by assuming $P_2$ which was that,
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon. \]
+			Actually, it is quite easy to apply a similar logic as previously but in reverse to make the converse implication. We can choose any $\epsilon$ and there exists some $\delta$ such that $P_2$ holds. Then, as we have seen previously in (2), $P_1$ tells us that, for this value of $\delta$,
+			\[ \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta \]
+			and $P_2$ tells us that,
+			\[ \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
+			Putting the two together we get,
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon \]
+			which implies that
+			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon. \]
+			So we have shown that $P_2$ implies that (2) implies (1) which is ${ P_2 \implies P_1 }$ as required.\\\\
+			
+			For completeness, let's consider another way of proving that ${ P_1 \implies P_2 }$ using a proof by contradiction.\\
+			So, we are assuming $P_1$ but also assuming, for contradiction, that $P_2$ is false. Then we are negating the statement,
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
+			so we are asserting that,
+			\[ \forall \epsilon > 0 \logicsep \nexists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
+			which is equivalent to
+			\[ \forall \epsilon > 0 \logicsep \forall \delta > 0 \logicsep \abs{x - a} < \delta \centernot\implies \abs{f(x) - f(a)} < \epsilon \]
+			or alternatively,
+			\[ \forall \epsilon > 0 \logicsep \forall \delta > 0 \logicsep \exists x \logicsep (\abs{x - a} < \delta) \wedge (\abs{f(x) - f(a)} \geq \epsilon). \]
+			So, this says that we can choose any arbitrary ${ \epsilon > 0 }$ and for all ${ \delta > 0 }$ there will be some $x$ in the $\delta$-neighbourhood of $a$ such that ${ \abs{f(x) - f(a)} \geq \epsilon. }$\\\\
+			Now, if we choose a value of $\delta$ that depends on a natural number $n$ in such a way that ${ \delta \to 0 }$ as ${ n \to \infty }$ - for example, if ${ \delta = 1/n }$ - then the $\delta$-neighbourhoods around $a$ will get smaller as ${ n \to \infty. }$ Then we can select an $x$ from the $\delta$-neighbourhood that corresponds to a particular value of $n$ and call it $x_n$ and, in this way, we create a sequence $x_n$ that converges to $a$. So we have ${ \lim_{n \to \infty} x_n = a. }$\\
+			But now, for every $\delta$ there is an $x_n$ in the $\delta$-neighbourhood of $a$ with ${ \abs{f(x_n) - f(a)} \geq \epsilon }$ so that
+			\[ \lim_{n \to \infty} f(x_n) = f(a) \]
+			is not true. Therefore this is a contradiction of the hypothesis $P_1$.
 		\end{proof}
+		\begin{corollary}
+			\label{cor:lim_of_func_of_convergent_sequence_is_func_of_limit}
+			${ \lim_{n \to \infty} f(x_n) = f(\lim_{n \to \infty} x_n) }$
+		\end{corollary}
+	
+		\bigskip
+		\subsubsection{Continuous Functions on Closed Intervals}
+		\boxeddefinition{For a subset $X$ of the domain of a function $f$, we say that $f$ is \textit{bounded} on $X$ if there exists $M$ such that ${ \abs{f(x)} \leq M }$ for each ${ x \in X }$.}
+		\boxeddefinition{We define the supremum (or maximum) of $f$ on $X$ as ${ sup\;\setc{f(x)}{x \in X} }$ (or ${ max\;\setc{f(x)}{x \in X} }$ if it exists).}
+		
+		\subsubsection{Examples of bounded and unbounded functions}
+		\begin{exe}
+			\ex{
+				The indicator function for rational numbers within the reals, known as the \textbf{Dirichlet Function},
+				\[ 
+				f(x) =	\begin{cases} 
+				0 & x \text{ is irrational} \\
+				1 & x \text{ is rational}
+				\end{cases}. 
+				\]
+				This function is nowhere continuous so that in every neighbourhood of a point $a$ you can always find values of $x$ closer in (i.e. in smaller neighbourhoods around $a$) such that ${ f(x) }$ is further away from the value of $f(a)$. So this function never converges anywhere but \textit{is} bounded because it only ever takes values of 1 or 0 so, clearly, its maximum is 1 and minimum is 0.
+			}\label{ex:dirichlet_function}
+			\ex{
+				The function ${ f(x) = 1/x }$ over the interval ${ (0,1) }$ is continuous at every point but unbounded as it goes to infinity as ${ x \to 0 }$. If we consider the same function over the closed interval ${ [0,1] }$ then we no longer have continuity over this interval as there is a singularity at ${ x=0 }$.
+			}\label{ex:reciprocal_function}
+		\end{exe}
+		
+		\subsubsection{Extreme Value Theorem}
+		\labeledTheorem{Let $f$ be continous on ${ [a,b] }$. Then $f$ is bounded on ${ [a,b] }$ and it achieves its maximum; that's to say, the supremum is equal to the maximum.}{extreme_value_theorem}
+		\note{
+			Note that, even if $f$ is defined at every point in ${ [a,b] }$, if it is not continuous then it \textit{may} not be bounded. There \textit{do} exist functions that are not continuous but bounded (for example the Dirichlet Function \ref{ex:dirichlet_function}) but there also exist functions that are not continuous and unbounded such as the reciprocal function \ref{ex:reciprocal_function}. So, functions that are not continuous on a closed interval may be bounded or not; and functions that are continuous on an open interval also may or may not be bounded (again, the reciprocal function is an example of a function that is continuous on an open interval but not bounded); but here we will show that functions that are continuous on a closed interval must be bounded on that interval.
+		}
+		\begin{proof}
+			That $f$ is continuous on ${ [a,b] }$ means that, for any ${ c \in (a,b) }$,
+			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - c} < \delta \implies \abs{f(x) - f(c)} < \epsilon. \]
+			This means that the value of $f(x)$ must be finite everywhere in ${ (a,b) }$ as, choosing any fixed point $c$ in the open interval, ${ \abs{x - c} }$ is finite and, therefore, less than some $\delta$ thus implying that ${ \abs{f(x) - f(c)} < \epsilon }$ for some finite $\epsilon$. So, continuity on the open interval implies that, if there is any point $c$ such that $f(c)$ is finite, then all $f(x)$ in the open interval must also be finite.\\
+			However, it may still be the case that the function becomes infinite at one or both of the endpoints of the interval (as, in fact, we saw with the reciprocal function \ref{ex:reciprocal_function}). But the other part of the definition of continuity of $f$ on ${ [a,b] }$ is that
+			\[ \lim_{x \to a^+} f(x) = f(a) \text{ and } \lim_{x \to b^-} f(x) = f(b) \]
+			which, along with the requirement for continuity that $f$ be defined on all points in the closed interval, ensures that the function does not become infinite at the bounds of the interval either.\\
+			Therefore, since at no point in the closed interval ${ [a,b] }$ does $f$ become infinite, we can say that
+			\[ \exists M \logicsep \forall x \in [a,b] \logicsep \abs{f(x)} \leq M. \]					
+		\end{proof}
+	
+		\bigskip
+		\subsubsection{Intermediate Value Theorem}
+		\labeledTheorem{Let $f$ be continuous on ${ [a,b] }$ and \WLOG assume ${ f(a) < f(b) }$. Then, for all ${ K \suchthat f(a) < K < f(b) }$, there exists some ${ c \in (a,b) }$ with ${ f(c) = K }$.
+		}{intermediate_value_theorem}
+		\note{Note that this theorem is \textbf{not} written for an interval such that ${ f(a) \leq f(b) }$ because if ${ f(a) = f(b) }$ then the only ${ K \suchthat f(a) \leq K \leq f(b) }$ is ${ f(a) = K = f(b) }$. But now it is \textbf{not} true to say that there exists some ${ c \in (a,b) }$ with ${ f(c) = K }$ as there is no reason why the value of $f(x)$ at the bounds of the interval should be repeated somewhere in the interior of the interval.}
+		\begin{proof}
+			Continuity at the interval bounds $a$ and $b$ means that,
+			\[ 0 < x - a < \delta_1 \implies \abs{f(x) - f(a)} < \epsilon_1, \]
+			\[ 0 < b - x < \delta_2 \implies \abs{f(x) - f(b)} < \epsilon_2. \]
+%			So $f(x)$ is bound in neighbourhoods of $f(a)$ and $f(b)$ as follows,
+%
+%			Then, if we make the neighbourhoods large enough so that they overlap, the lower neighbourhood (the one centred around the lower value $f(a)$) will have its upper bound inside the upper neighbourhood while the lower bound of the upper neighbourhood will be inside the lower neighbourhood. 
+			If we choose as the value of both $\delta_1$ and $\delta_2$ a value greater than ${ (b - a)/2 }$ then the intervals of $x$-values will overlap. If we consider the $x$-values in the intersection of the intervals, for these values of $x$, we have,
+			\[ f(a) - \epsilon_1 < f(x) < f(a) + \epsilon_1, \]
+			\[ f(b) - \epsilon_2 < f(x) < f(b) + \epsilon_2 \]
+			and, for the overlapping section,
+			\[ f(b) - \epsilon_2 < f(x) < f(a) + \epsilon_1. \]
+			Then, if we make $\epsilon_1$ a function of $\epsilon_2$ as follows,
+			\[ \epsilon_2 = \epsilon_1 + f(a) + f(b) \]
+			then we have,
+			\[ -(f(a) + \epsilon_1) < f(x) < (f(a) + \epsilon_1) \]
+			
+			So, we have a lower neighbourhood around $f(a)$ and an upper neighbourhood around $f(b)$ as follows,
+			\[ f(a) - \epsilon_1 < f(x) < f(a) + \epsilon_1, \]
+			\[ f(b) - \epsilon_2 < f(x) < f(b) + \epsilon_2 \]
+			If ${ \epsilon_1 > \abs{f(a)} }$ and ${ \epsilon_2 > \abs{f(b)} }$ then both neighbourhoods contain ${ f(x) = 0 }$. In this case, there is some interval of $x$ such that ${ f(x) }$ lies inside both the lower and upper neighbourhood -- in the overlap of the two. In the overlap we have,
+			\[ f(b) - \epsilon_2 < f(x) < f(a) + \epsilon_1. \]
+			Now if we let $\epsilon_1$ vary freely but make $\epsilon_2$ a function of $\epsilon_1$ like so,
+			\[ \epsilon_2 = f(a) + f(b) + \epsilon_1 \]
+			then we still have ${ \epsilon_1 > \abs{f(a)} }$ and ${ \epsilon_2 > \abs{f(b)} }$ as,
+			\[ \epsilon_1 > \abs{f(a)} \iff -\epsilon_1 < f(a) < \epsilon_1 \iff 0 < f(a) + \epsilon_1 < 2\epsilon_1 \]
+			so ${ \epsilon_2 > f(b) }$ and, conversely, if we assume that ${ \epsilon_2 > \abs{f(b)} }$ then,
+			\[ \epsilon_2 > \abs{f(b)} \iff -\epsilon_2 < f(b) < \epsilon_2 \iff -\epsilon_2 - f(b) < 0 < \epsilon_2 - f(b) \]
+			\[ \epsilon_1 = \epsilon_2 - f(a) - f(b) > -f(a) = \abs{f(a)} \hspace{20pt}\sidecomment{since ${ f(a) < 0 }$}. \]
+			Therefore,
+			\[ \epsilon_2 = f(a) + f(b) + \epsilon_1 \implies [ \epsilon_1 > \abs{f(a)} \iff \epsilon_2 > \abs{f(b)} ]. \]
+			Now we have,
+			\[ f(b) - \epsilon_2 = -f(a) - \epsilon_1 < f(x) < f(a) + \epsilon_1 \]
+			which is equivalent to
+			\[ \abs{f(x)} < f(a) + \epsilon_1 = \epsilon_3. \]
+			Now, since ${ f(a) + \epsilon_1 > 0 }$ we also have ${ \epsilon_3 > 0 }$ and it can become arbitrarily small as long as it is greater than $\abs{f(a)}$. So we have shown that continuity over the closed interval and ${ f(a) < f(b) }$ imply that we can find subintervals of ${ [a,b] }$ such that ${ f(x) }$ is constricted to ever-decreasing neighbourhoods of 0. In other words, for some ${c \suchthat a < c < b, \; f(x) \to 0 }$ as  ${ x \to c }$ and since $f$ is continuous on the interval this implies that ${ f(c) = 0 }$ also. 
+		\end{proof}
+		
 	}
-
+  
 \end{document}

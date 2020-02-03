@@ -23,9 +23,13 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{gb4e}
-\noautomath
-
 \usepackage{titlesec}
+\noautomath
+\usepackage[most]{tcolorbox}
+
+\definecolor{note_bg}{RGB}{247,247,247}
+
+
 
 \titleformat*{\subparagraph}{\small\bfseries}
 
@@ -89,8 +93,8 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem*{definition}{Definition}
 \newtheorem{axiom}{Axiom}
-\newtheorem*{corollary}{Corollary}
-\newtheorem*{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
 
 \newcommand{\labeledProposition}[2]{
 	\begin{proposition}
@@ -120,12 +124,12 @@
 }
 
 \newcommand{\note}[1]{
-	\noindent
-		\parbox{\textwidth}{%
-			{\scriptsize \textit{
-				#1
-			}}	
-		}\bigskip
+	\begin{tcolorbox}[enhanced jigsaw,colback=note_bg,boxrule=0pt,arc=0pt]
+	\noindent\parbox{\textwidth}{%
+			{\scriptsize \textit{#1}}	
+		}
+	\end{tcolorbox}
+	\smallskip
 }
 
 
