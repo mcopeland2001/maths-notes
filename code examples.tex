@@ -110,5 +110,19 @@
 			\item Item 3
 		\end{itemize}
 	\end{tcolorbox}
+
+	\subsection{Enumerations}
+	\subsubsection{With roman numerals}
+	\begin{enumerate}[label=(\roman*)]
+		\item{${\bm{ a_n = \frac{1}{n} + 1 }}$}
+		\[ \frac{a_{n+1}}{a_n} = \frac{n(n+2)}{(n+1)^2} =\frac{n^2 + 2n}{n^2 + 2n + 1} \to 1 \text{ as } n \to \infty \]
+		and clearly,
+		\[ \lim_{n \to \infty} \frac{1}{n} + 1 = 1. \]
+		But also,
+		\item{${\bm{ a_n = \frac{1}{n} }}$}
+		\[  \frac{a_{n+1}}{a_n} = \frac{n}{n+1} \to 1 \text{ as } n \to \infty \]
+		even though
+		\[ \lim_{n \to \infty} \frac{1}{n} = 0. \]
+	\end{enumerate}
 	
 \end{document}
