@@ -83,7 +83,7 @@
 			A \textbf{permutation} is a bijection from a set to itself. Since permutations are bijective, they are invertible and since they are functions, function composition defines an associative law of composition over them. As a result, they form a group. 
 		}
 		\boxeddefinition{
-			The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions.
+			The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions. The name probably comes from the study of symmetries of geometric objects that were eventually realised to be equivalent to permutations of the vertices.
 		}
 		\notation{The symmetric group over the integers from 1 to n is denoted $S_n$.}\\
 		\subparagraph{$\bm{S_2}$}
@@ -199,6 +199,7 @@
 		\[ a\Z{} + b\Z{} = \setc{n \in \Z{}}{n = ar + bs \;\; r, s \in \Z{}} \]
 		This is known as the subgroup \textit{generated} by $a,b$ because it is the smallest subgroup which contains $a$ and $b$. \autoref{prop:bZ_subgroup} tells us that it has the form $d\Z{}$ for some integer $d$.
 		\begin{corollary}
+			\label{coro:greatest_common_divisor}
 			If $d$ is the positive integer which generates the subgroup $a\Z{} + b\Z{}$ then $d$ is the greatest common divisor of $a$ and $b$ and so,
 			\begin{itemize}
 				\item{$d$ can be written in the form $d = ar + bs$ for some integers $r$ and $s$.}
@@ -228,7 +229,7 @@
 			It follows from $S$ being a subgroup of $\Z{+}$ and from \autoref{prop:bZ_subgroup} that $S$ has the form $m\Z{}$ where $m$ is the smallest positive integer such that $x^m = 1$. Therefore, in $H$, the $m$ elements $1, x, x^2, \cdots , x^{m-1}$ are all different and any element in $H$ will simplify to one of them: for $n \in S$, $n = mq + r$ such that $x^n = (x^m)^qx^r = 1^qx^r = x^r$.
 		\end{corollary}
 		
-		\boxeddefinition{The \textbf{order} of a group $G$ is the number of distinct elements it contains where an object and its inverse are not considered -- for this purpose -- distinct. It is typically denoted $\vert G \vert$.\\
+		\boxeddefinition{The \textbf{order} of a group $G$ is the number of distinct elements it contains. It is typically denoted $\vert G \vert$.\\
 			An element of a group is said to have \textbf{order} $m$ (possibly infinity) if the cyclic subgroup it generates has order $m$. This means that $m$ is the smallest positive integer with the property $x^m = 1$ or, if the order is infinite, that, $x^m \neq 1$ for all $m \neq 0$.
 		}
 	
@@ -322,9 +323,11 @@
 			where $ab$ represents composition according to the law of composition of $G$ and $\phi(a)\phi(b)$ represents composition according to the law of composition of $G'$.
 		}
 	
+		\note{An \textbf{isomorphism} is a \textbf{bijection} between two \textbf{groups}. That's to say, it is already assumed in the definition of an isomorphism that the codomain $G'$ is a group.}
+	
 		\labeledProposition{As a consequence of this sole property that, across the bijection, the respective laws of composition are preserved, all other properties of the groups are also preserved.}{isomorphism_preserves_structure}
 		\begin{proof}
-			Let $e' = \phi(e) \in G'$ and $1'$ be the identity element in $G'$ then,
+			Let $e$ be the identity in $G$ and $e' = \phi(e) \in G'$, and $1'$ be the identity element in $G'$ then,
 			\begin{itemize}
 				\item{
 					Since $G'$ is a group, it has the inverses property that every element has an inverse so,
@@ -337,7 +340,7 @@
 				\item{We can use the fact just shown that $\phi(e) = e' = 1'$ to show,
 					\begin{align*}
 						&&1' = e' = \phi(e) &= \phi(a\inv{a}) = \phi(a)\phi(\inv{a}) &\sidecomment{using preservation of law of composition}\\
-						&\iff &\inv{\phi(a)}1' &= \phi(\inv{a})\phi(a)\phi(\inv{a}) &\sidecomment{using the inverses property of $G'$}\\
+						&\iff &\inv{\phi(a)}1' &= \inv{\phi(a)}\phi(a)\phi(\inv{a}) &\sidecomment{using the inverses property of $G'$}\\
 						&\iff &\inv{\phi(a)} &= \phi(\inv{a})
 					\end{align*}
 					which shows that $\phi$ maps $\inv{a} \in G$ to $\inv{\phi(a)} \in G'$.}
@@ -362,6 +365,8 @@
 				\[ \phi : \Z{+} \longmapsto C \; \suchthat \; \phi(n) = a^n \]
 				is an isomorphism where the preservation of the respective laws of composition can be seen as,
 				\[ \phi(m + n) = a^{m + n} = a^ma^n = \phi(m)\phi(n) \]
+				and also ${ n + (-n) = 0 }$ and,
+				\[ \phi(-n) = a^{-n} = \inv{(a^n)}. \]
 			}
 			\item{Let $G$ be the set of real matrices of the form,
 				\[
@@ -407,7 +412,35 @@
 			&x &&\longmapsto &&x^2 \\
 			&x^2 &&\longmapsto &&x \\
 		\end{array}\]
-		This is because $x$ and $x^2$ have the same order because $x^3 = 1$ and also $(x^2)^3 = x^6 = (x^3)^2 = 1^2 = 1$ and so the law of composition is preserved.
+		\begin{table}[h!]%
+			\centering%
+			\begin{tabular}{|c||c|c|c|}
+				\hline
+				      &  1    & $x$   & $x^2$ \\
+				\hline
+				\hline
+				 1    &  1    & $x$   & $x^2$ \\
+				\hline
+				$x$   & $x$   & $x^2$ & 1     \\
+				\hline
+				$x^2$ & $x^2$ & 1     & $x$ \\
+				\hline
+			\end{tabular}
+			$ \longmapsto $
+			\begin{tabular}{|c||c|c|c|}
+				\hline
+				      &  1    & $x^2$ & $x$  \\
+				\hline
+				\hline
+				1     &  1    & $x^2$  & $x$  \\
+				\hline
+				$x^2$ & $x^2$ & $x$   & 1    \\
+				\hline
+				$x$   & $x$   & 1     & $x^2$ \\
+				\hline
+			\end{tabular}
+		\end{table}
+		\\\\This is because the group is cyclic and $x$ and $x^2$ have the same order ($x^3 = 1$ and also $(x^2)^3 = x^6 = (x^3)^2 = 1^2 = 1$). So the law of composition is preserved.
 		\paragraph{Conjugation}
 		The most important example of automorphism is conjugation.\\\\
 		\boxeddefinition{\textbf{Conjugation} by $b \in G$ is the map from $G$ to itself defined by,
@@ -438,7 +471,9 @@
 			\[ \phi(ab) = \phi(a)\phi(b) \text{ for all } a,b \in G \]
 			where $ab$ represents composition according to the law of composition of $G$ and $\phi(a)\phi(b)$ represents composition according to the law of composition of $G'$. 
 		}
-		So, the difference between a \textit{homomorphism} and a \textit{isomorphism} is that the latter is bijective whereas the former is not. As a result, a \textit{homomorphism} may be one-way only.
+		So, the difference between a \textit{homomorphism} and a \textit{isomorphism} is that the latter is bijective whereas the former is not. As a result, a \textit{homomorphism} may be one-way only.\\
+		
+		\note{A \textbf{homomorphism} is a \textbf{mapping} between two \textbf{groups}. That's to say, it is already assumed in the definition of a homomorphism that the codomain $G'$ is a group.}
 		
 		\paragraph{Examples of homomorphisms}
 		\begin{exe}
@@ -546,14 +581,15 @@
 	
 		\subsubsection{The center of a group}
 		\boxeddefinition{The \textbf{center} of a group $G$ is the set of elements that commute with every element of $G$,
-			\[ Z = \setc{z \in G}{zx = xz, \; \forall x \in G}. \]
-			The center of a group, $Z$, is a subgroup of $G$. This can be easily seen as,
-			\[ \forall a,b \in Z, x \in G \logicsep (ab)x = axb = x(ab) \]
-			and,
-			\[ \forall a \in Z, x \in G \logicsep ax = xa \iff \inv{a}ax = x = \inv{a}xa \iff x\inv{a} = \inv{a}x. \]
+			\[ Z = \setc{z \in G}{zx = xz, \; \forall x \in G}. \]	
 		}
 	
 		\notation{The \textbf{center} of a group $G$ may be denoted by $Z$ or by $Z(G)$.}
+		
+		The center of a group, $Z$, is a subgroup of $G$. This can be easily seen as,
+		\[ \forall a,b \in Z, x \in G \logicsep (ab)x = axb = x(ab) \]
+		and,
+		\[ \forall a \in Z, x \in G \logicsep ax = xa \iff \inv{a}ax = x = \inv{a}xa \iff x\inv{a} = \inv{a}x. \]
 		
 		For example,
 		\begin{exe}
@@ -645,6 +681,7 @@
 		\boxeddefinition{A coset can be defined for any subgroup $H$ of a group $G$. A \textbf{left coset} is a subset of the form,
 			\[ aH = \setc{ah}{h \in H}. \]
 		}
+		\note{Cosets are not, in general, subgroups. This can be easily seen as the left coset $aH$ does not contain the identity as, although $H$ contains the identity, $aH$ contains ${ a1 = a }$.} 
 		Note that the arbitrary subgroup $H$ could also be thought of as a coset $1H = H$ and also that the left cosets $aH$ are equivalence classes for the congruence relation,
 			\[ a \equiv b \iff b = ah, \; h \in H. \]
 		This is a congruence because, for some arbitrary $c \in G$,
@@ -681,8 +718,8 @@
 		\begin{proof}
 			As usual, equal cardinality is demonstrated by showing the existence of a bijection. It is clear that there is a bijective map between the subgroup $H$ and any coset $aH$ because the map $H \longmapsto aH$ is,
 			\begin{itemize}
-				\item{injective because $ah = ah' \implies h = h'$;}
-				\item{surjective because every $ah \in aH$ is mapped to by some $h \in H$.}
+				\item{injective because $ah = ah' \implies h = h'$ because by group properties $a$ has an inverse in $G$;}
+				\item{surjective because every $c \in aH$ has the form $ah$ and is therefore mapped to by some $h \in H$.}
 			\end{itemize}
 		\end{proof}
 	
@@ -694,19 +731,56 @@
 		\begin{theorem}
 			\textbf{Lagrange's Theorem: } Let $G$ be a finite group, and let $H$ be a subgroup of $G$. The order of $H$ divides the order of $G$.
 		\end{theorem}
+	
 		\begin{corollary}
+			Let $ G $ be a finite group, and let $ a $ be an element of $ G $. Then the order of $ a $ divides the order of $G$. That's to say, the order of the cyclic group generated by $a$, ${ \cardinality{\langle a \rangle} }$, divides ${ \cardinality{G}. }$
+		\end{corollary}
+	
+		\begin{corollary}
+			\label{coro:group_order_n_nth_power_of_elements_is_identity}
+			If $ G $ is a group of order $ n $, then ${ g^n = e }$ for every element $ g $ of $ G $.
+		\end{corollary}
+		\begin{proof}
+			This is clearly a consequence of the previous corollary. If we let the order of $g$ be $m$, then by the previous corollary, 
+			\[ m \divides n \iff n = km \text{ for } k \in \N{} \iff g^n = g^{km} = (g^m)^k = e^k = e. \qedhere \]
+		\end{proof}
+	
+		\begin{corollary}
+			\label{coro:prime_order_groups_are_cyclic}
 			Suppose that a group $G$ has $p$ elements and that $p$ is a prime integer. Let $a \in G$ be any element, not the identity. Then $G$ is the cyclic group $\{1, a, \dots , a^{p-1}\}$ generated by $a$.
 		\end{corollary}
 		\begin{proof}
 			Since $a \neq 1$ by selection, it has order greater than 1. Since its order must divide the order of $G$, which is prime, its order is equal to the order of $G$, $p$. So, the order of the nonidentity element $a$ is the same as the order of $G$ and so it generates the whole group.
 		\end{proof}
+	
 		\begin{corollary}
 			All groups with some prime order, $p$, are in the same isomorphism class.
 		\end{corollary}
 		\begin{proof}
 			Any group with prime order $p$ is the cyclic group of order $p$ and by \autoref{prop:one_class_per_cyclic_order} there is only a single isomorphism class for each cyclic group of a given order.
 		\end{proof}
+	
+		\subsubsection{Example applications of Lagrange Theorem}
+		\begin{exe}
+			\ex{\textbf{Fermat's Little Theorem}: \textit{If $ p $ is a prime number then \[ a^p \equiv a \bmod p \text{ for all } a \in \Z{}. \]}
+				\note{
+					We need to be a little careful here. We might assume -- given that we are multiplying the integer $a$ in modulo $p$ that the group we want to use is ${ (\Z{}_p, \otimes) }$. However, \textit{this is not a group!} The reason is that $\Z{}_p$ contains 0 which has no inverse under the proposed law of composition, multiplication.\\
+					If, however, we take ${ \Z{*}_p }$ where the $*$ means ${ \Z{}/\{0\} }$ then we have a set of ${ p - 1 }$ distinct elements. Over this set we can form the multiplicative group ${ G = (\Z{*}_p, \otimes) }$ because the primality of $p$ means that every element has a multiplicative inverse.\\
+					Note that this is \textbf{not} a group of prime order. The primality of $p$ is essential to make sure that every element has a multiplicative inverse but, since we also have to eliminate 0 for the same reason, the order is ${ p - 1 }$ which is not necessarily prime.
+				}
+				\begin{proof}
+					Take the set ${ \Z{*}_p }$ under multiplication and some arbitrary ${ a \in \Z{} }$.
+					\begin{enumerate}[label=(\roman*)]
+						\item{Primality of $ p $ means that it is possible to find ${ 1 = na + mp }$ for ${ m,n \in \Z{} }$ (see \autoref{coro:greatest_common_divisor}). This implies that there exists a multiplicative inverse of every non-zero element in modulo $ p $. Specifically, $ n $ is the inverse of $ a $ because ${ na = (-m)p + 1 \iff na \bmod p \equiv 1}$.}
+						\item{Existence of the multiplicative inverses implies that we have a group ${ G = (\Z{*}_p, \otimes) }$.}
+						\item{$G$ being a group implies that, for any element ${ a \in G }$, by \autoref{coro:group_order_n_nth_power_of_elements_is_identity} we have ${ a^{p-1} = 1 }$.}
+						\item{In $G$, ${ a^{p-1} = 1 \iff a^p = a }$ which translates to ${ a^p \equiv a \bmod p }$.}
+					\end{enumerate}
+				\end{proof}
+			}
+		\end{exe}
 		
+		\subsubsection{Lagrange's Theorem and Homomorphisms}
 		The Counting Formula can also be applied when a homomorphism is given. Let $\phi : G \longmapsto G'$ be a homomorphism. As we saw in coset example \ref{ex_coset_with_kernel}, the left cosets of $ker \; \phi$ are the fibres of the map $\phi$. They are in bijective correspondence with the elements of the image. Therefore,
 		\[ [G : ker \; \phi] = \cardinality{im \; \phi}. \]
 		Which implies that,
