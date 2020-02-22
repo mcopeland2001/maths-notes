@@ -856,6 +856,43 @@
 			\item{If we have ${ K \suchthat f(a) < K < f(b) }$ with ${ K \neq 0 }$ we can consider ${ g(x) = f(x) - K }$ so that we have ${ g(a) < 0 < g(b) }$.}
 		\end{itemize}
 		So, the general problem posed in the Intermediate Value Theorem is reducible to the case we have proved.
+		
+		\bigskip
+		\begin{corollary}
+			\label{coro:continuous_func_mapping_interval_to_itself_has_invariant_point}
+			Suppose that the real function $f$ is continuous on the closed interval ${ [a,b] }$ and that $f$ maps ${ [a,b] }$ into ${ [a,b] }$. Then there is ${ c \in [a,b] }$ with ${ f(c) = c }$.
+		\end{corollary}
+		\begin{proof}
+			Let ${ h(x) = f(x) - x }$ so that ${ f(c) = c }$ if and only if ${ h(c) = 0 }$. Then also we have,
+			\[ a \leq f(x) \leq b \implies h(a) \geq 0,\; h(b) \leq 0. \]
+			But this means that, either one of $h(a)$ or $h(b)$ is equal to 0 or neither are. In the case that one of them is equal to 0 then we have found our $c$ such that ${ f(c) = c }$. Otherwise, if neither is equal to 0, then we must have ${ h(a) > 0 }$ and ${ h(b) < 0 }$. So, we may apply the Intermediate Value Theorem to conclude that there exists ${ c \in (a,b) }$ such that ${ h(c) = 0 }$ which is to say ${ f(c) = c }$.
+		\end{proof}
+
+		\bigskip
+		\subsubsection{Examples of reasoning with the Intermediate Value Theorem}
+		\begin{exe}
+			\ex{\textit{Suppose the real function $f$ is continuous, positive and unbounded on $\R{}$ and that ${ \text{inf}\,\setc{f(x)}{x \in \R{}} = 0 }$. Use the Intermediate Value Theorem to prove that the range of $f$ is ${ (0,\infty) }$. }\\\\
+				Let ${ y \in (0,1) }$. We show that there is some ${ c \in \R{} }$ such that ${ f(c) = y }$. This shows that the range is the whole of ${ (0,1) }$. (The fact that it is no larger follows from the given fact that $ f $ is positive.)\\
+				Now,  ${ \text{inf}\,f(\R{}) = \text{inf}\,\setc{f(x)}{x \in \R{}} = 0 }$, so, since ${ y > 0 }$, there must be some ${ y_1 \in f(\R{}) }$ with ${ y_1 < y }$. This means there is some ${ x_1 \in \R{} }$ such that ${ y_1 = f(x_1) < y }$.\\
+				Similarly, because $ f $ is unbounded, which means $ f(\R{}) $ is unbounded, there must be some ${ y_2 \in f(\R{}) }$ with ${ y_2 > y }$ and there will be some ${ x_2 \in \R{} }$ such that ${ y_2 = f(x_2) > y }$.\\
+				Then $ y $ lies between $ f(x_1) $ and $ f(x_2) $ and, since $ f $ is continuous, the Intermediate Value Theorem shows that there is some $ c $ between $ x_1 $ and $ x_2 $ with ${ f(c) = y }$.
+			}
+				\ex{\textit{Suppose the real function $g$ is continuous on $\R{}$ and that $g$ maps ${ [a,b] }$ into ${ [d,e] }$ and maps ${ [d,e] }$ into ${ [a,b] }$ where ${ a < b,\; d < e }$. By considering the function
+						\[ k(x) = g(g(x)), \]
+				prove that there are ${ p,q \in \R{} }$ such that
+					\[ g(p) = q,\; g(q) = p. \]
+				Hence show that there is ${ c \in \R{} }$ such that ${ g(c) = c }$.
+				}\\\\
+				The function $k$, being a composition of continuous functions, is continuous and also maps ${ [a,b] }$ into ${ [a,b] }$ so that we can use \autoref{coro:continuous_func_mapping_interval_to_itself_has_invariant_point} to deduce that there exists ${ c \in [a,b] }$ such that ${ k(c) = c }$. If we let ${ p = c }$ and ${ q = g(p) }$ then we have,
+				\[ k(p) = p \iff g(g(p)) = p \iff g(q) = p. \]
+				Now we can employ the same trick again by defining
+				\[ h(x) = g(x) - x \]
+				and then we have
+				\[ h(p) = g(p) - p = q - p, \; h(q) = g(q) - q = p - q \]
+				so that ${ h(p) = -h(q) }$ and, therefore, ${ h(x) }$ changes sign between $p$ and $q$. (Note that we don't know which of $p$ and $q$ is the lower end and upper end of the interval but we know that between the two values the function changes sign.) Then, applying the Intermediate Value Theorem we have some $c$ between $p$ and $q$ such that,
+				\[ h(c) = 0 \iff g(c) - c = 0 \iff g(c) = c. \]
+			}
+		\end{exe}
 	}
 
 	\pagebreak
