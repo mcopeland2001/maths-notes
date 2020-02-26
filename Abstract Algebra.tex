@@ -7,6 +7,8 @@
 
 
 \begin{document}
+
+\chapter{Algebra}
 \searchableSubsection{\chapterTitle{Algebra}}{abstract algebra, complex numbers}{\bigskip\bigskip}
 
 	\searchableSubsection{\sectionTitle{Abstract Algebra}}{abstract algebra}{\bigskip}
@@ -77,8 +79,74 @@
 		\item{ ($\R{} \setminus \{0\}, \times)$ } is a group whereas ($\R{}, \times)$ is not a group because $0$ has no multiplicative inverse.
 		\item{ ($\R{}, +)$ } is a group.
 		\item{ The set of $n \times n$ invertible matrices is called the General Linear group and denoted $GL_n$  }
+		\item{Let $G$ denote the set of matrices
+			\[ G = \left\{
+				\begin{pmatrix}
+					a & b \\
+					0 & 1
+				\end{pmatrix}
+			\; \middle\vert \; a,b \in \Z{}_7, \; a \neq 0 \right\}. \]
+			Then $G$ is a group with respect to matrix multiplication (where all additions and multiplications are carried out in $\Z{}_7$). This is because closure can be shown by,
+			\[
+				\begin{pmatrix}
+				a & b \\
+				0 & 1
+				\end{pmatrix}
+				\begin{pmatrix}
+				a' & b' \\
+				0 & 1
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				aa' & ab' + b \\
+				0 & 1
+				\end{pmatrix} \in G
+			\]
+			where the result is in $G$ because ${ aa' \neq 0 }$. Next we need to show that we have inverses. So we need to show existence in $G$ of matrices such that,
+			\[
+				\begin{pmatrix}
+				a & b \\
+				0 & 1
+				\end{pmatrix}
+				\begin{pmatrix}
+				a' & b' \\
+				0 & 1
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				1 & 0 \\
+				0 & 1
+				\end{pmatrix} 
+				\iff
+				\begin{pmatrix}
+				aa' & ab' + b \\
+				0 & 1
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				1 & 0 \\
+				0 & 1
+				\end{pmatrix}
+			\]
+			which implies that ${ aa' = 1 }$ and ${ ab' + b = 0 }$. Because we are in $\Z{}_7$ every non-zero element has a multiplicative inverse so we have,
+			\[ a' = \inv{a} \eqand b' = -\inv{a}b \]
+			so that,
+			\[
+				\inv{\begin{pmatrix}
+				a & b \\
+				0 & 1
+				\end{pmatrix}}
+				=
+				\begin{pmatrix}
+				\inv{a} & -\inv{a}b \\
+				0 & 1
+				\end{pmatrix}.
+			\]
+		}
 		\end{itemize}
-			\subsubsection{Permutations and Symmetric Groups}\bigskip
+		
+		\bigskip
+		\subsubsection{Permutations and Symmetric Groups}\bigskip
 		\boxeddefinition{
 			A \textbf{permutation} is a bijection from a set to itself. Since permutations are bijective, they are invertible and since they are functions, function composition defines an associative law of composition over them. As a result, they form a group. 
 		}
@@ -125,8 +193,7 @@
 			\inv{x}y^3x^2y &= x^2yx^2y = x^2(yx)xy = x^2(x^2y)xy = x^4(yx)y\\
 						&= x^4(x^2y)y = x^6y^2 = (x^3)^2y^2 = 1 \cdot 1 = 1
 		\end{align*}
-		Rules like these that determine a complete multiplication table are called \textit{defining relations} for the group.
-	}
+		Rules like these that determine a complete multiplication table are called \textit{defining relations} for the group.	}
 	
 	
 	\pagebreak
