@@ -104,9 +104,14 @@
 			\end{itemize}
 		}
 		
-
+		\pagebreak
 		\searchableSubsection{Divisibility and Primes}{number theory}{\bigskip
 			\subsubsection{Greatest Common Divisor \tiny{(also called Highest Common Factor)}}
+			\boxeddefinition{
+				The \textbf{Greatest Common Divisor (gcd)} of two integers -- say $a$ and $b$ -- is an integer $d$ that satisfies,
+				\[ d = z_1a + z_2b \]
+				for some ${ z_1,z_2 \in \Z{}. }$ This means that, whenever we are adding or subtracting multiples of the two numbers $a$ and $b$, the result will always be a multiple of $d$ and, therefore also, $d$ is the smallest such result obtainable.
+			}
 			The greatest common divisor of 16 and 6 can be visualized as follows:
 			\begin{align*}			
 			\vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$16 = 6 \times 2 + 4$}\\			
@@ -119,9 +124,13 @@
 				&\text{if }\; b == 0\; \text{ then}\\
 				&\;\;\;\;\text{return } \; a\\
 				&\text{else}\\
-				&\;\;\;\;\text{return } \;\textbf{gcd}(b, b \bmod a)\\
+				&\;\;\;\;\text{return } \;\textbf{gcd}(b, a \bmod b)\\
 				&\text{end if}					
 			\end{align*}
+			
+			\note{The greatest common divisor of $a$ and $b$ is the smallest difference of multiples of $a$ and $b$. This is because -- for any difference, $d$, of multiples of $a$ and $b$ -- we have,
+			\[ d = ma + nb \text{ for } m,n \in \Z{} \]
+			and, if ${ g = gcd(a,b) }$ then, by definition, $g$ divides both $a$ and $b$ and, therefore, also divides $d$. So any such sum (or difference) of integer multiples of $a$ and $b$ is a multiple of $g$.}
 			
 			\labeledProposition{For non-zero integers $a$ and $b$, if $a = bq + r$ where $q,r \in \Z{}$, then $gcd(a, b) = gcd(b, r) = gcd(b, a \bmod b)$.}{gcd_remainder}
 				\begin{proof}
