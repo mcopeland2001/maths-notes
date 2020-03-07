@@ -103,9 +103,48 @@
 			\item{$m + n$ even $ \implies m,n$ even \wrong} 
 			\end{itemize}
 		}
+	
+		\pagebreak
+		\searchableSubsection{The Fundamental Theorem of Arithmetic}{number theory}{\bigskip
+			\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
+			More formally, an integer, $p$, is prime if it is greater than 1 and,
+			\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
+			
+			\paragraph{Primality $ \implies $ Unique Prime Factorization:}
+			\begin{quote}
+				``Any number either is prime or is measured by some prime number.''\\
+				\textit{Euclid, Elements Book VII, Proposition 32}
+			\end{quote}
+			So, if an integer $n$ is not prime then,
+			\begin{align*} 
+			\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
+			\iff n = ab
+			\end{align*}
+			Then, for $a$ (the same applies to $b$),
+			\begin{align*}
+			\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
+			\iff n = cd
+			\end{align*}
+			We can continue to descend like this until we must eventually encounter one or more primes.
+			Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
+			\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
+			But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
+			
+			\paragraph{Proof of existence}
+			\begin{proof}
+				It must be shown that every integer greater than $ 1 $ is either prime or a product of primes. First, $ 2 $ is prime. Then, by strong induction, assume this is true for all numbers greater than $ 1 $ and less than $ n $. 
+				If $ n $ is prime, there is nothing more to prove. 
+				Otherwise, there are integers $ a, b $ where $ n = ab $, and $ 1 < a \leq b < n $. By the induction hypothesis, $ a = p_1p_2...p_j \text{ and } b = q_1q_2...q_k $ are products of primes. But then $ n = ab = p_1p_2...p_jq_1q_2...q_k $ is a product of primes.
+			\end{proof}
+			
+			\paragraph{Proof of uniqueness}
+			\begin{proof}
+				Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
+			\end{proof}
+		}
 		
 		\pagebreak
-		\searchableSubsection{Divisibility and Primes}{number theory}{\bigskip
+		\searchableSubsection{Modular Arithmetic}{number theory}{\bigskip
 			\subsubsection{Greatest Common Divisor \tiny{(also called Highest Common Factor)}}
 			\boxeddefinition{
 				The \textbf{Greatest Common Divisor (gcd)} of two integers -- say $a$ and $b$ -- is an integer $d$ that satisfies,
@@ -139,52 +178,37 @@
 			
 			\labeledProposition{If $d = gcd(a, b)$ then there is no integer linear combination of $a$ and $b$ that equals any positive value less than $d$.}{gcd_min_linear_combination}
 			\begin{proof}
-				Assume $d = gcd(a,b)$ and that $\exists\, e < d \in \N{}, m,n \in \Z{} \suchthat e = am + bn$. Then,
+				Assume $d = gcd(a,b)$ and that ${ \exists\, e < d \in \N{}, m,n \in \Z{} \suchthat e = am + bn }$. Then,
 				\begin{align*}
 					&&e = am + bn &= dz_1m + dz_2n = d(z_1m + z_2n) \hspace{10pt} \text{ for } z_1, z_2 \in \Z{} \\
 					&\iff &z_1m + z_2n &= \frac{e}{d} \not\in \Z{}
 				\end{align*}
-				But this is impossible as, by the definition of the integers, $z_1m + z_2n \in \Z{}$.
-			\end{proof}
-		}
-	
-		\searchableSubsection{The Fundamental Theorem of Arithmetic}{number theory}{\bigskip
-			\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
-			More formally, an integer, $p$, is prime if it is greater than 1 and,
-			\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
-			
-			\paragraph{Primality $ \implies $ Unique Prime Factorization:}
-			\begin{quote}
-			``Any number either is prime or is measured by some prime number.''\\
-			\textit{Euclid, Elements Book VII, Proposition 32}
-			\end{quote}
-			So, if an integer $n$ is not prime then,
-			\begin{align*} 
-			\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
-			\iff n = ab
-			\end{align*}
-			Then, for $a$ (the same applies to $b$),
-			\begin{align*}
-			\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
-			\iff n = cd
-			\end{align*}
-			We can continue to descend like this until we must eventually encounter one or more primes.
-			Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
-			\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
-			But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
-			
-			\paragraph{Proof of existence}
-			\begin{proof}
-			It must be shown that every integer greater than $ 1 $ is either prime or a product of primes. First, $ 2 $ is prime. Then, by strong induction, assume this is true for all numbers greater than $ 1 $ and less than $ n $. 
-			If $ n $ is prime, there is nothing more to prove. 
-			Otherwise, there are integers $ a, b $ where $ n = ab $, and $ 1 < a \leq b < n $. By the induction hypothesis, $ a = p_1p_2...p_j \text{ and } b = q_1q_2...q_k $ are products of primes. But then $ n = ab = p_1p_2...p_jq_1q_2...q_k $ is a product of primes.
+				where we know that ${ \frac{e}{d} \not\in \Z{} }$ because ${ e < d }$. But the field properties of the integers ensures that the integers are closed under integer linear combinations so that $z_1m + z_2n \in \Z{}$. Therefore such an $e$ does not exist.
 			\end{proof}
 		
-			\paragraph{Proof of uniqueness}
+			\begin{corollary}
+				\label{coro:integer_linear_combination_is_multiple_of_gcd}
+				If $d = gcd(a, b)$ then every integer linear combination of $a$ and $b$ is a multiple of $d$.
+			\end{corollary}
 			\begin{proof}
-			Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
+				\autoref{prop:gcd_min_linear_combination} showed that there is no integer linear combination of $a$ and $b$ less than $d$. Suppose that we have,
+				\[ e > d  \in \N{}, m,n \in \Z{} \suchthat e = am + bn \]
+				then, because $d$ divides both $a$ and $b$,
+				\[ e = adz_1 + bdz_2 = d(az_1 + bz_2), \hspace{10pt} z_1,z_2 \in \Z{}. \]
+				Now the closure of the integer field means that ${ z_3 = az_1 + bz_2 \in \Z{} }$ so that,
+				\[ e = z_3d \implies d \divides e. \]
+			\end{proof}
+		
+			\labeledProposition{A number ${ x \in \Z{}_m }$ has a multiplicative inverse if and only if ${ gcd(x,m) = 1 }$.}{modular_inverse_iff_gcd_is_1}
+			\begin{proof}
+				Assume ${ \inv{x} }$ is a multiplicative inverse for ${ x \in \Z{}_m }$. Then,
+				\[ \inv{x}x = 1 \iff \inv{x}x \congruent{1}{m} \iff \inv{x}{x} = am + 1, \hspace{10pt} a \in \Z{}. \]
+				This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
+				Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
 			\end{proof}
 		}
+		
+		
 	
 		\searchableSubsection{Some Proofs on the Integers}{number theory}{\bigskip
 			\labeledProposition{For any integer $m$, $\sqrt{m}$ is rational iff $m$ is a square, i.e. $m=a^2$ for some integer $a$.}{rationality_of_sqrt_integers}
