@@ -57,10 +57,15 @@
 			{#3}
 	}
 }
-\newcommand{\searchableSection}[3]{
+\newcommand{\searchableSection}[2]{
 	\searchResult{#2}{
-		\section*{#1}\tags{#2}
-			{#3}
+		\section{#1}\tags{#2}\\
+	}
+}
+
+\newcommand{\searchableChapter}[2]{
+	\searchResult{#2}{
+		\chapter{#1}\tags{#2}
 	}
 }
 
