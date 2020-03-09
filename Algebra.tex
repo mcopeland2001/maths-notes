@@ -848,173 +848,6 @@
 			which has been proven to be a subgroup in \autoref{prop:cyclic_powers_add_subgroup_integers}.
 			\label{ex_kernel_cyclic_powers}
 		\end{exe}
-	
-		\bigskip
-		\subsubsection{Normal Subgroups}
-		\boxeddefinition{A subgroup $N$ of a group $G$ is called a \textbf{normal subgroup} if it has the property that,
-			\[ \forall \, a \in N, b \in G, \; ba\inv{b} \in N  \]
-			which is to say, that the conjugate by any element of $G$ of any element in $N$ is also in $N$.
-		}
-		\subsubsection{Examples of Normal Subgroups}
-		\begin{exe}
-			\ex{The kernel of a homomorphism is a normal subgroup because,
-				\begin{align*}
-					&& a \in ker \; \phi \iff \phi(a) &= 1 \\
-					&\implies & \phi(ba\inv{a}) &= \phi(a) \cdot 1 \cdot \phi(\inv{a}) \\
-					&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
-					&\iff & \phi(ba\inv{a}) &= 1.
-				\end{align*}
-				So,
-				\begin{xlist}
-					\ex{$SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$;}
-					\ex{$A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.}
-				\end{xlist}
-				}\label{ex_kernel_homomorphism}
-			\ex{Any subgroup of an abelian group is normal because when the composition law is commutative, as was mentioned in the section on conjugation,
-				 \[ ba = ab \iff ba\inv{b} = ab\inv{b} = a \]
-				 so that conjugation becomes the identity map and so, trivially, all conjugates of elements in a subgroup are also in the subgroup.
-			 }\label{ex_abelian_subgroup}	
-		\end{exe}
-		Subgroups of non-abelian groups, however, need not be normal. For example,
-		\begin{exe}
-			\ex{Group $T$ of invertible upper triangular matrices is not a normal subgroup of $GL_2(\R{})$. To show this note,
-				\[
-					A = \begin{bmatrix}
-					1 & 1 \\
-					0 & 1
-					\end{bmatrix},
-					B = \begin{bmatrix}
-					0 & 1 \\
-					1 & 0
-					\end{bmatrix},
-					BA\inv{B} = \begin{bmatrix}
-					1 & 0 \\
-					1 & 1
-					\end{bmatrix}
-				\]
-				where $A \in T, B \in GL_2(\R{})$ but $BA\inv{B} \not\in T$.
-			}
-		\end{exe}
-	
-		\bigskip
-		\subsubsection{The Center of a Group}
-		\boxeddefinition{The \textbf{center} of a group $G$ is the set of elements that commute with every element of $G$,
-			\[ Z = \setc{z \in G}{zx = xz, \; \forall x \in G}. \]
-			We can also define,
-			\[ C(x) = \setc{g \in G}{gx = xg} \]
-			as the set of elements in $G$ that commute with a single fixed element $x$.
-		}
-	
-		\notation{The \textbf{center} of a group $G$ may be denoted by $Z$ or by $Z(G)$.}
-		
-		The center of a group, $Z$, is a subgroup of $G$. This can be easily seen as, first of all, $Z$ is non-empty because the identity is in the center of any group. Then, also, the center $Z$ is closed under the group operation,
-		\[ \forall a,b \in Z, x \in G \logicsep (ab)x = axb = x(ab) \]
-		and it contains the inverses,
-		\[ \forall a \in Z, x \in G \logicsep ax = xa \iff \inv{a}ax = x = \inv{a}xa \iff x\inv{a} = \inv{a}x. \]
-		
-		\subsubsection{Examples of group centers}
-		\begin{exe}
-			\ex{Let ${ G = GL(2, \R{}) }$ be the group of invertible 2x2 matrices with real coefficients and take two elements in $G$,
-				\[ 
-				M = \begin{pmatrix}
-				2 & 0 \\
-				0 & 1
-				\end{pmatrix},\hspace{10pt}
-				N = \begin{pmatrix}
-				1 & 1 \\
-				0 & 1
-				\end{pmatrix}.
-				\]
-				Then we can identify the center of $M$ by observing that an arbitrary matrix in $C(M)$ satisfies,
-				\[
-				  \begin{pmatrix}
-				  a & b \\
-				  c & d
-				  \end{pmatrix}
-				  \begin{pmatrix}
-				  2 & 0 \\
-				  0 & 1
-				  \end{pmatrix}
-				  =
-				  \begin{pmatrix}
-				  2a & b \\
-				  2c & d
-				  \end{pmatrix}
-				  =
-				  \begin{pmatrix}
-				  2 & 0 \\
-				  0 & 1
-				  \end{pmatrix}
-				  \begin{pmatrix}
-				  a & b \\
-				  c & d
-				  \end{pmatrix}
-				  =
-				  \begin{pmatrix}
-				  2a & 2b \\
-				  c & d
-				  \end{pmatrix}
-				\]
-				which gives ${ b = 2b,\; c = 2c }$ implying that $b$ and $c$ are 0. So,
-				\[ C(M) = \bigsetc{
-					\begin{pmatrix}
-					a & 0 \\
-					0 & d
-					\end{pmatrix}
-				}{a,d \in \R{}\setminus\{0\}}.
-				\]
-				While matrices in the center of $N$ satisfy,
-				\[
-				\begin{pmatrix}
-				a & b \\
-				c & d
-				\end{pmatrix}
-				\begin{pmatrix}
-				1 & 1 \\
-				0 & 1
-				\end{pmatrix}
-				=
-				\begin{pmatrix}
-				a & a+b \\
-				c & c+d
-				\end{pmatrix}
-				=
-				\begin{pmatrix}
-				1 & 1 \\
-				0 & 1
-				\end{pmatrix}
-				\begin{pmatrix}
-				a & b \\
-				c & d
-				\end{pmatrix}
-				=
-				\begin{pmatrix}
-				a+c & b+d \\
-				c & d
-				\end{pmatrix}
-				\]
-				which gives ${ a = a+c,\; c+d = d,\; a+b = b+d }$ implying that ${ c = 0 }$ and ${ a = d }$. Therefore,
-				\[
-				   C(N) = \bigsetc{
-				   	\begin{pmatrix}
-				   	a & b \\
-				   	0 & a
-				   	\end{pmatrix}
-				   }{a,b \in \R{},\, a \neq 0}.
-				\]
-				\note{Note that in both cases some coefficients were required to be non-zero because to be members of the general linear group they must be invertible and so their determinant must be non-zero.}
-			}
-			\ex{The center of the general linear group $GL_n(\R{})$ is the group of \textit{scalar matrices} of the form $cI$ for $c \in \R{}$, i.e. matrices of the form,
-				\[
-				\begin{bmatrix}
-				c & 0 \\
-				0 & c
-				\end{bmatrix}
-				\]
-				in $GL_2(\R{})$.
-				Note that, for \textit{diagonal} matrices whose elements on the main diagonal are all non-zero but not-necessarily equal as in \textit{scalar} matrices, multiplication is commutative with other diagonal matrices but not generally so with other matrices in the general linear group.
-			}
-		\end{exe}
 	}
 
 
@@ -1196,11 +1029,29 @@
 		\[ [G : ker \; \phi] = \cardinality{im \; \phi}. \]
 		Which implies that,
 		\begin{corollary}
+			\label{coro:order_of_image_divides_both_order_of_domain_and_codomain}
 			If $\phi : G \longmapsto G'$ is a homomorphism of finite groups then,
 			\[ \cardinality{G} = \cardinality{ker \; \phi} \cdot \cardinality{im \; \phi}. \]
 			As a result, $\cardinality{ker \; \phi}$ divides $\cardinality{G}$, and $\cardinality{im \; \phi}$ divides both $\cardinality{G}$ and $\cardinality{G'}$.
 		\end{corollary}
 	
+		\bigskip
+		\subsubsection{Restriction of a Homomorphism to a Subgroup}
+		A useful way of understanding the structure of a complicated group is to understand its subgroups and then derive an understanding of the parent group from knowledge about the subgroups it contains. This frequently involves the application of Lagrange's Theorem. \textit{Restriction of a Homomorphism to a subgroup} refers to studying the behaviour of a homomorphism on subgroups of the parent group.\\
+		Suppose that ${ \phi: G \longmapsto G' }$ is a homomorphism and that $H$ is a subgroup of $G$. Then we may \textit{restrict $\phi$ to $H$} to obtain a homomorphism whose domain is a subset of the original,
+		\[ \phi \vert_H : H \longmapsto G'. \]
+		This \textit{restriction} is a homomorphism because $\phi$ is a homomorphism and the restriction domain is a group. Clearly, the kernel of the restricted homomorphism is the intersection of the domain $H$ with ${ ker\;\phi }$.
+		
+		\smallskip
+		\subsubsection{Examples of using Lagrange's Theorem with a homomorphism restricted to a subgroup}
+		\begin{exe}
+			\item{Referring again to the sign of a permutation (\ref{ex_sign_permutation}) ${ S_n \longmapsto \{-1,1\} }$: the order of the codomain of this homomorphism is clearly 2. Suppose we form the restriction of this homomorphism to a subgroup $H$ of $S_n$. Then, denoting the image by $\phi\vert_H(H)$, by \autoref{coro:order_of_image_divides_both_order_of_domain_and_codomain} we have that ${ \cardinality{\phi\vert_H(H)} }$ divides both 2 and ${ \cardinality{H} }$.\\
+			So, if the subgroup $H$ has odd order then ${ \cardinality{\phi\vert_H(H)} = 1 }$ and -- since $\phi\vert_H(H)$ must be a group because the group structure is preserved across the homomorphism --  ${ \phi\vert_H(H) = \{1\} }$. This means that $H$ is in the kernel of the sign map and that the subgroup of permutations in $S_n$ represented by $H$ consists of only even permutations.\\
+			Therefore, every permutation whose order in $S_n$ is odd is an even permutation (since the cyclic group that it generates has odd order). However, we can not make any conclusions about permutations of even order; they may be even or odd permutations.
+			}
+		\end{exe}
+	
+		\bigskip
 		\subsubsection{Right Cosets}
 		Right cosets also exist and are defined as,
 		 \[ Ha = \setc{g \in G}{g = ha, \; h \in H} \]
@@ -1209,15 +1060,260 @@
 		Right cosets are not necessarily the same as left cosets. For instance, continuing the example in \ref{ex_S_3}, the right cosets of the subgroup $\{1, xy\}$ of $S_3$ are,
 		\[ \{1, xy\} = H1 = Hxy, \; \{x, y\} = Hx = H, \; \{x^2, x^2y\} = Hx^2 = Hx^2y. \]
 		Note that this generates a different partition of $G$ then was generated by the left cosets.
-		
+	}
+
+
+	\bigskip\bigskip
+	\searchableSubsection{Normal Subgroups and Centers}{abstract algebra}{
+		\subsubsection{Normal Subgroups}
+		\boxeddefinition{A subgroup $N$ of a group $G$ is called a \textbf{normal subgroup} if it has the property that,
+			\[ \forall \, a \in N, b \in G, \; ba\inv{b} \in N  \]
+			which is to say, that the conjugate by any element of $G$ of any element in $N$ is also in $N$.
+		}
+	
 		\labeledProposition{A subset $H$ of a group $G$ is normal if and only if every left coset is also a right coset. If $H$ is normal then,
-			 \[ \forall a \in G, \, aH = Ha. \]}{normal_subgroups_equal_cosets}
+			\[ \forall a \in G, \, aH = Ha. \]}{normal_subgroups_equal_cosets}
 		\begin{proof}
 			Suppose that $H$ is normal. For any $h \in H$ and any $a \in G$,
 			\[ ah = (ah\inv{a})a. \]
 			Since $H$ is normal, the conjugate by $h$ of $a$ is also in $H$, that's to say, $ ah\inv{a} \in H $ which implies that $ (ah\inv{a})a \in Ha $. Therefore, any arbitrary member of $aH$ is also a member of $Ha$. Clearly, the same proof also works in the other direction so that any member of $Ha$ is also a member of $aH$ and the two cosets are equal. So, we have shown that ($H$ is normal) $\implies$ (left and right cosets of $H$ are equal). \\
 			Now we need to show that (left and right cosets of $H$ are equal) $\implies$ ($H$ is normal). Firstly, clearly the above logic doesn't apply if $H$ is not normal; there will be at least one element whose conjugate is not in $H$ so $aH \neq Ha$. However, it could still be the case that each left coset is also a right coset if, for every $a$ in $G$, there is some $b$ in $G$ such that $aH = Hb$. However, this is not possible because $aH$ and $Ha$ both contain $a$ which means that in a given partition of $G$ they must be the same partition. So $aH \neq Ha$ implies that the partitions are different; $Ha$ creates different equivalence classes. Therefore  (left and right cosets of $H$ are equal) $\implies$ ($H$ is normal).
 		\end{proof} 
+	
+		\medskip
+		\note{This is really the point of normal subgroups: That their cosets contain multiplication from both sides. As a result, when the cosets themselves are used as members of groups (see: Quotient Groups), the resulting groups are Abelian.}
+		\TODO{link to Quotient Groups}
+		
+		
+		\bigskip
+		\subsubsection{Examples of Normal Subgroups} \TODO{find an example of a non-Abelian normal subgroup}
+		\begin{exe}
+			\ex{The kernel of a homomorphism is a normal subgroup because,
+				\begin{align*}
+				&& a \in ker \; \phi \iff \phi(a) &= 1 \\
+				&\implies & \phi(ba\inv{a}) &= \phi(a) \cdot 1 \cdot \phi(\inv{a}) \\
+				&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
+				&\iff & \phi(ba\inv{a}) &= 1.
+				\end{align*}
+				So,
+				\begin{xlist}
+					\ex{$SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$;}
+					\ex{$A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.}
+				\end{xlist}
+			}\label{ex_kernel_homomorphism}
+			\ex{Any subgroup of an abelian group is normal because when the composition law is commutative, as was mentioned in the section on conjugation,
+				\[ ba = ab \iff ba\inv{b} = ab\inv{b} = a \]
+				so that conjugation becomes the identity map and so, trivially, all conjugates of elements in a subgroup are also in the subgroup.
+			}\label{ex_abelian_subgroup}	
+		\end{exe}
+		Subgroups of non-abelian groups, however, need not be normal. For example,
+		\begin{exe}
+			\ex{Group $T$ of invertible upper triangular matrices is not a normal subgroup of $GL_2(\R{})$. To show this note,
+				\[
+				A = \begin{bmatrix}
+				1 & 1 \\
+				0 & 1
+				\end{bmatrix},
+				B = \begin{bmatrix}
+				0 & 1 \\
+				1 & 0
+				\end{bmatrix},
+				BA\inv{B} = \begin{bmatrix}
+				1 & 0 \\
+				1 & 1
+				\end{bmatrix}
+				\]
+				where $A \in T, B \in GL_2(\R{})$ but $BA\inv{B} \not\in T$.
+			}
+		\end{exe}
+	
+		\bigskip
+		\labeledProposition{Let ${ \phi : G \longmapsto G' }$ be a homomorphism and let $H'$ be a subgroup of $G'$. Denote the inverse image ${ \inv{\phi}(H') = \setc{x \in G}{\phi(x) \in H'} }$ by $\tilde{H}$. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item{$\tilde{H}$ is a subgroup of $G$.}
+				\item{If $H'$ is a normal subgroup of $G'$ then $\tilde{H}$ is a normal subgroup of $G$.}
+				\item{$\tilde{H}$ contains $ker\;\phi$.}
+				\item{The restriction of $phi$ to $\tilde{H}$ defines a homomorphism ${ \tilde{H} \longmapsto H' }$ whose kernel is $ker\;\phi$.}
+			\end{enumerate}
+		}{homomorphism_inverse_image_properties}
+		\begin{proof}
+			Proofs are as follows:
+			\begin{enumerate}[label=(\roman*)]
+				\item{$\tilde{H}$ is a subgroup of $G$ because $\phi$ is a homomorphism and its image, $H'$, is a group (which is required for a homomorphism).}
+				\item{If $H'$ is a normal subgroup of $G'$ then $\tilde{H}$ is a normal subgroup of $G$ because for every element in $\tilde{H}$ the mapped element is in $H'$. Then, since $H'$ is normal, the conjugates of the mapped element are also in $H'$ which means that their inverse images are in $\tilde{H}$. Since the map is homomorphic, the inverse images of the conjugates in $G'$ are the respective conjugates in $G$.}
+				\item{$\tilde{H}$ contains $ker\;\phi$ because it contains every element in $G$ that maps to an element in $H'$ and, since $H'$ is a group, it includes the identity of $G'$. Therefore $\tilde{H}$ contains every element that maps to the identity of $G'$ which is $ker\;\phi$.}
+				\item{The restriction of $phi$ to $\tilde{H}$ is clearly a homomorphism and, since it contains $ker\;\phi$, its kernel is equal to the kernel of $\phi$.}
+			\end{enumerate}
+		\end{proof}
+		
+		
+		\bigskip\bigskip
+		\subsubsection{The Center of a Group}
+		\boxeddefinition{The \textbf{center} of a group $G$ is the set of elements that commute with every element of $G$,
+			\[ Z = \setc{z \in G}{zx = xz, \; \forall x \in G}. \]
+			We can also define,
+			\[ C(x) = \setc{g \in G}{gx = xg} \]
+			as the set of elements in $G$ that commute with a single fixed element $x$.
+		}
+		
+		\notation{The \textbf{center} of a group $G$ may be denoted by $Z$ or by $Z(G)$.}
+		
+		The center of a group, $Z$, is a subgroup of $G$. This can be easily seen as, first of all, $Z$ is non-empty because the identity is in the center of any group. Then, also, the center $Z$ is closed under the group operation,
+		\[ \forall a,b \in Z, x \in G \logicsep (ab)x = axb = x(ab) \]
+		and it contains the inverses,
+		\[ \forall a \in Z, x \in G \logicsep ax = xa \iff \inv{a}ax = x = \inv{a}xa \iff x\inv{a} = \inv{a}x. \]
+		
+		\subsubsection{Examples of group centers}
+		\begin{exe}
+			\ex{Let ${ G = GL(2, \R{}) }$ be the group of invertible 2x2 matrices with real coefficients and take two elements in $G$,
+				\[ 
+				M = \begin{pmatrix}
+				2 & 0 \\
+				0 & 1
+				\end{pmatrix},\hspace{10pt}
+				N = \begin{pmatrix}
+				1 & 1 \\
+				0 & 1
+				\end{pmatrix}.
+				\]
+				Then we can identify the center of $M$ by observing that an arbitrary matrix in $C(M)$ satisfies,
+				\[
+				\begin{pmatrix}
+				a & b \\
+				c & d
+				\end{pmatrix}
+				\begin{pmatrix}
+				2 & 0 \\
+				0 & 1
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				2a & b \\
+				2c & d
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				2 & 0 \\
+				0 & 1
+				\end{pmatrix}
+				\begin{pmatrix}
+				a & b \\
+				c & d
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				2a & 2b \\
+				c & d
+				\end{pmatrix}
+				\]
+				which gives ${ b = 2b,\; c = 2c }$ implying that $b$ and $c$ are 0. So,
+				\[ C(M) = \bigsetc{
+					\begin{pmatrix}
+					a & 0 \\
+					0 & d
+					\end{pmatrix}
+				}{a,d \in \R{}\setminus\{0\}}.
+				\]
+				While matrices in the center of $N$ satisfy,
+				\[
+				\begin{pmatrix}
+				a & b \\
+				c & d
+				\end{pmatrix}
+				\begin{pmatrix}
+				1 & 1 \\
+				0 & 1
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				a & a+b \\
+				c & c+d
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				1 & 1 \\
+				0 & 1
+				\end{pmatrix}
+				\begin{pmatrix}
+				a & b \\
+				c & d
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				a+c & b+d \\
+				c & d
+				\end{pmatrix}
+				\]
+				which gives ${ a = a+c,\; c+d = d,\; a+b = b+d }$ implying that ${ c = 0 }$ and ${ a = d }$. Therefore,
+				\[
+				C(N) = \bigsetc{
+					\begin{pmatrix}
+					a & b \\
+					0 & a
+					\end{pmatrix}
+				}{a,b \in \R{},\, a \neq 0}.
+				\]
+				\note{Note that in both cases some coefficients were required to be non-zero because to be members of the general linear group they must be invertible and so their determinant must be non-zero.}
+			}
+			\ex{The center of the general linear group $GL_n(\R{})$ is the group of \textit{scalar matrices} of the form $cI$ for $c \in \R{}$, i.e. matrices of the form,
+				\[
+				\begin{bmatrix}
+				c & 0 \\
+				0 & c
+				\end{bmatrix}
+				\]
+				in $GL_2(\R{})$.
+				Note that, for \textit{diagonal} matrices whose elements on the main diagonal are all non-zero but not-necessarily equal as in \textit{scalar} matrices, multiplication is commutative with other diagonal matrices but not generally so with other matrices in the general linear group.
+			}
+		\end{exe}
+	}
+
+
+	\bigskip\bigskip
+	\searchableSubsection{Modular Arithmetic}{abstract algebra, modular arithmetic}{
+		\TODO{Describe modular arithmetic in terms of cosets: Artin[79]}
+	}
+
+	
+	\pagebreak
+	\searchableSubsection{Product Groups and Quotient Groups}{abstract algebra}{
+		\subsubsection{Product Groups}
+		\boxeddefinition{Let ${ G,G' }$ be two groups. The \textbf{product group} is the set ${ G \times G' }$ with component-wise multiplication.}
+		
+		\notation{The \textbf{product group} of the two groups ${ G,G' }$ may be denoted by ${ G \times G' }$ or $GG'$.}
+		
+		So, if ${ a,b \in G }$ and ${ a', b' \in G' }$ then 
+		\begin{itemize}
+			\item{${ (a,a'), (b,b') \in G \times G' }$}
+			\item{${ (a,a')(b,b') = (ab, a'b') }$}
+			\item{the identity is ${ (1,1) }$ and ${ \inv{(a,a')} = (\inv{a}, \inv{a'}) }$.}
+		\end{itemize}
+	
+		\boxeddefinition{The \textbf{projections} of a product group ${ G \times G' }$ are the maps $p,p'$ such that,
+			\[ p(x,x') = x,\hspace{10pt} p'(x,x') = x'. \]
+		}		
+	
+		\bigskip
+		\labeledProposition{Let $r,s$ be coprime integers. A cyclic group of order $rs$ is isomorphic to the product of a cyclic group of order $r$ and a cyclic group of order $s$.}{group_factors_into_product_of_prime_ordered_groups}
+		\begin{proof}
+			Let ${ C = \{1,x,x^2,\dots,x^{rs-1}\},\; C_1 = \{1,y,y^2,\dots,y^{r-1}\},\; C_2 = \{1,z,z^2,\dots,z^{s-1}\} }$ and define the map ${ \phi: C \longmapsto C_1 \times C_2 }$ as,
+			\[ \phi(x^i) = (y^i, z^i). \]
+			Then $\phi$ is homomorphic because,
+			\[ \phi(x^ix^j) = \phi(x^{i+j}) = (y^{i+j}, z^{i+j}) = (y^i, z^i)(y^j, z^j). \]
+			And $\phi$ is injective because,
+			\[ \phi(x^i) = \phi(x^j) \iff (y^i, z^i) = (y^j, z^j) \iff (y^i = y^j) \wedge (z^i = z^j) \]
+			which requires that ${ \abs{i - j} }$ be a multiple of both $r$ and $s$. But $r$ and $s$ are coprime so their lowest common multiple is $rs$ which is the order of ${ x \in C }$ so we have,
+			\[ \phi(x^i) = \phi(x^j) \iff x^i = x^j. \]
+			Now, the order of the image of $\phi$ is the same as the order of $C$ and of ${ C_1 \times C_2 }$ and so it is a bijection and therefore isomorphic.
+		\end{proof}
+	
+		\note{Note that this is \textbf{only} the case for cyclic groups whose order is the product of two coprime numbers. For example, a cyclic group of order 4 is not isomorphic to a product of two cyclic groups of order 2 as every element in a product group ${ C_2 \times C_2 }$ has order 1 or 2. Whereas a cyclic group of order 4 has two elements of order 4 (the generating element and its inverse).
+		}
+	
+		\TODO{finish notes on Product Groups: Artin[78]}
+		
+		\subsubsection{Quotient Groups}
+		\TODO{Notes on Quotient Groups: Artin[81]}
 	}
 	
 	
