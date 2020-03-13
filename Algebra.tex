@@ -151,7 +151,8 @@
 		\boxeddefinition{
 			The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions. The name probably comes from the study of symmetries of geometric objects that were eventually realised to be equivalent to permutations of the vertices.
 		}
-		\notation{The symmetric group over the integers from 1 to n is denoted $S_n$.}\\
+		\notation{The symmetric group over the integers from 1 to n is denoted $S_n$. The symmetric group over a set $G$ may be denoted ${ Sym(G) }$.}\\
+		
 		\subparagraph{$\bm{S_2}$}
 		The symmetric group $S_2$ consists of the two elements $i$ and $\tau$ which are, respectively, the identity map and the transposition which interchanges 1 and 2. The group composition law is described by the fact that the identity map is the identity of the composition and by the relation $\tau\tau = \tau^2 = i$. Which results in the multiplication table:	
 		\[
@@ -769,16 +770,20 @@
 		This is an automorphism because it
 		\begin{itemize}
 			\item{is compatible with law of composition, 
-				\[ \phi(xy) = bxy\inv{b} = bx\inv{b}by\inv{b} = \phi(x)\phi(y) \]
+				\[ \phi(xy) = bxy\inv{b} = bx\inv{b}by\inv{b} = \phi(x)\phi(y). \]
 			}
 			\item{has an inverse so it is bijective, 
-				\[ (\inv{\phi} \circ \phi)(a) = \inv{\phi}(\phi(a)) = \inv{b}(ba\inv{b})b = (\inv{b}b)a(\inv{b}b) = a \]
+				\[ (\inv{\phi} \circ \phi)(a) = \inv{\phi}(\phi(a)) = \inv{b}(ba\inv{b})b = (\inv{b}b)a(\inv{b}b) = a. \]
 				Note that this is different from the inverse element of $a$ corresponding under the mapping $\phi$,
-				\[ \phi(a)\phi(\inv{a}) = ba\inv{b}b\inv{a}\inv{b} = ba(1)\inv{a}\inv{b} = b(1)\inv{b} = 1 \]
+				\[ \phi(a)\phi(\inv{a}) = ba\inv{b}b\inv{a}\inv{b} = ba(1)\inv{a}\inv{b} = b(1)\inv{b} = 1. \]
 			}
 		\end{itemize}
-		Another thing to note is that - in an abelian group where the composition law is commutative - conjugation becomes the identity map,
-		\[ ba = ab \iff ba\inv{b} = a \iff \phi(a) = a \]
+		A couple more important properties of the conjugate are as follows.
+		\begin{enumerate}[label=(\roman*)]
+			\item{In an abelian group where the composition law is commutative, conjugation becomes the identity map.
+				\[ ba = ab \iff ba\inv{b} = a \iff \phi(a) = a. \]}
+			\item{The inverse of the conjugate ${ ba\inv{b} = \inv{b}ab }$.}
+		\end{enumerate}
 	}
 
 	
@@ -831,11 +836,61 @@
 			\end{itemize}
 		\end{proof}
 	
+		\labeledProposition{If $\phi : G \longmapsto G'$ is a group homomorphism with kernel $N$ then, for $a,b \in G$,
+			\[\phi(a) = \phi(b) \iff \exists n \in N, \suchthat b = an  \]
+			or, equivalently, $\inv{a}b \in N$.
+		}{kernel_elements_relate_congruent_elements}
+		\begin{proof}
+			\begin{align*}
+			&& b &= an  \\
+			&\implies & \phi(b) &= \phi(an) \\
+			&\implies & \phi(b) &= \phi(a)\phi(n) &\sidecomment{by homomorphism property} \\
+			&\implies & \phi(b) &= \phi(a)1' &\sidecomment{n is in the kernel} \\
+			&\implies & \phi(b) &= \phi(a) \\
+			\end{align*}
+			\begin{align*}
+			&& \phi(b) &= \phi(a) \\
+			&\implies & \inv{\phi(a)}\phi(b) &= 1'  &\sidecomment{codomain is a group so has inverses} \\
+			&\implies & \phi(\inv{a})\phi(b) &= 1' &\sidecomment{by \autoref{prop:isomorphism_preserves_structure}} \\
+			&\implies & \phi(\inv{a}b) &= 1' &\sidecomment{by homomorphism property} \\
+			&\implies & \inv{a}b &= n \in N \\
+			&\implies & b &= an \\
+			\end{align*}
+		\end{proof}
+		
+		\labeledTheorem{A homomorphism is injective iff its kernel is the trivial subgroup ${ \{e\} }$.}{homomorphism_injective_iff_kernel_is_trivial}
+		\note{When asked to prove the proposition that a homomorphism is injective iff its kernel is the trivial subgroup ${ \{e\} }$, it's tempting to begin proving each direction of the bidirectional implication with a proof by contradiction (e.g. "Assuming there is a non-identity element in the kernel...") but the direct positive proof can be made very quick and simple with the above corollary.
+		}
+		\begin{proof}
+			Let ${ \phi: G \longmapsto G' }$ be a homomorphism.\\\\
+			Assume that $\phi$ is injective and ${ k \in ker\,\phi }$. Remembering that we always at least have ${ e_G \in ker\,\phi }$,
+			\[ \phi(k) = e_{G'} = \phi(e_G) \iff k = e_G \]
+			where the last implication is by the injectivity of $\phi$.\\\\
+			Now assume that ${ ker\,\phi = \{e_G\},\, a,b \in G }$. Then,
+			\begin{align*}
+			&& \phi(a) &= \phi(b) &  \\
+			&\iff & \phi(a)\inv{\phi(b)} &= e_{G'} & \\
+			&\iff & \phi(a)\phi(\inv{b}) &= \phi(a\inv{b}) = e_{G'} &\sidecomment{using homomorphism properties} \\
+			&\iff & a\inv{b} &\in ker\,\phi &\sidecomment{} \\
+			&\iff & a\inv{b} &= e_G &\sidecomment{by assumption ${ ker\,\phi = \{e_G\} }$} \\
+			&\iff & a &= b.  &\qedhere \\
+			\end{align*}		
+		\end{proof}
+		
+		\begin{corollary}
+			A homomorphism is an isomorhpism if its kernel contains only the identity and its image is the whole of the codomain (i.e. it's surjective). 
+		\end{corollary}
+	
+		\labeledTheorem{\textbf{Cayley's Theorem} states that: that every group $G$ is isomorphic to a subgroup of the symmetric group acting on $G$.}{cayleys_theorem}
+		\begin{proof}
+			\TODO{this proof from Abstract Maths 14.6}
+		\end{proof}
+	
 		\subsubsection{Examples of Kernels of Homomorphisms}
 		\begin{exe}
-			\ex The determinant function \ref{ex_determinant}, $ det : GL_n(\R{}) \longmapsto \R{\times} $ - has a kernel,
+			\ex The determinant function \ref{ex_determinant}, $ det : GL_n(\R{}) \longmapsto \R{\times} $, has a kernel,
 			\[ \setc{\text{real $n\times n$ matrices $A$}}{det \, A = 1}, \]
-			which is a subgroup of $GL_n(\R{})$ known as the \textit{special linear group} $SL_nn(\R{})$.
+			which is a subgroup of $GL_n(\R{})$ known as the \textit{special linear group} $SL_n(\R{})$.
 			\label{ex_special_lin_group}
 			\ex The sign of a permutation \ref{ex_sign_permutation} has a kernel that is the set of \textit{even} permutations,
 			\[ A_n = \{\text{even permutations}\}, \]
@@ -890,32 +945,6 @@
 				and the induced equivalence relation is $a \equiv b \iff \abs{a} = \abs{b}$. The fibres of this map are the concentric circles about 0. They are in bijective correspondence with elements of $im \; \phi$, the set of positive reals.
 			}
 		\end{exe}
-	
-		\labeledProposition{If $\phi : G \longmapsto G'$ is a group homomorphism with kernel $N$ then, for $a,b \in G$,
-			\[\phi(a) = \phi(b) \iff \exists n \in N, \suchthat b = an  \]
-			or, equivalently, $\inv{a}b \in N$.
-		}{kernel_elements_relate_congruent_elements}
-		\begin{proof}
-			\begin{align*}
-				&& b &= an  \\
-				&\implies & \phi(b) &= \phi(an) \\
-				&\implies & \phi(b) &= \phi(a)\phi(n) &\sidecomment{by homomorphism property} \\
-				&\implies & \phi(b) &= \phi(a)1' &\sidecomment{n is in the kernel} \\
-				&\implies & \phi(b) &= \phi(a) \\
-			\end{align*}
-			\begin{align*}
-				&& \phi(b) &= \phi(a) \\
-				&\implies & \inv{\phi(a)}\phi(b) &= 1'  &\sidecomment{codomain is a group so has inverses} \\
-				&\implies & \phi(\inv{a})\phi(b) &= 1' &\sidecomment{by \autoref{prop:isomorphism_preserves_structure}} \\
-				&\implies & \phi(\inv{a}b) &= 1' &\sidecomment{by homomorphism property} \\
-				&\implies & \inv{a}b &= n \in N \\
-				&\implies & b &= an \\
-			\end{align*}
-		\end{proof}
-	
-		\begin{corollary}
-			A group homomorphism is injective if and only if its kernel is the trivial subgroup $\{1\}$. So, a homomorphism is an isomorhpism if its kernel contains only the identity and its image is the whole of the codomain (i.e. it's surjective). 
-		\end{corollary}
 	}
 
 	
@@ -1081,23 +1110,29 @@
 		\end{proof} 
 	
 		\medskip
-		\note{This is really the point of normal subgroups: That their cosets contain multiplication from both sides. As a result, when the cosets themselves are used as members of groups (see: Quotient Groups), the resulting groups are Abelian.}
-		\TODO{link to Quotient Groups}
+		\note{This is really the point of normal subgroups: That their cosets contain multiplication from both sides. As a result, when the cosets themselves are used as members of groups (see: Quotient Groups \ref{subsubsection:Quotient Groups}), we can define a group composition operation between them such that ${ aHbH = abH }$ and the operation is well defined (i.e. equal arguments give equal results) because,
+			\[ aHbH = abHH = abH \eqand aH = a'H \implies abH = aHb = a'Hb = a'bH \]
+			where ${ aH = Ha }$ because $H$ is normal.
+		.}
 		
 		
 		\bigskip
-		\subsubsection{Examples of Normal Subgroups} \TODO{find an example of a non-Abelian normal subgroup}
+		\subsubsection{Examples of Normal Subgroups}
 		\begin{exe}
 			\ex{The kernel of a homomorphism is a normal subgroup because,
 				\begin{align*}
 				&& a \in ker \; \phi \iff \phi(a) &= 1 \\
-				&\implies & \phi(ba\inv{a}) &= \phi(a) \cdot 1 \cdot \phi(\inv{a}) \\
-				&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
-				&\iff & \phi(ba\inv{a}) &= 1.
+				&\implies & \phi(ba\inv{b}) &= \phi(b) \cdot 1 \cdot \phi(\inv{b}) \\
+				&\iff & \phi(ba\inv{b}) &= \phi(b)\inv{\phi(b)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
+				&\iff & \phi(ba\inv{b}) &= 1.
 				\end{align*}
-				So,
+				For example,
 				\begin{xlist}
-					\ex{$SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$;}
+					\ex{$SL_n(\R{})$ \ref{ex_special_lin_group} is a normal subgroup of $GL_n(\R{})$ \textit{even though it is not Abelian}, which can be seen as for ${ M \in GL_n(\R{}), A,B \in SL_n(\R{}) }$,
+						\[ AB \neq BA \eqand det\,A = 1,\,det\,\inv{M} = 1/(det\,M) \]
+						so that,
+						\[ det\,\inv{M}AM = (det\,\inv{M}) \cdot 1 \cdot (det\,M) = (det\,M)/(det\,M) = 1. \]
+					}
 					\ex{$A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.}
 				\end{xlist}
 			}\label{ex_kernel_homomorphism}
@@ -1276,43 +1311,118 @@
 
 	
 	\pagebreak
-	\searchableSubsection{Product Groups and Quotient Groups}{abstract algebra}{
-		\subsubsection{Product Groups}
-		\boxeddefinition{Let ${ G,G' }$ be two groups. The \textbf{product group} is the set ${ G \times G' }$ with component-wise multiplication.}
+	\searchableSubsection{Products Groups and Quotient Groups}{abstract algebra}{
+		\boxeddefinition{If we take the cartesian product of two sets then:
+			\begin{itemize}
+				\item{if the two sets are the underlying sets of two distinct groups then we have no way to combine them (as there is no common group operation) but we can take the pairing and define a component-wise multiplication over the pairs where each component is multiplied using that group's composition operation. In this way we create a new group over the pairs.}
+				\item{if the two sets are subsets of a common group then there is a common group operation between them and so we can multiply them using this group operation. The result is another subset of the common group (not necessarily a subgroup).}
+			\end{itemize}
+			Both of these may at times be referred to as \textbf{Product Groups} but the first one is more specifically referred to as a \textbf{Direct Product} and the second one may be referred to as a \textbf{Product Set}.
+		}
+	
+		\subsubsection{Direct Products}
+		\boxeddefinition{Let ${ G,G' }$ be two groups. The \textbf{direct product} is the set ${ G \times G' }$ with component-wise multiplication using the group composition operation for the group corresponding to the component. Its order is the product of the orders of $G$ and $G'$.}
 		
-		\notation{The \textbf{product group} of the two groups ${ G,G' }$ may be denoted by ${ G \times G' }$ or $GG'$.}
+		\notation{The \textbf{direct product} of the two groups ${ G,G' }$ may be denoted by ${ G \times G' }$ or $GG'$. In the case of Abelian groups the direct product may be referred to as the \textbf{direct sum} and denoted ${ G \oplus G' }$.}
 		
 		So, if ${ a,b \in G }$ and ${ a', b' \in G' }$ then 
 		\begin{itemize}
-			\item{${ (a,a'), (b,b') \in G \times G' }$}
+			\item{${ (a,a'), (a,b'), (b,a'), (b,b') \in G \times G' }$}
 			\item{${ (a,a')(b,b') = (ab, a'b') }$}
 			\item{the identity is ${ (1,1) }$ and ${ \inv{(a,a')} = (\inv{a}, \inv{a'}) }$.}
 		\end{itemize}
 	
-		\boxeddefinition{The \textbf{projections} of a product group ${ G \times G' }$ are the maps $p,p'$ such that,
+		\medskip
+		\boxeddefinition{The \textbf{projections} of a direct product ${ G \times G' }$ are the maps $p,p'$ such that,
 			\[ p(x,x') = x,\hspace{10pt} p'(x,x') = x'. \]
-		}		
+		}	
+	
+		\labeledProposition{The \textbf{mapping property of direct products}: Let $H$ be any group. The homomorphisms ${ \Phi: H \longmapsto G \times G' }$ are in bijective correspondence to pairs ${ (\phi,\phi') }$ of homomorphisms
+			\[ \phi: H \longmapsto G, \hspace{20pt} \phi': H \longmapsto G'. \]
+			The kernel of $\Phi$ is the intersection ${ (ker\,\phi) \cap (ker\,\phi') }$.
+		}{mapping_property_of_direct_products}
+		\begin{proof}
+			Given a pair of homomorphisms ${ (\phi,\phi') }$ we can define ${ \Phi(x) = (\phi(x), \phi'(x)) }$. Then this is homomorphic because,
+			\[ \Phi(xy) = (\phi(xy), \phi'(xy)) = (\phi(x), \phi'(x))(\phi(y), \phi'(y)) = \Phi(x)\Phi(y). \]
+			Conversely, given such a $\Phi$ we can recover the pair of homomorphisms with the group projections as such (outer parentheses omitted for clarity),
+			\[ \phi(x), \phi'(x) = p(\Phi(x)), p'(\Phi(x)). \]
+			Since the correspondence is invertible, it is a bijection.\\\\
+			Clearly, also, 
+			\[ \Phi(x) = (\phi(x), \phi'(x)) = (1,1) \iff (\phi(x) = 1) \wedge (\phi'(x) = 1) \]
+			so that ${ ker\,\Phi = (ker\,\phi) \cap (ker\,\phi') }$.
+		\end{proof}	
 	
 		\bigskip
 		\labeledProposition{Let $r,s$ be coprime integers. A cyclic group of order $rs$ is isomorphic to the product of a cyclic group of order $r$ and a cyclic group of order $s$.}{group_factors_into_product_of_prime_ordered_groups}
 		\begin{proof}
 			Let ${ C = \{1,x,x^2,\dots,x^{rs-1}\},\; C_1 = \{1,y,y^2,\dots,y^{r-1}\},\; C_2 = \{1,z,z^2,\dots,z^{s-1}\} }$ and define the map ${ \phi: C \longmapsto C_1 \times C_2 }$ as,
 			\[ \phi(x^i) = (y^i, z^i). \]
-			Then $\phi$ is homomorphic because,
-			\[ \phi(x^ix^j) = \phi(x^{i+j}) = (y^{i+j}, z^{i+j}) = (y^i, z^i)(y^j, z^j). \]
+			Then $\phi$ is homomorphic because it is comprised of two homomorphisms (by the mapping proper \autoref{prop:mapping_property_of_direct_products}),
+			\[ \phi_1(x^i) = y^i \eqand \phi_2(x^i) = z^i. \]
+			
 			And $\phi$ is injective because,
-			\[ \phi(x^i) = \phi(x^j) \iff (y^i, z^i) = (y^j, z^j) \iff (y^i = y^j) \wedge (z^i = z^j) \]
-			which requires that ${ \abs{i - j} }$ be a multiple of both $r$ and $s$. But $r$ and $s$ are coprime so their lowest common multiple is $rs$ which is the order of ${ x \in C }$ so we have,
-			\[ \phi(x^i) = \phi(x^j) \iff x^i = x^j. \]
-			Now, the order of the image of $\phi$ is the same as the order of $C$ and of ${ C_1 \times C_2 }$ and so it is a bijection and therefore isomorphic.
+			\[ \phi(x^i) = (1,1) \iff (y^i = 1) \wedge (z^i = 1) \iff (r \divides i) \wedge (s \divides i) \]
+			but $r$ and $s$ are coprime so this requires that ${ i = rs }$ which is also the order of ${ x \in C }$. So we have,
+			\[ \phi(x^i) = (1,1) \iff x^i = x^{rs} = 1. \]
+			Therefore ${ ker\,\phi = \{1\} }$ and, by \autoref{theo:homomorphism_injective_iff_kernel_is_trivial}, $\phi$ is injective.\\\\
+			
+			Since $\phi$ is injective, its image has the same order as that of the domain $C$ so we have,
+			\[ \cardinality{im\,\phi} = \cardinality{C} = rs = \cardinality{C \times C} \]
+			and $\phi$ is therefore surjective.\\\\
+			Therefore $\phi$ is a bijection and isomorphic.
 		\end{proof}
 	
-		\note{Note that this is \textbf{only} the case for cyclic groups whose order is the product of two coprime numbers. For example, a cyclic group of order 4 is not isomorphic to a product of two cyclic groups of order 2 as every element in a product group ${ C_2 \times C_2 }$ has order 1 or 2. Whereas a cyclic group of order 4 has two elements of order 4 (the generating element and its inverse).
+		\note{Note that this is \textbf{only} the case for cyclic groups whose order is the product of two coprime numbers. For example, a cyclic group of order 4 is not isomorphic to a product of two cyclic groups of order 2 as every element in a product group ${ C_2 \times C_2 }$ has order 1 or 2. Whereas a cyclic group of order 4 has two elements of order 4 (the generating element and its inverse).\\\\
+			Let ${ C_4 = \{1,x,x^2,x^3\},\;  C_2 = \{1,y\} }$ and define the map ${ \phi: C_4 \longmapsto C_2 \times C_2 }$ as ${ \phi(x^i) = (y^i, y^i) }$. Then,
+			\[ \phi(x^i) = (1,1) \iff y^i = 1 \iff 2 \divides i  \]
+			so that we have ${ ker\,\phi = \{1, x^2\} }$ and so $\phi$ is not injective.
 		}
 	
-		\TODO{finish notes on Product Groups: Artin[78]}
+		\bigskip
+		\subsubsection{Product Sets}
+		\boxeddefinition{Let $A$ and $B$ be subsets of the group $G$ and denote the \textbf{product set} of $A$ and $B$ by
+		\[ AB = \setc{x \in G}{x = ab \text{ for some } a \in A \eqand b \in B}. \]}
+		\note{Note that this notation is the same as one of the alternatives for the notation of the direct product so we need to be clear which is intended when we see this notation.}
 		
-		\subsubsection{Quotient Groups}
+		\bigskip
+		\subsubsection{Relationship Between the Types of Product Groups}
+		\medskip		
+		\labeledProposition{Let $H$ and $K$ be subgroups of $G$.
+			\begin{enumerate}[label=(\roman*)]
+				\item{If ${ H \cap K = \{1\} }$, the product map ${ p: H \times K \longmapsto G }$ defined by ${ p(h,k) = hk }$ is injective. Its image is the subset $HK$.}
+				\item{If either $H$ or $K$ is a normal subgroup of $G$, then the product sets $HK$ and $KH$ are equal and are subgroups of $G$.}
+				\item{If $H$ and $K$ are normal, ${ H \cap K = \{1\} }$, and ${ HK = G }$, then $G$ is isomorphic to the direct product ${ H \times K }$.}
+			\end{enumerate}
+		}{properties_of_product_groups}
+		\begin{proof}
+			Proofs of each property are as follows.
+			\begin{enumerate}[label=(\roman*)]
+				\item{If we assume that ${ H \cap K = \{1\} }$ then, for ${ h,h' \in H,\, k,k' \in K }$,
+					\[ p(h,k) = p(h', k') \iff hk = h'k' \iff \inv{(h')}h = k'\inv k \]
+					so that ${ \inv{(h')}h = k'\inv k \in H \cap K = \{1\} }$ therefore,
+					\[ \inv{(h')}h = 1 \iff h = h',\hspace{20pt} k'\inv k = 1 \iff k' = k. \]
+					Therefore $p$ is injective.
+				}
+				\item{Assume \WLOG that $K$ is a normal subgroup. Then for all ${ k \in K,g \in G,\, \inv{g}kg \in K }$ and, in particular, for ${ h \in H, \inv{h}kh \in K }$. Therefore,
+					\[  hk \in HK \implies h(\inv{h}kh) = kh \in HK \]
+					and conversely, using the fact that, ${ \inv{h} \in H \implies hk\inv{h} \in K }$,
+					\[ kh \in KH \implies (hk\inv{h})h = hk \in KH. \]
+					Therefore ${ HK = KH }$ and this implies that $HK$ is a subgroup because, for ${ h,h' \in H, k,k' \in K }$,
+					\[ hk,h'k' \in HK \eqand hh'kk' \in HK \implies hkh'k' \in HK \]
+					so that $HK$ is closed and for ${ hk \in HK }$,
+					\[ \inv{h}\inv{k} \in HK \implies \inv{k}\inv{h} \in HK \]
+					so that $HK$ also contains inverses.
+				}
+				\item{If ${ H \cap K = \{1\} }$ then the product map $p$ is injective and if ${ HK = G }$ then ${ im\,p = G }$ so $p$ is surjective also and, therefore, is a bijection between ${ H \times K}$ and ${ G }$.\\\\
+					If also both $H$ and $K$ are normal subgroups then ${ HK = KH }$ and for all ${ h \in H,\,k \in K,\; \inv{k}hk \in H \eqand \inv{h}kh \in K }$. Now, we know that $p$ is injective so that 
+					
+					\[ \phi((h,k)(h',k')) = \phi((hh', kk')) = hh'kk' = hkh'k' = \phi((h,k))\phi((h',k')) \]
+				}
+			\end{enumerate}
+		\end{proof}
+		
+		
+		\subsubsection{Quotient Groups}\label{subsubsection:Quotient Groups}
 		\TODO{Notes on Quotient Groups: Artin[81]}
 	}
 	
