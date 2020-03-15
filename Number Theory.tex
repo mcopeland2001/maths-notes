@@ -206,10 +206,17 @@
 				This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
 				Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
 			\end{proof}
+		
+			\subsubsection{Lowest Common Multiple}\label{sssec:lowest_common_multiple}
+			The lowest common multiple of two numbers is formed by the multiplication of all the prime factors that occur in the two numbers where repititions of prime factors are important. That's to say, the lowest common multiple of 4 and 8 is not 2 (which is the highest common factor/greatest common divisor) but 8 because in 8, the factor 2 occurs three times (as $2^3$) and it occurs twice in 4,
+			\[ lcm(4,8) = lcm(2\times2, 2\times2\times2) = 2\times2\times2. \]
+			
+			The general formula for the lowest common multiple may be expressed in terms of the gcd as follows
+			\[ d = gcd(a, b) \implies lcm(a, b) = d \times (a/d) \times (b/d). \]
 		}
 		
 		
-	
+		\pagebreak
 		\searchableSubsection{Some Proofs on the Integers}{number theory}{\bigskip
 			\labeledProposition{For any integer $m$, $\sqrt{m}$ is rational iff $m$ is a square, i.e. $m=a^2$ for some integer $a$.}{rationality_of_sqrt_integers}
 			To begin with we show the easier direction of implication: $(m = a^2) \implies$ ($\sqrt{m}$ is rational).

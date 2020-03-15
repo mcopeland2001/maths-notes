@@ -2,7 +2,6 @@
 
 
 
-
 \date{\vspace{-6ex}}
 
 
@@ -378,6 +377,10 @@
 		\begin{corollary}
 			It follows from $S$ being a subgroup of $\Z{+}$ and from \autoref{prop:bZ_subgroup} that $S$ has the form $m\Z{}$ where $m$ is the smallest positive integer such that $x^m = 1$. Therefore, in $H$, the $m$ elements $1, x, x^2, \cdots , x^{m-1}$ are all different and any element in $H$ will simplify to one of them: for $n \in S$, $n = mq + r$ such that $x^n = (x^m)^qx^r = 1^qx^r = x^r$.
 		\end{corollary}
+	
+		
+		\bigskip
+		\subsubsection{Order}
 		
 		\boxeddefinition{The \textbf{order} of a group $G$ is the number of distinct elements it contains. It is typically denoted $\vert G \vert$.\\
 			An element of a group is said to have \textbf{order} $m$ (possibly infinity) if the cyclic subgroup it generates has order $m$. This means that $m$ is the smallest positive integer with the property $x^m = 1$ or, if the order is infinite, that, $x^m \neq 1$ for all $m \neq 0$.
@@ -511,6 +514,30 @@
 			Here we could also use a proof by contradiction: Assume $n$ is not prime and it has factors ${ r,s > 1 \in \N{} }$. Then,
 			\[ (x^r)^s = x^{rs} = x^n = e \]
 			so that the order of $x^r$ in $G$ is less than or equal to $s$ which is less than $n$ (because it is a factor of $n$). It follows then that ${ \langle x^r \rangle \neq G }$, contradicting the definition of $G$. Therefore $n$ is prime.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Suppose the elements ${ x,y }$ in a group $G$ have orders ${ m,n }$ respectively and that the ${ gcd(m,n) = 1 }$. Then ${ \langle x \rangle \cap \langle y \rangle = \{e\} }$ and, if $x$ and $y$ commute, then the order of $xy$ in $G$ is $mn$.}{coprime_order_elements_have_disjoint_cyclic_groups}
+		\begin{proof}
+			One way to approach this is to say that for ${ z \in \langle x \rangle \cap \langle y \rangle }$ we have some ${ 0 \leq i < m, 0 \leq j < n }$ such that,
+			\[ z = x^i = y^j \iff x^{im} = e = y^{jm},\, x^{in} = y^{jn} = e \]
+			so that ${ x^{in} = y^{jm} = e \iff (m \divides in \eqand n \divides jm) }$. Note that,
+			\[ (m \divides in \eqand n \divides jm) \iff m,n \divides in + jm. \]
+			Now, applying the fact that ${ gcd(m,n) = 1 }$ we see that both $m$ and $n$ must divide 1. But both $m$ and $n$ are orders of elements and so, by definition, greater than 1. The only other alternative is that both ${ i,j = 0 }$ which results in ${ z = x^0 = y^0 = e }$.\\
+			
+			We could also have said,
+			\[ x^{im} = e = x^{in} \iff x^{im - in} = e \iff m \divides im - in. \]
+			In this case we can apply the fact that ${ gcd(m,n) = 1 }$ to the statement that ${ m \divides i(m-n) }$ to deduce that: either ${  m \divides (m-n) \iff m \divides 1 }$ which is impossible because $m$ must be greater than 1; or ${ m \divides i }$ which is also impossible because ${ i < m }$. So, again, we are only left with the alternative that ${ i = 0 }$ which results in ${ z = x^0 = y^0 = e }$.\\
+			
+			Next we prove the order of ${ xy \in G }$ and we begin by noting that, if $x$ and $y$ commute, then ${ (xy)^r = x^ry^r }$. So if we assume that $xy$ has order $r$ then we must have ${ m,n \divides r }$ and the lowest such $r$ is the order. Well, the lowest common multiple of ${ m,n }$ is defined according to the gcd as described in the Number Theory treatment of Modular Arithmetic (\ref{sssec:lowest_common_multiple}) as,
+			\[ d = gcd(m,n) \implies lcd(m,n) = d \cdot (m/d) \cdot (n/d). \]
+			Clearly then, if ${ d = gcd(m,n) = 1 }$, then the lowest common multiple is ${ mn }$ and so the order of ${ xy \in G }$ is ${ mn }$.\\
+			
+			Or to describe it a different way: ${ (xy)^{mn} = x^{mn}y^{mn} = ee = e }$ so that the order of $xy$,
+			\[ \cardinality{xy} \leq mn. \]
+			Conversely any $r$ such that ${ (xy)^r = e }$ must have ${ m,n \divides r }$ and the lowest common multiple of $m$ and $n$ is $mn$ so
+			\[ r \geq mn. \]
+			Therefore, ${ \cardinality{xy} = mn }$.			
 		\end{proof}
 	
 		\bigskip
@@ -720,7 +747,27 @@
 			\[ G = \{1, x, x^2, \cdots, x^{n-1}\}, \; G' = \{1, y, y^2, \cdots, y^{n-1}\} \]
 			are two cyclic groups of order $n$ then the map $\phi(x^i) = y^i$ is an isomorphism.
 		\end{proof}
+	
+		\medskip
+		\labeledProposition{\textbf{Cayley's Theorem} states that every group is isomorphic to a group of permutations of the same underlying set, or in other words, to a subgroup of the symmetric group acting on the group.}{cayleys_theorem}
+		\begin{proof}
+			Let $G$ be a group and ${ x \in G }$ and define ${ f_x : G \longmapsto G }$ as ${ f_x(g) = xg }$. Then $f_x$ is a bijection because it has an inverse ${ \inv{f_x}(g) = \inv{x}g = f_{\inv{x}}(g) }$. Therefore $f_x$ is a permutation.\\
+			
+			Now we define a map, from $G$ to the symmetric group of permutations of $G$, that maps each element $x$ in $G$ to the permutation defined by $f_x$. Let ${ \phi: G \longmapsto Sym(G) }$ be defined as ${ \phi(x) = f_x }$ then,
+			\begin{itemize}
+				\item{$\phi$ is homomorphic because
+					\[ (f_x \circ f_{x'})(g) = f_x(f_{x'}(g)) = x(x'g) = xx'g = f_{xx'}(g) \]
+					and so,
+					\[ \phi(xx') = f_{xx'} = f_x \circ f_{x'} = \phi(x) \circ \phi(x'). \]
+				}
+				\item{$\phi$ is injective because if ${ x,x' \in G }$ such that ${ x \neq x' }$ then ${ f_x(e) = x \neq x' = f_{x'}(e) }$ is sufficient to show that ${ f_x \neq f_{x'} }$. Or alternatively, the kernel of $\phi$ comprises the elements ${ k \in G }$ such that ${ f_k(g) = kg = g \iff k = e }$ so that the kernel is the trivial subgroup ${ \{e\} }$.
+				}
+			\end{itemize}
+			Since $\phi$ is homomorphic, its image ${ im\,\phi }$ is a subgroup of ${ Sym(G) }$ and since $\phi$ is injective, it is in bijective correspondence with its image ${ im\,\phi \leq Sym(G) }$.\\
+			Therefore $G$ is isomorphic to a subgroup of $Sym(G)$.
+		\end{proof}
 		
+		\bigskip
 		\subsubsection{Automorphisms}
 		\boxeddefinition{The domain and codomain of an isomorphism can be the same set of objects so that $\phi : G \longmapsto G$. This is known as an \textbf{automorphism}.}
 		\paragraph{Example}
@@ -759,7 +806,9 @@
 			\end{tabular}
 		\end{table}
 		\\\\This is because the group is cyclic and $x$ and $x^2$ have the same order ($x^3 = 1$ and also $(x^2)^3 = x^6 = (x^3)^2 = 1^2 = 1$). So the law of composition is preserved.
-		\paragraph{Conjugation}
+		
+		\bigskip
+		\subsubsection{Conjugation}
 		The most important example of automorphism is conjugation.\\\\
 		\boxeddefinition{\textbf{Conjugation} by $b \in G$ is the map from $G$ to itself defined by,
 			\[ \phi(a) = ba\inv{b} \]
@@ -767,7 +816,7 @@
 			\[ ba = \phi(a)b \]
 			so that we can think of conjugation of $a$ by $b$ as the way that we need to change $a$ if we want to move the multiplication by $b$ to the other side.
 		}
-		This is an automorphism because it
+		This is an automorphism (known as an \textit{inner automorphism}) because it
 		\begin{itemize}
 			\item{is compatible with law of composition, 
 				\[ \phi(xy) = bxy\inv{b} = bx\inv{b}by\inv{b} = \phi(x)\phi(y). \]
@@ -881,11 +930,6 @@
 			A homomorphism is an isomorhpism if its kernel contains only the identity and its image is the whole of the codomain (i.e. it's surjective). 
 		\end{corollary}
 	
-		\labeledTheorem{\textbf{Cayley's Theorem} states that: that every group $G$ is isomorphic to a subgroup of the symmetric group acting on $G$.}{cayleys_theorem}
-		\begin{proof}
-			\TODO{this proof from Abstract Maths 14.6}
-		\end{proof}
-	
 		\subsubsection{Examples of Kernels of Homomorphisms}
 		\begin{exe}
 			\ex The determinant function \ref{ex_determinant}, $ det : GL_n(\R{}) \longmapsto \R{\times} $, has a kernel,
@@ -955,11 +999,21 @@
 			\[ aH = \setc{ah}{h \in H}. \]
 		}
 		\note{Cosets are not, in general, subgroups. This can be easily seen as the left coset $aH$ does not contain the identity as, although $H$ contains the identity, $aH$ contains ${ a1 = a }$.} 
+		
 		Note that the arbitrary subgroup $H$ could also be thought of as a coset $1H = H$ and also that the left cosets $aH$ are equivalence classes for the congruence relation,
 			\[ a \equiv b \iff b = ah, \; h \in H. \]
 		This is a congruence because, for some arbitrary $c \in G$,
 			\[ 1 \equiv c \iff \exists h \in H \suchthat c = 1h = h. \]
 		That's to say, the elements that are congruent to the identity are precisely the members of the subgroup $H$ so that it plays a similar role to the kernel $N$ in \autoref{prop:kernel_elements_relate_congruent_elements}. Furthermore, since the congruence relation is an equivalence relation it forms a partition of the domain $G$.
+		
+		\labeledProposition{For a group $G$ with a subgroup $H$ and ${ x \in G }$, the coset $xH$ is equal to $H$ iff ${ x \in H }$.}{coset_of_subgroup_member_is_subgroup}
+		\begin{proof}
+			Assume ${ x \in H }$. Then ${ \forall xh \in xH \logicsep xh \in H }$. Therefore ${ xH \subseteq H }$. Conversely, ${ \inv{x} \in H }$ so,
+			\[ \forall h \in H \logicsep \inv{x}h \in H \implies x(\inv{x}h) = h \in xH. \]
+			Therefore ${ H \subseteq xH }$ and so ${ H = xH }$.\\
+			
+			Now assume that ${ H = xH }$. Since ${ e \in H }$ then ${ xe = x \in xH = H }$ and so ${ x \in H }$.
+		\end{proof}
 		
 		\labeledProposition{The left cosets of a subgroup partition the group.}{cosets_partition_group}
 		\begin{proof}
@@ -970,7 +1024,7 @@
 		\begin{exe}
 			\ex{The coset of an element with the kernel $N$,
 				\[ aN = \setc{g \in G}{g = an, \; n \in N} \]
-				is the set of all elements that are \textit{congruent} to $a$. The \textit{congruence classes} are precisely the cosets $aN$ for each $a \in G$. They are also the \textit{fibres} of the homomorphic map.
+				is the set of all elements that are \textit{congruent} to $a$. The \textit{congruence classes} are precisely the cosets $aN$ for each $a \in G$. They are also the \textit{fibres} of the homomorphic map.\medskip
 			}\label{ex_coset_with_kernel}
 			\ex \ref{S_3} Continuing the example of the symmetric group $S_3$ represented as 
 				\[ G = \{1, x, x^2, y, xy, x^2y\} \]
@@ -978,9 +1032,16 @@
 				\[ x^3 = 1, y^2 = 1, yx = x^2y. \]
 				The element $xy$ has order 2 so it generates a cyclic subgroup $H = \{1, xy\}$ of order 2. The left cosets of $H$ in $G$ are the three sets,
 				\[ \{1,xy\} = 1H = xyH, \; \{x, x^2y\} = xH = x^2yH, \; \{x^2, y\} = x^2H = yH. \]
-				Note that they do partition the group $G$. Also, notice that the cosets $aH$ for $a \in H$ produce the subgroup $H$ itself as should be expected as the group properties of the subgroup dictate that all products of its elements are already present in the subgroup. For this reason, the cosets $aH$ that are distinct from $H$ are those such that $a \not\in H$.\label{ex_S_3}
+				Note that they do partition the group $G$. Also, notice that the cosets $aH$ for $a \in H$ produce the subgroup $H$ itself as should be expected as the group properties of the subgroup dictate that all products of its elements are already present in the subgroup. For this reason, the cosets $aH$ that are distinct from $H$ are those such that $a \not\in H$.\medskip\label{ex_S_3}
+			\ex{Let ${ G = (\R{3}, +) }$ be the group of 3d vectors with vector addition and ${ \V{w} \in G }$. Then if
+				\[ H = \setc{ \V{x} \in G }{ \V{w}^T\V{x} = \V{0} } \]
+				then $H$ is a subgroup, ${ H \leq G }$. $H$ is a vector space representing a plane through the origin in $\R{3}$ and it's cosets are
+				\[ \V{v} + H = \setc{ \V{v} + \V{h} }{ \V{v} \in G,\, \V{h} \in H } \]
+				which are the affine spaces representing the translated planes, parallel to $H$, but not passing through the origin. Once again we see that the cosets partition the space even if there may be an infinite number of them.\label{ex:plane_vector_space_as_group}
+			}
 		\end{exe}
 	
+		\bigskip
 		\subsubsection{The index of a subgroup}
 		\boxeddefinition{The \textbf{index} of a subgroup is the number of left cosets it forms in the parent group.}
 		\notation{The \textbf{index} of a subgroup $H$ in $G$ is denoted by $[G:H]$.}
@@ -1005,10 +1066,12 @@
 			\textbf{Lagrange's Theorem: } Let $G$ be a finite group, and let $H$ be a subgroup of $G$. The order of $H$ divides the order of $G$.
 		\end{theorem}
 	
+		\medskip
 		\begin{corollary}
 			Let $ G $ be a finite group, and let $ a $ be an element of $ G $. Then the order of $ a $ divides the order of $G$. That's to say, the order of the cyclic group generated by $a$, ${ \cardinality{\langle a \rangle} }$, divides ${ \cardinality{G}. }$
 		\end{corollary}
 	
+		\medskip
 		\begin{corollary}
 			\label{coro:group_order_n_nth_power_of_elements_is_identity}
 			If $ G $ is a group of order $ n $, then ${ g^n = e }$ for every element $ g $ of $ G $.
@@ -1018,6 +1081,7 @@
 			\[ m \divides n \iff n = km \text{ for } k \in \N{} \iff g^n = g^{km} = (g^m)^k = e^k = e. \qedhere \]
 		\end{proof}
 	
+		\medskip
 		\begin{corollary}
 			\label{coro:prime_order_groups_are_cyclic}
 			Suppose that a group $G$ has $p$ elements and that $p$ is a prime integer. Let $a \in G$ be any element, not the identity. Then $G$ is the cyclic group $\{1, a, \dots , a^{p-1}\}$ generated by $a$.
@@ -1026,11 +1090,24 @@
 			Since $a \neq 1$ by selection, it has order greater than 1. Since its order must divide the order of $G$, which is prime, its order is equal to the order of $G$, $p$. So, the order of the nonidentity element $a$ is the same as the order of $G$ and so it generates the whole group.
 		\end{proof}
 	
+		\medskip
 		\begin{corollary}
 			All groups with some prime order, $p$, are in the same isomorphism class.
 		\end{corollary}
 		\begin{proof}
 			Any group with prime order $p$ is the cyclic group of order $p$ and by \autoref{prop:one_class_per_cyclic_order} there is only a single isomorphism class for each cyclic group of a given order.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Suppose the elements ${ x,y }$ in a group $G$ have orders ${ m,n }$ respectively and that the ${ gcd(m,n) = 1 }$. Then ${ \langle x \rangle \cap \langle y \rangle = \{e\} }$.}{coprime_order_elements_have_disjoint_cyclic_groups_using_lagrange}
+		\note{Here we will prove, using Lagrange's Theorem, something that we previously proved here (\autoref{prop:coprime_order_elements_have_disjoint_cyclic_groups}) using modular arithmetic. Notice how the proofs are similar but the proof with Lagrange's Theorem allows us to remain within Group Theory.
+		}
+		\begin{proof}	
+			Firstly, note that the intersection of the two cyclic groups,
+			\[ H = \langle x \rangle \cap \langle y \rangle \]
+			is a subgroup both of the parent group $G$ \textbf{and} of ${ \langle x \rangle }$ and ${ \langle y \rangle }$. So Lagrange's Theorem tells us that its order must divide into the order of the parent group \textbf{and} the orders of the cyclic groups of $x$ and $y$. Therefore, we have,
+			\[ \cardinality{H} \divides m \eqand \cardinality{H} \divides n. \]
+			Now, applying the fact that the ${ gcd(m,n) = 1 }$ we see that ${ \cardinality{H} \divides 1 }$ and therefore ${ \cardinality{H} = 1 }$. Furthermore, any group of order 1 must be the minimal group ${ \{e\} }$.		
 		\end{proof}
 	
 		\subsubsection{Example applications of Lagrange Theorem}
@@ -1050,7 +1127,7 @@
 						\item{In $G$, ${ a^{p-1} = 1 \iff a^p = a }$ which translates to ${ a^p \equiv a \bmod p }$.}
 					\end{enumerate}
 				\end{proof}
-			}
+			}\label{fermats_little_theorem}
 		\end{exe}
 		
 		\subsubsection{Lagrange's Theorem and Homomorphisms}
@@ -1134,6 +1211,7 @@
 						\[ det\,\inv{M}AM = (det\,\inv{M}) \cdot 1 \cdot (det\,M) = (det\,M)/(det\,M) = 1. \]
 					}
 					\ex{$A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.}
+					\TODO{explain a bit further (e.g. any group of matrices with the same determinant will be normal)}
 				\end{xlist}
 			}\label{ex_kernel_homomorphism}
 			\ex{Any subgroup of an abelian group is normal because when the composition law is commutative, as was mentioned in the section on conjugation,
@@ -1304,14 +1382,10 @@
 	}
 
 
-	\bigskip\bigskip
-	\searchableSubsection{Modular Arithmetic}{abstract algebra, modular arithmetic}{
-		\TODO{Describe modular arithmetic in terms of cosets: Artin[79]}
-	}
 
 	
 	\pagebreak
-	\searchableSubsection{Products Groups and Quotient Groups}{abstract algebra}{
+	\searchableSubsection{Products Groups and Quotient Groups}{abstract algebra, modular arithmetic}{
 		\boxeddefinition{If we take the cartesian product of two sets then:
 			\begin{itemize}
 				\item{if the two sets are the underlying sets of two distinct groups then we have no way to combine them (as there is no common group operation) but we can take the pairing and define a component-wise multiplication over the pairs where each component is multiplied using that group's composition operation. In this way we create a new group over the pairs.}
@@ -1408,22 +1482,51 @@
 					and conversely, using the fact that, ${ \inv{h} \in H \implies hk\inv{h} \in K }$,
 					\[ kh \in KH \implies (hk\inv{h})h = hk \in KH. \]
 					Therefore ${ HK = KH }$ and this implies that $HK$ is a subgroup because, for ${ h,h' \in H, k,k' \in K }$,
-					\[ hk,h'k' \in HK \eqand hh'kk' \in HK \implies hkh'k' \in HK \]
-					so that $HK$ is closed and for ${ hk \in HK }$,
-					\[ \inv{h}\inv{k} \in HK \implies \inv{k}\inv{h} \in HK \]
-					so that $HK$ also contains inverses.
+					\begin{itemize}
+						\item{$HK$ is closed because
+							\[ kh' \in KH = HK \implies kh' = h''k'' \in HK  \]
+							for some ${ h'' \in H,\, k'' \in K }$, and so,
+							\[ hk,h'k' \in HK \implies (hk)(h'k') = h(kh')k' = h(h''k'')k' = (hh'')(k''k') \in HK. \]
+						}
+						\item{$HK$ has inverses because for ${ hk \in HK }$,
+							\[ \inv{h}\inv{k} \in HK \implies \inv{k}\inv{h} \in HK. \]
+						}
+					\end{itemize}
 				}
-				\item{If ${ H \cap K = \{1\} }$ then the product map $p$ is injective and if ${ HK = G }$ then ${ im\,p = G }$ so $p$ is surjective also and, therefore, is a bijection between ${ H \times K}$ and ${ G }$.\\\\
-					If also both $H$ and $K$ are normal subgroups then ${ HK = KH }$ and for all ${ h \in H,\,k \in K,\; \inv{k}hk \in H \eqand \inv{h}kh \in K }$. Now, we know that $p$ is injective so that 
+				\item{If ${ H \cap K = \{1\} }$ then the product map $p$ is injective and if ${ HK = G }$ then ${ im\,p = G }$ so $p$ is surjective also and, therefore, is a bijection between ${ H \times K}$ and ${ G }$.\\
 					
-					\[ \phi((h,k)(h',k')) = \phi((hh', kk')) = hh'kk' = hkh'k' = \phi((h,k))\phi((h',k')) \]
+					To show that $p$ is a homomorphism between the direct product and the product set $HK$ we need to show that,
+					\[ p((h,k)(h',k')) = p((hh', kk')) = hh'kk' = hkh'k' = p((h,k))p((h',k')) \]
+					which will be true if ${ h'k = kh' }$ which, in turn, will be the case if products in $HK$ are commutative.\\
+					Now we have ${ H \cap K = \{1\} }$ and so,
+					\[ hk = kh \iff \inv{k}hk = h \iff \inv{k}hk\inv{h} = 1 \]
+					implies that ${ H \cap K = \{\inv{k}hk\inv{h}\} }$. So, if we can show that ${ \inv{k}hk\inv{h} }$ is in both $H$ and $K$ then we have a homomorphism.\\
+					Since, in this case, both $H$ and $K$ are normal we have,
+					\[ h,\inv{h} \in H,\, k \in K \implies \inv{k}hk \in H,\, hk\inv{h} \in K \]
+					which, by the group closure of $H$ and $K$ gives,
+					\[ (\inv{k}hk)h \in H \eqand \inv{k}(hk\inv{h}) \in K. \]
+					Therefore, if both $H$ and $K$ are normal subgroups and ${ H \cap K = \{1\} }$, then ${ hk = kh }$ for all ${ h \in H,\, k \in K }$. This, in turn, means that the product map $p$ is a homormorphism between the direct product ${ H \times K }$ and the product set $HK$. Since $p$ is also bijective, it is an isomorphism. 
 				}
 			\end{enumerate}
 		\end{proof}
+		\note{It is important to note that the product map of two subgroups ${ H \times K \longmapsto HK = G }$ will not be a group homomorphism unless the two subgroups commute with each other.
+		}
+	
+		\subsubsection{Examples of Product Groups}
+		\begin{exe}
+			\ex{There is a group with subgroups of orders ${ 1 \dots 12 }$. It is a direct product of cyclic groups of orders ${ 2 \times 2 \times 2 \times 3 \times 3 \times 5 \times 7 \times 11 = \cardinality{G} = 27,720 }$ so it looks like,
+				\[ G = C_2 \times C_2 \times C_2 \times C_3 \times C_3 \times C_5 \times C_7 \times C_{11}. \]
+			}
+		\end{exe}
 		
 		
 		\subsubsection{Quotient Groups}\label{subsubsection:Quotient Groups}
 		\TODO{Notes on Quotient Groups: Artin[81]}
+		
+		\medskip
+		\subsubsection{Modular Arithmetic}
+		\TODO{Describe modular arithmetic in terms of cosets: Artin[79]}
+		\TODO{include in examples Abstract Maths ex. 14.9}
 	}
 	
 	
