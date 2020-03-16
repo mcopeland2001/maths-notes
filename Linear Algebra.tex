@@ -36,7 +36,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 
 
 \begin{document}
-\searchableSubsection{\chapterTitle{Linear Algebra}}{linear algebra}{\bigskip\bigskip}
+\searchableSubsection{\chapterTitle{Linear Algebra}}{linear algebra}{\bigskip\bigskip}\TODO{fix these headers}
 
 \searchableSubsection{\sectionTitle{Matrix Algebra}}{linear algebra}{\bigskip}
 
@@ -171,13 +171,51 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			\end{bmatrix}
 			\right)
 			\begin{bmatrix}
+			i & j \\
+			k & l \\
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
 			a+e & b+f\\
 			c+g & d+h
+			\end{bmatrix}
+			\begin{bmatrix}
+			i & j \\
+			k & l \\
 			\end{bmatrix}
 			&=
 			\begin{bmatrix}
 			i\,{\left(a+e\right)}+k\,{\left(b+f\right)} & j\,{\left(a+e\right)}+l\,{\left(b+f\right)}\\
 			i\,{\left(c+g\right)}+k\,{\left(d+h\right)} & j\,{\left(c+g\right)}+l\,{\left(d+h\right)}\\
+			\end{bmatrix}\\
+			\hspace{50pt}
+			=
+			\begin{bmatrix}
+			ia + kb & ja + lb\\
+			ic + kd & jc + ld\\
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+			ie + kf & je + lf\\
+			ig + kh & jg + lh\\
+			\end{bmatrix}
+			&=
+			\begin{bmatrix}
+			a & b \\
+			c & d \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			i & j \\
+			k & l \\
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+			e & f \\
+			g & h \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			i & j \\
+			k & l \\
 			\end{bmatrix}
 		\end{align*}
 		
@@ -216,7 +254,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		\bigskip
 		\subsubsection*{Matrix transpose}
-		Denote the $i$th row of the matrix $A$ as $A[i:]$ and the $j$th column of the matrix $B$ as $B[j:]$ and a matrix whose components at $(i,j)$ are the dot-products of the $i$th row of the matrix $A$ with the $j$th column of the matrix $B$ as $(\langle A[i:], B[:j] \rangle)$. Then,
+		Denote the $i$th row of the matrix $A$ as $A[i:]$ and the $j$th column of the matrix $B$ as $B[:j]$ and a matrix whose components at $(i,j)$ are the dot-products of the $i$th row of the matrix $A$ with the $j$th column of the matrix $B$ as $(\langle A[i:], B[:j] \rangle)$. Then,
 		\begin{align*}
 		(AB)^{T} = (\langle A[i:], B[:j] \rangle)^{T} = (\langle A[j:], B[:i] \rangle) \\
 		B^{T}A^{T} = (\langle B^{T}[i:], A^{T}[:j] \rangle) = (\langle B[:i], A[j:] \rangle)
@@ -381,7 +419,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{center}
 		
 		\subsubsection{Conformal}
-		\subparagraph{Uniform Scaling}
+		\subparagraph{Uniform Scaling} is scaling by an equal amount in each dimension.
 		\begin{align*}
 		A =
 		\begin{bmatrix}    
@@ -405,7 +443,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{center}
 		
 		\subsubsection{Affine}
-		\subparagraph{Non-uniform Scaling}
+		\subparagraph{Non-uniform Scaling} is scaling by different amounts in the different dimensions. (The example shown here preserves the angles but for other shapes, a triangle for example, the angles would not be preserved.)
 		\begin{align*}
 		A =
 		\begin{bmatrix}    
