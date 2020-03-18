@@ -1541,11 +1541,25 @@
 		\[ aH = Ha \implies aHbH = abHH = abH \]
 		so that we may define a law of composition such that ${ aH * bH = abH }$ which closes over the set of cosets of $H$. The identity element of this composition is ${ eH = H }$ and the inverse of the element $aH$ is ${ \inv{a}H }$.
 		
+		\note{Note that this \textbf{only} applies to normal subgroups. The reason is that if $H$ is not normal then there exists ${ h \in H }$ and ${ a \in G }$ such that ${ ah\inv{a} \not\in H }$ which means that ${ S = aH\inv{a}H }$ is not in any coset.\\
+			This last claim can be proven if we observe -- remembering that cosets partition the group -- that $S$ contains ${ a1\inv{a}1 = 1 }$ which means that it has to be in $H$. However, $S$ also contains ${ ah\inv{a}1 = ah\inv{a} \not\in H }$ so, since these are equivalence classes, $S$ cannot be in $H$.
+		}
+		
 		\bigskip
 		\subsubsection{Quotient Groups}\label{subsubsection:Quotient Groups}
 		\boxeddefinition{
 			Suppose $H$ is a normal subgroup of a group $G$. Then the quotient group ${ G/N }$ is the set of cosets of $N$ in $G$ with the coset product. Its order is the index of $N$ in $G$, ${ [G : N] }$.
 		}
+	
+		\notation{Sometimes -- when it is not necessary to specify the subgroup against which the cosets are being formed -- the set of cosets in $G$ is denoted $\overline{G}$  and a member coset ${ aH }$ is denoted ${ \overline{a} \in \overline{G} }$.}
+		
+		\labeledTheorem{Every normal subgroup of a group $G$ is the kernel of a homomorphism.}{}
+		\begin{proof}
+			For any normal subgroup ${ N \leq G }$, if we define the map,
+			\[ \pi : G \longmapsto G/N \]
+			then $\pi$ is homomorphic because ${ \pi(ab) = abN = aNbN = \pi(a)\pi(b) }$.\\
+			Now, \autoref{prop:coset_of_subgroup_member_is_subgroup} tells us that ${ \pi{x} = 1N = N \iff x \in N }$ so that ${ ker\,\pi = N }$. (We could also observe that the cosets are equivalence classes and the kernel is the equivalence class containing the identity. The coset that contains the identity is the original subgroup ${ N = 1N }$.)
+		\end{proof}
 	
 		\subsubsection{Examples of Quotient Groups}
 		\begin{exe}
