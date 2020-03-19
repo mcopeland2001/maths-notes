@@ -307,7 +307,9 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{proof}
 	}
 	
-	\searchableSubsection{Matrices as linear transformations}{linear algebra}{\bigskip
+	
+	\searchableSubsection{Matrices as linear transformations}{linear algebra}{
+		\label{ssection:matrices_as_linear_transformations}
 		
 		\subsubsection{Multiplying a vector by a matrix on the left: $ A\V{x} = \V{y} $}
 		Left multiplication of a matrix $A$ of dimension $m \times n$ on a column vector $\V{x}$ of dimension $n \times 1$ transforms it to a column vector $\V{y}$ of dimension $m \times 1$.
@@ -984,10 +986,59 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{align*}
 		which is the expansion by minors of $A$ on the $j$th column but with the components $a_{ij}$ of $A$ replaced with the components of the vector $B$, divided by the determinant of $A$.
 	}
+
+
+	
+	\pagebreak
+	\searchableSubsection{Linear Transformations}{linear algebra}{
+		
+		The analogue for vector spaces of a homomorphism of groups is a map,
+		\[ T: V \longmapsto W \]
+		from one vector space over a field $\F{}$ to another, which is compatible with addition and scalar multiplication:
+		\[ T(\V{v_1} + \V{v_2}) = T(\V{v_1}) + T(\V{v_2}) \eqand T(c\V{v_1}) = cT(\V{v_1}), \]
+		for all ${ \V{v_1},\V{v_2} \in V,\, c \in \F{} }$.\\
+		
+		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation}.}
+		
+		\note{The compatibility with addition of vectors implies that a linear transformation is a homomorphism between additive groups of vectors.}
+	
+		\bigskip
+		\subsubsection{The Kernel and the Image of a Linear Transformation}
+		Let ${ T: V \longmapsto W }$ be any linear transformation. Then the kernel (or nullspace) of $T$ is defined as,
+		\[ ker\,T = \setc{\v}{T(\v) = \0}  \]
+		and the image of $T$ as,
+		\[ im\,T = \setc{\w \in W}{\exists \v \in V \logicsep \w = T(\v)}. \]
+		
+		\labeledProposition{The kernel of ${ T: V \longmapsto W }$ is a subspace of $V$ and the image is a subspace of $W$.}{kernel_and_image_of_linear_map_are_subspaces}
+		\begin{proof}
+			$T$ is a homomorphism between additive groups of vectors and so the proof that the kernel and image are subspaces is the same as for general homomorphisms (see \ref{sssection:image_of_homomorphism}).
+		\end{proof}
+	
+		\bigskip
+		\subsubsection{Examples of Linear Transformations}
+		\begin{exe}
+			\item{As previously seen in section \ref{ssection:matrices_as_linear_transformations}, matrix multiplication on the left is a linear transformation. Let $A$ be an ${ m \times n }$ matrix with entries in $\F{}$ and consider $A$ as an operator on column vectors ${ A: \F{n} \longmapsto \F{m} }$. The kernel of $A$ is the set of vectors that are solutions to ${ A\V{x} = \0 }$ while the image (or range) is the set of vectors $\V{b}$ such that ${ A\V{x} = \V{b} }$ has a solution.
+			}
+			\item{Also previously seen in \ref{ssection:polynomials_as_vector_spaces} is that polynomials can be modeled as vectors. Let $P_n$ be the vector space of real polynomials of degree ${ \leq n }$. Then the derivative is a linear transformation ${ P_n \longmapsto P_{n-1} }$.
+			}
+		\end{exe}
+	
+		\bigskip
+		\boxeddefinition{The dimension of the image is called the \textbf{rank} while the dimension of the kernel is known as the \textbf{nullity}.}
+		
+		\bigskip\bigskip
+		\subsubsection{The Dimension Formula}
+		\labeledTheorem{Let ${ T: V \longmapsto W }$ be a linear transformation, and assume that $V$ is finite dimensional. Then,
+			\[ dim\,V = dim(ker\,T) + dim(im\,T) = rank + nullity. \]
+		}{linear_map_dimension_formula}
+		\begin{proof}
+		\end{proof}
+	}	
+	
 	
 	
 	\pagebreak
-	\searchableSubsection{Relations on matrices}{linear algebra}{\bigskip\bigskip
+	\searchableSubsection{Relations on matrices}{linear algebra}{
 	
 		\searchable{subsubsection}{\small{Let $X$ be the set of $n \times n$ real matrices. Define a relation $\sim$ on $X$ by:
 			\[ M \sim N \iff \exists \text{ an invertible } P \in X \suchthat N = P^{-1}MP. \]

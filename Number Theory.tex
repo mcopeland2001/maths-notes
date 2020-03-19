@@ -3,11 +3,11 @@
 \date{\vspace{-6ex}}
 
 \begin{document}
-\searchableSubsection{\chapterTitle{Number Theory}}{number theory}{\bigskip\bigskip}
+\searchableChapter{Number Theory}{number theory}
 
-	\searchableSubsection{\sectionTitle{Natural Numbers}}{number theory}{\bigskip}
+	\searchableSection{Natural Numbers}{number theory}
 			
-		\searchableSubsection{Peano Axioms}{number theory}{\bigskip
+		\searchableSubsection{Peano Axioms}{number theory}{
 			\begin{axiom}{Closure under addition:}\\ For all $a,b \in \N{}$ we have $a + b \in \N{}$.	
 			\end{axiom}
 			\begin{axiom}{Closure under multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b \in \N{}$.
@@ -32,41 +32,39 @@
 			\end{axiom}
 			\begin{axiom}{Trichotomous property:}\\ For all $a,b \in \N{}$ exactly one of the following is true: $a = b,\; a < b,\; b < a$.
 			\end{axiom}
-		}
 		
-		% TODO: this should be inside a searchable subsection
-		\paragraph{Notation:} We also write $ab$ for $a \times b$.
-		
-		\searchableSubsection{Properties following from these axioms}{number theory}{\bigskip
+		\bigskip
+		\notation{We also write $ab$ for $a \times b$.}
 			
-			\labeledProposition{If $a,b \in \N{}$ satisfy $a \times b = a$, then $b = 1$.}{mult_identity_unique}
-				\begin{proof}
-				\begin{align*}
-				&& a \times b &= a = a \times 1 &\sidecomment{by Multiplicative Identity axiom}\\
-				&\iff & b \times a &= 1 \times a  &\sidecomment{by Commutative Law for multiplication}\\
-				&\iff & b &= 1  &\sidecomment{by Multiplicative cancellation}\\
-				\end{align*}
-				\end{proof}
-			
-			\labeledProposition{If $a,b,c \in \N{}$ and $a < b$ then $a \times c < b \times c$.}{less_than_mult_augment}
-				\begin{proof}
-				\begin{align*}
-				&& a < b &\implies a + d = b \text{ for some } d \in \N{} &\sidecomment{by Definition of "less than"}\\
-				&\therefore & b \times c &= (a + d) \times c = (a \times c) + (d \times c)  &\sidecomment{by Distributive Law}\\
-				&\therefore & a \times c &< (a \times c) + (d \times c) = b \times c  &\sidecomment{by defn. "less than" and closure}
-				\end{align*}
-				\end{proof}
-			
-			\labeledProposition{$1$ is the least element of $\N{}$.}{mult_identity_least_element}
+		\subsubsection{Properties following from these axioms}		
+		\labeledProposition{If $a,b \in \N{}$ satisfy $a \times b = a$, then $b = 1$.}{mult_identity_unique}
 			\begin{proof}
-				Assume $m$ is the least element of $\N{}$. Then, also $m < 1$. So, by \autoref{prop:less_than_mult_augment},
-				\begin{align*}
-				m < 1 \implies m \times m < 1 \times m = m
-				\end{align*}
-				But, closure of multiplication and $m \times m < m$ together contradict the assumption that $m$ is the least element of $\N{}$.\\
-				Therefore $m$ cannot be less than $1$. Since we know that $1 \in \N{}$ and that the minimum element of $\N{}$, $m$, cannot be less than $1$, it follows that $1$ must be the minimum element of $\N{}$ and $m = 1$.
+			\begin{align*}
+			&& a \times b &= a = a \times 1 &\sidecomment{by Multiplicative Identity axiom}\\
+			&\iff & b \times a &= 1 \times a  &\sidecomment{by Commutative Law for multiplication}\\
+			&\iff & b &= 1  &\sidecomment{by Multiplicative cancellation}\\
+			\end{align*}
 			\end{proof}
-		}
+		
+		\labeledProposition{If $a,b,c \in \N{}$ and $a < b$ then $a \times c < b \times c$.}{less_than_mult_augment}
+			\begin{proof}
+			\begin{align*}
+			&& a < b &\implies a + d = b \text{ for some } d \in \N{} &\sidecomment{by Definition of "less than"}\\
+			&\therefore & b \times c &= (a + d) \times c = (a \times c) + (d \times c)  &\sidecomment{by Distributive Law}\\
+			&\therefore & a \times c &< (a \times c) + (d \times c) = b \times c  &\sidecomment{by defn. "less than" and closure}
+			\end{align*}
+			\end{proof}
+		
+		\labeledProposition{$1$ is the least element of $\N{}$.}{mult_identity_least_element}
+		\begin{proof}
+			Assume $m$ is the least element of $\N{}$. Then, also $m < 1$. So, by \autoref{prop:less_than_mult_augment},
+			\begin{align*}
+			m < 1 \implies m \times m < 1 \times m = m
+			\end{align*}
+			But, closure of multiplication and $m \times m < m$ together contradict the assumption that $m$ is the least element of $\N{}$.\\
+			Therefore $m$ cannot be less than $1$. Since we know that $1 \in \N{}$ and that the minimum element of $\N{}$, $m$, cannot be less than $1$, it follows that $1$ must be the minimum element of $\N{}$ and $m = 1$.
+		\end{proof}
+	}
 	
 	
 	\searchableSubsection{\sectionTitle{Integers}}{number theory}{\bigskip}

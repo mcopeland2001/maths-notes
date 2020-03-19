@@ -40,6 +40,20 @@
 		\bigskip\smallskip 
 		\notation{from here on we will use juxtaposition notation for the group operation (so $xy = x * y$) and (usually) $1$ for the identity element instead of $e$. This is known as \textit{multiplicative notation}.}
 		
+		\labeledTheorem{Suppose an associative law of composition is given on a set $S$. Then there is a unique way to define a product of $n$ elements ${ a_1, \dots, a_n }$ for any ${ n \in \N{} }$.}{associative_law_gives_unique_n-ary_products}
+		\begin{proof}
+			Denote the product of $n$ elements as ${ [a_1 \dots a_n] }$. We show that a product can be defined with the following properties:
+			\begin{enumerate}[label=(\roman*)]
+				\item{${ [a_1] = a_1 }$;}
+				\item{${ [a_1a_2] = a_1 * a_2 }$ is defined by the law of composition;}
+				\item{for any integer $i$ such that ${ 1 \leq i \leq n }$, ${ [a_1\dots a_n] = [a_1\dots a_i][a_{i+1}\dots a_n] }$.}
+			\end{enumerate}
+			Following a proof by induction, firstly note that the product is defined for ${ n \leq 2 }$ by (i) and (ii) and that (ii) also satisfies the requirement (iii). Then, assume that the product is defined for ${ n \leq 2 }$ and that this product is the unique product satisfying (iii).\\
+			Then the induction step is to show that,
+			\[ [a_1\dots a_n] = [a_1\dots a_{n-1}][a_n] \]
+			\TODO{complete this from Artin[56]}
+		\end{proof}
+		
 		\bigskip\bigskip
 		\subsubsection{Corollaries of the group axioms}
 		The group operation is defined to map a unique tuple in $G \times G$ to a unique value in $G$ so that if we have $x,y \in G$ then $f((x, y)) = f(x,y) = xy \in G$ and for $a,b,c \in G$,
@@ -858,7 +872,7 @@
 	
 		
 		
-		\subsubsection{Image of a homomorphism}
+		\subsubsection{Image of a homomorphism}\label{sssection:image_of_homomorphism}
 		Since a homomorphism is not bijective it has an image different to the codomain group,
 		\[ im \; \phi = \setc{x \in G'}{\exists a \in G \suchthat \phi(a) = x} \]
 		The image of a homomorphism is a subgroup of the codomain group $G'$ because the homomorphism preserves the group structure as described in \autoref{prop:isomorphism_preserves_structure}.\\\\
@@ -1025,7 +1039,7 @@
 			\ex{The coset of an element with the kernel $N$,
 				\[ aN = \setc{g \in G}{g = an, \; n \in N} \]
 				is the set of all elements that are \textit{congruent} to $a$. The \textit{congruence classes} are precisely the cosets $aN$ for each $a \in G$. They are also the \textit{fibres} of the homomorphic map.\medskip
-			}\label{ex_coset_with_kernel}
+			}\label{ex:coset_with_kernel}
 			\ex \ref{S_3} Continuing the example of the symmetric group $S_3$ represented as 
 				\[ G = \{1, x, x^2, y, xy, x^2y\} \]
 				with group multiplication rules, 
@@ -1145,7 +1159,7 @@
 		\end{exe}
 		
 		\subsubsection{Lagrange's Theorem and Homomorphisms}
-		The Counting Formula can also be applied when a homomorphism is given. Let $\phi : G \longmapsto G'$ be a homomorphism. As we saw in coset example \ref{ex_coset_with_kernel}, the left cosets of $ker \; \phi$ are the fibres of the map $\phi$. They are in bijective correspondence with the elements of the image. Therefore,
+		The Counting Formula can also be applied when a homomorphism is given. Let $\phi : G \longmapsto G'$ be a homomorphism. As we saw in coset example \ref{ex:coset_with_kernel}, the left cosets of $ker \; \phi$ are the fibres of the map $\phi$. They are in bijective correspondence with the elements of the image. Therefore,
 		\[ [G : ker \; \phi] = \cardinality{im \; \phi}. \]
 		Which implies that,
 		\begin{corollary}
@@ -1558,7 +1572,19 @@
 			For any normal subgroup ${ N \leq G }$, if we define the map,
 			\[ \pi : G \longmapsto G/N \]
 			then $\pi$ is homomorphic because ${ \pi(ab) = abN = aNbN = \pi(a)\pi(b) }$.\\
-			Now, \autoref{prop:coset_of_subgroup_member_is_subgroup} tells us that ${ \pi{x} = 1N = N \iff x \in N }$ so that ${ ker\,\pi = N }$. (We could also observe that the cosets are equivalence classes and the kernel is the equivalence class containing the identity. The coset that contains the identity is the original subgroup ${ N = 1N }$.)
+			Now, \autoref{prop:coset_of_subgroup_member_is_subgroup} tells us that 
+			\[ \pi(x) = 1N = N \iff x \in N \]
+			which implies that ${ ker\,\pi = N }$.
+			(We could also observe that the cosets are equivalence classes and the kernel is the equivalence class containing the identity. The coset that contains the identity is the original subgroup ${ N = 1N }$.)
+		\end{proof}
+	
+		\labeledTheorem{\textbf{First Isomorphism Theorem}: Let ${ \phi: G \longmapsto G' }$ be a surjective group homomorphism, and let ${ N = ker\,\phi }$. Then ${ G/N }$ is isomorphic to $G'$ by the map $\overline\phi$ which sends the coset ${ \overline{a} = aN }$ to $\phi(a)$,
+			\[ \overline\phi(\overline{a}) = \phi(a). \]
+		}{first_isomorphism_theorem}
+		\begin{proof}
+			The non-empty fibres of $\phi$ are the cosets $aN$ as seen in the example \ref{ex:coset_with_kernel}. So, $G/N$ can be thought of either as the cosets of the kernel of $\phi$ or as the non-empty fibres of $\phi$. Then, $\overline\phi$ bijectively maps the cosets in $G/N$ with the elements of the ${ im\,\phi }$ and, because $\phi$ is surjective, we have ${ im\,\phi = G' }$ so we have a bijection ${ \overline\phi: G/N \longmapsto G' }$.\\
+			Also, the map $\overline\phi$ is homomorphic because coset multiplication is consistent with multiplication in the group,
+			\[ \overline\phi(\overline{ab}) = \phi(ab) = \phi(a)\phi(b) = \overline\phi(\overline{a})\overline\phi(\overline{b}). \]
 		\end{proof}
 	
 		\subsubsection{Examples of Quotient Groups}
