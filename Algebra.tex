@@ -1620,7 +1620,44 @@
 	
 	\pagebreak
 	\searchableSection{Fields}{abstract algebra}
+	
+		\label{def:field}
+		\boxeddefinition{A \textbf{field} F is a set together with two laws of composition, addition and multiplication, satisfying the following axioms:
+			\begin{enumerate}[label=(\roman*)]
+				\item{Addition makes $F$ into an abelian group $F^+$ (or ${ (F,+) }$). Its identity element is denoted 0.}
+				\item{Multiplication is associative and commutative and makes ${ (F/\{0\}, \times) }$ into a group. Its identity element is denoted 1.}
+				\item{Distributive law: For all ${ a,b,c \in F,\, (a + b)c = ac + bc }$.}
+			\end{enumerate}
+		}
+	
+		\smallskip
+		\note{The distributive law establishes a relationship between the two laws of composition such that, for ${ a \in \F{} }$,
+			\[ a + a = 1a + 1a = (1 + 1)a. \]
+			In so doing, it establishes a relationship between the two groups: the additive group and the multiplicative group.
+		}
+	
+		\bigskip\bigskip
+		\subsubsection{Subfields of $\C{}$}
+		\boxeddefinition{
+			A field $F$ is a \textbf{subfield of ${\bm{ \C{} }}$} if the following properties hold:
+			\begin{itemize}
+				\item If $a, b \in F$, then $a + b \in F$.
+				\item If $a \in F$, then $-a \in F$.
+				\item If $a, b \in F$, then $ab \in F$.
+				\item If $a \in F \text{ and } a \ne 0$, then $a^{-1} \in F$.
+				\item $1 \in F$.
+			\end{itemize}
+		}
+				
+		\smallskip
+		\note{Note that using the first, second and last of these axioms we can deduce that $1 - 1 = 0$ is an element of $F$.\\\\
+			Also notice that addition on the field makes ${ (F, +) }$ into an abelian group and multiplication makes ${ (F/\{0\}, \times) }$ into an abelian group also. Conversely, any subset of $F$ for which this is also true is a \textbf{subfield}.
+		}
 		
+		\bigskip\bigskip
+		\TODO{Finite Fields (Artin[98])}
+		
+		\bigskip
 		\searchableSubsection{Complex Numbers}{abstract algebra, complex numbers}{\bigskip
 			\labeledProposition{For every $\alpha \in \C{}$, there exists a unique $\beta \in \C{}$ such that $\alpha + \beta = 0$.}{unique_complex_additive_inverse}
 			\begin{proof}

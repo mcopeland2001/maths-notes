@@ -266,9 +266,9 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		\bigskip
 		\subsubsection*{Matrix inverse}
-		\begin{definition}
-		Inverse property is if $ \exists \text{ a matrix } B \suchthat AB = BA = I $ then $B$ is the \textbf{inverse} of $A$.
-		\end{definition}
+		\boxeddefinition{Inverse property is: If there exists a matrix B such that $ AB = BA = I $ then $B$ is the \textbf{inverse} of $A$ and $A$ is the inverse of $B$.}
+		
+		\medskip
 		This definition is inherently bound up with the definition of the identity ($\exists \text{ a matrix } I \suchthat AI = IA = A$) and both define the identity and inverse elements as commutatively producing their result under matrix multiplication. Since matrix multiplication is not, in general, commutative there is no guarantee that if $AB = I$ then $BA = I$. An example of this failing is,
 		\begin{align*}
 			A = 
@@ -294,6 +294,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		But we could have guessed this because \autoref{prop:square_identity} showed that identity matrices must be square and its product with a matrix must be defined from both the left and the right, i.e. $IA = AI = A$ meaning that the matrix $A$ must have the same dimensions as $I$. So, for non-square matrices, no identity can exist. If there is no identity, then the inverse is not defined either.
 		
+		\medskip
 		\labeledProposition{If the inverses of the matrices $A$ and $B$ both exist then so does the inverse of the product $AB$ and it is equal to $\inv{B}\inv{A}$.}{existence_inverse_product}
 		\begin{proof}
 		\begin{align*}
@@ -307,10 +308,10 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{proof}
 	}
 	
-	
+	\pagebreak
 	\searchableSubsection{Matrices as linear transformations}{linear algebra}{
 		\label{ssection:matrices_as_linear_transformations}
-		
+		\bigskip
 		\subsubsection{Multiplying a vector by a matrix on the left: $ A\V{x} = \V{y} $}
 		Left multiplication of a matrix $A$ of dimension $m \times n$ on a column vector $\V{x}$ of dimension $n \times 1$ transforms it to a column vector $\V{y}$ of dimension $m \times 1$.
 		\begin{align*}
@@ -352,6 +353,16 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 					
 		\exampleMatrixTwoDTransform
 		
+		\bigskip
+		\subsubsection{Change of Co-ordinates}
+		If a matrix $A$ has columns comprised of the axes of a co-ordinate system, then $\V{x}$ defined against the standard basis is, in the other system, ${ \inv{A}\V{x} }$. This is because the axes in $A$ are defined relative to the standard basis axes. Therefore, if $\V{x_A}$ is a vector defined against the axes in $A$, then the same vector against the standard basis axes $\V{x}$ would be ${ A\V{x_A} = \V{x} }$ and so ${ \V{x_A} = \inv{A}\V{x} }$.
+		
+		\medskip
+		\labeledProposition{Let $B$ be a basis of a vector space $V$. The other bases are the sets of the form ${ B' = B\inv{P} }$, where ${ P \in GL_n(\F{}) }$ is an invertible matrix.}{}
+		\begin{proof}
+		\end{proof}
+		
+		\bigskip
 		\subsubsection{Types of Transformations}
 		There are 3 basic types of transformation:
 		\begin{itemize}
@@ -1009,6 +1020,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		and the image of $T$ as,
 		\[ im\,T = \setc{\w \in W}{\exists \v \in V \logicsep \w = T(\v)}. \]
 		
+		\medskip
 		\labeledProposition{The kernel of ${ T: V \longmapsto W }$ is a subspace of $V$ and the image is a subspace of $W$.}{kernel_and_image_of_linear_map_are_subspaces}
 		\begin{proof}
 			$T$ is a homomorphism between additive groups of vectors and so the proof that the kernel and image are subspaces is the same as for general homomorphisms (see \ref{sssection:image_of_homomorphism}).

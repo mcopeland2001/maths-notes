@@ -46,20 +46,17 @@
 \providecommand\searchResult\nosearch
 
 \newcommand{\tags}[1]{
-	%\begin{footnotesize}
-	{ \tiny{(tags: #1)} }
-	%\textit{tags: {#1}}
-	%\end{footnotesize}
+	%{ \tiny{(tags: #1)} }
 }
 \newcommand{\searchableSubsection}[3]{
 	\searchResult{#2}{
-		\subsection{#1}\tags{#2}\\
+		\subsection{#1}\tags{#2}
 			{#3}
 	}
 }
 \newcommand{\searchableSection}[2]{
 	\searchResult{#2}{
-		\section{#1}\tags{#2}\\
+		\section{\sectionTitle{#1}}\tags{#2}\bigskip\bigskip
 	}
 }
 
