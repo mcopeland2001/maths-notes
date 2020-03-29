@@ -582,6 +582,12 @@
 			\item{The span of a set of vectors changes when adding a vector not in the existing span.}
 			\item{A linearly independent set of vectors continues to be linearly independent when adding a vector not in the existing span.}
 		\end{itemize}
+		The fundamental point of linear independence and span is that if the span of two sets of vectors is not completely disjoint (ignoring the zero vector) then the sets are not linearly independent.
+		Any nonzero vector in common between the two spans implies a linear relation between the sets,
+		\begin{align*}
+		&& \V{u_1} + ... + \V{u_n} &= \v = \V{w_1} + ... + \V{w_n} \\
+		&\iff & \0 &= (\V{w_1} + ... + \V{w_n}) - (\V{u_1} + ... + \V{u_n}). &\sidecomment{} \\
+		\end{align*}
 	}
 
 
