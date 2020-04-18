@@ -1,11 +1,5 @@
 \documentclass[MathsNotesBase.tex]{subfiles}
 
-
-\def\u{\vec{\bm{u}}}
-\def\v{\vec{\bm{v}}}
-\def\w{\vec{\bm{w}}}
-\def\0{\vec{\bm{0}}}
-
 \newcommand{\exampleMatrixTwoDTransform}{
 We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D transformation matrix $A$, into its image in the destination space, $Y$ in $\R{2}$.
 	\begin{align*}
@@ -36,24 +30,20 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 
 
 \begin{document}
-\searchableSection{Linear Algebra}{linear algebra}
+\searchableSection{Matrices}{linear algebra}
 
-	\searchableSubsection{Basic properties of Matrix Algebra}{linear algebra}{
+	\searchableSubsection{Basic Algebra of Matrices}{linear algebra}{
+		\bigskip\bigskip
 	
-		\begin{definition}
-		Matrix \textbf{equality} is defined component-wise so that if $A = B$ then $A$ and $B$ must have the same dimension as well as equal values in each component.
-		\end{definition}
-		\begin{definition}
-		An \textbf{identity} element $e$ is defined as $ea = ae = a$.
-		\end{definition}
+		\boxeddefinition{Matrix \textbf{equality} is defined component-wise so that if $A = B$ then $A$ and $B$ must have the same dimension as well as equal values in each component.}
+		\boxeddefinition{An \textbf{identity} element $e$ is defined as $ea = ae = a$.}
 		The definition of an identity element above is in any context (not just for matrices). For matrices this has certain consequences.
 		\labeledProposition{Identity matrices must be square}{square_identity}
 		\begin{proof}
 		For a matrix $A$ and an identity matrix $I$, $AI = IA = A$ which means that $AI$, $IA$ and $A$ must all have the same dimensions. If $A$ is of dimension $m \times n$ then $I$ must have dimension $n \times m$ but then $AI$ has dimension $m \times m$ while $IA$ has dimension $n \times n$. We conclude that $m = n$ and both matrices are square.
 		\end{proof}
 		 
-	
-		\subsubsection{\small{If $A,B,C$ are matrices s.t. $AB = AC$, can we, in general, conclude that $B = C$?}}
+		\subsubsubsection{\small{If $A,B,C$ are matrices s.t. $AB = AC$, can we, in general, conclude that $B = C$?}}
 		The answer is no, as the following example shows:
 		\begin{align*}
 			A = 
@@ -82,7 +72,8 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		This is because multiplication by $A$ has no inverse (i.e. it's not a bijection and $A^{-1}$ does not exist) as we can see by the fact that $\vert{A}\vert = 0$.
 		
-		\subsubsection{\small{If $A,B,C$ are matrices s.t. $A + 5B = A + 5C$, can we, in general, conclude that $B = C$?}}
+		
+		\subsubsubsection{\small{If $A,B,C$ are matrices s.t. $A + 5B = A + 5C$, can we, in general, conclude that $B = C$?}}
 		The answer is yes because the matrix addition and scalar multiplication always have inverses. The inverse of $+ A$ is $- A$ and the inverse of scalar multiplication by $5$ is scalar multiplication by $\frac{1}{5}$. So we can say,
 		\begin{align*}
 		&& A + 5B &= A + 5C\\[8pt]
@@ -94,19 +85,9 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		
 		
-		\subsubsection*{Matrix multiplication}
-		Multiplication of matrices proceeds as a collection of dot-products of individual vectors. As a result, its properties are largely dependent on the properties of the dot-product. These are:
-		\newcommand\vx{\V{x}}
-		\newcommand\vy{\V{y}}
-		\newcommand\vz{\V{z}}
-		\begin{itemize}
-		\item[]{If $\V{x} = (a, b)^{T}$ and $\V{y} = (e, g)^{T}$ then the dot-product $\langle \V{x}, \V{y} \rangle = ae + bg$ and,}
-		\item{$\langle \vx, \vy \rangle = \langle \vy, \vx \rangle$}
-		\item{$\alpha\langle \vx, \vy \rangle = \langle \alpha \vx, \vy \rangle = \langle \vx, \alpha \vy \rangle$}
-		\item{$\langle \vx+\vy, \vz \rangle = \langle \vx, \vz \rangle + \langle \vy, \vz \rangle$}
-		\item{$\langle \vx, \vx \rangle \geq 0$ and $\langle \vx, \vx \rangle = 0 \iff \vx = 0$}
-		\end{itemize}
-		
+		\subsubsection{Matrix multiplication}\label{sssection:matrix_multiplication}
+		Multiplication of matrices proceeds as a collection of dot-products of individual vectors. As a result, its properties are largely dependent on the properties of the dot-product (see: \ref{prop:properties_of_dot_product}).\\
+			
 		Matrix multiplication treats the two operand matrices as collections of vectors with the first matrix having the vectors as rows and the second having the vectors as columns.
 		\begin{align*}
 			\begin{bmatrix}
@@ -134,7 +115,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			e & f \\
 			g & h \\
 			\end{bmatrix}
-			&=
+			=
 			\begin{bmatrix}
 			\alpha a & \alpha b \\
 			\alpha c & \alpha d \\
@@ -143,12 +124,13 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			e & f \\
 			g & h \\
 			\end{bmatrix}
-			=
+			&=
 			\begin{bmatrix}
 			\alpha(ae + bg) & \alpha(af + bh) \\
 			\alpha(ce + dg) & \alpha(cf + dh) \\
-			\end{bmatrix}
-			=
+			\end{bmatrix} 
+			\\
+			&=
 			\alpha
 			\begin{bmatrix}
 			ae + bg & af + bh \\
@@ -172,7 +154,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			i & j \\
 			k & l \\
 			\end{bmatrix}
-			=
+			&=
 			\begin{bmatrix}
 			a+e & b+f\\
 			c+g & d+h
@@ -181,13 +163,14 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			i & j \\
 			k & l \\
 			\end{bmatrix}
+			\\
 			&=
 			\begin{bmatrix}
 			i\,{\left(a+e\right)}+k\,{\left(b+f\right)} & j\,{\left(a+e\right)}+l\,{\left(b+f\right)}\\
 			i\,{\left(c+g\right)}+k\,{\left(d+h\right)} & j\,{\left(c+g\right)}+l\,{\left(d+h\right)}\\
-			\end{bmatrix}\\
-			\hspace{50pt}
-			=
+			\end{bmatrix}
+			\\
+			&=
 			\begin{bmatrix}
 			ia + kb & ja + lb\\
 			ic + kd & jc + ld\\
@@ -197,6 +180,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			ie + kf & je + lf\\
 			ig + kh & jg + lh\\
 			\end{bmatrix}
+			\\
 			&=
 			\begin{bmatrix}
 			a & b \\
@@ -251,7 +235,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{itemize}
 		
 		\bigskip
-		\subsubsection*{Matrix transpose}
+		\subsubsection{Matrix transpose}
 		Denote the $i$th row of the matrix $A$ as $A[i:]$ and the $j$th column of the matrix $B$ as $B[:j]$ and a matrix whose components at $(i,j)$ are the dot-products of the $i$th row of the matrix $A$ with the $j$th column of the matrix $B$ as $(\langle A[i:], B[:j] \rangle)$. Then,
 		\begin{align*}
 		(AB)^{T} = (\langle A[i:], B[:j] \rangle)^{T} = (\langle A[j:], B[:i] \rangle) \\
@@ -265,7 +249,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{align*}
 		
 		\bigskip
-		\subsubsection*{Matrix inverse}
+		\subsubsection{Matrix inverse}
 		\boxeddefinition{Inverse property is: If there exists a matrix B such that $ AB = BA = I $ then $B$ is the \textbf{inverse} of $A$ and $A$ is the inverse of $B$.}
 		
 		\medskip
@@ -307,12 +291,43 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		Furthermore, this holds for a product of any finite sequence of invertible matrices $A_1A_2\cdots A_n$ which can easily be shown by induction on the associative product.
 		\end{proof}
 	}
+
+
+% --------------------------
+
+
+	\pagebreak
+	\searchableSubsection{Basic properties of Matrices}{linear algebra}{
+		\bigskip\bigskip
+		\subsubsection{Symmetry}
+		\TODO{Symmetric requires square?}
+		
+		\bigskip\bigskip
+		\subsubsection{Diagonal Matrices}
+		\TODO{definition}
+		\bigskip
+		\labeledProposition{Diagonal matrices form an abelian group under multiplication.}{}
+		\begin{proof}
+			\TODO{prove this (diagonal requires square?)}
+		\end{proof}
+		
+		\bigskip\bigskip
+		\subsubsection{Trace}\label{sssection:trace}
+		\boxeddefinition{The \textbf{trace} of a matrix is the sum of the diagonal entries.}
+		\TODO{requires square?}
+	}
+
+
+
+
+% --------------------------
+
 	
 	\pagebreak
 	\searchableSubsection{Matrices as linear transformations}{linear algebra}{
 		\label{ssection:matrices_as_linear_transformations}
 		\bigskip
-		\subsubsection{Multiplying a vector by a matrix on the left: $ A\V{x} = \V{y} $}
+		\subsubsection{Multiplying a vector by a matrix on the left: \texorpdfstring{$ A\V{x} = \V{y} $}{Ax = y}}
 		Left multiplication of a matrix $A$ of dimension $m \times n$ on a column vector $\V{x}$ of dimension $n \times 1$ transforms it to a column vector $\V{y}$ of dimension $m \times 1$.
 		\begin{align*}
 			\begin{bmatrix}
@@ -348,7 +363,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{align*}
 		In this case, each row of the matrix is a real-valued function in $n$ variables. Each of these functions is \textit{homogenous linear} (a function of the form $a_1x_1 + \cdots + a_kx_k + c$ for scalars $a_1,\cdots,a_k,c$ and $c = 0$) and so the system of functions is called a \textit{linear transformation}.\\
 		
-		\subsubsection{Multiplying a matrix of vectors by a matrix on the left: $ AX = Y $}
+		\subsubsection{Multiplying a matrix of vectors by a matrix on the left: \texorpdfstring{$ AX = Y $}{AX = Y}}
 		Looking at the matrix as a linear transformation from one co-ordinate space to another, consider $AX = Y$ where $X$ is a matrix - which may be considered a collection of vectors - transformed by the matrix $A$ into the matrix - or collection of vectors - $Y$.\\
 					
 		\exampleMatrixTwoDTransform
@@ -563,7 +578,8 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		So matrix units can be used to analyse matrix addition but to analyse matrix multiplication some square matrices called \textbf{elementary matrices} are more useful.\\
 		
 		Multiplying a matrix from the left (so doing row operations), there are 3 types of elementary matrix:
-		\subsubsection*{Adding rows: $\bm{ I + ae_{ij}\;\;\;\; \text{ for } i \neq j }$}
+		
+		\subsubsubsection{Adding rows: $\bm{ I + ae_{ij}\;\;\;\; \text{ for } i \neq j }$}
 			\[
 			\begin{bmatrix}
 			1 	&  &  	&	\\
@@ -574,7 +590,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			\]
 			This adds $a$ times some row to another row.
 			
-		\subsubsection*{Swapping rows: $\bm{ I + e_{ij} + e_{ji} - e_{ii} - e_{jj}\;\;\;\; \text{ for } i \neq j }$}
+		\subsubsubsection{Swapping rows: $\bm{ I + e_{ij} + e_{ji} - e_{ii} - e_{jj}\;\;\;\; \text{ for } i \neq j }$}
 			\[
 			\begin{bmatrix}
 			1 	&  &  	&	\\
@@ -585,7 +601,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			\]
 			This swaps the rows $i$ and $j$.
 		
-		\subsubsection*{Scalar-multiplying a row: $\bm{ I + (c - 1)e_{ii}\;\;\;\; \text{ for } c \neq 0 }$}
+		\subsubsubsection{Scalar-multiplying a row: $\bm{ I + (c - 1)e_{ii}\;\;\;\; \text{ for } c \neq 0 }$}
 			\[
 			\begin{bmatrix}
 			1 	&  &  	&	\\
@@ -638,14 +654,16 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 	
 	\pagebreak
 	\searchableSubsection{Determinants}{linear algebra}{\bigskip
-		\subsubsection{$\bm{1 \times 1}$}
+
+		\subsubsubsection{$\bm{1 \times 1}$}
 		The determinant of a $1 \times 1$ matrix is just its unique component entry,
 		\[ det
 		\begin{bmatrix}
 		{a}\\
 		\end{bmatrix} 
 		= a \]
-		\subsubsection{$\bm{2 \times 2}$}
+		
+		\subsubsubsection{$\bm{2 \times 2}$}
 		The determinant of a $2 \times 2$ matrix is given by the formula,
 		\[ det 
 		\begin{bmatrix}
@@ -664,7 +682,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		And the determinant would be $0$ in the case that the columns were proportional (representing co-linear vectors) and the determinant would be negative if the orientation of the output vectors were reversed \wrt the input vectors.\\
 		So, if we swap either the columns or the rows of the transformation matrix, $A$, the determinant comes out $-10$.
 		
-		\subsubsection{Swapping the columns:}
+		\subsubsubsection{Swapping the columns:}
 		\begin{align*}
 		A_c =
 		\begin{bmatrix}    
@@ -689,7 +707,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		
 		Note that the result looks exactly the same - it's just that now the x-vector $\langle 1, 0 \rangle$, produces $\langle 4, 2 \rangle$ and the y-vector, $\langle 0, 1 \rangle$ produces $\langle 3, 1 \rangle$.
 			
-		\subsubsection{Swapping the rows:}
+		\subsubsubsection{Swapping the rows:}
 		\begin{align*}
 		A_r =
 		\begin{bmatrix}    
@@ -768,7 +786,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{align*}
 		but in both cases the columns are proportional and therefore co-linear.
 		
-		\subsubsection{$\bm{n \times n}$}
+		\subsubsubsection{$\bm{n \times n}$}
 		The determinant of an $n \times n$ matrix is defined recursively as:
 		\begin{itemize}
 		\item{if $n = 1$ then $det\, A = a_{11}$, i.e. the determinant is equal to the sole component.}
@@ -839,7 +857,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			\end{align*}
 		\end{proof}
 	
-		\subsubsection{Better formulation \tiny{(from Rudin's Principles of Mathematical Analysis)}}
+		\subsubsection{Better formulation \tiny{(from Rudin's Principles of Mathematical Analysis)}}\label{sssection:determinant_formula}
 		Let $a(i,j)$ be the component in the $i$th row and $j$th column of the matrix $A$ and, 
 		\[ sign(x) = \begin{cases} 
 						-1 & x < 0 \\
@@ -849,7 +867,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\]
 		\[ s(j_1,\cdots,j_n) = \prod_{p < q}{sign(j_q - j_p)} \]
 		Then the determinant,
-		\[ det\, A = \sum_{i}s(j_1,\cdots,j_n)a(i,j_1) \cdots a(i,j_n) \]
+		\[ det\, A = \sum s(j_1,\cdots,j_n)a(1,j_1) \cdots a(n,j_n) \]
 		defined over all n-tuples of n distinct values, $j_1, \cdots, j_n$ with ${1 \leq j_r \leq n}$ (i.e, permutations of $[1,n] \subset \N{}$) with each term being produced by a different permutation. 
 		\bigskip
 		
@@ -921,17 +939,35 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			where $det\,E_1E_2 \cdots E_n$ is a known, non-zero quantity - say $d_e$. Since the determinant of $R$ is either 0 or 1 this leaves the determinant of $A$ being either 0 or $\frac{1}{d_e}$.
 			\paragraph{}So, the value of the determinant of an arbitrary matrix, $A$, is wholly determined by the properties described.
 		\end{proof}
+	
+		\bigskip
+		\labeledProposition{The determinant of any square matrix is equal to that of its transpose. That's to say, for an arbitrary square matrix $A$,
+			\[ det\,A^T = det\,A. \]
+		}{determinant_of_matrix_equal_to_its_transpose}
+		\begin{proof}
+			The determinant formula from \ref{sssection:determinant_formula} gives us:
+			\[ det\, A = \sum s(j_1,\cdots,j_n)a(1,j_1) \cdots a(n,j_n) \]
+			where $a(1,j)$ is the $(i,j)$th element of the matrix $A$ and the summation is over all n-tuples of n distinct values, $j_1, \cdots, j_n$ with ${1 \leq j_r \leq n}$. So we can also deduce that,
+			\[ det\, A^T = \sum s(j_1,\cdots,j_n)a(j_1,1) \cdots a(j_n,n). \]
+			Clearly for the identity permutation ${ j_1,\dots,j_n = 1,\dots,n }$ the term of the summation generated is the same: in both cases it is the product of the elements along the main diagonal ${ a(1,1)\cdots a(n,n) }$. On the other hand, if we take a minimal permutation, for example, where ${ j_1 = 2,\, j_2 = 1 }$ so that the first two elements are swapped, then we see that the term of the summation generated in the determinant of $A$ is
+			\[ -a(1,2)a(2,1)a(3,j_3) \cdots a(n,j_n) \]
+			while the term of the summation generated in the determinant of $A^T$ is
+			\[ -a(2,1)a(1,2)a(3,j_3) \cdots a(n,j_n) \]
+			so that the same permuatation in the n-tuple $j_1, \cdots, j_n$ produces the exact same terms of the summation in the determinant of $A$ and of $A^T$.\\
+			It's easy to see in fact, that this will happen with any permutation as the permutation of the $j_1, \cdots, j_n$, in the determinant of $A$, permutes the column indices while selecting in order from the rows whereas, in the determinant of $A^T$, it permutes the row indices while selecting from the columns in order. So, the net result is the same in both cases. Since each permutation of the n-tuple produces equal terms of the summation, the complete summation produced by all the permutations will be the same.\\
+			Therefore ${ det\,A^T = det\,A. }$
+		\end{proof}
 	}
 
 	\pagebreak
 	\searchableSubsection{Permutation Matrices}{linear algebra}{\bigskip
-		\begin{definition}
+		\boxeddefinition{
 			A permutation $p$ is a bijective map from a set $S$ to itself. If a matrix $P$ is the matrix associated with a permutation $p$ then:
 			\begin{itemize}
 				\item{the $j$th column of the matrix is the basis vector $e_{p(j)}$,}
 				\item{$P$ is a sum of the matrix units, $P = e_{p(1)1} + e_{p(2)2} + \cdots + e_{p(n)n} = \sum_j e_{p(j)j} $.}
 			\end{itemize}
-		\end{definition}
+		}
 		
 		\labeledProposition{If $P,Q$ are permutation matrices associated with the permutations $p,q$ then the matrix that corresponds to the permutation $p \circ q$ is $PQ$}{perm_composition_product_perm_matrices}
 		\begin{proof}
@@ -962,9 +998,9 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\[ det\,A  = (-1)^{j+1}a_{1j}\,det\,A_{1j} + (-1)^{j+2}a_{2j}\,det\,A_{2j} + \cdots + (-1)^{j+n}a_{nj}\,det\,A_{nj} \]
 		Expansion by minors on the ith row:
 		\[ det\,A  = (-1)^{i+1}a_{i1}\,det\,A_{i1} + (-1)^{i+2}a_{i2}\,det\,A_{i2} + \cdots + (-1)^{i+n}a_{in}\,det\,A_{in} \]
-		\begin{definition}
+		\boxeddefinition{
 			If we form a matrix with elements $\alpha_{ij} = (-1)^{i+j}\,det\,A_{ij}$ and then transpose it we get the \textbf{adjoint matrix}.
-		\end{definition}
+		}
 		\notation{The adjoint of $A$ is denoted $adj\,A$.}\\\\
 		Following we use $[x]$ to denote a matrix as distinguished from a scalar.\\\\
 		Let $d = det\,A$. Then, if we multiply the adjoint matrix of $[A]$ by $[A]$ we get,
@@ -996,92 +1032,6 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			&= \frac{1}{det\,A}(b_1(-1)^{1+j}\,det\,A_{1j} + \cdots + b_n(-1)^{n+j}\,det\,A_{nj})
 		\end{align*}
 		which is the expansion by minors of $A$ on the $j$th column but with the components $a_{ij}$ of $A$ replaced with the components of the vector $B$, divided by the determinant of $A$.
-	}
-
-
-	
-	\pagebreak
-	\searchableSubsection{Linear Transformations}{linear algebra}{
-		
-		The analogue for vector spaces of a homomorphism of groups is a map,
-		\[ T: V \longmapsto W \]
-		from one vector space over a field $\F{}$ to another, which is compatible with addition and scalar multiplication:
-		\[ T(\V{v_1} + \V{v_2}) = T(\V{v_1}) + T(\V{v_2}) \eqand T(c\V{v_1}) = cT(\V{v_1}), \]
-		for all ${ \V{v_1},\V{v_2} \in V,\, c \in \F{} }$.\\
-		
-		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation}.}
-		
-		\note{The compatibility with addition of vectors implies that a linear transformation is a homomorphism between additive groups of vectors.}
-	
-		\bigskip
-		\subsubsection{The Kernel and the Image of a Linear Transformation}
-		Let ${ T: V \longmapsto W }$ be any linear transformation. Then the kernel (or nullspace) of $T$ is defined as,
-		\[ ker\,T = \setc{\v}{T(\v) = \0}  \]
-		and the image of $T$ as,
-		\[ im\,T = \setc{\w \in W}{\exists \v \in V \logicsep \w = T(\v)}. \]
-		
-		\medskip
-		\labeledProposition{The kernel of ${ T: V \longmapsto W }$ is a subspace of $V$ and the image is a subspace of $W$.}{kernel_and_image_of_linear_map_are_subspaces}
-		\begin{proof}
-			$T$ is a homomorphism between additive groups of vectors and so the proof that the kernel and image are subspaces is the same as for general homomorphisms (see \ref{sssection:image_of_homomorphism}).
-		\end{proof}
-	
-		\bigskip
-		\subsubsection{Examples of Linear Transformations}
-		\begin{exe}
-			\item{As previously seen in section \ref{ssection:matrices_as_linear_transformations}, matrix multiplication on the left is a linear transformation. Let $A$ be an ${ m \times n }$ matrix with entries in $\F{}$ and consider $A$ as an operator on column vectors ${ A: \F{n} \longmapsto \F{m} }$. The kernel of $A$ is the set of vectors that are solutions to ${ A\V{x} = \0 }$ while the image (or range) is the set of vectors $\V{b}$ such that ${ A\V{x} = \V{b} }$ has a solution.
-			}
-			\item{Also previously seen in \ref{ssection:polynomials_as_vector_spaces} is that polynomials can be modeled as vectors. Let $P_n$ be the vector space of real polynomials of degree ${ \leq n }$. Then the derivative is a linear transformation ${ P_n \longmapsto P_{n-1} }$.
-			}
-		\end{exe}
-	
-		\bigskip
-		\boxeddefinition{The dimension of the image is called the \textbf{rank} while the dimension of the kernel is known as the \textbf{nullity}.}
-		
-		\bigskip\bigskip
-		\subsubsection{The Dimension Formula}
-		\labeledTheorem{Let ${ T: V \longmapsto W }$ be a linear transformation, and assume that $V$ is finite dimensional. Then,
-			\[ dim\,V = dim(ker\,T) + dim(im\,T) = rank + nullity. \]
-		}{linear_map_dimension_formula}
-		\begin{proof}
-		\end{proof}
-	}	
-	
-	
-	
-	\pagebreak
-	\searchableSubsection{Relations on matrices}{linear algebra}{
-	
-		\searchable{subsubsection}{\small{Let $X$ be the set of $n \times n$ real matrices. Define a relation $\sim$ on $X$ by:
-			\[ M \sim N \iff \exists \text{ an invertible } P \in X \suchthat N = P^{-1}MP. \]
-		Prove that $\sim$ is an equivalence relation.
-		}}{linear algebra, equivalence relations}{
-		\paragraph{Reflexivity:}
-		\begin{align*}
-		& N = I^{-1}NI \\
-		\therefore \; & N \sim N
-		\end{align*}
-		
-		\paragraph{Symmetry:}
-		\begin{align*}
-		& & N &= P^{-1}MP \\
-		&\iff & NP^{-1} &= P^{-1}M(PP^{-1}) \\
-		&\iff & NP^{-1} &= P^{-1}M \\
-		&\iff & PNP^{-1} &= (PP^{-1})M \\
-		&\iff & PNP^{-1} &= M \\
-		&\iff & R^{-1}NR &= M,\;\; R \in X\\
-		&\;\;\therefore & N \sim M &\iff M \sim N
-		\end{align*}
-		
-		\paragraph{Transitivity:}
-		\begin{align*}
-		& & N &= P^{-1}MP,\;\; M = Q^{-1}AQ \\
-		&\implies & N &= P^{-1}(Q^{-1}AQ)P \\
-		&\iff & N &= (P^{-1}Q^{-1})A(QP) \\
-		&\iff & N &= R^{-1}AR,\;\; R \in X\\
-		&\;\;\therefore & (N \sim M) & \wedge (M \sim Q) \iff (N \sim Q)
-		\end{align*}
-		}
 	}
 	
 \end{document}

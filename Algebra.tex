@@ -9,7 +9,7 @@
 
 \searchableChapter{Algebra}{abstract algebra, complex numbers}
 
-	\searchableSection{Abstract Algebra}{abstract algebra}
+	\searchableSection{Group Theory}{abstract algebra}
 	
 	\searchableSubsection{Groups}{abstract algebra}{\bigskip
 		
@@ -158,12 +158,14 @@
 		
 		\bigskip
 		\subsubsection{Permutations and Symmetric Groups}\bigskip
-		\boxeddefinition{
-			A \textbf{permutation} is a bijection from a set to itself. Since permutations are bijective, they are invertible and since they are functions, function composition defines an associative law of composition over them. As a result, they form a group. 
+		\boxeddefinition{A \textbf{permutation} is a bijection from a set to itself. Since permutations are bijective, they are invertible and since they are functions, function composition defines an associative law of composition over them. As a result, they form a group. 
 		}
-		\boxeddefinition{
-			The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions. The name probably comes from the study of symmetries of geometric objects that were eventually realised to be equivalent to permutations of the vertices.
+		\boxeddefinition{The \textbf{symmetric group} defined over a set is the group whose elements are the permutations of the objects of the set and whose law of composition is the composition of functions. The name probably comes from the study of symmetries of geometric objects that were eventually realised to be equivalent to permutations of the vertices.
 		}
+		\label{def:generating_set_of_group} 
+		\boxeddefinition{A \textbf{generating set of a group} is a subset such that every element of the group can be expressed as a combination (under the group operation) of finitely many elements of the subset and their inverses.}
+		
+		\smallskip
 		\notation{The symmetric group over the integers from 1 to n is denoted $S_n$. The symmetric group over a set $G$ may be denoted ${ Sym(G) }$.}\\
 		
 		\subparagraph{$\bm{S_2}$}
@@ -968,6 +970,7 @@
 	\searchableSubsection{Equivalence Relations and Partitions}{abstract algebra}{\bigskip
 		\notation{In the following treatment of equivalence relations we will use the notation $a \sim b$ to denote the equivalence of $a$ and $b$; $\overline{a}$ to indicate the equivalence class of $a$; and $\overline{S}$ to indicate the partition of $S$ comprised of equivalence classes such as the class $\overline{a} = \overline{b}$ which includes both $a$ and $b$.}
 		Any map of sets $\phi: S \longmapsto T$ defines an equivalence relation on the domain $S$ such that $a \sim b$ iff $\phi(a) = \phi(b)$. We will refer to this as the \textit{equivalence relation determined by the map}. The corresponding partition is made up of the sets of elements in the domain $S$ that are mapped to the same element in the codomain $T$.\\\\
+		\label{def:inverse_image}
 		\boxeddefinition{Let $\phi: S \longmapsto T$ be a map, then the \textbf{inverse image} of an element $t \in T$ is defined as,
 			\[ \inv{\phi}(t) = \setc{s \in S}{\phi(s) = t} \]
 			and can also be applied to a set $U \in T$ as,
@@ -1038,7 +1041,7 @@
 		\begin{exe}
 			\ex{The coset of an element with the kernel $N$,
 				\[ aN = \setc{g \in G}{g = an, \; n \in N} \]
-				is the set of all elements that are \textit{congruent} to $a$. The \textit{congruence classes} are precisely the cosets $aN$ for each $a \in G$. They are also the \textit{fibres} of the homomorphic map.\medskip
+				is the set of all elements that are \textit{congruent} to $a$. The \textit{congruence classes} are precisely the cosets $aN$ for each $a \in G$. They are also the nonempty \textit{fibres} of the homomorphic map.\medskip
 			}\label{ex:coset_with_kernel}
 			\ex \ref{S_3} Continuing the example of the symmetric group $S_3$ represented as 
 				\[ G = \{1, x, x^2, y, xy, x^2y\} \]
@@ -1239,7 +1242,10 @@
 						\[ det\,\inv{M}AM = (det\,\inv{M}) \cdot 1 \cdot (det\,M) = (det\,M)/(det\,M) = 1. \]
 					}
 					\ex{$A_n$ \ref{ex_alternating_group} is a normal subgroup of the symmetric group $S_n$.}
-					\TODO{explain a bit further (e.g. any group of matrices with the same determinant will be normal)}
+					\ex{In fact, any subgroup of $GL_n(\F{})$ with some fixed determinant ${ d \in \R{} }$ will be a normal subgroup.
+						\[ N = \setc{ A \in GL_n(\F{}) }{ det\,A = d } \]
+						For ${ A \in N, M \in GL_n(\F{}) \logicsep det(MA\inv{M}) = d }$ by the same logic as in example a. These conjugate matrices are known as \textit{similar} matrices.
+					}
 				\end{xlist}
 			}\label{ex_kernel_homomorphism}
 			\ex{Any subgroup of an abelian group is normal because when the composition law is commutative, as was mentioned in the section on conjugation,
@@ -1637,7 +1643,7 @@
 		}
 	
 		\bigskip\bigskip
-		\subsubsection{Subfields of $\C{}$}
+		\subsubsection{Subfields of \texorpdfstring{$\C{}$}{C}}
 		\boxeddefinition{
 			A field $F$ is a \textbf{subfield of ${\bm{ \C{} }}$} if the following properties hold:
 			\begin{itemize}
@@ -1680,9 +1686,9 @@
 		}
 		
 		\bigskip\bigskip
-		\searchableSubsection{Complex Numbers Problems}{abstract algebra, complex numbers}{\bigskip\bigskip}
+		\searchableSubsection{Complex Numbers Problems}{abstract algebra, complex numbers}{\bigskip\bigskip
 		
-		\searchable{subsubsection}{Find all the roots of $x^3 = 1$ for $x \in \C{}$}{complex numbers}{
+		\paragraph{Find all the roots of $x^3 = 1$ for $x \in \C{}$}{complex numbers}
 		Since $x^3 - 1 = (x - 1)(x^2 + x + 1)$, we have (via zero-factor theorem) possible roots from,
 		\[ x - 1 = 0 \iff x = 1 \]
 		\begin{align*}
@@ -1701,6 +1707,7 @@
 		which means that if $x = \frac{-1 \pm \sqrt{3}\,i}{2}$ then $x^3 = x^2x$ is of the form $(a+bi)(a-bi)=a^2+b^2$ so we have
 		that $x^3 = {\frac{-1}{2}}^2 + {\frac{\sqrt{3}}{2}}^2 = \frac{1}{4} + \frac{3}{4} = 1$.\\\\
 		So we see that - allowing for complex $x$ - the cubic polynomial $x^3 - 1$ has 3 roots as we should expect from the \href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Fundamental Theorem of Algebra} \textit{\color{red}{(is this the correct interpretation of this?)}}.
+		
 		}
 
 \end{document}

@@ -1,14 +1,20 @@
 \documentclass[12pt]{report}
 
 \usepackage{subfiles}
-\usepackage[open,openlevel=1]{bookmark}
+%\usepackage[depth=4,open,openlevel=1]{bookmark}
+%\usepackage[depth=5]{bookmark}% Show up to level 4 (\paragraph) in bookmarks
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{hyperref}
+\usepackage[depth=3]{bookmark}
+
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{centernot}
 \usepackage{listings}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}
+%\usepackage{hyperref}
+%\usepackage[latin1]{inputenc}
 \usepackage{color}
 \usepackage{bm}
 \usepackage{amsthm}
@@ -18,7 +24,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsfonts}
-\usepackage[outdir=./]{epstopdf}
+\usepackage{epstopdf}%[outdir=./resources/img/]
 \usepackage[table]{xcolor}
 \usepackage{siunitx}
 \usepackage{booktabs}
@@ -31,6 +37,21 @@
 
 \definecolor{note_bg}{RGB}{247,247,247}
 \AtBeginEnvironment{displayquote}{\small}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{4}
+%\setcounter{secnumdepth}{4}
+%\setcounter{tocdepth}{3}% Show up to level 3 (\subsubsection) in ToC
+%\hypersetup
+%{
+%	unicode,
+%	hidelinks, % Remove red boxes
+%	bookmarksnumbered=true,
+%	pdfauthor={Brian Griffin},
+%	pdftitle={Wish it, Want it, Do it},
+%	pdfsubject={Self help},
+%	pdfkeywords={therapy,healing,chicken soup},
+%	pdfproducer={Penguin Publishing}
+%}
 
 
 \titleformat*{\subparagraph}{\small\bfseries}
@@ -53,6 +74,7 @@
 \setlength{\parindent}{0em}
 \newcommand\chapterTitle\Huge
 \newcommand\sectionTitle\Huge
+\newcommand\subsubsubsection[1]{\paragraph{#1\\\\}}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
 \newcommand{\divides}{\mid}
@@ -62,7 +84,7 @@
 
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
-\newcommand{\TODO}[1]{\textcolor{blue}{\underline{TODO:} #1}}
+\newcommand{\TODO}[1]{\textcolor{blue}{\small{\underline{TODO:} #1}}}
 
 \DeclarePairedDelimiterX\setc[2]{\{}{\}}{\,#1 \,\;\delimsize\vert\;\, #2\,}
 \DeclareRobustCommand{\N}[1]{\mathbb{N}^{#1}}
@@ -78,11 +100,15 @@
 \def\v{\vec{\bm{v}}}
 \def\w{\vec{\bm{w}}}
 \def\0{\vec{\bm{0}}}
+\def\x{\vec{\bm{x}}}
+\def\b{\vec{\bm{b}}}
+\newcommand{\e}[1]{\vec{\bm{e_#1}}}
 
 \newcommand{\bigsetc}[2]{\left\{#1\; \middle\vert \;#2\right\}}
 \newcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\cardinality}{\abs}
 \newcommand{\norm}{\abs}
+\newcommand{\dotprod}{\boldsymbol{\cdot}}
 \newcommand{\congruent}[2]{\equiv #1 \modulo{#2}}
 
 \newcommand*{\V}[1]{\vec{\bm{#1}}}
@@ -139,7 +165,7 @@
 }
 
 \newcommand{\note}[1]{
-	\begin{tcolorbox}[enhanced jigsaw,colback=note_bg,boxrule=0pt,arc=0pt]
+	\begin{tcolorbox}[breakable,enhanced jigsaw,colback=note_bg,boxrule=0pt,arc=0pt]
 	\noindent\parbox{\textwidth}{%
 			{\small \textit{#1}}	
 		}
