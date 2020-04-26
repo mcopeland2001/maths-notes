@@ -15,7 +15,7 @@
 		\[ T(\V{v_1} + \V{v_2}) = T(\V{v_1}) + T(\V{v_2}) \eqand T(c\V{v_1}) = cT(\V{v_1}), \]
 		for all ${ \V{v_1},\V{v_2} \in V,\, c \in \F{} }$.\\
 		
-		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation} of \textbf{linear map}.}
+		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation} or \textbf{linear map or mapping}.}
 		
 		\note{The compatibility with addition of vectors implies that a linear transformation is a homomorphism between additive groups of vectors.}
 		
@@ -1043,20 +1043,30 @@
 		\end{proof}
 	
 		\bigskip\bigskip
-		\note{\textbf{Orthonormal Bases in Coordinate Vectors}\\\\If we consider what an orthonormal basis would look like in coordinate vectors. Obviously, the standard basis is an orthonormal basis as,
+		\subsubsection{Orthonormal Bases in Coordinate Vectors} 
+		If we consider what an orthonormal basis would look like in coordinate vectors. Obviously, the standard basis is an orthonormal basis as,
 			\[ \begin{bmatrix}1\\0\\0\end{bmatrix} \dotprod \begin{bmatrix}0\\1\\0\end{bmatrix} = 0 \]
-			and clearly for any ${ i,j }$ such that ${ i \neq j }$, ${ \e{i} \dotprod \e{j} = 0 }$ and ${\e{i}, \e{j} }$ have unit length.\\
+			and clearly for any ${ i,j }$ such that ${ i \neq j }$, ${ \e{i} \dotprod \e{j} = 0 }$ and ${\e{i}, \e{j} }$ have unit length.\\\\
 			We can form other orthonormal bases in $\R{3}$ though. The vectors,
 			\[ \begin{bmatrix}1\\1\\0\end{bmatrix} \dotprod \begin{bmatrix}-1\\1\\0\end{bmatrix} = 0 \]
 			are orthogonal but do not have unit length. We can make them unit length, though, by dividing them by $\sqrt{2}$ so that,
 			\[ \begin{bmatrix}1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}-1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-			is also an orthonormal basis of $\R{3}$.\\
+			is also an orthonormal basis of $\R{3}$.\\\\
 			Another orthonormal basis of $\R{3}$ is
-			\[ \begin{bmatrix}\sin\theta\\\cos\theta\\0\end{bmatrix},\, \begin{bmatrix}-\cos\theta\\\sin\theta\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix}. \]
-		}
+			\[ \begin{bmatrix}\cos\theta\\\sin\theta\\0\end{bmatrix},\, \begin{bmatrix}-\sin\theta\\\cos\theta\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
+			for any angle $\theta$ measured anticlockwise from the $x$-axis. Actually this is the general case of which the previous example is a special case when ${ \theta = \pi / 2 }$.			
+			\begin{figure}[h!]
+				\includegraphics[width=\linewidth]{resources/img/orthonormal_bases_theta_pi_by_2.png}
+				\caption{$ (\cos{\pi/4}, \sin{\pi/4})^T = (1/\sqrt{2}, 1/\sqrt{2})^T,\;  (-\sin{\pi/4}, \cos{\pi/4})^T = (-1/\sqrt{2}, 1/\sqrt{2})^T $}
+			\end{figure}
+			\\But for any value of the angle $\theta$ these remain orthogonal as can be seen if we generate the basis vectors for ${ \theta = \pi/3 }$.
+			\begin{figure}[h!]
+				\includegraphics[width=\linewidth]{resources/img/orthonormal_bases_theta_pi_by_3.png}
+				\caption{$ (\cos{\pi/3}, \sin{\pi/3})^T = (1/2, \sqrt{3}/2)^T,\;  (-\sin{\pi/3}, \cos{\pi/3})^T = (-\sqrt{3}/2, 1/2)^T $}
+			\end{figure}
 	
 		
-		\bigskip
+		\bigskip\bigskip
 		\subsubsection{Orthogonal Operators}
 		\bigskip
 		\boxeddefinition{A matrix whose columns form an orthonormal basis is called an \textbf{orthogonal matrix}.\\\\
@@ -1093,7 +1103,7 @@
 			where ${ a_j }$ is the $j$th column of the matrix $A$. But the columns of $A$ are vectors in an orthonormal basis and so ${ a_j \dotprod a_j= 1 }$.\\
 			Furthermore, the off-diagonal values take the form
 			\[ a_{1j}a_{1j'} + \cdots + a_{nj}a_{nj'} = a_j \dotprod a_{j'} \]
-			for ${ j \neq j' }$. Since the columns are from an orthonormal basis we know that in this case ${ a_j \dotprod a_{j'} = 0 }$.\\
+			for ${ j \neq j' }$. Since the columns are from an orthonormal basis we know that ${ a_j \dotprod a_{j'} = 0 }$.\\
 			Therefore the resultant matrix looks like,
 			\[ A^TA = \begin{bmatrix}
 						1 & 0 & \cdots & 0\\
@@ -1103,7 +1113,8 @@
 					  \end{bmatrix}
 					  = I_n.
 			\]
-			Clearly, ${ A^TA = I \iff A^T = \inv{A} }$.
+			Clearly, the same effect would be seen for ${ AA^T }$ and so,
+			\[ A^TA = AA^T = I \iff A^T = \inv{A}. \qedhere \]
 		\end{proof}
 	
 		\bigskip
@@ -1146,12 +1157,25 @@
 			If a matrix $A$ is orthogonal then ${ A^TA = I }$ which implies that,
 			\[ det(A^T)det(A) = det(I) = 1. \]
 			By \autoref{prop:determinant_of_matrix_equal_to_its_transpose}, ${ det(A^T) = det(A) }$ so,
-			\[ det(A^T)det(A) = det(A)^2 = 1 \iff \sqrt{det(A)} = 1 \iff det(A) = \pm 1. \]
+			\[ det(A^T)det(A) = det(A)^2 = 1 \iff \sqrt{det(A)} = 1 \iff det(A) = \pm 1.  \qedhere \]
 		\end{proof}
 		
-		\bigskip\TODO{complete this. where should this be put?}
-		\labeledProposition{The orthogonal matrices form a subgroup of $GL_n(\F{})$.}{}
+		\bigskip
+		\labeledProposition{The orthogonal matrices form a subgroup of $GL_n(\F{})$.}{orthogonal_matrices_are_subgroup}
 		\begin{proof}
+			Let ${ S = \setc{ A \in GL_n(\F{}) }{ A^TA = I } }$. Then,
+			\begin{itemize}
+				\item{$S$ is nonempty because ${ I \in S }$.}
+				\item{For ${ B,C \in S }$,
+					\[ (BC)^T(BC) = C^TB^T(BC) = C^T(B^TB)C = I \]
+					so ${ BC \in S }$.
+				}
+				\item{For ${ B \in S }$, by \autoref{prop:orthogonal_matrix_transpose_is_inverse}, ${ \inv{B} = B^T }$ and
+					\[ (B^T)^TB^T = BB^T = B\inv{B} = I \]
+					so $S$ contains inverses.
+				}
+			\end{itemize}
+			Therefore ${ S \leq GL_n(\F{}) }$.	
 		\end{proof}
 	}
 
@@ -1160,10 +1184,145 @@
 
 
 \pagebreak
-\searchableSubsection{Types of Map}{linear algebra}{
+\searchableSubsection{Linear and Affine Transformations}{linear algebra}{
 	\bigskip\bigskip
-	\subsubsection{Rigid Motions?}
-	\TODO{what?}
+	\boxeddefinition{Another way of describing the definition of a linear transformation $T$ is as a function over vector spaces such that, for $\v_i$ in a vector space over a field $\F{}$ and ${ \alpha_i \in \F{} }$,
+		\[ T(\sum_i \alpha_i \v_i) = \sum_i \alpha_i T(\v_i). \]
+		An \textbf{affine transformation} is defined exactly the same as a linear transformation but with the additional condition that the linearity holds \textbf{only} if,
+		\[ \sum_i \alpha_i = 1. \]
+	}
+	
+	\boxeddefinition{An \textbf{affine space} is a generalization of a Euclidean space in which there is no particular point designated as the origin. As a result vectors can be viewed as displacements rather than points.}
+
+	\medskip
+	\subsubsection{Intuition of Affine Spaces}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=120px]{C:/Users/Mike/Desktop/320px-Affine_space_R3.png}
+	\end{figure}
+	\bigskip
+	A translated linear subspace of a vector space like $P_2$ above that no longer passes through the origin is referred to as an \textbf{affine subspace}. It is not a vector space as ${ \0 \notin P_2 }$ and ${ \V{a},\V{b} \in P_2 }$ but ${ \V{a} + \V{b} \notin P_2 }$. However, if we instead consider displacements between points --- e.g. ${ \V{b} - \V{a} }$ --- then we see the relationship between affine spaces and vector spaces: ${ \V{b} - \V{a} \in P_1 }$. The displacements between points in $P_2$ form a linear subspace.
+	
+	\subsubsection{Affine Combinations}
+	\boxeddefinition{An \textbf{affine combination} of vectors is a combination such that the coefficients sum to 1.}
+	\note{The definition of an affine combination differs from that of a convex combination in that the coefficients of a convex combination are additionally required to be non-negative.}
+	In an affine space there is no particular point designated as the origin but we can describe vector displacements between points as an ordered pair of points, for example, ${ (p,a) = \V{pa} }$. Affine combinations of displacements agree on the resulting point with linear combinations in the corresponding Euclidean space.\\
+	For example, imagine a point $p$ in an affine space is at coordinates ${ (-1,4) }$ in the corresponding Euclidean space and similarly points $a$ and $b$ are at ${ (3,4) }$ and ${ (6,1) }$ respectively. Then, if we take an affine combination of the displacements to $a$ and $b$ the resulting point is independent of the chosen origin point.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=300px]{C:/Users/Mike/Desktop/affine_combinations_example.png}
+	\end{figure}
+	The diagram shows the affine combination ${ 2\V{a} - \V{b} = 2\V{pa} - \V{pb} }$ where $\V{a}$ denotes the usual position vector in the Euclidean space.\\
+	
+	For more information on Affine Spaces see the first two lectures here: \href{https://web.ma.utexas.edu/users/dafr/M375T/}{University of Texas - Multivariable Analysis}.
+	
+	
+	\bigskip\bigskip
+	\subsubsection{Affine Transformations}
+	This section characterizes affine transformations according to their form and behaviour in the Euclidean spaces $\R{2}$ and $\R{3}$. Specifically, whether the transformation:
+	\begin{enumerate}
+		\item{Fixes the origin: ${ T(\0) = \0 }$}
+		\item{Preserves the dot product: ${ T(\v)\dotprod T(\w) = \v\dotprod\w }$, matrix is orthogonal}
+		\item{Preserves distances: ${ \norm{T(\v) - T(\w)} = \norm{\v - \w} }$}
+		\item{Preserves angles: matrix is scalar multiple of orthogonal matrix}		
+		\item{Preserves orientation: transformation does not include a reflection, determinant of matrix is positive}
+		\item{Preserves parallelism: transformation exhibits affine property (linearity under affine combinations)}
+	\end{enumerate}
+
+	As we can see here, the property of preserving parallelism depends only on the affine property so clearly, all affine transformations exhibit this behaviour. As a consequence of preserving parallelism, affine transformations preserve the dimension of affine subspaces (points, lines, planes, etc.). They do not preserve distances between points however, but they do preserve ratios of distances between points lying on a straight line.\\
+	
+	\labeledProposition{The affinity property of an affine transformation implies that it preserves parallelism.}{affine_trans_preserves_parallelism}
+	\begin{proof}
+		The affinity property implies that, for an affine transformation $T$ over a vector space $V$, ${ \lambda \in \F{} }$ and any ${ \v,\w \in V }$,
+		\[ T(\lambda\v + (1-\lambda)\w) = \lambda T(\v) + (1-\lambda)T(\w). \]
+		This can be rearranged as,
+		\[ T(\lambda\v + (1-\lambda)\w) = \lambda (T(\v) - T(\w)) + T(\w) \]
+		which is a fixed displacement vector $T(\w)$ of the line described by ${ \lambda (T(\v) - T(\w)) }$ for $\lambda$ varying over the field values.
+%		Since this must hold for any ${ \v,\w \in V }$ we can fix a nonzero $\v$ and set ${ \w = \0 }$. Then we see that,
+%		\[ T(\lambda\v) = \lambda T(\v) \]
+%		meaning that a straight line described in $V$ by ${ \lambda\v }$ with $\lambda$ varying over some field $\F{}$ is mapped to a straight line ${ \lambda T(\v) }$. Furthermore, letting $\w$ take nonzero values we see that this results in displacement of the line ${ \lambda T(\v) }$ by the vector ${ (1-\lambda)T(\w) }$ and every such displaced line will remain parallel to the original line ${ \lambda T(\v) }$. Therefore, the affinity property alone is enough to preserve parallelism.
+	\end{proof}
+%	\note{An affine transformation still preserves straight lines even when the coefficients of a combination of vectors transformed is not an affine combination --- it's just a little more complicated to show it.}
+	
+	\bigskip\bigskip
+	The most common subclassifications of affine transformations are:
+	\begin{itemize}
+		\item{Linear: preserves the origin.}
+		\item{Conformal: preserves angles.}
+		\item{Isometry (also known as a congruent transformation): preserves distances in metric spaces and so also implicity, angles. In a Euclidean space these transformations are known as a Euclidean isometries or rigid transformations.}
+		\item{Rigid Motion: Euclidean isometry / rigid transformation that also preserves orientation.}
+	\end{itemize}
+
+	\bigskip
+	\subsubsection{Isometries}
+	\bigskip
+	\subsubsubsection{Linear}
+	Isometries that fix the origin are linear operators and rigid motions in Euclidean space.
+	\labeledProposition{Rigid motions are linear operators.}{rigid_motions_are_linear_ops}
+	\begin{proof}
+		Let $m$ be a rigid motion that fixes the origin. Then ${ m(\0) = \0 }$ and so $m$ is linear and also, $m$ has the isometry property,
+		\[ \norm{m(\v) - m(\w)} = \norm{\v - \w}. \]
+		Isometry implies,
+		\[ (m(\v) - m(\w))^T(m(\v) - m(\w)) = (\v - \w)^T(\v - \w) \]
+	\end{proof}
+	
+	
+	\bigskip
+	\subsubsubsection{Translation}
+	If $T$ is a translation then, in general, ${ T(\0) \neq \0 }$ so translations do not fix the origin and, as a result, are \textbf{not} linear transformations. However, translations preserve distances and angles (and orientation because there is no reflection) so they are rigid motions. For example:
+	\begin{exe}
+		\ex{Let ${ \v = (v_1,\dots,v_n) }$ be any fixed vector in $\R{n}$. Then translation by $\v$ is the map,
+			\[ t_v(\x) = \x + \v = \begin{bmatrix}x_1 + v_1\\\vdots\\x_n + v_n\end{bmatrix} \]
+			which can be seen to be isometric (a rigid transformation) by,
+			\begin{align*}
+			&& t_v(\x) - t_v(\V{y}) = (\x + \v) - (\V{y} +\v) &= \x - \V{y} \\
+			&\implies & \norm{t_v(\x) - t_v(\V{y})} &= \norm{\x - \V{y}}. &\sidecomment{} \\
+			\end{align*}
+		}
+	\end{exe}
+	
+	\subsubsubsection{Rotation}
+	Rotations preserve distances and angles and orientation and so are rigid motions. If the axis of rotation passes through the origin then they also fix the origin and are linear operators. For example:
+	\begin{exe}
+		\ex{\TODO{Example of Rotation}}
+	\end{exe}
+	
+	\bigskip
+	\subsubsubsection{Uniform Scaling}
+	Uniform scaling is a scalar multiple of an orthogonal matrix and is therefore a linear operator which means that it fixes the origin. It also preserves angles but not distances between points.
+	
+	\labeledProposition{Every rigid motion $m$ is the composition of an orthogonal linear operator and a translation. In other words, for some orthogonal matrix $A$ and fixed vector $\v$, it takes the form,
+		\[ m(\x) = A\x + \v. \]
+	}{every_rigid_motion_is_linear_op_plus_translation}
+	\begin{proof}
+		Rigid motions preserve distances and angles and so they also preserve the dot product. Therefore if $m$ is such a motion and ${ m(\x) = A\x }$ then the matrix must be orthogonal. \TODO{complete this proof}
+	\end{proof}
+
+	\bigskip
+	\subsubsection{Conformal Transformations}
+	\bigskip
+	\subsubsubsection{Non-uniform Scaling}
+	Non-uniform scaling, however, its matrix is not a scalar multiple of an orthogonal matrix and, as such, it does not preserve angles. An important example is:
+	\begin{exe}
+		\ex{\textbf{Mercator projection}:\\\\
+			This is a map projection that was designed so that rhumb lines (lines of constant bearing over the surface of the earth) are straight lines on the map. To achieve this the projection ensures that a square on the surface of the earth presents as a square on the map.\\
+			Then, modelling the earth as a sphere of radius $R$, if lines of latitude are horizontal grid lines across the map, then each actual line of latitude with circumference ${ 2\pi R \cos\phi }$ where $\phi$ is the angle of latitude will present on the map as the same length as the equator, which in reality is ${ 2\pi R }$. So they appear to be a line of length ${ \cos\phi }$ times longer than they actually are, i.e. they are stretched by ${ \sec{\phi} }$.\\
+			So, the map projection will stretch the width of a square on the surface of the earth by ${ \sec{\phi} }$ and to maintain it as a square, it is necessary to stretch the height of the square by the same amount, ${ \sec{\phi} }$. The actual square on the surface of the earth has height (approximately for a small square) ${ R\Delta\phi }$ so, on the map we need a height ${ \Delta y \propto \Delta\phi\sec\phi }$. Therefore, we have,
+			\[ \frac{dy}{d\phi} = \sec\phi \implies y = \ln{(\tan\phi + \sec\phi)} + c \]
+			where $c$ is a constant that we can set to 0. 
+			See \url{https://www.math.ubc.ca/~israel/m103/mercator/mercator.html} for a description of this derivation. For more information on conformal map projections generally see: \href{https://arxiv.org/pdf/1412.7690.pdf}{Map Projection, York University, Toronto} and \href{http://diposit.ub.edu/dspace/bitstream/2445/121898/2/memoria.pdf}{Conformal Cartographic
+				Representations - University of Barcelona}.
+		}
+	\end{exe}
+	
+	\subsubsubsection{Reflection}
+	Reflection usually refers to a Euclidean Isometry (rigid transformation over a Euclidean space) that fixes a hyperplane (so a line in $\R{2}$ and a plane in $\R{3}$) but does not preserve orientation so is not a rigid motion. However, it may also refer to a transformation that fixes an affine space of lower dimension than a hyperplane --- for example, reflection in a point --- in which case it does preserve orientation and is, therefore, a rigid motion (in fact, reflection in the origin in $\R{2}$ is equal to rotation by $\pi$). Reflection may fix the origin or may not, depending on whether or not the origin is contained in the affine space fixed by the reflection.
+	
+	\bigskip
+	\subsubsection{Non-Rigid non-Conformal Transformations}
+	\bigskip
+	\subsubsubsection{Shear}
+	Shear neither preserves distances nor angles. It does preserve parallelism though (as do all affine transformations) and it also fixes the origin, so it is a linear operator.
 }	
 
 \end{document}

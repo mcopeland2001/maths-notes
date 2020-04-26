@@ -299,22 +299,104 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 	\pagebreak
 	\searchableSubsection{Basic properties of Matrices}{linear algebra}{
 		\bigskip\bigskip
-		\subsubsection{Symmetry}
-		\TODO{Symmetric requires square?}
-		
-		\bigskip\bigskip
-		\subsubsection{Diagonal Matrices}
-		\TODO{definition}
-		\bigskip
-		\labeledProposition{Diagonal matrices form an abelian group under multiplication.}{}
-		\begin{proof}
-			\TODO{prove this (diagonal requires square?)}
-		\end{proof}
+		\boxeddefinition{If ${ a_{ij} }$ is an entry of a matrix in the $i$th row and $j$th column then the \textbf{main diagonal} of the matrix is the collection of entries ${ a_{ij} }$ with ${ i = j }$.}
+		\note{The main diagonal is most often spoken of with respect to square matrices but the definition does not require that the matrix be square (\href{https://en.wikipedia.org/wiki/Main_diagonal}{wikipedia}).}
 		
 		\bigskip\bigskip
 		\subsubsection{Trace}\label{sssection:trace}
 		\boxeddefinition{The \textbf{trace} of a matrix is the sum of the diagonal entries.}
-		\TODO{requires square?}
+		
+		\bigskip\bigskip
+		\subsubsection{Symmetric Matrices}
+		\boxeddefinition{A \textbf{symmetric} matrix is a matrix that is invariant under transposition.}
+		\note{This obviously requires that the matrix be square and that the upper off-diagonal elements mirror the lower off-diagonal elements.}
+		
+		\bigskip\bigskip
+		\subsubsection{Diagonal Matrices}
+		\boxeddefinition{A \textbf{diagonal} matrix is a matrix whose entries outside the main diagonal are all zero.}
+		\note{\begin{itemize}
+				\item{The definition of a diagonal matrix does \textbf{not} require that all the diagonal entries are nonzero so, for example, the zero matrix is a diagonal matrix.}
+				\item{Diagonal matrices are \textbf{usually understood to be} a subset of symmetric matrices but this is not strictly necessary according to their definition (\href{https://en.wikipedia.org/wiki/Diagonal_matrix}{wikipedia}).}
+			\end{itemize}
+		}
+		
+		\medskip
+		\labeledProposition{If ${ A = a_{ij},\, B = b_{ij} }$ are square diagonal matrices then multiplying them results in a square diagonal matrix ${ C = c_{ij} }$ whose diagonal entries ${ c_{11},\dots,c_{nn} }$ are the products of the corresponding diagonal entries in $A$ and $B$. That's to say 
+			\[  c_{11},\dots,c_{nn} = a_{11}b_{11},\dots, a_{nn}b_{nn}. \]
+		}{multiplying_square_diagonal_matrices_multiplies_their_diagonal_entries}
+		\begin{proof}
+				If ${ A = a_{ij},\, B = b_{ij} }$ are square diagonal matrices then,
+			\[  AB = 
+				\begin{bmatrix}
+				a_{11} & 0      & \cdots & 0\\
+				0 	   & a_{22} & \cdots & 0\\
+				\vdots\\
+				0 	   & 0 	    & \cdots & a_{nn}
+				\end{bmatrix}
+				\begin{bmatrix}
+				b_{11} & 0      & \cdots & 0\\
+				0 	   & b_{22} & \cdots & 0\\
+				\vdots\\
+				0 	   & 0 	    & \cdots & b_{nn}
+				\end{bmatrix} =
+				\begin{bmatrix}
+				a_{11}b_{11} & 0            & \cdots & 0\\
+				0 	         & a_{22}b_{22} & \cdots & 0\\
+				\vdots\\
+				0 	         & 0 	        & \cdots & a_{nn}b_{nn}
+				\end{bmatrix}. \qedhere
+			\]
+		\end{proof}
+		\begin{corollary}
+			\label{coro:multiplication_of_square_diagonal_matrices_is_commutative}
+			Multiplication of square diagonal matrices is commutative.
+		\end{corollary}
+		\begin{proof}
+			The multiplication described in \autoref{prop:multiplying_square_diagonal_matrices_multiplies_their_diagonal_entries} is commutative because the diagonal entries of the two matrices are the same whichever way around the multiplication is performed and the multiplication of the individual entries itself is commutative.
+		\end{proof}
+		\begin{corollary}
+			\label{coro:square_diagonal_matrices_with_nonzero_diag_entries_invertible}
+			Square diagonal matrices with nonzero diagonal entries are invertible.
+		\end{corollary}
+		\begin{proof}
+			A result of the multiplication described in \autoref{prop:multiplying_square_diagonal_matrices_multiplies_their_diagonal_entries} is that, if $A$ is a square diagonal matrix with nonzero diagonal entries, then we can obtain the identity matrix by multiplication with a matrix $B$ whose diagonal elements are the reciprocal of the corresponding entries in $A$. So, if the $jj$th entry in $A$ is $a_{jj}$, then the corresponding entry in $B$ is $1/a_{jj}$. For example,
+			\[ 	AB = 
+				\begin{bmatrix}
+				a_{11} & 0      & \cdots & 0\\
+				0 	   & a_{22} & \cdots & 0\\
+				\vdots\\
+				0 	   & 0 	    & \cdots & a_{nn}
+				\end{bmatrix}
+				\begin{bmatrix}
+				1/a_{11} & 0        & \cdots & 0\\
+				0 	     & 1/a_{22} & \cdots & 0\\
+				\vdots\\
+				0 	     & 0 	    & \cdots & 1/a_{nn}
+				\end{bmatrix} =
+				\begin{bmatrix}
+				1 & 0 & \cdots & 0\\
+				0 & 1 & \cdots & 0\\
+				\vdots\\
+				0 & 0 & \cdots & 1
+				\end{bmatrix}.
+			\]
+			Furthermore, by \ref{coro:multiplication_of_square_diagonal_matrices_is_commutative}, this multiplication is commutative so we have,
+			\[ AB = BA = I. \]
+			Therefore ${ B = \inv{A} }$. Furthermore, this matrix always exists as long as the entries of the matrix are drawn from a field (so that they have multiplicative inverses) and the diagonal entries are nonzero.
+		\end{proof}
+		
+		
+		\bigskip
+		\labeledProposition{Square diagonal matrices with nonzero diagonal entries form an abelian group under multiplication.}{}
+		\begin{proof}
+			Let $S$ be the set of ${ n \times n }$ diagonal matrices with nonzero diagonal entries. Then,
+			\begin{itemize}
+				\item{${ I_n \in S }$ so $S$ is nonempty.}
+				\item{By \autoref{prop:multiplying_square_diagonal_matrices_multiplies_their_diagonal_entries}, if $A,B$ are members of $S$, then $AB$ is also a square diagonal matrix with nonzero diagonal entries and so is also a member of $S$.}
+				\item{By \ref{coro:square_diagonal_matrices_with_nonzero_diag_entries_invertible} members of $S$ are invertible and are members of $S$.}
+			\end{itemize}
+			Therefore, ${ S \leq GL_n(\F{}) }$.
+		\end{proof}
 	}
 
 

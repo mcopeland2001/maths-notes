@@ -1,8 +1,6 @@
 \documentclass[12pt]{report}
 
 \usepackage{subfiles}
-%\usepackage[depth=4,open,openlevel=1]{bookmark}
-%\usepackage[depth=5]{bookmark}% Show up to level 4 (\paragraph) in bookmarks
 \usepackage[utf8]{inputenc}
 \usepackage[pdftex]{hyperref}
 \usepackage[depth=3]{bookmark}
@@ -13,18 +11,17 @@
 \usepackage{centernot}
 \usepackage{listings}
 \usepackage[pdftex]{graphicx}
-%\usepackage{hyperref}
-%\usepackage[latin1]{inputenc}
 \usepackage{color}
 \usepackage{bm}
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
+%\usepackage{esvect} provides longer over arrows (not currently in use)
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsfonts}
-\usepackage{epstopdf}%[outdir=./resources/img/]
+\usepackage{epstopdf}
 \usepackage[table]{xcolor}
 \usepackage{siunitx}
 \usepackage{booktabs}
@@ -39,25 +36,11 @@
 \AtBeginEnvironment{displayquote}{\small}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{4}
-%\setcounter{secnumdepth}{4}
-%\setcounter{tocdepth}{3}% Show up to level 3 (\subsubsection) in ToC
-%\hypersetup
-%{
-%	unicode,
-%	hidelinks, % Remove red boxes
-%	bookmarksnumbered=true,
-%	pdfauthor={Brian Griffin},
-%	pdftitle={Wish it, Want it, Do it},
-%	pdfsubject={Self help},
-%	pdfkeywords={therapy,healing,chicken soup},
-%	pdfproducer={Penguin Publishing}
-%}
 
 
 \titleformat*{\subparagraph}{\small\bfseries}
 \urlstyle{same}
 
-%\graphicspath{{}} (why does this not work?)
 
 % default formatting for code listings
 \lstset{ % docs: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
@@ -74,7 +57,7 @@
 \setlength{\parindent}{0em}
 \newcommand\chapterTitle\Huge
 \newcommand\sectionTitle\Huge
-\newcommand\subsubsubsection[1]{\paragraph{#1\\\\}}% this is the level below the last toc/bookmark level
+\newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\\\\}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
 \newcommand{\divides}{\mid}
