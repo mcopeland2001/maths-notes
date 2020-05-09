@@ -31,6 +31,7 @@
 \noautomath
 \usepackage[most]{tcolorbox}
 \usepackage{csquotes}
+\usepackage{wrapfig}
 
 \definecolor{note_bg}{RGB}{247,247,247}
 \AtBeginEnvironment{displayquote}{\small}
@@ -68,6 +69,7 @@
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
 \newcommand{\TODO}[1]{\textcolor{blue}{\small{\underline{TODO:} #1}}}
+\newcommand{\addref}{\TODO{add reference}}
 
 \DeclarePairedDelimiterX\setc[2]{\{}{\}}{\,#1 \,\;\delimsize\vert\;\, #2\,}
 \DeclareRobustCommand{\N}[1]{\mathbb{N}^{#1}}

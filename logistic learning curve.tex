@@ -1,0 +1,18 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}
+	\subsection{Logistic function as model of learning}
+	\bigskip
+	Describe a domain of knowledge as a finite set of knowable facts ${ F = \{f_1,\dots,f_n\} }$. The set of known facts is ${ K \subseteq F }$ and we can quantify the level of knowledge as the ratio
+	\[ y = \frac{\cardinality{K}}{\cardinality{F}}. \]
+	If we assume a uniform probability of encountering any particular ${ f_i \in F }$ then, when encountering a fact, the probability of the fact being unknown is ${ 1 - y }$. If we further assume that every time an unknown fact is encountered it is learned, then the rate of learning is the rate of encountering unknown facts which is the product of the rate of encountering facts $r$, and the probability of those facts being unknown,
+	\[ \frac{dy}{dt} = r(1 - y). \]
+	The key insight is that, in language learning, the rate of encountering facts increases with knowledge of the language. So we have,
+	\[ r = ay \]
+	for some constant of proportionality $a$. This results in the differential equation,
+	\[ \frac{dy}{dt} = ay(1 - y) = a(y - y^2) \]
+	the solution of which is the logistic function.
+\end{document}
