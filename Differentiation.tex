@@ -1,0 +1,177 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+
+
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}	
+	\searchableSection{Differentiation}{analysis, differentiation}
+	\bigskip\bigskip
+	
+	\searchableSubsection{\texorpdfstring{Differentiation as a Linear\\Transformation}{Differentiation as a Linear Transformation}}{analysis, differentiation}{\bigskip\bigskip
+		
+		\newcommand{\vtheta}{\V{\theta}}
+		\newcommand{\valpha}{\V{\alpha}}
+		\notation{The derivative of $y(x)$ with respect to $x$ will be denoted $\Dif_x y$ and of $f(x)$ with $\Dif_x f$.}
+		\boxeddefinition{The set ${ P_n \subset \R{\R{}} }$ of all univariate real-valued polynomials ${ p: \R{} \longmapsto \R{} }$ of degree $n$ is defined as,
+			\[ P_n = \setc{p \in \R{\R{}}}{p(x) = \sum_{i=0}^n \theta_i x^i, \hspace{10pt} \theta_i \in \R{}}. \]
+			Or alternatively, in vector notation,
+			\[ P_n = \setc{p \in \R{\R{}}}{p(x) = \vtheta^T \x, \hspace{10pt} \vtheta \in \R{n+1}} \]
+			where $\x$ is the standard basis of the space of degree-$n$ polynomials,
+			\[ (1,x,\dots,x^n)^T. \]
+		}
+		
+		\bigskip
+		\subsubsection{Linear Algebra of First-order Differential Equations}
+		\bigskip
+		The derivative $\Dif_x p(x)$, of the univariate degree-$n$ polynomial ${ p \in P_n }$ can be described as a linear transformation as,
+			\[ \Dif_x p(x) = (A\vtheta)^T \x = \x^T A\vtheta \]
+			where $A$ is the ${ n \times (n+1) }$ matrix,
+			\[ A = \begin{bmatrix}
+					0 & 1 & 0 & \cdots & 0\\
+					0 & 0 & 2 & \cdots & 0\\
+					\vdots &  &  &  & \vdots\\
+					0 & 0 & 0 & \cdots & n
+					\end{bmatrix}.
+			\]
+		The matrix $A$ clearly has rank $n$ and a 1-dimensional kernel so $\Dif_x$ transforms from $n+1$-space to $n$-space. The nullspace of $A$ being,
+		\[ nullspace(A) = t\begin{bmatrix}1\\0\\\vdots\\0\end{bmatrix} \hspace{20pt} t \in \R{} \]
+		the interpretation of which is that the derivative of constant polynomials is zero.\\\\
+		
+%		When we have a differential equation such as,
+%		\begin{equation}\label{eq:first-order-lin-diffeq}
+%			\Dif_x y(x) = ax + b \hspace{20pt} a,b \in R{}
+%		\end{equation}	
+%		we are trying to determine the function $y(x)$ from its derivative ${ ax + b }$ but, as we can see from the matrix $A$, the derivative transformation is singular and not invertible. This is why, when we find the antiderivative of a function through the process of integration, the result is a family of functions parameterized with the constant of integration. Expressing equation \ref{eq:first-order-lin-diffeq} in matrix form,
+%		\begin{equation}
+%			\x^T A\vtheta = \x^T (b,a,0,\dots,0)^T
+%		\end{equation}
+%		Because the members of $\x$ are linearly independent, this equation implies that the coefficients are equal,
+%		\[ A\vtheta = (b,a,0,\dots,0)^T. \]
+		
+		\medskip
+		In general the differential equation,
+		\begin{equation}
+			\Dif_x y(x) = \alpha_0 + \alpha_1 x + \cdots + \alpha_{n-1} x^{n-1}
+		\end{equation}
+		has the vector form,
+		\begin{equation}\label{eq:first-order-lin-diffeq}
+			\x^T A\vtheta = \x^T \valpha \iff A\vtheta = \valpha
+		\end{equation}
+		where the solution is
+		\[ y(x) = \theta_0 + \theta_1 x + \cdots + \theta_n x^n = \x^T \vtheta. \]
+		\note{Note that we can say
+			\[ \x^T A\vtheta = \x^T \valpha \iff A\vtheta = \valpha \]
+			because $\x^T$ is a basis and therefore a linearly independent set. By linear independence, the equation on the left implies that the coefficients are equal.\\\\
+			This is equivalent to analysing $P_n$, the ${ (n+1) }$-dimensional vector space of polynomials, by working in the coordinate space formed by the coefficients. This space is $\R{n+1}$ which is isomorphic to any ${ (n+1) }$-dimensional vector space by \autoref{prop:vector_space_isomorphic_to_coordinate_space_of_same_dimension}. 
+		}
+		
+		\smallskip
+		The matrix form of \autoref{eq:first-order-lin-diffeq} is,
+		\begin{equation}\label{eq:matrix-general-first-order-lin-diff-eq}
+		\begin{bmatrix}
+		0 & 1 & 0 & \cdots & \cdots & 0\\
+		0 & 0 & 2 & \cdots & \cdots & 0\\
+		\vdots &  &  &  &  & \vdots\\
+		0 & 0 & 0 & \cdots & n-1 & 0\\
+		0 & 0 & 0 & \cdots & \cdots & n
+		\end{bmatrix}\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\vdots\\\vdots\\\theta_n\end{bmatrix} = \begin{bmatrix}\alpha_0\\\alpha_1\\\alpha_2\\\vdots\\\alpha_{n-1}\end{bmatrix}.
+		\end{equation}
+		Constructing the augmented matrix and using Gaussian Elimination we obtain,
+		\begin{align*}
+		&\begin{amatrix}{6}
+		0 & 1 & 0 & \cdots & \cdots & 0 & \alpha_0\\
+		0 & 0 & 2 & \cdots & \cdots & 0 & \alpha_1\\
+		\vdots &  &  &  &  &  & \vdots\\
+		0 & 0 & 0 & \cdots & n-1 & 0 & \alpha_{n-2}\\
+		0 & 0 & 0 & \cdots & \cdots & n & \alpha_{n-1}
+		\end{amatrix} \\[20pt]
+		\leadsto &\begin{amatrix}{6}
+		0 & 1 & 0 & \cdots & \cdots & 0 & \alpha_0\\
+		0 & 0 & 1 & \cdots & \cdots & 0 & \alpha_1/2\\
+		\vdots &  &  &  &  &  & \vdots\\
+		0 & 0 & 0 & \cdots & 1 & 0 & \alpha_{n-2}/n-1\\
+		0 & 0 & 0 & \cdots & \cdots & 1 & \alpha_{n-1}/n
+		\end{amatrix}
+		\end{align*}
+		so that $\theta_0$ is a free variable and we can read off the other values of the coefficients $\theta_i$ corresponding to the columns of the matrix as follows:
+		\begin{equation}\label{eq:matrix-general-first-order-lin-diff-eq-soln}
+			\begin{bmatrix}\theta_0\\\theta_1\\\theta_2\\\vdots\\\theta_{n-1}\\\theta_n\end{bmatrix} =
+			\begin{bmatrix}t\\\alpha_0\\\alpha_1/2\\\vdots\\\alpha_{n-2}/n-1\\\alpha_{n-1}/n\end{bmatrix} \hspace{20pt} \text{for } t \in \R{}
+		\end{equation}
+		and this implies that the solution to the differential equation is:
+		\begin{equation}\label{eq:general-first-order-lin-diff-eq-soln}
+			y(x) = t + \alpha_0 x + \frac{\alpha_1}{2} x^2 + \cdots + \frac{\alpha_{n-1}}{n} x^n, \hspace{20pt} t \in \R{}.
+		\end{equation}
+		We can rewrite the result in \autoref{eq:matrix-general-first-order-lin-diff-eq-soln} as,
+		\begin{equation}
+			\begin{bmatrix}0\\\alpha_0\\\alpha_1/2\\\vdots\\\alpha_{n-2}/n-1\\\alpha_{n-1}/n\end{bmatrix} + t\begin{bmatrix}1\\0\\0\\\vdots\\0\\0\end{bmatrix}
+			\hspace{20pt} \text{for } t \in \R{}
+		\end{equation}
+		which makes it clear that we have a particular solution (with ${ t = 0 }$) plus a 1-dimensional nullspace. However, in practical applications modeled by differential equations, there will typically be an initial condition --- an initial value of $y$ such as $y(0)$ for example --- and this will be used to determine a particular solution. In this situation (known as IVP or Initial Value Problems) the particular solution involves finding a value of the parameter $t$ that fits the initial condition. For this reason, the solution in \autoref{eq:general-first-order-lin-diff-eq-soln} is referred to as the general solution of the differential equation while the particular solution has a particular value of the parameter $t$.\\\\
+		
+		\bigskip
+		\subsubsection{Linear Algebra of Second-order Differential Equations}
+		\bigskip
+		The most simple type of second-order linear differential equation looks like,
+		\begin{equation}\label{eq:eq:second-order-lin-diffeq}
+			 \Dif_x^2 y(x) = \alpha_0 + \alpha_1 x + \cdots + \alpha_{n-2} x^{n-2}.
+		\end{equation}
+		We can add an extra row of zeros to the matrix of $\Dif_x$ to make it square so that we can take powers of it,
+		\[ A = \begin{bmatrix}
+				0 & 1 & 0 & \cdots & 0\\
+				0 & 0 & 2 & \cdots & 0\\
+				\vdots &  &  &  & \vdots\\
+				0 & 0 & 0 & \cdots & n \\
+				0 & 0 & 0 & \cdots & 0
+				\end{bmatrix}
+		\]
+		and output an extra coefficient with value zero.\\
+		
+		Then the vector form of \autoref{eq:eq:second-order-lin-diffeq} is
+		\begin{equation}
+			A^2 \vtheta = \valpha
+		\end{equation}
+		and the matrix form is
+		\begin{equation}
+			\begin{bmatrix}
+			0 & 0 & 2 & 0 & \cdots & 0\\
+			0 & 0 & 0 & 6 & \cdots & 0\\
+			\vdots &  &  &  &  & \vdots\\
+			0 & 0 & 0 & 0 & \cdots & n(n-1)\\
+			0 & 0 & 0 & 0 & \cdots & 0\\
+			0 & 0 & 0 & 0 & \cdots & 0
+			\end{bmatrix}\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\vdots\\\vdots\\\theta_n\end{bmatrix} = \begin{bmatrix}\alpha_0\\\alpha_1\\\vdots\\\alpha_{n-2}\\0\\0\end{bmatrix}
+		\end{equation}
+		which gives the solution to the differential equation as:
+		\begin{equation}\label{eq:general-first-order-lin-diff-eq-soln}
+		y(x) = s + tx + \frac{\alpha_0}{2} x^2 + \frac{\alpha_1}{6} x^3 + \cdots + \frac{\alpha_{n-2}}{n(n-1)} x^n, \hspace{20pt} s,t \in \R{}.
+		\end{equation}
+		So, here the kernel is 2-dimensional and we need two initial values to determine a particular solution.
+		
+		\bigskip
+		\subsubsection{Eigenvectors of the Differentiation Operator}
+		\bigskip
+		If we had the differential equation,
+		\begin{equation}
+		\Dif_x y(x) = \alpha_0 + \alpha_1 x + \alpha_2 x^2 + \alpha_3 x^3 + \cdots
+		\end{equation}
+		so that the derivative of $y(x)$ is an infinite power series (not an infinite polynomial as polynomials are by definition finite), then the general solution would take the form,
+		\begin{equation}
+			y(x) = t + \alpha_0 x + \frac{\alpha_1}{2} x^2 + \frac{\alpha_2}{3} x^3 + \cdots
+		\end{equation}
+		for any ${ t \in \R{} }$.
+		
+		The exponential function $e^x$ is an eigenvector of the differentiation operator (also known as an \textit{eigenfunction} since the operator maps between function spaces). So the differential equation,
+		\begin{equation}
+			\Dif_x y = y
+		\end{equation}
+		which, in vector form, is
+		\begin{equation}
+			A\vtheta = \vtheta
+		\end{equation}
+		has general solution $Ce^x$ for constant $C$.
+	}
+\end{document}

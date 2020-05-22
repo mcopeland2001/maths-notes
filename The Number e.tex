@@ -1,0 +1,50 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}
+
+\searchableSubsection{The Number e}{analysis}{
+	\bigskip\bigskip
+	\boxeddefinition{The number \textbf{e} can be defined in various ways. Some of the most common of these are:
+		\begin{enumerate}[label=(\roman*)]
+			\item{\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \]}
+			\item{\[ e = \sum_{n=0}^\infty \frac{1}{n!} = \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \cdots \]}
+			\item{e is the unique number such that, \[ \ln{e} = \int_1^e \frac{1}{t} \dif t = 1 \]}
+		\end{enumerate}
+	}
+
+	\bigskip
+	\labeledProposition{Definitions (i) and (ii) are equivalent. That's to say,
+	\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \iff e = \sum_{n=0}^\infty \frac{1}{n!} = \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \cdots \]
+	}{limit-def-of-e-equiv-to-inf-series-def-of-e}
+	\begin{proof}
+	\end{proof}
+
+	\bigskip
+	\labeledProposition{Definitions (i) and (iii) are equivalent. That's to say,
+		\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \iff \text{$e$ is the unique number such that } \ln{e} = 1. \]
+	}{limit-def-of-e-equiv-to-log-def-of-e}
+	\begin{proof} Assume that,
+		\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n. \]
+		Then, taking logs of both sides,
+		\begin{align*}
+		&& \ln{e} &= \ln{\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n} \\[8pt]
+		&&  &= \lim_{n \to \infty} \ln{\left(1 + \frac{1}{n}\right)^n} &\sidecomment{by \autoref{theo:comps_continuous_functions_are_continuous}} \\[8pt]
+		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)}}{1/n} &\sidecomment{} \\[8pt]
+		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)} - \ln{1}}{1/n} &\sidecomment{} \\[8pt]
+		&&  &= \lim_{h \to 0} \frac{\ln{\left(1 + h\right)} - \ln{1}}{h} &\sidecomment{} \\[8pt]
+		&&  &= \eval{\frac{\dif(\ln{x})}{\dif x}}_{x=1} = \eval{\frac{1}{x}}_{x=1} = 1. &\sidecomment{}
+		\end{align*}
+		This shows that 
+		\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \implies \ln{e} = 1. \]
+		\TODO{But we haven't shown uniqueness of $e$ here!}\\
+		Conversely, if we assume that e is the unique number such that ${ \ln{e} = 1 }$ then the fact already shown, that 
+		\[ \ln{\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n} = 1 \]
+		implies that 
+		\[ \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e. \]
+	\end{proof}
+}
+
+\end{document}

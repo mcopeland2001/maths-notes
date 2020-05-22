@@ -32,6 +32,8 @@
 \usepackage[most]{tcolorbox}
 \usepackage{csquotes}
 \usepackage{wrapfig}
+\usepackage[none]{hyphenat}
+\usepackage{commath}
 
 \definecolor{note_bg}{RGB}{247,247,247}
 \AtBeginEnvironment{displayquote}{\small}
@@ -58,6 +60,7 @@
 \setlength{\parindent}{0em}
 \newcommand\chapterTitle\Huge
 \newcommand\sectionTitle\Huge
+\newcommand\subsectionTitle\Large
 \newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\\\\}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
@@ -65,6 +68,7 @@
 \newcommand{\notdivides}{\nmid}
 \newcommand{\eqand}{\hspace{10pt}\text{and}\hspace{10pt}}
 \newcommand{\modulo}[1]{\;(\bmod\; #1)}
+\newcommand{\dx}[1][x]{\;d#1}
 
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
@@ -81,6 +85,13 @@
 \DeclareRobustCommand{\inv}[1]{{#1}^{-1}}
 \DeclareRobustCommand{\logicsep}{\;.\;}
 
+\newenvironment{amatrix}[1]{% from https://gitlab.com/jim.hefferon/linear-algebra/-/blob/master/src/sty/linalgjh.sty
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
 \def\u{\vec{\bm{u}}}
 \def\v{\vec{\bm{v}}}
 \def\w{\vec{\bm{w}}}
@@ -90,9 +101,9 @@
 \newcommand{\e}[1]{\vec{\bm{e_#1}}}
 
 \newcommand{\bigsetc}[2]{\left\{#1\; \middle\vert \;#2\right\}}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\renewcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\cardinality}{\abs}
-\newcommand{\norm}{\abs}
+\renewcommand{\norm}{\abs}
 \newcommand{\dotprod}{\boldsymbol{\cdot}}
 \newcommand{\congruent}[2]{\equiv #1 \modulo{#2}}
 

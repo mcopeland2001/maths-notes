@@ -685,6 +685,18 @@
 		\end{proof}
 	
 		\bigskip
+		\labeledProposition{Similar matrices have the same determinant.}{similar-matrices-have-same-determinant}
+		\begin{proof}
+			Let ${ A' = PA\inv{P} }$ where $P$ is a change of basis matrix. Then,
+			\begin{align*}
+			\det{A'} &= \det{PA\inv{P}}\\
+			 &= (det{P}) \cdot (\det{A}) \cdot (\det{\inv{P}})\\
+			 &= (\det{P}) \cdot (\det{A}) \cdot (1/\det{P})\\
+			 &= \det{A}. \qedhere
+			\end{align*}
+		\end{proof}
+	
+		\bigskip
 		\labeledProposition{Similar matrices have the same eigenvalues.}{similar_matrices_same_eigenvalues}
 		\begin{proof}
 			Similar matrices represent the same transformation with respect to different bases and for a matrix $A$ representing a transformation $T$ with respect to an arbitrary basis $B$,
@@ -742,7 +754,8 @@
 		\boxeddefinition{An \textbf{eigenvector} of a linear operator $T$ is a nonzero vector $\v$ with the property under $T$ that,
 			\[ T(\v) = c\v \]
 			for some constant ${ c \in \F{} }$. The constant $c$ is called an \textbf{eigenvalue}.\\\\
-			Eigenvectors may also be referred to as \textbf{characteristic vectors} and eigenvalues as \textbf{characteristic values}.
+			Eigenvectors may also be referred to as \textbf{characteristic vectors} and eigenvalues as \textbf{characteristic values}.\\\\
+			The \textbf{eigenspace} of an eigenvalue is the subspace formed by the eigenvectors associated with the eigenvalue and the zero vector.
 		}
 		\medskip\note{Note:
 			\begin{itemize}
@@ -998,6 +1011,7 @@
 	
 		\bigskip
 		\begin{corollary}
+			\label{coro:matrix-trace-independent-of-basis}
 			The trace of a matrix of a linear operator is independent of the basis with respect to which the matrix is defined.
 		\end{corollary}
 		\begin{proof}
@@ -1106,6 +1120,68 @@
 				}
 			\end{itemize}
 		}
+		\begin{corollary}
+			If a linear operator on a vector space of dimension $n$ over a field $F$ has a characteristic polynomial with $n$ distinct roots then its determinant is equal to the product of its eigenvalues and its trace is equal to the sum of its eigenvalues.
+		\end{corollary}
+		\begin{proof}
+			By \autoref{prop:similar-matrices-have-same-determinant} and \autoref{coro:matrix-trace-independent-of-basis}, the determinant and trace are independent of the basis with respect to which the matrix is defined and so the existence of a basis with respect to which the matrix is diagonal means that we can look at the determinant and trace of the diagonal matrix.
+		\end{proof}
+	
+		
+		\bigskip
+		\subsubsection{Examples of Diagonalization using the Characteristic Polynomial}
+		\begin{exe}
+			\item{Let the real-valued matrix $A$ be,
+				\[ A = \begin{bmatrix}
+						4 & 0 & 4\\
+						0 & 4 & 4\\
+						4 & 4 & 8
+						\end{bmatrix}.
+				\]
+				Constructing the characteristic polynomial,
+				\begin{align*}
+				\lvert{A - \lambda I}\rvert &= \begin{vmatrix}
+													4 - \lambda & 0 & 4\\
+													0 & 4 - \lambda & 4\\
+													4 & 4 & 8 - \lambda
+													\end{vmatrix} \\
+				&= (4 - \lambda)\begin{vmatrix}4 - \lambda & 4\\4 & 8 - \lambda\end{vmatrix} + 
+										4\begin{vmatrix}0 & 4 - \lambda\\4 & 4\end{vmatrix} \\
+				&= (4 - \lambda)((4 - \lambda)(8 - \lambda) - 16 - 16)\\
+				&= (4 - \lambda)(\lambda^2 - 12\lambda)\\
+				&= (4 - \lambda)\lambda(\lambda - 12).
+				\end{align*}
+				So the eigenvalues are 4,0 and 12. To find an eigenvector for 4 we need to solve the equation ${ (A - 4I)\x = \0 }$ so we construct the matrix,
+				\[ A - 4I = \begin{bmatrix}
+							0 & 0 & 4\\
+							0 & 0 & 4\\
+							4 & 4 & 4
+							\end{bmatrix}
+				\]
+				and then find the nullspace of this matrix using row reduction,
+				
+				\begin{align*}
+				\begin{bmatrix}
+				0 & 0 & 4\\
+				0 & 0 & 4\\
+				4 & 4 & 4
+				\end{bmatrix} &=
+				\begin{bmatrix}
+				1 & 1 & 1\\
+				0 & 0 & 1\\
+				0 & 0 & 1
+				\end{bmatrix} \\
+				&= \begin{bmatrix}
+				1 & 1 & 0\\
+				0 & 0 & 1\\
+				0 & 0 & 0
+				\end{bmatrix}
+				\end{align*}
+				which gives ${ x_3 = 0 }$ and one free variable $x_2$. So
+				\[ \x = \begin{bmatrix}-t \\ t \\ 0\end{bmatrix} = t\begin{bmatrix}-1 \\ 1 \\ 0\end{bmatrix} \hspace{30pt} t \neq 0 \in \R{}. \]
+				\note{Note that ${ t \neq 0 }$ because eigenvectors are nonzero by definition.}
+			}
+		\end{exe}
 		
 		
 		\bigskip\bigskip

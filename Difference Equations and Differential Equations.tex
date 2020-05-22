@@ -1,0 +1,89 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+	\searchableSection{\texorpdfstring{Difference and Differential\\ Equations}{Difference and Differential Equations}}{differential equations, difference equations}
+	\bigskip\bigskip
+	
+	\searchableSubsection{Difference Equations}{difference equations}{
+		\bigskip\bigskip
+		\note{A \textbf{difference equation} is also known as a \textbf{recurrence equation}.}
+		
+		\bigskip
+		\subsubsection{First-order Difference Equations}
+		\boxeddefinition{Let ${ y_t }$ be the $t$-th value in a sequence (typically $t$ represents time). Then,
+			\[ y_t = ay_{t-1} + b, \hspace{20pt} t \geq 1 \]
+			is called a \textbf{first-order linear difference equation with constant coefficients}. The value $y_0$ is called an initial condition.\\
+			A solution to such an equation is an explicit expression for $y$ in terms of $t$ and $y_0$.\\
+			If ${ b = 0 }$ we have,
+			\[ y_t = ay_{t-1} \iff y_t - ay_{t-1} = 0 \]
+			which is known as a \textbf{homogeneous} first-order linear difference equation with constant coefficients.
+		}
+	
+		\bigskip
+		\labeledProposition{A first-order linear difference equation with constant coefficients of the form ${ y_t = ay_{t-1} + b }$ where ${ a = 1 }$ is a arithmetic progression.
+		}{first-order-lin-diff-eqn-const-coeff-1-multiplier-is-arith-prog}
+		\begin{proof}
+			Let ${ y_t = y_{t-1} + b }$ then,
+			\[ y_1 = y_0 + b,\, y_2 = y_1 + b = (y_0 + b) + b = y_0 + 2b,\, y_3 = y_0 + 3b, \dots \]
+			so we have ${ y_t = y_0 + tb }$. If we describe this as an arithmetic progression we have,
+			\[ x_n = a + nd \]
+			where the zeroth term $a$ corresponds to $y_0$, the common difference $d$ corresponds to $b$ and, clearly, $t$ and $n$ are both term indices.
+		\end{proof}
+		
+		\medskip
+		\labeledProposition{A first-order linear difference equation with constant coefficients of the form ${ y_t = ay_{t-1} + b }$ where ${ b = 0 }$ is a geometric progression.}{first-order-lin-diff-eqn-const-coeff-0-const-term-is-geom-prog}
+		\begin{proof}
+			Let ${ y_t = ay_{t-1} + 0 }$ then,
+			\[ y_1 = ay_0,\, y_2 = ay_1 = a(ay_0) = a^2y_0,\, y_3 = a^3y_0, \dots \]
+			so we have ${ y_t = a^ty_0 }$. If we describe this as a geometric progression we have,
+			\[ x_n = ar^n \]
+			where the zeroth term $a$ corresponds to $y_0$, the common ratio $r$ corresponds to $a$, and $n$ is the term index corresponding to $t$.
+		\end{proof}
+	
+		\bigskip
+		\subsubsection{Examples of first-order linear difference equations w/ const. coefficients}
+		\begin{exe}
+			\item{Let $y_t$ be an account balance after $t$ years and $r$ be the annual interest rate paid on the account. Suppose also, that each year $I$ is withdrawn from this account. Then the formula for $y_t$ is,
+				\[ y_t = (1 + r)y_{t-1} - I. \]
+			}
+		\end{exe}
+	}
+
+
+
+	\bigskip\bigskip
+	\searchableSubsection{Differential Equations}{differential equations}{
+		\bigskip\bigskip
+		
+		\subsubsection{Linear Ordinary Differential Equations}
+		\bigskip
+		
+		\subsubsubsection{First Order}
+		\begin{align*}
+		&& \frac{dy}{dx} &= ax + b \\
+		&\iff & \int \frac{dy}{dx} \dx &= \int ax + b \dx &\sidecomment{} \\
+		&\iff & y &= a'x^2 + bx + c. &\sidecomment{${ a' = a/2}$, c is any constant}
+		\end{align*}
+		Integrating we see that a first order differential equation only determines the function upto a constant value. In order to determine a specific function we need a relation between a value of $x$ and a value of $y$ (i.e. a point, in graphical terms). Typically this is described as an initial condition.
+		
+		\bigskip\bigskip
+		\subsubsubsection{Second Order}
+		\begin{align*}
+		&& \frac{d^2y}{dx^2} &= ax + b \\
+		&\iff & \int \frac{d^2y}{dx^2} \dx &= \int ax + b \dx  &\sidecomment{} \\
+		&\iff & \frac{dy}{dx} &= a'x^2 + bx + c  &\sidecomment{${ a' = a/2 }$, c is any constant} \\
+		&\iff & \int \frac{dy}{dx} \dx &= \int a'x^2 + bx + c \dx  &\sidecomment{} \\
+		&\iff & y &= a''x^3 + b'x^2 + cx + d. &\sidecomment{${ a'' = a/6,\, b' = b/2}$, d is any constant}
+		\end{align*}
+		Integrating a second order equation twice we see that we introduced two constants of integration, ${ c,d }$, and the last two terms ${ cx + d }$ are undetermined. So a second order equation of this type has only determined a function upto a first-degree polynomial (a line). To determine a specific function, in this case, we require two relations between $x$ and $y$ (two points determine a line).
+		
+		\bigskip\bigskip
+		\subsubsection{Differentiation Operator}
+		\bigskip
+		\boxeddefinition{The differentiation operator ${ D: P_n \longmapsto P_{n-1} }$ over real polynomials maps polynomials of degree $n$ to polynomials of degree $n-1$.}
+		
+	}
+
+\end{document}
