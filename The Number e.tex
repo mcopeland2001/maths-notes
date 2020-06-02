@@ -7,23 +7,102 @@
 
 \searchableSubsection{The Number e}{analysis}{
 	\bigskip\bigskip
+	\boxeddefinition{The \textbf{natural logarithm} is defined as,
+		\[ \ln{x} = \int_1^x \frac{1}{t} \dif t. \]
+	}
 	\boxeddefinition{The number \textbf{e} can be defined in various ways. Some of the most common of these are:
 		\begin{enumerate}[label=(\roman*)]
 			\item{\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \]}
 			\item{\[ e = \sum_{n=0}^\infty \frac{1}{n!} = \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \cdots \]}
-			\item{e is the unique number such that, \[ \ln{e} = \int_1^e \frac{1}{t} \dif t = 1 \]}
+			\item{e is the unique number such that, \[ \ln{e} = 1 \]}
 		\end{enumerate}
 	}
 
-	\bigskip
-	\labeledProposition{Definitions (i) and (ii) are equivalent. That's to say,
+	\bigskip\bigskip
+	\labeledProposition{The definition of the natural log implies:
+		\begin{enumerate}[label=(\roman*)]
+			\item{${ \ln{1} = 0 }$;}
+			\item{${ \frac{\dif}{\dif x}\ln{x} = 1/x }$;}
+			\item{${ \ln{x} = \ln{y} \iff x = y }$.}
+		\end{enumerate}}{properties-of-natural-log}
+	\begin{proof} The proofs of each of the properties are the following.
+		\begin{enumerate}[label=(\roman*)]
+			\item{${\bm{ \ln{1} = 0 : }}$\\\\
+				By the properties of integrals,
+				\[ \ln{1} = \int_1^1 \frac{1}{t} \dif t = 0. \]
+			}
+			\item{${\bm{ \frac{\dif}{\dif x}\ln{x} = 1/x : }}$\\\\
+				This is a consequence of the Fundamental Theorem of Calculus and,
+				\[ \ln{x} = \int_1^x \frac{1}{t} \dif t. \]
+			}
+			\item{${\bm{ \ln{x} = \ln{y} \iff x = y : }}$\\\\
+				This is a consequence of the previous property that,
+				\[ \frac{\dif}{\dif x}\ln{x} = \frac{1}{x}. \]
+				For ${ x > 0 }$, the function ${ 1/x }$ is strictly positive. This, in turn, means that the function,
+				\[ f(x) = \int_1^x \frac{1}{t} \dif t \]
+				is strictly monotonically increasing for all ${ x > 0 }$. Therefore,
+				\[ x > y \implies f(x) > f(y) \]
+				and so,
+				\[ x \neq y \implies f(x) \neq f(y). \qedhere\]
+			}
+		\end{enumerate}
+	\end{proof}
+
+	\bigskip\bigskip
+	\labeledProposition{Let ${ f: \R{} \longmapsto \R{} }$ be defined as
+	\[ f(x) = e^x. \] Then the function $f$ is the inverse of the natural log function $\ln$.}{exp-x-is-inverse-of-ln}
+	\begin{proof}
+		Using the definition of the natural log and properties of integrals we have,
+		\begin{align*}
+		\ln{e^x} &= \int_1^{e^x} \frac{1}{t} \dif t \\[8pt]
+		  		 &= \int_1^{e} \frac{1}{t} \dif t + \int_e^{e^2} \frac{1}{t} \dif t + \cdots + \int_{e^{x-1}}^{e^x} \frac{1}{t} \dif t &\sidecomment{} \\[8pt]
+		  		 &= \sum_{i=1}^x \int_{e^{i-1}}^{e^i} \frac{1}{t} \dif t \\[8pt]
+		  		 &= \sum_{i=1}^x \int_{1}^e \frac{e^{i-1}}{t} \dif u = \sum_{i=1}^x \int_{1}^e \frac{1}{u} \dif u &\sidecomment{${ u = t/(e^{i-1}),\, e^{i-1}\dif u = \dif t }$}\\[8pt]
+		  		 &= \sum_{i=1}^x \ln{e} = \sum_{i=1}^x 1 = x. \\[8pt]
+		\end{align*}
+		Conversely, using similar logic,
+		\begin{align*}
+		&& \ln{e^{\ln{x}}} &= \int_1^{e^{\ln{x}}} \frac{1}{t} \dif t \\[8pt]
+		&&  &= \sum_{i=1}^{\ln{x}} \ln{e} = \sum_{i=1}^{\ln{x}} 1 = \ln{x}. &\sidecomment{} \\
+		\end{align*}
+		Then, by the injectivity of the natural log (property (iii) of \autoref{prop:properties-of-natural-log}),
+		\[ \ln{e^{\ln{x}}} = \ln{x} \iff e^{\ln{x}} = x. \]
+		So, we have shown that,
+		\[ \ln{e^x} = x = e^{\ln{x}} \]
+		which implies that the functions are inverses.
+	\end{proof}
+
+	
+	\bigskip\bigskip
+	\labeledProposition{For any ${ x,r \in \R{} }$, \[ \ln{x^r} = r\ln{x}. \]}{log-x-to-power-r-is-r-times-log-x}
+	\begin{proof}
+		By \autoref{prop:exp-x-is-inverse-of-ln}, the functions ${ e^x }$ and ${ \ln{x} }$ are inverses. Therefore,
+		\[ \ln{x^r} = \ln{(e^{\ln{x}})^r} = \ln{e^{r\ln{x}}} = r\ln{x}. \qedhere \]
+	\end{proof}
+	
+
+	\bigskip\bigskip
+	\labeledProposition{Definitions (i) and (ii) of the number e are equivalent. That's to say,
 	\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \iff e = \sum_{n=0}^\infty \frac{1}{n!} = \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \cdots \]
 	}{limit-def-of-e-equiv-to-inf-series-def-of-e}
 	\begin{proof}
+		Consider, for finite $n$, the binomial expansion,
+		\begin{align*}
+		\left(1 + \frac{1}{n}\right)^n &= \sum_{k=0}^n {{n}\choose{k}} \frac{1}{n^k} \\[8pt]
+		&= \frac{1}{0!} + \frac{n}{1!}\left(\frac{1}{n}\right) + \frac{(n)(n-1)}{2!}\left(\frac{1}{n^2}\right) + \frac{(n)(n-1)(n-2)}{3!}\left(\frac{1}{n^3}\right) + \\[8pt]
+		&\hspace{28pt}\cdots + \frac{(n)(n-1)\cdots(1)}{n!}\left(\frac{1}{n^n}\right) \\[8pt]
+		&= \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!}\left(\frac{n-1}{n}\right) + \frac{1}{3!}\left(\frac{(n-1)(n-2)}{n^2}\right) + \\[8pt]
+		&\hspace{28pt}\cdots + \frac{1}{n!}\left(\frac{(n-1)(n-2)\cdots(1)}{n^{n-1}}\right) \\[8pt]
+		&= \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!}\left(1 - \frac{1}{n}\right) + \frac{1}{3!}\left(1 - \frac{1}{n}\right)\left(1 - \frac{2}{n}\right) + \\[8pt]
+		&\hspace{28pt}\cdots + \frac{1}{n!}\left(1 - \frac{1}{n}\right)\left(1 - \frac{2}{n}\right)\cdots\left(1 - \frac{n-1}{n}\right)
+		\end{align*}
+		which tends, as ${ n \to \infty }$, to
+		\[ \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \cdots \qedhere\]
 	\end{proof}
+	\note{The actual proof of this requires limit inferior and superior (see \href{https://en.m.wikipedia.org/wiki/Limit_superior_and_limit_inferior}{wikipedia}) because we haven't shown that the expression derived from the binomial expression converges. The full proof can be found in Artin[73] and \href{https://en.m.wikipedia.org/wiki/Characterizations_of_the_exponential_function\#Equivalence_of_the_characterizations}{wikipedia}.}
 
-	\bigskip
-	\labeledProposition{Definitions (i) and (iii) are equivalent. That's to say,
+	\bigskip\bigskip
+	\labeledProposition{Definitions (i) and (iii) of the number e are equivalent. That's to say,
 		\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \iff \text{$e$ is the unique number such that } \ln{e} = 1. \]
 	}{limit-def-of-e-equiv-to-log-def-of-e}
 	\begin{proof} Assume that,
@@ -32,19 +111,35 @@
 		\begin{align*}
 		&& \ln{e} &= \ln{\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n} \\[8pt]
 		&&  &= \lim_{n \to \infty} \ln{\left(1 + \frac{1}{n}\right)^n} &\sidecomment{by \autoref{theo:comps_continuous_functions_are_continuous}} \\[8pt]
-		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)}}{1/n} &\sidecomment{} \\[8pt]
+		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)}}{1/n} &\sidecomment{using \autoref{prop:log-x-to-power-r-is-r-times-log-x}} \\[8pt]
 		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)} - \ln{1}}{1/n} &\sidecomment{} \\[8pt]
 		&&  &= \lim_{h \to 0} \frac{\ln{\left(1 + h\right)} - \ln{1}}{h} &\sidecomment{} \\[8pt]
 		&&  &= \eval{\frac{\dif(\ln{x})}{\dif x}}_{x=1} = \eval{\frac{1}{x}}_{x=1} = 1. &\sidecomment{}
 		\end{align*}
 		This shows that 
 		\[ e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \implies \ln{e} = 1. \]
-		\TODO{But we haven't shown uniqueness of $e$ here!}\\
+		This number is unique by property (iii) of the natural log in \autoref{prop:properties-of-natural-log}.\\\\
+		
 		Conversely, if we assume that e is the unique number such that ${ \ln{e} = 1 }$ then the fact already shown, that 
 		\[ \ln{\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n} = 1 \]
 		implies that 
-		\[ \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e. \]
+		\[ \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e. \qedhere\]
 	\end{proof}
+
+	\bigskip\bigskip\bigskip
+	\subsubsection{\texorpdfstring{$e^x$}{e to the power x}}
+	\bigskip
+	Taking the limit definition of $e$ (definition (i)) and raising it to the power of $x$ we have,
+	\[ e^x = \left[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n\right]^x = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{xn} \]
+	\TODO{can we prove that ${ (\lim x)^n = \lim x^n }$?}
+	\begin{align*}
+	\left(1 + \frac{1}{n}\right)^{xn} &= \sum_{k=0}^{xn} {{xn}\choose{k}} \frac{1}{n^k} \\[8pt]
+	    &= 1 + (xn)\left(\frac{1}{n}\right) + \frac{(xn)(xn-1)}{2!}\left(\frac{1}{n^2}\right) + \frac{(xn)(xn-1)(xn-2)}{3!}\left(\frac{1}{n^3}\right) + \cdots &\sidecomment{} \\[8pt]
+	    &= 1 + x + \frac{1}{2!}\left(\frac{x(xn-1)}{n}\right) + \frac{1}{3!}\left(\frac{x(xn-1)(xn-2)}{n^2}\right) + \cdots &\sidecomment{} \\[8pt]
+	    &= 1 + x + \frac{x}{2!}\left(x - \frac{1}{n}\right) + \frac{x}{3!}\left(x - \frac{1}{n}\right)\left(x - \frac{2}{n}\right) + \cdots &\sidecomment{}
+	\end{align*}
+	If we take the limit of this expression as ${ n \to \infty }$ then we get,
+	\[ \frac{1}{0!} + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \]
 }
 
 \end{document}

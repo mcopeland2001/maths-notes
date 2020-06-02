@@ -278,7 +278,49 @@
 			TODO
 		}
 		
-		\searchableSubsection{Absolute Value}{number theory, absolute value}{\bigskip
+		\searchableSubsection{Absolute Value}{number theory, absolute value}{\label{ssection:absolute-value}\bigskip
+			\boxeddefinition{The \textbf{absolute value} function is defined,
+				\[ \abs{x} = 
+						\begin{cases}
+							x & x \geq 0\\
+							-x & x < 0
+						\end{cases}
+				\]
+			}
+		
+			\bigskip
+			\labeledProposition{${ \abs{a}\abs{b} = \abs{ab} }$.}{product-of-absolute-vals-is-absolute-val-of-product}
+			\begin{proof}
+				By the definition of absolute value,
+				\[ \abs{ab} = 
+						\begin{cases} 
+							ab & ab \geq 0 \\
+							-ab & ab < 0.
+						\end{cases}
+				\]
+				Extending the definition to the product of absolute values,
+				\[
+					\abs{a}\abs{b} = 
+						\begin{cases} 
+							ab & a,b \geq 0\\
+							-ab & a < 0, b \geq 0\\
+							-ab & a \geq 0, b < 0\\
+							ab & a,b < 0.
+						\end{cases}
+				\]
+				We can see that these are equivalent because,
+				\[
+					ab \text{ is } 
+						\begin{cases} 
+							\geq 0 & a,b \geq 0 \text{ or } a,b < 0\\
+							< 0 & a < 0, b \geq 0 \text{ or } a \geq 0, b < 0.
+						\end{cases} \qedhere
+				\]
+			\end{proof}
+		
+			\bigskip\bigskip
+			\subsubsection{The Triangle Inequality}
+			\bigskip
 			\[ \vert{x}\vert \ge x, \vert{y}\vert \ge y	\implies \vert{x}\vert + \vert{y}\vert \ge x + y \]
 			\begin{align*}			
 				\vert{x + y}\vert =
@@ -299,6 +341,7 @@
 			\[ \vert{x + y}\vert \leq \vert{ \vert{x}\vert + \vert{y}\vert }\vert = \vert{x}\vert + \vert{y}\vert \]
 			and this is known as the "triangle inequality".\bigskip
 			
+			\bigskip
 			\labeledProposition{$\vert{x - y}\vert \leq \vert{x - z}\vert + \vert{y - z}\vert$}{asdfa}
 			\begin{proof}
 			\begin{align*}

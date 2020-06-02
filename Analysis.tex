@@ -585,17 +585,213 @@
 		\bigskip
 		\subsubsection{Algebra of limits of functions}
 		\labeledTheorem{Let ${ f, g : \R{} \mapsto \R{} }$ be two functions and $c$ be any real number. Suppose that ${ \lim_{x \to a} f(x) = L }$ and ${ \lim_{x \to a} g(x) = M }$. Then,
-			\begin{enumerate}
+			\begin{enumerate}[label=(\roman*)]
 				\item{${ \lim_{x \to a} (cf)(x) = cL }$}
 				\item{${ \lim_{x \to a} (\abs{f})(x) = \abs{L} }$}
 				\item{${ \lim_{x \to a} (f + g)(x) = L + M }$}
 				\item{${ \lim_{x \to a} (f - g)(x) = L - M }$}
 				\item{${ \lim_{x \to a} f(x)g(x) = LM }$}
-				\item{${ \lim_{x \to a} (f / g)(x) = L/M }$ provided ${ g(x) \neq 0 }$ for any $x$ in the neighbourhood of $a$.}
+				\item{${ \lim_{x \to a} (f / g)(x) = L/M }$ provided ${ g(x) \neq 0 }$ for any $x$ in the neighbourhood of $a$}
+				\item{${ \lim_{x \to a} f(x)^c = L^c }$.}
 			\end{enumerate}
-		}{func_limit_properties}
+		}{func-limit-properties}
 		\begin{proof}
 			see: \href{http://tutorial.math.lamar.edu/Classes/CalcI/LimitProofs.aspx}{Lamar University - Paul's Online Notes - Proofs of limit properties}
+			First we need to prove a couple of more basic statements about limits as preliminaries.
+			\begin{itemize}
+				\item{${\bm{ \lim_{x \to a} c = c }}$:\\
+					\[ \forall \epsilon > 0 \logicsep \exists \delta \logicsep 0 < \abs{x - a} < \delta \implies \abs{c - c} < \epsilon \]
+					is clearly satisfied for any interval of $x$-values (since the constant function doesn't depend on $x$). So, the proposition is trivially satisfied by any ${ \epsilon,\delta }$.
+				}
+				\item{${\bm{ \lim_{x \to a} x = a }}$:\\
+					\[ \forall \epsilon > 0 \logicsep \exists \delta \logicsep 0 < \abs{x - a} < \delta \implies \abs{x - a} < \epsilon \]
+					is also trivially satisfied for any ${ \epsilon = \delta }$.
+				}
+			\end{itemize}
+			\bigskip
+			\begin{enumerate}[label=(\roman*)]
+				\item{${\bm{ \lim_{x \to a} (cf)(x) = cL }}$:\\\\
+					Let 
+					\[ \epsilon > 0,\; \epsilon_1 = \frac{\epsilon}{\abs{c}}.\]
+					By hypothesis,
+					\[ \forall \epsilon_1 > 0 \logicsep \exists \delta_1 \logicsep 0 < \abs{x - a} < \delta_1 \implies \abs{f(x) - L} < \epsilon_1. \]
+					Furthermore,
+					\begin{align*}
+					&& \abs{f(x) - L} &< \epsilon_1 \\
+					&\iff & \abs{c}\abs{f(x) - L} &< \abs{c}\epsilon_1 &\sidecomment{} \\
+					&\iff & \abs{cf(x) - cL} &< \abs{c}\epsilon_1 = \abs{c}\frac{\epsilon}{\abs{c}} = \epsilon. &\sidecomment{by \autoref{prop:product-of-absolute-vals-is-absolute-val-of-product}}
+					\end{align*}
+					\bigskip
+				}
+				\item{${\bm{ \lim_{x \to a} (\abs{f})(x) = \abs{L} }}$:\\\\
+					Using properties of absolute value (see: \ref{ssection:absolute-value}), 
+					\[ \abs{f(x) - L} \geq \abs{\abs{f(x)} - \abs{L}} \]
+					so that
+					\[ \abs{f(x) - L} < \epsilon \implies \abs{\abs{f(x)} - \abs{L}} < \epsilon. \]
+					This means that the limit hypothesis on $f(x)$ implies that
+					\[ \lim_{x \to a} (\abs{f})(x) = \abs{L} \]
+					as required.
+					\bigskip
+				}
+				\item{${\bm{ \lim_{x \to a} (f + g)(x) = L + M }}$:\\\\
+					Let 
+					\[ \epsilon > 0,\; \epsilon_1 = \frac{\epsilon}{2}.\]
+					By hypothesis we have,
+					\[ \forall \epsilon_1 > 0 \logicsep \exists \delta_1 \logicsep 0 < \abs{x - a} < \delta_1 \implies \abs{f(x) - L} < \epsilon_1, \]
+					\[ \forall \epsilon_1 > 0 \logicsep \exists \delta_2 \logicsep 0 < \abs{x - a} < \delta_2 \implies \abs{g(x) - M} < \epsilon_1. \]
+					Let 
+					\[ \delta = \min \{\delta_1,\delta_2\} \]
+					so that, for ${ 0 < \abs{x - a} < \delta }$ we have,
+					\[  \abs{f(x) - L} < \epsilon_1 \eqand \abs{g(x) - M} < \epsilon_1. \]
+					If we sum the two expressions and employ the absolute value properties (see: \ref{ssection:absolute-value}) we obtain,
+					\begin{align*}
+					&& \abs{f(x) - L} + \abs{g(x) - M} &<  2\epsilon_1 = \epsilon \\
+					&\implies & \abs{(f(x) - L) + (g(x) - M)} &<  \epsilon &\sidecomment{${ \abs{x + y} \leq \abs{x} + \abs{y} }$} \\
+					&\iff & \abs{(f(x) + g(x)) - (L + M)} &<  \epsilon. &\sidecomment{}
+					\end{align*}
+					\bigskip
+				}
+				\item{${\bm{ \lim_{x \to a} (f - g)(x) = L - M }}$:\\\\
+					Arguing similarly to (iii), again, for $x$ in the $\delta$-neighbourhood of $a$, we have both
+					\[ \abs{f(x) - L} < \epsilon_1 \eqand \abs{g(x) - M} < \epsilon_1. \]
+					This time, we are going to subtract the two expressions and use a fact derived from the absolute value properties (see: \ref{ssection:absolute-value}) that,
+					\[ \abs{\abs{x} - \abs{y}} \leq \abs{x - y} \leq \abs{x} + \abs{y}. \]
+					\begin{align*}
+					&& \abs{(f(x) - L) - (g(x) - M)} &\leq \abs{f(x) - L} + \abs{g(x) - M} < 2\epsilon_1 \\
+					&\iff & \abs{(f(x) - L) - (g(x) - M)} &<  2\epsilon_1 = \epsilon &\sidecomment{}\\
+					&\iff & \abs{(f(x) - g(x)) - (L - M)} &<  \epsilon. &\sidecomment{}
+					\end{align*}
+					\note{Note that the maximum "error" is the sum of the individual errors ${ \epsilon_1 + \epsilon_2 }$ just as it is for (iii).}
+					\bigskip
+				}
+				\item{${\bm{ \lim_{x \to a} f(x)g(x) = LM }}$:\\\\
+					First, we prove a lemma that will be useful for the second part of this proof.
+					\begin{lemma}
+						\[ \lim_{x \to a} (f(x) - L)(g(x) - M) = 0 \]
+					\end{lemma}
+					\begin{proof}
+						Let 
+						\[ \epsilon > 0,\; \epsilon_1 = \sqrt{\epsilon}.\]
+						By hypothesis we have,
+						\[ \forall \epsilon_1 > 0 \logicsep \exists \delta_1 \logicsep 0 < \abs{x - a} < \delta_1 \implies \abs{f(x) - L} < \epsilon_1, \]
+						\[ \forall \epsilon_1 > 0 \logicsep \exists \delta_2 \logicsep 0 < \abs{x - a} < \delta_2 \implies \abs{g(x) - M} < \epsilon_1. \]
+						Let 
+						\[ \delta = \min \{\delta_1,\delta_2\} \]
+						so that, for ${ 0 < \abs{x - a} < \delta }$ we have,
+						\[  \abs{f(x) - L} < \epsilon_1 \eqand \abs{g(x) - M} < \epsilon_1. \]
+						Then,
+						\[ \abs{f(x) - L}\abs{g(x) - M} < {\epsilon_1}^2 = \epsilon. \]
+						By \autoref{prop:product-of-absolute-vals-is-absolute-val-of-product},
+						\[ \abs{f(x) - L}\abs{g(x) - M} = \abs{(f(x) - L)(g(x) - M)} \]
+						so we have,
+						\[ \forall \epsilon > 0 \logicsep \exists \delta \logicsep 0 < \abs{x - a} < \delta \implies \abs{(f(x) - L)(g(x) - M) - 0} < \epsilon. \]
+						Which is to say,
+						\[ \lim_{x \to a} (f(x) - L)(g(x) - M) = 0. \qedhere \]
+					\end{proof}
+					\bigskip
+					The second part begins by observing that,
+					\[ f(x)g(x) = (f(x) - L)(g(x) - M) + Mf(x) + Lg(x) - LM. \]
+					If we take the limit of both sides of this equation as ${ x \to a }$ then,
+					\begin{align*}
+					\lim_{x \to a} f(x)g(x) &= \lim_{x \to a}[ (f(x) - L)(g(x) - M)\\
+					&\hspace{60pt} + Mf(x) + Lg(x) - LM ] \\[8pt]
+					&= \lim_{x \to a} (f(x) - L)(g(x) - M)\\
+					&\hspace{60pt} + M\lim_{x \to a} f(x) + L\lim_{x \to a} g(x) - LM &\sidecomment{} \\[8pt]
+					&= 0 + ML + LM - LM = LM. &\sidecomment{}
+					\end{align*}
+					\bigskip
+				}
+				\item{${\bm{ \lim_{x \to a} (f / g)(x) = L/M }}$ provided ${ g(x) \neq 0 }$ for any $x$ in the neighbourhood of $a$:\\\\
+					First we prove the following lemma:
+					\begin{lemma}
+						\[ \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{M} \]
+					\end{lemma}
+					\begin{proof}
+						Firstly observe that,
+						\[ \frac{1}{g(x)} - \frac{1}{M} = \frac{M - g(x)}{Mg(x)} \]
+						and that
+						\begin{align*}
+						&& \abs{M} = \abs{M -  g(x) + g(x)} &\leq \abs{M - g(x)} + \abs{g(x)} \\[8pt]
+						&\iff & \abs{g(x)} &\geq \abs{M} - \abs{M - g(x)} &\sidecomment{} \\[8pt]
+						&\iff & \frac{1}{\abs{g(x)}} &\leq \frac{1}{\abs{M} - \abs{g(x) - M}}. &\sidecomment{}
+						\end{align*}				
+						By hypothesis there exists some $\delta_1$ such that,
+						\[ 0 < \abs{x - a} < \delta_1 \implies \abs{g(x) - M} < \frac{\abs{M}}{2} \implies \frac{1}{\abs{M} - \abs{g(x) - M}} < \frac{2}{\abs{M}}. \]
+						Also, for any arbitrary ${ \epsilon > 0 }$ there exists some $\delta_2$ such that,
+						\[ 0 < \abs{x - a} < \delta_1 \implies \abs{g(x) - M} < \frac{\abs{M}^2}{2}\epsilon \]
+						which means that,
+						\[ \frac{\abs{M - g(x)}}{\abs{Mg(x)}} = \abs{g(x) - M} \cdot \frac{1}{\abs{M}} \cdot \frac{1}{g(x)} < \frac{\abs{M}^2}{2}\epsilon \cdot \frac{1}{\abs{M}} \cdot \frac{2}{\abs{M}} = \epsilon. \qedhere \] 
+					\end{proof}
+					\bigskip
+					Now we can use (v) to deduce that, 
+					\[ \lim_{x \to a} \frac{f(x)}{g(x)} = (\lim_{x \to a} f(x))\left(\lim_{x \to a} \frac{1}{g(x)}\right) = L \cdot \frac{1}{M} = \frac{L}{M}. \]
+				}
+				\item{${\bm{ \lim_{x \to a} f(x)^c = L^c }}$:\\\\
+					We need to prove this in progressive stages. First for a natural number power, then for any rational number and then for irrational numbers.
+					\begin{lemma}\label{lem:lim-to-natural-power}
+						\[ \lim_{x \to a} f(x)^n = L^n \hspace{30pt} n \in \N{} \]
+					\end{lemma}
+					\begin{proof}
+						Prove by induction on $n$. Base case ${ n = 2 }$:
+						\begin{align*}
+						\lim_{x \to a} f(x)^2 &= \lim_{x \to a} f(x)f(x) \\
+						&= (\lim_{x \to a} f(x))(\lim_{x \to a} f(x)) &\sidecomment{by (v)} \\
+						&= \left[\lim_{x \to a} f(x)\right]^2.
+						\end{align*}
+						Induction step:
+						\begin{align*}
+						\lim_{x \to a} f(x)^{n+1} &= \lim_{x \to a} f(x)^nf(x) \\
+						&= (\lim_{x \to a} f(x)^n)(\lim_{x \to a} f(x)) &\sidecomment{} \\
+						&= \left[\lim_{x \to a} f(x)\right]^n(\lim_{x \to a} f(x)) &\sidecomment{by induction hypothesis} \\
+						&= \left[\lim_{x \to a} f(x)\right]^{n+1}. \qedhere
+						\end{align*}						
+					\end{proof}
+					\begin{lemma}\label{lem:limit-of-nth-root-is-nth-root-of-limit}
+						\[ \lim_{x \to a} f(x)^{1/n} = L^{1/n} \hspace{30pt} n \in \N{} \]
+					\end{lemma}
+					\begin{proof}
+						\begin{align*}
+						&& \left[\lim_{x \to a} f(x)^{1/n}\right]^n &= \lim_{x \to a} (f(x)^{1/n})^n &\sidecomment{by \autoref{lem:lim-to-natural-power}}\\
+						&\iff & \left[\lim_{x \to a} f(x)^{1/n}\right]^n &= \lim_{x \to a} f(x) &\sidecomment{} \\
+						&\iff & \lim_{x \to a} f(x)^{1/n} &= \left[\lim_{x \to a} f(x)\right]^{1/n}. \qedhere \\
+						\end{align*}
+					\end{proof}
+					\begin{lemma}
+						\[ \lim_{x \to a} f(x)^q = L^q \hspace{30pt} q \in \Q{} \]
+					\end{lemma}
+					\begin{proof}
+						Firstly consider the case that ${ q \geq 0 }$. Since $q$ is a rational number, it can be expressed as ${ m/n }$ for ${ m,n \in \N{} }$. Then,
+						\begin{align*}
+						\lim_{x \to a} f(x)^q &= \lim_{x \to a} f(x)^{m/n} \\
+						&= \lim_{x \to a} (f(x)^{1/n})^m &\sidecomment{} \\
+						&= \left[\lim_{x \to a} f(x)^{1/n}\right]^m &\sidecomment{by \autoref{lem:lim-to-natural-power}} \\
+						&= \left[\left[\lim_{x \to a} f(x)\right]^{1/n}\right]^m &\sidecomment{by \autoref{lem:limit-of-nth-root-is-nth-root-of-limit}} \\
+						&= \left[\lim_{x \to a} f(x)\right]^{m/n} = \left[\lim_{x \to a} f(x)\right]^q.
+						\end{align*}
+						Now consider the case where ${ q < 0 }$. Then we can express $q$ as ${ -m/n }$ for ${ m,n \in \N{} }$. By (vi), 
+						\begin{align*}
+						\lim_{x \to a} f(x)^q &= \lim_{x \to a} f(x)^{-m/n} \\
+						&= \lim_{x \to a} (f(x)^{-1})^{m/n} &\sidecomment{} \\
+						&= \lim_{x \to a} (f(x)^{m/n})^{-1} &\sidecomment{} \\
+						&= \left[\lim_{x \to a} f(x)^{m/n}\right]^{-1} &\sidecomment{by (vi)} \\
+						&= \left[\lim_{x \to a} f(x)\right]^{-q}. \qedhere
+						\end{align*}
+					\end{proof}
+					\note{What follows is a tentative, speculative proof for irrational powers and will hopefully be confirmed or corrected at a later date.}
+					If we view an arbitrary irrational number $r$ as a Cauchy sequence then it is a convergent sum of an infinite series of rational terms. So, for ${ q_1,q_2,\dots \in \Q{} }$
+					\[ x^r = x^{(q_1 + q_2 + \cdots)} = x^{q_1}x^{q_2}\cdots \]
+					where 
+					\[ \lim_{i \to \infty} q_i = 0 \implies \lim_{i \to \infty} x^{q_i} = 1. \]
+					Therefore,
+					\begin{align*}
+					\lim_{x \to a} f(x)^r &= \lim_{x \to a} f(x)^{(q_1 + q_2 + \cdots)} \\
+					&= \lim_{x \to a} f(x)^{q_1}f(x)^{q_2}\cdots &\sidecomment{} \\
+					&= \left[\lim_{x \to a} f(x)\right]^{q_1}\left[\lim_{x \to a} f(x)\right]^{q_2}\cdots &\sidecomment{} \\
+					&= \left[\lim_{x \to a} f(x)\right]^{(q_1 + q_2 + \cdots)}\\
+					&= \left[\lim_{x \to a} f(x)\right]^r.
+					\end{align*}
+				}
+			\end{enumerate}
 		\end{proof}
 	
 		\bigskip
@@ -644,7 +840,7 @@
 			any real number. Then ${ \abs{f}, (cf), (f - g), (f + g), (f(x)g(x)) }$ are all continuous at $ a $, and
 			${ (f/g)  }$ is continuous provided ${ g(x) \neq 0 }$ for any $ x $ in some neighbourhood of $ a $.}{}
 		\begin{proof}
-			This follows from the algebra of limits of functions given in \autoref{theo:func_limit_properties}.
+			This follows from the algebra of limits of functions given in \autoref{theo:func-limit-properties}.
 		\end{proof}
 	
 		\begin{corollary}
