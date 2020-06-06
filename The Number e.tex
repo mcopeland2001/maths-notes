@@ -23,7 +23,7 @@
 		\begin{enumerate}[label=(\roman*)]
 			\item{${ \ln{1} = 0 }$;}
 			\item{${ \frac{\dif}{\dif x}\ln{x} = 1/x }$;}
-			\item{${ \ln{x} = \ln{y} \iff x = y }$.}
+			\item{${ \ln{x} = \ln{y} \implies x = y }$.}
 		\end{enumerate}}{properties-of-natural-log}
 	\begin{proof} The proofs of each of the properties are the following.
 		\begin{enumerate}[label=(\roman*)]
@@ -35,7 +35,7 @@
 				This is a consequence of the Fundamental Theorem of Calculus and,
 				\[ \ln{x} = \int_1^x \frac{1}{t} \dif t. \]
 			}
-			\item{${\bm{ \ln{x} = \ln{y} \iff x = y : }}$\\\\
+			\item{${\bm{ \ln{x} = \ln{y} \implies x = y : }}$\\\\
 				This is a consequence of the previous property that,
 				\[ \frac{\dif}{\dif x}\ln{x} = \frac{1}{x}. \]
 				For ${ x > 0 }$, the function ${ 1/x }$ is strictly positive. This, in turn, means that the function,
@@ -66,7 +66,7 @@
 		&&  &= \sum_{i=1}^{\ln{x}} \ln{e} = \sum_{i=1}^{\ln{x}} 1 = \ln{x}. &\sidecomment{} \\
 		\end{align*}
 		Then, by the injectivity of the natural log (property (iii) of \autoref{prop:properties-of-natural-log}),
-		\[ \ln{e^{\ln{x}}} = \ln{x} \iff e^{\ln{x}} = x. \]
+		\[ \ln{e^{\ln{x}}} = \ln{x} \implies e^{\ln{x}} = x. \]
 		So, we have shown that,
 		\[ \ln{e^x} = x = e^{\ln{x}} \]
 		which implies that the functions are inverses.
@@ -129,9 +129,9 @@
 	\bigskip\bigskip\bigskip
 	\subsubsection{\texorpdfstring{$e^x$}{e to the power x}}
 	\bigskip
-	Taking the limit definition of $e$ (definition (i)) and raising it to the power of $x$ we have,
-	\[ e^x = \left[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n\right]^x = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{xn} \]
-	\TODO{can we prove that ${ (\lim x)^n = \lim x^n }$?}
+	Taking the limit definition of $e$ (definition (i)) and raising it to the power of $x$, by (vi) of \autoref{theo:func-limit-properties}, we have
+	\[ e^x = \left[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n\right]^x = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{xn}. \]
+	If we expand this out using binomial theorem we get,
 	\begin{align*}
 	\left(1 + \frac{1}{n}\right)^{xn} &= \sum_{k=0}^{xn} {{xn}\choose{k}} \frac{1}{n^k} \\[8pt]
 	    &= 1 + (xn)\left(\frac{1}{n}\right) + \frac{(xn)(xn-1)}{2!}\left(\frac{1}{n^2}\right) + \frac{(xn)(xn-1)(xn-2)}{3!}\left(\frac{1}{n^3}\right) + \cdots &\sidecomment{} \\[8pt]
@@ -139,7 +139,19 @@
 	    &= 1 + x + \frac{x}{2!}\left(x - \frac{1}{n}\right) + \frac{x}{3!}\left(x - \frac{1}{n}\right)\left(x - \frac{2}{n}\right) + \cdots &\sidecomment{}
 	\end{align*}
 	If we take the limit of this expression as ${ n \to \infty }$ then we get,
-	\[ \frac{1}{0!} + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \]
+	\[ e^x = \frac{1}{0!} + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \]
+	
+	But also, if we take the expression (which arises if we infinitely compound interest at an interest rate of $x$),
+	\[ \left(1 + \frac{x}{n}\right)^n \]
+	and again expand it using binomial theorem,
+	\begin{align*}
+	\left(1 + \frac{x}{n}\right)^n &= \sum_{k=0}^n {{n}\choose{k}} \frac{x^k}{n^k} \\[8pt]
+	&= 1 + \frac{nx}{n} + \frac{n(n-1)}{2!}\frac{x^2}{n^2} + \frac{n(n-1)(n-2)}{3!}\frac{x^3}{n^3} + \cdots \\[8pt]
+	&= 1 + x + \frac{x^2}{2!}\frac{n-1}{n} + \frac{x^3}{3!}\frac{(n-1)(n-2)}{n^2} + \cdots \\[8pt]
+	&= 1 + x + \frac{x^2}{2!}\left(1 - \frac{1}{n}\right) + \frac{x^3}{3!}\left(1 - \frac{1}{n}\right)\left(1 - \frac{2}{n}\right) + \cdots
+	\end{align*}
+	again if we take the limit of this expression as ${ n \to \infty }$ then we get,
+	\[ \frac{1}{0!} + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = e^x. \]
 }
 
 \end{document}

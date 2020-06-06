@@ -152,26 +152,47 @@
 		So, here the kernel is 2-dimensional and we need two initial values to determine a particular solution.
 		
 		\bigskip
-		\subsubsection{Eigenvectors of the Differentiation Operator}
+		\subsubsection{Eigenvectors of the Differentiation Operator}\label{sss:eigenvectors-of-differentiation}
 		\bigskip
 		If we had the differential equation,
 		\begin{equation}
 		\Dif_x y(x) = \alpha_0 + \alpha_1 x + \alpha_2 x^2 + \alpha_3 x^3 + \cdots
 		\end{equation}
-		so that the derivative of $y(x)$ is an infinite power series (not an infinite polynomial as polynomials are by definition finite), then the general solution would take the form,
+		so that the derivative of $y(x)$ is an infinite power series (not an infinite polynomial as polynomials are by definition finite), then the general solution would take the form, for ${ t \in \R{} }$,
 		\begin{equation}
 			y(x) = t + \alpha_0 x + \frac{\alpha_1}{2} x^2 + \frac{\alpha_2}{3} x^3 + \cdots
 		\end{equation}
-		for any ${ t \in \R{} }$.
+		So, if we had
+		\[ \alpha_0 = \alpha_1,\, \frac{\alpha_1}{2} = \alpha_2,\, \frac{\alpha_2}{3} = \alpha_3 \]
+		then the general solution would be, for ${ t \in \R{} }$,
+		\begin{equation}
+			y(x) = t + \alpha_1 x + \alpha_2 x^2 + \alpha_3 x^3 + \cdots
+		\end{equation}
+		which is a family of functions which includes the derivative ${ \Dif_x y(x) }$ --- the derivative being the member of this set of functions with ${ t = \alpha_0 }$. In order to achieve this we need the coefficients to form the series,
+		\begin{align*}
+		&\alpha_0,\; \frac{\alpha_0}{1},\; \frac{\alpha_0}{1 \times 2},\; \frac{\alpha_0}{1 \times 2 \times 3},\; \dots
+		\end{align*}
+		so that
+		\begin{align*}
+		y(x) &= \alpha_0 + \frac{\alpha_0}{1}x + \frac{\alpha_0}{1 \times 2}x^2 + \frac{\alpha_0}{1 \times 2 \times 3}x^3 + \dots \\[8pt]
+		&= \alpha_0 + \frac{\alpha_0}{1!}x + \frac{\alpha_0}{2!}x^2 + \frac{\alpha_0}{3!}x^3 + \dots &\sidecomment{} \\[8pt]
+		&= \alpha_0\left(1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots \right) = \alpha_0 e^x.
+		\end{align*}
+		So, the general solution is,
+		\[ y(x) = t e^x \hspace{20pt} t \in \R{} \]
+		and the particular solution, for ${ t = \alpha_0 }$, is
+		\[ y(x) = \alpha_0 e^x. \]
+		\TODO{how does this relate to the shift operator describe in a note to \autoref{prop:properties_of_non_bijective_lin_operator}?}
 		
+		\bigskip\bigskip\bigskip
 		The exponential function $e^x$ is an eigenvector of the differentiation operator (also known as an \textit{eigenfunction} since the operator maps between function spaces). So the differential equation,
 		\begin{equation}
-			\Dif_x y = y
+			\Dif_x y = \alpha y
 		\end{equation}
 		which, in vector form, is
 		\begin{equation}
-			A\vtheta = \vtheta
+			A\vtheta = \alpha \vtheta
 		\end{equation}
-		has general solution $Ce^x$ for constant $C$.
+		has general solution $Ce^{\alpha x}$ for constant $C$.
 	}
 \end{document}

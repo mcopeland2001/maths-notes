@@ -80,9 +80,42 @@
 		Integrating a second order equation twice we see that we introduced two constants of integration, ${ c,d }$, and the last two terms ${ cx + d }$ are undetermined. So a second order equation of this type has only determined a function upto a first-degree polynomial (a line). To determine a specific function, in this case, we require two relations between $x$ and $y$ (two points determine a line).
 		
 		\bigskip\bigskip
-		\subsubsection{Differentiation Operator}
+		\subsubsection{Recurrence Differential Equations}
 		\bigskip
-		\boxeddefinition{The differentiation operator ${ D: P_n \longmapsto P_{n-1} }$ over real polynomials maps polynomials of degree $n$ to polynomials of degree $n-1$.}
+		\boxeddefinition{This is \textbf{not} standard terminology but what is meant here by \textbf{recurrence} differential equations is equations that describe the derivative of a function --- say $y(x)$ --- in terms of the value of the function itself. So, for example, a linear first-order example would have the form,
+			\[ \frac{\dif y}{\dif x} = f(x)y + g(x). \]
+		}
+	
+		Since the eigenfunction of differentiation is the exponent function ${ f(x) = e^x }$ (see \autoref{sss:eigenvectors-of-differentiation}), the solution to these differential equations will always involve the exponent function.
+		
+		\bigskip\bigskip
+		\subsubsubsection{The form ${ \frac{\dif y}{\dif x} = f(x)y }$}
+		The most simple form has a single $y$-term whose coefficient may be a function of $x$. This form is separable as,
+		\begin{align*}
+		&& \frac{\dif y}{\dif x} &= f(x)y \\[8pt]
+		&\iff & \frac{1}{y} \frac{\dif y}{\dif x} &= f(x) &\sidecomment{} \\[8pt]
+		&\iff & \int \frac{1}{y} \frac{\dif y}{\dif x} \dif x &= \int f(x) \dif x &\sidecomment{} \\[8pt]
+		&\iff & \ln \abs{y} &= F(x) + c &\sidecomment{${ y \neq 0 }$, $F$ is an antiderivative of $f$} \\[8pt]
+		&\iff & \abs{y} &= e^{F(x)}\cdot e^c &\sidecomment{} \\[8pt]
+		&\iff & y &= Ae^{F(x)} &\sidecomment{${ A \in \R{}. }$}
+		\end{align*}
+		\note{Note that the solution has the form,
+			\[ y = Ae^{F(x)} \]
+			where $F(x)$ is an antiderivative of $f(x)$, the coefficient of $y$ in the original differential equation. Since the antiderivative is unique upto a constant factor, the other possible antiderivatives are achieved by the value of the coefficient $A$ because,
+			\[ e^{F(x) + c} = e^{F(x)}\cdot e^c = Ae^{F(x)}. \]
+		}
+		
+		\bigskip\bigskip
+		\subsubsubsection{The form ${ \frac{\dif y}{\dif x} = f(x)y + g(x) }$}
+		This form is not separable as it is. But if we multiply both sides by $e^{-F(x)}$, where $F(x)$ is an antiderivative of $f(x)$, then
+		\begin{align*}
+		&& \frac{\dif y}{\dif x} &= f(x)y + g(x) \\[8pt]
+		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} &= e^{-F(x)}f(x)y + e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
+		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} - e^{-F(x)}f(x)y &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
+		&\iff & \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
+		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
+		&\iff & y &= e^{F(x)}\int e^{-F(x)}g(x) \dif x. &\sidecomment{}
+		\end{align*}
 		
 	}
 
