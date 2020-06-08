@@ -99,6 +99,8 @@
 		&\iff & \abs{y} &= e^{F(x)}\cdot e^c &\sidecomment{} \\[8pt]
 		&\iff & y &= Ae^{F(x)} &\sidecomment{${ A \in \R{}. }$}
 		\end{align*}
+		Check solution:
+		\[ \frac{\dif y}{\dif x} = f(x)Ae^{F(x)} = f(x)y. \]
 		\note{Note that the solution has the form,
 			\[ y = Ae^{F(x)} \]
 			where $F(x)$ is an antiderivative of $f(x)$, the coefficient of $y$ in the original differential equation. Since the antiderivative is unique upto a constant factor, the other possible antiderivatives are achieved by the value of the coefficient $A$ because,
@@ -114,9 +116,17 @@
 		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} - e^{-F(x)}f(x)y &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
 		&\iff & \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
 		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
-		&\iff & y &= e^{F(x)}\int e^{-F(x)}g(x) \dif x. &\sidecomment{}
+		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. &\sidecomment{}
 		\end{align*}
-		
+		Check solution:
+		\begin{align*}
+		\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
+		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) &\sidecomment{} \\[8pt]
+		&= f(x)y \dif x + g(x).
+		\end{align*}
+		\note{Note that
+			\[ Ae^{F(x)}\int \frac{g(x)}{Ae^{F(x)}} \dif x = Ae^{F(x)}\frac{1}{A}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
+		}
 	}
 
 \end{document}
