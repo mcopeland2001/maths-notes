@@ -8,12 +8,20 @@
 \searchableSection{Linear Transformations}{linear algebra}
 
 	\searchableSubsection{Basic Properties of Linear Transformations}{linear algebra}{
+		\label{ssection:basic-properties-linear-transformations}
+		\bigskip\bigskip
 		
 		The analogue for vector spaces of a homomorphism of groups is a map,
 		\[ T: V \longmapsto W \]
 		from one vector space over a field $\F{}$ to another, which is compatible with addition and scalar multiplication:
 		\[ T(\V{v_1} + \V{v_2}) = T(\V{v_1}) + T(\V{v_2}) \eqand T(c\V{v_1}) = cT(\V{v_1}), \]
 		for all ${ \V{v_1},\V{v_2} \in V,\, c \in \F{} }$.\\
+		
+		\note{Note that another way of describing this is that \textbf{linear combinations are preserved across linear transformations}. That's to say, if
+			\[ \u = \alpha_1 \v_1 + \cdots + \alpha_n \v_n \eqand \w = \alpha_1 f(\v_1) + \cdots + \alpha_n f(\v_n) \]
+			then, if $f$ is linear we also have,
+			\[ f(\u) = \w. \]
+		}
 		
 		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation} or \textbf{linear map or mapping}.}
 		
@@ -695,14 +703,6 @@
 			 &= \det{A}. \qedhere
 			\end{align*}
 		\end{proof}
-	
-		\bigskip
-		\labeledProposition{Similar matrices have the same eigenvalues.}{similar_matrices_same_eigenvalues}
-		\begin{proof}
-			Similar matrices represent the same transformation with respect to different bases and for a matrix $A$ representing a transformation $T$ with respect to an arbitrary basis $B$,
-			\[ T(\v) = c\v \iff A\v_B = c\v_B. \]
-			That's to say, the eigenvalues are not dependent on the basis with respect to which a coordinate vector is defined.
-		\end{proof}
 		
 		
 		
@@ -773,6 +773,19 @@
 			\end{itemize}
 		 }
 	 
+	 	\bigskip
+	 	\labeledTheorem{The eigenspace of an eigenvalue is a vector subspace.}{eigenspaces-are-vector-subspaces}
+	 	\begin{proof}
+	 		Let $S$ be the set of all eigenvectors of a linear operator $T$ corresponding to a particular eigenvalue $c$. Then the eigenspace is defined as,
+	 		\[ E = S \cup \{\0\}. \]
+	 		Then $E$ is a subspace because it contains the zero vector and
+	 		\[ \v,\w \in E \implies T(\alpha\v + \beta\w) = \alpha(c\v) + \beta(c\w) = c(\alpha\v + \beta\w) \implies \alpha\v + \beta\w \in E. \qedhere \]
+	 	\end{proof}
+ 		\begin{corollary}
+ 			Any linear combination of eigenvectors with eigenvalue $c$ is also an eigenvector with eigenvalue $c$.
+ 		\end{corollary}
+	 
+	 	\bigskip\medskip
 	 	\subsubsection{Examples of Eigenvectors and Eigenvalues}
 	 	\begin{exe}
 	 		\item{If we take the matrix,
@@ -842,6 +855,14 @@
  			\label{coro:diagonal-similar-matrix-iff-exists-basis-of-eigenvectors}
  			The matrix of a linear operator $T$ over a vector space $V$ is similar to a diagonal matrix iff there exists some basis of $V$ solely comprised of eigenvectors of $T$. 
  		\end{corollary}
+ 	
+ 		\bigskip
+ 		\labeledProposition{Similar matrices have the same eigenvalues.}{similar_matrices_same_eigenvalues}
+ 		\begin{proof}
+ 			Similar matrices represent the same transformation with respect to different bases and for a matrix $A$ representing a transformation $T$ with respect to an arbitrary basis $B$,
+ 			\[ T(\v) = c\v \iff A\v_B = c\v_B. \]
+ 			That's to say, the eigenvalues are not dependent on the basis with respect to which a coordinate vector is defined.
+ 		\end{proof}
 	}
 
 

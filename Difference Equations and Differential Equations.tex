@@ -115,18 +115,74 @@
 		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} &= e^{-F(x)}f(x)y + e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
 		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} - e^{-F(x)}f(x)y &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
 		&\iff & \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
-		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
-		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. &\sidecomment{}
+		&\iff & \int \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) \dif x &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
+		&\iff & e^{-F(x)}y + c &= \int e^{-F(x)}g(x) \dif x &\sidecomment{constant ${ c \in \R{} }$} \\[8pt]
+		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x - c &\sidecomment{} \\[8pt]
+		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x + Ae^{F(x)}. &\sidecomment{${ A = -c }$}
 		\end{align*}
 		Check solution:
 		\begin{align*}
-		\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
-		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) &\sidecomment{} \\[8pt]
-		&= f(x)y \dif x + g(x).
+		\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} + f(x)Ae^{F(x)} \\[8pt]
+		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x + Ae^{F(x)}\right) + g(x) &\sidecomment{} \\[8pt]
+		&= f(x)y + g(x).
 		\end{align*}
 		\note{Note that
 			\[ Ae^{F(x)}\int \frac{g(x)}{Ae^{F(x)}} \dif x = Ae^{F(x)}\frac{1}{A}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
 		}
+	
+		\paragraph{Example:}
+		\begin{exe}
+			\item{${\bm{ x\frac{\dif y}{\dif x} - 2y = 6 }}$:\\\\
+				The first step is to rearrange it to obtain an expression for the derivative. 
+				\begin{align*}
+				&& x\frac{\dif y}{\dif x} - 2y &= 6 \\
+				&\iff & \frac{\dif y}{\dif x} &= \frac{2}{x}y + \frac{6}{x}. &\sidecomment{} \\
+				\end{align*}
+				Then we can apply the derived formula using the antiderivative ${ F(x) = 2\ln{x} }$.
+				\begin{align*}
+				y &= e^{2\ln{x}}\int \frac{6/x}{e^{2\ln{x}}} \dif x \\
+				&= 6x^2 \int \frac{1}{x^3} \dif x &\sidecomment{} \\
+				&= 6x^2\left(-\frac{1}{2x^2} + c\right) &\sidecomment{} \\
+				&= -3 + c'x^2. &\sidecomment{${ c' = 6c }$} \\
+				\end{align*}
+				We can confirm this result by performing the calculation.
+				\begin{align*}
+				&& e^{-2\ln{x}}\frac{\dif y}{\dif x} &= e^{-2\ln{x}}\frac{2}{x}y + e^{-2\ln{x}}\frac{6}{x} \\
+				&\iff & x^{-2}\frac{\dif y}{\dif x} - x^{-2}\frac{2}{x}y &= x^{-2}\frac{6}{x} &\sidecomment{} \\
+				&\iff & x^{-2}\frac{\dif y}{\dif x} - \frac{2}{x^3}y &= \frac{6}{x^3} &\sidecomment{} \\
+				&\iff & \frac{\dif }{\dif x}(x^{-2}y) &= \frac{6}{x^3} &\sidecomment{} \\
+				&\iff & \int \frac{\dif }{\dif x}(x^{-2}y) \dif x &= 6 \int \frac{1}{x^3} \dif x &\sidecomment{} \\
+				&\iff & x^{-2}y &= 6(-\frac{1}{2x^2} + c) &\sidecomment{} \\
+				&\iff & x^{-2}y &= -3\frac{1}{x^2} + c' &\sidecomment{${ c' = 6c }$} \\
+				&\iff & y &= -3 + c'x^2. &\sidecomment{} \\
+				\end{align*}
+			}
+		\end{exe}
+	
+		\bigskip\bigskip
+		\subsubsubsection{Homogeneous Differential Equations}
+		\boxeddefinition{A \textbf{homogeneous differential equation} is an equation of the form,
+			\[ f(x,y)\frac{\dif y}{\dif x} = g(x,y) \]
+			where the functions $f,g$ are both homogeneous of degree $d$.
+		}
+	
+		\bigskip\note{The functions $f,g$ need not be linear and so these differential equations are not necessarily linear.}
+		
+		The key insight here is that, due to the homogeneous function property (see: \ref{section:homogeneous-functions}), if we define the function $y$ to be ${ y(x) = x \cdot v(x) }$ --- which we may do because, due to the non-trivial kernel of differentiation, we are only able to determine a solution to a differential equation upto a constant term so we can set the constant term to 0 for convenience during the calculation --- then,
+		\[ f(\lambda x, \lambda y) = \lambda^d f(x,y) \implies f(x,xv) = x^d g(v). \]
+		When this is applied in a differential equation of the above form we obtain,
+		\begin{align*}
+		&& f(x,y)\frac{\dif y}{\dif x} &= g(x,y) \\[8pt]
+		&\iff & x^d f_1(v) \left(v + x\frac{\dif v}{\dif x}\right) &= x^d f_2(v) &\sidecomment{${y = xv,\,\, y' = v + xv'}$} \\[8pt]
+		&\iff & f_1(v) \left(v + x\frac{\dif v}{\dif x}\right) &= f_2(v) &\sidecomment{} \\[8pt]
+		&\iff & v + x\frac{\dif v}{\dif x} &= \frac{f_2(v)}{f_1(v)} = f_3(v) &\sidecomment{} \\[8pt]
+		&\iff & x\frac{\dif v}{\dif x} &= f_3(v) - v = f_4(v) &\sidecomment{} \\[8pt]
+		&\iff & \frac{1}{f_4(v)}\frac{\dif v}{\dif x} &= \frac{1}{x} &\sidecomment{} \\[8pt]
+		&\iff & \int \frac{1}{f_4(v)}\frac{\dif v}{\dif x} \dif x &= \int \frac{1}{x} \dif x = \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
+		&\iff & \int \frac{1}{f_4(v)} \dif v &= \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
+		&\iff & \frac{1}{f_4'(v)} \ln{\abs{f_4(v)}} &= \ln{\abs{x}} + c. &\sidecomment{} \\[8pt]
+		\end{align*}
+
 	}
 
 \end{document}
