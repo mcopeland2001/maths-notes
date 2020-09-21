@@ -27,33 +27,571 @@
 		\begin{proof}
 			Let ${ y_t = y_{t-1} + b }$ then,
 			\[ y_1 = y_0 + b,\, y_2 = y_1 + b = (y_0 + b) + b = y_0 + 2b,\, y_3 = y_0 + 3b, \dots \]
-			so we have ${ y_t = y_0 + tb }$. If we describe this as an arithmetic progression we have,
+			so we have ${\bm{ y_t = y_0 + tb }}$. If we describe this as an arithmetic progression we have,
 			\[ x_n = a + nd \]
 			where the zeroth term $a$ corresponds to $y_0$, the common difference $d$ corresponds to $b$ and, clearly, $t$ and $n$ are both term indices.
 		\end{proof}
 		
-		\medskip
+		\bigskip\medskip
 		\labeledProposition{A first-order linear difference equation with constant coefficients of the form ${ y_t = ay_{t-1} + b }$ where ${ b = 0 }$ is a geometric progression.}{first-order-lin-diff-eqn-const-coeff-0-const-term-is-geom-prog}
 		\begin{proof}
 			Let ${ y_t = ay_{t-1} + 0 }$ then,
 			\[ y_1 = ay_0,\, y_2 = ay_1 = a(ay_0) = a^2y_0,\, y_3 = a^3y_0, \dots \]
-			so we have ${ y_t = a^ty_0 }$. If we describe this as a geometric progression we have,
+			so we have ${\bm{ y_t = a^ty_0 }}$. If we describe this as a geometric progression we have,
 			\[ x_n = ar^n \]
 			where the zeroth term $a$ corresponds to $y_0$, the common ratio $r$ corresponds to $a$, and $n$ is the term index corresponding to $t$.
 		\end{proof}
 	
+		\bigskip\medskip
+		\labeledProposition{A first-order linear difference equation with constant coefficients of the form ${ y_t = ay_{t-1} + b }$ where ${ a \neq 1 }$ and ${ b \neq 0 }$ has solution
+			\begin{align*}
+			y_t &= a^t y_0 + b(a^{t-1} + a^{t-2} + \cdots + a + 1) \\
+			&= a^t y_0 + b \sum_{i=0}^{t-1} a^i.
+			\end{align*}
+		}{first-order-lin-diff-eqn-const-coeff-soln-formula}
+		\begin{proof}
+			\begin{align*}
+			y_t &= a y_{t-1} + b \\
+			&= a(a y_{t-2} + b) + b = a^2 y_{t-2} + ab + b\\
+			&= a^2 (a(y_{t-3} + b)) + ab + b = a^3 y_{t-3} + a^2 b + ab + b \\
+			&= a^3 y_{t-3} + b(a^2 + a + 1) \\
+			&= a^t y_0 + b(a^{t-1} + \cdots + a + 1).  \qedhere  
+			\end{align*}
+		\end{proof}
+	
+		\bigskip\medskip
+		\labeledProposition{A first-order linear difference equation with constant coefficients of the form ${ y_t = ay_{t-1} + b }$ where ${ a \neq 1 }$ and ${ b \neq 0 }$ has solution
+			\[ y_t = a^t \left(y_0 - \frac{b}{1-a}\right) + \frac{b}{1-a} \]
+			where the value
+			\[ \frac{b}{1-a} = y^* = a y^* + b \]
+			is the \textbf{equilibrium} or \textbf{steady-state} value of the recurrence.
+		}{first-order-lin-diff-eqn-const-coeff-soln-formula-wrt-steady-state-value}
+		\begin{proof}
+			From \autoref{prop:first-order-lin-diff-eqn-const-coeff-soln-formula} we know that the solution to the given recurrence is
+			\[ y_t = a^t y_0 + b \sum_{i=0}^{t-1} a^i. \]
+			The summation in the second term is the sum of a geometric progression,
+			\begin{align*}
+			\sum_{i=0}^{t-1} a^i = 1 + a + \cdots + a^{t-1} &= \frac{a^t - 1}{a - 1} \\[8pt]
+			&= \frac{a^t}{a - 1} - \frac{1}{a - 1} \\[8pt]
+			&= \frac{1}{1 - a} - \frac{a^t}{1 - a}.
+			\end{align*}
+			So we see that the sum of a geometric progression can be separated into two terms: one term depends on the number of elements in the progression (here $t$), and the other term does not. This is the explanation of the sum of convergent geometric series: if ${ \abs{a} < 1 }$ then, when ${ t \to \infty }$, the $t$-dependent term disappears leaving only the steady-state term.\\
+			
+			The solution to the recurrence therefore becomes
+			\begin{align*}
+			y_t &= a^t y_0 + b \left(\frac{1}{1 - a} - \frac{a^t}{1 - a}\right) \\[8pt]
+			&= a^t \left(y_0 - \frac{b}{1-a}\right) + \frac{b}{1-a}. \qedhere \\
+			\end{align*}
+		\end{proof}
+	
+	
+		\biggerskip
+		\subsubsection{First-order Linear Difference Equations as Affine Transformations}
+		\def\y{\V{y}}
+		If we define a vectorized linear difference equation with constant coefficients,
+		\[ \y_t = A\y_{t-1} + \b \]
+		where $A$ is a matrix, then clearly $\y_t$ is an affine transformation of $\y_{t-1}$.\\
+		
+		We can linearize this by adding an extra dimension that takes the value 1 like so:
+		\[	\begin{bmatrix}
+				\y_t\\
+				1
+			\end{bmatrix} =
+			\begin{bmatrix}
+				A & \b\\
+				0 & 1
+	  		\end{bmatrix}
+			\begin{bmatrix}
+				\y_{t-1}\\
+				1
+			\end{bmatrix}.
+		\]
+		
+		\bigskip
+		A minimal, one-by-one matrix is just a scalar (see: \ref{ex:minimal-linear-transformation}) and a minimal vector can be just a field element (see: \ref{sssection:vectors-as-magnitude-and-direction}) so we can define ${ A = a }$ such that the linearized equation becomes
+		\begin{align*}
+		\begin{bmatrix}
+			y_t\\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			a & b\\
+			0 & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			y_{t-1}\\
+			1
+		\end{bmatrix} \\[8pt]
+		&=
+		\begin{bmatrix}
+			a & b\\
+			0 & 1
+		\end{bmatrix}^t
+		\begin{bmatrix}
+			y_0\\
+			1
+		\end{bmatrix}.
+		\end{align*}
+	
+		\subsubsubsection{Eigenvectors of the Transformation}
+		In order to easily take powers of the transformation we find the eigenvectors.
+		\begin{align*}
+		&& 
+		\begin{bmatrix}
+		a & b\\
+		0 & 1
+		\end{bmatrix} \v &= \lambda \v \\[8pt]
+		&\iff & \left(
+		\begin{bmatrix}
+		a & b\\
+		0 & 1
+		\end{bmatrix} - \lambda I \right) \v &= \0 &\sidecomment{} \\[8pt]
+		&\iff &
+		\begin{bmatrix}
+		a-\lambda & b\\
+		0 & 1-\lambda
+		\end{bmatrix} \v &= \0 &\sidecomment{} \\[8pt]
+		\end{align*}
+	
+		\begin{align*}
+		&& 
+		\begin{vmatrix}
+		a-\lambda & b\\
+		0 & 1-\lambda
+		\end{vmatrix} &= 0 \\[8pt]
+		&\iff & (a - \lambda)(1 - \lambda) &= 0 &\sidecomment{} \\[8pt]
+		&\iff & \lambda \in \{1, a\}.
+		\end{align*}
+		
+		So, for eigenvalue 1:
+		\begin{align*}
+		&& \begin{bmatrix}
+		a-1 & b\\
+		0 & 0
+		\end{bmatrix} \begin{bmatrix}v_1\\v_2\end{bmatrix} &= \begin{bmatrix}0\\0\end{bmatrix} \\[8pt]
+		&\iff & (a - 1)v_1 + b v_2 &= 0 &\sidecomment{} \\[8pt]
+		&\iff & (a - 1)v_1 &= -b &\sidecomment{letting ${ v_2 = 1 }$} \\[8pt]
+		&\iff & v_1 &= \frac{-b}{a - 1} = \frac{b}{1 - a}\\[8pt]
+		&\therefore & \v &= \begin{bmatrix}\frac{b}{1 - a}\\1\end{bmatrix}.
+		\end{align*}
+		\note{Note that ${ \frac{b}{1 - a} }$ is the steady-state solution of the difference equation.}
+		
+		For eigenvalue $a$:
+		\begin{align*}
+		&& \begin{bmatrix}
+		0 & b\\
+		0 & 1-a
+		\end{bmatrix} \begin{bmatrix}v_1\\v_2\end{bmatrix} &= \begin{bmatrix}0\\0\end{bmatrix}  \\[8pt]
+		&\iff & v_2 &= 0 &\sidecomment{}\\[8pt]
+		&\therefore & \v &= c\begin{bmatrix}1\\0\end{bmatrix} \text{ for } c \in \R{}.
+		\end{align*}
+		\note{Note that the second component of this vector adds the translation of the affine transformation so this is telling us that if ${ b = 0 }$ then any vector is an eigenvector with eigenvalue $a$. This corresponds to the homogeneous solution.}
+		
+		\subsubsubsection{Diagonalization}
+		\bigskip
+		So, if $B$ is the set of two eigenvectors
+		\[ \left\{ \begin{bmatrix}\frac{b}{1 - a}\\1\end{bmatrix}, \begin{bmatrix}1\\0\end{bmatrix} \right\} \]
+		and we take this as a basis, then the change of basis matrix to this basis is
+		\[ P = \inv{[B]} = \inv{\begin{bmatrix}\frac{b}{1 - a} & 1\\1 & 0\end{bmatrix}} 
+			= \begin{bmatrix}0 & 1\\1 & \frac{-b}{1 - a}\end{bmatrix} 
+		\]
+		and the diagonal matrix that represents the transformation with respect to this basis is
+		\begin{align*}
+		D &= PM\inv{P} \\
+		&= \begin{bmatrix}0 & 1\\1 & \frac{-b}{1 - a}\end{bmatrix}
+		\begin{bmatrix}
+		a & b\\
+		0 & 1
+		\end{bmatrix}
+		\begin{bmatrix}\frac{b}{1 - a} & 1\\1 & 0\end{bmatrix}\\
+		&= \begin{bmatrix}0 & 1\\1 & \frac{-b}{1 - a}\end{bmatrix}
+		\begin{bmatrix}\frac{b}{1 - a} & a\\1 & 0\end{bmatrix}\\
+		&= \begin{bmatrix}1 & 0\\0 & a\end{bmatrix}.
+		\end{align*}
+
+		Since $D$ is diagonal we have
+		\[ {D}^t = \begin{bmatrix}1 & 0\\0 & a^t\end{bmatrix}. \]
+		So, in order to calculate,
+		\[ M^t = \begin{bmatrix}
+					a & b\\
+					0 & 1
+				 \end{bmatrix}^t
+		 \]
+		 we can calculate,
+		 \begin{align*}
+		 && {D}^t &= (PM\inv{P})^t = PM^t\inv{P} \\
+		 &\iff & \inv{P}{D}^tP &= M^t. \\
+		 \end{align*}
+		 
+		 \begin{align*}
+		 &\therefore & M^t &= 
+		 	\begin{bmatrix}\frac{b}{1 - a} & 1\\1 & 0\end{bmatrix} 
+		 	\begin{bmatrix}1 & 0\\0 & a^t\end{bmatrix}
+		 	\begin{bmatrix}0 & 1\\1 & \frac{-b}{1 - a}\end{bmatrix} \\
+		 &\iff & M^t &= 
+		 	\begin{bmatrix}\frac{b}{1 - a} & 1\\1 & 0\end{bmatrix}
+		 	\begin{bmatrix}0 & 1\\a^t & \frac{-a^t b}{1 - a}\end{bmatrix} \\
+		 &\iff & M^t &= 
+		 	\begin{bmatrix}a^t & \frac{b(1 - a^t)}{1 - a}\\0 & 1\end{bmatrix}. \\
+		 \end{align*}
+		 
+		 So, the solution to the first-order linear recurrence is found to be
+		 \begin{align*}
+		 \begin{bmatrix}
+		 y_t\\
+		 1
+		 \end{bmatrix} &=
+		 \begin{bmatrix}
+		 a & b\\
+		 0 & 1
+		 \end{bmatrix}^t
+		 \begin{bmatrix}
+		 y_0\\
+		 1
+		 \end{bmatrix} \\
+		 &= \begin{bmatrix}a^t & \frac{b(1 - a^t)}{1 - a}\\0 & 1\end{bmatrix} 
+		 \begin{bmatrix}
+		 y_0\\
+		 1
+		 \end{bmatrix}
+		 \end{align*}
+		 
+		 so that 
+		 \[ y_t = a^t y_0 + \frac{b(1 - a^t)}{1 - a} = a^t\left(y_0 - \frac{b}{1 - a}\right) + \frac{b}{1 - a}. \]
+	
+		\biggerskip
+		\subsubsection{Difference as Rate of change}
+		\biggerskip
+		\textbf{Geometric progression}: Say we have a first-order linear difference equation with constant coefficients of the form ${ y_t = ay_{t-1} + b }$ where ${ b = 0 }$ so that the terms follow a geometric progression:
+		\[ y_1 = ay_0,\, y_2 = a^2y_0,\, y_3 = a^3y_0, \dots \]
+		Then the rate of change is
+		\[ \frac{\Delta y}{\Delta t} = y_t - y_{t-1} = ay_{t-1} - y_{t-1} = (a - 1)y_{t-1}. \]
+		\note{Note that the ratio of consecutive terms remains constant,
+			\[ \frac{y_t}{y_{t-1}} = a \]
+			which is the "geometric" characteristic of a geometric progression, but the rate of change is proportional to the value.
+		}
+		The rate of change of the rate of change is, therefore,
+		\[ \frac{\Delta^2 y}{\Delta t^2} = (a - 1)\frac{\Delta y_{t-1}}{\Delta t} = (a - 1)\frac{\Delta y}{\Delta t} = (a - 1)^2 y_{t-1}. \]
+	
 		\bigskip
 		\subsubsection{Examples of first-order linear difference equations w/ const. coefficients}
 		\begin{exe}
+			\item{Let $y_t$ be an account balance after $t$ years and $r$ be the annual interest rate paid on the account. Suppose also, that the interest is compounded $n$ times per year. Then the formula for $y_t$ is,
+				\[ y_t = \left(1 + \frac{r}{n}\right)^n y_{t-1} = y_0 \left(1 + \frac{r}{n}\right)^{nt}. \]
+				The rate of change per year is,
+				\[ \frac{\Delta y}{\Delta t} = y_t - y_{t-1} = \left(1 + \frac{r}{n}\right)^n y_{t-1} - y_{t-1} = \left(\left(1 + \frac{r}{n}\right)^n - 1\right) y_{t-1} \]
+				as expected for a geometric progression.\\
+				
+				If, instead, we let $t$ be continuous we can find the instantaneous rate of change by considering the values for ${ t, t + \Delta t }$,
+				\begin{align*}
+				\frac{\Delta y}{\Delta t} = \frac{y_{(t + \Delta t)} - y_t}{\Delta t} &=  \frac{y_0 \left(1 + \frac{r}{n}\right)^{n(t + \Delta t)} - y_0 \left(1 + \frac{r}{n}\right)^{nt}}{\Delta t} \\[8pt]
+				&= \frac{y_0\left(1 + \frac{r}{n}\right)^{nt}\left(\left(1 + \frac{r}{n}\right)^{n\Delta t} - 1\right)}{\Delta t}
+				\end{align*}
+				and then letting ${ \Delta t \to 0 }$ to obtain,
+				\begin{align*}
+				\frac{\dif y}{\dif t} &= \lim_{\Delta t \to 0} \frac{y_0\left(1 + \frac{r}{n}\right)^{nt}\left(\left(1 + \frac{r}{n}\right)^{n\Delta t} - 1\right)}{\Delta t} \\[8pt]
+				&= y_0\left(1 + \frac{r}{n}\right)^{nt} \lim_{\Delta t \to 0} \frac{\left(1 + \frac{r}{n}\right)^{n\Delta t} - 1}{\Delta t} &\sidecomment{} \\[8pt]
+				&= y_0\left(1 + \frac{r}{n}\right)^{nt} \lim_{\Delta t \to 0} \left[\frac{\dif}{\dif (\Delta t)} \left(1 + \frac{r}{n}\right)^{n\Delta t}\right] &\sidecomment{by L'H\^{o}pital's rule} \\[8pt]
+				&= y_0\left(1 + \frac{r}{n}\right)^{nt} \lim_{\Delta t \to 0} \left[n\ln{\left(1 + \frac{r}{n}\right)}\left(1 + \frac{r}{n}\right)^{n\Delta t}\right] &\sidecomment{by \autoref{prop:derivative-of-a-to-power-x-is-ln-a-times-a-to-power-x}} \\[8pt]
+				&= ny_0 \ln{\left(1 + \frac{r}{n}\right)} \left(1 + \frac{r}{n}\right)^{nt}
+				\end{align*}
+
+				But the question is: How meaningful is this really? If the interest is being compounded only $n$ times per year and these are the only moments when the account balance changes, then change happens at certain discrete moments rather than continuously so is it really meaningful to talk about the instantaneous rate of change? We can recover the discrete-time rate of change per year from this instantaneous one by integrating over a year.\\
+				
+				Now suppose that $n$, the number of times per year the interest is compounded, goes to infinity. Then (see \autoref{sssection:e-to-the-power-x}) we have,
+				\[ y_t = y_0 e^{rt}. \]
+				For discrete time we have,
+				\[ \frac{\Delta y}{\Delta t} = y_0 e^{rt} - y_0 e^{r(t-1)} = y_0 e^{r(t-1)} (e^r - 1) = y_{t-1} (e^r - 1) \]
+				which should be no surprise as we still have a geometric progression as
+				\[ \frac{y_t}{y_{t-1}} = e^r. \]
+				If we now let $t$ be continuous as before then, by a similar logic using L'H\^{o}pital's rule, the instantaneous rate of change obtained is
+				\[ \frac{\dif y}{\dif x} = r y_0 e^{rt}. \]
+				Note that this is wholly consistent with the discrete time version as we can obtain the discrete time rate of change per year from this instantaneous rate of change by integrating over a year as follows,
+				\begin{align*}
+				\int_{t-1}^t r y_0 e^{rx} \dif x &= r y_0 \int_{t-1}^t e^{rx} \dif x \\[8pt]
+				&= r y_0 \left[\frac{e^{rx}}{r}\right]_{t-1}^t &\sidecomment{} \\[8pt]
+				&= y_0 \left[e^{rx}\right]_{t-1}^t &\sidecomment{} \\[8pt]
+				&= y_0 (e^{rt} - e^{r(t-1)}) &\sidecomment{} \\[8pt]
+				&= y_0  e^{r(t-1)} (e^r - 1). &\sidecomment{}
+				\end{align*}
+			\bigskip}
 			\item{Let $y_t$ be an account balance after $t$ years and $r$ be the annual interest rate paid on the account. Suppose also, that each year $I$ is withdrawn from this account. Then the formula for $y_t$ is,
 				\[ y_t = (1 + r)y_{t-1} - I. \]
 			}
 		\end{exe}
+	
+	
+		\biggerskip
+		\subsubsection{Second-order Difference Equations}
+		\boxeddefinition{A recurrence equation of the form
+			\[ y_t = a y_{t-1} + b y_{t-2} + c \]
+			where ${ a,b,c \in \R{} }$, is known as a \textbf{second-order linear recurrence with constant coefficients}.
+		}
+		Following the same approach as with the first-order equations we have,
+		\[
+			\begin{bmatrix}y_t\\y_{t-1}\\1\end{bmatrix} =
+			\begin{bmatrix}
+				a & b & c\\
+				1 & 0 & 0\\
+				0 & 0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}y_{t-1}\\y_{t-2}\\1\end{bmatrix}.
+		\]
+		Determining eigenvalues we get,
+		\begin{align*}
+		&&	\begin{vmatrix}
+				a-\lambda & b & c\\
+				1 & -\lambda & 0\\
+				0 & 0 & 1-\lambda
+			\end{vmatrix} &= 0 \\[3pt]
+		&\iff & (1-\lambda)((-\lambda)(a-\lambda) - b) &= 0 &\sidecomment{} \\[3pt]
+		&\therefore & \lambda \in \left\{ 1, \frac{a + \sqrt{a^2 + 4b}}{2}, \frac{a - \sqrt{a^2 + 4b}}{2} \right\}.
+		\end{align*}
+		
+		Due to the translation represented by the lone 1 in the final row of the matrix, there will always be the eigenvalue 1. This corresponds to the steady state value which may be thought of as the eigenvector of the translation. The other two eigenvalues are the eigenvectors of the linear transformation part of the affine transformation. The block structure is as follows.
+		
+		\begin{align*}
+		&&	\begin{bmatrix}
+				\begin{bmatrix}a & b\\1 & 0\end{bmatrix} & \begin{bmatrix}c\\0\end{bmatrix} \\
+				\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}1\end{bmatrix}	
+			\end{bmatrix}
+			\begin{bmatrix}y_{t-1}\\y_{t-2}\\1\end{bmatrix} &= 
+			\begin{bmatrix}a & b\\1 & 0\end{bmatrix}\begin{bmatrix}y_{t-1}\\y_{t-2}\end{bmatrix} +
+			\begin{bmatrix}c\\0\end{bmatrix} \\
+		&&  &= A\y + \V{t}. \\
+		\end{align*}
+		
+		\subsubsubsection{Steady-state value}
+		Considering the case of the eigenvalue ${ \lambda = 1 }$ we have,
+		\[
+			\begin{bmatrix}
+				a-1 &  b & c \\
+				1   & -1 & 0 \\
+				0   &  0 & 0
+			\end{bmatrix}
+			\begin{bmatrix}y_{t-1}\\y_{t-2}\\1\end{bmatrix} =
+			\begin{bmatrix}0\\0\\0\end{bmatrix}. 
+	    \]
+	    So, to find the nullspace of the matrix we can find the row-reduced echelon form,
+	    \begin{align*}
+	    && 	\begin{bmatrix}
+		    	a-1 &  b & c \\
+		    	1   & -1 & 0 \\
+		    	0   &  0 & 0	
+		    \end{bmatrix} &\leadsto
+		    \begin{bmatrix}
+			    1 &  \frac{b}{a-1} & \frac{c}{a-1} \\
+			    1   & -1 & 0 \\
+			    0   &  0 & 0	
+		    \end{bmatrix} \\[4pt]
+	    &\leadsto & 
+		    \begin{bmatrix}
+			    1 &  \frac{b}{a-1} & \frac{c}{a-1} \\
+			    0  & -1-\frac{b}{a-1} & -\frac{c}{a-1} \\
+			    0   &  0 & 0	
+		    \end{bmatrix} &\leadsto 
+		    \begin{bmatrix}
+			    1 &  \frac{b}{a-1} & \frac{c}{a-1} \\
+			    0   & 1 & \frac{c}{a+b-1} \\
+			    0   &  0 & 0	
+		    \end{bmatrix}  \\[4pt]
+		&\leadsto &
+			\begin{bmatrix}
+				1 & 0 & \frac{c}{a+b-1} \\
+				0 & 1 & \frac{c}{a+b-1} \\
+				0 & 0 & 0	
+			\end{bmatrix}
+	    \end{align*}
+	    where the last step is because
+	  	\begin{align*}
+	  	\frac{c}{a-1} - \left(\frac{b}{a-1}\right)\frac{c}{a+b-1} &= \frac{c}{a-1}\left(1 - \frac{b}{a+b-1}\right) \\
+	  	&= \frac{c}{a-1}\left(\frac{a-1}{a+b-1}\right). \\
+	  	\end{align*} 
+	  	
+	  	So the nullspace is
+	  	\[ t\begin{bmatrix}
+		  		\frac{-c}{a+b-1} \\[4pt] \frac{-c}{a+b-1} \\[4pt] 1	
+		  	\end{bmatrix} 
+		\]
+		for any ${ t \in \R{} }$ and the steady-state value is
+		\[ \frac{-c}{a+b-1}. \]
+		\note{This is also sometimes referred to as a \textbf{particular solution of the non-homogeneous equation}.}
+		
+		\bigskip
+		\subsubsubsection{Eigenvalues of the linear transformation}
+		Let the discriminant ${ d = \sqrt{a^2 + 4b} }$. Then the eigenvalues of the linear transformation are
+		\[ \frac{a + d}{2} \eqand \frac{a - d}{2}. \]
+		In the case of the eigenvalue ${ \frac{a + d}{2} }$ we have,
+		\[
+		\begin{bmatrix}
+			\frac{a - d}{2} &  b & c \\
+			1   & -(\frac{a + d}{2}) & 0 \\
+			0   &  0 & 1-(\frac{a + d}{2})
+		\end{bmatrix}
+		\begin{bmatrix}y_{t-1}\\y_{t-2}\\1\end{bmatrix} =
+		\begin{bmatrix}0\\0\\0\end{bmatrix}. 
+		\]
+		Again using row reduction to find the nullspace:
+		\begin{align*}
+		&& 	\begin{bmatrix}
+			\frac{a - d}{2} &  b & c \\[4pt]
+			1   & -(\frac{a + d}{2}) & 0 \\[4pt]
+			0   &  0 & 1-(\frac{a + d}{2})	
+		\end{bmatrix} &\leadsto
+		\begin{bmatrix}
+			1   & -(\frac{a + d}{2}) & \frac{2c}{a - d} \\[4pt]
+			1   & -(\frac{a + d}{2}) & 0 \\[4pt]
+			0   &  0 & 1-(\frac{a + d}{2})
+		\end{bmatrix} &\sidecomment{using ${ \frac{2b}{a - d}\frac{a + d}{a + d} = -(\frac{a + d}{2}) }$}\\[4pt]
+		&\leadsto & 
+		\begin{bmatrix}
+			1   & -(\frac{a + d}{2}) & \frac{2c}{a - d} \\[4pt]
+			0   &  0 & \frac{-2c}{a - d} \\[4pt]
+			0   &  0 & 1-(\frac{a + d}{2})	
+		\end{bmatrix} &\leadsto 
+		\begin{bmatrix}
+			1   & -(\frac{a + d}{2}) & \frac{2c}{a - d} \\[4pt]
+			0   &  0 & 1 \\[4pt]
+			0   &  0 & 1	
+		\end{bmatrix}  \\[4pt]
+		&\leadsto &
+		\begin{bmatrix}
+			1   & -(\frac{a + d}{2}) & 0 \\[4pt]
+			0   &  0 & 1 \\[4pt]
+			0   &  0 & 0
+		\end{bmatrix}
+		\end{align*}
+		
+		So the nullspace is
+		\[ t\begin{bmatrix}
+				\frac{a + d}{2} \\[4pt] 1 \\[4pt] 0	
+			\end{bmatrix} 
+		\]
+		for any ${ t \in \R{} }$ and the value
+		\[ \frac{a + d}{2} = \frac{a + \sqrt{a^2 + 4b}}{2} \]
+		is the solution to the homogeneous equation corresponding to the eigenvalue ${ (a+d)/2 }$. It's also not hard to see that the other eigenvalue ${ (a-d)/2 }$ results in the solution to the homogeneous equation
+		\[ \frac{a - d}{2} = \frac{a - \sqrt{a^2 + 4b}}{2}. \]
+		
+		\medskip
+		\note{Another common way of finding these solutions in this case is to form what is known as the \textbf{auxiliary equation} as:
+			\begin{align*}
+			&& y_t - a y_{t-1} - b y_{t-2} &= 0 \\
+			&\leadsto & m^t - a m^{t-1} - b m^{t-2} &= 0 &\sidecomment{for some ${ m \neq 0 \in \R{} }$} \\
+			&\iff & m^{t-2}(m^2 - a m - b) &= 0 &\sidecomment{} \\
+			&\iff & m^2 - a m - b &= 0. &\sidecomment{since ${ m \neq 0 }$} \\
+			\end{align*} 
+		Note that this is the characteristic polynomial of the linear transformation part of the matrix:
+		\[ (-\lambda)(a-\lambda) - b = \lambda^2 - a \lambda - b. \]}
+	
+		\medskip
+		In this case, determining the final equation for ${ y_t }$ using matrix powers results in a very complex matrix and formula which is only reasonably performed on a computer. But we can infer that the formula will involve the eigenvalues of the linear transformation, raised to the power $t$, and the steady-state value,
+		\[ y_t = C_1 \frac{(a+d)^t}{2^t} + C_2 \frac{(a-d)^t}{2^t} + \frac{c}{a+b-1}. \]
+		
+		Then we can use the initial values to solve for the constants ${ C_1, C_2 }$,
+		\[ y_0 = C_1 + C_2 + \frac{c}{a+b-1} \eqand y_1 = C_1 \frac{a+d}{2} + C_2 \frac{a-d}{2} + \frac{c}{a+b-1}. \]
+		
+		The values 
+		\[ \frac{a+d}{2} = \frac{a + \sqrt{a^2 + 4b}}{2} \eqand \frac{a-d}{2} = \frac{a - \sqrt{a^2 + 4b}}{2} \]
+		may be two distinct real values, one real value (if ${ a^2 + 4b = 0 }$) or two distinct complex values (if ${ a^2 + 4b < 0 }$).
+		
+		\paragraph{In the case of one real value:} the formula becomes,
+		\[ y_t = (C_1 + C_2 t) \frac{(a+d)^t}{2^t} + \frac{c}{a+b-1}. \]
+		The explanation of this appears to be that the matrix ${ A - \lambda I }$ has cyclic order 2. \TODO{? eh?}
+		
+		\paragraph{In the case of two complex values:} expressing the eigenvalues in exponential form we have,
+		\begin{align*}
+		\frac{a}{2} \pm \frac{\sqrt{-a^2 - 4b}}{2} i &= \sqrt{ \frac{a^2}{4} + \frac{-a^2 - 4b}{4} }\, \exp\left(i\arctan{\pm\frac{\sqrt{-a^2 - 4b}}{a}}\right) \\[4pt]
+		&= \sqrt{-b}\, \exp\left(i\arctan{\pm\sqrt{-1 - \frac{4b}{a^2}}}\right).
+		\end{align*}
+		Let 
+		\[ \theta = \arctan{\sqrt{-1 - \frac{4b}{a^2}}} \eqand -\theta = \arctan{-\sqrt{-1 - \frac{4b}{a^2}}}. \]
+		Then the eigenvalues raised to the power of $t$ are:
+		\[ (\sqrt{-b})^t\, e^{i \theta t} \eqand (\sqrt{-b})^t\, e^{-i \theta t} \]
+		which means that the formula becomes,
+		\begin{align*}
+		y_t &= C_1(\sqrt{-b})^t\, (\cos(\theta t) + i \sin(\theta t))\\[8pt]
+			&\hspace{18pt} +  C_2(\sqrt{-b})^t\, (\cos(-\theta t) + i \sin(-\theta t)) \\[8pt]
+			&\hspace{18pt} +  \frac{c}{a+b-1} \\[8pt]
+		&= C_1(\sqrt{-b})^t\, (\cos(\theta t) + i \sin(\theta t))\\[8pt]
+			&\hspace{18pt} +  C_2(\sqrt{-b})^t\, (\cos(\theta t) - i \sin(\theta t)) \\[8pt]
+			&\hspace{18pt} +  \frac{c}{a+b-1} &\sidecomment{} \\[8pt]
+		&= (\sqrt{-b})^t\, (C_1 + C_2)\cos(\theta t) \\[8pt]
+			&\hspace{18pt} + i (\sqrt{-b})^t\, (C_1 - C_2) \sin(\theta t) \\[8pt]
+			&\hspace{18pt} +  \frac{c}{a+b-1} &\sidecomment{} \\[8pt]
+		&= (\sqrt{-b})^t\, (C_3\cos(\theta t) + i C_4 \sin(\theta t)) +  \frac{c}{a+b-1}.
+		\end{align*}
+		
+		But, since we are looking for real-valued solutions and any linear combination of the homogeneous solutions is also a homogeneous solution, we can generate other, real-valued homogeneous solutions from linear combinations of these ones. In fact, we can just divide the imaginary solution by $i$ so that our real-valued solution is:
+		\[ (\sqrt{-b})^t\, (C_3\cos(\theta t) + C_4 \sin(\theta t)) +  \frac{c}{a+b-1}. \]
 	}
 
 
 
-	\bigskip\bigskip
+
+% ----------------------------------
+
+
+	\pagebreak
+	\searchableSubsection{Markov Chains}{difference equations}{
+		\biggerskip
+		
+		\subsubsection{Markov Matrices (a.k.a. Stochastic Matrices)}
+		\note{This section taken from \href{http://people.math.harvard.edu/~knill/teaching/math19b_2011/handouts/lecture33.pdf}{Harvard}.}
+		
+		\boxeddefinition{An \( n \times n \) matrix is called a \textbf{Markov} or \textbf{Stochastic} matrix if all entries are nonnegative and the sum of each column vector is equal to 1.}
+		
+		The matrix
+		\[
+		A=\left[\begin{array}{ll}
+		1 / 2 & 1 / 3 \\
+		1 / 2 & 2 / 3
+		\end{array}\right]
+		\]
+		is a Markov matrix.\\
+		
+		\note{Many authors write the transpose of the matrix and apply the matrix to the right of a row vector.}
+		
+		Let's call a vector with nonnegative entries \( p_{k} \) for which all the \( p_{k} \) add up to 1 a stochastic vector. For a stochastic matrix, every column is a stochastic vector.
+		
+		\labeledTheorem{If \( p \) is a stochastic vector and \( A \) is a stochastic matrix, then \( A p \) is a stochastic vector.}{stochastic-vector-times-stochastic-matrix-is-stochastic}
+		\begin{proof}
+			Let \( v_{1}, \ldots, v_{n} \) be the column vectors of \( A . \) Then
+			\[
+			A p=\left[\begin{array}{c}
+			p_{1} \\
+			p_{2} \\
+			\cdots \\
+			p_{n}
+			\end{array}\right]=p_{1} v_{1}+\ldots+v_{n} v_{n}
+			\]
+			If we sum this up we get \( p_{1}+p_{2}+\ldots+p_{n}=1 \).
+		\end{proof}
+	
+		\biggerskip
+		\labeledTheorem{A Markov matrix \( A \) always has an eigenvalue \( 1 . \) All other eigenvalues are in absolute value smaller or equal to \( 1 . \)}{stochastic-matrix-eigenvalues-are-1-and-absolutely-less-than-1}
+		\begin{proof}
+			For the transpose matrix \( A^{T}, \) the sum of the row vectors is equal to \( 1 . \) The matrix \( A^{T} \) therefore has the eigenvector
+			\[
+			\left[\begin{array}{c}
+			1 \\
+			1 \\
+			\cdots \\
+			1
+			\end{array}\right].
+			\]
+			Because \( A \) and \( A^{T} \) have the same determinant, also \( A-\lambda I_{n} \) and \( A^{T}-\lambda I_{n} \) have the same determinant so that the eigenvalues of \( A \) and \( A^{T} \) are the same (\TODO{we can reference the proof that a matrix is similar to its transpose but does this explanation also make sense?}). With \( A^{T} \) having an eigenvalue 1 also \( A \) has an eigenvalue 1 Assume now that \( v \) is an eigenvector with an eigenvalue \( |\lambda|>1 . \) Then \( A^{n} v=|\lambda|^{n} v \) has exponentially growing length for \( n \rightarrow \infty . \) This implies that there is for large \( n \) one coefficient \( \left[A^{n}\right]_{i j} \) which is larger than \( 1 . \) But \( A^{n} \) is a stochastic matrix (see homework) and has all entries \( \leq 1 . \) The assumption of an eigenvalue larger than 1 can not be valid.
+		\end{proof}
+	
+		\note{For there to be a long-term distribution of the markov chain it is necessary that the eigenvalue 1 in the markov matrix have multiplicity 1. Otherwise, there may be more than one eigenvector corresponding with eigenvalue 1 or the matrix may not be diagonalizable. In the case that it is diagonalizable, there will only be one eigenvector with eigenvalue 1 that is also a distribution vector (stochastic vector).}
+	}
+
+
+
+
+% ----------------------------------
+
+
+	\pagebreak
 	\searchableSubsection{Differential Equations}{differential equations}{
 		\bigskip\bigskip
 		
@@ -63,7 +601,7 @@
 		\subsubsubsection{First Order}
 		\begin{align*}
 		&& \frac{dy}{dx} &= ax + b \\
-		&\iff & \int \frac{dy}{dx} \dx &= \int ax + b \dx &\sidecomment{} \\
+		&\iff & \int \frac{dy}{dx} \dif x &= \int ax + b \dif x &\sidecomment{} \\
 		&\iff & y &= a'x^2 + bx + c. &\sidecomment{${ a' = a/2}$, c is any constant}
 		\end{align*}
 		Integrating we see that a first order differential equation only determines the function upto a constant value. In order to determine a specific function we need a relation between a value of $x$ and a value of $y$ (i.e. a point, in graphical terms). Typically this is described as an initial condition.
@@ -72,9 +610,9 @@
 		\subsubsubsection{Second Order}
 		\begin{align*}
 		&& \frac{d^2y}{dx^2} &= ax + b \\
-		&\iff & \int \frac{d^2y}{dx^2} \dx &= \int ax + b \dx  &\sidecomment{} \\
+		&\iff & \int \frac{d^2y}{dx^2} \dif x &= \int ax + b \dif x  &\sidecomment{} \\
 		&\iff & \frac{dy}{dx} &= a'x^2 + bx + c  &\sidecomment{${ a' = a/2 }$, c is any constant} \\
-		&\iff & \int \frac{dy}{dx} \dx &= \int a'x^2 + bx + c \dx  &\sidecomment{} \\
+		&\iff & \int \frac{dy}{dx} \dif x &= \int a'x^2 + bx + c \dif x  &\sidecomment{} \\
 		&\iff & y &= a''x^3 + b'x^2 + cx + d. &\sidecomment{${ a'' = a/6,\, b' = b/2}$, d is any constant}
 		\end{align*}
 		Integrating a second order equation twice we see that we introduced two constants of integration, ${ c,d }$, and the last two terms ${ cx + d }$ are undetermined. So a second order equation of this type has only determined a function upto a first-degree polynomial (a line). To determine a specific function, in this case, we require two relations between $x$ and $y$ (two points determine a line).
@@ -126,7 +664,7 @@
 		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x + Ae^{F(x)}\right) + g(x) &\sidecomment{} \\[8pt]
 		&= f(x)y + g(x).
 		\end{align*}
-		\note{Note that
+		\note{\TODO{This is correct but means that ${ Ae^{F(x)} }$ \textbf{is} the solution because we are trying to look for the most \textbf{general} solution we can find.} Note that
 			\[ Ae^{F(x)}\int \frac{g(x)}{Ae^{F(x)}} \dif x = Ae^{F(x)}\frac{1}{A}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
 		}
 	

@@ -20,6 +20,46 @@
 		In other words, $r(x)$ has 3 roots: ${ x_1,x_2,x_3 }$. But $r(x)$ is a quadratic polynomial and has a maximum of 2 roots. Therefore there is non such (nonzero) polynomial.
 	\end{proof}
 
+	\subsubsection{Uniqueness of Coefficients of Polynomials}\TODO{is this the best place for this?}
+	\labeledTheorem{If a polynomial is identically zero (i.e. the zero function), then all coefficients are 0.}{identically-zero-polynomial-has-all-zero-coefficents}
+	\begin{proof}
+		An obvious way to prove this is to begin by assuming that we have a degree-$m$ polynomial,
+		\[ p(x) = a_0 + a_1 x + \cdots + a_m x^m \]
+		where any coefficients $a_i$ with ${ i < m }$ may be zero. Then we can reason that if $p(x)$ is zero for all ${ x \in \R{} }$ then its derivative $p'(x)$ must also be identically zero. In this way we can extend the implication to lower and lower degree polynomials by differentiation until $p^{(m)}$ is a degree zero polynomial,
+		\[ p^{(m)}(x) = m!\, a_m = 0 \implies a_m = 0. \]
+		But ${ a_m = 0 }$ contradicts the hypothesis that $p(x)$ is a degree-$m$ polynomial.\\
+		
+		Another (better?) proof is given in Linear Algebra Done Right as follows.\\
+		
+		Let
+		\[ x = \frac{\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m-1}}}{\abs{a_m}} + 1 \]
+		so that ${ x \geq 1 }$ and so ${ \abs{a_0} \leq \abs{a_0} x }$. Then, using the triangle inequality,
+		\[ \abs{a_0 + a_1 x} \leq \abs{a_0} + \abs{a_1 x} \leq \abs{a_0 x} + \abs{a_1 x} = (\abs{a_0} + \abs{a_1}) x. \]
+		Using induction with an inductive step,
+		\begin{align*}
+		&& \abs{a_0 + a_1 x + \cdots + a_{n-1} x^{n-1}} &\leq (\abs{a_0} + \cdots + \abs{a_{n-1}}) x^{n-1} \\
+		&\implies & \abs{a_0 + a_1 x + \cdots + a_n x^n} &\leq \abs{a_0 + a_1 x + \cdots + a_{n-1} x^{n-1}} + \abs{a_n x^n}\\
+		&&&\leq (\abs{a_0} + \cdots + \abs{a_{n-1}}) x^{n-1} + \abs{a_n} x^n \\
+		&&&\leq (\abs{a_0} + \cdots + \abs{a_{n-1}} + \abs{a_n}) x^n
+		\end{align*}
+		we can deduce that
+		\[ \abs{a_0 + a_1 x + \cdots + a_{m-1} x^{m-1}} \leq (\abs{a_0} + \cdots + \abs{a_{m-1}}) x^{m-1}. \]
+		Now, 
+		\begin{align*}
+		\abs{a_m x^m} = \abs{a_m} x^m &= (\abs{a_m} x) x^{m-1} \\
+		&= \left[\abs{a_m} \left(\frac{\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m-1}}}{\abs{a_m}} + 1\right)\right] x^{m-1}\\
+		&= \left(\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m-1}} + \abs{a_m}\right) x^{m-1}.
+		\end{align*}
+		Therefore, combining with the previous result, we have,
+		\[ \abs{a_0 + a_1 x + \cdots + a_{m-1} x^{m-1}} \leq (\abs{a_0} + \cdots + \abs{a_{m-1}}) x^{m-1} < \abs{a_m x^m}. \]
+		We can now reason that,
+		\begin{align*}
+		&& \abs{a_0 + a_1 x + \cdots + a_{m-1} x^{m-1}} &<  \abs{a_m x^m} \\
+		&\implies & a_0 + a_1 x + \cdots + a_{m-1} x^{m-1} &\neq -a_m x^m  &\sidecomment{} \\
+		&\iff & a_0 + a_1 x + \cdots + a_{m-1} x^{m-1} + a_m x^m &\neq 0.
+		\end{align*}
+	\end{proof}
+
 	\bigskip\bigskip
 	\subsubsection{Lagrange Polynomials}
 	\bigskip

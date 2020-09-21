@@ -7,7 +7,7 @@
 \begin{document}
 \searchableSection{Linear Transformations}{linear algebra}
 
-	\searchableSubsection{Basic Properties of Linear Transformations}{linear algebra}{
+	\searchableSubsection{\texorpdfstring{Basic Properties of Linear\\ Transformations}{Basic Properties of Linear Transformations}}{linear algebra}{
 		\label{ssection:basic-properties-linear-transformations}
 		\bigskip\bigskip
 		
@@ -51,6 +51,13 @@
 			\[ im\,T = \setc{\w \in W}{\exists (\v + K) \subseteq V \logicsep \{\w\} = T(\v + K)}. \]
 			We could also express this using the inverse image as in \ref{def:inverse_image} but the notation would be easily confused for the inverse transformation.
 		\end{proof}
+		\smallskip
+		\begin{corollary}
+			Let ${ T: V \longmapsto W }$ be any linear transformation with kernel ${ K = ker\,T }$ and let there be ${ \v \in V,\, \w \in W }$ such that 
+				\[ T(\v) = \w. \] 
+			Then,
+				\[ T(\x) = \w \iff \x \in (\v + K). \]
+		\end{corollary}
 	
 		\medskip
 		\labeledProposition{Linear Independence is preserved across a linear transformation iff the transformation is injective.}{linear_independence_not_preserved_across_homomorphic_lin_transform}
@@ -226,7 +233,31 @@
 				1 & -1 \\
 				2 & 0
 				\end{bmatrix}. \]
+				\bigskip
 			}
+			\ex{Consider a linear map ${ T: \R{n} \longmapsto \R{m} }$ and the matrix representing it ${ A \in \R{mn} }$. Suppose the equation ${ A\x = \b }$ has the known solution
+				\[ \x = \begin{bmatrix}1\\2\\0\\-1\\0\end{bmatrix} +
+						s \begin{bmatrix}2\\1\\1\\0\\0\end{bmatrix} +
+						t \begin{bmatrix}1\\1\\0\\-1\\1\end{bmatrix}
+						\hspace{30pt} s,t \in \R{}.
+				\]
+				What can be said about the linear transformation $T$ from looking at the solution $\x$?
+				\begin{itemize}
+					\item{The dimension of the domain, ${ n = 5 }$, is clear since the solution $\x$ is a vector in the domain space.}
+					\item{The nullity - dimension of the kernel - is 2, since there are two free variables ${ s,t }$. The basis of the 2-dimensional nullspace is the two vectors being multiplied by these variables.}
+					\item{Using the dimension formula (\autoref{theo:linear_map_dimension_formula}) we can deduce that the rank of $T$ is $n$ - nullity. So the rank is ${ 5 - 2 = 3 }$. This is also supported by the fact that the particular solution has 3 non-zero components.}
+				\end{itemize}
+				What can \textbf{not} be said?
+				\begin{itemize}
+					\item{The dimension of the codomain $m$ cannot be derived from looking at the solution $\x$. The dimension of the image of $T$ is given by its range because the kernel maps to the origin in the codomain and so the image of the kernel has dimension zero. Since we are not told whether or not the linear map is surjective we cannot know the dimension of the codomain space - only the image of $T$ in the codomain space.}
+				\end{itemize}
+				\bigskip
+			}
+			\ex{The minimal linear transformation is multiplication by a minimal matrix --- a one-by-one matrix, i.e. a scalar. So
+				\[ T(\v) = A\v = a\v. \]
+				Since the real number line, for example, may be considered a one-dimensional vector space, multiplication of two real numbers, for example, may be considered as a linear transformation.
+				\bigskip
+			}\label{ex:minimal-linear-transformation}
 		\end{exe}
 	
 		\bigskip\bigskip
@@ -478,9 +509,8 @@
 			\[ A = \begin{bmatrix}
 					I_r & \vdots \\
 					\cdots & 0 \\
-					\end{bmatrix} 
+					\end{bmatrix}.
 			\]
-		which is the reduced row echelon form of a bijective matrix of rank r.
 		}{simplification_of_linear_transform_matrix}
 		\begin{proof}
 			Let ${ U = \{\u_1,\dots,\u_k\} }$ be a basis of the kernel of $T$ where ${ k = dim(ker\,T) }$. Then $U$ may be extended to a basis of $V$ (\autoref{prop:lin_ind_set_can_be_extended_to_basis}),
@@ -494,7 +524,8 @@
 			\[ B_W = \{ \w_1,\dots,\w_r, \x_1,\dots, \x_{m-r} \}. \]
 			So, the matrix $A$ of $T$ with respect to the bases ${ B_V,B_W }$ satisfies,
 			\begin{align*}
-			&& [B_W]A &= [T(B_V)] \\
+			&& A &= \inv{[B_W]}[T(B_V)] \\
+			&\iff & [B_W]A &= [T(B_V)] \\
 			&\iff & \begin{bmatrix}\w_1 & \dots & \w_r & \x_1 & \dots & \x_{m-r}\end{bmatrix}A &= 
 					\begin{bmatrix}\w_1 & \dots & \w_r & \0 & \dots & \0\end{bmatrix}. &\sidecomment{}
 			\end{align*}
@@ -518,9 +549,9 @@
 				\begin{bmatrix}
 				w_{11} \dots & w_{1r} & 0 \dots & 0 \\
 				\vdots &  &  &  \\
-				w_{1r} \dots & w_{rr} & 0 \dots & 0 \\
+				w_{r1} \dots & w_{rr} & 0 \dots & 0 \\
 				\vdots &  &  &  \\
-				0 \dots & 0 & 0 \dots & 0 \\
+				w_{m1} \dots & w_{mr} & 0 \dots & 0 \\
 				\end{bmatrix}
 			\]
 			which makes it clear that $A$ has the form,
@@ -535,6 +566,99 @@
 			\]
 			as required.
 		\end{proof}
+		\begin{corollary}
+			By \autoref{prop:left_multiplication_by_matrix_are_lin_transforms}, left multiplication by any matrix is a linear transformation and so is equivalent to left multiplication by a matrix of the form
+			\[
+			\begin{bmatrix}
+				I_r & \vdots \\
+				\cdots & 0 \\
+				\end{bmatrix}
+			\]
+			but with reference to different coordinate systems.
+		\end{corollary}
+	
+		\bigskip
+		\subsubsection{Example of Simplification by Selecting Bases}
+		\begin{exe}
+			\ex{Continuing the example \ref{ex:gaussian-elimination} of Gaussian Elimination for row reducing a matrix we have a matrix
+			\[ A = \begin{bmatrix}
+						3 & 1 & 1  \\
+						0 & 2 & -4 \\
+						3 & 2 & -1
+					\end{bmatrix}
+			\]
+			whose rref form is
+			\[ A' = \begin{bmatrix}
+						1 & 0 & 1  \\
+						0 & 1 & -2 \\
+						0 & 0 & 0
+					\end{bmatrix}.
+			\]
+			The rref tells us that the first two columns of $A$ are a basis of the image and the kernel is 
+			\[ 	c \begin{bmatrix}-1\\2\\1\end{bmatrix} \hspace{20pt} c \in \R{}. \]	
+			
+			We can use this information to form a matrix ${ A_{PQ} }$ --- which is the matrix $A$ expressed with respect to the bases $P$ and $Q$ --- such that $A_{PQ}$ is maximally simplified. Following the procedure used in the proof of \autoref{prop:simplification_of_linear_transform_matrix}, we begin by finding a basis of the domain space by extending a basis of the kernel.\\
+			
+			Since the kernel is one-dimensional and the domain is three-dimensional, we can extend the basis of the kernel given above to a basis of the domain by adding two of the three standard basis vectors. So, the chosen basis of the domain is
+			\[ P = \left\{ \begin{bmatrix}1\\0\\0\end{bmatrix}, \begin{bmatrix}0\\1\\0\end{bmatrix}, \begin{bmatrix}-1\\2\\1\end{bmatrix} \right\}. \]
+			
+			Again following the procedure from the same proof, we next form a basis of the codomain space that extends a basis of the image which, in this case, is the first two columns of the matrix $A$. So, we can choose the basis,
+			\[ Q = \left\{ \begin{bmatrix}3\\0\\3\end{bmatrix}, \begin{bmatrix}1\\2\\2\end{bmatrix}, \begin{bmatrix}0\\0\\1\end{bmatrix} \right\}. \]
+			\note{We could have chosen anything for the final column just so long as it is linearly independent of the first two columns.}
+			
+			Then,
+			\begin{align*}
+			A_{PQ} &= \inv{Q} A P \\
+			&= 	\inv{\begin{bmatrix}
+					3 & 1 & 0\\
+					0 & 2 & 0\\
+					3 & 2 & 1
+				\end{bmatrix}}
+				\begin{bmatrix}
+					3 & 1 & 1  \\
+					0 & 2 & -4 \\
+					3 & 2 & -1
+				\end{bmatrix}
+				\begin{bmatrix}
+					1 & 0 & -1  \\
+					0 & 1 &  2 \\
+					0 & 0 &  1
+				\end{bmatrix} &\sidecomment{} \\[8pt]
+			&= 	\frac{1}{6}
+				\begin{bmatrix}
+					2  & -1 & 0\\
+					0  &  3 & 0\\
+					-6 & -3 & 6
+				\end{bmatrix}
+				\begin{bmatrix}
+					3 & 1 & 1  \\
+					0 & 2 & -4 \\
+					3 & 2 & -1
+				\end{bmatrix}
+				\begin{bmatrix}
+					1 & 0 & -1  \\
+					0 & 1 &  2 \\
+					0 & 0 &  1
+				\end{bmatrix} &\sidecomment{} \\[8pt]
+			&= 	\frac{1}{6}
+				\begin{bmatrix}
+				2  & -1 & 0\\
+				0  &  3 & 0\\
+				-6 & -3 & 6
+				\end{bmatrix}
+				\begin{bmatrix}
+				3 & 1 & 0 \\
+				0 & 2 & 0 \\
+				3 & 2 & 0
+				\end{bmatrix} &\sidecomment{} \\[8pt]
+			&= 	\begin{bmatrix}
+					1 & 0 & 0\\
+					0 & 1 & 0\\
+					0 & 0 & 0
+				\end{bmatrix}.
+			\end{align*}
+			}\label{ex:matrix-simplification-by-selecting-bases}
+		\end{exe}
 		
 	}
 
@@ -547,7 +671,7 @@
 	\searchableSubsection{Linear Operators and Eigenvectors}{linear algebra}{
 		
 		\bigskip
-		\boxeddefinition{A \textbf{linear operator} is a linear transformation from a space to itself.}
+		\boxeddefinition{A \textbf{linear operator} is a linear transformation from a space to itself. That's to say, the domain and codomain of the transformation are the same space and considered with respect to the same basis.}
 		
 		\medskip
 		\boxeddefinition{A linear operator is called \textbf{singular} if it does not have an inverse and \textbf{nonsingular} if it has an inverse.}
@@ -593,7 +717,8 @@
 			&= (0, \alpha a_1 + \beta b_1, \alpha a_2 + \beta b_2,\dots) &\sidecomment{} \\
 			&= T(\alpha a_1 + \beta b_1, \alpha a_2 + \beta b_2,\dots). &\sidecomment{} \\
 			\end{align*}
-			However, while clearly for this operator we have ${ im\,T < V }$, nevertheless the kernel of this operator is the trivial kernel ${ \{\0\} }$. This just shows further that the dimension formula (\autoref{theo:linear_map_dimension_formula}) for finite-dimensional vector spaces does not apply for infinite-dimensional spaces.
+			However, while clearly for this operator we have ${ im\,T < V }$, nevertheless the kernel of this operator is the trivial kernel ${ \{\0\} }$. This just shows further that the dimension formula (\autoref{theo:linear_map_dimension_formula}) for finite-dimensional vector spaces does not apply for infinite-dimensional spaces.\\
+			The explanation of this is that infinite sets can have proper subsets that have equal cardinality. So we can have an image whose dimensions are a proper subset of the dimensions of the space but the image, nevertheless, has the same dimensionality as the space. This can only happen with infinite-dimensional spaces.
 		}
 	
 		
@@ -715,7 +840,7 @@
 		}
 	
 		\medskip
-		Let ${ W \subseteq V }$ be a $T$-invariant subspace of $V$ with basis ${ B_W = \w_1,\dots,\w_k }$. Then $B_W$ can be extended to a basis of $V$,
+		Let ${ W \subseteq V }$ be a $T$-invariant subspace of $V$ with basis ${ B_W = \w_1,\dots,\w_k }$. Then, by \autoref{prop:lin_ind_set_can_be_extended_to_basis}, $B_W$ can be extended to a basis of $V$,
 		\[ B_V = \{ \w_1,\dots,\w_k, \v_1,\dots,\v_{n-k} \}. \]
 		If we look at the matrix $A$ of $T$ with respect to this basis $B_V$ we find a characteristic pattern.
 		\[ A = \inv{[B_V]}[T(B_V)] = \inv{[B_V]}[T(\w_1) \cdots T(\w_k) \; T(\v_1) \cdots T(\v_{n-k})] \]
@@ -761,12 +886,13 @@
 			\begin{itemize}
 				\item{To have eigenvectors, $T$ must be an operator as the image of the eigenvector ${ \v \in V }$ under $T$,
 					\[ T(\v) = c\v \in V \]
-					 is, by definition, in the same space as the eigenvector itself. In fact, this is the key of the relationship between eigenvectors and invariant subspaces. The space spanned by eigenvectors of $T$ is $T$-invariant. Conversely, the bases of $T$-invariant subspaces are eigenvectors. If $W$ is a 2-dimensional $T$-invariant subspace, for example, and its image under $T$ is one-dimensional (a line inside the plane of $W$) then vectors in $W$ that are not in the plane of the line image will be in the kernel of $T$ and so also eigenvectors but with the eigenvalue 0. It is also worth noting that they are still considered to be parallel to their image under $T$ because, by convention, the zero vector $\0$ is considered to be parallel to all vectors.
+					 is, by definition, in the same space as the eigenvector itself (if there were a change of basis then we would not consider it to be the same vector). In fact, this is the key of the relationship between eigenvectors and invariant subspaces: The space spanned by eigenvectors of $T$ is $T$-invariant. The bases of $T$-invariant subspaces, however, need not be eigenvectors. For example, a rotation of a plane in a 3d space has the plane as a T-invariant subspace but the only eigenvector is the axis of rotation, perpendicular to the plane.
 				 }
-				\item{An eigenvector may not be $\0$ but an eigenvalue may be 0. As a consequence of this, every nonzero vector in the kernel is an eigenvector (with eigenvalue 0).}
+				\item{An eigenvector may not be $\0$ but an eigenvalue may be 0. As a consequence of this, every nonzero vector in the kernel is an eigenvector (with eigenvalue 0). As a consequence of this, if $W$ is a 2-dimensional $T$-invariant subspace, for example, and its image under $T$ is one-dimensional (a line inside the plane of $W$) then vectors in $W$ that are not in the line of the image will be in the kernel of $T$ and so also eigenvectors but with the eigenvalue 0. It is also worth noting that they are still considered to be parallel to their image under $T$ because, by convention, the zero vector $\0$ is considered to be parallel to all vectors. 
+				}
 				\item{If we speak of an eigenvector of a square matrix then we are referring to an eigenvector of \textbf{left multiplication} by the matrix, i.e. a nonzero vector $\x$ such that,
 					\[ A\x = c\x. \]
-					Clearly if $\x_B$ is the coordinate vector of ${ \v \in V }$ with respect to $B$, a basis of $V$ and $A$ is the matrix of $T$ with respect to the basis $B$, then
+					Clearly if $\x_B$ is the coordinate vector of ${ \v \in V }$ with respect to $B$ --- a basis of $V$ --- and $A$ is the matrix of $T$ with respect to the basis $B$, then
 					\[ A\x_B = c\x_B \iff T(\v) = c\v. \]
 					As a result, all similar matrices have the same eigenvalues.	
 				}
@@ -824,6 +950,10 @@
 	 			\[ A = \begin{bmatrix}3 - c & 1\\0 & 2 - c\end{bmatrix} \]
 	 			then the nullspace of $A$ is the space of vectors ${ (x_1,x_2)^T }$ that satisfy this equation. If $A$ is invertible and nonsingular then this space is the trivial space ${ \{\0\} }$ but, if $A$ is singular however, then there exist nonzero vectors that satisfy this equation. Therefore, it is precisely the nonzero vectors that are in the nullspace of this matrix $A$ when it is singular that are the eigenvectors we are looking for. So, if we first determine the values of $c$ for which $A$ is singular, we can then determine the eigenvectors. Since, by \autoref{prop:properties_of_non_bijective_lin_operator}, $A$ is singular if and only if ${ det\,A = 0 }$, we are looking for \textit{precisely the values of $c$ which make ${ det\,A = 0 }$}.
 	 		}
+ 			\item{The minimal linear transformation seen in \ref{ex:minimal-linear-transformation} --- which is just scalar multiplication --- has every vector as its eigenvectors because
+ 				\[ T(\v) = A\v = a\v \]
+ 				for all ${ \v \in V }$. So every vector in $V$ is an eigenvector with eigenvalue $a$.
+ 			}\label{ex:eigenvectors-of-minimal-linear-transformations}
 	 	\end{exe}
  	
  		\bigskip
@@ -1410,7 +1540,7 @@
 		&\hspace{20pt} + (\alpha_1 + \cdots + \alpha_n)Q_n.
 		\end{align*}
 		But we have ${ \alpha_1 + \cdots + \alpha_n = 0 }$ so the final term is 0. As a result $S$ is a summation of terms of the form,
-		\[ (\alpha_1 + \cdots + \alpha_{i-1} + \alpha_i)(Q_{i-1} - Q_i) \]
+		\[ (\alpha_1 + \cdots + \alpha_{i-1})(Q_{i-1} - Q_i) \]
 		where ${ Q_{i-1} - Q_i }$ is a vector. Therefore $S$ is a linear combination of vectors in $V$ and is therefore also a vector in $V$.
 	\end{proof}
 	\begin{corollary}

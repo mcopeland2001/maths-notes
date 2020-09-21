@@ -168,7 +168,13 @@
 		\begin{equation}
 			y(x) = t + \alpha_1 x + \alpha_2 x^2 + \alpha_3 x^3 + \cdots
 		\end{equation}
-		which is a family of functions which includes the derivative ${ \Dif_x y(x) }$ --- the derivative being the member of this set of functions with ${ t = \alpha_0 }$. In order to achieve this we need the coefficients to form the series,
+		which is a family of functions which includes the derivative ${ \Dif_x y(x) }$ --- the derivative being the member of this set of functions with ${ t = \alpha_0 }$.\\
+		
+		\note{Note that, for polynomials, the derivative is a transformation between finite-dimensional vector spaces and so the Dimension Formula (\autoref{theo:linear_map_dimension_formula}) of linear transformations applies. We can see this in that the derivative has a one-dimensional kernel (the set of constant polynomials) and the derivative maps from $P_n$ to $P_{n-1}$, the image having one less dimension then the domain space because there is a one-dimensional kernel.\\
+			However, the coordinate space of the power series above is isomorphic to an infinite-dimensional vector space where the Dimension Formula no longer applies (see \autoref{theo:no-dimension-formula-for-infinite-vector-spaces}). So when we differentiate it we get a result of the same dimensionality despite there being a non-trivial one-dimensional kernel.
+		}
+		
+		In order to achieve this we need the coefficients to form the series,
 		\begin{align*}
 		&\alpha_0,\; \frac{\alpha_0}{1},\; \frac{\alpha_0}{1 \times 2},\; \frac{\alpha_0}{1 \times 2 \times 3},\; \dots
 		\end{align*}
@@ -182,35 +188,36 @@
 		\[ y(x) = t e^x \hspace{20pt} t \in \R{} \]
 		and the particular solution, for ${ t = \alpha_0 }$, is
 		\[ y(x) = \alpha_0 e^x. \]
-		\TODO{how does this relate to the shift operator describe in a note to \autoref{prop:properties_of_non_bijective_lin_operator}?}
 		
-		\begin{align*}
-		&& e^{\alpha x + c} &= 1 + \frac{\alpha x + c}{1!} + \frac{(\alpha x + c)^2}{2!} + \frac{(\alpha x + c)^3}{3!} + \cdots \\[8pt]
-		&\iff & \frac{\dif}{\dif x} e^{\alpha x + c} &= \alpha + \alpha\frac{\alpha x + c}{1!} + \alpha\frac{(\alpha x + c)^2}{2!} + \alpha\frac{(\alpha x + c)^3}{3!} + \cdots &\sidecomment{} \\[8pt]
-		&&&= \alpha e^{\alpha x + c}.
-		\end{align*}
+		\bigskip\bigskip
+		\labeledTheorem{The derivative of $e^{f(x)}$ is ${ f'(x)e^{f(x)} }$ where $f'$ is the derivative of the function $f$.}{derivative-of-exp-function}
+		\begin{proof}
+			\begin{align*}
+			&& e^{f(x)} &= 1 + \frac{f(x)}{1!} + \frac{(f(x))^2}{2!} + \frac{(f(x))^3}{3!} + \cdots \\[8pt]
+			&\implies & \frac{\dif}{\dif x} e^{f(x)} &= f'(x) + f'(x)\frac{f(x)}{1!} + f'(x)\frac{(f(x))^2}{2!} + f'(x)\frac{(f(x))^3}{3!} + \cdots &\sidecomment{} \\[8pt]
+			&&&= f'(x) e^{f(x)}.
+			\end{align*}
+		\end{proof}
+		\begin{corollary}
+			Any function of the form $Ae^{f(x)}$ is an eigenfunction of the differentiation operator with eigenvalue equal to $f'(x)$.
+		\end{corollary}
+		\begin{proof}
+			\[ \frac{\dif}{\dif x} Ae^{f(x)} = A \frac{\dif}{\dif x} e^{f(x)} = A f'(x)e^{f(x)} = f'(x)(Ae^{f(x)}). \qedhere \]
+		\end{proof}
+		\begin{corollary}
+			The set of functions $e^{\int f'(x) \dif x}$ form an eigenspace of the differentiation operator with eigenvalue $f'(x)$.
+		\end{corollary}
+	
+		\bigskip
+		\labeledProposition{For any ${ a,x \in \R{} }$, \[ \frac{\dif}{\dif x} a^x = (\ln{a}) a^x. \]}{derivative-of-a-to-power-x-is-ln-a-times-a-to-power-x}
+		\begin{proof}
+			\begin{align*}
+			\frac{\dif}{\dif x}a^x &= \frac{\dif}{\dif x} e^{(\ln{a})x} &\sidecomment{by \autoref{prop:exp-x-is-inverse-of-ln}}\\[8pt]
+			&= (\ln{a})e^{(\ln{a})x} &\sidecomment{by \autoref{theo:derivative-of-exp-function}} \\[8pt]
+			&= (\ln{a})a^x &\sidecomment{by \autoref{prop:exp-x-is-inverse-of-ln}.} \qedhere\\[8pt]
+			\end{align*}
+		\end{proof}
 		
-		So, the general form of the eigenvectors of the differentiation operator is
-		\[ e^{\alpha x + c} = te^{\alpha x} \]
-			
-		\TODO{
-			\begin{enumerate}
-				\item{show how any value of t produces an eigenfunction}
-				\item{show that the eigenvalues of these eigenfunctions are the derivatives of the exponents}
-				\item{deduce that any exponent with the same derivative is therefore in the same eigenspace (these will be solutions to homogeneous diff eqs?)}
-			\end{enumerate}
-		}
-		
-		\bigskip\bigskip\bigskip
-		The exponential function $e^x$ is an eigenvector of the differentiation operator (also known as an \textit{eigenfunction} since the operator maps between function spaces). So the differential equation,
-		\begin{equation}
-			\Dif_x y = \alpha y
-		\end{equation}
-		which, in vector form, is
-		\begin{equation}
-			A\vtheta = \alpha \vtheta
-		\end{equation}
-		has general solution $Ce^{\alpha x}$ for constant $C$.
 	}
 
 

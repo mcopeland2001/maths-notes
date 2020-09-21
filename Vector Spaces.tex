@@ -28,23 +28,132 @@
 			\paragraph*{distributive properties} $a(\u + \v) = a\u + a\v$ and $(a + b)\u = a\u + b\u$ for all $a, b \in F$ and $\u,\v \in V$;
 		}
 	
-		\note{Notice that vector addition  on a vector space $V$ is an associative, commutative law of composition on the set of vectors so that \textbf{${\bm{ (V, +) }}$ is an abelian group}.\\\\
-			Notice also, however, that scalar multiplication defines a law of composition between vectors in $V$ and scalars in the field $F$. This is known as an \textbf{external law of composition} on the vector space. This is an important part of the definition of vectors as, it defines a relationship between the additive group of vectors $V^+$ and the field $F$ in much the same way that the distributive law does for the additive and multiplicative groups inside fields (compare \ref{def:field}). Specifically the relationship takes the form,
-			\[ (1 + 1)\v = \v + \v = 2\v. \]
-			Sets of objects, for example, have the property (if we were to model set union with addition) that ${ a + a = a }$ and so cannot be modeled as vectors. They have a different sort of algebra (\href{https://en.wikipedia.org/wiki/set_algebra}{wikipedia}).\\\\
-			Also, multiplication of two vectors is not a part of the definition of a vector space. Products of vectors depend on a particular co-ordinate system in which the vectors are being represented and so are considered additional structure on the vector space.\\\\
-			It is typically the case that when modelling some system with vectors, the system contains more structure than is represented by a vector space. Furthermore, if we view a vector space as an abelian group then the group only describes a part of the vector space structure. These abstractions of vector space and group allow us to see what is generalizable about a system and which elements are specific to the system in question.
-		}
-	
+		\bigskip\bigskip	
+		\labeledProposition{A vector space contains a unique additive identity element.}{unique_additive_identity}
+		\begin{proof}
+			If $\V{0'}$ is also an additive identity then by the additive identity property, 
+			\[ \V{0} + \V{0'} = \V{0} \]
+			but since $\V{0}$ is also an additive identity,
+			\[ \V{0'} + \V{0} = \V{0'} \]
+			Then, by the commutativity of vector addition,
+			\[ \V{0} = \V{0} + \V{0'} = \V{0'} + \V{0} = \V{0'} \qedhere \]
+		\end{proof}
+		
 		\bigskip
-		\subsubsection{Isomorphisms between vector spaces}
+		\labeledProposition{A vector space contains a unique additive inverse for each element.}{unique_additive_inverse}
+		\begin{proof}
+			If $\v$ and $\w$ are both additive inverses of $\u$ then, by the additive inverse property we have,
+			\[ \u + \v = \0 \text{ and also } \u + \w = \0 \]
+			using the uniqueness of the additive identity,
+			\[ \u + \v = \0 = \u + \w \]
+			Then, if we add one of the additive inverses of $\u$ to both sides,
+			\[ \u + \v + \v = \u + \w + \v \]
+			and use the associativity of vector addition,
+			\begin{align*}
+			(\u + \v) + \v &= (\u + \v) + \w \\
+			\0 + \v &= \0 + \w \\
+			\v &= \w \qedhere
+			\end{align*}
+		\end{proof}
+	
+		\bigskip\subsubsubsection{Vector Subtraction}
+		\boxeddefinition{Because additive inverses are unique we can use the notation $-\v$ to denote the additive inverse of $\v$. Then we define $\w - \v$ to mean $\w + -\v$.
+			\[ \u - \v \coloneqq \u + -\v \]
+		}
+		
+		\bigskip
+		\labeledProposition{$0\v = \0$ for every $\v \in V$.}{multiplication_by_zero}
+		Note that this proposition is asserting something about scalar multiplication and the additive identity of $V$. The only part of the definition of a vector space that connects scalar multiplication and vector addition is the distributive property. Therefore the distributive property must be used in this proof.
+		\begin{proof}
+			Firstly take,
+			\[ \v + 0\v = 0\v + 1\v \]
+			and then use the properties of the underlying field to say
+			\[ (0 + 1)\v = 1\v = \v \]
+			Now we have shown that,
+			\[ \v + 0\v = \v \]
+			which, by the definition and uniqueness of the additive identity, shows that $0\v = \0$. But if we want to continue algebraically we can now add the additive inverse to both sides,
+			\[ (\v + -\v) + 0\v = (\v + -\v) \]
+			\[ \0 + 0\v = 0\v = \0 \qedhere\]
+		\end{proof}
+		Another, simpler proof exists. 
+		\begin{proof}
+			Using the underlying field properties and the distributivity of scalar vector multiplication,
+			\[ 0\v = (0 + 0)\v = 0\v + 0\v \]
+			and then adding the additive inverse to both sides,
+			\begin{align*}
+			(0\v + -(0\v)) &= (0\v + -(0\v)) + 0\v \\
+			\0 &= \0 + 0\v = 0\v \qedhere
+			\end{align*}
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{$a\0 = \0$ for every $a \in F$.}{multiplication_of_zero}
+		\begin{proof}
+			Using the distributivity of scalar multiplication of vectors and the additive identity,
+			\[ a\0 = a(\0 + \0) = a\0 + a\0 \]
+			Then, adding the additive inverse to both sides,
+			\begin{align*}
+			(a\0 + -(a\0)) &= a\0 + (a\0 + -(a\0))\\
+			\0 &= a\0 + \0 = a\0 \qedhere
+			\end{align*}
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{$(-1)\v = -\v$ for every $\v \in V$.}{multiplication_by_minus_one}
+		\begin{proof}
+			Using the distributivity of scalar multiplication of vectors and the underlying field properties we have,
+			\[ (-1)\v + \v = (-1)\v + 1\v = (-1 + 1)\v = 0\v = \0 \]
+			Now we could add the additive inverse to both sides to show that,
+			\begin{align*} 
+			(-1)\v + (\v + -\v) &= \0 + -\v \\
+			(-1)\v + \0 &= \0 + -\v \\
+			(-1)\v &= \v \qedhere
+			\end{align*}
+			But we already have,
+			\[ (-1)\v + \v =\0 \]
+			and this, by the definition of the additive inverse, proves that $(-1)\v$ is an additive inverse of $\v$. Since we have previously proven the uniqueness of the additive inverse in \autoref{prop:unique_additive_inverse} we can conclude, in fact, that $(-1)\v = -\v$ the unique additive inverse of $v$.
+		\end{proof}
+	
+	
+		\bigskip\bigskip
+		\subsubsection{Vectors as magnitude and direction}\label{sssection:vectors-as-magnitude-and-direction}
+		\bigskip
+		A vector is often described as an object with magnitude and direction. So how does this relate to the definition of vector spaces?\\\\
+		\subsubsubsection{Magnitude}
+		If we take the distributive property of scalar multiplication of vectors over addition and the multiplicative identity we get:
+		\[ \v + \v = 1\v + 1\v = (1 + 1)\v = 2\v. \]
+		This is how magnitudes behave: if we sum a magnitude with itself we get 2 times the magnitude. If we compare this with sets (not in a measure space), for example, where addition of sets is set union and, if $A$ is a set then,
+		\[ A + A = A. \]
+		That's to say, sets (without a measure defined on them) do not behave as magnitudes; if we add a set to itself we get the original set. As a result, it would be difficult or inappropriate to model sets as vectors.
+		\note{Sets have their own sort of algebra: see \href{https://en.wikipedia.org/wiki/set_algebra}{wikipedia}.}
+		\bigskip
+		\subsubsubsection{Direction}
+		If we take \autoref{prop:multiplication_by_minus_one} we see that
+		\[ (-1)\v = -v \eqand (-1)\v + \v = \0. \]
+		That's to say, a vector's magnitude is cancelled by being added to another vector with the same magnitude multiplied by -1. This is how the directionality comes into the definition. This abstract vector space definition only defines that a vector and its additive inverse have opposing direction; a relationship of direction between vectors that are not additive inverses is not defined. If an inner product is defined over the vector space then this provides a concept of angle between vectors.
+		\note{A coordinate space is not necessarily required to define an inner product. For example, the expectation of the product of two random variables is an inner product: \href{https://en.wikipedia.org/wiki/Inner_product_space\#Random_variables}{wikipedia}.}
+		
+		\bigskip
+		\subsubsubsection{Minimal Representation}
+		Since a magnitude and a direction are required to define vectors, the minimal numerical representation of a vector is a signed number. We can see this in basic physics where, if a system is defined in a single spatial dimension, forces are described as a signed real number with the sign indicating the direction.
+		
+		\bigskip
+		\subsubsection{Vector Spaces as Groups}
+		\bigskip
+		Vector addition  on a vector space $V$ is an associative, commutative law of composition on the set of vectors so that ${\bm{ (V, +) }}$ is an abelian group. Notice also, however, that scalar multiplication defines a law of composition between vectors in $V$ and scalars in the field $F$. This is known as an \textbf{external law of composition} on the vector space. This is an important part of the definition of vectors as, it defines a relationship between the additive group of vectors $V^+$ and the field $F$ in much the same way that the distributive law does for the additive and multiplicative groups inside fields (compare \ref{def:field}). Specifically the relationship takes the form,
+			\[ (1 + 1)\v = \v + \v = 2\v. \]
+		It is typically the case that when modelling some system with vectors, the system contains more structure than is represented by a vector space. Furthermore, if we view a vector space as an abelian group then the group only describes a part of the vector space structure. These abstractions --- vector space and group --- allow us to see what is generalizable about a system and what is specific to the system in question.
+	
+	
+		\bigskip\bigskip
+		\subsubsubsection{Isomorphisms between vector spaces}
 		\boxeddefinition{An \textbf{isomorphism} ${ \phi: V \longmapsto V' }$ -- where $V$ and $V'$ are defined over the same field $F$ -- is a bijective map compatible with the vector laws of composition. That's to say, for all ${ \V{v}, \V{v'} \in V,\, c \in F }$,
 			\[ \phi(\V{v} + \V{v'}) = \phi(\V{v}) + \phi(\V{v'}) \eqand \phi(c\V{v}) = c\phi(\V{v}). \]
 			
 		}
 	
 		\medskip
-		\subsubsection{Examples of isomorphisms between vector spaces}
+		\paragraph{Examples}
 		\begin{exe}
 			\ex{The space $\F{n}$ of n-dimensional row vectors is isomorphic to the space of n-dimensional column vectors.}
 			\ex{If we treat the set of complex numbers $\C{}$ as a vector space then the map ${ \phi: \R{2} \longmapsto \C{} }$ defined as ${ \phi(a,b) = a + bi }$ is an isomorphism.
@@ -52,94 +161,7 @@
 		\end{exe}
 	}
 	
-	\bigskip\bigskip
-	\searchableSubsection{Derived properties of a Vector Space}{vector spaces}{\bigskip
-
-
-		\labeledProposition{A vector space contains a unique additive identity element.}{unique_additive_identity}
-		\begin{proof}
-		If $\V{0'}$ is also an additive identity then by the additive identity property, 
-		\[ \V{0} + \V{0'} = \V{0} \]
-		but since $\V{0}$ is also an additive identity,
-		\[ \V{0'} + \V{0} = \V{0'} \]
-		Then, by the commutativity of vector addition,
-		\[ \V{0} = \V{0} + \V{0'} = \V{0'} + \V{0} = \V{0'} \qedhere \]
-		\end{proof}
-		
 	
-		\labeledProposition{A vector space contains a unique additive inverse for each element.}{unique_additive_inverse}
-		\begin{proof}
-		If $\v$ and $\w$ are both additive inverses of $\u$ then, by the additive inverse property we have,
-		\[ \u + \v = \0 \text{ and also } \u + \w = \0 \]
-		using the uniqueness of the additive identity,
-		\[ \u + \v = \0 = \u + \w \]
-		Then, if we add one of the additive inverses of $\u$ to both sides,
-		\[ \u + \v + \v = \u + \w + \v \]
-		and use the associativity of vector addition,
-		\begin{align*}
-		(\u + \v) + \v &= (\u + \v) + \w \\
-		\0 + \v &= \0 + \w \\
-		 \v &= \w \qedhere
-		\end{align*}
-		\end{proof}
-		Because additive inverses are unique we can use the notation $-\v$ to denote the additive inverse of $\v$. Then we define $\w - \v$ to mean $\w + -\v$.
-		\begin{definition}{Vector Subtraction}
-		\[ \u - \v \coloneqq \u + -\v \]
-		\end{definition}
-		
-	
-		\labeledProposition{$0\v = \0$ for every $\v \in V$.}{multiplication_by_zero}
-		Note that this proposition is asserting something about scalar multiplication and the additive identity of $V$. The only part of the definition of a vector space that connects scalar multiplication and vector addition is the distributive property. Therefore the distributive property must be used in this proof.
-		\begin{proof}
-		Firstly take,
-		\[ \v + 0\v = 0\v + 1\v \]
-		and then use the properties of the underlying field to say
-		\[ (0 + 1)\v = 1\v = \v \]
-		Now we have shown that,
-		\[ \v + 0\v = \v \]
-		which, by the definition and uniqueness of the additive identity, shows that $0\v = \0$. But if we want to continue algebraically we can now add the additive inverse to both sides,
-		\[ (\v + -\v) + 0\v = (\v + -\v) \]
-		\[ \0 + 0\v = 0\v = \0 \qedhere\]
-		\end{proof}
-		Another, simpler proof exists. 
-		\begin{proof}
-		Using the underlying field properties and the distributivity of scalar vector multiplication,
-		\[ 0\v = (0 + 0)\v = 0\v + 0\v \]
-		and then adding the additive inverse to both sides,
-		\begin{align*}
-		(0\v + -(0\v)) &= (0\v + -(0\v)) + 0\v \\
-		\0 &= \0 + 0\v = 0\v \qedhere
-		\end{align*}
-		\end{proof}
-		
-	
-		\labeledProposition{$a\0 = \0$ for every $a \in F$.}{multiplication_of_zero}
-		\begin{proof}
-		Using the distributivity of scalar multiplication of vectors and the additive identity,
-		\[ a\0 = a(\0 + \0) = a\0 + a\0 \]
-		Then, adding the additive inverse to both sides,
-		\begin{align*}
-		(a\0 + -(a\0)) &= a\0 + (a\0 + -(a\0))\\
-		\0 &= a\0 + \0 = a\0 \qedhere
-		\end{align*}
-		\end{proof}
-		
-	
-		\labeledProposition{$(-1)\v = -\v$ for every $\v \in V$.}{multiplication_by_minus_one}
-		\begin{proof}
-		Using the distributivity of scalar multiplication of vectors and the underlying field properties we have,
-		\[ (-1)\v + \v = (-1)\v + 1\v = (-1 + 1)\v = 0\v = \0 \]
-		Now we could add the additive inverse to both sides to show that,
-		\begin{align*} 
-		(-1)\v + (\v + -\v) &= \0 + -\v \\
-		(-1)\v + \0 &= \0 + -\v \\
-		(-1)\v &= \v \qedhere
-		\end{align*}
-		But we already have,
-		\[ (-1)\v + \v =\0 \]
-		and this, by the definition of the additive inverse, proves that $(-1)\v$ is an additive inverse of $\v$. Since we have previously proven the uniqueness of the additive inverse in \autoref{prop:unique_additive_inverse} we can conclude, in fact, that $(-1)\v = -\v$ the unique additive inverse of $v$.
-		\end{proof}
-	}
 	
 	\bigskip
 	\searchableSubsection{The notation $F^S$}{vector spaces}{\bigskip
@@ -910,6 +932,12 @@
 	\end{exe}
 
 	\note{It can be shown, using the Axiom of Choice, that every vector space has a basis but a basis of $\R{\infty}$ will be uncountably infinite and so will not be expressable as ${ (\V{v_1},\V{v_2},\dots) }$.}
+	
+	\labeledTheorem{A linear operator over an infinite-dimensional vector space does not conform to the Dimension Formula for finite-dimensional vector spaces.}{no-dimension-formula-for-infinite-vector-spaces}
+	\begin{proof}
+		The shift operator described in a note to \autoref{prop:properties_of_non_bijective_lin_operator}) is an example of a linear transformation over an infinite-dimensional vector space that doesn't conform to the dimension formula. As noted there, the reason is that infinite sets may have proper subsets of equal cardinality. So we can have an image that is clearly "smaller" than the space but nevertheless has the same dimensionality and so the map has a trivial kernel anyway.\\
+		Conversely the differentiation operator has a non-trivial kernel (the set of constant polynomials) but when differentiating an infinite power series the result is still an infinite power series.
+	\end{proof}
 
 	\bigskip\note{There is much more to this topic. For more details see \href{http://www.math.lsa.umich.edu/~kesmith/infinite.pdf}{the University of Michigan Maths Dept. Linear Algebra Supplement on Infinite-Dimensional Vector Spaces}.}
 }

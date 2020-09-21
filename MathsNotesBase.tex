@@ -26,8 +26,25 @@
 \usepackage{siunitx}
 \usepackage{booktabs}
 \usepackage{multirow}
+
+%----- fix the naming clash of \exp between gb4e and math as described in http://https://tex.stackexchange.com/questions/528818/crash-between-math-exp-and-that-of-gb4e
+\let\mathexp=\exp % save the current (math) definition of \exp
 \usepackage{gb4e}
+\let\gbexp=\exp % save the current (gb4e) definition of \exp
+
+\DeclareRobustCommand{\exp}{\ifmmode\mathexp\else\expandafter\gbexp\fi}
+%----- end fix
+
+
 \usepackage{titlesec}
+% ---- titlesec fix 
+\usepackage{etoolbox}
+
+\makeatletter
+\patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
+\patchcmd{\ttlh@hang}{\noindent}{}{}{}
+\makeatother
+% ---- 
 \noautomath
 \usepackage[most]{tcolorbox}
 \usepackage{csquotes}
@@ -36,13 +53,16 @@
 \usepackage{commath}
 
 
+
+
 \definecolor{note_bg}{RGB}{247,247,247}
 \AtBeginEnvironment{displayquote}{\small}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{4}
 
 
-\titleformat*{\subparagraph}{\small\bfseries}
+\titleformat*{\subparagraph}{\small\bfseries}{}{}{}
+%\titleformat{\subsubsection}[hang]{\sffamily\bfseries}{\thesection}{1em}{}  % bug -> breaks numbering
 \urlstyle{same}
 
 
@@ -62,6 +82,7 @@
 \newcommand\chapterTitle\Huge
 \newcommand\sectionTitle\Huge
 \newcommand\subsectionTitle\Large
+\newcommand{\biggerskip}{\bigskip\bigskip}
 \newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\\\\}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
@@ -69,7 +90,6 @@
 \newcommand{\notdivides}{\nmid}
 \newcommand{\eqand}{\hspace{10pt}\text{and}\hspace{10pt}}
 \newcommand{\modulo}[1]{\;(\bmod\; #1)}
-\newcommand{\dx}[1][x]{\;d#1}
 
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}

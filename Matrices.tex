@@ -350,7 +350,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\bigskip
 		\subsubsection{Matrix transpose}
 		\bigskip
-		\labeledProposition{$(AB)^{T} = B^{T}A^{T}$}{}
+		\labeledProposition{$(AB)^{T} = B^{T}A^{T}$}{transpose-of-product-is-reverse-product-of-transposes}
 		\begin{proof}
 			Denote the $i$th row of the matrix $A$ as $A[i:]$ and the $j$th column of the matrix $B$ as $B[:j]$ and a matrix whose components at $(i,j)$ are the dot-products of the $i$th row of the matrix $A$ with the $j$th column of the matrix $B$ as $(\langle A[i:], B[:j] \rangle)$. Then,
 			\begin{align*}
@@ -439,12 +439,71 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\boxeddefinition{A \textbf{symmetric} matrix is a matrix that is invariant under transposition.}
 		\note{This obviously requires that the matrix be square and that the upper off-diagonal elements mirror the lower off-diagonal elements.}
 		
+		\medskip
+		\labeledProposition{If $A$ and $B$ are symmetric matrices then ${ (BA)^T = AB. }$}{}
+		\begin{proof}
+			\autoref{prop:transpose-of-product-is-reverse-product-of-transposes} gives us the result that,
+			\[ (BA)^T = A^T B^T \]
+			and the definition of symmetric matrices tells us that for symmetric $A$ and $B$,
+			\[ A^T = A \eqand B^T = B. \]
+			Therefore ${ (BA)^T = AB. }$
+		\end{proof}
+		
+		\bigskip\bigskip
+		\subsubsection{Upper Triangular Matrices}
+		An \textbf{upper triangular matrix} is also known as a \textbf{row echelon matrix}.
+		
+		\biggerskip
+		\subsubsection{Reduced Row Echelon Form Matrices}\label{sssection:reduced-row-echelon-form-matrices}
+		\boxeddefinition{A \textbf{reduced row echelon form matrix} is an upper triangular matrix with the added conditions that the pivot values are all 1 and the other components in the same column as a pivot are all 0.}
+		
+		\bigskip
+		\subsubsubsection{Reading off the nullspace of a RREF matrix}
+		Let
+		\[ A = \begin{bmatrix}
+				1 & 0 & a\\
+				0 & 1 & b\\
+				0 & 0 & 0
+			   \end{bmatrix}
+			 = \begin{bmatrix}
+				I_2 & F\\
+				0   & 0
+			   \end{bmatrix}.
+		\]
+		Then the nullspace of $A$ is, for ${ t \in \R{} }$
+		\[ t\begin{bmatrix}-F\\I_1\end{bmatrix} = t\begin{bmatrix}-a\\-b\\1\end{bmatrix}. \]
+		So the general formula is
+		\[ \begin{bmatrix}-F\\I_k\end{bmatrix} \]
+		where $k$ is the dimension of the nullspace (kernel) of $A$.
+		
+		If the free variables are not next to each other then the blocks are broken up. For example for
+		\[ A = 	\begin{bmatrix}
+					1 & a & 0 & c\\
+					0 & b & 1 & d\\
+					0 & 0 & 0 & 0
+   				\end{bmatrix}
+		\]
+		the nullspace of $A$ is
+		\[
+			\begin{bmatrix}
+				-a  & -c \\
+				 1  &  0 \\
+				-b  & -d \\
+				 0  &  1
+			\end{bmatrix}
+			\begin{bmatrix}x_1 \\ x_2\end{bmatrix}. 
+		\]
+
+		
+
+		
 		\bigskip\bigskip
 		\subsubsection{Diagonal Matrices}
 		\boxeddefinition{A \textbf{diagonal} matrix is a matrix whose entries outside the main diagonal are all zero.}
 		\note{\begin{itemize}
 				\item{The definition of a diagonal matrix does \textbf{not} require that all the diagonal entries are nonzero so, for example, the zero matrix is a diagonal matrix.}
-				\item{Diagonal matrices are \textbf{usually understood to be} a subset of symmetric matrices but this is not strictly necessary according to their definition (\href{https://en.wikipedia.org/wiki/Diagonal_matrix}{wikipedia}).}
+				\item{Diagonal matrices are \textbf{usually understood to be} a subset of symmetric matrices but this is not strictly necessary as the definition of the main diagonal permits an interpretation that includes rectangular matrices (see \href{https://en.wikipedia.org/wiki/Diagonal_matrix}{wikipedia}).
+				}
 			\end{itemize}
 		}
 		
@@ -573,6 +632,31 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{align*}
 		In this case, each row of the matrix is a real-valued function in $n$ variables. Each of these functions is \textit{homogenous linear} (a function of the form $a_1x_1 + \cdots + a_kx_k + c$ for scalars $a_1,\cdots,a_k,c$ and $c = 0$) and so the system of functions is called a \textit{linear transformation}.\\
 		
+		\bigskip
+		\subsubsubsection{Example of ${ A\x = \V{y} }$}
+		\begin{exe}
+			\ex{Consider the following system of equations (represented by an augmented matrix) for some constants ${ a,b }$,
+				\[ \begin{amatrix}{3}
+						1 & -1 & 2 & 4\\
+						3 & -1 & -1& 0\\
+						1 &  1 & a &  b
+					\end{amatrix} \leadsto
+				   \begin{amatrix}{3}
+					   1 & -1 & 2 & 4\\
+					   0 &  1 & \frac{-7}{2} & -6\\
+					   0 &  0 & a+5 & b+8
+				   \end{amatrix} 
+				\]
+				where the second matrix represents a system of linear equations with the same solutions as the first. The second form tells us that:
+					\begin{itemize}
+						\item{The system has \textbf{precisely one solution} if ${ a \neq -5 }$, so that we have an upper triangular matrix.}
+						\item{The system has \textbf{infinitely many solutions} if ${ a = -5 }$ and ${ b = -8 }$, so that the bottom row is all zeroes and there is a free variable.}
+						\item{The system has \textbf{no solutions} if ${ a = -5 }$ but ${ b \neq -8 }$, so that the bottom row of the matrix is zeroes but the corresponding component in the augmented column is non-zero; meaning that the system is inconsistent.}
+					\end{itemize}
+			}
+		\end{exe}
+		
+		\biggerskip
 		\subsubsection{Multiplying a matrix of vectors by a matrix on the left: \texorpdfstring{$ AX = Y $}{AX = Y}}
 		Looking at the matrix as a linear transformation from one co-ordinate space to another, consider $AX = Y$ where $X$ is a matrix - which may be considered a collection of vectors - transformed by the matrix $A$ into the matrix - or collection of vectors - $Y$.\\
 					
@@ -582,10 +666,6 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\subsubsection{Change of Co-ordinates}
 		If a matrix $A$ has columns comprised of the axes of a co-ordinate system, then $\V{x}$ defined against the standard basis is, in the other system, ${ \inv{A}\V{x} }$. This is because the axes in $A$ are defined relative to the standard basis axes. Therefore, if $\V{x_A}$ is a vector defined against the axes in $A$, then the same vector against the standard basis axes $\V{x}$ would be ${ A\V{x_A} = \V{x} }$ and so ${ \V{x_A} = \inv{A}\V{x} }$.
 		
-		\medskip
-		\labeledProposition{Let $B$ be a basis of a vector space $V$. The other bases are the sets of the form ${ B' = B\inv{P} }$, where ${ P \in GL_n(\F{}) }$ is an invertible matrix.}{}
-		\begin{proof}
-		\end{proof}
 		
 		\bigskip
 		\subsubsection{Types of Transformations}
@@ -839,8 +919,12 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\[ A'X = B' \iff EAX = EB \]
 		and the existence of the inverse $E^{-1}$ means that the law of cancellation is in effect so,
 		\[ EAX = EB \iff AX = B \]
-		\[ \therefore A'X = B' \iff AX = B \]
+		\[ \therefore A'X = B' \iff AX = B. \qedhere \]
 		\end{proof}
+	
+		\bigskip
+		\note{Note that this is why Gaussian Elimination can employ row reduction to produce a linear system that is simpler to solve: elementary row operations on the matrix form linear combinations of the equations in a system of linear equations. This means that any vector that was a solution to the original system of equations (i.e. was a member of the intersection of the linear vector spaces represented by the equations) will also be a solution to the new system. Gaussian Elimination proceeds in this way until --- if we obtain the row reduced echelon form --- it has produced a system in which the linear vector spaces represented by the rows of the matrix are parallel to the co-ordinate system so that we can simply read off the co-ordinates of the solution (if it is a single point).
+		}
 		
 		\labeledProposition{Let $A$ be a square matrix. The following conditions are equivalent:
 			\begin{itemize}
@@ -858,6 +942,214 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			and, also by \autoref{prop:elementary_invertible}, $A$ is a product of elementary matrices and is invertible.\\
 			Furthermore, if $AX = 0$ then $X = \inv{A}0 = 0$ - i.e. the only solution to $AX = 0$ is $X = 0$.
 		\end{proof}
+	
+		\bigskip
+		\subsubsection{The Reduced Row Echelon Form}
+		The \textbf{reduced row echelon form} of a matrix is described in \ref{sssection:reduced-row-echelon-form-matrices}. It is obtained for a given matrix by a sequence of elementary row operations on the matrix according to the procedure known as Gaussian Elimination.\\
+		
+		\subsubsubsection{\small Example of Gaussian Elimination}
+		\begin{exe}
+			\ex{Let
+				\[ A = \begin{bmatrix}
+							3 & 1 & 1  \\
+							0 & 2 & -4 \\
+							3 & 2 & -1
+						\end{bmatrix}.
+				\]
+				Gaussian Elimination on $A$ produces the reduced row echelon form (rref) matrix
+				\[ A' = \begin{bmatrix}
+							1 & 0 & 1  \\
+							0 & 1 & -2 \\
+							0 & 0 & 0
+						\end{bmatrix}.
+				\]
+				
+				The rref matrix $A'$ tells us that the third column of $A$ is obtainable as a linear combination of the first two columns.\\
+				
+				If we break up the matrix $A$ into the blocks suggested by the rref
+				\[ A = \begin{bmatrix}
+							\begin{bmatrix}
+							3 & 1\\
+							0 & 2
+							\end{bmatrix} & 
+							\begin{bmatrix}
+							1  \\
+							-4
+							\end{bmatrix} \\[10pt]
+							\begin{bmatrix}3 & 2\end{bmatrix} & \begin{bmatrix}-1\end{bmatrix}
+						\end{bmatrix}
+				\]
+				we see that
+				\[ \inv{\begin{bmatrix}
+							3 & 1\\
+							0 & 2	
+						\end{bmatrix}} =
+						\frac{1}{6}
+						\begin{bmatrix}
+							2 & -1\\
+							0 & 3
+						\end{bmatrix}
+				\]
+				and
+				\[ \frac{1}{6}
+					\begin{bmatrix}
+						2 & -1\\
+						0 & 3
+					\end{bmatrix}
+					\begin{bmatrix}
+						1  \\
+						-4
+					\end{bmatrix} =
+					\begin{bmatrix}
+						1  \\
+						-2
+					\end{bmatrix}
+				\]
+				so that
+				\[ \begin{bmatrix}
+						\inv{\begin{bmatrix}
+							3 & 1\\
+							0 & 2
+						\end{bmatrix}} & 
+						\begin{bmatrix}
+							0  \\
+							0
+						\end{bmatrix} \\[10pt]
+						\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}0\end{bmatrix}
+					\end{bmatrix}
+					
+					\begin{bmatrix}
+						\begin{bmatrix}
+							3 & 1\\
+							0 & 2
+						\end{bmatrix} & 
+						\begin{bmatrix}
+							1  \\
+							-4
+						\end{bmatrix} \\[10pt]
+						\begin{bmatrix}3 & 2\end{bmatrix} & \begin{bmatrix}-1\end{bmatrix}
+					\end{bmatrix} =
+					\begin{bmatrix}
+						\begin{bmatrix}
+							1 & 0\\
+							0 & 1
+						\end{bmatrix} & 
+						\begin{bmatrix}
+							1  \\
+							-2
+						\end{bmatrix} \\[10pt]
+						\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}0\end{bmatrix}
+					\end{bmatrix}.
+				\]
+		
+		
+		\note{Note that the matrix multiplication by blocks works out:
+			\[  \begin{bmatrix}
+					\inv{\begin{bmatrix}
+						3 & 1\\
+						0 & 2
+						\end{bmatrix}} & 
+					\begin{bmatrix}
+					0  \\
+					0
+					\end{bmatrix} \\[10pt]
+					\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}0\end{bmatrix}
+				\end{bmatrix}
+				\begin{bmatrix}
+					\begin{bmatrix}
+					3 & 1\\
+					0 & 2
+					\end{bmatrix} & 
+					\begin{bmatrix}
+					1  \\
+					-4
+					\end{bmatrix} \\[10pt]
+					\begin{bmatrix}3 & 2\end{bmatrix} & \begin{bmatrix}-1\end{bmatrix}
+				\end{bmatrix} =
+				\begin{bmatrix}
+					\begin{bmatrix}
+					1 & 0\\
+					0 & 1
+					\end{bmatrix} +
+					\begin{bmatrix}
+					0 & 0\\
+					0 & 0
+					\end{bmatrix} & 
+					\begin{bmatrix}
+					1  \\
+					-2
+					\end{bmatrix} +
+					\begin{bmatrix}
+					0  \\
+					0
+					\end{bmatrix}\\[10pt]
+					\begin{bmatrix}0 & 0\end{bmatrix} + \begin{bmatrix}0 & 0\end{bmatrix}
+					 & \begin{bmatrix}0\end{bmatrix} + \begin{bmatrix}0\end{bmatrix}
+				\end{bmatrix}.
+			\]
+			}\label{ex:gaussian-elimination}
+			\end{exe}
+		}
+		
+		\medskip
+		From this it's clear that the Gaussian Elimination algorithm amounts to left multiplication by the inverse of the invertible part of the matrix (in this case $R$).\\
+		
+		Another way of looking at it arises from observing that
+		\[ AA' =	\begin{bmatrix}
+							3 & 1 & 1  \\
+							0 & 2 & -4 \\
+							3 & 2 & -1
+						\end{bmatrix}
+						\begin{bmatrix}
+							1 & 0 & 1  \\
+							0 & 1 & -2 \\
+							0 & 0 & 0
+						\end{bmatrix} 
+					= 	\begin{bmatrix}
+							3 & 1 & 1  \\
+							0 & 2 & -4 \\
+							3 & 2 & -1
+						\end{bmatrix} = A.
+		\]
+		So, the rref matrix of $A$ is also a right identity of $A$. The final column of the rref matrix representing the free variable, is an alternative to the standard basis vector ${ \begin{bmatrix}0\\0\\1\end{bmatrix} }$ when taking linear combinations of the columns of $A$.\\
+		
+		\bigskip
+		\subsubsubsection{Using the rref to solve ${ A\x = \b }$}
+		If we are attempting to solve an equation of the form ${ A\x = \b }$ then forming the augmented matrix and performing Gaussian Elimination left multiplies the vector $\b$ by the inverse of the invertible part of the matrix to obtain an element in the reverse image of $\b$.\\
+		
+		For example, let ${ \b = \langle 3, 4, 5 \rangle }$ then, forming the augmented matrix ${ [A \,|\, \b] }$ and performing row reduction to obtain the rref,
+		\[ \begin{amatrix}{3}
+			    3 & 1 &  1 & 3 \\
+				0 & 2 & -4 & 4 \\
+				3 & 2 & -1 & 5
+			\end{amatrix} \leadsto	
+			\begin{amatrix}{3}
+				1 & 0 &  1 & \frac{1}{3} \\
+				0 & 1 & -2 & 2 \\
+				0 & 0 &  0 & 0
+			\end{amatrix}
+		\]
+		from which we infer that
+		\[ \x = \begin{bmatrix}\frac{1}{3}\\2\\0\end{bmatrix} + t \begin{bmatrix}-1\\2\\1\end{bmatrix} \]
+		for ${ t \in \F{}. }$\\
+		
+		\note{Note that:
+			\begin{itemize}
+				\item{If $\b$ were not in the span of the first two columns of $A$ then elimination would show that the rows of $A$ were inconsistent. In this case, for $\b$ to be in the span of $A$ it had to be a point in the plane ${ x + \frac{y}{2} - z = 0. }$}
+				\item{If we were to swap the columns of $A$ around we would find the same kernel but the particular solution would be different because it would be expressed w.r.t to different vectors.}
+			\end{itemize}
+		}
+		
+		\bigskip
+		\subsubsubsection{Nature of the Solution}
+		The solution found by this method is, naturally, a coset of the kernel. In the language of linear algebra it is usually described as a particular solution + a general solution. Geometrically, in this case, the general solution (the kernel/nullspace) is a line and the particular solution is a point on the line. But, more interestingly, the particular solution found by this method is the solution that effectively has the kernel zero-ed out. That's to say,
+		\begin{align*}
+		\x &= \begin{bmatrix}\frac{1}{3}\\2\\0\end{bmatrix} = \begin{bmatrix}\frac{1}{3}\\2\\0\end{bmatrix} + \begin{bmatrix}0\\0\\0\end{bmatrix} \\
+		&= \begin{bmatrix}\frac{1}{3}\\2\\0\end{bmatrix} + 0 \begin{bmatrix}-1\\2\\1\end{bmatrix}.
+		\end{align*}
+		For example, if we define ${ t' = t - 1 }$ then,
+		\[ \x = \begin{bmatrix}\frac{-2}{3}\\4\\1\end{bmatrix} + t' \begin{bmatrix}-1\\2\\1\end{bmatrix}  \]
+		is also, equally, a solution. But the solution found by Gaussian Elimination will always consist of a vector (the particular solution) with zeroes in the components corresponding to any free-variable columns in the matrix.
 	}
 	
 	
