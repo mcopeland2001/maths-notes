@@ -1,0 +1,102 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}	
+	
+	\searchableSubsection{The Axiom of Choice}{set theory}{
+		\biggerskip
+		\subsubsection{Statement of the Problem - Intuitive}
+		The problem that the Axiom of Choice addresses was famously described by Bertrand Russell using the example of choosing from an infinite number of pairs of shoes and an infinite number of pairs of socks. From pairs of shoes it is easy to see how you can have a strategy for making a choice but for pairs of identical socks it is not at all obvious how to achieve the same thing.\\
+		
+		In fact, a set like a pair of socks cannot exist because the definition of a set of objects requires that the objects are distinguishable. As a result, just looking at Bertrand Russell's example, it is tempting to think that the problem wouldn't arise. However, we can instead think of an infinite collection of non-empty sets containing random (distinguishable) objects; in this case we still cannot develop a choice function because there is no single strategy that can be applied to make choices from all the sets. This is a more important point than it may at first seem because the problem of choosing a strategy for each of the infinite sets is a problem of making an arbitrary choice for an infinite number of sets - i.e. the very same problem that the Axiom of Choice is attempting to address!
+		
+		\bigskip
+		\subsubsection{Statement of the Problem - Formal}
+		If a set $B$ is non-empty then this can be expressed in first-order predicate logic as the truth of
+		\[ \phi(B) := (\exists x)(x \in B). \]
+		Then, through the use of \textit{existential instantiation} we can posit an element, say ${ c \in B }$.\\
+		
+		\boxeddefinition{In formal logic, \textbf{Existential Instantiation} is the inference, 
+			\[ \exists x \logicsep P(x) \implies P(c) \]
+		 where $c$ is a new constant symbol. The symbol $c$ must not have been previously used in the proof nor must it appear in the final conclusion.}
+		
+		So existential instantiation gives us a way, in formal logic, of "selecting" an arbitrary element from a single set without the need for a strategy for making a choice. Furthermore, we can concatenate atomic predicate clauses together to make an arbitrarily-long (but finite) compound predicate statement. For example,
+		\[ \phi(B_1) \land \phi(B_2) \land \cdots \land \phi(B_n) \]
+		which enables us to say,
+		\[ \exists (x_1,x_2,\dots,x_n) \logicsep (x_1 \in B_1) \land (x_2 \in B_2) \land \cdots \land (x_n \in B_n) \]
+		and so instantiate an $n$-tuple ${ (c_1, c_2, \dots, c_n) }$ with an element $c_i$ from each set $B_i$. In this way, formal mathematical logic allows us to make a "selection" from an arbitrary \textit{finite} number of non-empty sets.\\
+		
+		However, the first-order logic that is the standard for the logical formalization of mathematics is not able to model infinite domains as the \href{https://en.wikipedia.org/wiki/Compactness_theorem}{Compactness Theorem} implies that first-order logic cannot uniquely determine infinite sets. We cannot, therefore, use the same logical approach to formalize a choice from an infinite number of sets. For this reason the capability needs to be introduced as an axiom.
+		
+		\bigskip
+		\subsubsection{The Axiom of Choice}
+		\boxeddefinition{Let $A$ be a non-empty set of non-empty sets. A \textbf{choice function} on $A$ is a function,
+			\[ f: A \longmapsto \bigcup_{a \in A} \suchthat \forall a \in A, \; f(a) \in a. \]
+		}
+		
+		\boxedaxiom{\textbf{The Axiom of Choice} says that if $A$ is a non-empty set of non-empty sets then there exists a choice function for $A$.}
+		
+		\subsubsection{The Well-Ordering Theorem (a.k.a Zermelo's Theorem)}
+		\boxeddefinition{A set is \textbf{well-ordered} by a strict total order if every non-empty subset has a minimal element under the ordering.}
+		\boxedaxiom{The \textbf{Well-Ordering Theorem} states that every set can be well-ordered.}
+		Although, for historic reasons, this is known as a \textit{theorem}, it has been found to be unprovable from the axioms of mathematics and must be accepted as an axiom itself.\\
+		
+		It has also been found to be equivalent to the Axiom of Choice. That's to say, every set can be well-ordered if every collection of sets has a choice function and every collection of sets has a choice function if their union is a well-ordered set.\\
+		
+		\note{A point of interest when proving the Axiom of Choice using the Well-Ordering Theorem: We assert the well-ordering on the union of the collection of sets rather than asserting a (potentially different) well-ordering on each of the sets - which would equally suffice as a choice function. The reason for this is that if we attempt to assert an individual well-ordering on each of the sets then we are again falling into the problem of existential instantiation over an infinite structure - which, itself, requires the Axiom of Choice. This is the same point as was mentioned in the problem statement.}
+		
+		For uncountable sets the well-ordering may be inexpressible. Specfically, in the case of the reals $\R{}$, it has been proven that any well-ordering of $\R{}$ must be inexpressible.
+		
+		\subsubsection{Zorn's Lemma}
+		To understand Zorn's Lemma some concepts relating to partial orders are needed.\\
+		
+		\subsubsubsection{Partial Orders}
+		\boxeddefinition{Let $(P, \leq)$ be a partial order and let ${ A \subseteq P }$. An element ${ p \in P }$ is an \textbf{upper bound} for $A$ if ${ a \leq p }$ for all ${ a \in A }$.}
+		\boxeddefinition{Let $(P, \leq)$ be a partial order. An element ${ m \in P }$ is a \textbf{maximal element} if there is no ${ p \neq m \in P }$ such that ${ m \leq p }$.}
+		
+		Partial orders implicitly define totally ordered subsets, or \textit{chains}, within which there may be a maximal element. So, there can be multiple maximal elements for each chain in the poset.\\
+		
+		\textbf{Example of a Partial Order}
+		\begin{exe}
+			\ex{Let ${ (\N{} \setminus \{1\}, \preceq) }$ be the relation "divides by". More precisely, for ${ m,n \in \N{} }$
+				\[ n \preceq m \iff m | n. \]
+				Then, under this order, every prime number is a maximal element. If we were to modify the order slightly to include the element 1, the partial order ${ (\N{}, \preceq) }$ has a single, global maximal element - the number 1.
+			}
+		\end{exe}
+		
+		\bigskip
+		\boxedaxiom{(Zorn's Lemma). Let $(P, \leq)$ be a non-empty partial order such that every totally ordered subset has an upper bound. Then $P$ has a maximal element.}
+		
+		\labeledProposition{Zorn's Lemma implies the Axiom of Choice.}{zorns-lemma-implies-axiom-of-choice}
+		\begin{proof}
+			Let $A$ be a non-empty set of non-empty sets. Define a \textit{partial choice function} over $A$ to be a function that defines a choice from some of the sets in $A$ but not others. Define an \textit{extends} relation between functions such that if $f$ and $g$ are functions then $g$ \textit{extends} $f$ if and only if ${ dom(f) \subseteq dom(g) }$ and ${ g(x) = f(x) }$ for all ${ x \in dom(f). }$\\
+			Now if we postulate the existence of a collection $C$ of all the partial choice functions over $A$ then the \textit{extends} relation between the members of $C$ is a partial order. Denote this partial order ${ (A, \leq) }$.
+			For any chain in $C$ we can take the union of all the domains of the functions in the chain --- which will actually be the domain of the final function in the chain, say $f$ --- and form a function $g$ such that ${ g(x) = f(x) }$ for all ${ x \in dom(f) }$. The function $f$ is an upper bound on the chain.\\
+			Therefore we can apply Zorn's lemma to assert the existence of a maximal element $h$. The function $h$, being maximal, cannot be extended by any function in $C$ and must, therefore, have a domain equal to the entire set $A$. It follows then that $h$ is a choice function over all the set $A$ and satisfies the Axiom of Choice.
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{Every vector space has a basis}{every-vector-space-has-basis}
+		\begin{proof}
+			\TODO{proof}
+		\end{proof}
+	
+		\bigskip
+		
+	
+		\TODO{
+			\begin{itemize}
+				\item{proof that every vector space has a basis}
+				\item{outline proof of the impossibility of a countable basis of the reals as a vector space over the rationals (reference the indicator function for the reals)}
+				\item{reference in section on infinite vector spaces - which requires including this in main document (perhaps in a section entitled "Fundamentals"?)}
+			\end{itemize}
+		}
+		
+		\bigskip
+		\references{\url{http://www.math.toronto.edu/ivan/mat327/docs/notes/11-choice.pdf}}\\
+		
+		For further study: \url{https://www.mn.uio.no/math/tjenester/kunnskap/kompendier/acwozl.pdf}.
+	}
+	
+\end{document}
