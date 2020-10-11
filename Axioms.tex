@@ -35,11 +35,14 @@
 			\[ f: A \longmapsto \bigcup_{a \in A} \suchthat \forall a \in A, \; f(a) \in a. \]
 		}
 		
-		\boxedaxiom{\textbf{The Axiom of Choice} says that if $A$ is a non-empty set of non-empty sets then there exists a choice function for $A$.}
+		\boxedaxiom{\textbf{The Axiom of Choice:} If $A$ is a non-empty set of non-empty sets then there exists a choice function for $A$.}
 		
 		\subsubsection{The Well-Ordering Theorem (a.k.a Zermelo's Theorem)}
 		\boxeddefinition{A set is \textbf{well-ordered} by a strict total order if every non-empty subset has a minimal element under the ordering.}
-		\boxedaxiom{The \textbf{Well-Ordering Theorem} states that every set can be well-ordered.}
+		\boxedaxiom{\textbf{Well-Ordering Theorem:} Every set can be well-ordered.}
+		
+		\note{The \textbf{Well-Ordering Principle} is usually taken to be the proposition that the positive integers are well-ordered (which may be axiomatic or proven by induction depending on the method of constructing the natural numbers) but is sometimes used synonymously with the Well-Ordering Theorem.}
+		
 		Although, for historic reasons, this is known as a \textit{theorem}, it has been found to be unprovable from the axioms of mathematics and must be accepted as an axiom itself.\\
 		
 		It has also been found to be equivalent to the Axiom of Choice. That's to say, every set can be well-ordered if every collection of sets has a choice function and every collection of sets has a choice function if their union is a well-ordered set.\\
@@ -66,8 +69,10 @@
 		\end{exe}
 		
 		\bigskip
-		\boxedaxiom{(Zorn's Lemma). Let $(P, \leq)$ be a non-empty partial order such that every totally ordered subset has an upper bound. Then $P$ has a maximal element.}
+		\boxedaxiom{\textbf{Zorn's Lemma:} Let $(P, \leq)$ be a non-empty partial order such that every totally ordered subset has an upper bound. Then $P$ has a maximal element.}
 		
+		
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
 		\labeledProposition{Zorn's Lemma implies the Axiom of Choice.}{zorns-lemma-implies-axiom-of-choice}
 		\begin{proof}
 			Let $A$ be a non-empty set of non-empty sets. Define a \textit{partial choice function} over $A$ to be a function that defines a choice from some of the sets in $A$ but not others. Define an \textit{extends} relation between functions such that if $f$ and $g$ are functions then $g$ \textit{extends} $f$ if and only if ${ dom(f) \subseteq dom(g) }$ and ${ g(x) = f(x) }$ for all ${ x \in dom(f). }$\\
@@ -75,23 +80,18 @@
 			For any chain in $C$ we can take the union of all the domains of the functions in the chain --- which will actually be the domain of the final function in the chain, say $f$ --- and form a function $g$ such that ${ g(x) = f(x) }$ for all ${ x \in dom(f) }$. The function $f$ is an upper bound on the chain.\\
 			Therefore we can apply Zorn's lemma to assert the existence of a maximal element $h$. The function $h$, being maximal, cannot be extended by any function in $C$ and must, therefore, have a domain equal to the entire set $A$. It follows then that $h$ is a choice function over all the set $A$ and satisfies the Axiom of Choice.
 		\end{proof}
+		\end{tcolorbox}
+
 	
 		\bigskip
 		\labeledTheorem{Every vector space has a basis}{every-vector-space-has-basis}
 		\begin{proof}
-			\TODO{proof}
+			Let $V$ be an arbitrary vector space and let $S$ be the set of all linearly independent subsets of $V$. The inclusion relation $\subseteq$ is a partial order over the members of $S$. For every chain in this partial order ${ s_1 \subseteq s_2 \subseteq \cdots }$ if we take the union of the sets in the chain ${ U \coloneqq s_1 \cup s_2 \cup \cdots }$, then $U$ is an upper bound of the chain and, since $U$ is the union of sets of linearly independent vectors in $S$, ${ U \in S }$ also. Therefore, Zorn's Lemma tells us that $S$ has a maximal element.\\
+			Let $B$ be a maximal element of $S$. By membership of $S$, $B$ is a linearly independent set of vectors in $V$. Since $B$ is a maximal element in $S$ it follows that ${ \forall s \in S, \; s \subseteq B }$. Suppose that there is some vector $v$ in $V$ such that the set ${ B \cup \{\v\} }$ is linearly independent. Then the set ${ B \cup \{\v\} }$ is a linearly independent set of vectors in $V$ and so is a member of $S$ but is not a subset of $B$. This contradicts the maximality of $B$. We can therefore conclude that no such $v$ exists.\\
+			Therefore, there exists a set $B$ of linearly independent vectors in $V$ that spans the space $V$ and is the largest spanning set of linearly independent vectors that can be found in $V$. It is, therefore, a basis of $V$.
 		\end{proof}
-	
-		\bigskip
+		\note{Note that when looking for an upper bound to the chain in the set $S$ we don't just take the last element of the chain because the chain can be infinite.}
 		
-	
-		\TODO{
-			\begin{itemize}
-				\item{proof that every vector space has a basis}
-				\item{outline proof of the impossibility of a countable basis of the reals as a vector space over the rationals (reference the indicator function for the reals)}
-				\item{reference in section on infinite vector spaces - which requires including this in main document (perhaps in a section entitled "Fundamentals"?)}
-			\end{itemize}
-		}
 		
 		\bigskip
 		\references{\url{http://www.math.toronto.edu/ivan/mat327/docs/notes/11-choice.pdf}}\\

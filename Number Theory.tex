@@ -3,40 +3,40 @@
 \date{\vspace{-6ex}}
 
 \begin{document}
-\searchableChapter{Number Theory}{number theory}
 
-	\searchableSection{Natural Numbers}{number theory}
-			
-		\searchableSubsection{Peano Axioms}{number theory}{
-			\begin{axiom}{Closure under addition:}\\ For all $a,b \in \N{}$ we have $a + b \in \N{}$.	
-			\end{axiom}
-			\begin{axiom}{Closure under multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b \in \N{}$.
-			\end{axiom}
-			\begin{axiom}{Commutative Law for addition:}\\ For all $a,b \in \N{}$ we have $a + b = b + a$.
-			\end{axiom}
-			\begin{axiom}{Associative Law for addition:}\\ For all $a,b,c \in \N{}$ we have $(a + b) + c = a + (b + c)$.
-			\end{axiom}
-			\begin{axiom}{Commutative Law for multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b = b \times a$.
-			\end{axiom}
-			\begin{axiom}{Associative Law for multiplication:}\\ For all $a,b,c \in \N{}$ we have $(a \times b) \times c = a \times (b \times c)$.
-			\end{axiom}
-			\begin{axiom}{Multiplicative Identity:}\\ There is a special element of $\N{}$, denoted by 1, which has the property that for all $n \in \N{},\; n \times 1 = n$.
-			\end{axiom}
-			\begin{axiom}{Additive cancellation:}\\ For all $a,b,c \in \N{}$ if $a + c = b + c \text{ then } a = b$.
-			\end{axiom}
-			\begin{axiom}{Multiplicative cancellation:}\\ For all $a,b,c \in \N{}$ if $a \times c = b \times c \text{ then } a = b$.
-			\end{axiom}
-			\begin{axiom}{Distributive Law:}\\ For all $a,b,c \in \N{},\; a \times (b + c) = (a \times b) + (b \times c)$.
-			\end{axiom}
-			\begin{axiom}{Definition of "less than":}\\ For all $a,b \in \N{},\; a < b$ if and only if there is some $c \in \N{} \suchthat a + c = b$.
-			\end{axiom}
-			\begin{axiom}{Trichotomous property:}\\ For all $a,b \in \N{}$ exactly one of the following is true: $a = b,\; a < b,\; b < a$.
-			\end{axiom}
+\searchableSection{Number Theory}{number theory}
 		
+	\searchableSubsection{Natural Numbers}{number theory, natural numbers}{
+		
+		\subsubsection{Peano Axioms}
+		\begin{axiom}{Closure under addition:}\\ For all $a,b \in \N{}$ we have $a + b \in \N{}$.	
+		\end{axiom}
+		\begin{axiom}{Closure under multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b \in \N{}$.
+		\end{axiom}
+		\begin{axiom}{Commutative Law for addition:}\\ For all $a,b \in \N{}$ we have $a + b = b + a$.
+		\end{axiom}
+		\begin{axiom}{Associative Law for addition:}\\ For all $a,b,c \in \N{}$ we have $(a + b) + c = a + (b + c)$.
+		\end{axiom}
+		\begin{axiom}{Commutative Law for multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b = b \times a$.
+		\end{axiom}
+		\begin{axiom}{Associative Law for multiplication:}\\ For all $a,b,c \in \N{}$ we have $(a \times b) \times c = a \times (b \times c)$.
+		\end{axiom}
+		\begin{axiom}{Multiplicative Identity:}\\ There is a special element of $\N{}$, denoted by 1, which has the property that for all $n \in \N{},\; n \times 1 = n$.
+		\end{axiom}
+		\begin{axiom}{Additive cancellation:}\\ For all $a,b,c \in \N{}$ if $a + c = b + c \text{ then } a = b$.
+		\end{axiom}
+		\begin{axiom}{Multiplicative cancellation:}\\ For all $a,b,c \in \N{}$ if $a \times c = b \times c \text{ then } a = b$.
+		\end{axiom}
+		\begin{axiom}{Distributive Law:}\\ For all $a,b,c \in \N{},\; a \times (b + c) = (a \times b) + (b \times c)$.
+		\end{axiom}
+		\begin{axiom}{Definition of "less than":}\\ For all $a,b \in \N{},\; a < b$ if and only if there is some $c \in \N{} \suchthat a + c = b$.
+		\end{axiom}
+		\begin{axiom}{Trichotomous property:}\\ For all $a,b \in \N{}$ exactly one of the following is true: $a = b,\; a < b,\; b < a$.
+		\end{axiom}
+	
 		\bigskip
 		\notation{We also write $ab$ for $a \times b$.}
-			
-		\subsubsection{Properties following from these axioms}		
+				
 		\labeledProposition{If $a,b \in \N{}$ satisfy $a \times b = a$, then $b = 1$.}{mult_identity_unique}
 			\begin{proof}
 			\begin{align*}
@@ -65,315 +65,323 @@
 			Therefore $m$ cannot be less than $1$. Since we know that $1 \in \N{}$ and that the minimum element of $\N{}$, $m$, cannot be less than $1$, it follows that $1$ must be the minimum element of $\N{}$ and $m = 1$.
 		\end{proof}
 	}
-	
-	
-	\searchableSubsection{\sectionTitle{Integers}}{number theory}{\bigskip}
 
-		\searchableSubsection{Odd and Even Numbers}{number theory}{\bigskip
-			\begin{definition}
-			An \textbf{even} number, $n \in \Z{}$, is one that satisfies,
-			\[ \exists\,m \in \Z\; \cdot \; n = 2m \]
-			\end{definition}
-			
-			\begin{definition}
-			An \textbf{odd} number, $n \in \Z{}$, is one that satisfies,
-			\[ \exists\,m \in \Z\; \cdot \; n = 2m + 1 \]
-			\end{definition}
-			
-			\subsubsection{Consequences}
-			Sum of even numbers, $m + n$:
-			\begin{align*}
-			m + n &= 2k + 2l \hspace{15pt} \text{where $k,l \in \Z{}$} &\sidecomment{by defn. of even no.s $m,n$} \\
-				  &= 2(k + l) \\
-				  &= 2q      \hspace{15pt} \text{where $q \in \Z{}$}
-			\end{align*}
-			So $m + n$ is also even.
-			However, if $m + n$ is even:
-			\begin{align*}
-			m + n &= 2k \hspace{15pt} \text{where $k \in \Z{}$} &\sidecomment{by defn. of even $m + n$} \\
-			k &= \frac{m}{2} + \frac{n}{2}\\
-			\end{align*}
-			So $m$ and $n$ are not necessarily even. A counterexample is 
-			\[3 + 5 = 8 \iff \frac{3}{2} + \frac{5}{2} = 4 \]
-			To summarize:
-			\begin{itemize}
-			\item{$m,n$ even $ \implies m + n$ even}
-			\item{$m + n$ even $ \implies m,n$ even \wrong} 
-			\end{itemize}
-		}
+
+	\searchableSubsection{Integers}{number theory, integers}{
+		
+		\TODO{construction of the integers from peano natural numbers}
+
+		\subsubsection{Odd and Even Numbers}\bigskip
+		
+		\begin{definition}
+		An \textbf{even} number, $n \in \Z{}$, is one that satisfies,
+		\[ \exists\,m \in \Z\; \cdot \; n = 2m \]
+		\end{definition}
+		
+		\begin{definition}
+		An \textbf{odd} number, $n \in \Z{}$, is one that satisfies,
+		\[ \exists\,m \in \Z\; \cdot \; n = 2m + 1 \]
+		\end{definition}
+		
+		\subsubsection{Consequences}
+		Sum of even numbers, $m + n$:
+		\begin{align*}
+		m + n &= 2k + 2l \hspace{15pt} \text{where $k,l \in \Z{}$} &\sidecomment{by defn. of even no.s $m,n$} \\
+ &= 2(k + l) \\
+ &= 2q      \hspace{15pt} \text{where $q \in \Z{}$}
+		\end{align*}
+		So $m + n$ is also even.
+		However, if $m + n$ is even:
+		\begin{align*}
+		m + n &= 2k \hspace{15pt} \text{where $k \in \Z{}$} &\sidecomment{by defn. of even $m + n$} \\
+		k &= \frac{m}{2} + \frac{n}{2}\\
+		\end{align*}
+		So $m$ and $n$ are not necessarily even. A counterexample is 
+		\[3 + 5 = 8 \iff \frac{3}{2} + \frac{5}{2} = 4 \]
+		To summarize:
+		\begin{itemize}
+		\item{$m,n$ even $ \implies m + n$ even}
+		\item{$m + n$ even $ \implies m,n$ even \wrong} 
+		\end{itemize}
+
 	
 		\pagebreak
-		\searchableSubsection{The Fundamental Theorem of Arithmetic}{number theory}{\bigskip
-			\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
-			More formally, an integer, $p$, is prime if it is greater than 1 and,
-			\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
-			
-			\paragraph{Primality $ \implies $ Unique Prime Factorization:}
-			\begin{quote}
-				``Any number either is prime or is measured by some prime number.''\\
-				\textit{Euclid, Elements Book VII, Proposition 32}
-			\end{quote}
-			So, if an integer $n$ is not prime then,
-			\begin{align*} 
-			\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
-			\iff n = ab
-			\end{align*}
-			Then, for $a$ (the same applies to $b$),
-			\begin{align*}
-			\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
-			\iff n = cd
-			\end{align*}
-			We can continue to descend like this until we must eventually encounter one or more primes.
-			Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
-			\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
-			But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
-			
-			\paragraph{Proof of existence}
-			\begin{proof}
-				It must be shown that every integer greater than $ 1 $ is either prime or a product of primes. First, $ 2 $ is prime. Then, by strong induction, assume this is true for all numbers greater than $ 1 $ and less than $ n $. 
-				If $ n $ is prime, there is nothing more to prove. 
-				Otherwise, there are integers $ a, b $ where $ n = ab $, and $ 1 < a \leq b < n $. By the induction hypothesis, $ a = p_1p_2...p_j \text{ and } b = q_1q_2...q_k $ are products of primes. But then $ n = ab = p_1p_2...p_jq_1q_2...q_k $ is a product of primes.
-			\end{proof}
-			
-			\paragraph{Proof of uniqueness}
-			\begin{proof}
-				Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
-			\end{proof}
-		}
+		\subsubsection{The Fundamental Theorem of Arithmetic}\bigskip
 		
-		\pagebreak
-		\searchableSubsection{Modular Arithmetic}{number theory}{\bigskip
-			\subsubsection{Greatest Common Divisor \tiny{(also called Highest Common Factor)}}
-			\boxeddefinition{
-				The \textbf{Greatest Common Divisor (gcd)} of two integers -- say $a$ and $b$ -- is an integer $d$ that satisfies,
-				\[ d = z_1a + z_2b \]
-				for some ${ z_1,z_2 \in \Z{}. }$ This means that, whenever we are adding or subtracting multiples of the two numbers $a$ and $b$, the result will always be a multiple of $d$ and, therefore also, $d$ is the smallest such result obtainable.
-			}
-			The greatest common divisor of 16 and 6 can be visualized as follows:
-			\begin{align*}			
-			\vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$16 = 6 \times 2 + 4$}\\			
-			\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$6 = 4 \times 1 + 2$}\\		
-			\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{green}{\cdot\, \cdot} \vert &&\sidecomment{$4 = 2 \times 2 + 0$}\\		
-			\end{align*}
-			This implies the algorithm:		
-			\begin{align*}
-			\textbf{gcd}(&a, b):\\
-				&\text{if }\; b == 0\; \text{ then}\\
-				&\;\;\;\;\text{return } \; a\\
-				&\text{else}\\
-				&\;\;\;\;\text{return } \;\textbf{gcd}(b, a \bmod b)\\
-				&\text{end if}					
-			\end{align*}
-			
-			\note{The greatest common divisor of $a$ and $b$ is the smallest difference of multiples of $a$ and $b$. This is because -- for any difference, $d$, of multiples of $a$ and $b$ -- we have,
-			\[ d = ma + nb \text{ for } m,n \in \Z{} \]
-			and, if ${ g = gcd(a,b) }$ then, by definition, $g$ divides both $a$ and $b$ and, therefore, also divides $d$. So any such sum (or difference) of integer multiples of $a$ and $b$ is a multiple of $g$.}
-			
-			\labeledProposition{For non-zero integers $a$ and $b$, if $a = bq + r$ where $q,r \in \Z{}$, then $gcd(a, b) = gcd(b, r) = gcd(b, a \bmod b)$.}{gcd_remainder}
-				\begin{proof}
-				$(a \bmod b) = r = a - bq$. For any $m \suchthat m \divides a \text{ and } m \divides b$ we must also have $m \divides (a - bq)$ so the set of divisors of $a$ and $b$ is a subset of the set of divisors of $b$ and $r = (a \bmod b)$. Conversely, for any $m \suchthat m \divides b \text{ and } m \divides r = (a \bmod b)$ we have that $m \divides (bq + r) = a$ so the set of divisors of $b$ and $r = (a \bmod b)$ is a subset of the set of divisors of $a$ and $b$. So the sets are equal proving that they must have the same maximum element - the greatest common divisor.
-				\end{proof}
-			
-			\labeledProposition{If $d = gcd(a, b)$ then there is no integer linear combination of $a$ and $b$ that equals any positive value less than $d$.}{gcd_min_linear_combination}
-			\begin{proof}
-				Assume $d = gcd(a,b)$ and that ${ \exists\, e < d \in \N{}, m,n \in \Z{} \suchthat e = am + bn }$. Then,
-				\begin{align*}
-					&&e = am + bn &= dz_1m + dz_2n = d(z_1m + z_2n) \hspace{10pt} \text{ for } z_1, z_2 \in \Z{} \\
-					&\iff &z_1m + z_2n &= \frac{e}{d} \not\in \Z{}
-				\end{align*}
-				where we know that ${ \frac{e}{d} \not\in \Z{} }$ because ${ e < d }$. But the field properties of the integers ensures that the integers are closed under integer linear combinations so that $z_1m + z_2n \in \Z{}$. Therefore such an $e$ does not exist.
-			\end{proof}
+		\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
+		More formally, an integer, $p$, is prime if it is greater than 1 and,
+		\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
 		
-			\begin{corollary}
-				\label{coro:integer_linear_combination_is_multiple_of_gcd}
-				If $d = gcd(a, b)$ then every integer linear combination of $a$ and $b$ is a multiple of $d$.
-			\end{corollary}
-			\begin{proof}
-				\autoref{prop:gcd_min_linear_combination} showed that there is no integer linear combination of $a$ and $b$ less than $d$. Suppose that we have,
-				\[ e > d  \in \N{}, m,n \in \Z{} \suchthat e = am + bn \]
-				then, because $d$ divides both $a$ and $b$,
-				\[ e = adz_1 + bdz_2 = d(az_1 + bz_2), \hspace{10pt} z_1,z_2 \in \Z{}. \]
-				Now the closure of the integer field means that ${ z_3 = az_1 + bz_2 \in \Z{} }$ so that,
-				\[ e = z_3d \implies d \divides e. \]
-			\end{proof}
+		\paragraph{Primality $ \implies $ Unique Prime Factorization:}
+		\begin{quote}
+			``Any number either is prime or is measured by some prime number.''\\
+			\textit{Euclid, Elements Book VII, Proposition 32}
+		\end{quote}
+		So, if an integer $n$ is not prime then,
+		\begin{align*} 
+		\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
+		\iff n = ab
+		\end{align*}
+		Then, for $a$ (the same applies to $b$),
+		\begin{align*}
+		\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
+		\iff n = cd
+		\end{align*}
+		We can continue to descend like this until we must eventually encounter one or more primes.
+		Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
+		\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
+		But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
 		
-			\labeledProposition{A number ${ x \in \Z{}_m }$ has a multiplicative inverse if and only if ${ gcd(x,m) = 1 }$.}{modular_inverse_iff_gcd_is_1}
-			\begin{proof}
-				Assume ${ \inv{x} }$ is a multiplicative inverse for ${ x \in \Z{}_m }$. Then,
-				\[ \inv{x}x = 1 \iff \inv{x}x \congruent{1}{m} \iff \inv{x}{x} = am + 1, \hspace{10pt} a \in \Z{}. \]
-				This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
-				Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
-			\end{proof}
+		\paragraph{Proof of existence}
+		\begin{proof}
+			It must be shown that every integer greater than $ 1 $ is either prime or a product of primes. First, $ 2 $ is prime. Then, by strong induction, assume this is true for all numbers greater than $ 1 $ and less than $ n $. 
+			If $ n $ is prime, there is nothing more to prove. 
+			Otherwise, there are integers $ a, b $ where $ n = ab $, and $ 1 < a \leq b < n $. By the induction hypothesis, $ a = p_1p_2...p_j \text{ and } b = q_1q_2...q_k $ are products of primes. But then $ n = ab = p_1p_2...p_jq_1q_2...q_k $ is a product of primes.
+		\end{proof}
 		
-			\subsubsection{Lowest Common Multiple}\label{sssec:lowest_common_multiple}
-			The lowest common multiple of two numbers is formed by the multiplication of all the prime factors that occur in the two numbers where repititions of prime factors are important. That's to say, the lowest common multiple of 4 and 8 is not 2 (which is the highest common factor/greatest common divisor) but 8 because in 8, the factor 2 occurs three times (as $2^3$) and it occurs twice in 4,
-			\[ lcm(4,8) = lcm(2\times2, 2\times2\times2) = 2\times2\times2. \]
-			
-			The general formula for the lowest common multiple may be expressed in terms of the gcd as follows
-			\[ d = gcd(a, b) \implies lcm(a, b) = d \times (a/d) \times (b/d). \]
-		}
+		\paragraph{Proof of uniqueness}
+		\begin{proof}
+			Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
+		\end{proof}
 		
 		
 		\pagebreak
-		\searchableSubsection{Some Proofs on the Integers}{number theory}{\bigskip
-			\labeledProposition{For any integer $m$, $\sqrt{m}$ is rational iff $m$ is a square, i.e. $m=a^2$ for some integer $a$.}{rationality_of_sqrt_integers}
-			To begin with we show the easier direction of implication: $(m = a^2) \implies$ ($\sqrt{m}$ is rational).
-			\begin{proof}
-			Assume $m,a,b \in \Z{}$.
-			\begin{align*}
-			m &= a^2 \\
-			\iff \sqrt{m} &= \abs{a} \\
-			&= a/b \text{ for } b = 1 \text{ or } -1. \qedhere
-			\end{align*}
-			\end{proof}
-			Now the other (harder) direction, ($\sqrt{m}$ is rational) $\implies (m = a^2)$.
-			\begin{proof}
-			Assume $m,a,b \in \Z{}$. ($\sqrt{m}$ is rational) can be formalized as:
-			\[ \exists\,m,a,b \in \Z{} \cdot (\sqrt{m} = \frac{a}{b}) \; \wedge \; \text{($a$ and $b$ are coprime)} \]
-			\begin{align*}
-			\sqrt{m} &= \frac{a}{b} \\[8pt]
-			\implies m &= \frac{a^2}{b^2} \\[8pt]
-			\iff mb^2 &= a^2 \\ 
-			\end{align*}
-			But $a$ and $b$ are coprime so they don't share any prime factors. This means that $a^2$ and $b^2$ also don't share any prime factors. So, if $\abs{b} > 1$, the prime factorization of $mb^2$ is necessarily different from that of $a^2$ meaning that $mb^2 \neq a^2$ contradicting the hypothesis of coprimality.
-			On the other hand, if $\abs{b} = 1$, then $b$ has no prime factors (its prime factorization is empty) and so $mb^2$ has the same prime factorization as $m$ which may be equal to that of $a^2$ in the case that $m = a^2$.
-			\end{proof}
-			\bigskip
-			
-			\bigskip
-			\labeledProposition{For all nonnegative integers $a > b$ the difference of squares $a^2 - b^2$ does not give a remainder of 2 when divided by 4.}{a_squared_minus_b_squared}
-			Beginner's attempt - try proof by contradiction:
-			\begin{align*}
-			a^2 - b^2 &= 4n + 2 \\
-			2k &= 4n + 2 &\sidecomment{by $a^2 - b^2$ even}\\
-			k &= 2n + 1 \implies \text{ $k$ is some odd number.}
-			\end{align*}
-			So, proof by contradiction is our first instinct but doesn't seem to get us anywhere.
-			Instead, proceed by cases:
-			\paragraph{Case $a, b$ are even:}
-			\begin{align*}
-			\exists\,k,l \in \Z\; \cdot \;a &= 2k, b = 2l \\
-			\implies a^2 - b^2 &= 4k^2 - 4l^2 \\
-			&= 4\left(k^2 - l^2\right) \\
-			&= 4m\; \text{ where } \;m \in \Z\;  \\
-			\end{align*}
-			So $4$ divides $a^2 - b^2$ with $0$ remainder.
-			\paragraph{Case $a, b$ are odd:}
-			\begin{align*}
-			\exists\,k,l \in \Z\; \cdot \;a &= 2k+1, b = 2l+1 \\
-			\implies a^2 - b^2 &= \left(4k^2 + 4k + 1\right) - \left(4l^2 + 4l + 1\right) \\
-			&= 4\left(k^2 + k - l^2 - l\right) \\
-			&= 4m\; \text{ where } \;m \in \Z\;  \\
-			\end{align*}
-			So, again, $4$ divides $a^2 - b^2$ with $0$ remainder.
-			\paragraph{Case $a$ even, $b$ odd:}
-			\begin{align*}
-			\exists\,k,l \in \Z\; \cdot \;a &= 2k, b = 2l+1 \\
-			\implies a^2 - b^2 &= 4k^2 - \left(4l^2 + 4l + 1\right) \\
-			&= 4\left(k^2 - l^2 - l\right) - 1 \\
-			&= 4m + 3\; \text{ where } \;m=k^2 - l^2 - l - 1 \in \Z\;  \\
-			\end{align*}
-			So, here, $4$ divides $a^2 - b^2$ with $3$ remainder. So the proposition is proven as we have proven all the possible cases.\\
-			There is also another approach given in the Cambridge University Discrete Mathematics lecture notes,
-			TODO
+		\subsubsection{Modular Arithmetic}\bigskip
+		
+		\subsubsubsection{Greatest Common Divisor \tiny{(also called Highest Common Factor)}}
+		\boxeddefinition{
+			The \textbf{Greatest Common Divisor (gcd)} of two integers -- say $a$ and $b$ -- is an integer $d$ that satisfies,
+			\[ d = z_1a + z_2b \]
+			for some ${ z_1,z_2 \in \Z{}. }$ This means that, whenever we are adding or subtracting multiples of the two numbers $a$ and $b$, the result will always be a multiple of $d$ and, therefore also, $d$ is the smallest such result obtainable.
 		}
+		The greatest common divisor of 16 and 6 can be visualized as follows:
+		\begin{align*}			
+		\vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$16 = 6 \times 2 + 4$}\\			
+		\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$6 = 4 \times 1 + 2$}\\		
+		\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{green}{\cdot\, \cdot} \vert &&\sidecomment{$4 = 2 \times 2 + 0$}\\		
+		\end{align*}
+		This implies the algorithm:		
+		\begin{align*}
+		\textbf{gcd}(&a, b):\\
+			&\text{if }\; b == 0\; \text{ then}\\
+			&\;\;\;\;\text{return } \; a\\
+			&\text{else}\\
+			&\;\;\;\;\text{return } \;\textbf{gcd}(b, a \bmod b)\\
+			&\text{end if}					
+		\end{align*}
 		
-		\searchableSubsection{Absolute Value}{number theory, absolute value}{\label{ssection:absolute-value}\bigskip
-			\boxeddefinition{The \textbf{absolute value} function is defined,
-				\[ \abs{x} = 
-						\begin{cases}
-							x & x \geq 0\\
-							-x & x < 0
-						\end{cases}
-				\]
-			}
+		\note{The greatest common divisor of $a$ and $b$ is the smallest difference of multiples of $a$ and $b$. This is because -- for any difference, $d$, of multiples of $a$ and $b$ -- we have,
+		\[ d = ma + nb \text{ for } m,n \in \Z{} \]
+		and, if ${ g = gcd(a,b) }$ then, by definition, $g$ divides both $a$ and $b$ and, therefore, also divides $d$. So any such sum (or difference) of integer multiples of $a$ and $b$ is a multiple of $g$.}
 		
-			\bigskip
-			\labeledProposition{${ \abs{a}\abs{b} = \abs{ab} }$.}{product-of-absolute-vals-is-absolute-val-of-product}
+		\labeledProposition{For non-zero integers $a$ and $b$, if $a = bq + r$ where $q,r \in \Z{}$, then $gcd(a, b) = gcd(b, r) = gcd(b, a \bmod b)$.}{gcd_remainder}
 			\begin{proof}
-				By the definition of absolute value,
-				\[ \abs{ab} = 
-						\begin{cases} 
-							ab & ab \geq 0 \\
-							-ab & ab < 0.
-						\end{cases}
-				\]
-				Extending the definition to the product of absolute values,
-				\[
-					\abs{a}\abs{b} = 
-						\begin{cases} 
-							ab & a,b \geq 0\\
-							-ab & a < 0, b \geq 0\\
-							-ab & a \geq 0, b < 0\\
-							ab & a,b < 0.
-						\end{cases}
-				\]
-				We can see that these are equivalent because,
-				\[
-					ab \text{ is } 
-						\begin{cases} 
-							\geq 0 & a,b \geq 0 \text{ or } a,b < 0\\
-							< 0 & a < 0, b \geq 0 \text{ or } a \geq 0, b < 0.
-						\end{cases} \qedhere
-				\]
+			$(a \bmod b) = r = a - bq$. For any $m \suchthat m \divides a \text{ and } m \divides b$ we must also have $m \divides (a - bq)$ so the set of divisors of $a$ and $b$ is a subset of the set of divisors of $b$ and $r = (a \bmod b)$. Conversely, for any $m \suchthat m \divides b \text{ and } m \divides r = (a \bmod b)$ we have that $m \divides (bq + r) = a$ so the set of divisors of $b$ and $r = (a \bmod b)$ is a subset of the set of divisors of $a$ and $b$. So the sets are equal proving that they must have the same maximum element - the greatest common divisor.
 			\end{proof}
 		
-			\bigskip\bigskip
-			\subsubsection{The Triangle Inequality}
-			\bigskip
-			\[ \vert{x}\vert \ge x, \vert{y}\vert \ge y	\implies \vert{x}\vert + \vert{y}\vert \ge x + y \]
-			\begin{align*}			
-				\vert{x + y}\vert =
-					\begin{cases} 
-				      \vert{x}\vert + \vert{y}\vert & x,y \geq 0 \\
-				      \vert{ -\vert{x}\vert + \vert{y}\vert }\vert & x < 0,y \geq 0 \\
-				      \vert{ \vert{x}\vert - \vert{y}\vert }\vert & x \geq 0,y < 0 \\
-				      \vert{ -(\vert{x}\vert + \vert{y}\vert) }\vert & x,y < 0
-				   \end{cases}
-				\iff
-					\begin{cases} 
-						\vert{ \vert{x}\vert + \vert{y}\vert }\vert & x,y \geq 0 \text{ or } x,y < 0) \\
-						\vert{ \vert{x}\vert - \vert{y}\vert }\vert & x < 0,y \geq 0 \text{ or } x \geq 0,y < 0 \\
+		\labeledProposition{If $d = gcd(a, b)$ then there is no integer linear combination of $a$ and $b$ that equals any positive value less than $d$.}{gcd_min_linear_combination}
+		\begin{proof}
+			Assume $d = gcd(a,b)$ and that ${ \exists\, e < d \in \N{}, m,n \in \Z{} \suchthat e = am + bn }$. Then,
+			\begin{align*}
+				&&e = am + bn &= dz_1m + dz_2n = d(z_1m + z_2n) \hspace{10pt} \text{ for } z_1, z_2 \in \Z{} \\
+				&\iff &z_1m + z_2n &= \frac{e}{d} \not\in \Z{}
+			\end{align*}
+			where we know that ${ \frac{e}{d} \not\in \Z{} }$ because ${ e < d }$. But the field properties of the integers ensures that the integers are closed under integer linear combinations so that $z_1m + z_2n \in \Z{}$. Therefore such an $e$ does not exist.
+		\end{proof}
+	
+		\begin{corollary}
+			\label{coro:integer_linear_combination_is_multiple_of_gcd}
+			If $d = gcd(a, b)$ then every integer linear combination of $a$ and $b$ is a multiple of $d$.
+		\end{corollary}
+		\begin{proof}
+			\autoref{prop:gcd_min_linear_combination} showed that there is no integer linear combination of $a$ and $b$ less than $d$. Suppose that we have,
+			\[ e > d  \in \N{}, m,n \in \Z{} \suchthat e = am + bn \]
+			then, because $d$ divides both $a$ and $b$,
+			\[ e = adz_1 + bdz_2 = d(az_1 + bz_2), \hspace{10pt} z_1,z_2 \in \Z{}. \]
+			Now the closure of the integer field means that ${ z_3 = az_1 + bz_2 \in \Z{} }$ so that,
+			\[ e = z_3d \implies d \divides e. \]
+		\end{proof}
+	
+		\labeledProposition{A number ${ x \in \Z{}_m }$ has a multiplicative inverse if and only if ${ gcd(x,m) = 1 }$.}{modular_inverse_iff_gcd_is_1}
+		\begin{proof}
+			Assume ${ \inv{x} }$ is a multiplicative inverse for ${ x \in \Z{}_m }$. Then,
+			\[ \inv{x}x = 1 \iff \inv{x}x \congruent{1}{m} \iff \inv{x}{x} = am + 1, \hspace{10pt} a \in \Z{}. \]
+			This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
+			Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
+		\end{proof}
+	
+		\subsubsubsection{Lowest Common Multiple}\label{sssec:lowest_common_multiple}
+		The lowest common multiple of two numbers is formed by the multiplication of all the prime factors that occur in the two numbers where repititions of prime factors are important. That's to say, the lowest common multiple of 4 and 8 is not 2 (which is the highest common factor/greatest common divisor) but 8 because in 8, the factor 2 occurs three times (as $2^3$) and it occurs twice in 4,
+		\[ lcm(4,8) = lcm(2\times2, 2\times2\times2) = 2\times2\times2. \]
+		
+		The general formula for the lowest common multiple may be expressed in terms of the gcd as follows
+		\[ d = gcd(a, b) \implies lcm(a, b) = d \times (a/d) \times (b/d). \]
+	
+	
+		
+		\pagebreak
+		\subsubsection{Some Proofs on the Integers}\bigskip
+	
+		\labeledProposition{For any integer $m$, $\sqrt{m}$ is rational iff $m$ is a square, i.e. $m=a^2$ for some integer $a$.}{rationality_of_sqrt_integers}
+		To begin with we show the easier direction of implication: $(m = a^2) \implies$ ($\sqrt{m}$ is rational).
+		\begin{proof}
+		Assume $m,a,b \in \Z{}$.
+		\begin{align*}
+		m &= a^2 \\
+		\iff \sqrt{m} &= \abs{a} \\
+		&= a/b \text{ for } b = 1 \text{ or } -1. \qedhere
+		\end{align*}
+		\end{proof}
+		Now the other (harder) direction, ($\sqrt{m}$ is rational) $\implies (m = a^2)$.
+		\begin{proof}
+		Assume $m,a,b \in \Z{}$. ($\sqrt{m}$ is rational) can be formalized as:
+		\[ \exists\,m,a,b \in \Z{} \cdot (\sqrt{m} = \frac{a}{b}) \; \wedge \; \text{($a$ and $b$ are coprime)} \]
+		\begin{align*}
+		\sqrt{m} &= \frac{a}{b} \\[8pt]
+		\implies m &= \frac{a^2}{b^2} \\[8pt]
+		\iff mb^2 &= a^2 \\ 
+		\end{align*}
+		But $a$ and $b$ are coprime so they don't share any prime factors. This means that $a^2$ and $b^2$ also don't share any prime factors. So, if $\abs{b} > 1$, the prime factorization of $mb^2$ is necessarily different from that of $a^2$ meaning that $mb^2 \neq a^2$ contradicting the hypothesis of coprimality.
+		On the other hand, if $\abs{b} = 1$, then $b$ has no prime factors (its prime factorization is empty) and so $mb^2$ has the same prime factorization as $m$ which may be equal to that of $a^2$ in the case that $m = a^2$.
+		\end{proof}
+		\bigskip
+		
+		\bigskip
+		\labeledProposition{For all nonnegative integers $a > b$ the difference of squares $a^2 - b^2$ does not give a remainder of 2 when divided by 4.}{a_squared_minus_b_squared}
+		Beginner's attempt - try proof by contradiction:
+		\begin{align*}
+		a^2 - b^2 &= 4n + 2 \\
+		2k &= 4n + 2 &\sidecomment{by $a^2 - b^2$ even}\\
+		k &= 2n + 1 \implies \text{ $k$ is some odd number.}
+		\end{align*}
+		So, proof by contradiction is our first instinct but doesn't seem to get us anywhere.
+		Instead, proceed by cases:
+		\paragraph{Case $a, b$ are even:}
+		\begin{align*}
+		\exists\,k,l \in \Z\; \cdot \;a &= 2k, b = 2l \\
+		\implies a^2 - b^2 &= 4k^2 - 4l^2 \\
+		&= 4\left(k^2 - l^2\right) \\
+		&= 4m\; \text{ where } \;m \in \Z\;  \\
+		\end{align*}
+		So $4$ divides $a^2 - b^2$ with $0$ remainder.
+		\paragraph{Case $a, b$ are odd:}
+		\begin{align*}
+		\exists\,k,l \in \Z\; \cdot \;a &= 2k+1, b = 2l+1 \\
+		\implies a^2 - b^2 &= \left(4k^2 + 4k + 1\right) - \left(4l^2 + 4l + 1\right) \\
+		&= 4\left(k^2 + k - l^2 - l\right) \\
+		&= 4m\; \text{ where } \;m \in \Z\;  \\
+		\end{align*}
+		So, again, $4$ divides $a^2 - b^2$ with $0$ remainder.
+		\paragraph{Case $a$ even, $b$ odd:}
+		\begin{align*}
+		\exists\,k,l \in \Z\; \cdot \;a &= 2k, b = 2l+1 \\
+		\implies a^2 - b^2 &= 4k^2 - \left(4l^2 + 4l + 1\right) \\
+		&= 4\left(k^2 - l^2 - l\right) - 1 \\
+		&= 4m + 3\; \text{ where } \;m=k^2 - l^2 - l - 1 \in \Z\;  \\
+		\end{align*}
+		So, here, $4$ divides $a^2 - b^2$ with $3$ remainder. So the proposition is proven as we have proven all the possible cases.\\
+		\TODO{There is also another approach given in the Cambridge University Discrete Mathematics lecture notes}
+	}
+	
+	\searchableSubsection{Absolute Value}{number theory, absolute value}{
+	\label{ssection:absolute-value}
+	\bigskip
+	
+		\boxeddefinition{The \textbf{absolute value} function is defined,
+			\[ \abs{x} = 
+					\begin{cases}
+						x & x \geq 0\\
+						-x & x < 0
 					\end{cases}
-			\end{align*}
-			\bigskip
-			Clearly, $\vert{ \vert{x}\vert + \vert{y}\vert }\vert \ge \vert{ \vert{x}\vert - \vert{y}\vert }\vert$ so that,
-			\[ \vert{x + y}\vert \leq \vert{ \vert{x}\vert + \vert{y}\vert }\vert = \vert{x}\vert + \vert{y}\vert \]
-			and this is known as the "triangle inequality".\bigskip
-			
-			\bigskip
-			\labeledProposition{$\vert{x - y}\vert \leq \vert{x - z}\vert + \vert{y - z}\vert$}{asdfa}
-			\begin{proof}
-			\begin{align*}
-				\vert{x - y}\vert = \vert{(x - z) + (z - y)}\vert \leq \vert{x - z}\vert + \vert{z - y}\vert = \vert{x - z}\vert + \vert{y - z}\vert
-			\end{align*}
-			\end{proof}
-			
-			\labeledProposition{$\vert{x - y}\vert \geq \vert{ \vert{x}\vert - \vert{y}\vert }\vert$}{asdfa}
-			\begin{proof}
-			Need to show $-\vert{x - y}\vert \leq \vert{x}\vert - \vert{y}\vert \leq \vert{x - y}\vert$. So, prove as two separate inequalities:
-			\begin{align*}				
-				&&\vert{y}\vert = \vert{x + (y - x)}\vert &\leq \vert{x}\vert + \vert{y - x}\vert \\
-				&\iff &-\vert{y - x}\vert = -\vert{x - y}\vert &\leq \vert{x}\vert - \vert{y}\vert \\
-			\end{align*}
-			\begin{align*}				
-				&&\vert{x}\vert = \vert{(x - y) + y}\vert &\leq \vert{x - y}\vert + \vert{y}\vert \\
-				&\iff &\vert{x}\vert - \vert{y}\vert &\leq \vert{x - y}\vert
-			\end{align*}
-			\end{proof}
+			\]
 		}
 	
-		\pagebreak
-		\searchableSubsection{Complex Number}{number theory, complex numbers}{\bigskip
-			\boxeddefinition{The \textbf{modulus} of a complex number, $z = a + bi$, is the quantity defined as,
-				\[ \abs{z} = \sqrt{a^2 + b^2}. \]
-			}
-			\textcolor{red}{TODO: modulus is also called "absolute value" and can be calculated as product with conjugate}
-			The modulus obeys the following properties:
-			\begin{itemize}
-				\item{$ \abs{z_1z_2} = \abs{z_1}\abs{z_2} $}
-			\end{itemize}
+		\bigskip
+		\labeledProposition{${ \abs{a}\abs{b} = \abs{ab} }$.}{product-of-absolute-vals-is-absolute-val-of-product}
+		\begin{proof}
+			By the definition of absolute value,
+			\[ \abs{ab} = 
+					\begin{cases} 
+						ab & ab \geq 0 \\
+						-ab & ab < 0.
+					\end{cases}
+			\]
+			Extending the definition to the product of absolute values,
+			\[
+				\abs{a}\abs{b} = 
+					\begin{cases} 
+						ab & a,b \geq 0\\
+						-ab & a < 0, b \geq 0\\
+						-ab & a \geq 0, b < 0\\
+						ab & a,b < 0.
+					\end{cases}
+			\]
+			We can see that these are equivalent because,
+			\[
+				ab \text{ is } 
+					\begin{cases} 
+						\geq 0 & a,b \geq 0 \text{ or } a,b < 0\\
+						< 0 & a < 0, b \geq 0 \text{ or } a \geq 0, b < 0.
+					\end{cases} \qedhere
+			\]
+		\end{proof}
+	
+		\bigskip\bigskip
+		\subsubsection{The Triangle Inequality}
+		\bigskip
+		\[ \vert{x}\vert \ge x, \vert{y}\vert \ge y	\implies \vert{x}\vert + \vert{y}\vert \ge x + y \]
+		\begin{align*}			
+			\vert{x + y}\vert =
+				\begin{cases} 
+      \vert{x}\vert + \vert{y}\vert & x,y \geq 0 \\
+      \vert{ -\vert{x}\vert + \vert{y}\vert }\vert & x < 0,y \geq 0 \\
+      \vert{ \vert{x}\vert - \vert{y}\vert }\vert & x \geq 0,y < 0 \\
+      \vert{ -(\vert{x}\vert + \vert{y}\vert) }\vert & x,y < 0
+   \end{cases}
+			\iff
+				\begin{cases} 
+					\vert{ \vert{x}\vert + \vert{y}\vert }\vert & x,y \geq 0 \text{ or } x,y < 0) \\
+					\vert{ \vert{x}\vert - \vert{y}\vert }\vert & x < 0,y \geq 0 \text{ or } x \geq 0,y < 0 \\
+				\end{cases}
+		\end{align*}
+		\bigskip
+		Clearly, $\vert{ \vert{x}\vert + \vert{y}\vert }\vert \ge \vert{ \vert{x}\vert - \vert{y}\vert }\vert$ so that,
+		\[ \vert{x + y}\vert \leq \vert{ \vert{x}\vert + \vert{y}\vert }\vert = \vert{x}\vert + \vert{y}\vert \]
+		and this is known as the "triangle inequality".\bigskip
+		
+		\bigskip
+		\labeledProposition{$\vert{x - y}\vert \leq \vert{x - z}\vert + \vert{y - z}\vert$}{asdfa}
+		\begin{proof}
+		\begin{align*}
+			\vert{x - y}\vert = \vert{(x - z) + (z - y)}\vert \leq \vert{x - z}\vert + \vert{z - y}\vert = \vert{x - z}\vert + \vert{y - z}\vert
+		\end{align*}
+		\end{proof}
+		
+		\labeledProposition{$\vert{x - y}\vert \geq \vert{ \vert{x}\vert - \vert{y}\vert }\vert$}{asdfa}
+		\begin{proof}
+		Need to show $-\vert{x - y}\vert \leq \vert{x}\vert - \vert{y}\vert \leq \vert{x - y}\vert$. So, prove as two separate inequalities:
+		\begin{align*}				
+			&&\vert{y}\vert = \vert{x + (y - x)}\vert &\leq \vert{x}\vert + \vert{y - x}\vert \\
+			&\iff &-\vert{y - x}\vert = -\vert{x - y}\vert &\leq \vert{x}\vert - \vert{y}\vert \\
+		\end{align*}
+		\begin{align*}				
+			&&\vert{x}\vert = \vert{(x - y) + y}\vert &\leq \vert{x - y}\vert + \vert{y}\vert \\
+			&\iff &\vert{x}\vert - \vert{y}\vert &\leq \vert{x - y}\vert
+		\end{align*}
+		\end{proof}
+	}
+
+	\pagebreak
+	\searchableSubsection{Complex Number}{number theory, complex numbers}{\bigskip
+		\boxeddefinition{The \textbf{modulus} of a complex number, $z = a + bi$, is the quantity defined as,
+			\[ \abs{z} = \sqrt{a^2 + b^2}. \]
 		}
+		\textcolor{red}{TODO: modulus is also called "absolute value" and can be calculated as product with conjugate}
+		The modulus obeys the following properties:
+		\begin{itemize}
+			\item{$ \abs{z_1z_2} = \abs{z_1}\abs{z_2} $}
+		\end{itemize}
+	}
 		
 		
 \end{document}

@@ -617,12 +617,9 @@
 		\end{align*}
 		Integrating a second order equation twice we see that we introduced two constants of integration, ${ c,d }$, and the last two terms ${ cx + d }$ are undetermined. So a second order equation of this type has only determined a function upto a first-degree polynomial (a line). To determine a specific function, in this case, we require two relations between $x$ and $y$ (two points determine a line).
 		
-		\bigskip\bigskip
-		\subsubsection{Recurrence Differential Equations}
-		\bigskip
-		\boxeddefinition{This is \textbf{not} standard terminology but what is meant here by \textbf{recurrence} differential equations is equations that describe the derivative of a function --- say $y(x)$ --- in terms of the value of the function itself. So, for example, a linear first-order example would have the form,
-			\[ \frac{\dif y}{\dif x} = f(x)y + g(x). \]
-		}
+		\biggerskip\biggerskip
+		\subsubsubsection{Differential Equations of Linear Dynamical Systems}\\
+		Differential equations are most often used to describe the evolving state of dynamical systems --- that is, systems whose future state is a function of its current state.\\
 	
 		Since the eigenfunction of differentiation is the exponent function ${ f(x) = e^x }$ (see \autoref{sss:eigenvectors-of-differentiation}), the solution to these differential equations will always involve the exponent function.
 		
@@ -635,14 +632,14 @@
 		&\iff & \int \frac{1}{y} \frac{\dif y}{\dif x} \dif x &= \int f(x) \dif x &\sidecomment{} \\[8pt]
 		&\iff & \ln \abs{y} &= F(x) + c &\sidecomment{${ y \neq 0 }$, $F$ is an antiderivative of $f$} \\[8pt]
 		&\iff & \abs{y} &= e^{F(x)}\cdot e^c &\sidecomment{} \\[8pt]
-		&\iff & y &= Ae^{F(x)} &\sidecomment{${ A \in \R{}. }$}
+		&\iff & y &= ke^{F(x)} &\sidecomment{${ k \in \R{}. }$}
 		\end{align*}
 		Check solution:
-		\[ \frac{\dif y}{\dif x} = f(x)Ae^{F(x)} = f(x)y. \]
+		\[ \frac{\dif y}{\dif x} = f(x)ke^{F(x)} = f(x)y. \]
 		\note{Note that the solution has the form,
-			\[ y = Ae^{F(x)} \]
-			where $F(x)$ is an antiderivative of $f(x)$, the coefficient of $y$ in the original differential equation. Since the antiderivative is unique upto a constant factor, the other possible antiderivatives are achieved by the value of the coefficient $A$ because,
-			\[ e^{F(x) + c} = e^{F(x)}\cdot e^c = Ae^{F(x)}. \]
+			\[ y = ke^{F(x)} \]
+			where $F(x)$ is an antiderivative of $f(x)$, the coefficient of $y$ in the original differential equation. Since the antiderivative is unique upto a constant factor, the other possible antiderivatives are achieved by the value of the coefficient $k$ because,
+			\[ e^{F(x) + c} = e^{F(x)}\cdot e^c = ke^{F(x)}. \]
 		}
 		
 		\bigskip\bigskip
@@ -654,19 +651,27 @@
 		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} - e^{-F(x)}f(x)y &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
 		&\iff & \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
 		&\iff & \int \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) \dif x &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
-		&\iff & e^{-F(x)}y + c &= \int e^{-F(x)}g(x) \dif x &\sidecomment{constant ${ c \in \R{} }$} \\[8pt]
-		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x - c &\sidecomment{} \\[8pt]
-		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x + Ae^{F(x)}. &\sidecomment{${ A = -c }$}
+		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x \\[8pt]
+		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x
 		\end{align*}
+		where the constant of integration of the integral on the left has been absorbed into the integral on the right.\\
+		
+		So, the solution has the form,
+		\[ y = ke^{F(x)} + h(x) \]
+		where $h(x)$ is an antiderivative of ${ g(x)/e^{F(x)} }$ and $k$ is the constant of integration.\\
+		
 		Check solution:
 		\begin{align*}
-		\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} + f(x)Ae^{F(x)} \\[8pt]
-		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x + Ae^{F(x)}\right) + g(x) &\sidecomment{} \\[8pt]
+		\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
+		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) \\[8pt]
 		&= f(x)y + g(x).
 		\end{align*}
-		\note{\TODO{This is correct but means that ${ Ae^{F(x)} }$ \textbf{is} the solution because we are trying to look for the most \textbf{general} solution we can find.} Note that
-			\[ Ae^{F(x)}\int \frac{g(x)}{Ae^{F(x)}} \dif x = Ae^{F(x)}\frac{1}{A}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
+		
+		\note{Note that
+			\[ ke^{F(x)}\int \frac{g(x)}{ke^{F(x)}} \dif x = ke^{F(x)}\frac{1}{k}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
 		}
+	
+		\paragraph{Taking the linear algebra approach to the same differential equation:} For the sake of simplicity assume that functions of x are polynomials of maximum degree 2.
 	
 		\paragraph{Example:}
 		\begin{exe}
