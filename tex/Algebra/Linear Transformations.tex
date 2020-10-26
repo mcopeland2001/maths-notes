@@ -27,7 +27,38 @@
 		
 		\note{The compatibility with addition of vectors implies that a linear transformation is a homomorphism between additive groups of vectors.}
 		
+		\note{Linear transformations \textbf{preserve} linear combinations in their arguments but this must be distinguished carefully from \textbf{being equal} to linear combinations of their arguments. A typical linear transformation is \textbf{not} expressible as a linear combination of it's sole argument and --- in fact --- the image of a vector under a linear map only fails to be linearly independent to the original vector in the case that the original vector is an eigenvector ${ A\v = c\v. }$\\ It is, however, worth noting that a linear map between finite vector spaces may be thought of as the application of a coordinate vector to a different basis than that against which it was originally defined. Therefore, any linear combination of objects may be thought of as a linear map between the space of coefficients and the space of objects. For example, the linear combination,
+			\[ \alpha_1 x_1 + \alpha_2 x_2 + \cdots + \alpha_n x_n \]
+		may be thought of as a linear map from the space of coefficients ${ \alpha_i }$ to the space of objects ${ x_i }$,
+			\[ T\left(\begin{bmatrix}\alpha_1\\\alpha_2\\\vdots\\\alpha_n\end{bmatrix}\right) = \alpha_1 x_1 + \alpha_2 x_2 + \cdots + \alpha_n x_n. \]
+		}
+		
+		\begin{corollary}
+			As with all homomorphisms, linear maps always map the identity to the identity. For linear maps this means mapping the zero vector to the zero vector.
+		\end{corollary}
+		
 		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{A linear map is homogeneous of degree 1.}{lin-map-is-homogeneous-degree-1}
+			\begin{proof}
+				${ L(\alpha \v) = \alpha L(\v) }$ for all ${ \alpha \in \F{},\; \v \in V }$.
+			\end{proof}
+		\end{tcolorbox}
+		
+		\medskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Linear Dependence is always preserved across any linear transformation.}{lin-dependence-preserved-across-any-lin-transform}
+			\begin{proof}
+				Let ${ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 }$ be a linear relation between the vectors ${ \{\v_1,\dots,\v_n\} }$. If $L$ is a linear map then,
+				\begin{align*}
+					&& L(\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n) &= L(\0) \\
+					&\iff & \alpha_1 L(\v_1) + \alpha_2 L(\v_2) + \cdots + \alpha_n L(\v_n) &= \0. \qedhere \\
+				\end{align*}
+			\end{proof}
+		\end{tcolorbox}
+		
+		
+		\biggerskip
 		\subsubsection{The Kernel and the Image of a Linear Transformation}
 		\boxeddefinition{
 			Let ${ T: V \longmapsto W }$ be any linear transformation. Then the \textbf{kernel (or nullspace)} of $T$ is defined as,
@@ -88,6 +119,8 @@
 			\[ \alpha_1\u_1 + \cdots + \alpha_n\u_n \neq \0 \implies ker\,T \neq \{\0\} \]
 			and therefore this proves that if $T$ does not preserve linear independence then it is not injective.
 		\end{proof}
+	
+		\note{Note that \textbf{linear dependence}, however, is preserved across any linear map (\autoref{prop:lin-dependence-preserved-across-any-lin-transform}).}
 		
 		\bigskip
 		\subsubsection{Examples of Linear Transformations}
@@ -1375,12 +1408,12 @@
 			\[ \begin{bmatrix}\cos\theta\\\sin\theta\\0\end{bmatrix},\, \begin{bmatrix}-\sin\theta\\\cos\theta\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
 			for any angle $\theta$ measured anticlockwise from the $x$-axis. Actually this is the general case of which the previous example is a special case when ${ \theta = \pi / 2 }$.			
 			\begin{figure}[h!]
-				\includegraphics[width=\linewidth]{resources/img/orthonormal_bases_theta_pi_by_2.png}
+				\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_2.png}
 				\caption{$ (\cos{\pi/4}, \sin{\pi/4})^T = (1/\sqrt{2}, 1/\sqrt{2})^T,\;  (-\sin{\pi/4}, \cos{\pi/4})^T = (-1/\sqrt{2}, 1/\sqrt{2})^T $}
 			\end{figure}
 			\\But for any value of the angle $\theta$ these remain orthogonal as can be seen if we generate the basis vectors for ${ \theta = \pi/3 }$.
 			\begin{figure}[h!]
-				\includegraphics[width=\linewidth]{resources/img/orthonormal_bases_theta_pi_by_3.png}
+				\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_3.png}
 				\caption{$ (\cos{\pi/3}, \sin{\pi/3})^T = (1/2, \sqrt{3}/2)^T,\;  (-\sin{\pi/3}, \cos{\pi/3})^T = (-\sqrt{3}/2, 1/2)^T $}
 			\end{figure}
 	
@@ -1554,7 +1587,7 @@
 	\pagebreak
 	\subsubsection{Intuition of Affine Spaces}
 	\begin{wrapfigure}{l}{0.5\textwidth}
-		\includegraphics[width=0.9\linewidth]{resources/img/320px-Affine_space_R3.png} 
+		\includegraphics[width=0.9\linewidth]{\resourceDir/img/320px-Affine_space_R3.png} 
 		\label{fig:affine_space_schematic}
 	\end{wrapfigure}
 	A translated linear subspace of a vector space like $P_2$ above that no longer passes through the origin is referred to as an \textbf{affine subspace}. It is not a vector space as ${ \0 \notin P_2 }$ and ${ \V{a},\V{b} \in P_2 }$ but ${ \V{a} + \V{b} \notin P_2 }$. 
@@ -1570,14 +1603,14 @@
 	In an affine space there is no particular point designated as the origin but we can describe vector displacements between points as an ordered pair of points, for example, ${ (p,a) = \V{pa} }$. Affine combinations of displacements agree on the resulting point with linear combinations in the corresponding Euclidean space.\\
 	For example, imagine a point $p$ in an affine space is at coordinates ${ (-1,4) }$ in the corresponding Euclidean space and similarly points $a$ and $b$ are at ${ (3,4) }$ and ${ (6,1) }$ respectively. Then, if we take an affine combination of the displacements to $a$ and $b$ the resulting point is independent of the chosen origin point.
 %	\begin{wrapfigure}{l}{0.5\textwidth}
-%		\includegraphics[width=\linewidth]{resources/img/affine_combinations_example.png} 
+%		\includegraphics[width=\linewidth]{\resourceDir/img/affine_combinations_example.png} 
 %		\label{fig:affine_combinations_example}
 %	\end{wrapfigure}
 %	
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=300px]{resources/img/affine_combinations_example.png}
+		\includegraphics[width=300px]{\resourceDir/img/affine_combinations_example.png}
 		\caption{\small The diagram shows the affine combination ${ 2\V{a} - \V{b} = 2\V{pa} - \V{pb} }$ where $\V{a}$ denotes the usual position vector in the Euclidean space.}
 		\label{fig:affine_combinations_example}
 	\end{figure}

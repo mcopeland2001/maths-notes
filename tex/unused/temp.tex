@@ -1,0 +1,18 @@
+\documentclass[MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}	
+	
+Testing latexmk - two different approaches to the repeated roots:
+	\begin{itemize}
+	\item{if the root is squared then the ${ A - \lambda I }$ matrix is squared and the eigenvector must have a cyclic order of 2 under the linear transformation. If the linear transformation is differentiation then a degree 1 polynomial satisfies this condition.}
+		\item{in the case of a root of multiplicity 2 (strictly speaking \textit{geometric multiplicity} 2), the solution is the limit of the case of distinct roots as the eigenvalues tend to the same value. Using l'hopital's rule, this is shown to produce a degree 1 polynomial.}
+	\end{itemize}
+
+	limit of distinct roots:
+	\begin{itemize}
+		\item{take complex distinct roots and let the imaginary part go to zero - results in ${ \lim_{x \to 0} \frac{\sin{x}}{x} = x }$.}
+	\end{itemize}
+	
+\end{document}

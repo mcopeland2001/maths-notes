@@ -402,7 +402,7 @@
 	\paragraph{\small{Give an example of a nonempty subset $U$ of $\R2$ such that $U$ is closed under scalar multiplication but $U$ is not a subspace of $\R2$.}}	
 	For all $\lambda \in \R{}$ the set $\setc{\lambda\v}{\v \in \{(1,1) (-1,1)\} }$ is closed under scalar multiplication but not addition.
 	\begin{figure}[h!]
-	 \includegraphics[width=\linewidth]{resources/img/not_closed_under_addition.png}
+	 \includegraphics[width=\linewidth]{\resourceDir/img/not_closed_under_addition.png}
 	 \caption{The blue arrows are vectors whose scalar multiples will all be in the same line as the blue arrows but the red arrow shows what happens if we add them; the result lies outside of both lines.}
 	\end{figure}
 	
@@ -613,7 +613,7 @@
 
 	
 	\bigskip
-	\subsubsection{Bases}
+	\subsubsection{Bases}\label{sssection:bases}
 	\boxeddefinition{A \textbf{basis} for a vector space $V$ is a set of vectors that is both linearly independent and spans the space $V$. The empty set is therefore a basis for the zero vector space $\{\0\}$.\\
 	Since a basis of $V$ spans the space, any vector in $V$ may be expressed as as a linear combination of the vectors in the basis set and, since the basis set is linearly independent, this expression is unique.
 	}
@@ -971,6 +971,37 @@
 		Then, the \textbf{coordinate vector of $\v$ with respect to the basis $B$} is,
 		\[ \v_B = \langle c_1, \dots, c_n \rangle. \]
 	}
+
+	\medskip\note{The definition of a basis \ref{sssection:bases} requires that it is a set of \textbf{linearly independent} vectors. It is worth noting what results if we attempt to use a linearly dependent set of vectors as a basis because in real-world situations this often occurs (for example in data analysis) when the full relationship between objects may not be known.\\
+	Imagine a "basis" ${ B = \{x, 3x\}. }$ Co-ordinate vectors defined against this basis are not unique --- 
+		\[ (3)x + (1)3x = (6)x + (0)3x = \cdots \]
+	In fact, from the basis and the co-ordinate vectors, we appear to working in a 2-dimensional space but in fact, because there is a linear relation between the two "basis" vectors we are actually working in a 1-dimensional space. As a result, algebraic analysis will be missing one relation. For example, take the vectors against "basis" $B$,
+	\[ \left\{ \begin{bmatrix}1\\0\end{bmatrix}, \begin{bmatrix}1\\3\end{bmatrix}, \begin{bmatrix}1\\5\end{bmatrix} \right\}. \]
+	It appears that there is a single linear relation between these vectors given by the nullspace of their matrix as follows:
+	\[ 	\begin{bmatrix}
+			1 & 1 & 1\\
+			0 & 3 & 5
+		\end{bmatrix} \leadsto
+		\begin{bmatrix}
+			1 & 0 & -2/3\\
+			0 & 1 & 5/3
+		\end{bmatrix} \implies
+		\text{nullspace} =
+		t\begin{bmatrix}
+			2/3\\
+			-5/3\\
+			1
+		\end{bmatrix} \hspace{20pt} \text{ for } t \in \R{}.
+	\]
+	Whereas in actual fact all vectors in this space are colinear, being of the form ${ \alpha x }$ for some ${ \alpha \in \R{} }$. If we apply the co-ordinate vectors to their "basis" we see that,
+	\[ \begin{bmatrix}1\\0\end{bmatrix} = (1)x = \bm{x}, \begin{bmatrix}1\\3\end{bmatrix} = (1)x + (3)3x = \bm{10x}, \begin{bmatrix}1\\5\end{bmatrix} = (1)x + (5)3x = \bm{16x}. \]
+	Then we can see that the true extent of the relationship between the vectors is given by,
+	\[ \begin{bmatrix}1 & 10 & 16\end{bmatrix} \leadsto s \begin{bmatrix}-10\\1\\0\end{bmatrix} + t \begin{bmatrix}-16\\0\\1\end{bmatrix} \]
+	for ${ s,t \in \R{} }$.\\
+	As we can see, the true relation (with respect to $x$) between the vectors is 2-dimensional. The relation found when using the "basis" $B$ is a 1-dimensional subspace within this space corresponding to the values ${ s = -5/3,\; t = 1 }$.
+	}
+	
+	\biggerskip
 	\boxeddefinition{The \textbf{dot product} of two coordinate vectors in an $n$-dimensional coordinate space is defined as,
 		\[ \v \dotprod \w = v_1w_1 + \cdots + v_nw_n = \v^T\w. \]
 	}
