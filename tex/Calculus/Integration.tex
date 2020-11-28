@@ -1,0 +1,42 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+
+
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}	
+	\searchableSection{Integration}{analysis, calculus, integration}
+	\bigskip\bigskip
+	
+	\searchableSubsection{Definite and Indefinite Integration}{analysis, calculus, integration}{\label{ssection:definite-and-indefinite-integration}
+		Indefinite integration determines an antiderivative up to a constant so that, if $F(x)$ is some antiderivative of $f(x)$ and $C$ is a constant, then
+		\[ \int f(x) \dif x = F(x) + C. \]
+		This expresses the fact that any value of $C$ would produce a valid antiderivative of $f(x)$. In fact, these are the fibres -- the cosets of the kernel -- of the differentiation linear transformation. The kernel of differentiation is the set of constant-valued functions,
+		\[ f(x) = C \]
+		for any ${ C \in \R{} }$.\\
+		
+		In the case of a definite integral, however, the constant cancels out:
+		\[ \int_a^b f(x) \dif x = [F(x) + C]_a^b = (F(b) + C) - (F(a) + C) = F(b) - F(a) \]
+		so that we are able to resolve the value of the definite integral to a specific constant value. In this case, the result is the sum of two elements of the kernel of the differentiation transform and so the result is also in the kernel.\\
+		
+		However, if we consider a function of a variable, $t$, such that
+		\[ h(t) = \int_a^t f(x) \dif x \]
+		then $h(t)$ is also an antiderivative of $f(t)$ but also,
+		\[ h(t) = \int_a^t f(x) \dif x = [F(x) + C]_a^t = F(t) - F(a) = F(t) + C_2 \]
+		where ${ C_2 = -F(a) }$ is a constant. So, the definite integral -- specifically, the initial value, $a$ -- has allowed us to resolve a particular antiderivative from the set of functions produced by the possible values of $C$. That's to say, the initial value $a$ specified for us a particular element in the kernel of the differentiation operator -- namely, ${ C_2 = -F(a) }$.\\
+		
+		Furthermore, since the definite integral is a particular antiderivative of $f(x)$ we can also relate the indefinite and definite integrals as follows,
+		\[ \int f(x) \dif x = \int_a^t f(x) \dif x + C. \]
+		This amounts to -- expressed in terms of group theory -- the statement that, if $G$ is a group with kernel $K$ and ${ x,k \in G,\; k \in K }$, then
+		\[ xK = xkK \] 
+		where 
+		\begin{align*}
+			xK &= \int f(x) \dif x = F(x) + C \\
+			xk &= \int_a^t f(x) \dif x = F(t) - F(a) \\
+			xkK &= \int_a^t f(x) \dif x + C = F(t) - F(a) + C.
+		\end{align*}
+	}
+
+\end{document}

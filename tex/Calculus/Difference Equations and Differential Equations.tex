@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 \date{\vspace{-6ex}}
 
@@ -523,6 +523,7 @@
 		
 		But, since we are looking for real-valued solutions and any linear combination of the homogeneous solutions is also a homogeneous solution, we can generate other, real-valued homogeneous solutions from linear combinations of these ones. In fact, we can just divide the imaginary solution by $i$ so that our real-valued solution is:
 		\[ (\sqrt{-b})^t\, (C_3\cos(\theta t) + C_4 \sin(\theta t)) +  \frac{c}{a+b-1}. \]
+		\TODO{eh? if divide by $i$ then the real part will be divided by $i$ also}
 	}
 
 
@@ -641,6 +642,22 @@
 			where $F(x)$ is an antiderivative of $f(x)$, the coefficient of $y$ in the original differential equation. Since the antiderivative is unique upto a constant factor, the other possible antiderivatives are achieved by the value of the coefficient $k$ because,
 			\[ e^{F(x) + c} = e^{F(x)}\cdot e^c = ke^{F(x)}. \]
 		}
+	
+		\subsubsubsection{Example}
+		\begin{exe}
+			\ex{Say we have an IVP (Initial Value Problem) such that our independent variable is $t$ beginning at 0, with ${ y(0) = y_0 }$, and
+				\[ \frac{\dif y}{\dif t} = f(t) y.  \]
+				Then if we look at what happens at integral intervals of $t$ we can see that:
+				\begin{align*}
+					y(0) &= y_0 \\
+					y(1) &= y_0 e^{\int_0^1 f(t) dt} \\
+					y(2) &= y_0 e^{\int_0^1 f(t) dt} e^{\int_1^2 f(t) dt} = y_0 e^{\int_0^2 f(t) dt} \\
+					\vdots
+				\end{align*}
+				So, in general, at time $t$,
+				\[ y(t) = y_0 e^{\int_0^t f(u) du}. \]
+			}\label{ex:diff-eq-basic-ivp}
+		\end{exe}
 		
 		\bigskip\bigskip
 		\subsubsubsection{The form ${ \frac{\dif y}{\dif x} = f(x)y + g(x) }$}
@@ -656,26 +673,35 @@
 		\end{align*}
 		where the constant of integration of the integral on the left has been absorbed into the integral on the right.\\
 		
+		\note{Note, also, that
+			\[ ke^{F(x)}\int \frac{g(x)}{ke^{F(x)}} \dif x = ke^{F(x)}\frac{1}{k}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
+		}
+		
+		\medskip
 		So, the solution has the form,
-		\[ y = ke^{F(x)} + h(x) \]
+		\[ y = k e^{F(x)} + h(x) e^{F(x)} \]
 		where $h(x)$ is an antiderivative of ${ g(x)/e^{F(x)} }$ and $k$ is the constant of integration.\\
 		
 		Check solution:
 		\begin{align*}
-		\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
-		&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) \\[8pt]
-		&= f(x)y + g(x).
+			y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x \implies \\[8pt]
+			\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
+			&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) \\[8pt]
+			&= f(x)y + g(x).
 		\end{align*}
+		and also,
+		\begin{align*}
+			y &= k e^{F(x)} + h(x) e^{F(x)} \implies \\[8pt]
+			\frac{\dif y}{\dif x} &= f(x) k e^{F(x)} + f(x) h(x) e^{F(x)} + g(x) e^{-F(x)} e^{F(x)} \\[8pt]
+			&= f(x) k e^{F(x)} + f(x) h(x) e^{F(x)} + g(x) \\[8pt]
+			&= f(x)y + g(x)
+		\end{align*}
+		where we have used the fact that $h(x)$ is an antiderivative of ${ g(x) e^{-F(x)} }$.
 		
-		\note{Note that
-			\[ ke^{F(x)}\int \frac{g(x)}{ke^{F(x)}} \dif x = ke^{F(x)}\frac{1}{k}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
-		}
-	
-		\paragraph{Taking the linear algebra approach to the same differential equation:} For the sake of simplicity assume that functions of x are polynomials of maximum degree 2.
-	
-		\paragraph{Example:}
+		\biggerskip\hrule\biggerskip
+		\paragraph{Examples}
 		\begin{exe}
-			\item{${\bm{ x\frac{\dif y}{\dif x} - 2y = 6 }}$:\\\\
+			\ex{${\bm{ x\frac{\dif y}{\dif x} - 2y = 6 }}$:\\\\
 				The first step is to rearrange it to obtain an expression for the derivative. 
 				\begin{align*}
 				&& x\frac{\dif y}{\dif x} - 2y &= 6 \\
@@ -700,9 +726,43 @@
 				&\iff & y &= -3 + c'x^2. &\sidecomment{} \\
 				\end{align*}
 			}
+			\biggerskip
+			\ex{Consider a bank account with variable interest. Let $M(t)$ be the amount of money in the account at time $t$, measured in years (though the specific unit isn't important conceptually), and let $I(t)$ be the rate of interest at time $t$: for example, $3 \%$ interest corresponds to $I(t)=0.03 .$ Finally, let $Q(t)$ be the amount of money put in (or negative for removing money) in year $t$. Thus, $M(t)$ obeys the differential equation
+				\[ \frac{\dif M}{\dif t} = I(t) M(t) + Q(t). \]
+				This illustrates a common trend: the first term indicates how it would grow independent of external forces, and the second term represents external influences.
+				
+				This can be solved in different ways:\\
+				
+				First, suppose $Q(t)=0$ and $I(t)=I$ is constant. Then ${ M(t)=M(0) e^{I t} }$.\\
+				
+				On the other hand, if $I(t)$ can vary, then ${ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} }$ as explained in \ref{ex:diff-eq-basic-ivp}.\\
+				
+				When $Q(t)$ isn't zero, we can begin to understand it by considering the case where money is only put in once at the end of each year --- so we have ${ Q(0), Q(1), \dots }$ --- giving the solution:
+				\[ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} + Q(1) e^{\int_{1}^{t} I(u) \dif u} + Q(2) e^{\int_{2}^{t} I(u) \dif u} + \cdots \]
+				In the case of continuous deposit and withdrawal from the account we end up with:
+				\[ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} + \int_0^t Q(x) e^{\int_x^t I(u) \dif u} \dif x. \]
+				
+				We can relate this to the general formula for this form of differential equation using \ref{ssection:definite-and-indefinite-integration} as follows:
+				\begin{align*}
+					M(t) &= e^{\int I(t) \dif t} \int Q(t) e^{\uminus\int I(u) \dif u} \dif t \\[8pt]
+					&= e^{\int_0^t I(u) \dif u} \left( \int_0^t Q(x) e^{\uminus\int_0^x I(u) \dif u} \dif x + C \right) \\[8pt]
+					&= C e^{\int_0^t I(u) \dif u}  + \int_0^t Q(x) e^{\int_x^t I(u) \dif u} \dif x
+				\end{align*}
+				which gives us ${ M(0) = C }$ when we substitute in ${ t = 0 }$.
+				\biggerskip
+			}
+			\biggerskip
+			\ex{This example isn't necessarily as realistic, but is commonly used. The logistic model of population
+				growth takes $p(t)$ to be the population at time $t$. The model takes some additional factor that illustrates that a space can
+				only hold a fixed carrying capacity of the population, producing the equation
+				\[ \frac{\dif P}{\dif t} = c P(t) \left( 1 - \frac{P(t)}{A} \right). \]
+				When ${ P(t) = A }$, the change is zero, and when it's greater, it becomes negative, indicating that $A$ is the largest population
+				supported by the environment.
+			}
 		\end{exe}
 	
-		\bigskip\bigskip
+		
+		\biggerskip\biggerskip\hrule\biggerskip\biggerskip
 		\subsubsubsection{Homogeneous Differential Equations}
 		\boxeddefinition{A \textbf{homogeneous differential equation} is an equation of the form,
 			\[ f(x,y)\frac{\dif y}{\dif x} = g(x,y) \]
