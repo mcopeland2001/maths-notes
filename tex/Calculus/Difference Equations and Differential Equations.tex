@@ -6,16 +6,16 @@
 	\searchableSection{\texorpdfstring{Difference and Differential\\ Equations}{Difference and Differential Equations}}{differential equations, difference equations}
 	\bigskip\bigskip
 	
-	\searchableSubsection{Difference Equations}{difference equations}{
+	\searchableSubsection{First-order Difference Equations}{difference equations}{
 		\bigskip\bigskip
 		\note{A \textbf{difference equation} is also known as a \textbf{recurrence equation}.}
 		
-		\bigskip
-		\subsubsection{First-order Difference Equations}
 		\boxeddefinition{Let ${ y_t }$ be the $t$-th value in a sequence (typically $t$ represents time). Then,
 			\[ y_t = ay_{t-1} + b, \hspace{20pt} t \geq 1 \]
 			is called a \textbf{first-order linear difference equation with constant coefficients}. The value $y_0$ is called an initial condition.\\
-			A solution to such an equation is an explicit expression for $y$ in terms of $t$ and $y_0$.\\
+			
+			A solution to such an equation is an explicit -- or a closed-form (see: \href{https://en.wikipedia.org/wiki/Closed-form_expression}{wikipedia}) -- expression for $y_t$ in terms of $t$ and $y_0$.\\
+			
 			If ${ b = 0 }$ we have,
 			\[ y_t = ay_{t-1} \iff y_t - ay_{t-1} = 0 \]
 			which is known as a \textbf{homogeneous} first-order linear difference equation with constant coefficients.
@@ -110,33 +110,44 @@
 		\bigskip
 		A minimal, one-by-one matrix is just a scalar (see: \ref{ex:minimal-linear-transformation}) and a minimal vector can be just a field element (see: \ref{sssection:vectors-as-magnitude-and-direction}) so we can define ${ A = a }$ such that the linearized equation becomes
 		\begin{align*}
-		\begin{bmatrix}
-			y_t\\
-			1
-		\end{bmatrix} &=
-		\begin{bmatrix}
-			a & b\\
-			0 & 1
-		\end{bmatrix}
-		\begin{bmatrix}
-			y_{t-1}\\
-			1
-		\end{bmatrix} \\[8pt]
-		&=
-		\begin{bmatrix}
-			a & b\\
-			0 & 1
-		\end{bmatrix}^t
-		\begin{bmatrix}
-			y_0\\
-			1
-		\end{bmatrix}.
+			\begin{bmatrix}
+				y_t\\
+				1
+			\end{bmatrix} &=
+			\begin{bmatrix}
+				a & b\\
+				0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				y_{t-1}\\
+				1
+			\end{bmatrix} \\[8pt]
+			&=
+			\begin{bmatrix}
+				a & b\\
+				0 & 1
+			\end{bmatrix}^t
+			\begin{bmatrix}
+				y_0\\
+				1
+			\end{bmatrix}.
 		\end{align*}
 	
+		\bigskip
 		\subsubsubsection{Eigenvectors of the Transformation}
-		In order to easily take powers of the transformation we find the eigenvectors.
+		In order to easily take powers of the transformation we find the eigenvectors.\\
+		
+		Let $M$ be the transformation matrix,
+		\[ M = \begin{bmatrix}
+				a & b\\
+				0 & 1
+			\end{bmatrix}
+		\]
+		
+		and, for an eigenvector $\v$,
 		\begin{align*}
-		&& 
+		&& M \v &= \lambda \v \\
+		&\iff & 
 		\begin{bmatrix}
 		a & b\\
 		0 & 1
@@ -298,7 +309,7 @@
 
 				But the question is: How meaningful is this really? If the interest is being compounded only $n$ times per year and these are the only moments when the account balance changes, then change happens at certain discrete moments rather than continuously so is it really meaningful to talk about the instantaneous rate of change? We can recover the discrete-time rate of change per year from this instantaneous one by integrating over a year.\\
 				
-				Now suppose that $n$, the number of times per year the interest is compounded, goes to infinity. Then (see \autoref{sssection:e-to-the-power-x}) we have,
+				Now suppose that $n$, the number of times per year the interest is compounded, goes to infinity. Then (see \ref{sssection:e-to-the-power-x}) we have,
 				\[ y_t = y_0 e^{rt}. \]
 				For discrete time we have,
 				\[ \frac{\Delta y}{\Delta t} = y_0 e^{rt} - y_0 e^{r(t-1)} = y_0 e^{r(t-1)} (e^r - 1) = y_{t-1} (e^r - 1) \]
@@ -314,15 +325,54 @@
 				&= y_0 (e^{rt} - e^{r(t-1)}) &\sidecomment{} \\[8pt]
 				&= y_0  e^{r(t-1)} (e^r - 1). &\sidecomment{}
 				\end{align*}
-			\bigskip}
-			\item{Let $y_t$ be an account balance after $t$ years and $r$ be the annual interest rate paid on the account. Suppose also, that each year $I$ is withdrawn from this account. Then the formula for $y_t$ is,
-				\[ y_t = (1 + r)y_{t-1} - I. \]
+				
+				\bigskip
+				Now suppose $b$ is deposited at the end of each year so that,
+				\begin{align*}
+					y_t &= \left(1 + \frac{r}{n}\right)^n y_{t-1} + b \\
+					&=  \left(1 + \frac{r}{n}\right)^n \left[ \left(1 + \frac{r}{n}\right)^n y_{t-2} + b \right] + b \\
+					&=  \left(1 + \frac{r}{n}\right)^{nt} y_0 + b \sum_{i=0}^{t-1} \left(1 + \frac{r}{n}\right)^{ni}.
+				\end{align*}
+				But if we, again, let the number of compounds $n$, go to infinity, then,
+				\begin{align*}
+					y_t &= e^{r} y_{t-1} + b \\
+					&=  e^{r} ( e^{r} y_{t-2} + b ) + b \\[6pt]
+					&=  y_0 e^{rt} + b \sum_{i=0}^{t-1} e^{ri} \\[6pt]
+					&=  y_0 e^{rt} + b \left( \frac{e^{rt} - 1}{e^r - 1} \right) \\[6pt]
+					&=  y_0 e^{rt} + b \frac{e^{rt}}{e^r - 1} - b \frac{1}{e^r - 1} \\[6pt]
+					&=  \left( y_0 - \frac{b}{1 - e^r} \right) e^{rt} + \frac{b}{1 - e^r}
+				\end{align*}	
+				where ${ \frac{b}{1 - e^r} }$ is the steady-state value.
+			}
+		
+			\biggerskip
+			\item{Let $M_t$ be an account balance at the end of year $t$. Let $Q(t)$ be an amount that is deposited into the account (or withdrawn if the value is negative) one time, at the end of year $t$ and let the interest rate be a fixed rate of $I$. Then,
+				\begin{align*}
+					M_t &= I M_{t-1} + Q(t) \\
+					&= I (I M_{t-2} + Q(t-1)) + Q(t) \\
+					&= I (I (I M_{t-3} + Q(t-2)) + Q(t-1)) + Q(t) \\
+					&= M_0 I^t + \sum_{i=0}^{t-1} Q(t-i) I^i
+				\end{align*}
+				and the rate of change is,
+				\[ M_t - M_{t-1} = M_0 I^{t-1} (I - 1) + Q(1) I^{t-1} = I^{t-1} (M_0(I - 1) + Q(1)) \]
+				which is proportional to $I^{t-1}$.\\
+				
+				\note{If the interest rate $I$, is also a function of $t$, then -- if we define ${ I(0) = 1 }$ -- we end up with:
+					\[ M_t = M_0 \prod_{i=0}^t I(i) + \sum_{i=0}^{t-1} Q(t-i) \prod_{j=0}^i I(i) \]
+					which is getting pretty messy. At this point it becomes easier to work with continuous time.
+				}
 			}
 		\end{exe}
 	
+	}
+
+
+% ------------------- 	
 	
-		\biggerskip
-		\subsubsection{Second-order Difference Equations}
+	\pagebreak
+	\searchableSubsection{Second-order Difference Equations}{difference equations}{
+		\bigskip
+		
 		\boxeddefinition{A recurrence equation of the form
 			\[ y_t = a y_{t-1} + b y_{t-2} + c \]
 			where ${ a,b,c \in \R{} }$, is known as a \textbf{second-order linear recurrence with constant coefficients}.
@@ -352,13 +402,13 @@
 		
 		\begin{align*}
 		&&	\begin{bmatrix}
-				\begin{bmatrix}a & b\\1 & 0\end{bmatrix} & \begin{bmatrix}c\\0\end{bmatrix} \\
-				\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}1\end{bmatrix}	
-			\end{bmatrix}
-			\begin{bmatrix}y_{t-1}\\y_{t-2}\\1\end{bmatrix} &= 
-			\begin{bmatrix}a & b\\1 & 0\end{bmatrix}\begin{bmatrix}y_{t-1}\\y_{t-2}\end{bmatrix} +
-			\begin{bmatrix}c\\0\end{bmatrix} \\
-		&&  &= A\y + \V{t}. \\
+			\begin{bmatrix}a & b\\1 & 0\end{bmatrix} & \begin{bmatrix}c\\0\end{bmatrix} \\
+			\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}1\end{bmatrix}	
+		\end{bmatrix}
+		\begin{bmatrix}y_{t-1}\\y_{t-2}\\1\end{bmatrix} &= 
+		\begin{bmatrix}a & b\\1 & 0\end{bmatrix}\begin{bmatrix}y_{t-1}\\y_{t-2}\end{bmatrix} +
+		\begin{bmatrix}c\\0\end{bmatrix} \\
+		&&  &= A\V{y} + \V{t}. \\
 		\end{align*}
 		
 		\subsubsubsection{Steady-state value}
@@ -524,6 +574,7 @@
 		But, since we are looking for real-valued solutions and any linear combination of the homogeneous solutions is also a homogeneous solution, we can generate other, real-valued homogeneous solutions from linear combinations of these ones. In fact, we can just divide the imaginary solution by $i$ so that our real-valued solution is:
 		\[ (\sqrt{-b})^t\, (C_3\cos(\theta t) + C_4 \sin(\theta t)) +  \frac{c}{a+b-1}. \]
 		\TODO{eh? if divide by $i$ then the real part will be divided by $i$ also}
+		
 	}
 
 
@@ -643,7 +694,14 @@
 			\[ e^{F(x) + c} = e^{F(x)}\cdot e^c = ke^{F(x)}. \]
 		}
 	
-		\subsubsubsection{Example}
+		\bigskip
+		\subsubsubsection{Separable Equations}
+		Any equation of the form ${ \frac{\dif y}{\dif x} = f(x)y }$ is separable into the form,
+		\[ f(x) \dif x = g(y) \dif y \]
+		and can then be solved by integrating both sides. As a result, the solution moves on level sets of ${ \int f(x) \dif x - \int g(y) \dif y }$. This value, then, is invariant (i.e. constant) across all solutions and so, tends to represent a conserved quantity in physical systems. Therefore, these type of equations, when modelling physical systems, could be described as modelling closed systems with no external influence.
+	
+		\biggerskip
+		\subsubsubsection{Examples}
 		\begin{exe}
 			\ex{Say we have an IVP (Initial Value Problem) such that our independent variable is $t$ beginning at 0, with ${ y(0) = y_0 }$, and
 				\[ \frac{\dif y}{\dif t} = f(t) y.  \]
@@ -657,6 +715,68 @@
 				So, in general, at time $t$,
 				\[ y(t) = y_0 e^{\int_0^t f(u) du}. \]
 			}\label{ex:diff-eq-basic-ivp}
+			\biggerskip
+			\ex{\textbf{The Logistic:} This example isn't necessarily as realistic, but is commonly used. The logistic model of population
+				growth takes $P(t)$ to be the population at time $t$. The model takes some additional factor that illustrates that a space can
+				only hold a fixed carrying capacity of the population, producing the equation
+				\[ \frac{\dif P}{\dif t} = c P(t) \left( 1 - \frac{P(t)}{A} \right). \]
+				
+				\subsubsubsection{From looking at the differential equation}
+				Whatever the value of the derivative, we can see that the scalar $c$ will increase its magnitude thereby amplifying changes. So, $c$ is the growth rate and larger values of $c$ cause the population to change more rapidly.\\
+				
+				The steady-states of $P(t)$ are at the values such that the derivative is 0. Therefore,
+				\[  c P(t) \left( 1 - \frac{P(t)}{A} \right) = 0 \implies P(t) \in \{0,1\}. \]
+				Looking at the steady-states one-by-one:
+				\begin{itemize}
+					\item{$\bm{ P(t) = 0 }$: If $P(t)$ climbs above 0 then the derivative will be positive and so the function will be increasing away from the steady-state at 0. This is therefore an \textit{unstable} steady-state.
+						\note{Note that, since $P(t)$ is a population, negative values don't make sense.}
+					}
+					\item{$\bm{ P(t) = A }$: If $P(t)$ is less than $A$ then the derivative will be positive and so the function will be increasing toward the steady-state at A. This is therefore a \textit{stable} steady-state from below. Also, if $P(t)$ is greater than $A$, the derivative is negative and so the function is decreasing towards the steady-state value at $A$ -- so this a \textit{stable} steady-state from above also. However, if the initial population value is less than $A$, then the population will never arrive at values above $A$ and this is the way that this function is normally used -- taking values between 0 and $A$. From either side, the larger the value of the growth rate $c$, the faster the function will approach the steady-state.
+					}
+				\end{itemize}
+				
+				\bigskip
+				\subsubsubsection{Finding the solution}
+				The equation is separable so we have,
+				\begin{align*}
+					&& \frac{\dif P}{\dif t} &= c P \left( 1 - \frac{P}{A} \right) \\[6pt]
+					&\iff & \frac{\dif P}{\dif t} &= \left(\frac{c}{A}\right) P ( A - P) &\sidecomment{} \\[6pt]
+					&\iff & \frac{1}{P ( A - P)} \dif P &= \left(\frac{c}{A}\right) \dif t  &\sidecomment{} \\[6pt]
+					&\iff & \int \frac{1}{AP} + \frac{1}{A(A - P)} \dif P &= \int \left(\frac{c}{A}\right) \dif t  &\sidecomment{by partial fractions} \\[6pt]
+					&\iff & \int \frac{1}{P} + \frac{1}{(A - P)} \dif P &= \int c \dif t  &\sidecomment{by partial fractions} \\[6pt]
+					&\iff & \ln{P} - \ln{(A-P)} &= c t + D  &\sidecomment{$D$ is const. of integration} \\[6pt]
+					&\iff & \ln{\left(\frac{P}{A-P}\right)} &= c t + D  &\sidecomment{} \\[6pt]
+					&\iff & \frac{P}{A-P} &= B e^{ct}  &\sidecomment{$B=e^D$} \\[6pt]
+					&\iff & P &= B e^{ct} (A - P)  &\sidecomment{} \\[6pt]
+					&\iff & P(1 + B e^{ct}) &= AB e^{ct}  &\sidecomment{} \\[6pt]
+					&\iff & P &= A \left( \frac{B e^{ct}}{1 + B e^{ct}} \right).
+				\end{align*}
+				\note{Note that:
+					\begin{itemize}
+						\item{Another common way to write the logistic function is to divide by ${  B e^{ct} }$ to get:
+							\[ A \left( \frac{1}{E e^{-ct} + 1} \right) \]
+							where ${ E = \frac{1}{B} }$.
+						}
+						\item{As has been noted: ${ 0 \leq P(t) \leq A }$. So,
+							\begin{align*}
+								&& 0 \leq  A &\left( \frac{B e^{ct}}{1 + B e^{ct}} \right) \leq A \\
+								&\iff & 0 \leq  &\left( \frac{B e^{ct}}{1 + B e^{ct}} \right) \leq 1.  \\
+							\end{align*}
+							The value,
+							\[ \frac{B e^{ct}}{1 + B e^{ct}} = \frac{1}{E e^{-ct} + 1} \]
+							is a proportion, a value in ${ [0,1] }$.
+						}
+						\item{Since we have,
+							\[ P(t) = A \theta \]
+							where $\theta$ is a proportion and the derivative is given by,
+							\[ \frac{\dif P(t)}{\dif t} = c A \theta (1 - \theta) = cA\theta - cA\theta^2 \]
+							we can see that if $\theta$ is small then the derivative will be approximately,
+							\[ cA\theta = cP(t). \]
+							For this reason, when $\theta$ is small -- which happens when $t$ is small -- the growth of the function is approximately exponential.
+						}
+					\end{itemize}	 
+				}
+			}
 		\end{exe}
 		
 		\bigskip\bigskip
@@ -751,16 +871,45 @@
 				which gives us ${ M(0) = C }$ when we substitute in ${ t = 0 }$.
 				\biggerskip
 			}
-			\biggerskip
-			\ex{This example isn't necessarily as realistic, but is commonly used. The logistic model of population
-				growth takes $p(t)$ to be the population at time $t$. The model takes some additional factor that illustrates that a space can
-				only hold a fixed carrying capacity of the population, producing the equation
-				\[ \frac{\dif P}{\dif t} = c P(t) \left( 1 - \frac{P(t)}{A} \right). \]
-				When ${ P(t) = A }$, the change is zero, and when it's greater, it becomes negative, indicating that $A$ is the largest population
-				supported by the environment.
-			}
 		\end{exe}
+
+
+% -------------
+
 	
+		\pagebreak
+		\subsubsubsection{Autonomous Equations and Exact Equations}
+		\boxeddefinition{An \textbf{autonomous} equation refers to a differential equation with no \textbf{explicit} dependence on the independent variable (typically in dynamical systems, $t$ for time). These differential equations express change in a system based solely on the current value of the system. For example:
+			\[ \frac{\dif y}{\dif x} = -k y \eqand \frac{\dif y}{\dif t} = r y(1-y). \]
+			An equation of the form,
+			\[ \frac{\dif y}{\dif t} = f(t) y(1-y) \]
+			for example, would express that the growth rate intrinsic to the system is varying over time. Meanwhile, an equation of the form,
+			\[ \frac{\dif y}{\dif x} = -k y + f(x) \]
+			for example, would express that the rate of change of the system is being influenced by something that varies with the independent variable and is, in some way, extrinsic to the system (because it depends only on the independent variable and not on the state of the system).
+		}
+		
+		\boxeddefinition{An \textbf{exact} equation refers to a differential equation whose solutions all conserve the value of some property. All separable equations are exact equations because,
+			\[ f(y) \dif y = g(x) \dif x \implies \int f(y) \dif y - \int g(x) \dif x = 0. \]
+			However, there are also exact equations that are not separable such as,
+			\[ y' \sin{x} + y \cos{x} + 2x = 0 \implies (y \sin{x} + x^2)' = 0 \implies y = \frac{C - x^2}{\sin{x}}. \]
+		}
+	
+		\note{All autonomous equations are separable (though the reverse is not generally true) and all separable equations are exact equations (although some exact equations are not separable). So we have,
+			\[ \{\text{Autonomous}\} \subset \{\text{Separable}\} \subset \{\text{Exact}\}. \]
+		}
+	
+		\TODO{For all autonomous equations, if ${ y = g(x) }$ is a solution then so is ${ y = g(x + c) }$ for constant $c$? In what type of equations is this not the case?}
+		\begin{itemize}
+			\item{Autonomous equations have direction fields that look the same across the independent variable - this is because the derivative doesn't depend on the independent variable.}
+			\item{Non-separable equations cannot have steady-states because the derivative depends on a term with only the dependent variable so it cannot remain zero for all values of the independent variable greater than a certain value.}
+		\end{itemize}	
+		\TODO{include matlab direction fields}
+	
+	
+		\biggerskip\biggerskip\hrule\biggerskip\biggerskip
+		\subsubsubsection{Comparison of Differential Equations with Difference Equations}
+		\TODO{}
+		
 		
 		\biggerskip\biggerskip\hrule\biggerskip\biggerskip
 		\subsubsubsection{Homogeneous Differential Equations}
@@ -785,7 +934,20 @@
 		&\iff & \int \frac{1}{f_4(v)} \dif v &= \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
 		&\iff & \frac{1}{f_4'(v)} \ln{\abs{f_4(v)}} &= \ln{\abs{x}} + c. &\sidecomment{} \\[8pt]
 		\end{align*}
+	
 
+	
+
+% -----------------	
+	
+		\pagebreak
+		\subsubsection{Nonlinear Differential Equations}
+		\bigskip
+		\note{
+			\begin{itemize}
+				\item{Initial conditions do not necessarily determine a unique solution \TODO{Harvard[8]}}
+			\end{itemize}
+		}
 	}
 
 \end{document}
