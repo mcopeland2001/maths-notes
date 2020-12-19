@@ -51,6 +51,10 @@
 \usepackage{wrapfig}
 \usepackage[none]{hyphenat}
 \usepackage{commath}
+\usepackage{optidef} % for optimisation problems
+
+\usepackage{subfig}
+\usepackage{microtype} % Load this package to obtain a fine composition.
 
 \allowdisplaybreaks
 
@@ -99,8 +103,12 @@
 \newcommand{\divides}{\mid}
 \newcommand{\notdivides}{\nmid}
 \newcommand{\eqand}{\hspace{10pt}\text{and}\hspace{10pt}}
+\newcommand{\eqword}[1]{\hspace{10pt}\text{#1}\hspace{10pt}}
 \newcommand{\modulo}[1]{\;(\bmod\; #1)}
 \newcommand{\uminus}{\scalebox{0.5}[1.0]{$-$}}  % unary minus scaled by argument
+\newcommand{\nn}{\\[6pt]}
+\newcommand{\nnn}{\\[8pt]}
+\newcommand{\sep}{\biggerskip\hrule\biggerskip}
 
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
@@ -185,7 +193,7 @@
 \def\corollaryautorefname{Corollary}
 \def\lemmaautorefname{Lemma}
 
-\def\exautorefname{Example}
+% \def\exautorefname{Example} doesn't work - don't know why
 
 \newcommand{\boxeddefinition}[1]{\noindent\fbox{%
 		\parbox{\textwidth}{%

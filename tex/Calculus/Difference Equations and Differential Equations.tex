@@ -638,44 +638,41 @@
 	}
 
 
+% ----------------------------------
+
+
+	\pagebreak
+	\searchableSubsection{Differential Equations}{differential equations}{
+		\biggerskip
+		
+		Differential equations are most often used to describe the evolving state of dynamical systems -- that is, systems whose future state is a function of its current state. Therefore, that portion of the future state that is dependent on the previous state is compounded in a similar fashion to compound interest. For this reason, the solutions to differential equations typically involve the exponential function.\\
+		
+		\subsubsection{Types of Differential Equations}
+		\boxeddefinition{A \textbf{first-order} differential equation is an equation containing only degree-one terms in the derivatives of the dependent variable. There must be another, independent, variable against which it can be differentiated. A common convention is for the dependent variable to be $y$ and the independent variable to be $t$ -- reflecting the fact that it is often modelling time -- but $x$ is often used also. \TODO{this is a linear! equation}
+		}
+	
+		\biggerskip
+		\boxeddefinition{A \textbf{first-order nonlinear} differential equation is a first-order differential equation t}
+		
+		\boxeddefinition{A \textbf{separable} first-order equation is one where the first-derivative of the dependent variable may be expressed as a single term. That's to say, if $y$ is the dependent variable, $t$ the independent variable and $c$ represents any constant term, we can put the equation in the form,
+			\[ \dod{y}{t} = f(t)g(y). \]
+		}
+		\note{Note that the definition of a separable equations means that -- if $a,b,c,d$ are constants -- the following equation is separable,
+			\[ \dod{y}{t} = abt^2y^2 + adt^2 + bcy^2 + cd \]
+			because it can be factorized into,
+			\[ \dod{y}{t} = (at^2 + c)(by^2 + d) = f(t)g(y). \]
+		}
+		\TODO{Taxonomy of differential equations should go here?}
+	}
 
 
 % ----------------------------------
 
 
 	\pagebreak
-	\searchableSubsection{Differential Equations}{differential equations}{
+	\searchableSubsection{First-order Linear ODEs}{differential equations}{
 		\bigskip\bigskip
 		
-		\subsubsection{Linear Ordinary Differential Equations}
-		\bigskip
-		
-		\subsubsubsection{First Order}
-		\begin{align*}
-		&& \frac{dy}{dx} &= ax + b \\
-		&\iff & \int \frac{dy}{dx} \dif x &= \int ax + b \dif x &\sidecomment{} \\
-		&\iff & y &= a'x^2 + bx + c. &\sidecomment{${ a' = a/2}$, c is any constant}
-		\end{align*}
-		Integrating we see that a first order differential equation only determines the function upto a constant value. In order to determine a specific function we need a relation between a value of $x$ and a value of $y$ (i.e. a point, in graphical terms). Typically this is described as an initial condition.
-		
-		\bigskip\bigskip
-		\subsubsubsection{Second Order}
-		\begin{align*}
-		&& \frac{d^2y}{dx^2} &= ax + b \\
-		&\iff & \int \frac{d^2y}{dx^2} \dif x &= \int ax + b \dif x  &\sidecomment{} \\
-		&\iff & \frac{dy}{dx} &= a'x^2 + bx + c  &\sidecomment{${ a' = a/2 }$, c is any constant} \\
-		&\iff & \int \frac{dy}{dx} \dif x &= \int a'x^2 + bx + c \dif x  &\sidecomment{} \\
-		&\iff & y &= a''x^3 + b'x^2 + cx + d. &\sidecomment{${ a'' = a/6,\, b' = b/2}$, d is any constant}
-		\end{align*}
-		Integrating a second order equation twice we see that we introduced two constants of integration, ${ c,d }$, and the last two terms ${ cx + d }$ are undetermined. So a second order equation of this type has only determined a function upto a first-degree polynomial (a line). To determine a specific function, in this case, we require two relations between $x$ and $y$ (two points determine a line).
-		
-		\biggerskip\biggerskip
-		\subsubsubsection{Differential Equations of Linear Dynamical Systems}\\
-		Differential equations are most often used to describe the evolving state of dynamical systems --- that is, systems whose future state is a function of its current state.\\
-	
-		Since the eigenfunction of differentiation is the exponent function ${ f(x) = e^x }$ (see \autoref{sss:eigenvectors-of-differentiation}), the solution to these differential equations will always involve the exponent function.
-		
-		\bigskip\bigskip
 		\subsubsubsection{The form ${ \frac{\dif y}{\dif x} = f(x)y }$}
 		The most simple form has a single $y$-term whose coefficient may be a function of $x$. This form is separable as,
 		\begin{align*}
@@ -694,7 +691,17 @@
 			\[ e^{F(x) + c} = e^{F(x)}\cdot e^c = ke^{F(x)}. \]
 		}
 	
-		\bigskip
+		\subsubsubsection{I.V.P. Solution}
+		If we have an initial value for the function -- say ${ y(t_0) = y_0 }$ -- then we need 
+			\[ y(t_0) = y_0 = y_0 (1) = y_0 e^0 = y_0 e^{\int_{t_0}^t f(x) \dif x}. \]
+		That's to say, with the addition of an initial value, the general solution,
+			\[ y(t) = e^{\int f(t) \dif t} = k e^{F(t)} \]
+		becomes a complete solution,
+			\[ y(t) = y_0 e^{\int_{t_0}^t f(x) \dif x}. \]
+		We can see the equivalence by setting the constant $k$ in the general solution to ${ y_0 / e^{F(t_0)} }$,
+			\[ y(t) = \frac{y_0}{e^{F(t_0)}} e^{F(t)} = y_0 \frac{ e^{F(t)} }{ e^{F(t_0)} } = y_0 e^{(F(t) - F(t_0))} = y_0 e^{\int_{t_0}^t f(x) \dif x}. \]
+	
+		\sep
 		\subsubsubsection{Separable Equations}
 		Any equation of the form ${ \frac{\dif y}{\dif x} = f(x)y }$ is separable into the form,
 		\[ f(x) \dif x = g(y) \dif y \]
@@ -715,10 +722,555 @@
 				So, in general, at time $t$,
 				\[ y(t) = y_0 e^{\int_0^t f(u) du}. \]
 			}\label{ex:diff-eq-basic-ivp}
+		\end{exe}
+		
+		\sep
+		\subsubsubsection{The form ${ \frac{\dif y}{\dif x} = f(x)y + g(x) }$}
+		This form is not separable as it is. But if we multiply both sides by $e^{-F(x)}$, where $F(x)$ is an antiderivative of $f(x)$, then
+		\begin{align*}
+		&& \frac{\dif y}{\dif x} &= f(x)y + g(x) \\[8pt]
+		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} &= e^{-F(x)}f(x)y + e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
+		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} - e^{-F(x)}f(x)y &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
+		&\iff & \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
+		&\iff & \int \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) \dif x &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
+		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x \\[8pt]
+		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x
+		\end{align*}
+		where the constant of integration of the integral on the left has been absorbed into the integral on the right.\\
+		
+		\note{Note, also, that
+			\[ ke^{F(x)}\int \frac{g(x)}{ke^{F(x)}} \dif x = ke^{F(x)}\frac{1}{k}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
+		}
+		
+		\medskip
+		So, the solution has the form,
+		\[ y = k e^{F(x)} + h(x) e^{F(x)} \]
+		where $h(x)$ is an antiderivative of ${ g(x)/e^{F(x)} }$ and $k$ is the constant of integration.\\
+		
+		Check solution:
+		\begin{align*}
+			y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x \implies \\[8pt]
+			\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
+			&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) \\[8pt]
+			&= f(x)y + g(x).
+		\end{align*}
+		and also,
+		\begin{align*}
+			y &= k e^{F(x)} + h(x) e^{F(x)} \implies \\[8pt]
+			\frac{\dif y}{\dif x} &= f(x) k e^{F(x)} + f(x) h(x) e^{F(x)} + g(x) e^{-F(x)} e^{F(x)} \\[8pt]
+			&= f(x) k e^{F(x)} + f(x) h(x) e^{F(x)} + g(x) \\[8pt]
+			&= f(x)y + g(x)
+		\end{align*}
+		where we have used the fact that $h(x)$ is an antiderivative of ${ g(x) e^{-F(x)} }$.
+		
+		\biggerskip
+		\subsubsubsection{I.V.P. Solution}
+		For the solution of the IVP we are going to want a definite integral. If the exponent in the integrating factor has to be an antiderivative of $f(t)$, as a definite integral, we can use ${ e^{\int_a^t f(x) \dif x} }$ where $a$ is any constant real number and $t$ is our independent variable.
+		\note{Note that the function,
+			\[ F(t) = \int_a^t f(x) \dif x \]
+			has derivative ${ F'(t) = f(t) }$, by the FTC, and has ${ F(a) = 0 }$.
+		}
+		We can set the value of $a$ to fit the initial conditions. For example, if ${ y(t_0) = y_0 }$ and ${ y(t) = y_0 e^{\int_a^t f(x) \dif x} }$ as in the separable case, then we can set ${ a = t_0 }$ so that the initial condition is met.\\
+		
+		Now suppose we have an non-separable differential equation with an initial value ${ y(t_0) = y_0 }$. When we integrate using our integrating factor we want definite integration starting at $t_0$, so,
+		\begin{align*}
+			&& \dod{y}{t} &= f(t)y + g(t) \\[8pt]
+			&\iff & e^{-\int_a^t f(x) \dif x} \dod{y}{t} - e^{-\int_a^t f(x) \dif x} f(t) y &= e^{-\int_a^t f(x) \dif x} g(t) \\[8pt]
+			&\iff & \dod{}{t} \left( e^{-\int_a^t f(x) \dif x} y\right ) &= e^{-\int_a^t f(x) \dif x} g(t) \\[8pt]
+			&\iff & \int_{t_0}^t \dod{}{u} \left( e^{-\int_a^u f(x) \dif x} y(u)\right ) \dif u &= \int_{t_0}^t e^{-\int_a^u f(x) \dif x} g(u) \dif u \\[8pt]
+			&\iff & e^{-\int_a^t f(x) \dif x} y(t) - e^{-\int_a^{t_0} f(x) \dif x} y(t_0) &= \int_{t_0}^t e^{-\int_a^u f(x) \dif x} g(u) \dif u \\[8pt]
+			&\iff & e^{-\int_a^t f(x) \dif x} y(t) = \int_{t_0}^t e^{-\int_a^u f(x) \dif x} g(u) \dif u &+ e^{-\int_a^{t_0} f(x) \dif x} y(t_0) \\[8pt]
+			&\iff & y(t) = e^{\int_a^t f(x) \dif x} \big( \int_{t_0}^t e^{-\int_a^u f(x) \dif x} g(u) \dif u &+ e^{-\int_a^{t_0} f(x) \dif x} y(t_0) \big) \\[8pt]
+			&\iff & y(t) = \int_{t_0}^t e^{\int_u^t f(x) \dif x} g(u) \dif u &+ e^{\int_{t_0}^t f(x) \dif x} y(t_0).
+		\end{align*}
+		\note{So the resultant solution form is:
+			\[ y(t) = y_0 e^{\int_{t_0}^t f(x) \dif x} + \int_{t_0}^t e^{\int_u^t f(x) \dif x} g(u) \dif u \]
+			for ${ y(t_0) = y_0 }$.
+		}
+		
+		\sep
+		\paragraph{Examples}
+		\begin{exe}
+			\ex{${\bm{ x\frac{\dif y}{\dif x} - 2y = 6 }}$:\\\\
+				The first step is to rearrange it to obtain an expression for the derivative. 
+				\begin{align*}
+				&& x\frac{\dif y}{\dif x} - 2y &= 6 \\
+				&\iff & \frac{\dif y}{\dif x} &= \frac{2}{x}y + \frac{6}{x}. &\sidecomment{} \\
+				\end{align*}
+				Then we can apply the derived formula using the antiderivative ${ F(x) = 2\ln{x} }$.
+				\begin{align*}
+				y &= e^{2\ln{x}}\int \frac{6/x}{e^{2\ln{x}}} \dif x \\
+				&= 6x^2 \int \frac{1}{x^3} \dif x &\sidecomment{} \\
+				&= 6x^2\left(-\frac{1}{2x^2} + c\right) &\sidecomment{} \\
+				&= -3 + c'x^2. &\sidecomment{${ c' = 6c }$} \\
+				\end{align*}
+				We can confirm this result by performing the calculation.
+				\begin{align*}
+				&& e^{-2\ln{x}}\frac{\dif y}{\dif x} &= e^{-2\ln{x}}\frac{2}{x}y + e^{-2\ln{x}}\frac{6}{x} \\
+				&\iff & x^{-2}\frac{\dif y}{\dif x} - x^{-2}\frac{2}{x}y &= x^{-2}\frac{6}{x} &\sidecomment{} \\
+				&\iff & x^{-2}\frac{\dif y}{\dif x} - \frac{2}{x^3}y &= \frac{6}{x^3} &\sidecomment{} \\
+				&\iff & \frac{\dif }{\dif x}(x^{-2}y) &= \frac{6}{x^3} &\sidecomment{} \\
+				&\iff & \int \frac{\dif }{\dif x}(x^{-2}y) \dif x &= 6 \int \frac{1}{x^3} \dif x &\sidecomment{} \\
+				&\iff & x^{-2}y &= 6(-\frac{1}{2x^2} + c) &\sidecomment{} \\
+				&\iff & x^{-2}y &= -3\frac{1}{x^2} + c' &\sidecomment{${ c' = 6c }$} \\
+				&\iff & y &= -3 + c'x^2. &\sidecomment{} \\
+				\end{align*}
+			}
 			\biggerskip
-			\ex{\textbf{The Logistic:} This example isn't necessarily as realistic, but is commonly used. The logistic model of population
-				growth takes $P(t)$ to be the population at time $t$. The model takes some additional factor that illustrates that a space can
-				only hold a fixed carrying capacity of the population, producing the equation
+			\ex{Consider a bank account with variable interest. Let $M(t)$ be the amount of money in the account at time $t$, measured in years (though the specific unit isn't important conceptually), and let $I(t)$ be the rate of interest at time $t$: for example, $3 \%$ interest corresponds to $I(t)=0.03 .$ Finally, let $Q(t)$ be the amount of money put in (or negative for removing money) in year $t$. Thus, $M(t)$ obeys the differential equation
+				\[ \frac{\dif M}{\dif t} = I(t) M(t) + Q(t). \]
+				This illustrates a common trend: the first term indicates how it would grow independent of external forces, and the second term represents external influences.
+				
+				This can be solved in different ways:\\
+				
+				First, suppose $Q(t)=0$ and $I(t)=I$ is constant. Then ${ M(t)=M(0) e^{I t} }$.\\
+				
+				On the other hand, if $I(t)$ can vary, then ${ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} }$ as explained in \ref{ex:diff-eq-basic-ivp}.\\
+				
+				When $Q(t)$ isn't zero, we can begin to understand it by considering the case where money is only put in once at the end of each year --- so we have ${ Q(0), Q(1), \dots }$ --- giving the solution:
+				\[ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} + Q(1) e^{\int_{1}^{t} I(u) \dif u} + Q(2) e^{\int_{2}^{t} I(u) \dif u} + \cdots \]
+				In the case of continuous deposit and withdrawal from the account we end up with:
+				\[ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} + \int_0^t Q(x) e^{\int_x^t I(u) \dif u} \dif x. \]
+				
+				We can relate this to the general formula for this form of differential equation using \ref{ssection:definite-and-indefinite-integration} as follows:
+				\begin{align*}
+					M(t) &= e^{\int I(t) \dif t} \int Q(t) e^{\uminus\int I(u) \dif u} \dif t \\[8pt]
+					&= e^{\int_0^t I(u) \dif u} \left( \int_0^t Q(x) e^{\uminus\int_0^x I(u) \dif u} \dif x + C \right) \\[8pt]
+					&= C e^{\int_0^t I(u) \dif u}  + \int_0^t Q(x) e^{\int_x^t I(u) \dif u} \dif x
+				\end{align*}
+				which gives us ${ M(0) = C }$ when we substitute in ${ t = 0 }$.
+			}
+		\end{exe}
+
+
+		\biggerskip
+		\subsubsection{Number of Solutions}
+		First-order linear differential equations always have a single solution. The linear algebra of first-order linear equations certainly supports a single unique solution: the matrix is non-singular. However, the proof of this lies in the explicit formula derived above,
+		\[ y(t) = e^{\int_{t_0}^t f(x) \dif x} \int_{t_0}^t g(x) e^{\int_x^t f(u) \dif u} \dif x. \]
+	}
+
+
+
+% -----------------	
+
+	\pagebreak
+	\searchableSubsection{First-order Nonlinear ODEs}{differential equations}{	
+		\biggerskip
+		For first-order nonlinear odes, separable equations can be solved in exactly the same manner as separable linear odes. Non-separable equations, however, cannot be solved as with linear equations.
+		
+		\subsubsection{Number of Solutions}
+		For nonlinear differential equations, nothing general can be said about the number of \textit{global} solutions. There could be 0, 1, or many. For \textit{local} solutions over a restricted domain, two things can be said though:\\
+		
+		Let the function ${ f(t,y) }$ be differentiable on the interval ${ [t_0, t_1] }$ and let ${ y' = f(t, y) }$ with the initial condition ${ y(t_0) = y_0 }$. Then,
+		\begin{enumerate}[label=(\roman*)]
+			\item{There is at least one solution over some interval ${ [t_0, t_2] }$ for ${ t_0 \leq t_2 \leq t_1 }$;}
+			\item{If ${ \tpd{f}{y} }$ is continuous over some interval ${ [t_0, t_2] }$ for ${ t_0 \leq t_2 \leq t_1 }$, then there is one unique solution over the interval ${ [t_0, t_2] }$.}
+		\end{enumerate}
+	
+		\note{${ \tpd{f}{y} }$ represents the way that the derivative of $y$ changes with the value of $y$. If it has an infinite discontinuity then this would seem to suggest an infinite sensitivity to initial conditions at the point of the singularity. Of course, any type of discontinuity may be a modelling problem.}
+		
+		\sep
+		\subsubsubsection{Examples}
+		\begin{exe}
+			\item{Suppose we have the equation ${ y' = y^2 }$ and the initial value ${ y(0) = 1 }$. This is an autonomous equation and, as such, is separable. So,
+				\begin{align*}
+					&& \dod{y}{x} &= y^2 \nn
+					&\iff & \frac{1}{y^2} \dif y &= \dif x &\sidecomment{} \nn
+					&\iff & \frac{-1}{y} &= x + C &\sidecomment{} \nn
+					&\iff & y &= \frac{-1}{x + C}. &\sidecomment{} \nn
+				\end{align*}
+				Applying the initial value we have,
+				\begin{align*}
+					&& y(0) &= \frac{-1}{0 + C} = 1 \\
+					&\iff & C &= -1. &\sidecomment{} \\
+				\end{align*}
+				Therefore the solution is ${ y(x) = \frac{1}{1-x} }$. But this is \textbf{not} a \textit{global} solution! There is a singularity at ${ x = 1 }$ so this formula only provides \textit{local} solutions over intervals of $x$ that do not include 1.\\
+				
+				\begin{enumerate}[label=(\roman*)]
+					\item{There is a solution ${ y(x) = \frac{1}{1-x} }$ over any interval that does not include ${ x = 1 }$.}
+					\item{${ \tpd{f}{y} = 2y }$ is continuous everywhere so solutions of this equation over an interval are unique. Note that there is a steady-state at ${ y = 0 }$ but it is unreachable from the initial condition of ${ y(0) = 1 }$.}
+				\end{enumerate}
+			}
+			\biggerskip
+			\item{Suppose we have the equation ${ y' = 2\sqrt{y} }$ and the initial value ${ y(0) = 0 }$. This is also an autonomous equation and so is separable.
+				\begin{align*}
+					&& \dod{y}{x} &= 2\sqrt{y} \nn
+					&\iff & \frac{1}{\sqrt{y}} \dif y &= 2 \dif x \nn
+					&\iff & 2\sqrt{y} &= 2x + C \\
+					&\iff & \sqrt{y} &= x + D \\
+					&\iff & y &= (x + D)^2 = x^2 + 2Dx + D^2.
+				\end{align*}
+				If we apply the initial value then we can determine that
+				\[ y(0) = D^2 = 0 \implies D = 0. \]
+				This gives us the solution ${ y(x) = x^2 }$. But there is another solution: There is a steady-state at ${ y = 0 }$ and, since the initial condition is ${ y(0) = 0 }$, the initial condition is in the steady-state. Therefore ${ y(x) = 0 }$ is also a solution.\\
+				
+				\begin{enumerate}[label=(\roman*)]
+					\item{There are 2 solutions ${ y(x) = x^2 }$ and ${ y(x) = 0 }$ over all intervals of $x$.}
+					\item{${ \tpd{f}{y} = \frac{1}{\sqrt{y}} }$ is discontinuous at ${ y = 0 }$ -- in fact, it is an infinite discontinuity -- so, since ${ y = 0 }$ is the initial value, solutions over any interval with this initial value will not be unique. (And, in this case, there are 2 solutions).}
+				\end{enumerate}
+			}
+			\biggerskip
+			\item{Consider a ball falling under the influence of gravity but resisted by air-resistance. (The example uses a spherical object because other shapes would be likely to have a much more complicated influence of air-resistance on them.) Let $v(t)$ be the velocity at a time $t$ and $g$ be the acceleration due to gravity.\\
+				
+			We can model the air-resistance as ${ -av^2 }$ for some constant $a$. This model is quadratic in the velocity of the falling object because: the faster the object is falling through the air, the greater the resisting force produced by the air (by Newton's Second Law) but, also, the greater the amount of air that the object is coming into contact with in a given time interval. Furthermore, since the air-resistance is acting in the opposite direction to the movement of the object it has the opposite sign to the velocity.\\
+			
+			Therefore, our final model of the falling ball is,
+			\[ \dod{v}{t} = g - av^2. \]
+			This is a separable equation so we can proceed to solve it by the re-arrangement,
+			\[ \frac{1}{g - av^2} \dif v = \dif t. \]
+			We have two (at least) possible approaches to the analytical solution of the integration,
+			\[ \int \frac{1}{g - av^2} \dif v. \]
+			We can use trigonometry functions or partial fractions. Using trig. we proceed as,
+			\begin{align*}
+				\int \frac{1}{g - av^2} \dif v &= \frac{1}{g} \int \frac{1}{1 - (a/g)v^2} \dif v \nnn
+				&= \frac{1}{g} \int \frac{1}{1 - \sin^2\theta} \dif\, (\sqrt{g/a}\sin\theta) &\sidecomment{} \nnn
+				&= \frac{1}{g} \int \frac{\sqrt{g/a}\cos\theta}{1 - \sin^2\theta} \dif\theta &\sidecomment{} \nnn
+				&= \frac{\sqrt{g/a}}{g} \int \frac{\cos\theta}{\cos^2\theta} \dif\theta &\sidecomment{} \nnn
+				&= \frac{1}{\sqrt{ag}} \int \sec\theta \dif\theta &\sidecomment{} \nn
+				&= \frac{1}{\sqrt{ag}} \ln(\sec\theta + \tan\theta) &\sidecomment{w/o the constant} \nn
+				&= \frac{1}{\sqrt{ag}} \ln\left(\frac{1}{\sqrt{1 - (a/g)v^2}} + \sqrt{\frac{(a/g)v^2}{1 - (a/g)v^2}}\right) &\sidecomment{} \nnn
+				&= \frac{1}{\sqrt{ag}} \ln\left(\frac{1 + \sqrt{\frac{a}{g}}\,v}{\sqrt{1 - (\frac{a}{g})v^2}}\right) \nn
+				&= \frac{1}{\sqrt{ag}} \ln\left(\frac{\sqrt{g} + \sqrt{a}\,v}{\sqrt{g - av^2}}\right) \nn
+				&= \frac{1}{2\sqrt{ag}} \ln\left(\frac{g + 2\sqrt{ag}\,v + av^2}{g - av^2}\right) \nn
+				&= \frac{1}{2\sqrt{ag}} \ln\left(\frac{(\sqrt{g} + \sqrt{a}\,v)^2}{(\sqrt{g} + \sqrt{a}\,v)(\sqrt{g} - \sqrt{a}\,v)}\right) \nn
+				&= \frac{1}{2\sqrt{ag}} \ln\left(\frac{\sqrt{g} + \sqrt{a}\,v}{\sqrt{g} - \sqrt{a}\,v}\right). \\
+			\end{align*}
+		
+			Alternatively, using partial fractions we can proceed as,
+			\begin{align*}
+				\int \frac{1}{g - av^2} \dif v &= \int \frac{A}{\sqrt{g} + \sqrt{a}v} + \frac{B}{\sqrt{g} - \sqrt{a}v} \dif v \nn
+				&= \int \frac{1}{2\sqrt{g}(\sqrt{g} + \sqrt{a}v)} + \frac{1}{2\sqrt{g}(\sqrt{g} - \sqrt{a}v)} \dif v \nn
+				&= \frac{1}{2\sqrt{g}} \int \frac{1}{\sqrt{g} + \sqrt{a}v} + \frac{1}{\sqrt{g} - \sqrt{a}v} \dif v \nn
+				&= \frac{1}{2\sqrt{g}} ( \frac{1}{\sqrt{a}} \ln(\sqrt{g} + \sqrt{a}v) + \frac{-1}{\sqrt{a}} \ln(\sqrt{g} - \sqrt{a}v) ) \nn
+				&= \frac{1}{2\sqrt{ag}} ( \ln(\sqrt{g} + \sqrt{a}v) - \ln(\sqrt{g} - \sqrt{a}v) ) \nn
+				&= \frac{1}{2\sqrt{ag}} \ln\left(\frac{\sqrt{g} + \sqrt{a}v}{\sqrt{g} - \sqrt{a}v}\right). \\
+			\end{align*}
+		
+			So, either way, we arrive at,
+			\begin{align*}
+				&& \frac{1}{2\sqrt{ag}} \ln\left(\frac{\sqrt{g} + \sqrt{a}v}{\sqrt{g} - \sqrt{a}v}\right) &= t + C \nn
+				&\iff & \frac{\sqrt{g} + \sqrt{a}v}{\sqrt{g} - \sqrt{a}v} &= Ae^{2\sqrt{ag}\,t} &\sidecomment{${ A = e^{2\sqrt{ag}\,C} }$} \nn
+				&\iff & \sqrt{g} + \sqrt{a} v (1 + Ae^{2\sqrt{ag}\,t}) &= \sqrt{g} Ae^{2\sqrt{ag}\,t} \\
+				&\iff & \sqrt{a} v (1 + Ae^{2\sqrt{ag}\,t}) &= \sqrt{g} ( Ae^{2\sqrt{ag}\,t} - 1) \nn
+				&\iff & v &= \frac{\sqrt{g}}{\sqrt{a}} \left( \frac{Ae^{2\sqrt{ag}\,t} - 1}{1 + Ae^{2\sqrt{ag}\,t}} \right) \nn
+				&\iff & v &= \sqrt\frac{g}{a} \left( \frac{Ae^{2\sqrt{ag}\,t} - 1}{Ae^{2\sqrt{ag}\,t} + 1} \right). \\
+			\end{align*}
+			
+			If the initial condition is ${ v(0) = 0 }$ -- that's to say that the body starts at rest -- then we can resolve the value of the constant ${ A = 1 }$. This then gives us the solution,
+			\[ v(t) = \sqrt\frac{g}{a} \left( \frac{e^{2\sqrt{ag}\,t} - 1}{e^{2\sqrt{ag}\,t} + 1} \right) = \sqrt\frac{g}{a} \tanh(\sqrt{ag}\,t). \]
+			
+			The terminal velocity is given by allowing ${ t \to \infty }$ and the result is that ${ v \to \sqrt\frac{g}{a} }$. As expected, the terminal velocity decreases with increasing values of the constant $a$.\\
+			
+			Also, as expected from looking at the original equation and the partial derivative \wrt $v$, we have obtained a single unique solution -- which is good because it could represent a problem for Newtonian physics if we didn't.
+			}
+		\end{exe}
+	}
+
+
+% -----------------	
+
+	\pagebreak
+	\searchableSubsection{Some Classes of (First-order?) ODEs}{differential equations}{
+	\biggerskip
+	
+		\subsubsubsection{Autonomous Equations and Exact Equations}
+		\bigskip
+		
+		\boxeddefinition{An \textbf{autonomous} equation refers to a differential equation with no \textbf{explicit} dependence on the independent variable (typically in dynamical systems, $t$ for time). These differential equations express change in a system based solely on the current value of the system. For example:
+			\[ \frac{\dif y}{\dif x} = -k y \eqand \frac{\dif y}{\dif t} = r y(1-y). \]
+			Autonomous equations are always separable.\\
+			
+			On the other hand, an equation of the form,
+			\[ \frac{\dif y}{\dif t} = f(t) y(1-y) \]
+			for example, would express that the growth rate intrinsic to the system is varying over time. Equations of this form are not autonomous but are separable.\\
+			
+			Meanwhile, an equation of the form,
+			\[ \frac{\dif y}{\dif x} = -k y + f(x) \]
+			for example, would express that the rate of change of the system is being influenced by something that varies with the independent variable and is, in some way, extrinsic to the system (because it depends only on the independent variable and not on the state of the system). Equations of this form are neither autonomous nor separable.
+		}
+		
+		\begin{figure}
+			\newcommand\autonomousDir{\resourceDir/img/diff_eq_autonomous_v_separable_v_non_separable}
+			\newcommand\figHeight{12em}
+			\ContinuedFloat
+			\centering
+			
+			\subfloat[\raggedright autonomous: ${ y' = y (1-y) }$]{\includegraphics[height=\figHeight]{\autonomousDir/autonomous.png}}
+			
+			\subfloat[\raggedright separable: ${ y' = f(x) y (1-y) }$ where ${ f(x) = 0.2x }$]{\includegraphics[height=\figHeight]{\autonomousDir/separable.png}}
+			
+			\subfloat[\raggedright non-separable: ${ y' = y (1-y) + f(x) }$ where ${ f(x) = 0.02x }$]{\includegraphics[height=\figHeight]{\autonomousDir/non_separable.png}}
+			
+			\caption{autonomous, separable and non-separable direction fields}%
+		\end{figure}
+		
+		\boxeddefinition{An \textbf{exact} equation refers to a differential equation whose solutions all conserve the value of some property. All separable equations are exact equations because,
+			\[ f(y) \dif y = g(x) \dif x \implies \int f(y) \dif y - \int g(x) \dif x = 0. \]
+			However, there are also exact equations that are not separable such as,
+			\[ y' \sin{x} + y \cos{x} + 2x = 0 \implies (y \sin{x} + x^2)' = 0 \implies y = \frac{C - x^2}{\sin{x}}. \]
+		}
+	
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Let $y$ be any function satisfying the differential equation,
+				\[ A(x,y) + B(x,y)\dod{y}{x} = 0 \]
+				with
+				\[ \dpd{A}{y} = \dpd{B}{x}. \]
+				Then all such functions $y$ preserve some invariant property ${ \Psi(x,y) = C }$ for constant $C$.}{exact-equation-form-of-diff-eq}
+			\begin{proof}
+				The function $\Psi$ may consist of terms of only $x$, terms of only $y$, terms containing both $x$ and $y$ and a constant term. So we can describe it as,
+				\[ \Psi(x,y) = p(x)q(y) + r(x) + s(y) + k \]
+				where ${ p,q,r,s }$ are arbitrary functions and $k$ is a constant. But, since $\Psi$ will be a constant -- and we are only interested in the fact that it is constant, not the value of the constant -- we can ignore the constant term $k$ because it will just change the value of the constant that $\Psi$ is equal to. In other words, we can describe $\Psi$ as,
+				\[ \Psi(x,y) = p(x)q(y) + r(x) + s(y) = C \]
+				with $k$ absorbed into the value of $C$.\\
+				
+				Then, taking partial derivatives with respect to $x$ and $y$ we have,
+				\[ \dpd{\Psi}{x} = \dod{p}{x} q(y) + \dod{r}{x} \eqand \dpd{\Psi}{y} = p(x) \dod{q}{y} + \dod{s}{y}. \]
+				Furthermore, since $\Psi$ is a constant function we know that,
+				\[ \dod{\Psi}{x} = 0 = \dpd{\Psi}{x} + \dpd{\Psi}{y} \dod{y}{x}. \]
+				This has the required form ${ A(x,y) + B(x,y)\tod{y}{x} = 0 }$ with ${ \tpd{A}{y} = \tpd{B}{x} }$. So, if we have a differential equation of the given form and we postulate the existence of a constant function $\Psi$ such that ${ \tpd{\Psi}{x} = A(x,y) }$ and ${ \tpd{\Psi}{y} = B(x,y) }$, then,
+				\begin{align*}
+					\int A(x,y) \dif x = \int \dpd{\Psi}{x} \dif x &= \int \left( \dod{p}{x} q(y) + \dod{r}{x} \right) \dif x\nn
+					 &= p(x) q(y) + r(x) + C_1(y), \nn
+					\int B(x,y) \dif y = \int \dpd{\Psi}{y} \dif y &= \int \left( p(x) \dod{q}{y} + \dod{s}{y} \right) \dif y  \nn
+					&= p(x) q(y) + s(y) + C_2(x).
+				\end{align*}
+				Comparing these two results,
+				\[ \Psi(x,y) = p(x) q(y) + r(x) + C_1(y) = p(x) q(y) + s(y) + C_2(x), \]
+				we can see that the function $\Psi(x,y)$ that we are looking for is ${ \Psi(x,y) = p(x)q(y) + r(x) + s(y) }$.\\
+				
+				Another way that we could have resolved $\Psi$ is to take the first integral,
+				\[ \int A(x,y) \dif x = \int \dpd{\Psi}{x} \dif x = p(x) q(y) + r(x) + C_1(y) \]
+				and say, if ${ \Psi(x,y) = p(x) q(y) + r(x) + C_1(y) }$ then,
+				\[ \dpd{\Psi}{y} = p(x) \dod{q}{y} + \dod{C_1}{y} \]
+				and compare this with ${ B(x,y) }$ to resolve the function $C_1$,
+				\begin{align*}
+					&& p(x) \dod{q}{y} + \dod{C_1}{y} &= B(x,y) = p(x) \dod{q}{y} + \dod{s}{y} \nn
+					&\iff & \dod{C_1}{y} &= \dod{s}{y} \nn
+					&\iff & C_1(y) &= s(y) + k &\sidecomment{integrating both sides wrt. $y$}
+				\end{align*}
+				where $k$ is a constant of integration which, in this case, can be ignored.
+			\end{proof}
+		\end{tcolorbox}
+	
+		\medskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{All separable equations are exact equations.}{separable-diff-eqs-are-exact}
+			\begin{proof}
+				A separable differential equation is one that may be put in the form,
+				\[ f(y) \dif y = g(x) \dif x. \]
+				We can re-arrange this,
+				\begin{align*}
+					&& f(y) \dif y &= g(x) \dif x \\
+					&\iff & f(y) \dod{y}{x} - g(x) &= 0.
+				\end{align*}
+				Now, taking ${ A(x,y) = -g(x) }$ and ${ B(x,y) = f(y) }$ we have the form ${ A(x,y) + B(x,y) \tod{y}{x} = 0 }$ with ${ \tpd{A}{y} = \tpd{B}{x} = 0 }$ so this is an exact equation.
+			\end{proof}
+		\end{tcolorbox}
+		
+		
+		
+		\biggerskip\biggerskip
+		\note{All autonomous equations are separable (though the reverse is not generally true) and all separable equations are exact equations (although some exact equations are not separable). So we have,
+			\[ \{\text{Autonomous}\} \subset \{\text{Separable}\} \subset \{\text{Exact}\}. \]
+		}
+		
+		\begin{itemize}
+			\item{Autonomous equations have direction fields that look the same across the independent variable - this is because the derivative doesn't depend on the independent variable. So, if $g(x)$ is a solution then $g(x+c)$, for constant $c$, is also a solution.}
+			\item{Separable equations can have steady-states because the differential equation does not include a term with only the dependent variable so there will be some value of the function $y$ that makes the derivative 0 and subsequent increasing values of the independent variable will not change that.}
+		\end{itemize}
+		
+		
+		\biggerskip
+		\subsubsubsection{Examples of Exact Equations}
+		\begin{exe}
+			\item{Suppose we have the equation
+				\[ (3x^2 + 2xy) + (2y + x^2)\dod{y}{x} = 0. \]
+				We have,
+				\[ \dpd{(3x^2 + 2xy)}{y} = 2x = \dpd{(2y + x^2)}{x} \]
+				so this is an exact equation. We can solve for the constant function preserved by all solutions by setting
+				\begin{align*}
+					&& \int 3x^2 + 2xy \dif x &= \int 2y + x^2 \dif y \nn
+					&\iff & x^3 + x^2y + C_1(y) &= y^2 + x^2y + C_2(x) &\sidecomment{} \nn
+					&\iff & x^3 + C_1(y) &= y^2 + C_2(x) \nn
+					&\therefore & \Psi(x,y) &= x^2y + y^2 + x^3 = C  &\sidecomment{for constant C}.
+				\end{align*}
+				So, all solutions $y(x)$ of this differential equation preserve the value of $\Psi$ and so, if we have an initial condition -- say ${ y(0) = 1 }$ -- then we can use this to find the value of ${ C = \Psi(0,1) }$ and this value will be preserved for all values of $x$ and $y$.
+				\[ \Psi(0,1) = (0^2)(1) + (1)^2 + (0^3) = 1 = x^2y + y^2 + x^3 \hspace{20pt} \forall x,y \in \R{}. \]
+				Now we can solve for $y$ by treating $x$ as a constant and arranging the equation as a quadratic in $y$:
+				\[ y^2 + x^2 y + (x^3 - 1) = 0 \]
+				and then using the quadratic formula for $y$,
+				\[ y = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} = \frac{-x^2 \pm \sqrt{x^4 - 4x^3 - 4}}{2}. \]
+			}
+			\bigskip
+			\item{Suppose we have the equation
+				\[ (3x + 2y) + (\frac{2y}{x} + x)\dod{y}{x} = 0. \]
+				This is equation is \textit{not} exact because,
+				\[ \dpd{(3x + 2y)}{y} = 2  \neq \dpd{(\frac{2y}{x} + x)}{x} = \frac{-2y}{x^2} + 1. \]
+				However, if we multiply the equation by $x$ then we get the equation in the previous example,
+				\[ x(3x + 2y) + x(\frac{2y}{x} + x)\dod{y}{x} = (3x^2 + 2xy) + (2y + x^2)\dod{y}{x} = 0. \]
+				So there are times when multiplying by an integrating factor can result in an exact equation.
+			}
+			\bigskip
+			\item{
+				Consider a body falling toward earth from a significant distance so that the change in acceleration due to gravity as the body gets closer to the earth is significant. Acceleration due to gravity is proportional to ${ 1/r^2 }$ where $r$ is the distance of the body from the centre of the earth -- remember the mass of the body is a multiplier of the force of gravity but also of the inertia so in the expression for the resultant acceleration the mass cancels out -- so we can model this situation as,
+				\[ \dod[2]{r}{t} = -\frac{c}{r^2} \]
+				where $c$ is a positive constant. Note that the expression on the right hand side is negative because $r$ is always positive but, in the scenario, is decreasing so ${ \tod{r}{t} }$ is negative, and it is getting more negative as $r$ gets smaller, so the second derivative is also negative.\\
+				
+				If we use classical Newtonian mechanics then we can model $r$ as a displacement $s$ from the center of the earth. Then the velocity ${ v = \tod{s}{t} }$ is negative as the body is falling towards the earth. We also have,
+				\[ a = \dod[2]{s}{t} = \dod{v}{t} = \dod{v}{s} \cdot \dod{s}{t} = \dod{v}{s} \cdot v. \]
+				Interestingly, we can see that,
+				\[ \dod{v}{s} = \frac{a}{v} = \frac{\dif v/\dif t}{v} \]
+				which is the log-derivative of $v$ representing the relative infinitesimal change (\href{https://en.wikipedia.org/wiki/Logarithmic_derivative}{wikipedia}) of the velocity and also,
+				\[ \dod{v}{s} = \dod{(\dif s/\dif t)}{s} \]
+				the way that the rate of change of the displacement changes with the displacement.\\
+				
+				If we consider the first-order equation
+				\[ \dod{v}{s} v = -\frac{c}{s^2}, \]
+				this has the form ${ y \tod{y}{t} = f(t) }$ and so, is separable. 
+				\begin{align*}
+					&& \dod{v}{s} v &= -\frac{c}{s^2} \\
+					&\iff & \int v \dif v &= -c \int \frac{1}{s^2} \dif s &\sidecomment{} \nn
+					&\iff & \frac{v^2}{2} &= -c \left(\frac{-1}{s}\right) + C &\sidecomment{} \nn
+					&\iff & \frac{v^2}{2} &= \frac{c}{s} + C &\sidecomment{} \nn
+					&\iff & \frac{v^2}{2} - \frac{c}{s} &= C.
+				\end{align*}
+				So the quantity ${ \frac{v^2}{2} - \frac{c}{s} }$ is preserved by all solutions of this differential equation. The gravitational potential energy of a body displaced from the earth is given (by Newton's 3rd law) as the work done if the body were to fall all the way to the earth's centre,
+				\[ E_p = F \cdot s = m\, a(s)\, \cdot s \]
+				where $m$ is the mass of the body, $s$ is the displacement of the body from the centre of the earth and $a$ is the acceleration due to gravity as a function of the displacement. Substituting in the function for the acceleration due to gravity as a function of the distance from the earth's centre we have,
+				\[ E_p = m \left(-\frac{c}{s^2}\right) s = - \frac{mc}{s}. \]
+				The kinetic energy of the falling body is given by,
+				\[ E_k = \frac{mv^2}{2}. \]
+				Since the falling movement of the body is the potential energy turning to kinetic energy, the sum ${ E_p + E_k }$ is conserved. So, for some constant $K$ we have,
+				\begin{align*}
+					&& \frac{mv^2}{2} - \frac{mc}{s} &= K \nn
+					&\iff & m \left( \frac{v^2}{2} - \frac{c}{s} \right) &= K &\sidecomment{} \nn
+					&\iff & \frac{v^2}{2} - \frac{c}{s} &= C &\sidecomment{for ${ C = K/m }$.} \\
+				\end{align*}
+			}
+			\biggerskip
+			\item{
+				Imagine a pendulum swinging on a rod (or a rope that remains taut) of length $L$. Let $\theta$ be the angle the rod makes with the vertical and $g$ the acceleration due to gravity. The gravitational force acting on the pendulum has a component that is balanced by the tension in the rod maintaining the pendulum swinging along the circumference of a circle. This component acts in a direction perpendicular to the circumference of the circle in which the pendulum mass moves and along the radius of the circle of movement. The other component of $g$, orthogonal to this one, acts along the tangent of the circumference of movement of the pendulum mass. It is this component that creates the motion of the pendulum mass. (If this is not clear: \href{https://www.acs.psu.edu/drussell/Demos/Pendulum/Pendulum.html}{Penn State page on pendulum oscillation}.)\\
+				
+				We have:
+				\begin{itemize}
+					\item{Acceleration due to gravity with a component perpendicular to the pendulum rod given by: ${ a = - g \sin\theta }$.}
+					\item{Angular velocity of the pendulum mass: ${ \omega = \dod{\theta}{t} }$.}
+					\item{Tangential velocity of the pendulum mass: ${ v_t = L \dod{\theta}{t} }$.}
+				\end{itemize}
+				
+				So, using ${ F = m\od{v}{t} }$, the equation describing the acceleration of the pendulum mass is,
+				\begin{align*}
+					&& m\dod{v_t}{t} &= - m g \sin\theta \nn
+					&\iff & \dod{v_t}{t} &= - g \sin\theta &\sidecomment{} \nn
+					&\iff &  L \dod[2]{\theta}{t} &= - g \sin\theta.
+				\end{align*}
+				
+				This is a second-order nonlinear equation. For small oscillations we can use the small-angle approximation of sine to linearize it (see example \ref{ex:pendulum-second-order-linear}). If the oscillations are not small though, the small-angle approximation becomes too inaccurate to be useful and we must solve the nonlinear equation.\\
+				
+				We can simplify it into a first-order nonlinear equation by describing the tangential velocity in relation to the angle $\theta$ and eliminating time from the model,
+				\[ v = L\omega = L\dod{\theta}{t} \iff \dod{\theta}{t} = \frac{v}{L}, \]
+				\[ L \od[2]{\theta}{t} = \dod{v}{t} = \dod{v}{\theta} \cdot \dod{\theta}{t} = \dod{v}{\theta} \cdot \frac{v}{L} = - g \sin\theta. \]
+				
+				\bigskip
+				So we end up with the \textit{separable} first-order nonlinear equation,
+				\begin{align*}
+					&& v \, \dod{v}{\theta} &= - gL \sin\theta \nn
+					&\iff & \int v \dif v &= -gL \int \sin\theta \dif \theta &\sidecomment{} \nn
+					&\iff & v^2 &= 2gL \cos\theta + C &\sidecomment{} \nn
+					&\iff & v(\theta) &= \pm \sqrt{2gL \cos\theta + C}. \\
+				\end{align*}
+				Note that we have ended up with an expression for the tangential velocity as a function of the angle $\theta$ \textit{only}.  Also worth noting is that the constant quantity,
+					\[ v^2 - 2gL \cos\theta = C \]
+				represents the conserved energy of the pendulum system -- the $v^2$ term being proportional to the kinetic energy and the $2gL \cos\theta$ term being proportional to the potential energy.\\
+				
+				If we consider an oscillation with maximum angle $\theta_{max}$ then the pendulum is momentarily at rest when ${ \theta = \theta_{max} }$. It is convenient to use this as the initial condition of the angle of the pendulum ${ \theta_0 = \theta_{max} }$ so that the pendulum begins at rest and so ${ v(\theta_0) = 0 }$ and then we can resolve the value of the constant,
+				\begin{align*}
+					&& v(\theta_0) &= \pm \sqrt{2gL \cos\theta_0 + C} = 0 \\
+					&\therefore & C &= - 2gL \cos\theta_0.
+				\end{align*}
+			
+				So, for the initial condition,  we have resolved the tangential velocity \wrt to the angle of displacement of the pendulum as,
+				\[ v(\theta) = \pm \sqrt{2gL (\cos\theta - \cos\theta_0)}. \]
+				We could also have obtained this result with definite integration from $\theta_0$ to $\theta$,
+				\begin{align*}
+					&& \int_{v(\theta_0)}^{v(\theta)} v \dif v &= -gL \int_{\theta_0}^\theta \sin t \dif t \nn
+					&\iff & \frac{1}{2} (v(\theta)^2 - v(\theta_0)^2) &= gL (\cos\theta - \cos\theta_0) &\sidecomment{} \nn
+					&\iff & v(\theta)^2 &= 2gL (\cos\theta - \cos\theta_0) &\sidecomment{${ \because v(\theta_0) = 0 }$}. \\
+				\end{align*}
+			
+				To recover the time information into the solution we can bring back the definition of the velocity as a function of time \textit{as well as} the angle of displacement,
+				\[ v = L\dod{\theta}{t}. \]
+				Substituting this back into the solution we get,
+				\begin{align*}
+					&& L\dod{\theta}{t} &= \pm \sqrt{2gL (\cos\theta - \cos\theta_0)} \\
+					&\iff & \dif t &= \sqrt{\frac{L}{2g}} \frac{1}{\sqrt{\cos\theta - \cos\theta_0}} \dif \theta. &\sidecomment{}
+				\end{align*}
+			
+				So, to find the time taken when the pendulum swings from its central position, with ${ \theta = 0 }$, to its amplitude, with ${ \theta_{max} = \theta_0 }$, we can integrate the expression on the right of this equation between $\theta_0$ and 0. To get the whole time period of the oscillation we can multiply this time by 4,
+				\[ T = 4 \sqrt{\frac{L}{2g}} \int_{\theta_0}^0 \frac{1}{\sqrt{\cos\theta - \cos\theta_0}}  \dif \theta. \]
+				This integral is a type of improper integral called an elliptic integral and it doesn't have an analytic solution. However, for small-angle oscillations we can use the small-angle approximation for cosine, 
+				\[ \cos{x} = 1 - \frac{x^2}{2}, \]
+				to obtain an approximate value of the integral,
+				\begin{align*}
+					&\int_{\theta_0}^0 \frac{1}{\sqrt{(1 - \frac{\theta^2}{2}) - (1 - \frac{\theta_0^2}{2})}}  \dif \theta  \nnn
+					= &\int_{\theta_0}^0 \frac{1}{\sqrt{\frac{1}{2}(\theta_0^2 - \theta^2)}}  \dif \theta  \nnn
+					= &\sqrt{2} \int_{\theta_0}^0 \frac{1}{\sqrt{\theta_0^2 - \theta^2}}  \dif \theta  \nnn
+					= &\frac{\sqrt{2}}{\theta_0} \int_{\theta_0}^0 \frac{1}{ \sqrt{ 1 - \left(\frac{\theta}{\theta_0}\right)^2 } }  \dif \theta  \nnn
+					= &\frac{\sqrt{2}}{\theta_0} \int_{\theta_0}^0 \frac{1}{ \sqrt{ 1 - \sin^2\alpha } }  \dif\, (\theta_0\sin\alpha)  \\[9pt]
+					= &\frac{\sqrt{2}}{\theta_0} \int_{\inv\sin(1)}^{\inv\sin(0)} \frac{\theta_0\cos\alpha}{\cos\alpha}  \dif \alpha  \\[9pt]
+					= &\sqrt{2} (\inv\sin(0) - \inv\sin(1))  \nnn
+					= &\sqrt{2} \left( - \frac{\pi}{2} \right) = - \frac{\pi}{\sqrt{2}}.  \\
+				\end{align*}
+				In this case we can ignore the minus sign -- it's merely a factor of the choice that $\inv\sin$ has to make in order to be a function; returning $\frac{\pi}{2}$ for $\inv\sin(1)$ instead of $- \frac{\pi}{2}$. So, the time period becomes,
+				\[ T = 4 \sqrt{\frac{L}{2g}} \left( \frac{\pi}{\sqrt{2}} \right) = 2\pi \sqrt{\frac{L}{g}}. \]
+				Note that the amplitude of the pendulum's oscillation $\theta_0$ cancelled out in the calculation of the time period and that the resultant expression for the \textit{time period of small oscillations} of a pendulum depends only on the length of the string and the acceleration due to gravity.
+			}\label{ex:pendulum-first-order-exact}
+		\end{exe}
+		
+		\biggerskip\sep\biggerskip
+		\parbox{\linewidth}{
+			\subsubsubsection{Homogeneous Differential Equations}
+			\boxeddefinition{A \textbf{homogeneous differential equation} is an equation of the form,
+				\[ f(x,y)\frac{\dif y}{\dif x} = g(x,y) \]
+				where the functions $f,g$ are both homogeneous of degree $d$.
+			}
+		}
+		
+		\bigskip\note{The functions $f,g$ need not be linear and so these differential equations are not necessarily linear.}
+		
+		The key insight here is that, due to the homogeneous function property (see: \ref{section:homogeneous-functions}), if we define the function $y$ to be ${ y(x) = x \cdot v(x) }$ --- which we may do because, due to the non-trivial kernel of differentiation, we are only able to determine a solution to a differential equation upto a constant term so we can set the constant term to 0 for convenience during the calculation --- then,
+		\[ f(\lambda x, \lambda y) = \lambda^d f(x,y) \implies f(x,xv) = x^d g(v). \]
+		When this is applied in a differential equation of the above form we obtain,
+		\begin{align*}
+			&& f(x,y)\frac{\dif y}{\dif x} &= g(x,y) \\[8pt]
+			&\iff & x^d f_1(v) \left(v + x\frac{\dif v}{\dif x}\right) &= x^d f_2(v) &\sidecomment{${y = xv,\,\, y' = v + xv'}$} \\[8pt]
+			&\iff & f_1(v) \left(v + x\frac{\dif v}{\dif x}\right) &= f_2(v) &\sidecomment{} \\[8pt]
+			&\iff & v + x\frac{\dif v}{\dif x} &= \frac{f_2(v)}{f_1(v)} = f_3(v) &\sidecomment{} \\[8pt]
+			&\iff & x\frac{\dif v}{\dif x} &= f_3(v) - v = f_4(v) &\sidecomment{} \\[8pt]
+			&\iff & \frac{1}{f_4(v)}\frac{\dif v}{\dif x} &= \frac{1}{x} &\sidecomment{} \\[8pt]
+			&\iff & \int \frac{1}{f_4(v)}\frac{\dif v}{\dif x} \dif x &= \int \frac{1}{x} \dif x = \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
+			&\iff & \int \frac{1}{f_4(v)} \dif v &= \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
+			&\iff & \frac{1}{f_4'(v)} \ln{\abs{f_4(v)}} &= \ln{\abs{x}} + c. &\sidecomment{} \\[8pt]
+		\end{align*}
+	}
+
+
+
+
+% ---------------- break --------------
+
+	\pagebreak
+	\searchableSubsection{Comparison of Differential Equations with Difference Equations}{differential equations}{
+		\TODO{}
+	}
+% ------------------
+
+	\pagebreak
+	\searchableSubsection{Second-order Linear ODEs}{differential equations}{
+		
+		\subsubsection{Examples of Second-order Linear}
+		\begin{exe}
+			\ex{\textbf{The Logistic:} The logistic model of population growth takes $P(t)$ to be the population at time $t$. The model takes some additional factor that illustrates that a space can only hold a fixed carrying capacity of the population, producing the equation
 				\[ \frac{\dif P}{\dif t} = c P(t) \left( 1 - \frac{P(t)}{A} \right). \]
 				
 				\subsubsubsection{From looking at the differential equation}
@@ -777,177 +1329,33 @@
 					\end{itemize}	 
 				}
 			}
-		\end{exe}
-		
-		\bigskip\bigskip
-		\subsubsubsection{The form ${ \frac{\dif y}{\dif x} = f(x)y + g(x) }$}
-		This form is not separable as it is. But if we multiply both sides by $e^{-F(x)}$, where $F(x)$ is an antiderivative of $f(x)$, then
-		\begin{align*}
-		&& \frac{\dif y}{\dif x} &= f(x)y + g(x) \\[8pt]
-		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} &= e^{-F(x)}f(x)y + e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
-		&\iff & e^{-F(x)}\frac{\dif y}{\dif x} - e^{-F(x)}f(x)y &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
-		&\iff & \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) &= e^{-F(x)}g(x) &\sidecomment{} \\[8pt]
-		&\iff & \int \frac{\dif}{\dif x} \left(e^{-F(x)}y\right) \dif x &= \int e^{-F(x)}g(x) \dif x &\sidecomment{} \\[8pt]
-		&\iff & e^{-F(x)}y &= \int e^{-F(x)}g(x) \dif x \\[8pt]
-		&\iff & y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x
-		\end{align*}
-		where the constant of integration of the integral on the left has been absorbed into the integral on the right.\\
-		
-		\note{Note, also, that
-			\[ ke^{F(x)}\int \frac{g(x)}{ke^{F(x)}} \dif x = ke^{F(x)}\frac{1}{k}\int \frac{g(x)}{e^{F(x)}} \dif x = e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x. \]
-		}
-		
-		\medskip
-		So, the solution has the form,
-		\[ y = k e^{F(x)} + h(x) e^{F(x)} \]
-		where $h(x)$ is an antiderivative of ${ g(x)/e^{F(x)} }$ and $k$ is the constant of integration.\\
-		
-		Check solution:
-		\begin{align*}
-			y &= e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x \implies \\[8pt]
-			\frac{\dif y}{\dif x} &= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + e^{F(x)}\frac{g(x)}{e^{F(x)}} \\[8pt]
-			&= f(x)\left(e^{F(x)}\int \frac{g(x)}{e^{F(x)}} \dif x\right) + g(x) \\[8pt]
-			&= f(x)y + g(x).
-		\end{align*}
-		and also,
-		\begin{align*}
-			y &= k e^{F(x)} + h(x) e^{F(x)} \implies \\[8pt]
-			\frac{\dif y}{\dif x} &= f(x) k e^{F(x)} + f(x) h(x) e^{F(x)} + g(x) e^{-F(x)} e^{F(x)} \\[8pt]
-			&= f(x) k e^{F(x)} + f(x) h(x) e^{F(x)} + g(x) \\[8pt]
-			&= f(x)y + g(x)
-		\end{align*}
-		where we have used the fact that $h(x)$ is an antiderivative of ${ g(x) e^{-F(x)} }$.
-		
-		\biggerskip\hrule\biggerskip
-		\paragraph{Examples}
-		\begin{exe}
-			\ex{${\bm{ x\frac{\dif y}{\dif x} - 2y = 6 }}$:\\\\
-				The first step is to rearrange it to obtain an expression for the derivative. 
-				\begin{align*}
-				&& x\frac{\dif y}{\dif x} - 2y &= 6 \\
-				&\iff & \frac{\dif y}{\dif x} &= \frac{2}{x}y + \frac{6}{x}. &\sidecomment{} \\
-				\end{align*}
-				Then we can apply the derived formula using the antiderivative ${ F(x) = 2\ln{x} }$.
-				\begin{align*}
-				y &= e^{2\ln{x}}\int \frac{6/x}{e^{2\ln{x}}} \dif x \\
-				&= 6x^2 \int \frac{1}{x^3} \dif x &\sidecomment{} \\
-				&= 6x^2\left(-\frac{1}{2x^2} + c\right) &\sidecomment{} \\
-				&= -3 + c'x^2. &\sidecomment{${ c' = 6c }$} \\
-				\end{align*}
-				We can confirm this result by performing the calculation.
-				\begin{align*}
-				&& e^{-2\ln{x}}\frac{\dif y}{\dif x} &= e^{-2\ln{x}}\frac{2}{x}y + e^{-2\ln{x}}\frac{6}{x} \\
-				&\iff & x^{-2}\frac{\dif y}{\dif x} - x^{-2}\frac{2}{x}y &= x^{-2}\frac{6}{x} &\sidecomment{} \\
-				&\iff & x^{-2}\frac{\dif y}{\dif x} - \frac{2}{x^3}y &= \frac{6}{x^3} &\sidecomment{} \\
-				&\iff & \frac{\dif }{\dif x}(x^{-2}y) &= \frac{6}{x^3} &\sidecomment{} \\
-				&\iff & \int \frac{\dif }{\dif x}(x^{-2}y) \dif x &= 6 \int \frac{1}{x^3} \dif x &\sidecomment{} \\
-				&\iff & x^{-2}y &= 6(-\frac{1}{2x^2} + c) &\sidecomment{} \\
-				&\iff & x^{-2}y &= -3\frac{1}{x^2} + c' &\sidecomment{${ c' = 6c }$} \\
-				&\iff & y &= -3 + c'x^2. &\sidecomment{} \\
-				\end{align*}
-			}
 			\biggerskip
-			\ex{Consider a bank account with variable interest. Let $M(t)$ be the amount of money in the account at time $t$, measured in years (though the specific unit isn't important conceptually), and let $I(t)$ be the rate of interest at time $t$: for example, $3 \%$ interest corresponds to $I(t)=0.03 .$ Finally, let $Q(t)$ be the amount of money put in (or negative for removing money) in year $t$. Thus, $M(t)$ obeys the differential equation
-				\[ \frac{\dif M}{\dif t} = I(t) M(t) + Q(t). \]
-				This illustrates a common trend: the first term indicates how it would grow independent of external forces, and the second term represents external influences.
+			\ex{\textbf{Simple Harmonic Motion:} ${ y'' = -ky }$ \TODO{complete this}}
+			\biggerskip
+			\ex{
 				
-				This can be solved in different ways:\\
-				
-				First, suppose $Q(t)=0$ and $I(t)=I$ is constant. Then ${ M(t)=M(0) e^{I t} }$.\\
-				
-				On the other hand, if $I(t)$ can vary, then ${ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} }$ as explained in \ref{ex:diff-eq-basic-ivp}.\\
-				
-				When $Q(t)$ isn't zero, we can begin to understand it by considering the case where money is only put in once at the end of each year --- so we have ${ Q(0), Q(1), \dots }$ --- giving the solution:
-				\[ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} + Q(1) e^{\int_{1}^{t} I(u) \dif u} + Q(2) e^{\int_{2}^{t} I(u) \dif u} + \cdots \]
-				In the case of continuous deposit and withdrawal from the account we end up with:
-				\[ M(t) = M(0) e^{\int_{0}^{t} I(u) \dif u} + \int_0^t Q(x) e^{\int_x^t I(u) \dif u} \dif x. \]
-				
-				We can relate this to the general formula for this form of differential equation using \ref{ssection:definite-and-indefinite-integration} as follows:
+				This is a second-order non-linear equation but, for small angular displacements, we can linearize this equation using the small-angle approximation for sine ${ \sin\theta \approx \theta }$ giving:
 				\begin{align*}
-					M(t) &= e^{\int I(t) \dif t} \int Q(t) e^{\uminus\int I(u) \dif u} \dif t \\[8pt]
-					&= e^{\int_0^t I(u) \dif u} \left( \int_0^t Q(x) e^{\uminus\int_0^x I(u) \dif u} \dif x + C \right) \\[8pt]
-					&= C e^{\int_0^t I(u) \dif u}  + \int_0^t Q(x) e^{\int_x^t I(u) \dif u} \dif x
+					&&  L \od[2]{\theta}{t} &= - g \theta \\
+					&\iff & \od[2]{\theta}{t} &= - \frac{g}{L} \theta &\sidecomment{} \\
+					&\iff & \od[2]{\theta}{t} + \frac{g}{L} \theta &= 0.
 				\end{align*}
-				which gives us ${ M(0) = C }$ when we substitute in ${ t = 0 }$.
-				\biggerskip
-			}
+				The auxiliary equation of this equation is ${ z^2 + \frac{g}{L} = 0 }$ -- the roots of which are clearly complex and given by,
+				\[ z = \pm \frac{\sqrt{-4(g/L)}}{2} = \pm \sqrt{-\frac{g}{L}} = \pm \sqrt{\frac{g}{L}} i. \]
+				
+				\TODO{complete this}
+				
+			}\label{ex:pendulum-second-order-linear}
 		\end{exe}
+	}
 
+% ------------------
 
-% -------------
-
-	
-		\pagebreak
-		\subsubsubsection{Autonomous Equations and Exact Equations}
-		\boxeddefinition{An \textbf{autonomous} equation refers to a differential equation with no \textbf{explicit} dependence on the independent variable (typically in dynamical systems, $t$ for time). These differential equations express change in a system based solely on the current value of the system. For example:
-			\[ \frac{\dif y}{\dif x} = -k y \eqand \frac{\dif y}{\dif t} = r y(1-y). \]
-			An equation of the form,
-			\[ \frac{\dif y}{\dif t} = f(t) y(1-y) \]
-			for example, would express that the growth rate intrinsic to the system is varying over time. Meanwhile, an equation of the form,
-			\[ \frac{\dif y}{\dif x} = -k y + f(x) \]
-			for example, would express that the rate of change of the system is being influenced by something that varies with the independent variable and is, in some way, extrinsic to the system (because it depends only on the independent variable and not on the state of the system).
-		}
+	\pagebreak
+	\searchableSubsection{Second-order Nonlinear ODEs}{differential equations}{
+		\biggerskip
 		
-		\boxeddefinition{An \textbf{exact} equation refers to a differential equation whose solutions all conserve the value of some property. All separable equations are exact equations because,
-			\[ f(y) \dif y = g(x) \dif x \implies \int f(y) \dif y - \int g(x) \dif x = 0. \]
-			However, there are also exact equations that are not separable such as,
-			\[ y' \sin{x} + y \cos{x} + 2x = 0 \implies (y \sin{x} + x^2)' = 0 \implies y = \frac{C - x^2}{\sin{x}}. \]
-		}
-	
-		\note{All autonomous equations are separable (though the reverse is not generally true) and all separable equations are exact equations (although some exact equations are not separable). So we have,
-			\[ \{\text{Autonomous}\} \subset \{\text{Separable}\} \subset \{\text{Exact}\}. \]
-		}
-	
-		\TODO{For all autonomous equations, if ${ y = g(x) }$ is a solution then so is ${ y = g(x + c) }$ for constant $c$? In what type of equations is this not the case?}
-		\begin{itemize}
-			\item{Autonomous equations have direction fields that look the same across the independent variable - this is because the derivative doesn't depend on the independent variable.}
-			\item{Non-separable equations cannot have steady-states because the derivative depends on a term with only the dependent variable so it cannot remain zero for all values of the independent variable greater than a certain value.}
-		\end{itemize}	
-		\TODO{include matlab direction fields}
-	
-	
-		\biggerskip\biggerskip\hrule\biggerskip\biggerskip
-		\subsubsubsection{Comparison of Differential Equations with Difference Equations}
-		\TODO{}
-		
-		
-		\biggerskip\biggerskip\hrule\biggerskip\biggerskip
-		\subsubsubsection{Homogeneous Differential Equations}
-		\boxeddefinition{A \textbf{homogeneous differential equation} is an equation of the form,
-			\[ f(x,y)\frac{\dif y}{\dif x} = g(x,y) \]
-			where the functions $f,g$ are both homogeneous of degree $d$.
-		}
-	
-		\bigskip\note{The functions $f,g$ need not be linear and so these differential equations are not necessarily linear.}
-		
-		The key insight here is that, due to the homogeneous function property (see: \ref{section:homogeneous-functions}), if we define the function $y$ to be ${ y(x) = x \cdot v(x) }$ --- which we may do because, due to the non-trivial kernel of differentiation, we are only able to determine a solution to a differential equation upto a constant term so we can set the constant term to 0 for convenience during the calculation --- then,
-		\[ f(\lambda x, \lambda y) = \lambda^d f(x,y) \implies f(x,xv) = x^d g(v). \]
-		When this is applied in a differential equation of the above form we obtain,
-		\begin{align*}
-		&& f(x,y)\frac{\dif y}{\dif x} &= g(x,y) \\[8pt]
-		&\iff & x^d f_1(v) \left(v + x\frac{\dif v}{\dif x}\right) &= x^d f_2(v) &\sidecomment{${y = xv,\,\, y' = v + xv'}$} \\[8pt]
-		&\iff & f_1(v) \left(v + x\frac{\dif v}{\dif x}\right) &= f_2(v) &\sidecomment{} \\[8pt]
-		&\iff & v + x\frac{\dif v}{\dif x} &= \frac{f_2(v)}{f_1(v)} = f_3(v) &\sidecomment{} \\[8pt]
-		&\iff & x\frac{\dif v}{\dif x} &= f_3(v) - v = f_4(v) &\sidecomment{} \\[8pt]
-		&\iff & \frac{1}{f_4(v)}\frac{\dif v}{\dif x} &= \frac{1}{x} &\sidecomment{} \\[8pt]
-		&\iff & \int \frac{1}{f_4(v)}\frac{\dif v}{\dif x} \dif x &= \int \frac{1}{x} \dif x = \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
-		&\iff & \int \frac{1}{f_4(v)} \dif v &= \ln{\abs{x}} + c &\sidecomment{} \\[8pt]
-		&\iff & \frac{1}{f_4'(v)} \ln{\abs{f_4(v)}} &= \ln{\abs{x}} + c. &\sidecomment{} \\[8pt]
-		\end{align*}
-	
-
-	
-
-% -----------------	
-	
-		\pagebreak
-		\subsubsection{Nonlinear Differential Equations}
-		\bigskip
-		\note{
-			\begin{itemize}
-				\item{Initial conditions do not necessarily determine a unique solution \TODO{Harvard[8]}}
-			\end{itemize}
-		}
+		\subsubsection{Examples of Second-order Nonlinear}
 	}
 
 \end{document}

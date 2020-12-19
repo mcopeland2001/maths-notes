@@ -26,6 +26,26 @@
 		\bigskip
 		\subsubsection{Linear Algebra of First-order Differential Equations}
 		\bigskip
+			\subsubsubsection{First Order}
+		\begin{align*}
+			&& \frac{dy}{dx} &= ax + b \\
+			&\iff & \int \frac{dy}{dx} \dif x &= \int ax + b \dif x &\sidecomment{} \\
+			&\iff & y &= a'x^2 + bx + c. &\sidecomment{${ a' = a/2}$, c is any constant}
+		\end{align*}
+		Integrating we see that a first order differential equation only determines the function upto a constant value. In order to determine a specific function we need a relation between a value of $x$ and a value of $y$ (i.e. a point, in graphical terms). Typically this is described as an initial condition.
+		
+		\bigskip\bigskip
+		\subsubsubsection{Second Order}
+		\begin{align*}
+			&& \frac{d^2y}{dx^2} &= ax + b \\
+			&\iff & \int \frac{d^2y}{dx^2} \dif x &= \int ax + b \dif x  &\sidecomment{} \\
+			&\iff & \frac{dy}{dx} &= a'x^2 + bx + c  &\sidecomment{${ a' = a/2 }$, c is any constant} \\
+			&\iff & \int \frac{dy}{dx} \dif x &= \int a'x^2 + bx + c \dif x  &\sidecomment{} \\
+			&\iff & y &= a''x^3 + b'x^2 + cx + d. &\sidecomment{${ a'' = a/6,\, b' = b/2}$, d is any constant}
+		\end{align*}
+		Integrating a second order equation twice we see that we introduced two constants of integration, ${ c,d }$, and the last two terms ${ cx + d }$ are undetermined. So a second order equation of this type has only determined a function upto a first-degree polynomial (a line). To determine a specific function, in this case, we require two relations between $x$ and $y$ (two points determine a line).
+		
+		\biggerskip
 		The derivative $\Dif_x p(x)$, of the univariate degree-$n$ polynomial ${ p \in P_n }$ can be described as a linear transformation as,
 			\[ \Dif_x p(x) = (A\vtheta)^T \x = \x^T A\vtheta \]
 			where $A$ is the ${ n \times (n+1) }$ matrix,
@@ -39,17 +59,7 @@
 		The matrix $A$ clearly has rank $n$ and a 1-dimensional kernel so $\Dif_x$ transforms from $n+1$-space to $n$-space. The nullspace of $A$ being,
 		\[ nullspace(A) = t\begin{bmatrix}1\\0\\\vdots\\0\end{bmatrix} \hspace{20pt} t \in \R{} \]
 		the interpretation of which is that the derivative of constant polynomials is zero.\\\\
-		
-%		When we have a differential equation such as,
-%		\begin{equation}\label{eq:first-order-lin-diffeq}
-%			\Dif_x y(x) = ax + b \hspace{20pt} a,b \in R{}
-%		\end{equation}	
-%		we are trying to determine the function $y(x)$ from its derivative ${ ax + b }$ but, as we can see from the matrix $A$, the derivative transformation is singular and not invertible. This is why, when we find the antiderivative of a function through the process of integration, the result is a family of functions parameterized with the constant of integration. Expressing equation \ref{eq:first-order-lin-diffeq} in matrix form,
-%		\begin{equation}
-%			\x^T A\vtheta = \x^T (b,a,0,\dots,0)^T
-%		\end{equation}
-%		Because the members of $\x$ are linearly independent, this equation implies that the coefficients are equal,
-%		\[ A\vtheta = (b,a,0,\dots,0)^T. \]
+
 		
 		\medskip
 		In general the differential equation,

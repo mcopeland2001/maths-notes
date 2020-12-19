@@ -8,9 +8,81 @@
 
 \begin{document}	
 	\searchableSection{Integration}{analysis, calculus, integration}
-	\bigskip\bigskip
+	\bigskip
 	
-	\searchableSubsection{Definite and Indefinite Integration}{analysis, calculus, integration}{\label{ssection:definite-and-indefinite-integration}
+	\searchableSubsection{Univariate Integration}{analysis, calculus, integration}{
+		\biggerskip
+		
+		\subsubsection{The Riemann Integral}
+		\boxeddefinition{In the context of the Riemann Integral, a \textbf{partition} of an interval ${ [a,b] \in \R{} }$ is a set,
+			\[ P = \setc{x_i}{0 \leq i \leq n} \eqword{where} a \leq x_i < x_{i+1} \leq b. \]
+			That's to say,
+			\[ P = \{x_0, x_1, \dots, x_n\} \eqword{where} a = x_0 < x_1 < \cdots < x_n = b. \]
+		}
+		\boxeddefinition{The \textbf{lower estimate} of the area under the curve of a function $f(x)$ with respect to a particular partition is defined as,
+			\[ L(P) = \sum_{i = 0}^{n-1} (x_{i+1} - x_i) \min_{ x_i \leq x \leq x_{i+1} }{ f(x) } \]
+			where each ${ x_i \in P }$. The \textbf{upper estimate} is similarly defined as,
+			\[ U(P) = \sum_{i = 0}^{n-1} (x_{i+1} - x_i) \max_{ x_i \leq x \leq x_{i+1} }{ f(x) }. \]
+		}
+		\boxeddefinition{Let $P(n)$ be a partition of cardinality $n+1$ over the interval $[a,b]$. If, for a function $f(x)$,
+			\[ \lim_{n \to \infty} L(P(n)) = \lim_{n \to \infty} U(P(n)) = I \]
+			then the \textbf{Riemann Integral} of $f(x)$ over $P(n)$ is defined as,
+			\[ \int_a^b f(x) \dif x = I. \]
+		}
+		
+		
+		\bigskip\subsubsubsection{Example}
+		\begin{exe}
+			\item{Suppose ${ f(x) = e^x }$ and we define a partition over the interval $[0,1]$,
+				\[ P(n) = \{0, \frac{1}{n}, \frac{2}{n}, \dots, \frac{n-1}{n}, 1\}. \]
+				Then the lower estimate of the area under the curve of this function is given by,
+				\begin{align*}
+					L(P(n)) &= \sum_{i=0}^{n-1} (x_{i+1} - x_i) \min_{ x_i \leq x \leq x_{i+1} }{ f(x) } \nn
+					&= \frac{1}{n} \sum_{i=0}^{n-1} \min_{ \frac{i}{n} \leq x \leq \frac{i+1}{n} }{ e^x } \nn
+					&= \frac{1}{n} \sum_{i=0}^{n-1} e^{\frac{i}{n}} = \frac{1}{n} (1 + e^{\frac{1}{n}} + \cdots + e^{\frac{n-1}{n}}) \nn
+					&= \frac{1}{n} \left( \frac{e - 1}{e^{\frac{1}{n}} - 1} \right).\\
+				\end{align*}
+				Meanwhile, the upper estimate is given by,
+				\begin{align*}
+					U(P(n)) &= \frac{1}{n} \sum_{i=0}^{n-1} \max_{ \frac{i}{n} \leq x \leq \frac{i+1}{n} }{ e^x } \nn
+					&= \frac{1}{n} \sum_{i=0}^{n-1} e^{\frac{i+1}{n}} = \frac{1}{n} (e^{\frac{1}{n}} + \cdots + e^{\frac{n-1}{n}} + e) \nn
+					&= \frac{e^{\frac{1}{n}}}{n} \left( \frac{e - 1}{e^{\frac{1}{n}} - 1} \right).\\
+				\end{align*}
+				Taking the limits as ${ n \to \infty }$,
+				\begin{align*}
+					\lim_{n \to \infty} L(P(n)) &= \lim_{n \to \infty} \frac{1}{n} \left( \frac{e - 1}{e^{\frac{1}{n}} - 1} \right) \nn
+					&= (e - 1) \lim_{n \to \infty} \frac{1}{n} \left( \frac{1}{e^{\frac{1}{n}} - 1} \right)  &\sidecomment{} \nn
+					&= (e - 1) \lim_{n \to \infty} \frac{1/n}{e^{\frac{1}{n}} - 1}  &\sidecomment{} \nn
+					&= (e - 1) \lim_{n \to \infty} \frac{-1/n^2}{(-1/n^2)e^{\frac{1}{n}}}  &\sidecomment{by L'H\^{o}pital} \nn
+					&= (e - 1) \lim_{n \to \infty} e^{-\frac{1}{n}} = (e - 1)(1) = e - 1,
+				\end{align*}
+				\begin{align*}
+					\lim_{n \to \infty} U(P(n)) &= \lim_{n \to \infty} \frac{e^{\frac{1}{n}}}{n} \left( \frac{e - 1}{e^{\frac{1}{n}} - 1} \right) \nn
+					&= (e - 1) \lim_{n \to \infty} \frac{e^{\frac{1}{n}}}{n} \left( \frac{1}{e^{\frac{1}{n}} - 1} \right) \nn
+					&= (e - 1) \left( \lim_{n \to \infty} e^{\frac{1}{n}} \right) \left( \lim_{n \to \infty} \frac{1}{n} \left[ \frac{1}{e^{\frac{1}{n}} - 1} \right) \right] \nn
+					&= (e - 1) (1) (1) = e - 1. \\
+				\end{align*}
+				So, we see that 
+				\[ \lim_{n \to \infty} L(P(n)) = \lim_{n \to \infty} U(P(n)) = e - 1 \]
+				and this is the value of the riemann integral for $e^x$ over the interval $[0,1]$. Note that it is in agreement with the analytic solution,
+				\begin{align*}
+					\int_0^1 e^x &= [e^x]_0^1 \\
+					&= e^1 - e^0 = e - 1.
+				\end{align*}
+			}
+		\end{exe}
+		
+		\biggerskip
+		\subsubsection{FTC and the Chain Rule}
+		\begin{align*}
+			&\hspace{14pt} \dod{}{t} \int_{p(t)}^{q(t)} f(x) \dif x \nn
+			&= \dod{}{t} \int_0^{q(t)} f(x) \dif x - \dod{}{t} \int_0^{p(t)} f(x) \dif x &\sidecomment{} \nn
+			&= \dod{q}{t} \dod{}{q} \int_0^{q} f(x) \dif x - \dod{p}{t} \dod{}{p} \int_0^{p} f(x) \dif x &\sidecomment{} \nn
+			&= \dod{q}{t} f(q) - \dod{p}{t} f(p).
+		\end{align*}
+		
+		\bigskip
+		\subsubsection{Definite and Indefinite Integration}\label{ssection:definite-and-indefinite-integration}
 		Indefinite integration determines an antiderivative up to a constant so that, if $F(x)$ is some antiderivative of $f(x)$ and $C$ is a constant, then
 		\[ \int f(x) \dif x = F(x) + C. \]
 		This expresses the fact that any value of $C$ would produce a valid antiderivative of $f(x)$. In fact, these are the fibres -- the cosets of the kernel -- of the differentiation linear transformation. The kernel of differentiation is the set of constant-valued functions,
@@ -37,6 +109,51 @@
 			xk &= \int_a^t f(x) \dif x = F(t) - F(a) \\
 			xkK &= \int_a^t f(x) \dif x + C = F(t) - F(a) + C.
 		\end{align*}
+	}
+
+
+% ------------------------ break --------------
+
+	\pagebreak
+	\searchableSubsection{Multivariate Integration}{analysis, calculus, integration}{
+		
+		\bigskip
+		\subsubsection{Partial Differentiation of Integrals}
+		\[ \dpd{}{x} \left( \int f(x,y) \dif y \right) = \int \dpd{f(x,y)}{x} \dif y \]
+		
+		\bigskip
+		\subsubsection{Integration of Partial Derivatives}
+		Suppose we have a function ${ f(x,y) }$. Then,
+		\[ \int \dpd{f(x,y)}{x} \dif x = g(x,y) + C(y) \eqand \int \dpd{f(x,y)}{y} \dif x = g(x,y) + C(x). \]
+		So, the antiderivatives are only determined upto a function of the other variable. In this case, we can recover the original function $f(x,y)$ if we have both partial derivatives by setting the antiderivatives equal,
+		\[ g_1(x,y) + C_1(y) = g_2(x,y) + C_2(x). \]
+		Any cross terms (terms containing both $x$ and $y$) in $f$ will appear in both $g_1(x,y)$ and $g_2(x,y)$ and the remaining term in $g_1$ will be equal to $C_2$ while the remaining term in $g_2$ will be equal to $C_1$.\\
+		
+		\medskip
+		\subsubsubsection{Example}
+		\begin{exe}
+			\item{
+				Let $\varphi: \mathbb{R}^{2} \rightarrow \mathbb{R}$ be such that for all $(x, y) \in \mathbb{R}^{2}$ the following equalities hold:
+				\[
+				\frac{\partial \varphi}{\partial x}(x, y)=\underbrace{e^{x} \sin (y)}_{f(x, y)} \; \wedge \; \frac{\partial \varphi}{\partial y}(x, y)=\underbrace{e^{x} \cos (y)}_{g(x, y)}.
+				\]
+				Integrating $f$ with respect to $x$ we get
+				\[ \varphi(x, y)=\int e^{x} \sin (y) d x=e^{x} \sin (y)+\psi(y), \]
+				for some differentiable function $\psi: \mathbb{R} \rightarrow \mathbb{R}$. Differentiating with respect to $y$ it follows that 
+				\[ e^{x} \cos (y)+\psi^{\prime}(y)=g(x, y)=e^{x} \cos (y). \]
+				Therefore $\psi^{\prime}$ is always 0 and it follows that there exists $C \in \mathbb{R}$ such that for all $u \in \mathbb{R}$ we have $\psi(u)=C$ -- that is, $\psi$ is constant.\\
+				This gives you $\varphi(x, y)=e^{x} \sin (y)+C \in \mathbb{R},$ for some $C \in \mathbb{R}$. Taking $C \in \mathbb{R}$ arbitrarily will give you a possible $\varphi$.
+			}
+		\end{exe}
+	
+		\sep
+		
+		In the case of definite integration though, whether the variables are independent is important (?). For example, suppose ${ y = y(x) }$. Refer: \url{https://math.stackexchange.com/questions/754742/integrating-a-partial-derivative} and \url{https://math.stackexchange.com/questions/2714061/integrating-partial-derivatives?noredirect=1&lq=1}.
+		
+		\begin{itemize}
+			\item{If ${ y = y(x) }$ then the result of the integral may not be meaningful.}
+			\item{If we have both of the partial derivatives (wrt. $x$ and $y$), then we can recover the original function regardless of whether the variables are independent or not.}
+		\end{itemize}
 	}
 
 \end{document}
