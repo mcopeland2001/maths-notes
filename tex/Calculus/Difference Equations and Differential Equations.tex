@@ -648,21 +648,86 @@
 		Differential equations are most often used to describe the evolving state of dynamical systems -- that is, systems whose future state is a function of its current state. Therefore, that portion of the future state that is dependent on the previous state is compounded in a similar fashion to compound interest. For this reason, the solutions to differential equations typically involve the exponential function.\\
 		
 		\subsubsection{Types of Differential Equations}
-		\boxeddefinition{A \textbf{first-order} differential equation is an equation containing only degree-one terms in the derivatives of the dependent variable. There must be another, independent, variable against which it can be differentiated. A common convention is for the dependent variable to be $y$ and the independent variable to be $t$ -- reflecting the fact that it is often modelling time -- but $x$ is often used also. \TODO{this is a linear! equation}
+		
+		\boxeddefinition{A \textbf{differential equation} -- that is, a single equation as opposed to a system of equations -- is an equation that relates a single dependent variable's derivatives to each other and may or may not explicitly include the independent variable. A common convention is for the dependent variable to be $y$ and the independent variable to be $t$ -- reflecting the fact that it is often modelling time -- but $x$ is often used also.}
+		
+		\boxeddefinition{A differential equation that does not explicitly include the independent variable is known as an \textbf{autonomous} equation. It represents a time-invariant system if the independent variable is viewed as time. So, if ${ y(t) = g(t) }$ is a solution then ${ y(t) = g(t+c) }$, for constant $c$, is also a solution.}
+		
+		\boxeddefinition{A \textbf{first-order} differential equation is an equation in which only derivatives upto and including the first derivative of the dependent variable appear. That's to say, an equation that relates the dependent variable to its first derivative and, potentially, to the independent variable.}
+		
+		\boxeddefinition{Similarly, a \textbf{second-order} differential equation relates the dependent variable to both its first and second derivatives as well as, potentially, to the independent variable. Higher-order differential equations also exist -- but are less common -- with the order being given by the highest derivative present in the equation.}
+		
+		\boxeddefinition{A \textbf{linear} differential equation is an equation containing only degree-one monomial terms in the derivatives of the dependent variable. So, the equation is linear in the derivatives of the dependent variable although it may also contain any function of the independent variable.
 		}
 	
-		\biggerskip
-		\boxeddefinition{A \textbf{first-order nonlinear} differential equation is a first-order differential equation t}
+		\boxeddefinition{A \textbf{nonlinear} differential equation is an equation that contains nonlinear terms of the derivatives of the dependent variable.}
 		
-		\boxeddefinition{A \textbf{separable} first-order equation is one where the first-derivative of the dependent variable may be expressed as a single term. That's to say, if $y$ is the dependent variable, $t$ the independent variable and $c$ represents any constant term, we can put the equation in the form,
+		\boxeddefinition{A \textbf{separable} first-order equation is one where the first-derivative of the dependent variable may be expressed as a single term. That's to say, we can put the equation in the form,
 			\[ \dod{y}{t} = f(t)g(y). \]
 		}
-		\note{Note that the definition of a separable equations means that -- if $a,b,c,d$ are constants -- the following equation is separable,
-			\[ \dod{y}{t} = abt^2y^2 + adt^2 + bcy^2 + cd \]
+		\note{Note that the definition of a separable equations means that -- if $A,B,C,D$ are constants -- the following equation is separable,
+			\[ \dod{y}{t} = ABt^2y^2 + ADt^2 + BCy^2 + CD \]
 			because it can be factorized into,
-			\[ \dod{y}{t} = (at^2 + c)(by^2 + d) = f(t)g(y). \]
+			\[ \dod{y}{t} = (At^2 + C)(By^2 + D) = f(t)g(y). \]
 		}
-		\TODO{Taxonomy of differential equations should go here?}
+		
+		\boxeddefinition{A \textbf{partial} differential equation is a differential equation that includes at least one partial derivative. Otherwise, a differential equation is known as an \textbf{ordinary} differential equation. The two terms are frequently abbreviated to ODE and PDE.}
+		
+		
+		\bigskip
+		\subsubsection{Solutions}
+		\boxeddefinition{A \textbf{solution} to a differential equation -- also called a \textbf{general solution} -- is a set of functions that share the relation expressed in the differential equation.}%
+		\note{This is similar to the solution to an indefinite integral being a set of antiderivatives. However, an indefinite integral determines an antiderivative upto an additive constant but the general solution of a differential equation may only determine a function upto a multiplicative constant.}
+		
+		\medskip
+		\boxeddefinition{A \textbf{solution to the initial value problem} of a differential equation is a specific function where the initial value has determined a particular member of the set of functions in the general solution. That's to say, it is a function that \textbf{both} exhibits the relation in the differential equation and satisfies the initial condition(s) of the initial value problem.}
+		
+		
+		\note{A general solution of a differential equation defines a direction field where at every co-ordinate -- $(x,y)$ or $(t,y)$ -- the gradient is defined by the equation ${ \tod{y}{t} = f(t,y) }$. The solution to an IVP is a path through this direction field beginning at a point $(t_0, y_0)$ representing the initial conditions.}
+		\begin{figure}[h!]
+			\caption{The direction field of ${ y' = \sin(y) }$. The field contains steady-states at ${ y = 0,\pi,\frac{pi}{2} }$.}\label{fig:Dy_eq_sin_y}
+			\includegraphics[width=\linewidth]{\resourceDir/img/Dy_eq_sin_y.png}
+		\end{figure}
+		\biggerskip
+		
+		
+		\biggerskip
+		\subsubsection{Equilibrium Points / Steady-states}
+		
+		\boxeddefinition{A \textbf{steady-state} solution is an IVP solution that is constant across all values of the independent variable. Therefore, the initial conditions of the IVP must be this constant value.\\
+		For example, if ${ y(t) = C }$ for some constant $C$, is a steady-state solution then, for the initial condition ${ y(t_0) = C }$, the constant function ${ y(t) = C }$ is a solution to the IVP. Since this function is constant for all values of $t$, the derivative ${ \tod{y}{t} = 0 }$ also at all values of $t$.}
+		
+		\note{Although a function ${ y(t) = C }$ is only a solution to the IVP ${ y(t_0) = C }$ other solutions satisfying other initial conditions may converge to the value $C$. In this way, the steady-state may be the long-term behaviour of IVP solutions from a whole set of initial conditions.}
+		
+		\note{If we take the general form of a first-order differential equation
+				\[ \dod{y}{t} = f(t)g(y) + h(t), \]
+			then, for some value of the function $y_s$ to be a steady-state solution we need, for all $t$,
+				\begin{align*}
+					&& \dod{y}{t} = f(t)g(y_s) + h(t) &= 0 \\
+					&\iff &  g(y_s) &= -\frac{h(t)}{f(t)}.
+				\end{align*}
+			For example, the equation ${ y' = \frac{4t}{y} - 2t }$ has a steady-state at ${ y = 2 }$.
+		}
+		
+		\medskip
+		\boxeddefinition{A steady-state is called \textbf{stable} if the set of initial conditions that converge to it is greater than its value alone. In other words, if ${ y(t) = C }$ is a steady-state, then it is stable if the set of all initial values of the function ${ y_0 = y(t_0) }$ whose IVP solutions converge to it, 
+			\[ S = \setc{y_0}{y(t_0) = y_0 \implies \lim_{t \to \infty} y(t) = C} \]
+		is a proper superset of $\set{C}$ -- i.e. ${ \set{C} \subsetneq S }$.\\
+		
+		Conversely, a steady-state is called \textbf{unstable} if the set of initial conditions that converge to it is only the value itself. That's to say,
+			\[ S = \set{C}. \]
+		}
+	
+		\note{Stable steady-states happen when greater values of the function decrease to the steady-state value and lesser values of the function increase to the steady-state value. An \textbf{unstable} steady-state, conversely, is one where values of the function on lesser and greater move away from the steady-state value; the states of real-world systems modelled by these steady-states may not, in practice, be referred to as equilibria due to their instability.\\\\
+		Examples:
+		\begin{itemize}
+			\item{A ball rolling into a dip in the ground stays there whereas a ball at the top of a hump in the ground will likely roll off.}
+			\item{The equation ${ y' = \sin(y) }$ in figure \ref{fig:Dy_eq_sin_y} shows a stable equilibrium at ${ y = \pi }$ and unstable equilibria at ${ y = 0, 2\pi }$.}
+			\item{Another example: The equation ${ y' = \frac{4t}{y} - 2t }$ has a \textbf{stable} steady-state at ${ y = 2 }$ but the equation ${ y' = -\frac{4t}{y} + 2t }$ has an \textbf{unstable} steady-state at the same value ${ y = 2 }$. (Is this because for the first equation, at ${ y = y_s }$ we have ${ \tpd[2]{f}{y}\big\rvert_{y=y_s} > 0 }$ meaning that it is some kind of minimum? and the converse for the second equation?)
+			}
+		\end{itemize}
+		}
+	
 	}
 
 
@@ -970,7 +1035,7 @@
 % -----------------	
 
 	\pagebreak
-	\searchableSubsection{Some Classes of (First-order?) ODEs}{differential equations}{
+	\searchableSubsection{Autonomous, Separable and Exact ODEs}{differential equations}{
 	\biggerskip
 	
 		\subsubsubsection{Autonomous Equations and Exact Equations}
@@ -995,7 +1060,7 @@
 			\ContinuedFloat
 			\centering
 			
-			\subfloat[\raggedright autonomous: ${ y' = y (1-y) }$]{\includegraphics[height=\figHeight]{\autonomousDir/autonomous.png}}
+			\subfloat[\raggedright autonomous: ${ y' = y (1-y) }$ - note that the field is invariant to a shift along the $x$-axis.]{\includegraphics[height=\figHeight]{\autonomousDir/autonomous.png}}
 			
 			\subfloat[\raggedright separable: ${ y' = f(x) y (1-y) }$ where ${ f(x) = 0.2x }$]{\includegraphics[height=\figHeight]{\autonomousDir/separable.png}}
 			
@@ -1073,11 +1138,6 @@
 		\note{All autonomous equations are separable (though the reverse is not generally true) and all separable equations are exact equations (although some exact equations are not separable). So we have,
 			\[ \{\text{Autonomous}\} \subset \{\text{Separable}\} \subset \{\text{Exact}\}. \]
 		}
-		
-		\begin{itemize}
-			\item{Autonomous equations have direction fields that look the same across the independent variable - this is because the derivative doesn't depend on the independent variable. So, if $g(x)$ is a solution then $g(x+c)$, for constant $c$, is also a solution.}
-			\item{Separable equations can have steady-states because the differential equation does not include a term with only the dependent variable so there will be some value of the function $y$ that makes the derivative 0 and subsequent increasing values of the independent variable will not change that.}
-		\end{itemize}
 		
 		
 		\biggerskip
@@ -1261,7 +1321,7 @@
 
 	\pagebreak
 	\searchableSubsection{Comparison of Differential Equations with Difference Equations}{differential equations}{
-		\TODO{}
+		\TODO{Comparison of Differential Equations with Difference Equations}
 	}
 % ------------------
 
@@ -1330,7 +1390,7 @@
 				}
 			}
 			\biggerskip
-			\ex{\textbf{Simple Harmonic Motion:} ${ y'' = -ky }$ \TODO{complete this}}
+			\ex{\textbf{Simple Harmonic Motion:} ${ y'' = -ky }$ \TODO{S.H.M.}}
 			\biggerskip
 			\ex{
 				
@@ -1343,7 +1403,7 @@
 				The auxiliary equation of this equation is ${ z^2 + \frac{g}{L} = 0 }$ -- the roots of which are clearly complex and given by,
 				\[ z = \pm \frac{\sqrt{-4(g/L)}}{2} = \pm \sqrt{-\frac{g}{L}} = \pm \sqrt{\frac{g}{L}} i. \]
 				
-				\TODO{complete this}
+				\TODO{2nd order linearized pendulum equation}
 				
 			}\label{ex:pendulum-second-order-linear}
 		\end{exe}
