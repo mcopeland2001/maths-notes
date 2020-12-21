@@ -716,18 +716,32 @@
 		
 		Conversely, a steady-state is called \textbf{unstable} if the set of initial conditions that converge to it is only the value itself. That's to say,
 			\[ S = \set{C}. \]
+			
+		A steady-state can also be \textbf{semi-stable} if it is stable from one side and unstable from the other.
 		}
 	
-		\note{Stable steady-states happen when greater values of the function decrease to the steady-state value and lesser values of the function increase to the steady-state value. An \textbf{unstable} steady-state, conversely, is one where values of the function on lesser and greater move away from the steady-state value; the states of real-world systems modelled by these steady-states may not, in practice, be referred to as equilibria due to their instability.\\\\
-		Examples:
-		\begin{itemize}
-			\item{A ball rolling into a dip in the ground stays there whereas a ball at the top of a hump in the ground will likely roll off.}
-			\item{The equation ${ y' = \sin(y) }$ in figure \ref{fig:Dy_eq_sin_y} shows a stable equilibrium at ${ y = \pi }$ and unstable equilibria at ${ y = 0, 2\pi }$.}
-			\item{Another example: The equation ${ y' = \frac{4t}{y} - 2t }$ has a \textbf{stable} steady-state at ${ y = 2 }$ but the equation ${ y' = -\frac{4t}{y} + 2t }$ has an \textbf{unstable} steady-state at the same value ${ y = 2 }$. (Is this because for the first equation, at ${ y = y_s }$ we have ${ \tpd[2]{f}{y}\big\rvert_{y=y_s} > 0 }$ meaning that it is some kind of minimum? and the converse for the second equation?)
+		\note{Stable steady-states happen when greater values of the function decrease to the steady-state value and lesser values of the function increase to the steady-state value. An \textbf{unstable} steady-state, conversely, is one where values of the function that are a little lesser and greater move away from the steady-state value. The states of real-world systems modelled by these unstable steady-states may sometimes not, in practice, be referred to as equilibria due to their instability.
+		}
+	
+		\bigskip
+		\subsubsubsection{Examples of types of steady-state}
+		\begin{exe}
+			\ex{A ball rolling into a dip in the ground stays there whereas a ball at the top of a hump in the ground will likely roll off. If a dip in the ground is described by the curve ${ y = x^2 }$ so that the stable equilibrium is at ${ x = 0 }$ then, if the ball is pushed and rolls up the hill on the right side, the potential energy gained is proportional to $x^2$ and the tendency to return to the equilibrium is dependent on the rate at which the potential energy is released as the ball rolls back to the bottom, which is ${ \tod{x^2}{x} = 2x }$. Since this is acting to reduce the value of the displacement $x$ its sign is negative so $-2x$. Clearly the converse is the situation for a hump in the ground. So, in this model, the dip in the ground has a gradient field with a maximum at the equilibrium (similar to the curve of ${ y = -x^2 }$) while the hump in the ground has a gradient field with a minimum at the equilibrium (similar to the curve of ${ y = x^2 }$).
 			}
-		\end{itemize}
-		}
-	
+			\medskip
+			\ex{The equation ${ y' = \sin(y) }$ in figure \ref{fig:Dy_eq_sin_y} shows a stable equilibrium at ${ y = \pi }$ and unstable equilibria at ${ y = 0, 2\pi }$. This is because ${ \tpd{}{y} \sin(y) = \cos(y) }$ which is negative around ${ y = \pi }$ -- so this is a maximum and therefore, stable -- and positive around the values ${ y = 0, 2\pi }$ -- so these are minimums and therefore, unstable.
+			}
+			\medskip
+			\ex{Another example: The equation ${ y' = \frac{4t}{y} - 2t }$ has a \textbf{stable} steady-state at ${ y = 2 }$ for positive $t$ but at the same $y$-value the steady-state is unstable for negative values of $t$. This is because ${ \tpd{}{y}\left(\frac{4t}{y} - 2t\right) = -\frac{4t}{y^2} = -t }$ at ${ y = 2 }$ which means that the steady-state is a maximum and stable for positive $t$ and a minimum and unstable for negative $t$.
+				\note{Note that, if $t$ is modelling time, negative values of $t$ may not be meaningful.}
+			}
+			\medskip
+			\ex{The equation ${ y' = y^2 }$ has a semi-stable steady-state at ${ y = 0 }$: solution curves below it converge to it, but those above it diverge. Why? At ${ y = 0 }$ we have ${ \tpd{}{y} y^2 = 2y = 0 }$ so this is an inflection point. We look at before and after and see that both have positive values of the gradient $y'$.
+			}\label{ex:Dy-eq-y-squared}
+			\medskip
+			\ex{A corner case: The equation ${ y' = 2\sqrt{y} }$. This has a steady-state at ${ y = 0 }$ which is unstable from above because ${ \tpd{}{y} (2\sqrt{y}) = \frac{1}{\sqrt{y}} }$ is positive for positive $y$ so this is a minimum when viewed from above. But the partial derivative has an infinite discontinuity as ${ y = 0 }$ and doesn't exist as a real number for negative $y$. Likewise the gradient $y'$ is not a real number for negative $y$ and so is undefined in this situation. 
+			}\label{ex:Dy-eq-2-sqrt-y}
+		\end{exe}
 	}
 
 
@@ -937,7 +951,7 @@
 		\sep
 		\subsubsubsection{Examples}
 		\begin{exe}
-			\item{Suppose we have the equation ${ y' = y^2 }$ and the initial value ${ y(0) = 1 }$. This is an autonomous equation and, as such, is separable. So,
+			\ex{Continuing the example \ref{ex:Dy-eq-y-squared}, suppose we have the equation ${ y' = y^2 }$ and the initial value ${ y(0) = 1 }$. This is an autonomous equation and, as such, is separable. So,
 				\begin{align*}
 					&& \dod{y}{x} &= y^2 \nn
 					&\iff & \frac{1}{y^2} \dif y &= \dif x &\sidecomment{} \nn
@@ -957,7 +971,7 @@
 				\end{enumerate}
 			}
 			\biggerskip
-			\item{Suppose we have the equation ${ y' = 2\sqrt{y} }$ and the initial value ${ y(0) = 0 }$. This is also an autonomous equation and so is separable.
+			\ex{Continuing the example \ref{ex:Dy-eq-2-sqrt-y}, suppose we have the equation ${ y' = 2\sqrt{y} }$ and the initial value ${ y(0) = 0 }$. This is also an autonomous equation and so is separable.
 				\begin{align*}
 					&& \dod{y}{x} &= 2\sqrt{y} \nn
 					&\iff & \frac{1}{\sqrt{y}} \dif y &= 2 \dif x \nn
@@ -975,7 +989,7 @@
 				\end{enumerate}
 			}
 			\biggerskip
-			\item{Consider a ball falling under the influence of gravity but resisted by air-resistance. (The example uses a spherical object because other shapes would be likely to have a much more complicated influence of air-resistance on them.) Let $v(t)$ be the velocity at a time $t$ and $g$ be the acceleration due to gravity.\\
+			\ex{Consider a ball falling under the influence of gravity but resisted by air-resistance. (The example uses a spherical object because other shapes would be likely to have a much more complicated influence of air-resistance on them.) Let $v(t)$ be the velocity at a time $t$ and $g$ be the acceleration due to gravity.\\
 				
 			We can model the air-resistance as ${ -av^2 }$ for some constant $a$. This model is quadratic in the velocity of the falling object because: the faster the object is falling through the air, the greater the resisting force produced by the air (by Newton's Second Law) but, also, the greater the amount of air that the object is coming into contact with in a given time interval. Furthermore, since the air-resistance is acting in the opposite direction to the movement of the object it has the opposite sign to the velocity.\\
 			
