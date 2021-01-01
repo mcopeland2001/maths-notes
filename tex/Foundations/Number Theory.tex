@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 \date{\vspace{-6ex}}
 
@@ -381,6 +381,47 @@
 		\begin{itemize}
 			\item{$ \abs{z_1z_2} = \abs{z_1}\abs{z_2} $}
 		\end{itemize}
+	
+		\bigskip
+		\[ e^{(a+bi)t} = e^a (\cos{t} + i \sin{t})^b = e^a (\cos{bt} + i \sin{bt}) \]
+		where we have used
+		\[\begin{aligned}
+			(\cos{t} + i \sin{t})^2 &= \cos^2{t} + i \sin{2t} - \sin^2{t} \\
+			&= \cos{2t} +  i \sin{2t} \\
+		\end{aligned}\]
+		\[\begin{aligned}
+			(\cos{2t} +  i \sin{2t})^2 &= \cos^2{2t} + 2 i \sin{2t}\cos{2t} - \sin^2{2t} \\
+			&= \cos{4t} + i \sin{4t}. \\
+		\end{aligned}\]
+		(more difficult to prove for non-even integer powers)
+		
+		\subsubsection{The Complex Conjugate}
+		\[\begin{aligned}
+			\conj{z + w} &= \conj{(a + bi) + (c + di)} \\
+			&= \conj{(a + c) + i(b + d)} \\
+			&= (a + c) - (b + d)i \\
+			&= (a - bi) + (c - di) \\
+			&= \conj{z} + \conj{w}.
+		\end{aligned}\]
+		
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{The conjugate of a product of complex numbers is equal to the product of their conjugates.}{conjugate-of-complex-product-equal-to-product-of-conjugates}
+			\begin{proof}
+				\[\begin{aligned}
+					\conj{zw} &= \conj{(a + bi)(c + di)} \\
+					&= \conj{(ac - bd) + (ad + bc)i} \\
+					&= (ac - bd) - (ad + bc)i \\
+					&= (a - bi)(c - di) \\
+					&= \conj{z} \, \conj{w}.
+				\end{aligned}\]
+			\end{proof}
+		\end{tcolorbox}
+	
+		\[\begin{aligned}
+			\overline{\left(\frac{z}{w}\right)} &= \overline{ \left(\frac{z \, \overline{w}}{w \, \overline{w}}\right) } \nn
+			&= \overline{ \left(\frac{z \, \overline{w}}{\abs{w}}\right) } = \frac{\overline{z} \, w}{\abs{w}} \nn
+			&= \frac{\overline{z} \, w}{w \, \overline{w}} = \frac{\overline{z}}{\overline{w}} \nn
+		\end{aligned}\]
 	}
 		
 		

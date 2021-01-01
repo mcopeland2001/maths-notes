@@ -97,7 +97,7 @@
 \newcommand\sectionTitle\Huge
 \newcommand\subsectionTitle\Large
 \newcommand{\biggerskip}{\bigskip\bigskip}
-\newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\\}% this is the level below the last toc/bookmark level
+\newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\\[8pt]}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
 \newcommand{\divides}{\mid}
@@ -133,6 +133,20 @@
 	\end{array}\right]
 }
 
+%\newcommand*\xbar[1]{% from https://latex.org/forum/viewtopic.php?t=20717
+%	\hbox{%
+%		\vbox{%
+%			\hrule height 0.5pt % The actual bar
+%			\kern0.5ex%         % Distance between bar and symbol
+%			\hbox{%
+%				\kern-0.1em%      % Shortening on the left side
+%				\ensuremath{#1}%
+%				\kern-0.1em%      % Shortening on the right side
+%			}%
+%		}%
+%	}%
+%}  currently not being used
+
 
 \def\u{\vec{\bm{u}}}
 \def\v{\vec{\bm{v}}}
@@ -148,6 +162,7 @@
 \renewcommand{\norm}{\abs}
 \newcommand{\dotprod}{\boldsymbol{\cdot}}
 \newcommand{\congruent}[2]{\equiv #1 \modulo{#2}}
+\newcommand{\conj}[1]{\overline{#1}}
 
 \newcommand*{\V}[1]{\vec{\bm{#1}}}
 \newcommand{\dotsuchthat}{\;\cdot\;}

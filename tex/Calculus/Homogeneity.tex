@@ -1,0 +1,295 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+\title{Homogeneity}
+\date{\vspace{-6ex}}
+
+\begin{document}
+	\searchableSection{Homogeneity}{analysis, calculus, homogeneous functions}{\label{section:homogeneous-functions}
+		\bigskip\bigskip
+		
+		\subsection{Homogeneous Functions}
+		
+		\boxeddefinition{A \textbf{homogeneous} function is a multivariate function $f(x_1, \dots, x_n)$ such that,
+			\[ f(\lambda x_1, \dots, \lambda x_n) = \lambda^d f(x_1,\dots, x_n) \hspace{20pt} d \in \Z{},\, \lambda \in \R{}. \]
+			The integer power $d$ is known as the \textbf{degree} so that $f$ is described as \textbf{homogeneous of degree $d$}.\\
+			
+			If ${ f: V \longmapsto W }$ is a function between two vector spaces over a field $\F{}$, then $f$ is said to be homogeneous of degree $d$ if
+			\[ f(\lambda \v ) = \lambda^{d} f(\v ) \]
+			for all non-zero ${ \lambda \in \F{} }$ and ${ \v \in V }$.\\
+			
+			When defined on vector spaces over the reals, a more restricted definition is often used requiring only that,
+			\[ f(\lambda \v ) = \lambda^{d} f(\v ) \]
+			for all ${ \lambda > 0 }$.
+		}
+	
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{If a linear map is homogeneous then it preserves the origin.}{linear-map-is-homogeneous-implies-preserves-origin}
+			\begin{proof}
+				Let ${ T: V \longmapsto W }$ be a linear map between vector spaces over the field $\F{}$ that is homogeneous of degree $d$. Then,
+				\[\begin{aligned}
+					\lambda^d \, T(\v) &= T(\lambda \v) &\sidecomment{by homogeneity of $T$}\\
+					&= T(\lambda (\v + \0)) &\sidecomment{by vector axioms} \\
+					&= T(\lambda\v + \lambda\0) &\sidecomment{by vector axioms} \\
+					&= T(\lambda\v) + T(\lambda\0) &\sidecomment{by linearity of $T$} \\
+					&= T(\lambda\v) + T(\0) &\sidecomment{by vector axioms} \\
+					&= \lambda^d \, T(\v) + T(\0) &\sidecomment{by homogeneity of $T$}. \\
+				\end{aligned}\]
+				Therefore ${ T(\0) = \0 }$.
+			\end{proof}
+		\end{tcolorbox}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Any linear map is homogeneous of degree 1.}{linear-map-is-homogeneous-degree-1}
+			\begin{proof}
+				Let ${ T: V \longmapsto W }$ be a linear map between vector spaces over the field $\F{}$. Then by the definition of a linear map,
+				\[ T(\lambda \v) = \lambda \, T(\v) = \lambda^1 \, T(\v) \]
+				for any ${ \v \in V }$ and ${ \lambda \in \F{} }$.
+			\end{proof}
+		\end{tcolorbox}
+	
+		\medskip
+		\begin{corollary}\label{coro:linear-map-homogeneous-degree-1-and-preserves-origin}
+			Any linear map is homogeneous of degree 1 and preserves the origin.
+		\end{corollary}
+		\begin{proof}
+			By \autoref{prop:linear-map-is-homogeneous-degree-1}, any linear map is homogeneous of degree 1 and, by \autoref{prop:linear-map-is-homogeneous-implies-preserves-origin} it, therefore, preserves the origin.
+		\end{proof}
+	
+	
+		\biggerskip
+		\subsection{Homogeneous Polynomials}
+		\bigskip
+		\boxeddefinition{A \textbf{homogeneous polynomial or monomial} is a polynomial or monomial that, when considered as a function of its variables, forms a homogeneous function.}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Any monomial is homogeneous with degree equal to the sum of the powers of the variables.}{monomial-is-homogeneous-degree-sum-of-powers}
+			\begin{proof}
+				Using the definition of a monomial (\href{https://en.wikipedia.org/wiki/Monomial}{wikipedia}) we form a function whose implementation is a monomial expression,
+				\[ f(x_1, x_2, \dots, x_n) = x_1^{\alpha_1}x_2^{\alpha_2}\dots x_n^{\alpha_n}. \]
+				Then,
+				\[\begin{aligned}
+					f(\lambda x_1, \lambda x_2, \dots, \lambda x_n) &= (\lambda x_1)^{\alpha_1}(\lambda x_2)^{\alpha_2}\dots (\lambda x_n)^{\alpha_n} \nn
+					&= \lambda^{\alpha_1 + \alpha_2 + \cdots + \alpha_n} x_1^{\alpha_1}x_2^{\alpha_2}\dots x_n^{\alpha_n} \nn
+					&= \lambda^{\alpha_1 + \alpha_2 + \cdots + \alpha_n} f(x_1, x_2, \dots, x_n).
+				\end{aligned}\]
+				So $f$ is homogeneous of degree ${ \alpha_1 + \cdots + \alpha_n }$.
+			\end{proof}
+		\end{tcolorbox}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{A polynomial comprised of monomial terms of degree $d$ is homogeneous of degree $d$.}{polynomial-of-monomials-of-degree-d-also-is-degree-d}
+			\begin{proof}
+				Let 
+				\[ p(x_1,\dots,x_n) = m_1(x_1,\dots,x_n) + \cdots + m_n(x_1,\dots,x_n) \]
+				be a polynomial whose terms are given by the monomial functions ${ m_1,\dots,m_n }$. If each of the monomial functions $m_i$ has degree $d$ then each is homogeneous of degree $d$ and,
+				\[\begin{aligned}
+					p(\lambda x_1, \dots, \lambda x_n) &= \lambda^d m_1(x_1,\dots,x_n) + \cdots + \lambda^d  m_n(x_1,\dots,x_n) \\
+					&= \lambda^d [ m_1(x_1,\dots,x_n) + \cdots + m_n(x_1,\dots,x_n) ] \\
+					&= \lambda^d p(x_1,\dots,x_n). \qedhere
+				\end{aligned}\]
+			\end{proof}
+		\end{tcolorbox}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{A homogeneous polynomial of degree $d$ can be converted into a homogeneous polynomial of degree 1 by raising to the power $1/d$.}{}
+			\begin{proof}
+				Let ${ p(x_1,\dots,x_n) }$ be a homogeneous polynomial of degree $d$. Then by homogeneity of $p$,
+				\[ p(\lambda x_1, \dots, \lambda x_n) = \lambda^d p(x_1,\dots,x_n) \]
+				and we define a function $q$ such that,
+				\[ q(x_1,\dots,x_n) = [p(x_1,\dots,x_n)]^{\frac{1}{d}}. \]
+				Now,
+				\[\begin{aligned}
+					q(\lambda x_1, \dots, \lambda x_n) &= [p(\lambda x_1, \dots, \lambda x_n)]^{\frac{1}{d}} \\
+					&= [\lambda^d p(x_1,\dots,x_n)]^{\frac{1}{d}} \\
+					&= \lambda [p(x_1,\dots,x_n)]^{\frac{1}{d}} \\
+					&= \lambda q(x_1,\dots,x_n). \qedhere \\
+				\end{aligned}\]
+			\end{proof}
+		\end{tcolorbox}
+	
+		\note{Note that this seems obvious when considered in the abstract as in the proof here but, in practice, may not be obvious. For example, the implication is that,
+			\[ f(x,y,z) = (x^k + y^k + z^k)^{\frac{1}{k}} \]
+			has the property that,
+			\[ f(\lambda x, \lambda y, \lambda z) = \lambda f(x,y,z). \]
+		}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{An arbitrary polynomial in $n$ variables can be converted into a homogeneous polynomial of an arbitrary degree $d$ in ${ n+1 }$ variables.}{n-variable-polynomial-is-homogeneous-n+1-variable-polynomial}
+			\begin{proof}
+				Let ${ p(x_1,\dots,x_n) }$ be an arbitrary non-homogeneous polynomial. Then $p$ can be expressed as the sum of monomial functions,
+				\[  p(x_1,\dots,x_n) = \sum_i m_i(x_1,\dots,x_n) \]
+				where each monomial function $m_i$ has degree $d_i$. By \autoref{prop:monomial-is-homogeneous-degree-sum-of-powers}, we have,
+				\[ d_i = \sum_{j=1}^n \alpha_j \]
+				where the $\alpha_j$ are the exponents of each of the $n$ variables in the monomial term $m_i$.\\
+				
+				If we now define another polynomial function $q$ such that,
+				\[\begin{aligned}
+					q(x_0,x_1,\dots,x_n) &= {x_0}^d \, p\left(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}\right) \nn
+					&= {x_0}^d \, \sum_i m_i\left(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}\right) \nn
+					&= {x_0}^d \, \sum_i \left(\frac{1}{x_0}\right)^{d_i} \, m_i(x_1,\dots,x_n) \nn
+					&= \sum_i {x_0}^{d-d_i} \, m_i(x_1,\dots,x_n) \nn
+				\end{aligned}\]
+				we can see now that the function $q$ has the property that,
+				\[\begin{aligned}
+					q(\lambda x_0,\lambda x_1,\dots,\lambda x_n) &= \sum_i {(\lambda x_0)}^{d-d_i} \, m_i(\lambda x_1,\dots,\lambda x_n) \nn
+					&= \sum_i (\lambda^{d-d_i} \, {x_0}^{d-d_i}) \, \lambda^{d_i} \, m_i(x_1,\dots,x_n) \nn
+					&= \lambda^d \, \sum_i {x_0}^{d-d_i} \, m_i(x_1,\dots,x_n) \nn
+					&= \lambda^d \, q(x_0,x_1,\dots,x_n) \qedhere \\
+				\end{aligned}\]
+			\end{proof}.
+		\end{tcolorbox}
+	
+		\biggerskip
+		\subsection{Homogeneous Coordinates}
+		\bigskip
+		We can consider coordinates as a function $C$ from the domain of all possible coordinate values to a set of possible points $P$,
+		\[ C: \R{n} \longmapsto P. \]
+		Then, \textit{homogeneous} coordinates describe a function $H$ that does this non-injectively. Specifically,
+		\[ H: \R{n+1} \longmapsto P, \hspace{10pt} H(x_0,x_1,\dots,x_n) = C\left(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}\right) \]
+		implementing a function that is homogeneous of degree 0 so that,
+		\[\begin{aligned}
+			H(\lambda x_0,\lambda x_1,\dots,\lambda x_n) &= C\left(\frac{\lambda x_1}{\lambda x_0},\dots,\frac{\lambda x_n}{\lambda x_0}\right) \nn
+			&= C\left(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}\right) \nn
+			&= H(x_0,x_1,\dots,x_n).
+		\end{aligned}\]
+		So the coordinates are invariant under uniform scaling of their components. For this reason, they also represent a projective space and are also known as \textit{projective} coordinates (\href{https://en.wikipedia.org/wiki/Homogeneous_coordinates}{wikipedia}).\\
+		
+		Projective coordinates can represent translation as a linear transformation:
+		\[ 	\begin{bmatrix}
+				a & 0 & t_x\\
+				0 & b & t_y\\
+				0 & 0 & 1
+			\end{bmatrix}\begin{bmatrix}x\\ y\\ 1\end{bmatrix} =
+			\begin{bmatrix}ax + t_x\\ by + t_y\\ 1\end{bmatrix} =
+			\begin{bmatrix}ax\\ by\\ 0\end{bmatrix} +
+			\begin{bmatrix}t_x\\ t_y\\ 1\end{bmatrix}
+		\]
+		which, in "normal" coordinates, would be,
+		\[ 	\begin{bmatrix}
+				a & 0\\
+				0 & b
+			\end{bmatrix}\begin{bmatrix}x\\ y\end{bmatrix} + 
+			\begin{bmatrix}t_x\\ t_y\end{bmatrix}.
+		\]
+	
+		\biggerskip
+		\subsection{Homogeneous Equations and Systems}
+		\bigskip
+		\note{Equations may be considered as functions in two ways: as an explicit or as an implicit function. The explicit form involves selecting a single variable as the dependent variable which will be the function and explicitly defining it in terms of the other variables, e.g.
+			\[ ax + by + cz + d = 0 \leadsto z(x,y) = -\left(\frac{a}{c}\right) x - \left(\frac{b}{c}\right) y + \left(\frac{d}{c}\right). \]
+			(Note that it is not always possible to find an explicit expression such as this.)\\\\
+			The implicit form on the other hand involves considering the equation as a constant-valued function of all of its variables, e.g.,
+			\[ ax + by + cz + d = 0 \leadsto f(x,y,z) = ax + by + cz = -d. \]
+			Clearly, this is always possible.\\\\
+			The examples here show linear equations but there is no reason why they can't be nonlinear, e.g.
+			\[ f(x,y,z) = \cos{x} + y^2 + \frac{1}{z} = -d. \]
+			In the case of a linear equation, the constant-value implicit function form of the equation can be considered as a linear map over its variables,
+			\[\begin{aligned}
+				&& \alpha_1 x_1 + \alpha_2 x_2 + \cdots + \alpha_n x_n &= b \nnn
+				&\iff & \begin{bmatrix}\alpha_1&\alpha_2&\cdots&\alpha_n\end{bmatrix} \begin{bmatrix}x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix} &= b \nnn
+				&\iff & A \x &= b.
+			\end{aligned}\]
+		}
+		\medskip
+		\boxeddefinition{A \textbf{homogeneous equation} is one which, when expressed as a constant-valued implicit function of all of its variables, is homogeneous \textbf{of degree zero}.}
+		
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{A linear equation that is also homogeneous has no constant term.}{linear-homogeneous-equation-has-no-constant-term}
+			\begin{proof}
+				Let ${ f(x_1,\dots,x_n) = C }$ be a constant-valued implicit function representing an equation over a field $\F{}$. If the equation is homogeneous then, by the definition, this function $f$ must be homogeneous of degree zero. Therefore,
+				\begin{equation} f(\lambda x_1,\dots,\lambda x_n) = \lambda^0 \, f(x_1,\dots,x_n) = \lambda^0 \, C = C  \tag{1}
+					\label{eq:linear-homogeneous-equation-has-no-constant-term_1} 
+				\end{equation}
+				for some constants ${ C, \lambda \neq 0 \in \F{}, d \in \Z{} }$. But since the underlying equation is linear then the function $f$ is a linear transformation of its variables considered as a vector,
+				\[ f(x_1,\dots,x_n) = A\x = C. \]
+				But, by \autoref{prop:linear-map-is-homogeneous-degree-1}, the linear map is homogeneous of degree 1. So, we have,
+				\begin{equation} f(\lambda x_1,\dots,\lambda x_n) = A\lambda\x = \lambda A\x = \lambda C \tag{2} 
+					\label{eq:linear-homogeneous-equation-has-no-constant-term_2}
+				\end{equation}
+				From \eqref{eq:linear-homogeneous-equation-has-no-constant-term_1} and \eqref{eq:linear-homogeneous-equation-has-no-constant-term_2} we have that,
+				\[ f(\lambda x_1,\dots,\lambda x_n) = C = \lambda C \]
+				with ${ \lambda \neq 0 }$ from the definition of homogeneity. It follows from field axioms, therefore, that ${ C = 0 }$.
+			\end{proof}
+		\end{tcolorbox}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{A linear equation that is also homogeneous always has the trivial solution.}{linear-homogeneous-equation-has-trivial-solution}
+			\begin{proof}
+				Let ${ f(x_1,\dots,x_n) = A\x = C }$ be a constant-valued implicit function representing a linear homogeneous equation over a field $\F{}$. Using \autoref{prop:linear-homogeneous-equation-has-no-constant-term}, we know that ${ C = 0 }$ and using \autoref{coro:linear-map-homogeneous-degree-1-and-preserves-origin} we have that ${ A\0 = \0 }$. It follows then, that $\0$ is a solution to the equation.
+			\end{proof}
+		\end{tcolorbox}
+		
+		
+		\biggerskip
+		\subsubsubsection{Systems}
+		\boxeddefinition{A linear system of equations is described as \textbf{homogeneous} if all its equations are homogeneous.}
+		
+		It follows that a \textit{linear} system of equations is \textit{homogeneous} if the constant terms are all zero,
+		\[ 
+			\begin{alignedat}
+					{7}a_{11}x_{1}&&\;+\;&&a_{12}x_{2}&&\;+\cdots +\;&&a_{1n}x_{n}&&\;=\;&&&0\\a_{21}x_{1}&&\;+\;&&a_{22}x_{2}&&\;+\cdots +\;&&a_{2n}x_{n}&&\;=\;&&&0\\\vdots \;\;\;&&&&\vdots \;\;\;&&&&\vdots \;\;\;&&&&&\,\vdots \\a_{m1}x_{1}&&\;+\;&&a_{m2}x_{2}&&\;+\cdots +\;&&a_{mn}x_{n}&&\;=\;&&&0.\\
+			\end{alignedat}
+		\]
+		which is equivalent to the matrix equation,
+		\[ A \x = \0. \]
+		It further follows that such systems, and matrix equations, always have the trivial solution ${ \x = \0 }$.
+		
+		
+		
+
+
+% -----------------------------
+		
+		
+		\pagebreak
+		\subsection{Differentiation of Homogeneous Functions}
+		\bigskip
+		\begin{lemma}\label{lem:homogeneous-func-has-powers-that-sum-to-degree}
+			If a function $f$ is homogeneous of degree $d$ then it can be expressed as a polynomial whose terms contain powers of variables such that the powers sum to $d$.
+		\end{lemma}
+		\begin{proof}
+			Assume $f$ can be expressed as a multivariate polynomial. Then $f(x_1, \dots, x_n)$ can be expressed as the sum of terms of the form,
+			\[ \alpha x_1^{i_1} \cdots x_n^{i_n} \]
+			for some constant ${ \alpha \in \R{} }$. Therefore, for each term of $f(\lambda x_1, \dots, \lambda x_n)$ we have,
+			\[ \alpha (\lambda x_1)^{i_1} \cdots (\lambda x_n)^{i_n} = \alpha \lambda^{i_1} x_1^{i_1} \cdots \lambda^{i_n} x_n^{i_n} = \lambda^{(i_1 + \cdots + i_n)} (\alpha x_1^{i_1} \cdots x_n^{i_n}). \]
+			Since $f$ is homogeneous of degree $d$ we also have,
+			\[ f(\lambda x_1, \dots, \lambda x_n) = \lambda^d f(x_1,\dots, x_n) \]
+			where each term of $\lambda^d f(x_1,\dots, x_n)$ has the form,
+			\[ \lambda^d (\alpha x_1^{i_1} \cdots x_n^{i_n}) \]
+			which means that, for every term of the expression for $f(\lambda x_1, \dots, \lambda x_n)$, we must have,
+			\[ \lambda^{(i_1 + \cdots + i_n)} = \lambda^d \iff i_1 + \cdots + i_n = d. \qedhere \]
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{\textbf{Euler's Theorem of Homogeneous Functions}: If $f(x_1, \dots, x_n)$ is a homogeneous function of degree $d$ then,
+			\[ d \cdot f(x_1, \dots, x_n) = x_1 \frac{\partial f}{\partial x_1} + \cdots + x_n \frac{\partial f}{\partial x_n}. \]
+		}{eulers-theorem-of-homogeneous-functions}
+		\begin{proof}
+			Assume $f$ can be expressed as a multivariate polynomial. Then $f(x_1, \dots, x_n)$ can be expressed as the sum of terms of the form,
+			\[ \alpha x_1^{i_1} \cdots x_n^{i_n} \]
+			for some constant ${ \alpha \in \R{} }$. If we take the partial derivative of $f$ with respect to $x_1$, each term of the result will take the form,
+			\[ i_1 \alpha x_1^{(i_1 - 1)}x_2^{i_2}\cdots x_n^{i_n} \]
+			and each term of the partial derivative with respect to $x_2$ will have the form,
+			\[ i_2 \alpha x_1^{i_1}x_2^{(i_2 - 1)}\cdots x_n^{i_n} \]
+			and the $n$-th partial derivative will have terms,
+			\[ i_n \alpha x_1^{i_1}x_2^{i_2}\cdots x_n^{(i_n - 1)}. \]
+			Now if we look at the terms of the expression $x_1f_{x_1}$,
+			\[ x_1 \cdot i_1 \alpha x_1^{(i_1 - 1)}x_2^{i_2}\cdots x_n^{i_n} = i_1 (\alpha x_1^{i_1}x_2^{i_2}\cdots x_n^{i_n}) \]
+			we see that the terms are the same as the terms of the original function $f(x_1, \dots, x_n)$ except multiplied by the power of $x_1$ in that term. Therefore, each term of the expression ${ x_1f_{x_1} + \cdots + x_nf_{x_n} }$ has the form,
+			\[ (i_1 + i_2 + \cdots + i_n)(\alpha x_1^{i_1}x_2^{i_2}\cdots x_n^{i_n}) = d(\alpha x_1^{i_1}x_2^{i_2}\cdots x_n^{i_n}) \]
+			where we have used \autoref{lem:homogeneous-func-has-powers-that-sum-to-degree} to determine that,
+			\[ i_1 + \cdots + i_n = d. \]
+			Therefore,
+			\[ x_1f_{x_1} + \cdots + x_nf_{x_n} = d \cdot f(x_1, \dots, x_n). \qedhere \]
+		\end{proof}
+	}
+\end{document}
