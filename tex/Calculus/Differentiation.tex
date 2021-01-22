@@ -233,5 +233,23 @@
 		\subsubsection{Problems with this approach to Differentiation}
 		\bigskip
 		We can describe polynomial functions as finite vectors defined against the basis of monomials ($1,x,x^2,\dots$) but to describe transcendental functions such as $e^x$ in the same manner we would need an infinite linear combination of monomials which cannot be generally defined to create a vector space of such vectors.
+		
+		\sep
+		\subsubsection{The Polynomial Differential Operator}\label{sssection:polynomial-differential-operator}
+		\bigskip
+		\boxeddefinition{The $n$-th degree \textbf{polynomial differential operator} is defined as 
+			\[ L = a_n D^n + a_{n-1} D^{n-1} + \cdots + a_1 D + a_0 \]
+			so that, for example, a second-degree operator may be used to define the homogeneous differential equation
+			\[ a_2 y'' + a_1 y' + a_0 y = 0 \]
+			as
+			\[ L y = 0 = a_2 D^2 y + a_1 D y + a_0 y. \]
+		}
+		\note{We can form polynomials of the differential operator $D$ because, as a linear operator, we can use \ref{defn:polynomials-of-linear-operators}. However, it should be noted that, if ${ u, v }$ are both functions of $t$, ${ u(t), v(t) }$,
+			\[ Duv = v \centernot\implies Du = 1. \]
+			This seems obvious because,
+			\[ Duv = (Du)v + u(Dv) \]
+			but some implications may not be so obvious. For example,
+			\[ (D - a) uv = v \centernot\implies (D - a) u = 1. \]
+		}
 	}
 \end{document}

@@ -871,8 +871,9 @@
 	\medskip
 	\labeledProposition{Let $W$ be a subspace of a finite-dimensional vector space $V$. Then there is another subspace $W'$ such that ${ W \oplus W' = V }$.}{subspaces_have_a_complement_wrt_direct_sum}
 	\begin{proof}
-		Any basis of $W$ is a linearly independent set in $V$ and can be extended to a basis of $V$ by adding a set of linearly independent vectors $S$. Then $S$ is a basis of a subspace $W'$ such that ${ W \oplus W' = V }$.
+		Any basis of $W$ is a linearly independent set in $V$ and can be extended to a basis of $V$ by adding a set of linearly independent vectors $S$. Then $S$ is a basis of a subspace $W'$ such that any vector in $V$ is in ${ W + W' }$ and since their bases are linearly independent this sum of spaces is a direct sum ${ W \oplus W' }$. Therefore, ${ W \oplus W' = V }$.
 	\end{proof}
+	\note{The subspace $W'$ of $V$ such that ${ W \oplus W' = V }$ is called the \textbf{quotient space of $V$ by $W$} and is denoted ${ V/W }$ (see \href{https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)}{wikipedia}).}
 }
 
 

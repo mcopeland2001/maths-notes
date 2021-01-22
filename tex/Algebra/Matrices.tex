@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 \newcommand{\exampleMatrixTwoDTransform}{
 We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D transformation matrix $A$, into its image in the destination space, $Y$ in $\R{2}$.
@@ -235,6 +235,31 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\end{itemize}
 	
 		\bigskip
+		\subsubsection{The Zero Matrix}
+		\boxeddefinition{The \textbf{zero matrix} is the matrix additive identity and multiplicative unit. Therefore, if $0_n$ here denotes the ${ n \times n }$ zero matrix then, for any square ${ n \times n }$ matrix $M$,
+			\[ M + 0_n = M = 0_n + M \eqand M 0_n = 0_n = 0_n M. \]
+			Obviously, for non-square matrices, the multiplication will not be commutative and so only the left- or right-multiplication will be applicable.
+		}
+	
+		\biggerskip
+		\labeledTheorem{Any matrix $A$ such that for all vectors $\v$ in the space ${ A\v = \0 }$, is the zero matrix.}{matrix-that-sends-all-vectors-to-zero-is-zero-matrix}
+		\begin{proof}
+			Let $A$ be such a matrix so that for all $\v$ in the vector space $V$ over which the matrix is defined,
+			\[ A\v = \0. \]
+			Then, for any other arbitrary matrix $M$ defined over the same vector space, and having the same dimensions as $A$,
+			\[ (M + A)\v = M\v + A\v = M\v = A\v + M\v = (A + M)\v \]
+			which implies that ${ M + A = M = A + M }$.\\
+			
+			In addition, if $M$ has appropriate dimensions for left-multiplication of $A$ then,
+			\[ (M A)\v = M(A\v) = M\0 = \0 \]
+			and if $M$ has appropriate dimensions for right-multiplication of $A$ then,
+			\[ (A M)\v = A(M\v) = A\w = \0. \]
+			It therefore follows that,
+			\[ MA = 0 \eqand AM = 0 \]
+			where 0 denotes the zero matrix of appropriate dimensions.
+		\end{proof}
+	
+		\bigskip
 		\subsubsection{Block Matrix multiplication}\label{sssection:block-matrix-multiplication}
 		In the description of matrix multiplication as
 		\begin{align*}
@@ -346,6 +371,35 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			\end{bmatrix} \implies
 			AC = I \iff C = \inv{A}.
 		\]
+		
+		\biggerskip
+		\subsubsubsection{Block multiplication preserves the block dimensions}
+		
+		For example, let 
+		\[ A \in \R{2 \times 2}, \, B \in \R{2 \times 1}, \, C \in \R{1 \times 2}, \, D \in \R{}. \]
+		Then,
+		\[
+			\begin{bmatrix}
+				A & B\\
+				C & D
+			\end{bmatrix}
+			\begin{bmatrix}
+				A & B\\
+				C & D
+			\end{bmatrix} =
+			\begin{bmatrix}
+				A^2 + BC & AB + BD\\
+				CA + DC & CB + D^2
+			\end{bmatrix}
+		\]
+		where 
+		\[\begin{aligned}
+			A^2 + BC &\in \R{2 \times 2} \\
+			AB + BD &\in \R{2 \times 1} \\
+			CA + DC &\in \R{1 \times 2} \\
+			CB + D^2 &\in \R{}.
+		\end{aligned}\]
+		
 		
 		\bigskip
 		\subsubsection{Matrix transpose}
@@ -856,14 +910,14 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\notation{The \textbf{matrix units} - matrices with a single non-zero component whose value is 1 are traditionally named $\bm{e_{ij}}$ where $i,j$ is the matrix co-ordinate of the 1.}\\\\
 		An arbitrary matrix $A = (a_{ij})$ may be expressed as a sum of such unit matrices as $A = a_{11}e_{11} + \cdots + a_{nn}e_{nn}$.
 		\[
-		e_{ij} = 
-		\begin{bmatrix}
-		\cdots & \cdots & \cdots \\
-		\vdots & \vdots & \vdots \\
-		\cdots & 1 & \cdots \\
-		\vdots & \vdots & \vdots \\
-		\cdots & \cdots & \cdots \\
-		\end{bmatrix}
+			e_{ij} = 
+				\begin{bmatrix}
+					\cdots & \cdots & \cdots \\
+					\vdots & \vdots & \vdots \\
+					\cdots & 1 & \cdots \\
+					\vdots & \vdots & \vdots \\
+					\cdots & \cdots & \cdots \\
+				\end{bmatrix}
 		\]
 		So matrix units can be used to analyse matrix addition but to analyse matrix multiplication some square matrices called \textbf{elementary matrices} are more useful.\\
 		
@@ -1016,8 +1070,7 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 							0
 						\end{bmatrix} \\[10pt]
 						\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}0\end{bmatrix}
-					\end{bmatrix}
-					
+					\end{bmatrix}					
 					\begin{bmatrix}
 						\begin{bmatrix}
 							3 & 1\\
@@ -1043,53 +1096,53 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 				\]
 		
 		
-		\note{Note that the matrix multiplication by blocks works out:
-			\[  \begin{bmatrix}
-					\inv{\begin{bmatrix}
-						3 & 1\\
-						0 & 2
-						\end{bmatrix}} & 
-					\begin{bmatrix}
-					0  \\
-					0
-					\end{bmatrix} \\[10pt]
-					\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}0\end{bmatrix}
-				\end{bmatrix}
-				\begin{bmatrix}
-					\begin{bmatrix}
-					3 & 1\\
-					0 & 2
-					\end{bmatrix} & 
-					\begin{bmatrix}
-					1  \\
-					-4
-					\end{bmatrix} \\[10pt]
-					\begin{bmatrix}3 & 2\end{bmatrix} & \begin{bmatrix}-1\end{bmatrix}
-				\end{bmatrix} =
-				\begin{bmatrix}
-					\begin{bmatrix}
-					1 & 0\\
-					0 & 1
-					\end{bmatrix} +
-					\begin{bmatrix}
-					0 & 0\\
-					0 & 0
-					\end{bmatrix} & 
-					\begin{bmatrix}
-					1  \\
-					-2
-					\end{bmatrix} +
-					\begin{bmatrix}
-					0  \\
-					0
-					\end{bmatrix}\\[10pt]
-					\begin{bmatrix}0 & 0\end{bmatrix} + \begin{bmatrix}0 & 0\end{bmatrix}
-					 & \begin{bmatrix}0\end{bmatrix} + \begin{bmatrix}0\end{bmatrix}
-				\end{bmatrix}.
-			\]
+				\note{Note that the matrix multiplication by blocks works out:
+					\[  \begin{bmatrix}
+							\inv{\begin{bmatrix}
+								3 & 1\\
+								0 & 2
+								\end{bmatrix}} & 
+							\begin{bmatrix}
+							0  \\
+							0
+							\end{bmatrix} \\[10pt]
+							\begin{bmatrix}0 & 0\end{bmatrix} & \begin{bmatrix}0\end{bmatrix}
+						\end{bmatrix}
+						\begin{bmatrix}
+							\begin{bmatrix}
+							3 & 1\\
+							0 & 2
+							\end{bmatrix} & 
+							\begin{bmatrix}
+							1  \\
+							-4
+							\end{bmatrix} \\[10pt]
+							\begin{bmatrix}3 & 2\end{bmatrix} & \begin{bmatrix}-1\end{bmatrix}
+						\end{bmatrix} =
+						\begin{bmatrix}
+							\begin{bmatrix}
+							1 & 0\\
+							0 & 1
+							\end{bmatrix} +
+							\begin{bmatrix}
+							0 & 0\\
+							0 & 0
+							\end{bmatrix} & 
+							\begin{bmatrix}
+							1  \\
+							-2
+							\end{bmatrix} +
+							\begin{bmatrix}
+							0  \\
+							0
+							\end{bmatrix}\\[10pt]
+							\begin{bmatrix}0 & 0\end{bmatrix} + \begin{bmatrix}0 & 0\end{bmatrix}
+							 & \begin{bmatrix}0\end{bmatrix} + \begin{bmatrix}0\end{bmatrix}
+						\end{bmatrix}.
+					\]
+				}%note
 			}\label{ex:gaussian-elimination}
-			\end{exe}
-		}
+		\end{exe}
 		
 		\medskip
 		From this it's clear that the Gaussian Elimination algorithm amounts to left multiplication by the inverse of the invertible part of the matrix (in this case $R$).\\

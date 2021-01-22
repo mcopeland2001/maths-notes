@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 
 \date{\vspace{-6ex}}
@@ -23,7 +23,9 @@
 			\[ f(\u) = \w. \]
 		}
 		
-		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation} or \textbf{linear map or mapping}.}
+		\boxeddefinition{A homomorphism between two vector spaces that is also compatible with scalar multiplication is called a \textbf{linear transformation} or \textbf{linear map or mapping}. That's to say, if $T$ is a linear map over a vector space defined over a field $\F{}$; each $\v_i$ is drawn from the vector space; and each $\alpha_i$ is drawn from $\F{}$ then,
+			\[ T\left( \sum_i \alpha_i \v_i \right) = \sum_i \alpha_i T(\v_i). \]
+		}
 		
 		\note{The compatibility with addition of vectors implies that a linear transformation is a homomorphism between additive groups of vectors.}
 		
@@ -171,6 +173,37 @@
 				\item{This formula \textbf{only applies to finite-dimensional vector spaces}. This should be clear as we simply cannot do this kind of arithmetic with $\infty$. For example, if the rank is infinite then the dimension of the kernel would be ${ \infty - \infty = ? }$.}
 			\end{itemize}
 		}
+	
+		\biggerskip
+		\subsubsection{The Algebra of Linear Transformations}
+		\bigskip
+		\notation{If $T_1$ and $T_2$ are being used to denote linear maps then ${ T_1 T_2 }$ will denote their function composition and any other common operations performed on them (e.g. addition, subtraction, scalar multiplication or division, etc.) will denote a pointwise function definition. That's to say, for example,
+			\[ (T_1 + T_2)\v = T_1\v + T_2\v. \]
+		}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Any linear combination of linear maps is a linear map.}{linear-combination-of-linear-maps-is-linear-map}
+			\begin{proof}
+				Let ${ M = \sum_i \alpha_i T_i }$ be a map formed as an arbitrary linear combination of linear maps $T_i$. Then, following the pointwise definition,
+				\[\begin{aligned}
+					M(\beta_1\v_1 + \beta_2\v_2) &= \sum_i \alpha_i T_i (\beta_1\v_1 + \beta_2\v2) &\sidecomment{pointwise defn.}\nn
+					&= \sum_i \alpha_i T_i \beta_1\v_1 + \alpha_i T_i \beta_2\v2 &\sidecomment{linearity of $T_i$}\nn
+					&= \sum_i \alpha_i T_i \beta_1\v_1 + \sum_i \alpha_i T_i \beta_2\v2 &\sidecomment{'+' associative, commutative}\nn
+					&= \beta_1 \sum_i \alpha_i T_i \v_1 + \beta_2 \sum_i \alpha_i T_i \v2 &\sidecomment{linearity of $T_i$}\nn
+					&= \beta_1 M(\v_1) + \beta_2 M(\v2) &\sidecomment{pointwise defn.}.\nn
+				\end{aligned}\]
+				In fact, we can extend this to any arbitrary linear combination of vectors,
+				\[\begin{aligned}
+					M\left( \sum_j \beta_j \v_j \right) &= \sum_i \alpha_i T_i \left( \sum_j \beta_j \v_j \right) &\sidecomment{pointwise defn.}\nn
+					&= \sum_i \sum_j \alpha_i T_i \beta_j \v_j &\sidecomment{linearity of $T_i$}\nn
+					&= \sum_j \sum_i \alpha_i T_i \beta_j \v_j &\sidecomment{'+' associative, commutative}\nn
+					&= \sum_j \beta_j \sum_i \alpha_i T_i \v_j &\sidecomment{linearity of $T_i$}\nn
+					&= \sum_j \beta_j M(\v_j) &\sidecomment{pointwise defn.}.\nn
+				\end{aligned}\]
+			\end{proof}
+		\end{tcolorbox}
+	
 	}
 
 
@@ -710,6 +743,36 @@
 		\boxeddefinition{A linear operator is called \textbf{singular} if it does not have an inverse and \textbf{nonsingular} if it has an inverse.}
 		
 		\bigskip
+		\boxeddefinition{If $T$ is a linear operator on a vector space (finite or infinite) over a field $\F{}$ and $p(x)$ is a polynomial over $\F{}$, 
+			\[ p(x) = a_0 + a_1 x + \cdots + a_n x^n \]
+		then we can define the \textbf{polynomial of the linear operator} $T$ as
+			\[ p(T) = a_0 I + a_1 T + \cdots + a_n T^n. \]
+		Similarly for a square matrix $A$,
+			\[ p(A) = a_0 I + a_1 A + \cdots + a_n A^n. \]
+		}\label{defn:polynomials-of-linear-operators}
+		
+		\medskip
+		\note{To show the validity of polynomials of linear operators:\\\\ Let $T$ be an arbitrary linear map over a vector space $V$ defined over a field $\F{}$. Define ${ T + a }$ as the linear map ${ T + aI }$ and similarly ${ T - b = T - bI }$. Lastly, define ${ (T + a)(T - b) }$ as the composition of the linear maps,
+			\[ (T + aI) \circ (T - bI). \]
+		Then,
+		\[\begin{aligned}
+			(T + a)(T - b) &= T(T - b) + a(T - b) &\sidecomment{pointwise definition} \\
+			&= TT - Tb + aT - ab &\sidecomment{linearity} \\
+			&= T^2 + (a-b)T - ab. \\
+		\end{aligned}\]
+		In fact, polynomials over a field such as the reals can be viewed as linear combinations of a linear map -- the simplest linear map: scalar multiplication.\\\\ If we regard the real variable $x$ as the function "multiply by $x$ for any $x$ in the field" ${ f_1(t) = xt }$, then ${ x + a }$ is the linear combination of this function with the function "multiply by the constant $a$" (defined pointwise) which results in: ${ f_2(t) = (x + a)t = xt + at }$. Then 
+		\[\begin{aligned}
+			(x + a)^2 &= (x + a)(x + a) \\
+			&= (x + a)f_2(t) \\
+			&= (x + a)(xt + at) \\
+			&= x^2 t + axt + axt + a^2 t \\
+			&= x^2 t + 2axt + a^2 t \\
+			&= (x^2 + 2ax + a^2)t.
+		\end{aligned}\]
+		A full treatment of this topic requires Modules (\href{https://en.wikipedia.org/wiki/Module_(mathematics)}{wikipedia}).
+		}
+		
+		\bigskip
 		\labeledProposition{A linear operator ${ T: V \longmapsto V }$ is bijective iff it has a trivial kernel.}{injective_lin_operator_is_bijective}
 		\begin{proof}
 			By \autoref{theo:homomorphism_injective_iff_kernel_is_trivial} of homomorphisms, if $T$ has a trivial kernel then it is injective which implies that ${ \cardinality{im\,T} = \cardinality{V} }$ so that it is also surjective (because the domain is equal to the codomain). Therefore, it is bijective.\\
@@ -785,7 +848,7 @@
 		\end{proof}
 	
 		\bigskip
-		\subsubsection{Similar Matrices}
+		\subsubsection{Similar Matrices}\label{sssection:similar-matrices}
 		\bigskip
 		\boxeddefinition{If two matrices ${ A,A' }$ are related by,
 			\[ A' = PA\inv{P} \]
@@ -817,6 +880,22 @@
 		So, we have,
 		\[ A'P = PA = \inv{[B']}[T(B)] \]
 		\[ \inv{P}A' = A\inv{P} = \inv{[B]}[T(B)]\inv{[B]}[B'] = \inv{[B]}[T(B')]. \]
+		
+		
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledTheorem{If $A$ is similar to a matrix ${ \tilde{A} = \inv{P}AP }$ then 
+				\[ A^n = (P \tilde{A} \inv{P})^n = P \tilde{A}^n \inv{P}. \]
+			}{exponentiation-of-similar-matrices}
+			\begin{proof}
+				Remembering that matrix multiplication is not, in general, commutative,
+				\begin{align*}
+					&& A^n &= (P \tilde{A} \inv{P})(P \tilde{A} \inv{P})\cdots(P \tilde{A} \inv{P}) \\
+					&&  &= P \tilde{A} (\inv{P})(P) \tilde{A} (\inv{P}P) \cdots (\inv{P}P) \tilde{A} \inv{P} \\
+					&&  &= P \tilde{A}^n \inv{P}. \qedhere
+				\end{align*}
+			\end{proof}
+		\end{tcolorbox}
 		
 		\bigskip
 		\labeledProposition{Similarity of matrices is an equivalence relation.}{matrix_similarity_is_equiv_relation}
@@ -868,11 +947,90 @@
 		\subsubsection{Invariant Subspaces}
 		\medskip
 		\boxeddefinition{Let ${ T: V \longmapsto V }$ be a linear operator on a vector space. A subspace $W$ of $V$ is called an \textbf{invariant subspace} or a \textbf{$T$-invariant subspace} if it is carried to itself by the operator,
-			\[ TW \subset W. \]
+			\[ TW \subseteq W. \]
 			In other words, $W$ is $T$-invariant if ${ T(\w) \in W }$ for all ${ \w \in W }$. In this case, $T$ may be referred to as defining an operator on $W$ that is the \textbf{restriction of $T$ to $W$}.
 		}
+		\notation{Denote the restriction of $T$ to $W$ by $T_w$.}
+		
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{If $T$ is a projection of a vector space $V$ onto $W$ then $W$ is $T$-invariant and the restriction of $T$ to $W$, $T_w$ is the identity operator on $W$, $I_w$.}{restriction-to-subspace-of-projection-onto-same-subspace-is-identity-operator}
+			\begin{proof}
+				If $T$ is a projection of $V$ onto $W$ then, for all ${ \v \in V }$ there is some ${ \w \in W }$ such that,
+				\[ T\v = \w. \]
+				Therefore, since ${ W \subseteq V }$ we also have, for all ${ \w_1 \in W }$ and some ${ \w_2 \in W }$,
+				\[ T\w_1 = \w_2 \in W. \]
+				So $W$ is shown to be $T$-invariant.\\
+				
+				Since $W$ is $T$-invariant, we can define the restriction of $T$ to $W$,
+				\[ T_w : W \longmapsto W \suchthat T_w\w_1 = T\w_1 = \w_2. \]
+				But also, since $T$ is a projection onto $W$, it is also idempotent,
+				\[ T^2 = T \implies T^2\,\v = T\v \implies {T_w}^2\,\w = T^2\,\w = T\w = T_w\w. \]
+				Putting these two together we obtain, for any ${ \w_1,\w_2 \in W }$ such that ${ T_w\w_1 = \w_2 }$,
+				\[ {T_w}^2\,\w_1 = T_w\w_1 = \w_2 = T_w(T_w\w_1) = T_w\w_2 = {T_w}^2\,\w_2. \]
+				We have obtained 
+				\[ T_w\w_2 = \w_2 \]
+				which implies that ${ T_w = I_w }$ the identity operator on $W$.
+			\end{proof}
+		\end{tcolorbox}\TODO{move to the section on Projections?}
 	
-		\medskip
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Let $T$ be an operator over a vector space $V$ on a field $\F{}$ and $W$ a $T$-invariant subspace of $V$. If ${ V = R(T) \oplus W }$ where $R(T)$ denotes the range of $T$, then ${ W \subseteq N(T) }$ where $N(T)$ denotes the nullspace of $T$.\\
+			
+			Furthermore, if $V$ is finite-dimensional then ${ W = N(T) }$.
+			}{invariant-subspace-linearly-independent-from-range-is-in-nullspace}
+			\begin{proof}
+				Let ${ U = R(T) }$ so that ${ V = U + W }$ and for all ${ \v \in V }$, there exists ${ \u \in U, \w \in W }$ such that
+				\[ \v = \u + \w \eqand \u + \w = \0 \implies \u = \w = \0. \]
+				Also, since $W$ is $T$-invariant, for any ${ \w \in W }$
+				\[ T\w \in W. \]
+				But ${ U = R(T) }$ is the range of $T$, so it must also be that
+				\[ T\w \in U. \]
+				Therefore, there exists some ${ \w_1 \in W, \, \u_1 \in U }$ such that
+				\[ T\w = \w_1 = \u_1. \]
+				Since,
+				\[ \w_1 = \u_1 \iff \u_1 - \w_1 = \0 \implies \w_1 = \u_1 = \0 \]
+				we obtain the result that, for all ${ \w \in W }$,
+				\[ T\w = \0. \]
+				This implies that ${ W \subseteq N(T) }$.\\
+				
+%				If $V$ is finite-dimensional with dimension $n$ then, by the dimension formula (\addref), 
+%				\[ n - \dim U = \dim N(T). \]
+				If $V$ is finite-dimensional with dimension $n$ and ${ B_u = \{\u_1,\dots,\u_k\} }$ is a basis of $U$, then by (\addref), we can extend $B_u$ to a basis of $V$,
+				\[ B = \{ \u_1,\dots,\u_k, \v_1,\dots,\v_{n-k} \}. \]
+				Since we have ${ V = U \oplus W }$, for all ${ \v \in V }$ there exists some ${ \u \in U, \, \w \in W }$ such that
+				\[ \v = \u + \w = \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k}. \]
+				But, since $B_u$ is a basis for $U$, for any ${ \u \in U }$ we have,
+				\[ \u = \beta_1 \u_1 + \cdots + \beta_k \u_k \]
+				for some ${ \beta_1,\dots,\beta_k \in \F{} }$. Furthermore, using $B$ as a basis of $V$ we have,
+				\[\begin{aligned}
+					&& \v &= \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} \\
+					&\iff & \u + \w &= \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} &\sidecomment{} \\
+					&\iff & (\beta_1 \u_1 + \cdots + \beta_k \u_k) + \w &= \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} &\sidecomment{} \\
+				\end{aligned}\]
+%				\[\begin{aligned}
+%					&& \v &= \u + \w \\
+%					&\iff & \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} &= \u + \w &\sidecomment{} \\
+%				\end{aligned}\]
+%				Then, since $U$ is the range of $T$ and $B_u$ is a basis for $U$, we have, for any ${ \v \in V }$,
+%				\[ T\v = \beta_1 \u_1 + \cdots + \beta_k \u_k \]
+%				which gives
+%				\[\begin{aligned}
+%					&& & T(\alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k}) &= \beta_1 \u_1 + \cdots + \beta_k \u_k \\
+%					&\iff  &\sidecomment{} \\
+%				\end{aligned}\]
+%				\[ T\v = T(\alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k}) = \alpha_1 \u_1 + \cdots + \alpha_k \u_k. \]\wrong \TODO{fix this}
+%				We can subtract ${ \alpha_1 \u_1 + \cdots + \alpha_k \u_k }$ from both sides and obtain,
+%				\[ \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} = \0 \implies \alpha_{k+1},\dots,\alpha_n = 0. \]
+%				The implication being because ${ \{ \v_1, \dots, \v_{n-k} \} }$ is linearly independent by construction.
+%				\TODO{show that if $V$ is finite-dimensional then ${ W = N(T) }$. (something to do with the direct sum and the dimension formula?)}
+			\end{proof}
+		\end{tcolorbox}
+		\note{If $T$ were a projection onto $U$ then $U$ would be the range and it would also be $T$-invariant and the quotient space $W$ would be the nullspace of $T$. However, if $W$ is $T$-invariant}
+		
+		\biggerskip\biggerskip
+		\subsubsubsection{Invariant Subspaces as Matrix Blocks}
 		Let ${ W \subseteq V }$ be a $T$-invariant subspace of $V$ with basis ${ B_W = \w_1,\dots,\w_k }$. Then, by \autoref{prop:lin_ind_set_can_be_extended_to_basis}, $B_W$ can be extended to a basis of $V$,
 		\[ B_V = \{ \w_1,\dots,\w_k, \v_1,\dots,\v_{n-k} \}. \]
 		If we look at the matrix $A$ of $T$ with respect to this basis $B_V$ we find a characteristic pattern.
@@ -1091,7 +1249,7 @@
 	
 		\bigskip
 		\subsubsection{The Characteristic Polynomial}
-		\notation{It is customary to use the variable $t$ to denote the eigenvalue in the characteristic polynomial.}
+		\notation{It is customary to use either the variable $t$ or $\lambda$ to denote the eigenvalue in the characteristic polynomial.}
 		\boxeddefinition{The \textbf{characteristic polynomial} of a linear operator $T$ is the polynomial,
 			\[ p(t) = det(tI - A) = \sum s(j_1,\cdots,j_n)a_{1j_1} \cdots a_{nj_n} \]
 			where the sum is defined over all permutations ${ j_1, \cdots, j_n }$ of ${ \{1,\dots,n\} }$  and ${ s(j_1,\cdots,j_n) }$ is the sign of the permutation.
@@ -1258,7 +1416,7 @@
 		\medskip\note{Note that this proof is over the complex number field but the same proof would work over any field that contains all the roots of the characteristic polynomial.}
 		
 		\bigskip
-		\labeledProposition{Let ${ \v_1,\dots,\v_r \in V }$ be eigenvectors for a linear operator $T$, with distinct eigenvalues ${ c_1,\dots,c_r }$. Then the set ${ \{\v_1,\dots,\v_r\} }$ is linearly independent.}{distinct-eigenvals-means-independent-eigenvecs}
+		\labeledProposition{Eigenvectors corresponding to different eigenvalues are linearly independent. That's to say: Let ${ \v_1,\dots,\v_r \in V }$ be eigenvectors for a linear operator $T$, with distinct eigenvalues ${ c_1,\dots,c_r }$. Then the set ${ \{\v_1,\dots,\v_r\} }$ is linearly independent.}{distinct-eigenvals-means-independent-eigenvecs}
 		\begin{proof}
 			Assume for contradiction that there exists a linear relation between the set of eigenvectors,
 			\[ \alpha_1\v_1 + \cdots + \alpha_r\v_r = \0. \]
@@ -1284,6 +1442,36 @@
 		\end{proof}
 	
 		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$, $q(t)$ an arbitrary polynomial over $F$, and $\v$ an eigenvector of $T$ with eigenvalue $c$. Then
+				\[ q(T)\v = q(c)\v. \]
+			}{polynomial-of-linear-map-times-eigenvec-is-polynomial-of-eigenval-times-eigenvec}
+			\begin{proof}
+				The polynomial $q(t)$ has the general form,
+				\[ q(t) = a_n t^n + \cdots + a_1 t + a_0. \]
+				Since $T$ is an operator we can use \ref{defn:polynomials-of-linear-operators} to define,
+				\[ q(T) = a_n T^n + \cdots + a_1 T + a_0 I. \]
+				Then,
+				\[\begin{aligned}
+					q(T)\v &= a_n T^n \, \v + \cdots + a_1 T \v + a_0 \v \\
+					&= a^n c^n \, \v + \cdots + a_1 c \v + a_0 \v \\
+					&= (a^n c^n + \cdots + a_1 c + a_0) \v \\
+					&= q(c)\v. \qedhere
+				\end{aligned}\]
+			\end{proof}
+		\end{tcolorbox}
+		\begin{corollary}
+			If $p(t)$ is the characteristic polynomial of a \textit{diagonizable} linear operator $T$, then $p(T)$ is 0 the zero operator.
+		\end{corollary}
+		\begin{proof}
+			As above, for an eigenvector $\v$ with eigenvalue $c$,
+			\[ p(T)\v = p(c)\v. \]
+			But now, $p(t)$ is the characteristic polynomial of $T$ and $c$, as an eigenvalue of $T$, \textit{is a root of the characteristic polynomial}. So, for any eigenvector of $T$,
+			\[  p(T)\v = p(c)\v = 0\v = 0. \]
+			Since $T$ is diagonalizable, there exists a basis of the space $V$ comprised solely of eigenvectors. Therefore, for any vector ${ \v \in V }$, we can express it as a linear combination of eigenvectors each of which will be mapped to the zero vector by $p(T)$.
+		\end{proof}
+	
+		\bigskip
 		\labeledTheorem{Let $T$ be a linear operator on a vector space $V$ of dimension $n$ over a field $F$. Assume that its characteristic polynomial has $n$ \textbf{distinct} roots in $F$. Then there is a basis for $V$ with respect to which the matrix of $T$ is diagonal.}{maximum-distinct-roots-of-char-poly-implies-diagonal}
 		\begin{proof}
 			If the characteristic polynomial has $n$ distinct roots then there are $n$ distinct eigenvalues along with their associated eigenvectors. By \autoref{prop:distinct-eigenvals-means-independent-eigenvecs}, these eigenvectors form a linearly independent set. Since the dimension of the space $V$ is $n$, by \autoref{theo:lin_ind_set_of_dim_cardinality_is_basis}, these eigenvectors form a basis of $V$. Then, by \autoref{prop:diagonal_iff_every_basis_vector_eigenvector}, the matrix of $T$ with respect to this basis is diagonal.
@@ -1293,26 +1481,21 @@
 			\begin{itemize}
 				\item{The diagonal entries of the matrix of a linear operator with respect to a basis of eigenvectors are the eigenvalues. For this reason, the set of values is wholly determined by the linear operator although the order is determined on the order of the vectors in the basis set (which is not significant);
 				}
-				\item{If a matrix $A$ is found to be similar to a diagonal matrix $B$ via a change of basis expressed in the matrix $P$ then,
+				\item{If a matrix $A$ is found to be similar to a diagonal matrix $B$ via a change of basis expressed in the matrix $P$ then, by \autoref{theo:exponentiation-of-similar-matrices},
 					\[ A^m = (\inv{P}BP)^m = \inv{P}B^mP. \]
-					This is because --- remembering that matrices don't, in general, commute --- $A^m$ takes the form,
-					\begin{align*}
-					&& A^m &= (\inv{P}BP)(\inv{P}BP)\dots(\inv{P}BP)(\inv{P}BP) \\
-					&&  &= \inv{P}B(P\inv{P})BP\dots\inv{P}B(P\inv{P})BP &\sidecomment{} \\
-					&&  &= \inv{P}B^mP. &\sidecomment{} \\
-					\end{align*}
 				}
 			\end{itemize}
 		}
-		\begin{corollary}
+		\begin{corollary}\label{coro:matrix-with-eigenbasis-has-trace-equal-to-sum-of-eigenvalues-and-determinant-equal-to-product}
 			If a linear operator on a vector space of dimension $n$ over a field $F$ has a characteristic polynomial with $n$ distinct roots then its determinant is equal to the product of its eigenvalues and its trace is equal to the sum of its eigenvalues.
 		\end{corollary}
 		\begin{proof}
 			By \autoref{prop:similar-matrices-have-same-determinant} and \autoref{coro:matrix-trace-independent-of-basis}, the determinant and trace are independent of the basis with respect to which the matrix is defined and so the existence of a basis with respect to which the matrix is diagonal means that we can look at the determinant and trace of the diagonal matrix.
 		\end{proof}
 	
+			
 		
-		\bigskip
+		\sep
 		\subsubsection{Examples of Diagonalization using the Characteristic Polynomial}
 		\begin{exe}
 			\item{Let the real-valued matrix $A$ be,
@@ -1366,13 +1549,604 @@
 				\note{Note that ${ t \neq 0 }$ because eigenvectors are nonzero by definition.}
 			}
 		\end{exe}
+	
+		
+		\sep
+		\subsubsection{Repeated Eigenvalues}
+		\bigskip
+		It's not every matrix that is diagonalizable because we can only form a diagonal matrix when there is a complete set of eigenvectors of the matrix that form a basis of the domain of the matrix. However, if we refer to the Fundamental Theorem of Algebra \autoref{theo:fundamental-theorem-of-algebra} we see that there will always be (when counted with multiplicity) $n$ roots of a degree-$n$ non-constant polynomial with complex coefficients. So, if we consider our matrix to be defined over the complex field, then we will always have, counted with multiplicity, $n$ roots of a characteristic polynomial of a ${ n \times n }$ matrix. The reason is that, when we don't have a complete eigenbasis, we have one or more roots of the characteristic polynomial with a multiplicity greater than one -- or, in other words, repeated roots.\\
+		
+		Consider, for example, the matrix
+		\[
+			A = \begin{bmatrix}
+					a & 1\\
+					0 & a
+				\end{bmatrix} 
+		\]
+		that results in the characteristic polynomial
+		\[ t^2 - 2at + a^2 = 0 \implies (t - a)(t - a) = (t - a)^2 = 0. \]
+		
+		This implies that we have a single eigenvalue ${ t = a }$, repeated twice. In this case, we cannot form an eigenbasis of the space and a diagonalized matrix of $A$. However, we can still find two eigenvectors, both of which will be in the eigenspace of the eigenvalue ${ t = a }$. The reasoning is as follows: If we find the eigenvector $\v_1$ for the eigenvalue in the usual way,
+		\[ (A - aI)\v_1 = 
+			\begin{bmatrix}
+				0 & 1\\
+				0 & 0
+			\end{bmatrix}\v_1 = \0 \implies \v_1 = \begin{bmatrix}1\\ 0\end{bmatrix}. 
+		\]
+		But we also have a second eigenvector $\v_2$ such that,
+		\[ (A - aI)^2 \,\v_2 = (A - aI)(A - aI)\v_2 = \0. \]
+		We can leverage the first eigenvector to solve this:
+		\[ (A - aI)\v_2 = \v_1 \implies (A - aI)[(A - aI)\v_2] = (A - aI)\v_1 = 0. \]
+		So, if we can find a vector $\v_2$ such that,
+		\[ (A - aI)\v_2 = \v_1 \iff A\v_2 = a\v_2 + \v_1 \]
+		then $\v_2$ is also a kind of eigenvector with eigenvalue $a$. This kind of eigenvector is known as a \textit{generalized eigenvector}.\\
+		
+		In the example here it is easy to see that,
+		\[
+			\begin{bmatrix}
+				0 & 1\\
+				0 & 0
+			\end{bmatrix}\v_2 = \begin{bmatrix}1\\ 0\end{bmatrix} \implies \v_2 = \begin{bmatrix}0\\ 1\end{bmatrix}
+		\]
+		and together, $\v_1$ and $\v_2$ form a basis of the two-dimensional domain of the matrix $A$. In fact,
+		\[
+			A = \begin{bmatrix}
+					a & 1\\
+					0 & a
+				\end{bmatrix} = 
+				\begin{bmatrix}
+					0 & 1\\
+					1 & 0
+				\end{bmatrix} 
+				\begin{bmatrix}
+					a & 0\\
+					1 & a
+				\end{bmatrix}
+				\begin{bmatrix}
+					0 & 1\\
+					1 & 0
+				\end{bmatrix} 
+		\]
+		or, alternatively,
+		\[
+			A = \begin{bmatrix}
+					a & 1\\
+					0 & a
+				\end{bmatrix} = 
+				\begin{bmatrix}
+					1 & 0\\
+					0 & 1
+				\end{bmatrix} 
+				\begin{bmatrix}
+					a & 1\\
+					0 & a
+				\end{bmatrix}
+				\begin{bmatrix}
+					1 & 0\\
+					0 & 1
+				\end{bmatrix}.
+		\]
 		
 		
-		\bigskip\bigskip
+		\biggerskip
+		\subsubsection{Generalized Eigenvectors}\label{sssection:generalized-eigenvectors}
+		\bigskip
+		\boxeddefinition{The \textbf{algebraic multiplicity} of an eigenvalue is the number of times that it appears as a root of the characteristic polynomial.\\
+		
+			The \textbf{geometric multiplicity} of an eigenvalue is the dimension of its associated eigenspace.\\
+			
+			An eigenvalue is said to be \textbf{defective} if its geometric multiplicity is less than its algebraic multiplicity.
+		}
+		\boxeddefinition{A \textbf{generalized eigenvector of rank (or index) $\bm{r}$} of a matrix $A$ corresponding to an eigenvalue $\lambda$ is defined as a vector $\v$ such that,
+			\[ (A - \lambda I)^r \, \v = \0 \eqand (A - \lambda I)^{r-1} \, \v \neq \0. \]
+		}
+		\note{An eigenvector (not generalized) is also a generalized eigenvector of rank 1 because,
+			\[ (A - \lambda I)^1 \, \v = \0 \iff (A - \lambda I) \, \v = \0 \]
+			and we have the restriction that an eigenvector cannot be $\0$ so also,
+			\[ (A - \lambda I)^0 \, \v = \v \neq \0. \]
+		}	
+		\boxeddefinition{The generalized eigenspace of an eigenvalue $\lambda$ of a linear operator $T$ over a vector space $V$ is the set
+			\[ K_\lambda = \setc{\v \in V}{\exists k \in \N{} \suchthat (T- \lambda I)^k \, \v = \0}. \]
+		}
+	
+		\bigskip
+		\labeledTheorem{The generalized eigenspace of an eigenvalue $\lambda$ of a linear operator $T$ over a vector space $V$ is a $T$-invariant subspace of $V$ that contains the eigenspace of $\lambda$.}{generalized-eigenspace-is-T-invariant-subspace}\nopagebreak
+		\begin{proof}
+			Let $K_\lambda$ be the generalized eigenspace of an eigenvalue $\lambda$. $K_\lambda$ is a subspace of the vector space $V$ because:
+			\begin{itemize}
+				\item{It contains the zero vector because ${ (T- \lambda I)^k \, \0 = \0 }$ for any ${ k \in \N{} }$;}
+				\item{If $\v_1,\v_2$ are members of $K_\lambda$ such that
+					\[ (T- \lambda I)^p \, \v_1 = \0 = (T- \lambda I)^q \, \v_2 \]
+					for some ${ p,q \in \N{} }$, then
+					\[ (T- \lambda I)^{p+q} \, (\v_1 + \v_2) = (T- \lambda I)^q \, (\0) + (T- \lambda I)^p \, (\0) = \0. \]
+				}
+			\end{itemize}
+			$K_\lambda$ is $T$-invariant because if $\v$ is a member of $K_\lambda$ with index $p$ then,
+			\[ (T- \lambda I)^p \, \v = \0 \iff (T- \lambda I)^p \, T\v = T[(T- \lambda I)^p \, \v] = T\0 = \0. \]
+			Therefore ${ \v \in K_\lambda \implies T\v \in K_\lambda }$.\\
+			
+			Finally, $K_\lambda$ clearly contains the eigenspace of $\lambda$ as this is just
+			\[ \setc{\v \in V}{(T- \lambda I)^k \, \v = \0} \]
+			where ${ k = 1 }$.
+		\end{proof}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{The vectors in the generalized eigenspaces of distinct eigenvalues are linearly independent.}{distinct-eigenvalue-gen-eigenspaces-are-lin-independent}
+			\begin{proof}
+				Prove by induction on the the number of distinct eigenvalues. 
+				
+				\subheading{Induction step: $n$ distinct eigenvalues}
+				Let ${ K_{\lambda_i} \eqword{for} 1 \leq i \leq n }$ be the generalized eigenspaces of the eigenvalues $\lambda_i$ for some linear operator and let
+				\[ \v_i \in K_{\lambda_i} \]
+				be an arbitrary element of $K_{\lambda_i}$. Assume for contradiction, a linear dependence between arbitrary elements of the $n$ different spaces $K_{\lambda_i}$. Then,
+				\[ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 \]
+				for some scalars ${ \alpha_1,\alpha_2,\dots,\alpha_n \suchthat \sum_1^n \alpha_i \neq 0 }$. But also, ${ \v_i \in K_{\lambda_i} }$ implies that, for some ${ k_i \in \N{} }$,
+				\[ (T - \lambda_i I)^{k_i-1} \, \v_i = \w_i \]
+				is an eigenvector with eigenvalue $\lambda_i$. So the linear relation can be rewritten as,
+				\[\begin{aligned}
+					&\alpha_1 (T - \lambda_1 I)^{k_1-1} \, \v_1 + \alpha_2 (T - \lambda_2 I)^{k_2-1} \, \v_2 + \cdots + \alpha_n (T - \lambda_n I)^{k_n-1} \, \v_n =\\
+					&\hspace{80pt} \alpha_1 \w_1 + \alpha_2 \w_2 + \cdots + \alpha_n \w_n = \0 &\sidecomment{} \\
+				\end{aligned}\]
+				
+%				\subheading{Base case: 2 distinct eigenvalues}
+%				Let ${ K_{\lambda_1} \eqand K_{\lambda_2} }$ be the generalized eigenspaces of the eigenvalues ${ \lambda_1, \lambda_2 }$ for some linear operator and let
+%				\[ \v_1 \in K_{\lambda_1}, \, \v_2 \in K_{\lambda_2} \]
+%				be arbitrary elements of ${ K_{\lambda_1}, K_{\lambda_2} }$. Assume for contradiction, a linear dependence between ${ \v_1, \v_2 }$ such that,
+%				\[ \alpha_1 \v_1 + \alpha_2 \v_2 = \0 \]
+%				for some scalars ${ \alpha_1,\alpha_2 }$ not both zero. Then,
+%				\[ \v_1 = -\frac{1}{\alpha_1} (\alpha_2 \v_2). \]
+%				But ${ \v_1 \in K_{\lambda_1} }$ implies that, for some ${ k \in \N{} }$,
+%				\[ (T - \lambda_1 I)^k \, \v_1 = \0. \]
+%				So also,
+%				\[\begin{aligned}
+%					&& (T - \lambda_1 I)^k \, \v_1 &= -\frac{(T - \lambda_1 I)^k}{\alpha_1} (\alpha_2 \v_2) &\sidecomment{} \nn
+%					&\iff & \0 &= -\frac{(T - \lambda_1 I)^k}{\alpha_1} (\alpha_2 \v_2) &\sidecomment{} \nn
+%					&\iff & \0 &= (T - \lambda_1 I)^k \, \v_2 &\sidecomment{${ \because \alpha_1,\alpha_2 \neq 0 }$} \nn
+%					&\therefore & \v_2 &\in K_{\lambda_1}
+%				\end{aligned}\]
+%				which contradicts the hypothesis that ${ \v_2 \in K_{\lambda_2} }$ for distinct ${ \lambda_1, \lambda_2 }$.\\
+%				
+%				\subheading{Induction step: $n$ distinct eigenvalues}
+%				Let ${ K_{\lambda_i} \eqword{for} 1 \leq i \leq n }$ be the generalized eigenspaces of the eigenvalues $\lambda_i$ for some linear operator and let
+%				\[ \v_i \in K_{\lambda_i} \]
+%				be an arbitrary element of $K_{\lambda_i}$. Assume for contradiction, a linear dependence between arbitrary elements of the $n$ different spaces $K_{\lambda_i}$. Then,
+%				\[ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 \]
+%				for some scalars ${ \alpha_1,\alpha_2,\dots,\alpha_n \suchthat \sum_1^n \alpha_i \neq 0 }$. But also, ${ \v_n \in K_{\lambda_n} }$ implies that, for some ${ k \in \N{} }$,
+%				\[ (T - \lambda_n I)^k \, \v_n = \0. \]
+%				So we have,
+%				\[\begin{aligned}
+%					&& (T - \lambda_n I)^k \, (\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n) &= \0 \\
+%					&\iff & (T - \lambda_n I)^k \, \alpha_1 \v_1 + (T - \lambda_n I)^k \, \alpha_2 \v_2 + \cdots + \alpha_n \0 &= \0 &\sidecomment{} \\
+%					&\iff & (T - \lambda_n I)^k \, (\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1}) &= \0 &\sidecomment{} \\
+%					&\iff & \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} &= \0 &\sidecomment{} \\
+%				\end{aligned}\]
+%				
+%				So we have,
+%				\[ \v_n = -\frac{1}{\alpha_n} ( \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} ) \]
+%				and it follows then, that there exists ${ k \in \N{} }$ such that,
+%				\[\begin{aligned}
+%					&& (T - \lambda_n I)^k \, \v_n &= -\frac{(T - \lambda_n I)^k}{\alpha_n} ( \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} ) \\
+%					&\iff & \0 &= (T - \lambda_n I)^k \, ( \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} ) &\sidecomment{} \\
+%				\end{aligned}\]
+			\end{proof}
+		\end{tcolorbox}
+	
+		\biggerskip
+		\labeledTheorem{An eigenvalue's geometric multiplicity is less than or equal to its algebraic multiplicity.}{}\nopagebreak
+		\begin{proof}
+			\TODO{proof: An eigenvalue's geometric multiplicity is less than or equal to its algebraic multiplicity}
+			The algebraic multiplicities sum to $n$, the dimension of the vector space. $n$ is also the maximum size of a set of linearly independent vectors in the space. So, if there were an eigenvalue with geometric multiplicity greater than its algebraic multiplicity then it follows that there must be another eigenvalue with geometric multiplicity less than its algebraic multiplicity. 
+			
+			If an eigenvalue has algebraic multiplicity $a$ then \TODO{complete this!}
+		\end{proof}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{If a vector $\v_r$ is a generalized eigenvector of rank $r$ corresponding to the eigenvalue $\lambda$ of the linear transformation $T$ then,
+				\[ \v = (T - \lambda I)^{r-1} \, \v_r \]
+				is an eigenvector of $T$.
+			}{gen-eigenvec-chain-initial-vector-is-eigenvector}
+			\begin{proof}
+				By the definition of a generalized eigenvector of rank $r$ we have,
+				\[ (T - \lambda I)^r \, \v_r = \0 \iff (T - \lambda I)(T - \lambda I)^{r-1} \, \v_r = \0 \]
+				but also
+				\[ (T - \lambda I)^{r-1} \, \v_r \neq \0 \]
+				which also implies that
+				\[ (T - \lambda I)^m \, \v_r \neq \0 \]
+				for any ${ m < r-1 }$. It therefore follows that also,
+				\[ (T - \lambda I) \, \v_r \neq \0. \]
+				So we must have,
+				\[ (T - \lambda I)^{r-1} \, \v_r = \v \suchthat (T - \lambda I)\v = \0. \]
+				Therefore ${ \v = (T - \lambda I)^{r-1} \, \v_r }$ is an eigenvector of the transformation $T$.
+			\end{proof}
+		\end{tcolorbox}
+	
+		\biggerskip
+		\subsubsubsection{Chains of Generalized Eigenvectors}
+		\boxeddefinition{Let $T$ be a linear transformation of which $\lambda$ is an eigenvalue and $\v$ is a generalized eigenvector of rank $r$. Then the set
+			\[ \{ (T - \lambda I)^{r-1} \, \v, (T - \lambda I)^{r-2} \, \v, \dots, \v \} \]
+			is known as a \textbf{chain} or \textbf{cycle} of generalized eigenvectors of length $r$. The elements $(T - \lambda I)^{r-1} \, \v$ and $\v$ are known as the \textbf{initial~vector} and \textbf{end~vector} respectively of the chain or cycle.
+		}
+	
+		\biggerskip
+		\labeledTheorem{The generalized eigenvectors in a chain are linearly independent.}{gen-eigenvecs-in-a-chain-are-linearly-independent}
+		\begin{proof}
+			Prove by induction on the length of the chain. 
+			
+			\subheading{Base case: length ${ \bm{= 2} }$}
+			A chain of length 2 corresponding to the eigenvector $\lambda$ of a linear transformation $T$, has the form
+			\[ C_2 = \{ (T - \lambda I) \v, \, \v \} \]
+			where $\v$ is a generalized eigenvector of rank 2. Then also, by the definition of the generalized eigenvector of rank 2,
+			\[ (T - \lambda I)^2 \, \v = \0 \eqand (T - \lambda I) \v \neq \0. \]
+			
+			Assume, for contradiction, that the chain is not linearly independent. Then there exists a linear relation between the elements of the chain,
+			\[ \alpha_1 (T - \lambda I) \, \v + \alpha_2 \v = \0 \]
+			where ${ \alpha_1, \alpha_2 \neq 0 }$ are constant scalars. This further implies, defining ${ \alpha = -\frac{\alpha_1}{\alpha_2} }$, that
+			\[ \v = \alpha (T - \lambda I) \, \v \implies (T - \lambda I) \v = \alpha (T - \lambda I)^2 \, \v = \0. \]
+			But ${ (T - \lambda I) \v = \0 }$ contradicts the definition of $\v$ as a generalized eigenvector of rank 2. It follows then, that a chain of length 2 is linearly independent.
+			
+			\subheading{Induction step: length ${ \bm{= k} }$}
+			A chain of length $k$ corresponding to the eigenvector $\lambda$ of a linear transformation $T$, has the form
+			\[ C_k = \{ (T - \lambda I)^{k-1} \, \v, \, (T - \lambda I)^{k-2} \, \v, \, \dots, \, (T - \lambda I) \v, \, \v \} \]
+			where $\v$ is a generalized eigenvector of rank $k$. Then also, by the definition of the generalized eigenvector of rank $k$,
+			\[ (T - \lambda I)^k \, \v = \0 \eqand (T - \lambda I)^{k-1} \, \v \neq \0. \]
+			It follows from the fact that $\v$ is a generalized eigenvector of rank $k$ that ${ \w = (T - \lambda I) \v }$ is a generalized eigenvector of rank ${ k - 1 }$ because,
+			\[ (T - \lambda I)^{k-1} \, \w = (T - \lambda I)^k \, \v = \0 \eqand (T - \lambda I)^{k-2} \, \w = (T - \lambda I)^{k-1} \, \v \neq \0. \]
+			Therefore
+			\[ C_{k-1} = \{ (T - \lambda I)^{k-1} \, \v, \, (T - \lambda I)^{k-2} \, \v, \, \dots, \, (T - \lambda I) \v \} \]
+			is a $(k-1)$-length chain and is, by the induction hypothesis, linearly independent.\\
+			
+			It follows that $C_k$ will be linearly independent iff $\v$ is not in the span of $C_{k-1}$. Assume for contradiction, that $\v$ is indeed in the span of $C_{k-1}$. Then $\v$ can be expressed as a linear combination of the elements of $C_{k-1}$,
+			\[ \v = \alpha_1 (T - \lambda I)^{k-1} \, \v + \alpha_2 (T - \lambda I)^{k-2} \, \v + \cdots + \alpha_{k-1} (T - \lambda I) \v. \]
+			But this implies that,
+			\[\begin{aligned}
+				(T - \lambda I)^{k-1} \, \v &= \alpha_1 (T - \lambda I)^{k-2} ((T - \lambda I)^k \, \v) \\
+				&\hspace{14pt} + \alpha_2 (T - \lambda I)^{k-3} ((T - \lambda I)^k \, \v) + \cdots + \alpha_{k-1} ((T - \lambda I)^k \, \v) \nn
+				&= \alpha_1 (T - \lambda I)^{k-2} \, (\0) + \alpha_2 (T - \lambda I)^{k-3} (\0) + \cdots + \alpha_{k-1} (\0) \nn
+				&= \0.
+			\end{aligned}\]
+			Since ${ (T - \lambda I)^{k-1} \, \v = \0 }$ contradicts the definition of $\v$ as a generalized eigenvector of rank $k$, we can deduce that $\v$ cannot be in the span of $C_{k-1}$.
+		\end{proof}
+
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{If a linear operator $T$ on a finite-dimensional complex vector space $V$ has an eigenvalue $\lambda$ of multiplicity $k$, then there exists a set of $k$ linearly independent vectors ${ S = \setc{\v_i \in V}{1 \leq i \leq k} }$ such that, \TODO{complete this}
+				\[ (A - \lambda I)^i \, \v_i = \0 \eqword{for} 1 \leq i \leq k. \]
+			}{}
+			\begin{proof}
+				A chain terminates when ${ (A - \lambda I)^i = 0 }$ which must happen when $i$ is equal to the multiplicity of the eigenvalue. \TODO{how to prove this?}
+			\end{proof}
+		\end{tcolorbox}
+	
+		\bigskip
+		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+			\labeledProposition{\textbf{(Cayley-Hamilton Theorem.)} If $A$ is an ${ n \times n }$ matrix over $\C{}$ with (not necessarily unique) eigenvalues ${ \lambda_1, \lambda_2, \dots, \lambda_n }$, then
+				\[ (A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I) = 0. \]
+			}{n-eigenvalues-are-roots-of-n-ary-matrix-polynomial}
+			\begin{proof}
+				\href{https://en.wikipedia.org/wiki/Cayley-Hamilton_theorem}{wikipedia}
+				We can find $n$ linearly independent eigenvectors or generalized eigenvectors corresponding to these $n$ eigenvalues. (\TODO{how to prove this? eigenvectors of different eigenvalues are linearly independent by \autoref{prop:distinct-eigenvals-means-independent-eigenvecs} so we only need to prove that there is at least one (non-generalized?) eigenvector for each eigenvalue and this is proven by the fact that the eigenvalue is a root of the characteristic polynomial so that the matrix $A - \lambda I$ has a non-trivial nullspace.})\\
+				
+				Assume we have $n$ linearly independent eigenvectors or generalized eigenvectors (see \ref{sssection:generalized-eigenvectors}) $\v_i$ corresponding to each eigenvalue $\lambda_i$. Then these $n$ vectors must span the vector space over which $A$ operates. Therefore, any arbitrary vector $\v$ in the space must be expressible as a linear combination of the vectors $\v_i$. So, we have,
+				\[\begin{aligned}
+					&(A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)\v = \nn
+					&\hspace{50pt} (A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)(\alpha_1\v_1 + \cdots + \alpha_n\v_n) \nn
+					&= \alpha_1(A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)\v_1 + \cdots \nn
+					&\hspace{50pt} + \alpha_n(A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)\v_n. \nn
+				\end{aligned}\]
+				But, since each $\v_i$ is an eigenvector or generalized eigenvector, for each such vector $\v_i$, there exists some subset of the eigenvalues ${ \Lambda \subseteq \{\lambda_1,\dots,\lambda_n\} }$ such that
+				\[ \left( \prod_{\lambda \in \Lambda} (A - \lambda I) \right) \v_i = \0. \]
+				Therefore, each term of the above summation is equal to $\0$ and so the entire expression is identically $\0$ for all vectors in the domain. Since the matrix ${ (A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I) }$ maps any vector in the domain to $\0$ it must be the 0 matrix.
+			\end{proof}
+		\end{tcolorbox}
+		
+		\bigskip
+		\note{We can also see this directly for a ${ 2 \times 2 }$ matrix by calculation:\\\\		
+			\[  A = \begin{bmatrix}
+				a_{11} & a_{12}\\
+				a_{21} & a_{22}
+			\end{bmatrix}
+			\]
+			and
+			\[\begin{aligned}
+				&& \begin{vmatrix}
+					a_{11} - \lambda & a_{12}\\
+					a_{21} & a_{22} - \lambda
+				\end{vmatrix} &= 0 \nn
+				&\iff &\lambda^2 - (a_{11} + a_{22})\lambda + a_{11}a_{22} - a_{12}a_{21} &= 0 \nn
+				&\therefore \lambda = \frac{a_{11} + a_{22}}{2} &\pm \frac{\sqrt{(a_{11} + a_{22})^2 - 4(a_{11}a_{22} - a_{12}a_{21})}}{2}.
+			\end{aligned}\]			
+			Let ${ C = \frac{\sqrt{(a_{11} + a_{22})^2 - 4(a_{11}a_{22} - a_{12}a_{21})}}{2} }$ with, in particular,
+			\[\begin{aligned}
+				C^2 &= \frac{ (a_{11} + a_{22})^2 - 4(a_{11}a_{22} - a_{12}a_{21}) }{4} \\
+				&= \left(\frac{a_{11} + a_{22}}{2}\right)^2 - (a_{11}a_{22} - a_{12}a_{21}). \\\\
+			\end{aligned}\]			
+			Let ${ \lambda_1 = \frac{a_{11} + a_{22}}{2} + C }$ and ${ \lambda_2 = \frac{a_{11} + a_{22}}{2} - C }$ so that,
+			\[ \lambda_1 + \lambda_2 = a_{11} + a_{22}, \]
+			\[ \lambda_1 \lambda_2 = \left(\frac{a_{11} + a_{22}}{2}\right)^2 - C^2 = a_{11}a_{22} - a_{12}a_{21}. \]
+			Note that this is just \autoref{coro:matrix-with-eigenbasis-has-trace-equal-to-sum-of-eigenvalues-and-determinant-equal-to-product} for a ${ 2 \times 2 }$ matrix.\\\\			
+			So we have,
+			\[\begin{aligned}
+				&(A - \lambda_1 I)(A - \lambda_2 I) = \\ &\hspace{70pt}
+				\begin{bmatrix}
+					a_{11} - \lambda_1 & a_{12}\\
+					a_{21} & a_{22} - \lambda_1
+				\end{bmatrix}
+				\begin{bmatrix}
+					a_{11} - \lambda_2 & a_{12}\\
+					a_{21} & a_{22} - \lambda_2
+				\end{bmatrix} \nn \\
+				&= 
+				\begin{bmatrix}
+					(a_{11} - \lambda_1)(a_{11} - \lambda_2) + a_{12}a_{21} & a_{12}(a_{11} - \lambda_1) + a_{12}(a_{22} - \lambda_2)\\
+					a_{21}(a_{11} - \lambda_2) + a_{21}(a_{22} - \lambda_1) & a_{12}a_{21} + (a_{22} - \lambda_1)(a_{22} - \lambda_2)
+				\end{bmatrix} \nn
+			\end{aligned}\]
+			where the diagonal entries have the form,
+			\[\begin{aligned}
+				(a - \lambda_1)(a - \lambda_2) &+ a_{12}a_{21} \\
+				&= (\lambda_1 \lambda_2 - (\lambda_1 + \lambda_2)a + a^2) + a_{12}a_{21} \\
+				&= (a_{11}a_{22} - a_{12}a_{21} - (a_{11} + a_{22})a + a^2) + a_{12}a_{21} \\
+				&= a_{11}a_{22} - a_{11}a - a_{22}a + a^2 \\
+			\end{aligned}\]
+			so if ${ a = a_{11} }$ then we have,
+			\[ a_{11}a_{22} - {a_{11}}^2 - a_{11}a_{22} + {a_{11}}^2 = 0 \]
+			and if ${ a = a_{22} }$ then we have,
+			\[ a_{11}a_{22} - a_{11}a_{22} - {a_{22}}^2 + {a_{22}}^2 = 0 \]
+			which makes the two diagonal entries 0. Meanwhile, the entries on the reverse diagonal have the form,
+			\[\begin{aligned}
+				a(a_{11} - \lambda_2) + a(a_{22} - \lambda_1) &= a(a_{11} + a_{22}) - (\lambda_1 + \lambda_2)a \\
+				&= a(a_{11} + a_{22}) - (a_{11} + a_{22})a = 0 \\
+			\end{aligned}\]
+			which is clearly 0 for $a$ equal to any $a_{ij}$. For this reason, the entries on the reverse diagonal are 0.
+		}
+	
+		\biggerskip
+		\subsubsubsection{Generalized Eigenvectors and Jordan Blocks}
+		Consider a simple case of repeated eigenvalues: a matrix $A$ that simply represents a uniform scaling by $a$, for some constant $a$,
+		\[ 
+			A = \begin{bmatrix}
+					a & 0\\
+					0 & a
+				\end{bmatrix}.
+		\]
+		In this case, clearly, the only eigenvalue is ${ \lambda = a }$. From which we obtain,
+		\[ (A - aI) = 	\begin{bmatrix}
+							0 & 0\\
+							0 & 0
+						\end{bmatrix}
+		\]
+		which has a 2-dimensional nullspace equal to the entire vector space over which it operates. So we can use the standard basis as the two eigenvectors. If the diagonalized matrix is $D$ and the change of basis matrix to the eigenbasis is $P$ (which in this case is the identity) then ${ AP = PD }$ which is the matrix equation,
+		\[ 
+			\begin{bmatrix}
+				a & 0\\
+				0 & a
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix} =
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				a & 0\\
+				0 & a
+			\end{bmatrix}.
+		\]
+		
+		\bigskip
+		On the other hand, if the diagonal entries of $A$ are distinct so that the matrix becomes a non-uniform, rectangular scaling,
+		\[ 
+			A = \begin{bmatrix}
+					a & 0\\
+					0 & b
+				\end{bmatrix}
+		\]
+		we have, in this case, eigenvalues: ${ \lambda_1 = a, \, \lambda_2 = b }$. From which we obtain,
+		\[ (A - aI) = 	\begin{bmatrix}
+							0 & 0\\
+							0 & b-a
+						\end{bmatrix} \eqand
+		   (A - bI) = 	\begin{bmatrix}
+							a-b & 0\\
+							0 & 0
+						\end{bmatrix}	
+		\]
+		which, each have a 1-dimensional nullspace, the direct sum of them forming the entire vector space. In fact, the eigenvectors are the two standard basis vectors and, similarly to the previous case, we have the following matrix equation,
+		\[ 
+			\begin{bmatrix}
+				a & 0\\
+				0 & b
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix} =
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				a & 0\\
+				0 & b
+			\end{bmatrix}.
+		\]
+		
+		\bigskip
+		However, in the case,
+		\[ 
+			A = \begin{bmatrix}
+					a & 1\\
+					0 & b
+				\end{bmatrix}
+		\]
+		we have the same eigenvalues ${ \lambda_1 = a, \, \lambda_2 = b }$, but the eigenvector of ${ \lambda_2 = b }$ is not the same.
+		\[ (A - aI) = 	\begin{bmatrix}
+							0 & 1\\
+							0 & b-a
+						\end{bmatrix} \eqand
+		   (A - bI) = 	\begin{bmatrix}
+							a-b & 1\\
+							0 & 0
+						\end{bmatrix}	
+		\]
+		In this case, the eigenvector of ${ \lambda_2 = b }$ is
+		\[ \begin{bmatrix}\frac{1}{b-a}\nn 1\end{bmatrix}. \]
+		The reason is that, here, we have a stretching of $b$ in the second dimension (say, the $y$-direction) that also has a component of 1 in the $x$-direction -- which is being stretched by $a$. So, in order to have a vector whose components are \textit{both} stretched by $b$ we need the $x$ component to obey,
+		\[ 1 + ax = bx \iff x = 1/(b-a). \] 
+		\TODO{relate this to modular arithmetic and resonance}\\
+		
+		Here the matrix equation is,
+		\[ 
+			\begin{bmatrix}
+				a & 1\\
+				0 & b
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & \frac{1}{b-a}\\
+				0 & 1
+			\end{bmatrix} =
+			\begin{bmatrix}
+				1 & \frac{1}{b-a}\\
+				0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				a & 0\\
+				0 & b
+			\end{bmatrix}.
+		\]
+		
+		\bigskip
+		Now, if we allow $b$ to go to $a$ then the first component of the eigenvector is going to go to infinity but we are also approaching,
+		\[ 
+			\begin{bmatrix}
+				a & 1\\
+				0 & b
+			\end{bmatrix} \to
+			\begin{bmatrix}
+				a & 1\\
+				0 & a
+			\end{bmatrix} \leadsto
+			(A - aI) = (A - bI) =
+						\begin{bmatrix}
+							0 & 1\\
+							0 & 0
+						\end{bmatrix}	
+		\]
+		which is a repeated eigenvalue with a generalized eigenvector. Specifically, the eigenvector is ${ (1,0)^T }$ and the generalized eigenvector satisfies,
+		\[
+			(A - aI)\v = (1,0)^T \implies \v = (0,1)^T
+		\]
+		so that 
+		\[ (A - aI)^2 \, \v = (A - aI) (1,0)^T = \0. \]
+		\note{Notice also, that since $A$ is a ${ 2 \times 2 }$ matrix, in accordance with \autoref{prop:n-eigenvalues-are-roots-of-n-ary-matrix-polynomial}, we have,
+		\[ (A - aI)^2 = 0. \]}
+		
+		So, in matrix equations, we have
+		\[ 
+			\begin{bmatrix}
+				0 & 1\\
+				0 & 0
+			\end{bmatrix}\begin{bmatrix}0\\ 1\end{bmatrix} = \begin{bmatrix}1\\ 0\end{bmatrix}.
+		\]
+		
+		If we try to use the generalized eigenvector in the same way as a "normal" eigenvector and form the diagonalized matrix in the normal way then it doesn't work as intended because, clearly
+		\[ 
+			\begin{bmatrix}
+				a & 1\\
+				0 & a
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix} \neq
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				a & 0\\
+				0 & a
+			\end{bmatrix}.
+		\]
+		but, in fact,
+		\[ 
+			\begin{bmatrix}
+				a & 1\\
+				0 & a
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix} =
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				a & 1\\
+				0 & a
+			\end{bmatrix}.
+		\]
+		
+		\smallskip
+		The modification to the diagonal matrix reflects the fact that, for the generalized eigenvector,
+		\[
+			\begin{bmatrix}
+				a & 1\\
+				0 & a
+			\end{bmatrix}\begin{bmatrix}0\\ 1\end{bmatrix} = \begin{bmatrix}1\\ 0\end{bmatrix} + a \begin{bmatrix}0\\ 1\end{bmatrix} =
+			\begin{bmatrix}
+				1 & 0\\
+				0 & 1
+			\end{bmatrix}\begin{bmatrix}1\\ a\end{bmatrix}.
+		\]
+		The matrix,
+		\[ 
+			\begin{bmatrix}
+				a & 1\\
+				0 & a
+			\end{bmatrix}
+		\]
+		is a \textit{Jordan block} for the eigenvalue $a$.
+		
+		
+		\biggerskip
 		\subsubsection{Jordan Canonical Form}
+		\bigskip
+		\boxeddefinition{A \textbf{Jordan block} is a matrix (appearing as a block within a larger matrix) with the form,
+			\[
+				\begin{bmatrix}
+					\lambda & 1 &  &  &  &  & \\
+					& \lambda & 1 &  &  &  &  \\
+					& & \ddots & \ddots &  & &  \\
+					& & & \ddots & \ddots & & \\
+					& & & & \ddots & \ddots & \\
+					& & & & &  \lambda & 1
+				\end{bmatrix} 
+			\]
+			or its transpose.
+		}
+		\boxeddefinition{A \textbf{Jordan} matrix or \textbf{Jordan form} or \textbf{Jordan Canonical form} matrix, is a matrix consisting solely of jordan blocks.}
+	
+		\bigskip
+		\TODO{explain how generalized eigenvectors result in Jordan blocks and then reference the explanation in the proof below.}
+		
+		\medskip
+		\labeledTheorem{\textbf{Jordan Form.} Let ${ T: V \longmapsto V }$ be a linear operator on a finite-dimensional complex vector space. There is a basis of $V$ such that the matrix of $T$ with respect to this basis, is made up of Jordan blocks.}{jordan-form}\nopagebreak
+		\begin{proof}
+			By \autoref{prop:characterstic_poly_independent_of_basis_of_matrix}, any matrix representing $T$ with respect to any basis has the same characteristic polynomial. Let this characteristic polynomial be of degree $n$. By the Fundamental Theorem of Algebra \autoref{theo:fundamental-theorem-of-algebra}, we know that this polynomial has $n$ roots, when the roots are multiplied by their multiplicity. For each of these $n$ roots there is a corresponding generalized eigenvector such that
+			\[ (A - \lambda I)^k \, \v = \0. \]
+			We know this because the fact that $\lambda$ is a root of the characteristic polynomial means that the matrix $(A - \lambda I)$ has a non-trivial nullspace. If the multiplicity ${ k > 1 }$ then it means that either the nullspace of 
+			
+			If $\setc{\v_i}{0 \leq i \leq n}$ is the set of generalized eigenvectors corresponding to the $n$ roots of the characteristic polynomial. Then, for each $\v_i$ corresponding to a root $\lambda_i$, either ${ A\v_i = \lambda_i \v_i }$ or ${ A\v_i = \lambda_i \v_i + \v_j }$ for some ${ j \neq i, \; 0 \leq j \leq n }$. So the effect on the vectors $\v_i$ of left multiplication by $A$ is expressed as a jordan block: one for each $\lambda_i$.
+		\end{proof}
 		\TODO{from LSE}
 	}
-
 
 
 % --------------------

@@ -327,7 +327,7 @@
 		\end{proof}
 	
 		\bigskip\bigskip
-		\subsubsection{The Triangle Inequality}
+		\subsubsection{The Triangle Inequality}\label{sssection:triangle-inequality}
 		\bigskip
 		\[ \vert{x}\vert \ge x, \vert{y}\vert \ge y	\implies \vert{x}\vert + \vert{y}\vert \ge x + y \]
 		\begin{align*}			
@@ -422,6 +422,29 @@
 			&= \overline{ \left(\frac{z \, \overline{w}}{\abs{w}}\right) } = \frac{\overline{z} \, w}{\abs{w}} \nn
 			&= \frac{\overline{z} \, w}{w \, \overline{w}} = \frac{\overline{z}}{\overline{w}} \nn
 		\end{aligned}\]
+	
+		\biggerskip
+		\subsubsection{The Fundamental Theorem of Algebra}
+		\begin{theorem}[Fundamental Theorem of Algebra]\label{theo:fundamental-theorem-of-algebra}
+			Every non-constant single-variable polynomial with complex coefficients has at least one complex root.
+		\end{theorem}
+		\begin{proof}
+			\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra#Proofs}{wikipedia}
+		\end{proof}
+		\begin{corollary}
+			Every non-constant degree-$n$ single-variable polynomial with complex coefficients has exactly $n$ complex roots when counted with the multiplicity.
+		\end{corollary}
+		\begin{proof}
+			This is equivalent to the Fundamental Theorem of Algebra because if we have a degree-$n$ polynomial with complex coefficients,
+			\[ p_n(z) = a_n z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0 \]
+			then the theorem tells us that this polynomial has at least one complex root. Let $r_n$ be a root of $p_n(z)$. Then,
+			\[ p_n(z) = (z - r_n)p_{n-1}(z). \]
+			But since $p_{n-1}(z)$ is a degree-$n-1$ polynomial with complex coefficients, the theorem also assures us that it too has at least one complex root, say $r_{n-1}$ so that
+			\[ p_n(z) = (z - r_n)(z - r_{n-1})p_{n-2}(z). \]
+			Clearly, we can proceed in this way until we obtain
+			\[ p_n(z) = a(z - r_n)(z - r_{n-1})\cdots(z - r_1) \]
+			for some constant $a$. Since the roots $r_i$ may not be distinct, this shows that $p_n(z)$ has $n$ roots when counted with the multiplicity.
+		\end{proof}
 	}
 		
 		

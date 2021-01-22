@@ -97,7 +97,7 @@
 \newcommand\sectionTitle\Huge
 \newcommand\subsectionTitle\Large
 \newcommand{\biggerskip}{\bigskip\bigskip}
-\newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\\[8pt]}% this is the level below the last toc/bookmark level
+\newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\nopagebreak\\[8pt]\nopagebreak}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
 \newcommand{\divides}{\mid}
@@ -109,6 +109,7 @@
 \newcommand{\nn}{\\[6pt]}
 \newcommand{\nnn}{\\[8pt]}
 \newcommand{\sep}{\biggerskip\hrule\biggerskip}
+\newcommand{\subheading}[1]{\bigskip\par\textbf{#1}\nopagebreak\\[4pt]\nopagebreak}
 
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
@@ -133,20 +134,6 @@
 	\end{array}\right]
 }
 
-%\newcommand*\xbar[1]{% from https://latex.org/forum/viewtopic.php?t=20717
-%	\hbox{%
-%		\vbox{%
-%			\hrule height 0.5pt % The actual bar
-%			\kern0.5ex%         % Distance between bar and symbol
-%			\hbox{%
-%				\kern-0.1em%      % Shortening on the left side
-%				\ensuremath{#1}%
-%				\kern-0.1em%      % Shortening on the right side
-%			}%
-%		}%
-%	}%
-%}  currently not being used
-
 
 \def\u{\vec{\bm{u}}}
 \def\v{\vec{\bm{v}}}
@@ -159,7 +146,7 @@
 \newcommand{\bigsetc}[2]{\left\{#1\; \middle\vert \;#2\right\}}
 \renewcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\cardinality}{\abs}
-\renewcommand{\norm}{\abs}
+%\renewcommand{\norm}{\abs}
 \newcommand{\dotprod}{\boldsymbol{\cdot}}
 \newcommand{\congruent}[2]{\equiv #1 \modulo{#2}}
 \newcommand{\conj}[1]{\overline{#1}}
@@ -182,13 +169,13 @@
 	}\bigskip
 }
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
 \newtheorem*{definition}{Definition}
-\newtheorem{axiom}{Axiom}
-\newtheorem{corollary}{Corollary}
-\newtheorem{lemma}{Lemma}
-\newtheorem{claim}{Claim}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{claim}{Claim}[section]
 
 \newcommand{\labeledProposition}[2]{
 	\begin{proposition}

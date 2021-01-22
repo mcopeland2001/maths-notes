@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 \date{\vspace{-6ex}}
 
@@ -152,6 +152,114 @@
 	\end{align*}
 	again if we take the limit of this expression as ${ n \to \infty }$ then we get,
 	\[ \frac{1}{0!} + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = e^x. \]
+	
+	
+	\biggerskip
+	\subsubsection{The Matrix Exponential}
+	\bigskip
+	\boxeddefinition{If $A$ is a matrix in $\F{n \times n}$, then the \textbf{matrix exponential $\bm{e^A}$} is defined as
+		\[ e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots \]
+		which is a matrix in $\F{n \times n}$.
+	}
+
+	\bigskip
+	\labeledTheorem{The series ${ e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots }$ converges (absolutely) for all complex matrices $A$.}{matrix-exponential-converges}
+	\begin{proof}
+		Let the norm ${ \norm{A} = \max_{i,j}{\abs{A_{ij}}} }$ be the maximum absolute value of the entries of the matrix $A$. Since, for ${ n \times n }$ matrices $A$ and $B$, we have
+		\[\begin{aligned}
+			\abs{ (AB)_{ij} } &= \abs{ \sum_{k=1}^n A_{ik}B_{kj} } \nn
+			&\leq \sum_{k=1}^n \abs{A_{ik} B_{kj}} &\sidecomment{$\because$ triangle inequality \ref{sssection:triangle-inequality}}\nn
+			&= \sum_{k=1}^n \abs{A_{ik}} \abs{B_{kj}} &\sidecomment{$\because$ \autoref{product-of-absolute-vals-is-absolute-val-of-product}}\nn
+			&\leq \sum_{k=1}^n \norm{A}\norm{B} = n \norm{A}\norm{B}
+		\end{aligned}\]
+		we can, therefore, deduce that
+		\[ \norm{AB} \leq n\norm{A}\norm{B} \implies \norm{A^k} \leq n^{k-1} \norm{A}^k. \]
+		
+	\end{proof}
+		
+	\bigskip
+	\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+		\labeledProposition{If $A$ is similar to a matrix ${ \tilde{A} = \inv{P}AP }$ then ${ \inv{P} e^A P = e^{\tilde{A}} }$.}{matrix-exponential-of-similar-matrices}
+		\begin{proof}
+			Using \autoref{theo:exponentiation-of-similar-matrices} and the distributivity of matrix multiplication over addition,
+			\[\begin{aligned}
+				\inv{P} e^A P &= \inv{P} I P + \inv{P} A P + \frac{1}{2!}\inv{P} A^2 P + \frac{1}{3!}\inv{P} A^3 P + \cdots \nn
+				&= I + \tilde{A} + \frac{1}{2!}\tilde{A}^2 + \frac{1}{3!}\tilde{A}^3 + \cdots = e^{\tilde{A}}. \qedhere \\
+			\end{aligned}\]
+		\end{proof}
+	\end{tcolorbox}
+	\begin{corollary}
+		If $A$ is diagonalizable into ${ D = \inv{P} A P }$ then ${ \inv{P} e^A P = e^D }$ and so ${ e^A = P e^D \inv{P} }$.
+	\end{corollary}
+
+	\bigskip
+	\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+		\labeledProposition{If $A$ and $B$ commute then
+			\[ e^{A + B} = e^A e^B = e^B e^A. \]
+		}{matrix-exponential-of-commuting-matrices}
+		\begin{proof}
+			\TODO{proof}
+			Because matrix addition is commutative we have,
+			\[ e^A e^B = e^{A + B} = e^{B + A} = e^B e^A. \]
+		\end{proof}
+	\end{tcolorbox}
+	\begin{corollary}
+		The inverse of $e^A$ is $e^{-A}$.
+	\end{corollary}
+	\begin{proof}
+		An arbitrary square matrix $A$ commutes with itself so ${ A (-A) = (-1) A^2 = (-A) A }$ and $A$ also commutes with $-A$. Therefore,
+		\[ e^A \, e^{-A} = e^{A-A} = e^0 = I \]
+		where the 0 is an ${ n \times n }$ matrix of zeroes.
+	\end{proof}
+
+	\bigskip
+	\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
+		\labeledProposition{If $t$ is a variable scalar and $A$ a square matrix, the function $e^{tA}$ is a differentiable function of $t$ and its derivative is $Ae^{tA}$.}{matrix-exponential-is-differentiable-function}
+		\begin{proof}
+			\TODO{proof of differentiability of $e^{tA}$}
+		\end{proof}
+	\end{tcolorbox}
+
+	\bigskip
+	\labeledTheorem{Let $A$ be a real or complex ${ n \times n }$ matrix. The columns of the matrix $e^{tA}$ form a basis for the vector space of solutions of the differential equation 
+		\[ \dod{X(t)}{t} = AX. \]
+	}{matrix-exponential-columns-are-solutions-to-system-of-diff-eqs}
+	\begin{proof}
+		\TODO{proof that matrix exponential solves system of diff eqs}
+	\end{proof}
+	
+	\sep
+	
+	If we look at the entries of $e^A$ using the notation $(e^A)_{ij}$ to indicate the $ij$-th entry,
+	\[ (e^A)_{ij} = I_{ij} + A_{ij} + \frac{1}{2!}(A^2)_{ij} + \frac{1}{3!}(A^3)_{ij} + \cdots \]
+	we can see that -- \textit{if $A$ is diagonal} -- each entry has the value ${ e^{A_{ij}} }$. That's to say, the new matrix has entries equal to $e$ to the power of the corresponding entry in the original matrix $A$. But this is \textit{only} the case if $A$ is diagonal.\\
+	
+	If $A$ is triangular the calculation may also be manageable. For example, let
+	\[ A = 	\begin{bmatrix}
+		1 & 1\\
+		0 & 2
+	\end{bmatrix} 
+	\]
+	so that
+	\[ A^2 =\begin{bmatrix}
+		1 & 3\\
+		0 & 4
+	\end{bmatrix},
+	A^3 =\begin{bmatrix}
+		1 & 7\\
+		0 & 8
+	\end{bmatrix}, \dots,
+	A^n =\begin{bmatrix}
+		1 & 2^n - 1\\
+		0 & 2^n
+	\end{bmatrix}.
+	\]
+	This results in a matrix exponential
+	\[ e^A =\begin{bmatrix}
+		1 & e^2 - e\\
+		0 & e^2
+	\end{bmatrix}.
+	\]
 }
 
 \end{document}

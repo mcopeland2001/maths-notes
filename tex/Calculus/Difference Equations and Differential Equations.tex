@@ -1597,8 +1597,8 @@
 		}
 	
 		\bigskip
-		What we are trying to find is the intersection between a set of antiderivatives and a set of solutions to a linear matrix equation. So we leverage the similar form of eigenvectors of the matrix and the eigenfunction of the derivative operator to find the intersection,
-		\[ \setc{\alpha(t)\v}{A\v = \lambda(t) \v,\; t \in \R{}} \cap \setc{\beta e^{\int \lambda(t) \dif t}}{t \in \R{}}. \]
+		What we are trying to find is the intersection between a set of antiderivatives and a set of solutions to a linear matrix equation. So we leverage the similar form of the eigenfunction of the derivative operator and the eigenvectors of the matrix to find the intersection,
+		\[ \setc{\beta e^{\int \lambda(t) \dif t}}{t \in \R{}} \cap \setc{\alpha(t)\v}{A\v = \lambda(t) \v,\; t \in \R{}}. \]
 		\[\begin{aligned}
 			&& \dod{}{t}(\v e^{\int \lambda(t) \dif t}) &= A\v e^{\int \lambda(t) \dif t} \nn
 			&\iff & \lambda(t) \v e^{\int \lambda(t) \dif t} &= \lambda(t) \v e^{\int \lambda(t) \dif t} &\sidecomment{} \nn
@@ -1630,7 +1630,7 @@
 		\[ D = (a+d)^2 - 4(ad - bc) \]
 		which is the square of the sum of the diagonal entries (the trace) minus 4 times the determinant. When the square of the trace is greater than 4 times the determinant, the eigenvalues will be real; when the square of the trace is less than 4 times the determinant, the eigenvalues will be complex; and when they are equal, there will be repeated eigenvalues.\\
 		
-		The characteristic polynomial gives us ${ \lambda = \frac{a+d}{2} \pm \frac{\sqrt{D}}{2} }$. In the case where the determinant ${ D < 0 }$ this becomes,
+		The characteristic polynomial gives us ${ \lambda = \frac{a+d}{2} \pm \frac{\sqrt{D}}{2} }$. In the case where the discriminant ${ D < 0 }$ this becomes,
 		\[ \lambda_1 = \frac{(a+d) + \sqrt{-D} \, i}{2} \eqand \lambda_2 = \frac{(a+d) - \sqrt{-D} \, i}{2}. \]
 		So the general solution is going to take the form,
 		\[ c_1 \v_1 e^{\lambda_1 t} + c_2 \v_2 e^{\lambda_2 t}. \]
@@ -1828,12 +1828,117 @@
 		\biggerskip
 		\subsubsubsection{Repeated Eigenvalues}
 		
-		\TODO{
-			\begin{itemize}
-				\item{Solutions to linear systems form a linear vector space}
-				\item{Eigenvectors/values give \textbf{all} possible solutions}
-				\item{Complex and repeated eigenvalues}
-			\end{itemize}	
+		In the case of a ${ 2 \times 2 }$ system, a repeated eigenvalue will occur when the discriminant
+		\[ D = (a+d)^2 - 4(ad - bc) = 0. \]
+	
+		Actually the eigenvalues are,
+		\[\begin{aligned}
+			\lambda_1,\lambda_2 &= \frac{a+d}{2} \pm \frac{\sqrt{(a+d)^2 - 4(ad - bc)}}{2} \nn
+			&= \frac{a+d}{2} \pm \frac{1}{2} \cdot \sqrt{ 4 \left[ \frac{(a+d)^2}{4} - (ad - bc) \right] } &\sidecomment{} \nn
+			&= \frac{a+d}{2} \pm \sqrt{ \left(\frac{a+d}{2}\right)^2 - (ad - bc) } &\sidecomment{} \nn
+		\end{aligned}\]
+		and will be equal when
+		\[ \left(\frac{a+d}{2}\right)^2 - (ad - bc) = 0. \]
+		That's to say, when the mean of the diagonal elements is equal to the determinant.\\
+		
+		An obvious case where this will happen is a scaling matrix, a scalar multiple of the identity matrix,
+		\[
+			\begin{bmatrix}
+				\alpha & 0\\
+				0 & \alpha
+			\end{bmatrix} 
+		\]
+		where ${ \alpha \neq 1 }$ is the scale factor. The mean of the diagonal elements here is clearly $\alpha$ and the determinant of the matrix is $\alpha^2$ so our eigenvalues will be,
+		\[ \lambda_1,\lambda_2 = \frac{2\alpha}{2} \pm \frac{\sqrt{(2\alpha)^2 - 4(\alpha^2 - 0)}}{2} = \alpha. \]
+		The characteristic polynomial is
+		\[ (\alpha - \lambda)^2 \]
+		and the system being modelled is
+		\[
+			\dod{}{t} \begin{bmatrix}x\\ y\end{bmatrix} =
+						\begin{bmatrix}
+							\alpha & 0\\
+							0 & \alpha
+						\end{bmatrix} \begin{bmatrix}x\\ y\end{bmatrix}
+		\]
+		or
+		\[ D \x = A \x \]
+		Another case would be
+		\[
+			\begin{bmatrix}
+				\alpha + 1 & -1\\
+				1 & \alpha - 1
+			\end{bmatrix} 
+		\]
+		so that the characterstic polynomial comes out as
+		\[\begin{aligned}
+			&& ((\alpha + 1) - \lambda)((\alpha - 1) - \lambda) + 1 &= 0 \\
+			&\iff & \lambda^2 - 2\alpha\lambda + \alpha^2 &= 0 &\sidecomment{} \\
+			&\iff & (\lambda - \alpha)^2 &= 0 &\sidecomment{} \\
+		\end{aligned}\]
+		so that, using the polynomial differential operator \autoref{sssection:polynomial-differential-operator},
+		\[ (A - \lambda I)^2 \, \x = 0  = (D - \lambda)^2 \, \x \]
+		and here, for the eigenvalue ${ \lambda = \alpha }$,
+		\[ 
+			\begin{bmatrix}
+				(\alpha + 1) - \lambda & -1\\
+				1 & (\alpha - 1) - \lambda
+			\end{bmatrix}^2 = 
+			\begin{bmatrix}
+				1 & -1\\
+				1 & -1
+			\end{bmatrix}^2 =
+			\begin{bmatrix}
+				0 & 0\\
+				0 & 0
+			\end{bmatrix}
+		\]
+		and the eigenvector for $\lambda$ is clearly ${ (1, 1)^T }$.\\
+		
+		So, the eigenvalue $\lambda$ has given us the solution ${ c_1 (1, 1)^T e^{\lambda t} }$ such that
+		\[ (A - \lambda I)^2 \, c_1 \begin{bmatrix}1\\ 1\end{bmatrix} e^{\lambda t} = (D - \lambda)^2 \, c_1 \begin{bmatrix}1\\ 1\end{bmatrix} e^{\lambda t} = 0. \]
+		
+		Now, since
+		\[ A \begin{bmatrix}c_1 e^{\lambda t}\\ c_1 e^{\lambda t}\end{bmatrix} = \lambda \begin{bmatrix}c_1 e^{\lambda t}\\ c_1 e^{\lambda t}\end{bmatrix} = D \begin{bmatrix}c_1 e^{\lambda t}\\ c_1 e^{\lambda t}\end{bmatrix},  \]
+		if we denote ${ \v_e = (c_1 e^{\lambda t}, c_1 e^{\lambda t})^T }$ then
+		\[\begin{aligned}
+			&& A\v_e &= \lambda \v_e = D \v_e \\
+			&\iff & A\v_e - \lambda \v_e  &= D \v_e - \lambda \v_e = 0 &\sidecomment{} \\
+			&\iff & (A - \lambda I) \v_e  &= (D - \lambda) \v_e = 0 &\sidecomment{} \\
+		\end{aligned}\]
+		which means that $\v_e$ satisfies
+		\[ (A - \lambda I)^2 \v_e  = (D - \lambda)^2 \v_e = 0 \]
+		because
+		\[ (A - \lambda I)^2 \v_e = (A - \lambda I)((A - \lambda I) \v_e) = (A - \lambda I)(0) = 0 \]
+		and, also of course,
+		\[ (D - \lambda)^2 \v_e = 0 = (D - \lambda)((D - \lambda) \v_e) = (D - \lambda)(0) = 0. \]
+		But we have a system with 2 degrees of freedom and so we need to find another linearly independent solution to get the general solution. If we can find a solution $\v_{e'}$ such that ${ (D - \lambda)^2 \v_{e'} = 0 }$ but ${ (D - \lambda) \v_{e'} \neq 0 }$ then it will be linearly independent to $\v_e$ because any constant multiple of $\v_e$ is also a solution to ${ (D - \lambda) \v = 0 }$.\\
+		
+		The solution is to have a ${ \v_{e'} = \alpha(t) e^{\lambda t} }$ such that ${ D^2 \alpha(t) = 0 }$. This way we have (dropping the function argument of $\alpha$ and using $\alpha'$ to denote its derivative),
+		\[\begin{aligned}
+			(D - \lambda)((D - \lambda) \v_{e'}) &= (D - \lambda)[ \alpha' e^{\lambda t} + \lambda \alpha e^{\lambda t} - \lambda \alpha e^{\lambda t} ] \\
+			&= (D - \lambda)[ \alpha' e^{\lambda t} ] &\sidecomment{} \\
+			&= \alpha'' e^{\lambda t} + \lambda \alpha' e^{\lambda t} - \lambda \alpha' e^{\lambda t} &\sidecomment{} \\
+			&= \alpha'' e^{\lambda t} = 0 &\sidecomment{${ \alpha'' = D^2 \alpha = 0 }$.} \\
+		\end{aligned}\]
+	
+	
+		\biggerskip
+		\subsubsubsection{Solving for the Non-homogeneous System}
+		
+		The previous technique for repeated eigenvalues can also be adapted to give solutions to the non-homogeneous solution. If we have an equation of the form,
+		\[ y' = a y + b \]
+		and we use a function of the form ${ \alpha(t) e^{at} }$ then
+		\[ y' - ay = \alpha' e^{at} + a \alpha e^{at} - a \alpha e^{at} = \alpha' e^{at}. \]
+		So, clearly, if ${ \alpha' e^{at} = b }$ then we have a solution. Therefore,
+		\[ \alpha' = b e^{-at} \implies \alpha(t) = \int b e^{-at} \dif t. \]
+		This is another way of deriving the formula for solutions of non-separable first-order ordinary equations,
+		\[ y(t) = e^{at} \int b e^{-at} \dif t. \]
+		
+		\note{If the external driver signal is equal to the natural response of the system then we have
+			\[ Dy = \lambda(t) y + g(t) \implies (D - \lambda(t)) \, \alpha(t) \, e^{\int \lambda(t) \dif t} = g(t) \]
+			but with ${ g(t) = e^{\int \lambda(t) \dif t} }$. In this case,
+			\[ D\alpha(t) = g(t) e^{-\int \lambda(t) \dif t} = 1 \implies \alpha(t) = t + C. \]
+			This is \textbf{resonance}.
 		}
 	}
 
