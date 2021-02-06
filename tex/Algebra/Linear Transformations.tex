@@ -35,29 +35,26 @@
 			\[ T\left(\begin{bmatrix}\alpha_1\\\alpha_2\\\vdots\\\alpha_n\end{bmatrix}\right) = \alpha_1 x_1 + \alpha_2 x_2 + \cdots + \alpha_n x_n. \]
 		}
 		
-		\begin{corollary}
+		\begin{corollary}\label{coro:linear-maps-map-the-origin-to-itself}
 			As with all homomorphisms, linear maps always map the identity to the identity. For linear maps this means mapping the zero vector to the zero vector.
 		\end{corollary}
 		
 		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{A linear map is homogeneous of degree 1.}{lin-map-is-homogeneous-degree-1}
-			\begin{proof}
-				${ L(\alpha \v) = \alpha L(\v) }$ for all ${ \alpha \in \F{},\; \v \in V }$.
-			\end{proof}
-		\end{tcolorbox}
+		\labeledProposition{A linear map is homogeneous of degree 1.}{lin-map-is-homogeneous-degree-1}
+		\begin{proof}
+			${ L(\alpha \v) = \alpha L(\v) }$ for all ${ \alpha \in \F{},\; \v \in V }$.
+		\end{proof}
+
 		
 		\medskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{Linear Dependence is always preserved across any linear transformation.}{lin-dependence-preserved-across-any-lin-transform}
-			\begin{proof}
-				Let ${ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 }$ be a linear relation between the vectors ${ \{\v_1,\dots,\v_n\} }$. If $L$ is a linear map then,
-				\begin{align*}
-					&& L(\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n) &= L(\0) \\
-					&\iff & \alpha_1 L(\v_1) + \alpha_2 L(\v_2) + \cdots + \alpha_n L(\v_n) &= \0. \qedhere \\
-				\end{align*}
-			\end{proof}
-		\end{tcolorbox}
+		\labeledProposition{Linear Dependence is always preserved across any linear transformation.}{lin-dependence-preserved-across-any-lin-transform}
+		\begin{proof}
+			Let ${ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 }$ be a linear relation between the vectors ${ \{\v_1,\dots,\v_n\} }$. If $L$ is a linear map then,
+			\begin{align*}
+				&& L(\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n) &= L(\0) \\
+				&\iff & \alpha_1 L(\v_1) + \alpha_2 L(\v_2) + \cdots + \alpha_n L(\v_n) &= \0. \qedhere \\
+			\end{align*}
+		\end{proof}
 		
 		
 		\biggerskip
@@ -142,13 +139,13 @@
 		\medskip\note{Dimension and rank also exist for Groups (see \href{https://en.wikipedia.org/wiki/Rank_of_a_group}{wikipedia}) where it refers to the minimal generating set for the group.}
 		
 		\bigskip
-		\labeledTheorem{\textbf{The Dimension Formula:} Let ${ T: V \longmapsto W }$ be a linear transformation, and assume that $V$ is finite dimensional. Then,
-			\[ dim\,V = dim(ker\,T) + dim(im\,T) = rank + nullity. \]
+		\labeledTheorem{\textbf{(The Dimension Formula.)} Let ${ T: V \longmapsto W }$ be a linear transformation, and assume that $V$ is finite dimensional. Then,
+			\[ \dim V = \dim (\operatorname{ker} T) + \dim (\operatorname{im} T) = \operatorname{rank} + \operatorname{nullity}. \]
 		}{linear_map_dimension_formula}
 		\begin{proof}
-			Let ${ \{\V{k_1}, \dots, \V{k_m}\} }$ be a basis of ${ ker\,T }$. Then, by \autoref{prop:lin_ind_set_can_be_extended_to_basis}, it may be extended to a basis of $V$,
+			Let ${ \{\V{k_1}, \dots, \V{k_m}\} }$ be a basis of ${ \operatorname{ker} T }$. Then, by \autoref{prop:lin_ind_set_can_be_extended_to_basis}, it may be extended to a basis of $V$,
 			\[ B = \{\V{k_1}, \dots, \V{k_m}, \V{u_1}, \dots, \V{u_n}\}. \]
-			So, for any ${ \v \in V }$, $\v$ may be expressed as a linear combination of the vectors in $B$. Therefore, for any ${ \w \in im\,T }$,
+			So, for any ${ \v \in V }$, $\v$ may be expressed as a linear combination of the vectors in $B$. Therefore, for any ${ \w \in \operatorname{im} T }$,
 			\begin{align*}
 			&& \w &= T(\alpha_1\V{k_1} + \cdots + \alpha_m\V{k_m} + \beta_1\V{u_1} + \cdots + \beta_n\V{u_n})  \\
 			&\iff &  &= T(\alpha_1\V{k_1}) + \cdots + T(\alpha_m\V{k_m}) + T(\beta_1\V{u_1}) + \cdots + T(\beta_n\V{u_n}) &\\
@@ -174,6 +171,53 @@
 			\end{itemize}
 		}
 	
+		
+		\bigskip
+		\labeledTheorem{If ${ T: V \longmapsto W }$ is a linear transformation over a finite-dimensional vector space $V$, then the quotient space of $V$ by the kernel of $T$ is a space that is in bijective correspondence to the range of $T$.}{for-lin-map-quotient-by-kernel-is-bijection-with-range}
+		\begin{proof}
+			Let ${ B_K = \{ \V{k}_1, \dots, \V{k}_k \} }$ be a basis of the kernel of $T$. By \autoref{prop:lin_ind_set_can_be_extended_to_basis}, it may be extended to a basis of $V$,
+			\[ B = \{ \V{k}_1, \dots, \V{k}_k, \b_1, \dots, \b_{n-k} \}. \]
+			Then, for any ${ \v \in V }$,
+			\[\begin{aligned}
+				T\v &= T(\alpha_1 \V{k}_1 + \cdots + \alpha_k \V{k}_k + \alpha_{k+1} \b_1 + \cdots + \alpha_n \b_{n-k}) \\
+				&= T(\alpha_1 \V{k}_1 + \cdots + \alpha_k \V{k}_k) + T(\alpha_{k+1} \b_1 + \cdots + \alpha_n \b_{n-k}) &\sidecomment{} \\
+				&= \0 + T(\alpha_{k+1} \b_1 + \cdots + \alpha_n \b_{n-k}) &\sidecomment{} \\
+				&= \alpha_{k+1} T(\b_1) + \cdots + \alpha_n T(\b_{n-k}) &\sidecomment{} \\
+			\end{aligned}\]
+			Therefore ${ B_R = \{ T(\b_1), \dots, T(\b_{n-k}) \} }$ spans the range of $T$. A linear relation between the elements of $B_R$ would imply,
+			\[\begin{aligned}
+				&& \alpha_1 T(\b_1) + \cdots + \alpha_{n-k} T(\b_{n-k}) &= \0 \\
+				&\iff & T(\alpha_1 \b_1 + \cdots + \alpha_{n-k} \b_{n-k}) &= \0,
+			\end{aligned}\]
+			which means that the vector,
+			\[ \alpha_1 \b_1 + \cdots + \alpha_{n-k} \b_{n-k} \in \operatorname{ker} T \]
+			which is impossible by construction of the basis $B$ as it would imply a linear relation with the elements of $B_K$.\\
+			Therefore, $B_R$ is linearly independent and a basis of the range (i.e. the image) of $T$. Furthermore, ${ B_{K'} = \{  \b_1, \dots, \b_{n-k} \} }$  is a basis of the quotient space of $V$ by the kernel of $T$ and the map
+			\[ \phi: \operatorname{span} B_{K'} \longmapsto \operatorname{span} B_R = R(T) \; \suchthat \phi(\v) = T\v \]
+			is a bijection because:
+			\begin{itemize}
+				\item{For any ${ \v \in R(T) }$, there exists some ${ \beta_1, \dots, \beta_{n-k} }$ such that,
+					\[ \v = \beta_1 T(\b_1) + \cdots + \beta_{n-k} T(\b_{n-k})) = T(\beta_1 \b_1 + \cdots + \beta_{n-k} \b_{n-k}) \]
+					and, clearly, ${ \beta_1 \b_1 + \cdots + \beta_{n-k} \b_{n-k} \in \operatorname{span} B_{K'} }$. Therefore $\phi$ is surjective.
+				}
+				\item{For any ${ \v_1, \v_2 \in V }$ such that ${ \phi(\v_1) = \phi(\v_2) }$ we have,
+					\[\begin{aligned}
+						&& T\v_1 &= T\v_2 \\
+						&\iff & T(\alpha_1 \b_1 + \cdots + \alpha_{n-k} \b_{n-k}) &= T(\beta_1 \b_1 + \cdots + \beta_{n-k} \b_{n-k}) &\sidecomment{} \\
+						&\iff & \alpha_1 T(\b_1) + \cdots + \alpha_{n-k} T(\b_{n-k}) &= \beta_1 T(\b_1) + \cdots + \beta_{n-k} T(\b_{n-k})
+					\end{aligned}\]
+					which, by the linear independence of $B_R$ implies that ${ \alpha_i = \beta_i, \; 1 \leq i \leq n-k }$. This in turn implies that,
+					\[\begin{aligned}
+						&& \alpha_1 \b_1 + \cdots + \alpha_{n-k} \b_{n-k} &= \beta_1 \b_1 + \cdots + \beta_{n-k} \b_{n-k} \\
+						&\iff & \v_1 &= \v_2. &\sidecomment{} \\
+					\end{aligned}\]
+					Therefore $\phi$ is injective. \qedhere
+				}
+			\end{itemize}
+		\end{proof}
+		\note{Note that this is the linear algebra version of \autoref{theo:first_isomorphism_theorem}.}
+
+	
 		\biggerskip
 		\subsubsection{The Algebra of Linear Transformations}
 		\bigskip
@@ -182,27 +226,25 @@
 		}
 	
 		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{Any linear combination of linear maps is a linear map.}{linear-combination-of-linear-maps-is-linear-map}
-			\begin{proof}
-				Let ${ M = \sum_i \alpha_i T_i }$ be a map formed as an arbitrary linear combination of linear maps $T_i$. Then, following the pointwise definition,
-				\[\begin{aligned}
-					M(\beta_1\v_1 + \beta_2\v_2) &= \sum_i \alpha_i T_i (\beta_1\v_1 + \beta_2\v2) &\sidecomment{pointwise defn.}\nn
-					&= \sum_i \alpha_i T_i \beta_1\v_1 + \alpha_i T_i \beta_2\v2 &\sidecomment{linearity of $T_i$}\nn
-					&= \sum_i \alpha_i T_i \beta_1\v_1 + \sum_i \alpha_i T_i \beta_2\v2 &\sidecomment{'+' associative, commutative}\nn
-					&= \beta_1 \sum_i \alpha_i T_i \v_1 + \beta_2 \sum_i \alpha_i T_i \v2 &\sidecomment{linearity of $T_i$}\nn
-					&= \beta_1 M(\v_1) + \beta_2 M(\v2) &\sidecomment{pointwise defn.}.\nn
-				\end{aligned}\]
-				In fact, we can extend this to any arbitrary linear combination of vectors,
-				\[\begin{aligned}
-					M\left( \sum_j \beta_j \v_j \right) &= \sum_i \alpha_i T_i \left( \sum_j \beta_j \v_j \right) &\sidecomment{pointwise defn.}\nn
-					&= \sum_i \sum_j \alpha_i T_i \beta_j \v_j &\sidecomment{linearity of $T_i$}\nn
-					&= \sum_j \sum_i \alpha_i T_i \beta_j \v_j &\sidecomment{'+' associative, commutative}\nn
-					&= \sum_j \beta_j \sum_i \alpha_i T_i \v_j &\sidecomment{linearity of $T_i$}\nn
-					&= \sum_j \beta_j M(\v_j) &\sidecomment{pointwise defn.}.\nn
-				\end{aligned}\]
-			\end{proof}
-		\end{tcolorbox}
+		\labeledProposition{Any linear combination of linear maps is a linear map.}{linear-combination-of-linear-maps-is-linear-map}
+		\begin{proof}
+			Let ${ M = \sum_i \alpha_i T_i }$ be a map formed as an arbitrary linear combination of linear maps $T_i$. Then, following the pointwise definition,
+			\[\begin{aligned}
+				M(\beta_1\v_1 + \beta_2\v_2) &= \sum_i \alpha_i T_i (\beta_1\v_1 + \beta_2\v2) &\sidecomment{pointwise defn.}\nn
+				&= \sum_i \alpha_i T_i \beta_1\v_1 + \alpha_i T_i \beta_2\v2 &\sidecomment{linearity of $T_i$}\nn
+				&= \sum_i \alpha_i T_i \beta_1\v_1 + \sum_i \alpha_i T_i \beta_2\v2 &\sidecomment{'+' associative, commutative}\nn
+				&= \beta_1 \sum_i \alpha_i T_i \v_1 + \beta_2 \sum_i \alpha_i T_i \v2 &\sidecomment{linearity of $T_i$}\nn
+				&= \beta_1 M(\v_1) + \beta_2 M(\v2) &\sidecomment{pointwise defn.}.\nn
+			\end{aligned}\]
+			In fact, we can extend this to any arbitrary linear combination of vectors,
+			\[\begin{aligned}
+				M\left( \sum_j \beta_j \v_j \right) &= \sum_i \alpha_i T_i \left( \sum_j \beta_j \v_j \right) &\sidecomment{pointwise defn.}\nn
+				&= \sum_i \sum_j \alpha_i T_i \beta_j \v_j &\sidecomment{linearity of $T_i$}\nn
+				&= \sum_j \sum_i \alpha_i T_i \beta_j \v_j &\sidecomment{'+' associative, commutative}\nn
+				&= \sum_j \beta_j \sum_i \alpha_i T_i \v_j &\sidecomment{linearity of $T_i$}\nn
+				&= \sum_j \beta_j M(\v_j) &\sidecomment{pointwise defn.}.\nn
+			\end{aligned}\]
+		\end{proof}
 	
 	}
 
@@ -327,7 +369,7 @@
 		\end{exe}
 	
 		\bigskip\bigskip
-		\subsubsection{Linear Transformations and Change of Basis}
+		\subsubsection{Linear Transformations and Change of Basis}\label{sssection:linear-trans-and-change-of-basis}
 		\medskip
 		It is often possible to achieve powerful simplifications of problems by selecting appropriate bases. In this section we will look at linear transformations represented by matrices between arbitrary bases of spaces. So here we are looking at the relationship between linear transformations and change of basis.\\
 
@@ -747,6 +789,8 @@
 			\[ p(x) = a_0 + a_1 x + \cdots + a_n x^n \]
 		then we can define the \textbf{polynomial of the linear operator} $T$ as
 			\[ p(T) = a_0 I + a_1 T + \cdots + a_n T^n. \]
+		Since any power of the operator $T^n$ is also a linear operator and the polynomial is a linear combination of these, by \autoref{prop:linear-combination-of-linear-maps-is-linear-map}, \textbf{the polynomial $p(T)$ is also a linear operator}.\\
+		
 		Similarly for a square matrix $A$,
 			\[ p(A) = a_0 I + a_1 A + \cdots + a_n A^n. \]
 		}\label{defn:polynomials-of-linear-operators}
@@ -954,80 +998,67 @@
 		
 		\bigskip
 		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{If $T$ is a projection of a vector space $V$ onto $W$ then $W$ is $T$-invariant and the restriction of $T$ to $W$, $T_w$ is the identity operator on $W$, $I_w$.}{restriction-to-subspace-of-projection-onto-same-subspace-is-identity-operator}
-			\begin{proof}
-				If $T$ is a projection of $V$ onto $W$ then, for all ${ \v \in V }$ there is some ${ \w \in W }$ such that,
-				\[ T\v = \w. \]
-				Therefore, since ${ W \subseteq V }$ we also have, for all ${ \w_1 \in W }$ and some ${ \w_2 \in W }$,
-				\[ T\w_1 = \w_2 \in W. \]
-				So $W$ is shown to be $T$-invariant.\\
-				
-				Since $W$ is $T$-invariant, we can define the restriction of $T$ to $W$,
-				\[ T_w : W \longmapsto W \suchthat T_w\w_1 = T\w_1 = \w_2. \]
-				But also, since $T$ is a projection onto $W$, it is also idempotent,
-				\[ T^2 = T \implies T^2\,\v = T\v \implies {T_w}^2\,\w = T^2\,\w = T\w = T_w\w. \]
-				Putting these two together we obtain, for any ${ \w_1,\w_2 \in W }$ such that ${ T_w\w_1 = \w_2 }$,
-				\[ {T_w}^2\,\w_1 = T_w\w_1 = \w_2 = T_w(T_w\w_1) = T_w\w_2 = {T_w}^2\,\w_2. \]
-				We have obtained 
-				\[ T_w\w_2 = \w_2 \]
-				which implies that ${ T_w = I_w }$ the identity operator on $W$.
-			\end{proof}
-		\end{tcolorbox}\TODO{move to the section on Projections?}
-	
-		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{Let $T$ be an operator over a vector space $V$ on a field $\F{}$ and $W$ a $T$-invariant subspace of $V$. If ${ V = R(T) \oplus W }$ where $R(T)$ denotes the range of $T$, then ${ W \subseteq N(T) }$ where $N(T)$ denotes the nullspace of $T$.\\
-			
-			Furthermore, if $V$ is finite-dimensional then ${ W = N(T) }$.
-			}{invariant-subspace-linearly-independent-from-range-is-in-nullspace}
-			\begin{proof}
-				Let ${ U = R(T) }$ so that ${ V = U + W }$ and for all ${ \v \in V }$, there exists ${ \u \in U, \w \in W }$ such that
-				\[ \v = \u + \w \eqand \u + \w = \0 \implies \u = \w = \0. \]
-				Also, since $W$ is $T$-invariant, for any ${ \w \in W }$
-				\[ T\w \in W. \]
-				But ${ U = R(T) }$ is the range of $T$, so it must also be that
-				\[ T\w \in U. \]
-				Therefore, there exists some ${ \w_1 \in W, \, \u_1 \in U }$ such that
-				\[ T\w = \w_1 = \u_1. \]
-				Since,
-				\[ \w_1 = \u_1 \iff \u_1 - \w_1 = \0 \implies \w_1 = \u_1 = \0 \]
-				we obtain the result that, for all ${ \w \in W }$,
-				\[ T\w = \0. \]
-				This implies that ${ W \subseteq N(T) }$.\\
-				
-%				If $V$ is finite-dimensional with dimension $n$ then, by the dimension formula (\addref), 
-%				\[ n - \dim U = \dim N(T). \]
-				If $V$ is finite-dimensional with dimension $n$ and ${ B_u = \{\u_1,\dots,\u_k\} }$ is a basis of $U$, then by (\addref), we can extend $B_u$ to a basis of $V$,
-				\[ B = \{ \u_1,\dots,\u_k, \v_1,\dots,\v_{n-k} \}. \]
-				Since we have ${ V = U \oplus W }$, for all ${ \v \in V }$ there exists some ${ \u \in U, \, \w \in W }$ such that
-				\[ \v = \u + \w = \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k}. \]
-				But, since $B_u$ is a basis for $U$, for any ${ \u \in U }$ we have,
-				\[ \u = \beta_1 \u_1 + \cdots + \beta_k \u_k \]
-				for some ${ \beta_1,\dots,\beta_k \in \F{} }$. Furthermore, using $B$ as a basis of $V$ we have,
-				\[\begin{aligned}
-					&& \v &= \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} \\
-					&\iff & \u + \w &= \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} &\sidecomment{} \\
-					&\iff & (\beta_1 \u_1 + \cdots + \beta_k \u_k) + \w &= \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} &\sidecomment{} \\
-				\end{aligned}\]
-%				\[\begin{aligned}
-%					&& \v &= \u + \w \\
-%					&\iff & \alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} &= \u + \w &\sidecomment{} \\
-%				\end{aligned}\]
-%				Then, since $U$ is the range of $T$ and $B_u$ is a basis for $U$, we have, for any ${ \v \in V }$,
-%				\[ T\v = \beta_1 \u_1 + \cdots + \beta_k \u_k \]
-%				which gives
-%				\[\begin{aligned}
-%					&& & T(\alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k}) &= \beta_1 \u_1 + \cdots + \beta_k \u_k \\
-%					&\iff  &\sidecomment{} \\
-%				\end{aligned}\]
-%				\[ T\v = T(\alpha_1 \u_1 + \cdots + \alpha_k \u_k + \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k}) = \alpha_1 \u_1 + \cdots + \alpha_k \u_k. \]\wrong \TODO{fix this}
-%				We can subtract ${ \alpha_1 \u_1 + \cdots + \alpha_k \u_k }$ from both sides and obtain,
-%				\[ \alpha_{k+1} \v_1 + \cdots + \alpha_n \v_{n-k} = \0 \implies \alpha_{k+1},\dots,\alpha_n = 0. \]
-%				The implication being because ${ \{ \v_1, \dots, \v_{n-k} \} }$ is linearly independent by construction.
-%				\TODO{show that if $V$ is finite-dimensional then ${ W = N(T) }$. (something to do with the direct sum and the dimension formula?)}
+			\labeledProposition{If $T$ is a linear operator over a vector space $V$ with range $R(T)$ and kernel/nullspace $N(T)$ then the following subspaces of $V$ are all $T$-invariant:
+				\begin{enumerate}[label=(\roman*)]
+					\item{$V$}
+					\item{$ \{ \0 \} $}
+					\item{$R(T)$}
+					\item{$N(T)$}
+				\end{enumerate}
+			}{range-nullspace-origin-and-whole-space-are-all-T-invariant}
+			\begin{proof}$ $
+				\begin{enumerate}[label=(\roman*)]
+					\item{$V$}\\
+						Since $T$ is a linear operator, ${ T: V \longmapsto V }$, we have, for all ${ \v \in V }$, ${ T\v \in V }$.
+					\item{$ \{ \0 \} $}\\
+						Any linear transformation, by homogeneity (\autoref{coro:linear-maps-map-the-origin-to-itself}), maps the origin to itself.
+					\item{$R(T)$}\\
+						By the definition of the range of $T$ we must have for all ${ \v \in V }$, ${ T\v \in R(T) }$ and since $T$ is a linear operator, ${ T: V \longmapsto V }$, 
+						\[ R(T) \subseteq V \implies \forall \V{r} \in R(T), \; T\V{r} \in R(T). \]
+					\item{$N(T)$}\\
+						By the definition of the nullspace/kernel of $T$ we have: for all ${ \v \in N(T) }$, ${ T\v = \0 }$. Since the origin is a member of all vector spaces, this implies that also for all ${ \v \in N(T) }$, ${ T\v \in N(T) }$.
+				\end{enumerate}
 			\end{proof}
 		\end{tcolorbox}
-		\note{If $T$ were a projection onto $U$ then $U$ would be the range and it would also be $T$-invariant and the quotient space $W$ would be the nullspace of $T$. However, if $W$ is $T$-invariant}
+	
+		\bigskip		
+		\labeledProposition{Let $T$ be an operator over a vector space $V$ and $W$ a subspace of $V$ such that ${ V = R(T) \oplus W }$ where $R(T)$ denotes the range of $T$. If $W$ is $T$-invariant then ${ W \subseteq N(T) }$ where $N(T)$ denotes the nullspace of $T$. Furthermore, if $V$ is finite-dimensional then ${ W = N(T) }$.
+		}{invariant-subspace-linearly-independent-from-range-is-in-nullspace}
+		\begin{proof}
+			Let ${ U = R(T) }$ so that ${ V = U \oplus W }$ and for all ${ \v \in V }$, there exists ${ \u \in U, \w \in W }$ such that
+			\[ \v = \u + \w \eqand \u + \w = \0 \implies \u = \w = \0. \]
+			Since $W$ is $T$-invariant, for any ${ \w \in W }$
+			\[ T\w \in W. \]
+			But ${ U = R(T) }$ is the range of $T$, so it must also be that
+			\[ T\w \in U. \]
+			Therefore, there exists some ${ \w_1 \in W, \, \u_1 \in U }$ such that
+			\[ T\w = \w_1 = \u_1. \]
+			Since,
+			\[ \w_1 = \u_1 \iff \u_1 - \w_1 = \0 \implies \w_1 = \u_1 = \0 \]
+			we obtain the result that, for all ${ \w \in W }$,
+			\[ T\w = \0. \]
+			This implies that ${ W \subseteq N(T) }$.\\
+			
+			Furthermore, if $V$ is finite-dimensional, the dimension formula for linear operators over finite-dimensional vector spaces (\autoref{theo:linear_map_dimension_formula}) tells us that,
+			\[ \dim R(T) + \dim N(T) = \dim V \iff \dim N(T) = \dim V - \dim R(T).  \]
+			So we have,
+			\[ \dim N(T) = \dim V - \dim U \]
+			but also
+			\[ V = U \oplus W \implies \dim V = \dim U + \dim W \iff \dim V - \dim U = \dim W \]
+			which gives us
+			\[ \dim W = \dim N(T). \]
+			We can therefore deduce,
+			\[ [\, W \subseteq N(T) \,] \land [\, \dim W = \dim N(T) \,] \implies W = N(T). \]
+		\end{proof}
+	
+		\biggerskip
+		\subsubsubsection{Examples of Invariant Subspaces}
+		\begin{exe}
+			\ex{Let ${ T: \R{3} \longmapsto \R{3} }$ be defined by,
+				\[ T(a, b, c) = (a + b, \, b + c, \, 0). \]
+				Then the $xy$-plane ${ \setc{(x,y,0)}{x,y \in \R{}} }$ and the $x$-axis ${ \setc{(x,0,0)}{x \in \R{}} }$ are $T$-invariant subspaces of $\R{3}$.
+			}
+		\end{exe}
 		
 		\biggerskip\biggerskip
 		\subsubsubsection{Invariant Subspaces as Matrix Blocks}
@@ -1064,8 +1095,50 @@
 				\end{bmatrix} \]
 				are known as \textbf{block diagonal matrices} or \textbf{diagonal block matrices}.
 		}
-		
+	
 		\bigskip
+		\subsubsubsection{Cyclic Subspaces}
+		\boxeddefinition{Let $T$ be a linear operator on a vector space $V$ and let ${ \v \neq \0 \in V }$. Then the subspace,
+			\[ W = \operatorname{span} \{ \v, \, T\v, \, T^2\,\v, \dots \} \]
+			is called the \textbf{$T$-cyclic subspace of $V$ generated by $\v$}.\\
+			The $T$-cyclic subspace of $V$ generated by any element of $V$, is $T$-invariant by construction.
+			\note{refer: cyclic subgroups in Group Theory \ref{sssection:cyclic-subgroups}}
+		}
+	
+		\bigskip
+		\labeledProposition{The $T$-cyclic subspace of $V$ generated by ${ \v \in V }$ is the smallest $T$-invariant subspace of $V$ containing $\v$.}{cyclic-subspace-generated-by-v-is-smallest-invariant-space-containing-v}
+		\begin{proof}
+			Let $W$ be the $T$-cyclic subspace of $V$ generated by ${ \v \in V }$.\\
+			Clearly, from the definition, $W$ contains $\v$ so $W$ is a subspace containing $\v$.\\
+			Furthermore, if $W$ is to be $T$-invariant then $T\v$ must also be in $W$. But then for $W$ to be $T$-invariant we also need that 
+			\[ T(T\v) = T^2\,\v \]
+			is in $W$ too. In fact, we need the closure of the composition of $T$ applied to $\v$.\\
+			Therefore, $W$ is the smallest $T$-cyclic subspace of $V$ containing $\v$.
+		\end{proof}
+	
+		\paragraph{Examples}
+		\begin{exe}
+			\ex{Let ${ T: \R{3} \longmapsto \R{3} }$ be defined by,
+				\[ T(a, b, c) = (-b + c, \, a + c, \, 3c). \]
+				To obtain the $T$-cyclic subspace generated by ${ \e{1} = (1,0,0) }$ we compose $T$ repeatedly:
+				\[\begin{aligned}
+					T\e{1} &= (0,1,0) = \e{2} \\
+					T^2\,\e{1} &= T(0,1,0) = (-1,0,0) = -\e{1} \\
+					T^3\,\e{1} &= T(-1,0,0) = (0,-1,0) = -\e{2} \\
+					T^4\,\e{1} &= T(0,-1,0) = (1,0,0) = \e{1}
+				\end{aligned}\]
+				which produces the cycle of elements:
+				\[ \e{1} \to \e{2} \to -\e{1} \to -\e{2} \to \e{1}. \]
+				Therefore the subspace generated is
+				\[ \operatorname{span} \{ \e{1}, \e{2} \} = \setc{(x,y,0)}{x,y \in \R{}}. \]
+			}\label{ex:simple-T-cyclic-subspace}
+			\ex{Let $T$ be the linear operator on $P(\R{})$, the polynomials with real coefficients, defined by differentiation,
+				\[ T(p(x)) = \Dif_x p. \]
+				Then the $T$-cyclic subspace generated by $x^2$ is ${ \operatorname{span} \{ x^2, 2x, 2 \} }$.
+			}
+		\end{exe}
+		
+		\biggerskip
 		\subsubsection{Eigenvectors}
 		\boxeddefinition{An \textbf{eigenvector} of a linear operator $T$ is a nonzero vector $\v$ with the property under $T$ that,
 			\[ T(\v) = c\v \]
@@ -1370,7 +1443,7 @@
 				\item{If $\F{}$ is the field of complex numbers and ${ V \neq 0 }$, then $T$ has at least one eigenvalue, and hence it has an eigenvector.}
 			\end{enumerate}
 		}{num-eigenvalues}
-		\begin{proof}
+		\begin{proof}\nl
 			\begin{enumerate}[label=(\roman*)]
 				\item{For any field $\F{}$, a polynomial of degree $n$ can have at most $n$ different roots (see Artin[373]). Since $T$ is defined over a vector space of dimension $n$, the degree of the characteristic polynomial of $T$ is $n$. Then, by \autoref{theo:eigenvalues_are_roots_of_characteristic_poly} we can have a maximum of $n$ eigenvalues.}
 				\item{Every polynomial of positive degree with complex coefficients has at least one complex root. This fact is called the Fundamental Theorem of Algebra (\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{wikipedia}).}
@@ -1440,36 +1513,7 @@
 			\[ \alpha_1(c_r - c_1)\v_1 + \cdots \alpha_{r-1}(c_r - c_{r-1})\v_{r-1} = \0. \]
 			Now we can use the induction hypothesis to assert that ${ \v_1,\dots,\v_{r-1} }$ are linearly independent implying that ${ \alpha_1,\dots,\alpha_{r-1} = 0 }$. This, in turn, implies that ${ \alpha_r = 0 }$ meaning that ${ \v_1,\dots,\v_r }$ is linearly independent.
 		\end{proof}
-	
-		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$, $q(t)$ an arbitrary polynomial over $F$, and $\v$ an eigenvector of $T$ with eigenvalue $c$. Then
-				\[ q(T)\v = q(c)\v. \]
-			}{polynomial-of-linear-map-times-eigenvec-is-polynomial-of-eigenval-times-eigenvec}
-			\begin{proof}
-				The polynomial $q(t)$ has the general form,
-				\[ q(t) = a_n t^n + \cdots + a_1 t + a_0. \]
-				Since $T$ is an operator we can use \ref{defn:polynomials-of-linear-operators} to define,
-				\[ q(T) = a_n T^n + \cdots + a_1 T + a_0 I. \]
-				Then,
-				\[\begin{aligned}
-					q(T)\v &= a_n T^n \, \v + \cdots + a_1 T \v + a_0 \v \\
-					&= a^n c^n \, \v + \cdots + a_1 c \v + a_0 \v \\
-					&= (a^n c^n + \cdots + a_1 c + a_0) \v \\
-					&= q(c)\v. \qedhere
-				\end{aligned}\]
-			\end{proof}
-		\end{tcolorbox}
-		\begin{corollary}
-			If $p(t)$ is the characteristic polynomial of a \textit{diagonizable} linear operator $T$, then $p(T)$ is 0 the zero operator.
-		\end{corollary}
-		\begin{proof}
-			As above, for an eigenvector $\v$ with eigenvalue $c$,
-			\[ p(T)\v = p(c)\v. \]
-			But now, $p(t)$ is the characteristic polynomial of $T$ and $c$, as an eigenvalue of $T$, \textit{is a root of the characteristic polynomial}. So, for any eigenvector of $T$,
-			\[  p(T)\v = p(c)\v = 0\v = 0. \]
-			Since $T$ is diagonalizable, there exists a basis of the space $V$ comprised solely of eigenvectors. Therefore, for any vector ${ \v \in V }$, we can express it as a linear combination of eigenvectors each of which will be mapped to the zero vector by $p(T)$.
-		\end{proof}
+
 	
 		\bigskip
 		\labeledTheorem{Let $T$ be a linear operator on a vector space $V$ of dimension $n$ over a field $F$. Assume that its characteristic polynomial has $n$ \textbf{distinct} roots in $F$. Then there is a basis for $V$ with respect to which the matrix of $T$ is diagonal.}{maximum-distinct-roots-of-char-poly-implies-diagonal}
@@ -1493,12 +1537,202 @@
 			By \autoref{prop:similar-matrices-have-same-determinant} and \autoref{coro:matrix-trace-independent-of-basis}, the determinant and trace are independent of the basis with respect to which the matrix is defined and so the existence of a basis with respect to which the matrix is diagonal means that we can look at the determinant and trace of the diagonal matrix.
 		\end{proof}
 	
+	
+		\bigskip
+		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$ over a field $F$, $q(t)$ an arbitrary polynomial over $F$, and $\v$ an eigenvector of $T$ with eigenvalue $c$. Then
+			\[ q(T)\v = q(c)\v. \]
+		}{polynomial-of-linear-map-times-eigenvec-is-polynomial-of-eigenval-times-eigenvec}
+		\begin{proof}
+			The polynomial $q(t)$ has the general form,
+			\[ q(t) = a_n t^n + \cdots + a_1 t + a_0. \]
+			Since $T$ is an operator we can use \ref{defn:polynomials-of-linear-operators} to define,
+			\[ q(T) = a_n T^n + \cdots + a_1 T + a_0 I. \]
+			Then,
+			\[\begin{aligned}
+				q(T)\v &= a_n T^n \, \v + \cdots + a_1 T \v + a_0 \v \\
+				&= a^n c^n \, \v + \cdots + a_1 c \v + a_0 \v \\
+				&= (a^n c^n + \cdots + a_1 c + a_0) \v \\
+				&= q(c)\v. \qedhere
+			\end{aligned}\]
+		\end{proof}
+		\begin{corollary}
+			If $p(t)$ is the characteristic polynomial of a \textbf{diagonalizable} linear operator $T$ over a finite-dimensional vector space, then $p(T)$ is 0, the zero operator $T_0$.
+		\end{corollary}
+		\begin{proof}
+			As above, for an eigenvector $\v$ with eigenvalue $c$,
+			\[ p(T)\v = p(c)\v. \]
+			But now, $p(t)$ is the characteristic polynomial of $T$ and $c$, as an eigenvalue of $T$, \textit{is a root of the characteristic polynomial}. So, for any eigenvector of $T$,
+			\[  p(T)\v = p(c)\v = 0\v = 0. \]
+			Since $T$ is diagonalizable, there exists a basis of the space $V$ comprised solely of eigenvectors. Therefore, for any vector ${ \v \in V }$, we can express it as a linear combination of eigenvectors each of which will be mapped to the zero vector by $p(T)$.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $W$ be a $T$-invariant subspace of $V$. Then the characteristic polynomial of the restriction of $T$ to $W$, $T_w$, divides the characteristic polynomial of $T$.}{char-poly-of-restriction-to-invariant-space-divides-char-poly-of-T}
+		\begin{proof}
+			Let ${ B_w = \{ \w_1, \dots, \w_k \} }$ be a basis of $W$ and extend it to a basis of $V$, ${ B = \{ \w_1, \dots, \w_k, \v_1, \dots, \v_{n-k} \} }$. Then the matrix of $T$ with respect to the basis $B$ has the form,
+			\[ A = 	\begin{bmatrix}
+						A_w & C  \\
+						0   & D
+					\end{bmatrix}
+			\]
+			where ${ A_w = T_w(B_w) }$ is the matrix of $T_w$ \wrt to the basis $B_w$.\\
+			So, the characteristic polynomial $p(t)$ of $A$ is
+			\[\begin{aligned}
+				p(t) = \det (A - tI_n) &=
+									\begin{vmatrix}
+										A_w - tI_k & C \\
+										0               & D - tI_{n-k}
+									\end{vmatrix} \nn
+				&= \det (A_w - tI_k) \cdot \det (D - tI_{n-k}) \nn
+				&= q(t) \cdot \det (D - tI_{n-k})
+			\end{aligned}\]
+			where $q(t)$ is the characterstic polynomial of $T_w$, the restriction of $T$ to $W$. 		
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $W$ denote the $T$-cyclic subspace of $V$ generated by ${ \v \in V }$. Suppose that ${ \dim W = k \geq 1 }$ (and hence ${ \v \neq \0 }$). Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item{${ \{ \v, T\v, T^2\,\v, \dots, T^{k-1}\,\v \} }$ is a basis for $W$.}
+				\item{If 
+					\[ T^k\,\v = -a_0\v - a_1 T\v - \cdots - a_{k-1} T^{k-1}\,\v, \]
+					then the characteristic polynomial of $T_w$ is
+					\[ p(t) = (-1)^k (t^k + a_{k-1} t^{k-1} + \cdots + a_1 t + a_0). \]
+				}
+			\end{enumerate}
+		}{characteristic-polynomial-of-T-cyclic-subspace}
+		\begin{proof}
+			Let ${ B_x = \setc{ T^i\,\v }{ i \in \N{}, \; 0 \leq i \leq x } }$. Since $V$ is finite-dimensional, there exists some ${ m \in \N{} }$ such that
+			\[ T^m\,\v \in \operatorname{span} B_{m-1}. \]
+			Let ${ j \in \N{} }$ be the lowest such value so that ${ B_{j-1} = \setc{ T^i\,\v }{ i \in \N{}, \; 0 \leq i \leq j-1 } }$ is linearly independent. If we can show that $B_{j-1}$ spans $W$ then, by \autoref{theo:lin_ind_set_of_dim_cardinality_is_basis}, $B_{j-1}$ is a basis of $W$.\\
+			We can show inductively that for any ${ m \in \N{} }$, ${ T^m\,\v \in \operatorname{span} B_{j-1} }$. Begin by observing that, clearly, ${ T^m\,\v }$ for any ${ 0 \leq m \leq j-1 }$ is a member of $B_{j-1}$ and is, therefore, trivially in the span. Then, for some ${ m > j-1 }$ we have that, by the induction hypothesis, $T^{m-1}\,\v$ is in the span of $B_{j-1}$ so,
+			\[ T^{m-1}\,\v = a_0 \v + a_1 T\v + \cdots + a_{j-1} T^{j-1}\,\v \]
+			for some ${ a_0, a_1, \dots, a_{j-1} \in \F{} }$. Then,
+			\[\begin{aligned}
+				T^m\,\v &= T(a_0 \v + a_1 T\v + \cdots + a_{j-1} T^{j-1}\,\v) \\
+				&= a_0 T\v + a_1 T^2\,\v + \cdots + a_{j-1} T^j\,\v \\
+			\end{aligned}\]
+			which is in the span of $B_{j-1}$ because $T^j\,\v$ is in the span by construction. Therefore, $B_{j-1}$ is a basis of $W$ and it follows then that it must have length $k$ so that ${ j = k }$.
+			
+			\note{Note that we could also have attempted to prove this by invoking the division theorem (\autoref{theo:division-theorem}) to observe that, if ${ j \in \N{} }$ is the lowest natural number such that ${ T^j\,\v \in \operatorname{span} B_{j-1} }$, then, for any ${ m > j \in \N{} }$, there exist ${ q \in \Z{}, r \in \N{} }$ with ${ 0 \leq r < j }$, such that
+				\[ m = qj + r \implies T^m\,\v = (T^j\,\v)^q \, (T^r\,\v). \]
+				Here, $T^j\,\v$ is in the span of $B_{j-1}$ by hypothesis and $T^r\,\v$ is an element of $B_{j-1}$ and so, trivially, in the span. However, this still leaves the question of whether $(T^j\,\v)^q$ is in the span of $B_{j-1}$ -- which is precisely what we're trying to prove!
+			}
+			
+			To build the characteristic polynomial of $T_w$, observe that the regular structure of the basis $B_{k-1}$ results in a regular structure of the matrix of the transformation \wrt this basis (remember that, by \autoref{prop:characterstic_poly_independent_of_basis_of_matrix}, the characterstic polynomial is the same regardless of the basis \wrt which we specify the matrix). If $A_w$ is the matrix of $T_w$ \wrt to the basis $B_{k-1}$ then (see: \ref{sssection:linear-trans-and-change-of-basis}),
+			\[ A_w = \inv{[B_{k-1}]} [T(B_{k-1})] \]
+			where $[B_{k-1}]$ denotes the matrix whose columns are the elements of $B_{k-1}$ and $[T(B_{k-1})]$ denotes the matrix whose columns are the elements of $B_{k-1}$ transformed by $T$. So, the columns of $[T(B_{k-1})]$ are ${ T\v, T^2\,\v, \dots, T^k\,\v }$ which, when expressed \wrt the basis $B_{k-1}$ are going to be,
+			\[ (0,1,0,\dots,0), \, (0,0,1,0\dots,0), \dots, (-a_0, -a_1, \dots, -a_{k-1}). \]
+			
+			So, the matrix $A_w$ is going to take the form,
+			\[ A_w = 	\begin{bmatrix}
+							0 & 0 & \cdots & 0 & -a_0 \\
+							1 & 0 & \cdots & 0 & -a_1 \\
+							0 & 1 & \cdots & 0 & -a_2 \\
+							\vdots & \vdots & &  & \vdots \\
+							0 & 0 & \cdots & 0 & -a_{k-2} \\
+							0 & 0 & \cdots & 1 & -a_{k-1} \\
+						\end{bmatrix}.
+			\]
+			Note that $A_w$ is square ${ k \times k }$ which is as expected because $T_w$ is ${ W \longmapsto W }$.\\
+			
+			To show that this results in the desired characteristic polynomial we use induction on $k$, the dimension of $A_w$.\\
+			
+			For ${ k = 2 }$,
+			\[\begin{aligned}
+				A_w &= 	\begin{bmatrix}
+							0 & -a_{k-2} \\
+							1 & -a_{k-1}
+						\end{bmatrix} \leadsto
+						\begin{vmatrix}
+							-t & -a_{k-2} \\
+							1 & -a_{k-1} - t
+						\end{vmatrix} \nn
+				&= (-t)^k + (-t)^{k-1} (-a_{k-1}) + (-1)^{k-1} (-a_{k-2}) (1) \\
+				&= (-1)^k (t^k + a_{k-1} t^{k-1} + a_0).
+			\end{aligned}\]
+			which has the desired form ${ (-1)^k (t^k + a_{k-1} t^{k-1} + \cdots + a_1 t + a_0) }$.\\
+			
+			For ${ k = n > 2 \in \N{} }$, we assume that matrices of size ${ (n-1) \times (n-1) }$ have the desired form of characteristic polynomial,
+			\[ p_{n-1}(t) = (-1)^{n-1} (t^{n-1} + a_{n-2} t^{n-2} + \cdots + a_1 t + a_0). \]
+			Then,
+			\[\begin{aligned}
+				\det A_w &= \begin{vmatrix}
+								-t & 0 & \cdots & 0 & -a_0 \\
+								1 & -t & \cdots & 0 & -a_1 \\
+								0 & 1 & \cdots & 0 & -a_2 \\
+								\vdots & \vdots & &  & \vdots \\
+								0 & 0 & \cdots & -t & -a_{k-2} \\
+								0 & 0 & \cdots & 1 & -a_{k-1} - t \\
+							\end{vmatrix} \nn
+				&= (-t) p_{n-1}(t) + (-1)^{k-1} (-a_0) (1) &\sidecomment{} \\
+				&= (-t) [(-1)^{k-1} (t^{k-1} + a_{k-1} t^{k-1} + \cdots + a_2 t + a_1)] + (-1)^{k-1} (-a_0) &\sidecomment{} \\
+				&= (-1)^k (t^k + a_{k-1} t^k + \cdots + a_2 t^2 + a_1 t) + (-1)^k a_0 &\sidecomment{} \\
+				&= (-1)^k (t^k + a_{k-1} t^k + \cdots + a_2 t^2 + a_1 t + a_0). \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Cayley-Hamilton Theorem.)} If $p(t)$ is the characteristic polynomial of \textbf{any} linear operator $T$ over a finite-dimensional vector space, then $p(T)$ is 0, the zero operator $T_0$.}{any-linear-operator-on-finite-vector-space-satisfies-its-characteristic-polynomial}
+		\begin{proof}
+			Let ${ T: V \longmapsto V }$ be a linear operator over a finite-dimensional vector space. Then for an arbitrary ${ \v \neq \0 \in V }$ there exists an associated $T$-cyclic subspace $W$ with basis ${ \{ \v, T\v, \dots, T^{k-1}\,\v \} }$ and we have
+			\[ T^k\,\v = -a_0\v - a_1 T\v - \cdots - a_{k-1} T^{k-1}\,\v \]
+			for some scalars ${ a_0,a_1,\dots,a_{k-1} }$.\\
+			
+			By \autoref{prop:characteristic-polynomial-of-T-cyclic-subspace} then, the characteristic polynomial of $W$ is
+			\[ p_w(t) = (-1)^k (t^k + a_{k-1} t^{k-1} + \cdots + a_1 t + a_0) \]
+			and then,
+			\[ p_w(T)\v = (-1)^k (T^k\,\v + a_{k-1} T^{k-1}\,\v + \cdots + a_1 T\v + a_0\v) = \0. \]
+			But also, \autoref{prop:char-poly-of-restriction-to-invariant-space-divides-char-poly-of-T} tells us that $p_w(t)$ divides $p(t)$, the characteristic polynomial of $T$. Therefore,
+			\[ p(T)\v = (p_w(T) \cdot q(T))\v = (q(T) \cdot p_w(T))\v = q(T)(p_w(T)\v) = q(T)(\0) = \0. \]
+			\note{Note the commutativity of the polynomial factors for polynomials in a single linear operator (see: \ref{defn:polynomials-of-linear-operators}).}
+			In this way, $p(T)$ has been shown to map any arbitrary non-zero vector in the space to the zero vector and, since it is a linear operator (by the definition of a polynomial of a linear operator \ref{defn:polynomials-of-linear-operators}), it must also map the zero vector to the zero vector. It therefore follows that ${ p(T) = 0 = T_0 }$, the zero operator.
+		\end{proof}
+	
+	
+		\bigskip
+		\labeledProposition{Let $T$ be a linear operator over a finite-dimensional vector space $V$ and let
+			\[ V = W_1 \oplus W_2 \oplus \cdots \oplus W_n \]
+			where each $W_i$, for ${ 1 \leq i \leq n }$, is a $T$-invariant subspace of $V$. Then, if $p(t)$ is the characteristic polynomial of $T$ while $p_i(t)$ is the characteristic polynomial of $T_{W_i}$ we have,
+			\[ p(t) = p_1(t) p_2(t) \cdots p_n(t). \]
+		}{}
+		\begin{proof}
+			This proof proceeds by induction on the number of invariant subspaces $n$ with base case ${ n = 2 }$.\\
+			
+			For ${ n = 2 }$, we have ${ W_1 \oplus W_2 = V }$ and if $B_1$ is a basis for $W_1$ and $B_2$ is a basis of $W_2$ then
+			\[ B = B_1 \cup B_2 \]
+			is a basis of $V$. If we form the matrix of $T$ \wrt $B$ then we get
+			\[ 
+				A = \begin{bmatrix}
+						A_{W_1} & 0\\
+						0 & A_{W_2}
+					\end{bmatrix}.
+			\]
+			Let ${ k_1 = \dim W_1, k_2 = \dim W_2 }$, then
+			\[\begin{aligned}
+				&& \det (A - tI) &= \det (A - tI_{k_1}) \cdot \det (A - tI_{k_2}) \\
+				&\iff & p(t) &= p_1(t) p_2(t).
+			\end{aligned}\]
+			So the proposition is proven for the base case ${ n = 2 }$.\\
+			
+			For the induction step, assume that the proposition holds for some ${ n - 1 \geq 2 \in \N{} }$. Then
+			\[ V = W_1 \oplus W_2 \oplus \cdots \oplus W_n = (W_1 \oplus W_2 \oplus \cdots \oplus W_{n-1}) \oplus W_n. \]
+			If we let
+			\[ W' = W_1 \oplus W_2 \oplus \cdots \oplus W_{n-1} \]
+			then $W'$ is a $T$-invariant subspace of $V$ whose characteristic polynomial, by the induction hypothesis, takes the form
+			\[ p_{W'}(t) = p_1(t) p_2(t) \cdots p_{n-1}(t) \]
+			but we also have 
+			\[ W' \oplus W_n = V \]
+			which, by the base case proof means that the characteristic polynomial of $T$ can be expressed as
+			\[ p(t) = p_{W'}(t) p_n(t) = p_1(t) p_2(t) \cdots p_{n-1}(t) p_n(t). \]
+		\end{proof}
+	
 			
 		
 		\sep
 		\subsubsection{Examples of Diagonalization using the Characteristic Polynomial}
 		\begin{exe}
-			\item{Let the real-valued matrix $A$ be,
+			\ex{Let the real-valued matrix $A$ be,
 				\[ A = \begin{bmatrix}
 						4 & 0 & 4\\
 						0 & 4 & 4\\
@@ -1547,6 +1781,61 @@
 				which gives ${ x_3 = 0 }$ and one free variable $x_2$. So
 				\[ \x = \begin{bmatrix}-t \\ t \\ 0\end{bmatrix} = t\begin{bmatrix}-1 \\ 1 \\ 0\end{bmatrix} \hspace{30pt} t \neq 0 \in \R{}. \]
 				\note{Note that ${ t \neq 0 }$ because eigenvectors are nonzero by definition.}
+			}
+			\biggerskip
+			\ex{Let ${ T : \R{4} \longmapsto \R{4} }$ be defined as,
+				\[ T(a,b,c,d) = (a + b + 2c - d, \, b + d, \, 2c - d, \, c + d). \]
+				The subspace ${ W = \setc{(x,y,0,0)}{x,y \in \R{}} }$ is a $T$-invariant subspace of $\R{4}$ as,
+				\[ T(x,y,0,0) = (x + y, \, y, \, 0, \, 0). \]
+				Clearly, the standard basis of the $xy$-plane, ${ \{\e{1}, \e{2}\} }$ is a basis of $W$. This basis of $W$ can be extended to the standard basis of $\R{4}$ and the matrix of $T$ \wrt this basis is
+				\[ A = 	\begin{bmatrix}
+							1 & 1 & 2 & -1\\
+							0 & 1 & 0 & 1 \\
+							0 & 0 & 2 & -1\\
+							0 & 0 & 1 & 1
+						\end{bmatrix} 
+				\]
+				which contains the matrix for the restriction of $T$ to $W$ \wrt to the standard basis of the $xy$-plane in the top left corner,
+				\[ 
+					A_w =
+					\begin{bmatrix}
+						1 & 1 \\
+						0 & 1
+					\end{bmatrix}.
+				\]
+				So, we can see that the characteristic polynomial of $A_w$ divides that of $A$ as,
+				\[ \det (A - tI_4) = \det (A_w - tI_2) \, \cdot \, 
+														\begin{vmatrix}
+															2 & -1\\
+															1 & 1
+														\end{vmatrix}.
+				\]
+			}
+			\biggerskip
+			\ex{Continuing the example \ref{ex:simple-T-cyclic-subspace}, we have ${ T: \R{3} \longmapsto \R{3} }$ defined by,
+				\[ T(a, b, c) = (-b + c, \, a + c, \, 3c) \]
+				and the $T$-cyclic subspace generated by $\e{1}$,
+				\[ W = \operatorname{span} \{ \e{1}, \e{2} \} = \setc{(x,y,0)}{x,y \in \R{}}. \]
+				The  restriction of $T$ to $W$ is
+				\[ T_w = T(a, b) = (-b, a). \]
+				If we form the matrix of $T_w$
+				\[ A_w = [T_w(\{ \e{1}, \e{2} \})] = 
+							\begin{bmatrix}
+								0 & -1\\
+								1 & 0
+							\end{bmatrix},
+				\]
+				then the characteristic polynomial generated by the matrix method is
+				\[
+					\begin{vmatrix}
+						-t & -1\\
+						1 & -t
+					\end{vmatrix} = t^2 + 1.
+				\]
+				Alternatively, we could apply \autoref{prop:characteristic-polynomial-of-T-cyclic-subspace} which tells us that, since in $W$ we have
+				\[ T^2\,\e{1} = T(T\e{1}) = T\e{2} = -\e{1} \]
+				then the characteristic polynomial of $T_w$ is
+				\[ p(t) = (-1)^2 (t^2 + 1) = t^2 + 1. \]
 			}
 		\end{exe}
 	
@@ -1639,8 +1928,9 @@
 		}
 		\boxeddefinition{A \textbf{generalized eigenvector of rank (or index) $\bm{r}$} of a matrix $A$ corresponding to an eigenvalue $\lambda$ is defined as a vector $\v$ such that,
 			\[ (A - \lambda I)^r \, \v = \0 \eqand (A - \lambda I)^{r-1} \, \v \neq \0. \]
-		}
-		\note{An eigenvector (not generalized) is also a generalized eigenvector of rank 1 because,
+			
+			\nl[3]
+			An eigenvector is a particular case of a generalized eigenvector with rank 1 as,
 			\[ (A - \lambda I)^1 \, \v = \0 \iff (A - \lambda I) \, \v = \0 \]
 			and we have the restriction that an eigenvector cannot be $\0$ so also,
 			\[ (A - \lambda I)^0 \, \v = \v \neq \0. \]
@@ -1650,7 +1940,7 @@
 		}
 	
 		\bigskip
-		\labeledTheorem{The generalized eigenspace of an eigenvalue $\lambda$ of a linear operator $T$ over a vector space $V$ is a $T$-invariant subspace of $V$ that contains the eigenspace of $\lambda$.}{generalized-eigenspace-is-T-invariant-subspace}\nopagebreak
+		\labeledProposition{The generalized eigenspace of an eigenvalue $\lambda$ of a linear operator $T$ over a vector space $V$ is a $T$-invariant subspace of $V$ that contains the eigenspace of $\lambda$.}{generalized-eigenspace-is-T-invariant-subspace}
 		\begin{proof}
 			Let $K_\lambda$ be the generalized eigenspace of an eigenvalue $\lambda$. $K_\lambda$ is a subspace of the vector space $V$ because:
 			\begin{itemize}
@@ -1671,103 +1961,109 @@
 		\end{proof}
 	
 		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{The vectors in the generalized eigenspaces of distinct eigenvalues are linearly independent.}{distinct-eigenvalue-gen-eigenspaces-are-lin-independent}
-			\begin{proof}
-				Prove by induction on the the number of distinct eigenvalues. 
-				
-				\subheading{Induction step: $n$ distinct eigenvalues}
-				Let ${ K_{\lambda_i} \eqword{for} 1 \leq i \leq n }$ be the generalized eigenspaces of the eigenvalues $\lambda_i$ for some linear operator and let
-				\[ \v_i \in K_{\lambda_i} \]
-				be an arbitrary element of $K_{\lambda_i}$. Assume for contradiction, a linear dependence between arbitrary elements of the $n$ different spaces $K_{\lambda_i}$. Then,
-				\[ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 \]
-				for some scalars ${ \alpha_1,\alpha_2,\dots,\alpha_n \suchthat \sum_1^n \alpha_i \neq 0 }$. But also, ${ \v_i \in K_{\lambda_i} }$ implies that, for some ${ k_i \in \N{} }$,
-				\[ (T - \lambda_i I)^{k_i-1} \, \v_i = \w_i \]
-				is an eigenvector with eigenvalue $\lambda_i$. So the linear relation can be rewritten as,
-				\[\begin{aligned}
-					&\alpha_1 (T - \lambda_1 I)^{k_1-1} \, \v_1 + \alpha_2 (T - \lambda_2 I)^{k_2-1} \, \v_2 + \cdots + \alpha_n (T - \lambda_n I)^{k_n-1} \, \v_n =\\
-					&\hspace{80pt} \alpha_1 \w_1 + \alpha_2 \w_2 + \cdots + \alpha_n \w_n = \0 &\sidecomment{} \\
-				\end{aligned}\]
-				
-%				\subheading{Base case: 2 distinct eigenvalues}
-%				Let ${ K_{\lambda_1} \eqand K_{\lambda_2} }$ be the generalized eigenspaces of the eigenvalues ${ \lambda_1, \lambda_2 }$ for some linear operator and let
-%				\[ \v_1 \in K_{\lambda_1}, \, \v_2 \in K_{\lambda_2} \]
-%				be arbitrary elements of ${ K_{\lambda_1}, K_{\lambda_2} }$. Assume for contradiction, a linear dependence between ${ \v_1, \v_2 }$ such that,
-%				\[ \alpha_1 \v_1 + \alpha_2 \v_2 = \0 \]
-%				for some scalars ${ \alpha_1,\alpha_2 }$ not both zero. Then,
-%				\[ \v_1 = -\frac{1}{\alpha_1} (\alpha_2 \v_2). \]
-%				But ${ \v_1 \in K_{\lambda_1} }$ implies that, for some ${ k \in \N{} }$,
-%				\[ (T - \lambda_1 I)^k \, \v_1 = \0. \]
-%				So also,
-%				\[\begin{aligned}
-%					&& (T - \lambda_1 I)^k \, \v_1 &= -\frac{(T - \lambda_1 I)^k}{\alpha_1} (\alpha_2 \v_2) &\sidecomment{} \nn
-%					&\iff & \0 &= -\frac{(T - \lambda_1 I)^k}{\alpha_1} (\alpha_2 \v_2) &\sidecomment{} \nn
-%					&\iff & \0 &= (T - \lambda_1 I)^k \, \v_2 &\sidecomment{${ \because \alpha_1,\alpha_2 \neq 0 }$} \nn
-%					&\therefore & \v_2 &\in K_{\lambda_1}
-%				\end{aligned}\]
-%				which contradicts the hypothesis that ${ \v_2 \in K_{\lambda_2} }$ for distinct ${ \lambda_1, \lambda_2 }$.\\
-%				
-%				\subheading{Induction step: $n$ distinct eigenvalues}
-%				Let ${ K_{\lambda_i} \eqword{for} 1 \leq i \leq n }$ be the generalized eigenspaces of the eigenvalues $\lambda_i$ for some linear operator and let
-%				\[ \v_i \in K_{\lambda_i} \]
-%				be an arbitrary element of $K_{\lambda_i}$. Assume for contradiction, a linear dependence between arbitrary elements of the $n$ different spaces $K_{\lambda_i}$. Then,
-%				\[ \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n = \0 \]
-%				for some scalars ${ \alpha_1,\alpha_2,\dots,\alpha_n \suchthat \sum_1^n \alpha_i \neq 0 }$. But also, ${ \v_n \in K_{\lambda_n} }$ implies that, for some ${ k \in \N{} }$,
-%				\[ (T - \lambda_n I)^k \, \v_n = \0. \]
-%				So we have,
-%				\[\begin{aligned}
-%					&& (T - \lambda_n I)^k \, (\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_n \v_n) &= \0 \\
-%					&\iff & (T - \lambda_n I)^k \, \alpha_1 \v_1 + (T - \lambda_n I)^k \, \alpha_2 \v_2 + \cdots + \alpha_n \0 &= \0 &\sidecomment{} \\
-%					&\iff & (T - \lambda_n I)^k \, (\alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1}) &= \0 &\sidecomment{} \\
-%					&\iff & \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} &= \0 &\sidecomment{} \\
-%				\end{aligned}\]
-%				
-%				So we have,
-%				\[ \v_n = -\frac{1}{\alpha_n} ( \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} ) \]
-%				and it follows then, that there exists ${ k \in \N{} }$ such that,
-%				\[\begin{aligned}
-%					&& (T - \lambda_n I)^k \, \v_n &= -\frac{(T - \lambda_n I)^k}{\alpha_n} ( \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} ) \\
-%					&\iff & \0 &= (T - \lambda_n I)^k \, ( \alpha_1 \v_1 + \alpha_2 \v_2 + \cdots + \alpha_{n-1} \v_{n-1} ) &\sidecomment{} \\
-%				\end{aligned}\]
-			\end{proof}
-		\end{tcolorbox}
-	
-		\biggerskip
-		\labeledTheorem{An eigenvalue's geometric multiplicity is less than or equal to its algebraic multiplicity.}{}\nopagebreak
+		\labeledProposition{If a vector $\v_r$ is a generalized eigenvector of rank $r$ corresponding to the eigenvalue $\lambda$ of the linear transformation $T$ then,
+			\[ \v = (T - \lambda I)^{r-1} \, \v_r \]
+			is an eigenvector of $T$ with eigenvalue $\lambda$.
+		}{gen-eigenvec-chain-initial-vector-is-eigenvector}
 		\begin{proof}
-			\TODO{proof: An eigenvalue's geometric multiplicity is less than or equal to its algebraic multiplicity}
-			The algebraic multiplicities sum to $n$, the dimension of the vector space. $n$ is also the maximum size of a set of linearly independent vectors in the space. So, if there were an eigenvalue with geometric multiplicity greater than its algebraic multiplicity then it follows that there must be another eigenvalue with geometric multiplicity less than its algebraic multiplicity. 
-			
-			If an eigenvalue has algebraic multiplicity $a$ then \TODO{complete this!}
+			By the definition of a generalized eigenvector of rank $r$ we have,
+			\[ (T - \lambda I)^r \, \v_r = \0 \iff (T - \lambda I)(T - \lambda I)^{r-1} \, \v_r = \0 \]
+			but also
+			\[ (T - \lambda I)^{r-1} \, \v_r \neq \0 \]
+			which also implies that
+			\[ (T - \lambda I)^m \, \v_r \neq \0 \]
+			for any ${ m < r-1 }$. It therefore follows that also,
+			\[ (T - \lambda I) \, \v_r \neq \0. \]
+			So we must have,
+			\[ (T - \lambda I)^{r-1} \, \v_r = \v \suchthat (T - \lambda I)\v = \0. \]
+			Therefore ${ \v = (T - \lambda I)^{r-1} \, \v_r }$ is an eigenvector of the transformation $T$.
 		\end{proof}
 	
 		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{If a vector $\v_r$ is a generalized eigenvector of rank $r$ corresponding to the eigenvalue $\lambda$ of the linear transformation $T$ then,
-				\[ \v = (T - \lambda I)^{r-1} \, \v_r \]
-				is an eigenvector of $T$.
-			}{gen-eigenvec-chain-initial-vector-is-eigenvector}
-			\begin{proof}
-				By the definition of a generalized eigenvector of rank $r$ we have,
-				\[ (T - \lambda I)^r \, \v_r = \0 \iff (T - \lambda I)(T - \lambda I)^{r-1} \, \v_r = \0 \]
-				but also
-				\[ (T - \lambda I)^{r-1} \, \v_r \neq \0 \]
-				which also implies that
-				\[ (T - \lambda I)^m \, \v_r \neq \0 \]
-				for any ${ m < r-1 }$. It therefore follows that also,
-				\[ (T - \lambda I) \, \v_r \neq \0. \]
-				So we must have,
-				\[ (T - \lambda I)^{r-1} \, \v_r = \v \suchthat (T - \lambda I)\v = \0. \]
-				Therefore ${ \v = (T - \lambda I)^{r-1} \, \v_r }$ is an eigenvector of the transformation $T$.
-			\end{proof}
-		\end{tcolorbox}
+		\labeledProposition{The vectors in the generalized eigenspaces of distinct eigenvalues are linearly independent.}{distinct-eigenvalue-gen-eigenspaces-are-lin-independent}
+		\begin{proof}
+			Let $T$ be a linear operator on a (not necessarily finite) vector space defined over a field $\F{}$, and let ${ \setc{\lambda_i}{1 \leq i \leq k} }$ be a (not necessarily exhaustive) set of distinct eigenvalues of $T$. Let $K_{\lambda_i}$ be the generalized eigenspace corresponding to the eigenvalue $\lambda_i$ and let ${ \v_i \in K_{\lambda_i} }$ be an arbitrary vector in the generalized eigenspace of $\lambda_i$. The proposition is proven if it is shown that
+			\[ \v_1 + \v_2 + \cdots + \v_k = \0 \implies \v_1, \v_2, \dots, \v_k = \0. \]
+			
+			Following a proof by induction on the number of distinct eigenvalues $k$, if we take ${ k = 1 }$ as the base case, the proposition holds trivially as
+			\[ \v_1 = \0 \implies \v_1 = \0. \]
+			
+			\nl[2]
+			For the induction step, assume that the proposition holds for some ${ k - 1 \geq 1 \in \N{} }$. Now identify two possible cases: ${ \v_k = \0 }$ and ${ \v_k \neq \0 }$.\\
+			
+			\nl[2]
+			Assume ${ \v_k = \0 }$. Then we have,
+			\[ \v_1 + \v_2 + \cdots + \v_{k-1} + \v_k = \v_1 + \v_2 + \cdots + \v_{k-1} = \0 \]
+			which satisfies the proposition by the induction hypothesis so that
+			\[ \v_1 + \v_2 + \cdots + \v_{k-1} = \0 \implies \v_1, \v_2, \dots, \v_{k-1} = \0. \]
+			Since, also, ${ \v_k = \0 }$ by assumption, the proposition holds.\\
+			
+			\nl[3]
+			Conversely, assume that ${ \v_k \neq \0 }$ and that we have a linear relation so that,
+			\[ \v_1 + \v_2 + \cdots + \v_k = \0 \implies \v_k = -(\v_1 + \v_2 + \cdots + \v_{k-1}). \]
+			Let ${ r_i \in \N{} }$ be the rank of each $\v_i$ so that,
+			\[ (T - \lambda_i I)^{r_i} \, \v_i = \0 \]
+			and, using \autoref{prop:gen-eigenvec-chain-initial-vector-is-eigenvector}, define the eigenvectors $\x_i$,
+			\[ \x_i = (T - \lambda_i I)^{r_i - 1} \, \v_i. \]
+
+			The linear relation implies,
+			\[\begin{aligned}
+				&& \v_1 + \v_2 + \cdots + \v_k &= \0 \\
+				&\implies & (T - \lambda_1 I)^{r_1} \, \v_1 + (T - \lambda_1 I)^{r_1} \, \v_2 + \cdots + (T - \lambda_1 I)^{r_1} \, \v_k &= \0 \\
+				&\implies & \0 + (T - \lambda_1 I)^{r_1} \, \v_2 + \cdots + (T - \lambda_1 I)^{r_1} \, \v_k &= \0 \\
+				&\implies & (T - \lambda_1 I)^{r_1} \, (T - \lambda_2 I)^{r_2} \, \v_2 + \cdots + (T - \lambda_1 I)^{r_1} \, (T - \lambda_2 I)^{r_2} \, \v_k &= \0 \\
+				&\implies & (T - \lambda_1 I)^{r_1} \, (T - \lambda_2 I)^{r_2} \, \cdots (T - \lambda_k I)^{r_k} \, \v_k &= \0. \\
+			\end{aligned}\]
+		
+			If we define the polynomial with coefficients in $\F{}$,
+			\[ p(t) = (t - \lambda_1)^{r_1}(t - \lambda_2)^{r_2}\cdots(t - \lambda_{k-1})^{r_{k-1}} \]
+			then, using \ref{defn:polynomials-of-linear-operators}, the linear relation implies that
+			\[ (T - \lambda_1)^{r_1} \, (T - \lambda_2)^{r_2} \, \cdots (T - \lambda_k)^{r_k} \, \v_k = \0 \implies p(T)\v_k = \0. \]
+			
+			However, we also have the eigenvector $\x_k$,
+			\[ \x_k = (T - \lambda_k I)^{r_k - 1} \v_k \]
+			and by \autoref{prop:polynomial-of-linear-map-times-eigenvec-is-polynomial-of-eigenval-times-eigenvec}, 
+			\[ p(T)\x_k = (\lambda_k - \lambda_1)(\lambda_k - \lambda_2)\cdots(\lambda_k - \lambda_{k-1}) \neq \0. \]
+			And so, for the eigenvector $\x_k$,
+			\[\begin{aligned}
+				&& p(T)\x_k = p(T)(T - \lambda_k I)^{r_k - 1} \, \v_k &\neq \0 \\
+				&\iff & (T - \lambda_k I)^{r_k - 1} \, p(T)\v_k &\neq \0 &\sidecomment{commutativity by \ref{defn:polynomials-of-linear-operators}} \\
+				&\implies & p(T)\v_k &\neq \0 \\
+			\end{aligned}\]
+			which contradicts the implications of the linear relation.
+		\end{proof}
+	
+	
+		\bigskip
+		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$ with distinct eigenvalues ${ \setc{\lambda_i}{1 \leq i \leq k} }$. For each $i$, let $S_i$ be a linearly independent subset of the generalized eigenspace $K_{\lambda_i}$. Then,
+			\[ S_i \cap S_j = \emptyset \eqword{for} i \neq j \]
+			and ${ S = S_1 \cup S_2 \cup \cdots \cup S_k }$ is a linearly independent subset of $V$.
+		}{}
+		\begin{proof}
+			Suppose that ${ \x \in S_{i} \cap S_{j} }$ for some ${ i \neq j }$. Let ${ \y = -\x }$. Then ${ \x \in K_{\lambda_i}, \, \y \in K_{\lambda_j} }$, and ${ \x + \y = \0 }$. By \autoref{prop:distinct-eigenvalue-gen-eigenspaces-are-lin-independent}, ${ \x = \0 }$, contrary to the fact that $\x$ lies in a linearly independent set. Thus ${ S_i \cap S_j = \emptyset }$. Now suppose that for each $i$
+			\[ S_i = \{ \x_{i 1}, \x_{i 2}, \dots, \x_{i n_i} \} \]
+			Then 
+			\[ S = \setc{ \x_{i j} }{ 1 \leq j \leq n_i, 1 \leq i \leq k }. \] 
+			Consider any scalars $a_{i j}$ such that
+			\[ \sum_{i=1}^k \sum_{j=1}^{n_i} a_{i j} \x_{i j} = \0. \]
+			For each $i$ let
+			\[ \y_i = \sum_{j=1}^{n_i} a_{i j} \x_{i j}. \]
+			Then ${ \y_i \in K_{\lambda_i} }$ for each $i$ and ${ \y_1 + \y_2 + \cdots + \y_k = \0 }$. Therefore, by \autoref{prop:distinct-eigenvalue-gen-eigenspaces-are-lin-independent}, ${ \y_i = \0 }$ for all $i$. But $S_i$ is linearly independent for all $i$. Thus, for each $i$, it follows that ${ a_{i j} = 0 }$ for all $j$. We conclude that $S$ is linearly independent.
+		\end{proof}
+	
+		
 	
 		\biggerskip
-		\subsubsubsection{Chains of Generalized Eigenvectors}
-		\boxeddefinition{Let $T$ be a linear transformation of which $\lambda$ is an eigenvalue and $\v$ is a generalized eigenvector of rank $r$. Then the set
+		\group{
+		\subsubsubsection{Chains/Cycles of Generalized Eigenvectors}
+		\boxeddefinition{Let $T$ be a linear transformation of which $\lambda$ is an eigenvalue and $\v$ is a generalized eigenvector of rank $r$. If ${ r \in \N{} }$ is the least natural number such that
+			\[ (T - \lambda I)^r \, \v = \0 \]
+		then the set
 			\[ \{ (T - \lambda I)^{r-1} \, \v, (T - \lambda I)^{r-2} \, \v, \dots, \v \} \]
-			is known as a \textbf{chain} or \textbf{cycle} of generalized eigenvectors of length $r$. The elements $(T - \lambda I)^{r-1} \, \v$ and $\v$ are known as the \textbf{initial~vector} and \textbf{end~vector} respectively of the chain or cycle.
-		}
+		is known as a \textbf{chain} or \textbf{cycle} of generalized eigenvectors of length $r$. The elements $(T - \lambda I)^{r-1} \, \v$ and $\v$ are known as the \textbf{initial~vector} and \textbf{end~vector} respectively of the chain or cycle.
+		}}
+	
+		\note{Note that a chain or cycle of generalized eigenvectors is a subset of a generalized eigenspace. There may be more than one chain/cycle in a given generalized eigenspace.}
 	
 		\biggerskip
 		\labeledTheorem{The generalized eigenvectors in a chain are linearly independent.}{gen-eigenvecs-in-a-chain-are-linearly-independent}
@@ -1808,100 +2104,64 @@
 			\end{aligned}\]
 			Since ${ (T - \lambda I)^{k-1} \, \v = \0 }$ contradicts the definition of $\v$ as a generalized eigenvector of rank $k$, we can deduce that $\v$ cannot be in the span of $C_{k-1}$.
 		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{The generalized eigenvectors in a chain form the basis of a $T$-invariant space.}{chain-of-gen-eigenvecs-is-basis-of-invariant-space}
+		\begin{proof}
+			Let $C_k$ be a chain/cycle of length $k$ corresponding to the eigenvector $\lambda$ of a linear transformation $T$ so that,
+			\[ C_k = \{ (T - \lambda I)^{k-1} \, \v, \, (T - \lambda I)^{k-2} \, \v, \, \dots, \, (T - \lambda I) \v, \, \v \}. \]
+			By \autoref{theo:gen-eigenvecs-in-a-chain-are-linearly-independent} we have that $C_k$ is linearly independent so the proposition will be proven if we can show that the space spanned by $C_k$ is $T$-invariant.\\
+			
+			\note{Note that it may be tempting to use the proof used in \autoref{prop:generalized-eigenspace-is-T-invariant-subspace}:
+				For any ${ \x \in C_k }$ we have some ${ m \leq k \in \N{} }$ such that
+				\[ (T - \lambda I)^m\,\x = \0. \]
+				Therefore, for any ${ n \in \N{} }$,
+				\[ (T - \lambda I)^m \, T^n \, \x = T^n \, (T - \lambda I)^m \, \x = T^n \, (\0) = \0. \]
+				But this only proves that $T^n \,\x$ is a generalized eigenvector with eigenvalue $\lambda$, it does \textbf{not} prove that it is in the span of the chain/cycle $C_k$. Remember, there may be more than one chain/cycle in a generalized eigenspace.
+			}
+			
+			\[\begin{aligned}
+				T\v &= (T - \lambda I) \v + \lambda \v, \\
+				T(T - \lambda I) \v &= (T - \lambda I)^2 \, \v + \lambda T\v - \lambda^2 \v \\
+									&= (T - \lambda I)^2 \, \v + \lambda (T - \lambda I) \v. \\
+			\end{aligned}\]
+			For any ${ m \in \N{} }$ such that ${ 1 \leq m \leq k-1 }$,
+			\[\begin{aligned}
+				T(T - \lambda I)^m\,\v &= (T - \lambda I)(T - \lambda I)^m\,\v + \lambda (T - \lambda I)^m\,\v \\
+				&= (T - \lambda I)^{m+1}\,\v + \lambda (T - \lambda I)^m\,\v.\\
+			\end{aligned}\]
+			When ${ m = k-1 }$ we have the special case that,
+			\[\begin{aligned}
+				T(T - \lambda I)^{k-1}\,\v &= (T - \lambda I)^k\,\v + \lambda (T - \lambda I)^{k-1}\,\v \\
+				&= \0 + \lambda (T - \lambda I)^{k-1}\,\v \\
+			\end{aligned}\]
+			which reflects the fact that ${ (T - \lambda I)^{k-1}\,\v }$ is an eigenvector.\\
+			
+			So, we have shown that $T\x$ for any ${ \x \in C_k }$ is in the span of $C_k$. For any ${ n > 1 \in \N{} }$,
+			\[\begin{aligned}
+				&& T^n\,(T - \lambda I)^m\,\v &= (T - \lambda I)T^{n-1}\,(T - \lambda I)^m\,\v + \lambda (T - \lambda I)^m\,\v \\
+				&\iff &  &= T^{n-1}\,(T - \lambda I)^{m+1}\,\v + \lambda (T - \lambda I)^m\,\v &\sidecomment{} \\
+			\end{aligned}\]
+			In the case that ${ m + 1 = k }$,
+			\[ T^{n-1}\,(T - \lambda I)^{m+1}\,\v + \lambda (T - \lambda I)^m\,\v = \0 + \lambda (T - \lambda I)^m\,\v \]
+			which is clearly in the span of $C_k$. Otherwise, 
+			\[\begin{aligned}
+				&& T^{n-1}\,(T - \lambda I)^{m+1}\,\v + \lambda (T - \lambda I)^m\,\v &\in \operatorname{span} C_k \\
+				&\iff &  T^{n-1}\,(T - \lambda I)^{m+1}\,\v &\in \operatorname{span} C_k. &\sidecomment{} \\
+			\end{aligned}\]
+			Therefore, by induction, the space spanned by $C_k$ is shown to be $T$-invariant.
+		\end{proof}
 
-	
-		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{If a linear operator $T$ on a finite-dimensional complex vector space $V$ has an eigenvalue $\lambda$ of multiplicity $k$, then there exists a set of $k$ linearly independent vectors ${ S = \setc{\v_i \in V}{1 \leq i \leq k} }$ such that, \TODO{complete this}
-				\[ (A - \lambda I)^i \, \v_i = \0 \eqword{for} 1 \leq i \leq k. \]
-			}{}
-			\begin{proof}
-				A chain terminates when ${ (A - \lambda I)^i = 0 }$ which must happen when $i$ is equal to the multiplicity of the eigenvalue. \TODO{how to prove this?}
-			\end{proof}
-		\end{tcolorbox}
-	
-		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{\textbf{(Cayley-Hamilton Theorem.)} If $A$ is an ${ n \times n }$ matrix over $\C{}$ with (not necessarily unique) eigenvalues ${ \lambda_1, \lambda_2, \dots, \lambda_n }$, then
-				\[ (A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I) = 0. \]
-			}{n-eigenvalues-are-roots-of-n-ary-matrix-polynomial}
-			\begin{proof}
-				\href{https://en.wikipedia.org/wiki/Cayley-Hamilton_theorem}{wikipedia}
-				We can find $n$ linearly independent eigenvectors or generalized eigenvectors corresponding to these $n$ eigenvalues. (\TODO{how to prove this? eigenvectors of different eigenvalues are linearly independent by \autoref{prop:distinct-eigenvals-means-independent-eigenvecs} so we only need to prove that there is at least one (non-generalized?) eigenvector for each eigenvalue and this is proven by the fact that the eigenvalue is a root of the characteristic polynomial so that the matrix $A - \lambda I$ has a non-trivial nullspace.})\\
-				
-				Assume we have $n$ linearly independent eigenvectors or generalized eigenvectors (see \ref{sssection:generalized-eigenvectors}) $\v_i$ corresponding to each eigenvalue $\lambda_i$. Then these $n$ vectors must span the vector space over which $A$ operates. Therefore, any arbitrary vector $\v$ in the space must be expressible as a linear combination of the vectors $\v_i$. So, we have,
-				\[\begin{aligned}
-					&(A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)\v = \nn
-					&\hspace{50pt} (A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)(\alpha_1\v_1 + \cdots + \alpha_n\v_n) \nn
-					&= \alpha_1(A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)\v_1 + \cdots \nn
-					&\hspace{50pt} + \alpha_n(A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I)\v_n. \nn
-				\end{aligned}\]
-				But, since each $\v_i$ is an eigenvector or generalized eigenvector, for each such vector $\v_i$, there exists some subset of the eigenvalues ${ \Lambda \subseteq \{\lambda_1,\dots,\lambda_n\} }$ such that
-				\[ \left( \prod_{\lambda \in \Lambda} (A - \lambda I) \right) \v_i = \0. \]
-				Therefore, each term of the above summation is equal to $\0$ and so the entire expression is identically $\0$ for all vectors in the domain. Since the matrix ${ (A - \lambda_1 I)(A - \lambda_2 I)\cdots(A - \lambda_n I) }$ maps any vector in the domain to $\0$ it must be the 0 matrix.
-			\end{proof}
-		\end{tcolorbox}
 		
 		\bigskip
-		\note{We can also see this directly for a ${ 2 \times 2 }$ matrix by calculation:\\\\		
-			\[  A = \begin{bmatrix}
-				a_{11} & a_{12}\\
-				a_{21} & a_{22}
-			\end{bmatrix}
-			\]
-			and
-			\[\begin{aligned}
-				&& \begin{vmatrix}
-					a_{11} - \lambda & a_{12}\\
-					a_{21} & a_{22} - \lambda
-				\end{vmatrix} &= 0 \nn
-				&\iff &\lambda^2 - (a_{11} + a_{22})\lambda + a_{11}a_{22} - a_{12}a_{21} &= 0 \nn
-				&\therefore \lambda = \frac{a_{11} + a_{22}}{2} &\pm \frac{\sqrt{(a_{11} + a_{22})^2 - 4(a_{11}a_{22} - a_{12}a_{21})}}{2}.
-			\end{aligned}\]			
-			Let ${ C = \frac{\sqrt{(a_{11} + a_{22})^2 - 4(a_{11}a_{22} - a_{12}a_{21})}}{2} }$ with, in particular,
-			\[\begin{aligned}
-				C^2 &= \frac{ (a_{11} + a_{22})^2 - 4(a_{11}a_{22} - a_{12}a_{21}) }{4} \\
-				&= \left(\frac{a_{11} + a_{22}}{2}\right)^2 - (a_{11}a_{22} - a_{12}a_{21}). \\\\
-			\end{aligned}\]			
-			Let ${ \lambda_1 = \frac{a_{11} + a_{22}}{2} + C }$ and ${ \lambda_2 = \frac{a_{11} + a_{22}}{2} - C }$ so that,
-			\[ \lambda_1 + \lambda_2 = a_{11} + a_{22}, \]
-			\[ \lambda_1 \lambda_2 = \left(\frac{a_{11} + a_{22}}{2}\right)^2 - C^2 = a_{11}a_{22} - a_{12}a_{21}. \]
-			Note that this is just \autoref{coro:matrix-with-eigenbasis-has-trace-equal-to-sum-of-eigenvalues-and-determinant-equal-to-product} for a ${ 2 \times 2 }$ matrix.\\\\			
-			So we have,
-			\[\begin{aligned}
-				&(A - \lambda_1 I)(A - \lambda_2 I) = \\ &\hspace{70pt}
-				\begin{bmatrix}
-					a_{11} - \lambda_1 & a_{12}\\
-					a_{21} & a_{22} - \lambda_1
-				\end{bmatrix}
-				\begin{bmatrix}
-					a_{11} - \lambda_2 & a_{12}\\
-					a_{21} & a_{22} - \lambda_2
-				\end{bmatrix} \nn \\
-				&= 
-				\begin{bmatrix}
-					(a_{11} - \lambda_1)(a_{11} - \lambda_2) + a_{12}a_{21} & a_{12}(a_{11} - \lambda_1) + a_{12}(a_{22} - \lambda_2)\\
-					a_{21}(a_{11} - \lambda_2) + a_{21}(a_{22} - \lambda_1) & a_{12}a_{21} + (a_{22} - \lambda_1)(a_{22} - \lambda_2)
-				\end{bmatrix} \nn
-			\end{aligned}\]
-			where the diagonal entries have the form,
-			\[\begin{aligned}
-				(a - \lambda_1)(a - \lambda_2) &+ a_{12}a_{21} \\
-				&= (\lambda_1 \lambda_2 - (\lambda_1 + \lambda_2)a + a^2) + a_{12}a_{21} \\
-				&= (a_{11}a_{22} - a_{12}a_{21} - (a_{11} + a_{22})a + a^2) + a_{12}a_{21} \\
-				&= a_{11}a_{22} - a_{11}a - a_{22}a + a^2 \\
-			\end{aligned}\]
-			so if ${ a = a_{11} }$ then we have,
-			\[ a_{11}a_{22} - {a_{11}}^2 - a_{11}a_{22} + {a_{11}}^2 = 0 \]
-			and if ${ a = a_{22} }$ then we have,
-			\[ a_{11}a_{22} - a_{11}a_{22} - {a_{22}}^2 + {a_{22}}^2 = 0 \]
-			which makes the two diagonal entries 0. Meanwhile, the entries on the reverse diagonal have the form,
-			\[\begin{aligned}
-				a(a_{11} - \lambda_2) + a(a_{22} - \lambda_1) &= a(a_{11} + a_{22}) - (\lambda_1 + \lambda_2)a \\
-				&= a(a_{11} + a_{22}) - (a_{11} + a_{22})a = 0 \\
-			\end{aligned}\]
-			which is clearly 0 for $a$ equal to any $a_{ij}$. For this reason, the entries on the reverse diagonal are 0.
-		}
+		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$ and let $Z_i$ for ${ 1 \leq i \leq q }$ be cycles of generalized eigenvectors of $T$ corresponding to a single common eigenvalue $\lambda$.\\
+		If $\y_i$ is the initial vector in cycle $i$ then, if the set ${ \setc{ \y_i }{ 1 \leq i \leq q } }$ is linearly independent then the sets $Z_i$ are disjoint and their union
+			\[ Z = \bigcup_{i=1}^q Z_i \]
+		is linearly independent.
+		}{}
+		\begin{proof}
+		\end{proof}	
+		
 	
 		\biggerskip
 		\subsubsubsection{Generalized Eigenvectors and Jordan Blocks}
@@ -2129,7 +2389,7 @@
 					& & & & &  \lambda & 1
 				\end{bmatrix} 
 			\]
-			or its transpose.
+			or its transpose (depending on the ordering of the basis vectors).
 		}
 		\boxeddefinition{A \textbf{Jordan} matrix or \textbf{Jordan form} or \textbf{Jordan Canonical form} matrix, is a matrix consisting solely of jordan blocks.}
 	
@@ -2731,6 +2991,70 @@
 			\item{\url{https://www.maa.org/sites/default/files/pdf/pubs/books/meg/meg_ch12.pdf}}
 		\end{itemize}
 	}
-}	
+}
+
+
+% ---------------- break -------------
+\pagebreak
+
+\searchableSubsection{Projections}{linear transformations, projections}{
+	\biggerskip
+	\subsubsection{Linear Operators as Projections}
+	\boxeddefinition{A linear operator ${ T: V \longmapsto V }$ is a \textbf{projection} on ${ W_1 \subseteq V }$ if
+		\begin{enumerate}[label=(\roman*)]
+			\item{there exists a subspace ${ W_2 \subseteq V }$ such that ${ W_1 \oplus W_2 = V }$;}
+			\item{for ${ \v = \w_1 + \w_2 \in V }$ where ${ \w_1 \in W_1, \, \w_2 \in W_2 }$, we have
+				\[ T\v = T(\w_1 + \w_2) = \w_1. \]
+			}
+		\end{enumerate}
+	}
+
+	\biggerskip
+	\subsubsubsection{Intuition}
+	If we attempt to project the $x$-axis of $\F{3}$ onto the $z$-axis,
+	\[ T\left( \begin{bmatrix}1\\0\\0\end{bmatrix} \right) = \begin{bmatrix}0\\0\\1\end{bmatrix} \]
+	then this leads to the matrix,
+	\[ A = 	\begin{bmatrix}
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+				1 & 0 & 0
+			\end{bmatrix}.
+	\]
+	But this is \textbf{not} a projection because ${ A^2 = 0 \neq A }$. The $z$-axis is not invariant under $A$; in fact, $A$ maps the $z$-axis to the origin.\\
+	
+	If we try to fix this by also satisfying,
+	\[ T\left( \begin{bmatrix}0\\0\\1\end{bmatrix} \right) = \begin{bmatrix}0\\0\\1\end{bmatrix} \]
+	we get the matrix,
+	\[ A = 	\begin{bmatrix}
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+				1 & 0 & 1
+			\end{bmatrix}.
+	\]
+	\textit{This} matrix $A$, \textit{does} satisfy ${ A^2 = A }$ and \textit{is} therefore a projection of the $x$-axis onto the $z$-axis.\\
+	
+	
+	\biggerskip
+	\subsubsubsection{Deductions}
+		
+	\labeledProposition{If $T$ is a linear operator over a vector space $V$ and also, $T$ is a projection of $V$ onto $W$, then $W$ is $T$-invariant and the restriction of $T$ to $W$, $T_w$ is the identity operator on $W$, $I_w$.}{restriction-to-subspace-of-projection-onto-same-subspace-is-identity-operator}
+	\begin{proof}
+		If $T$ is a projection of $V$ onto $W$ then, for all ${ \v \in V }$ there is some ${ \w \in W }$ such that,
+		\[ T\v = \w. \]
+		Therefore, since ${ W \subseteq V }$ we also have, for all ${ \w_1 \in W }$ and some ${ \w_2 \in W }$,
+		\[ T\w_1 = \w_2 \in W \implies TW \subseteq W. \]
+		So $W$ is shown to be $T$-invariant.\\
+		
+		Since $W$ is $T$-invariant, we can define the restriction of $T$ to $W$,
+		\[ T_w : W \longmapsto W \suchthat T_w\w_1 = T\w_1 = \w_2. \]
+		But also, since $T$ is a projection onto $W$, it is also idempotent,
+		\[ T^2 = T \implies T^2\,\v = T\v \implies {T_w}^2\,\w = T^2\,\w = T\w = T_w\w. \]
+		Putting these two together we obtain, for any ${ \w_1,\w_2 \in W }$ such that ${ T_w\w_1 = \w_2 }$,
+		\[ {T_w}^2\,\w_1 = T_w\w_1 = \w_2 = T_w(T_w\w_1) = T_w\w_2 = {T_w}^2\,\w_2. \]
+		We have obtained 
+		\[ T_w\w_2 = \w_2 \]
+		which implies that ${ T_w = I_w }$, the identity operator on $W$.
+	\end{proof}
+}
 
 \end{document}

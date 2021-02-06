@@ -27,6 +27,9 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 
+\usepackage{ifthen}
+\usepackage{xifthen}
+
 %----- fix the naming clash of \exp between gb4e and math as described in http://https://tex.stackexchange.com/questions/528818/crash-between-math-exp-and-that-of-gb4e
 \let\mathexp=\exp % save the current (math) definition of \exp
 \usepackage{gb4e}
@@ -108,8 +111,14 @@
 \newcommand{\uminus}{\scalebox{0.5}[1.0]{$-$}}  % unary minus scaled by argument
 \newcommand{\nn}{\\[6pt]}
 \newcommand{\nnn}{\\[8pt]}
+\newcommand{\nl}[1][]{% from https://stackoverflow.com/questions/2144176/latex-newcommand-default-argument-is-empty
+	\ifthenelse{\isempty{#1}}%
+	{$ $\\}
+	{$ $\\[{#1}pt]}
+}
 \newcommand{\sep}{\biggerskip\hrule\biggerskip}
 \newcommand{\subheading}[1]{\bigskip\par\textbf{#1}\nopagebreak\\[4pt]\nopagebreak}
+\newcommand{\group}[1]{\parbox{\textwidth}{#1}}
 
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
@@ -140,6 +149,7 @@
 \def\w{\vec{\bm{w}}}
 \def\0{\vec{\bm{0}}}
 \def\x{\vec{\bm{x}}}
+\def\y{\vec{\bm{y}}}
 \def\b{\vec{\bm{b}}}
 \newcommand{\e}[1]{\vec{\bm{e_#1}}}
 
@@ -150,6 +160,7 @@
 \newcommand{\dotprod}{\boldsymbol{\cdot}}
 \newcommand{\congruent}[2]{\equiv #1 \modulo{#2}}
 \newcommand{\conj}[1]{\overline{#1}}
+
 
 \newcommand*{\V}[1]{\vec{\bm{#1}}}
 \newcommand{\dotsuchthat}{\;\cdot\;}
@@ -176,6 +187,7 @@
 \newtheorem{corollary}{Corollary}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{claim}{Claim}[section]
+
 
 \newcommand{\labeledProposition}[2]{
 	\begin{proposition}

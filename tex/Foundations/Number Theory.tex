@@ -143,6 +143,22 @@
 		\begin{proof}
 			Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
 		\end{proof}
+	
+		
+		\biggerskip
+		\subsubsection{Euclidean Division (a.k.a Integer Division)}
+		\boxeddefinition{Given two integers $a$ and $b$, with ${ b \neq 0 }$, if we find two integers $q$ and $r$ such that
+			\[ a = bq + r, \hspace{15pt} 0 ≤ r < |b| \]
+			where $|b|$ denotes the absolute value of $b$, then this process is referred to as \textbf{Euclidean Division} or \textbf{Integer Division}.\\
+			
+			In the above: $a$ is called the \textbf{dividend}, $b$ is called the \textbf{divisor}, $q$ is called the \textbf{quotient} and $r$ is called the \textbf{remainder}.
+		}
+		\labeledTheorem{\textbf{(Division Theorem.)} Given two integers $a$ and $b$, with ${ b \neq 0 }$, there exist unique integers $q$ and $r$ such that
+			\[ a = bq + r, \hspace{15pt} 0 ≤ r < |b| \]
+			where $|b|$ denotes the absolute value of $b$.}{division-theorem}
+		\begin{proof}
+			proof \href{https://en.wikipedia.org/wiki/Euclidean_division#Proof}{wikipedia}
+		\end{proof}
 		
 		
 		\pagebreak

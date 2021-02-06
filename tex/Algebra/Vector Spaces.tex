@@ -522,7 +522,9 @@
 		The empty set is defined to be linearly independent.
 	}
 
-	
+	\note{Note that if we talk about vector spaces being linearly independent this means that their sum is a direct sum. That's to say, if spaces ${ U_1,\dots,U_k }$ are linearly independent and ${ \u_i \in U_i }$ for ${ 1 \leq i \leq k }$, then
+		\[ \u_i + \cdots + \u_k = \0 \iff \u_1 = \cdots = \u_k = \0. \]
+	}
 
 	\bigskip
 	\labeledProposition{If a set of vectors contains the zero vector $\0$ then it cannot be linearly independent.}{set_containing_zero_vector_not_linearly_independent}
@@ -869,11 +871,15 @@
 	\end{proof}
 
 	\medskip
-	\labeledProposition{Let $W$ be a subspace of a finite-dimensional vector space $V$. Then there is another subspace $W'$ such that ${ W \oplus W' = V }$.}{subspaces_have_a_complement_wrt_direct_sum}
+	\labeledProposition{Let $W$ be a subspace of a finite-dimensional vector space $V$. Then there is another subspace $W'$ such that ${ W \oplus W' = V }$.}{subspaces-have-a-complement-wrt-direct-sum}
 	\begin{proof}
 		Any basis of $W$ is a linearly independent set in $V$ and can be extended to a basis of $V$ by adding a set of linearly independent vectors $S$. Then $S$ is a basis of a subspace $W'$ such that any vector in $V$ is in ${ W + W' }$ and since their bases are linearly independent this sum of spaces is a direct sum ${ W \oplus W' }$. Therefore, ${ W \oplus W' = V }$.
 	\end{proof}
-	\note{The subspace $W'$ of $V$ such that ${ W \oplus W' = V }$ is called the \textbf{quotient space of $V$ by $W$} and is denoted ${ V/W }$ (see \href{https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)}{wikipedia}).}
+	
+	\bigskip
+	\subsubsection{Quotient Spaces in Finite-Dimensional Vector Spaces}
+	\boxeddefinition{The subspace $W'$ of $V$ such that ${ W \oplus W' = V }$ is called the \textbf{quotient space of $V$ by $W$} and is denoted ${ V/W }$.}
+	Further information: \href{https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)}{wikipedia}).}
 }
 
 
