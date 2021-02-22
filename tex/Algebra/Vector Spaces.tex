@@ -859,8 +859,11 @@
 	\bigskip
 	\subsubsection{Direct Sums in Finite-Dimensional Vector Spaces}
 	\medskip
-	\labeledProposition{Let ${ W_1, \dots, W_n }$ be subspaces of a finite-dimensional vector space $V$, and let $B_i$ be a basis for $W_i$. Then, the ordered set $B$ obtained by listing the bases ${ B_1, \dots, B_n }$ in order is a basis of $V$ iff $V$ is the direct sum ${ W_1 \otimes \cdots \otimes W_n }$.
-	}{properties_of_direct_sum_of_finite_vector_space}
+	\labeledProposition{Let ${ W_1, \dots, W_n }$ be subspaces of a finite-dimensional vector space $V$, and let $B_i$ be a basis for $W_i$. Then, the union
+		\[ \bigcup_{i=1}^n B_i \]
+		is a disjoint union and forms a basis of $V$ iff 
+		\[ V = W_1 \otimes \cdots \otimes W_n. \]
+	}{bases-of-direct-summands-have-disjoint-union-equal-to-basis-of-space}
 	\begin{proof}
 		Let ${ B = \bigcup_i B_i }$ be a basis of $V$. Then $B$ is a linearly independent set and so,
 		\[ \forall \V{b} \in B \logicsep \V{b} \not\in span(B \setminus \{\V{b}\}) \]
