@@ -2770,8 +2770,8 @@
 			\end{aligned}\]
 			So the simplest cycle is: ${ \frac{1}{2}z^2, -z, 1 }$ and we can choose as a jordan basis,
 			\[ J = \{ 2, -2z, z^2 \}. \]
-			Then the matrix of $T$ \wrt this basis is
-			\[ [T]_J = \inv[J][T(J)] = 	
+			Then the matrix of $T$ \wrt this basis is in Jordan Canonical Form,
+			\[ [T]_J = \inv{[J]}[T(J)] = 	
 				\begin{bmatrix}
 					\frac{1}{2} & 0 & 0\\
 					0 & -\frac{1}{2} & 0\\
@@ -2792,50 +2792,353 @@
 	\end{exe}
 
 
-% --------------------
+
+
+
+
+% -------------------- break ------------------
+
+
+	\pagebreak
+	\searchableSubsection{Inner Product Spaces}{linear algebra}{
+		
+		\boxeddefinition{An \textbf{inner product} is a generalization of the dot product of Euclidean coordinate spaces to arbitrary abstract spaces that need not be Euclidean or represented by coordinate spaces.\\
+		
+		As such, it is a real-valued binary function on vectors from the same vector space (i.e. an operation on vectors)
+			\[ f: V \times V \longmapsto \R{} \]
+		that satisfies the same properties as the Euclidean dot product \autoref{prop:properties_of_dot_product}.\\
+		
+		The inner product is:
+		\begin{enumerate}[label=(\roman*)]
+			\item{Commutative: ${ \inner{\x}{\y} = \inner{\y}{\x} }$;}
+			\item{Linear in its first argument: ${ \inner{\alpha\u + \beta\v}{\w} = \alpha\inner{\u}{\w} + \beta\inner{\v}{\w} }$;}
+			\item{Reflexively positive semi-definite and only zero for the zero vector: ${ \inner{\x}{\x} \geq 0 }$ with ${ \inner{\x}{\x} = 0 \iff \x = \0 }$.}
+		\end{enumerate}
+		}\label{def:inner-product}
+	
+		\boxeddefinition{A vector space that is equipped with (i.e. has defined on it) an inner product is called an \textbf{inner product space}.}
+		
+		\boxeddefinition{An inner product induces a \textbf{norm} on a vector space $V$ such that the norm of a vector ${ \v \in V }$ --- denoted ${ \norm{\v} }$ --- is defined as
+			\[ \norm{\v} = \sqrt{\inner{\v}{\v}}. \]
+			By the properties of the inner product,
+			\[ \inner{\v}{\v} \geq 0 \in \R{} \implies \norm{\v} \geq 0 \in \R{}. \]
+			So, the norm is a real-valued positive semi-definite function
+			\[ f: V \longmapsto \R{}. \]
+			A vector space equipped with a norm is called a \textbf{normed} vector space.
+		}
+		\boxeddefinition{A \textbf{unit vector} is a vector in a normed vector space that has norm equal to 1.\\
+			
+			If a vector ${ \v \in V }$ of arbitrary norm is divided by its norm (i.e. scalar multiplied by the reciprocal of its norm), then
+			\[ \u = \frac{1}{\norm{\v}} \v \]
+			is a unit vector colinear with $\v$. This process is known as \textbf{normalization} of the vector $\v$.
+		}
+		
+		\biggerskip
+		\note{In a Euclidean space if two parametric lines have the same direction vector,
+			\[ l_1(t_1) = \V{p}_1 + t_1\v, \; \; l_2(t_2) = \V{p}_2 + t_2\v \]
+			then the distance between them remains constant at all points on the lines. This is Euclid's 5th postulate, known as {\normalfont The Parallel Postulate} (\href{https://en.wikipedia.org/wiki/Parallel_postulate}{wikipedia}).\\\\
+			In this case, the distance is defined as,
+			\[ d(t_1) = \min_{t_2} \, \norm{(\V{p}_2 + t_2\v) - (\V{p}_1 + t_1\v)}  \]
+			where the norm used here is the Euclidean norm (\ref{def:euclidean-norm}). This Euclidean norm is defined as,
+			\[ \norm{\v} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} \]
+			for ${ \v \in \R{n} }$. Each component of $\v$ represents a scaling of a standard basis vector ${ v_i \e{i} }$ whose resultant length --- and therefore, norm --- will be $v_i$. The vector $\v$ is the sum of these component vectors,
+			\[ \v = \sum_{i = 1}^n v_i \e{i} = v_1 \e{1} + v_2 \e{2} + \cdots + v_n \e{n} \]
+			and, since the standard basis vectors are orthogonal and so subtend right angles with each other, we can use pythagoras theorem to deduce that
+			\[\begin{aligned}
+				\norm{\v}^2 &= \norm{v_1 \e{1}}^2 + \norm{v_2 \e{2}}^2 + \cdots + \norm{v_n \e{n}}^2 \\[4pt]
+				&= v_1^2 + v_2^2 + \cdots + v_n^2.
+			\end{aligned}\]
+			That's to say, the Euclidean norm, which is also the metric (i.e. definition of distance) in Euclidean space, relies on the assumption of an orthogonal basis. Meanwhile, the constancy of the metric value \wrt the coordinates (i.e. that the distance between parallel lines is constant) makes Euclidean space "flat".\\\\
+			If we consider WGS-84 GPS coordinate space as an example of a non-Euclidean space: the axes --- latitude and longitude --- form an orthogonal basis at the equator and also, even though the longitude lines converge at the poles, they remain orthogonal to the lines of latitude. So, even though the coordinate bases are orthogonal everywhere, the metric function that returns the distance between two coordinates in the space, depends on the latitude. It is for this reason that it is a non-Euclidean space.\\\\
+			In general, an inner product space may not be a metric space, may not be a coordinate space, and --- if we are working with coordinates \wrt a basis --- the basis may not be orthogonal.
+		}
+	
+		\note{If the metric is equal to the norm then parallel vectors will remain the same distance apart? (i.e. the space is flat?) Maybe because the distance between two coordinate points remains the same? Between two coordinate points we can define a vector whose length is the vector norm, if that is also the distance, then the distance depends in a constant way on the coordinates and so the space is not "curved". (?) If we take vectors defined as displacements in the gps coordinate system then the length of the vector depends only on the difference in the coordinates not in where the starting point is (as we would expect because vectors do not have a particular starting point) but the distance represented by the displacement depends on the latitude of the starting point.}
+		
+		\biggerskip
+		\subsubsubsection{Example}
+		\begin{exe}
+			\ex{It is possible to define an inner product over the space of degree-n real polynomials $P_n(\R{})$ by, for ${ p,q \in P_n(\R{}) }$,
+				\[ \inner{p}{q} = \sum_{i = 1}^{n+1} p(x_i)q(x_i) \]
+				for any distinct ${ x_1,x_2,\dots,x_{n+1} \in \R{} }$. This inner product satisfies 
+				\[ \inner{\v}{\v} = 0 \iff \v = \0 \]
+				because, for $p(x_i)^2$ to equal 0 at $n+1$ distinct $x_i$ values, it must have $n+1$ roots -- which is not possible unless $p$ is the zero function (refer: \autoref{prop:three_points_identify_quadratic}).
+			}
+		\end{exe}
+	
+		\biggerskip
+		\subsubsubsection{Generalized Geometry}
+		In a bare inner product space there are no points or coordinates and no metric defining distance between points or coordinates. Nevertheless, we can define the angle between two vectors in terms of the inner product and the induced norm.\\
+		
+		\boxeddefinition{\textbf{(Orthogonality)} Let $V$ be an inner product space and ${ \x,\y \in V }$. Then the angle $\theta$ between the vectors $\x$ and $\y$ is defined as,
+			\[ \cos\theta = \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \iff \theta = \inv\cos\left( \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \right). \]
+			
+			The vectors $\x$ and $\y$ are said to be \textbf{orthogonal} --- denoted ${ \x \perp \y }$ --- iff ${ \inner{\x}{\y} = 0 }$. In which case, we have
+			\[ \theta = \inv\cos(0) = \pm \frac{\pi}{2}. \]
+		}\label{def:angle-between-vectors-and-orthogonality}
+	
+		\boxeddefinition{\textbf{(Orthogonal Complement)} Let $V$ be an inner product space and ${ S \subset V }$. Then the \textbf{orthogonal complement} of $S$ is defined as,
+			\[ S^\perp = \setc{\v \in V}{\forall \x \in S \logicsep \v \perp \x}. \]
+		}\label{def:orthogonal-complement}
+		
+		\begin{lemma}\label{lem:squared-norm-of-sum-of-vectors}
+			Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
+			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 2\inner{\x}{\y}. \]
+		\end{lemma}
+		\begin{proof}
+			\[\begin{aligned}
+				\norm{\x + \y}^2 &= \inner{\x + \y}{\x + \y} \\
+				&= \inner{\x}{\x + \y} + \inner{\y}{\x + \y} &\sidecomment{} \\
+				&= \inner{\x}{\x} + \inner{\x}{\y} + \inner{\y}{\x} + \inner{\y}{\y} &\sidecomment{} \\
+				&= \inner{\x}{\x} + \inner{\y}{\y} + 2\inner{\x}{\y} &\sidecomment{by inner product properties}. \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Generalized Pythagoras Theorem.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. If $\x$ and $\y$ are orthogonal then,
+			\[ \norm{\x + \y}^2 = \norm{\x}^2 + \norm{\y}^2. \]
+		}{generalized-pythagoras-theorem}
+		\begin{proof}\nl[2]
+			If $\x$ and $\y$ are orthogonal then ${ \inner{\x}{\y} = 0 }$. Then the \autoref{lem:squared-norm-of-sum-of-vectors} gives us,
+			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 0 = \norm{\x}^2 + \norm{\y}^2. \qedhere \]
+		\end{proof}
+		 
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Cauchy-Schwarz Inequality.)} Let ${ \x,\y \in V }$ be vectors in a normed vector space. Then,
+			\[ \abs{\inner{\x}{\y}} \leq \norm{\x}\norm{\y}. \]
+		}{cauchy-schwarz-inequality}
+		\begin{proof}\nl[2]
+			For all ${ \alpha \in \R{} }$ we have,
+			\[\begin{aligned}
+				&& \norm{\alpha \x + \y}^2 &\geq 0 \\
+				&\iff & \inner{\alpha\x + \y}{\alpha\x + \y} &\geq 0 \\
+				&\iff & \inner{\alpha\x}{\alpha\x + \y} + \inner{\y}{\alpha\x + \y} &\geq 0 \\
+				&\iff & \inner{\alpha\x}{\alpha\x} + \inner{\alpha\x}{\y} + \inner{\y}{\alpha\x} + \inner{\y}{\y} &\geq 0 \\
+				&\iff & \alpha^2\inner{\x}{\x} + 2\alpha\inner{\x}{\y} + \inner{\y}{\y} &\geq 0 &\sidecomment{by inner product properties}.
+			\end{aligned}\]
+			We can re-arrange this result as a real-valued quadratic in $\alpha$,
+			\[ p(\alpha) = \inner{\x}{\x}\alpha^2 + 2\inner{\x}{\y}\alpha + \inner{\y}{\y} \]
+			which has discriminant
+			\[\begin{aligned}
+				d &= (2\inner{\x}{\y})^2 - 4\inner{\x}{\x}\inner{\y}{\y} \\
+				&= 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,).
+			\end{aligned}\]
+			Since we have that ${ \forall \alpha \in \R{} \logicsep p(\alpha) \geq 0 }$ we can deduce that the discriminant ${ d \leq 0 }$ and so,
+			\[\begin{aligned}
+				&& 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,) &\leq 0 \nn
+				&\iff & \inner{\x}{\y}^2 &\leq \inner{\x}{\x}\inner{\y}{\y} \nn
+				&\iff & -\sqrt{\inner{\x}{\x}\inner{\y}{\y}} \leq \inner{\x}{\y} &\leq \sqrt{\inner{\x}{\x}\inner{\y}{\y}} \nn
+				&\iff & \abs{\inner{\x}{\y}} &\leq \norm{\x}\norm{\y}. \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Triangle Inequality for Norms.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
+			\[ \norm{\x + \y} \leq \norm{\x} + \norm{\y}. \]
+		}{triangle-inequality-for-norms}
+		\begin{proof}\nl[2]
+			This follows from the \autoref{lem:squared-norm-of-sum-of-vectors} and Cauchy-Schwarz \ref{theo:cauchy-schwarz-inequality}:
+			\[\begin{aligned}
+				\norm{\x + \y}^2 &= \inner{\x}{\x} + \inner{\y}{\y} + 2\inner{\x}{\y} \\
+				&\leq \inner{\x}{\x} + \inner{\y}{\y} + 2\norm{\x}\norm{\y}  &\sidecomment{by Cauchy-Schwarz} \\
+				&= (\, \norm{\x} + \norm{\y} \,)^2. \qedhere
+			\end{aligned}\]
+		\end{proof}
+		\note{Compare with the Triangle Inequality for simple signed magnitudes: \ref{sssection:triangle-inequality}.}
+	
+		\biggerskip
+		\labeledProposition{If a set of non-zero vectors in an inner product space is pairwise orthogonal, then it is also linearly independent.\\
+			
+			That's to say, if ${ \v_1, \v_2, \dots, \v_k \in V }$ are non-zero vectors in an inner product space such that, for each ${ 1 \leq i \neq j \leq k }$, we have ${ \v_i \perp \v_j }$, then ${ S = \{ \v_1, \v_2, \dots, \v_k \} }$ is linearly independent.
+		}{pairwise-orthogonal-set-is-linearly-independent}
+		\begin{proof}
+			Assume there exists a linear dependence relation between some subset of $S$,
+			\[ \alpha_1 \x_1 + \alpha_2 \x_2 + \cdots + \alpha_m \x_m = \0 \]
+			for ${ \x_1,\x_2,\dots,\x_m \in S }$ and ${ \alpha_1,\alpha_2,\dots,\alpha_m \neq 0 }$. Then, any vector in the dependence relation can be expressed as a linear combination of the others,
+			\[ \x_1 = -\frac{1}{\alpha_1}(\alpha_2 \x_2 + \cdots + \alpha_m \x_m). \]
+			Now, since the elements of $S$ are pairwise orthogonal, we have
+			\[ \inner{\x_i}{\x_j} = 0 \eqword{for} 1 \leq i \neq j \leq m. \]
+			Therefore,
+			\[\begin{aligned}
+				&& \inner{\x_1}{\x_2} &= 0 \\
+				&\iff & \inner{-\frac{1}{\alpha_1}(\alpha_2 \x_2 + \cdots + \alpha_m \x_m)}{\x_2} &= 0 &\sidecomment{} \nn
+				&\iff & -\frac{1}{\alpha_1}\inner{(\alpha_2 \x_2 + \cdots + \alpha_m \x_m)}{\x_2} &= 0 &\sidecomment{by \ref{def:inner-product}} \nn
+				&\iff & \alpha_2\inner{\x_2}{\x_2} + \alpha_3\inner{\x_3}{\x_2} + \cdots + \alpha_m\inner{\x_m}{\x_2} &= 0 &\sidecomment{by \ref{def:inner-product}} \nn
+				&\iff & \alpha_2\inner{\x_2}{\x_2} + 0 + \cdots + 0 &= 0 &\sidecomment{by pairwise orthogonality} \nn
+				&\iff & \alpha_2\inner{\x_2}{\x_2} &= 0 \nn
+				&\iff & \x_2 &= \0. &\sidecomment{by \ref{def:inner-product}}
+			\end{aligned}\]
+			But all the vectors in $S$ are non-zero by construction so this is a contradiction.
+		\end{proof}	
+	}
+
+
+
+
+
+% -------------------- break ------------------
 
 
 	\pagebreak
 	\searchableSubsection{Orthonormal Bases and Orthogonal Operators}{linear algebra}{
-		\bigskip\bigskip
+		\biggerskip
+		\boxeddefinition{A set of pairwise mutually orthogonal (see: \ref{def:angle-between-vectors-and-orthogonality}) unit vectors in an inner product space is called an \textbf{orthonormal set}.
+		}
+		\medskip
 		\subsubsection{Orthonormal Bases}
-		\boxeddefinition{A basis consisting of pairwise mutually orthogonal (see: \ref{sssection:orthogonality}) unit vectors is called an \textbf{orthonormal basis}.
+		\boxeddefinition{A basis consisting of an orthonormal set of vectors is known as an \textbf{orthonormal basis}.
 		}
 	
 		\medskip
 		\labeledProposition{Let ${ U = \{\u_1,\dots, \u_n\} }$ be an orthonormal basis. Then, for any ${ \u_i,\u_j \in U,\, i \neq j }$,
 			\[ \u_i\dotprod\u_j = 0 \eqand \u_i\dotprod\u_i = 1 = \u_j\dotprod\u_j. \]}{properties_of_orthonormal_basis_vectors}
 		\begin{proof}
-			The elements of $U$ are pairwise mutually orthogonal so --- by the definition of orthogonal vectors (\ref{sssection:orthogonality}) --- ${ \u_i\dotprod\u_j = 0 }$ for ${ i \neq j }$. Furthermore,
+			The elements of $U$ are pairwise mutually orthogonal so --- by the definition of orthogonal vectors (\ref{def:angle-between-vectors-and-orthogonality}) --- ${ \u_i\dotprod\u_j = 0 }$ for ${ i \neq j }$. Furthermore,
 			\[ \u_i\dotprod\u_i = \norm{\u_i}^2 = 1 \]
 			because the length of unit vectors is 1.
 		\end{proof}
 	
-		\bigskip\bigskip
-		\subsubsection{Orthonormal Bases in Coordinate Vectors} 
-		If we consider what an orthonormal basis would look like in coordinate vectors. Obviously, the standard basis is an orthonormal basis as,
-			\[ \begin{bmatrix}1\\0\\0\end{bmatrix} \dotprod \begin{bmatrix}0\\1\\0\end{bmatrix} = 0 \]
-			and clearly for any ${ i,j }$ such that ${ i \neq j }$, ${ \e{i} \dotprod \e{j} = 0 }$ and ${\e{i}, \e{j} }$ have unit length.\\\\
-			We can form other orthonormal bases in $\R{3}$ though. The vectors,
-			\[ \begin{bmatrix}1\\1\\0\end{bmatrix} \dotprod \begin{bmatrix}-1\\1\\0\end{bmatrix} = 0 \]
-			are orthogonal but do not have unit length. We can make them unit length, though, by dividing them by $\sqrt{2}$ so that,
-			\[ \begin{bmatrix}1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}-1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-			is also an orthonormal basis of $\R{3}$.\\\\
-			Another orthonormal basis of $\R{3}$ is
-			\[ \begin{bmatrix}\cos\theta\\\sin\theta\\0\end{bmatrix},\, \begin{bmatrix}-\sin\theta\\\cos\theta\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-			for any angle $\theta$ measured anticlockwise from the $x$-axis. Actually this is the general case of which the previous example is a special case when ${ \theta = \pi / 2 }$.			
-			\begin{figure}[h!]
-				\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_2.png}
-				\caption{$ (\cos{\pi/4}, \sin{\pi/4})^T = (1/\sqrt{2}, 1/\sqrt{2})^T,\;  (-\sin{\pi/4}, \cos{\pi/4})^T = (-1/\sqrt{2}, 1/\sqrt{2})^T $}
-			\end{figure}
-			\\But for any value of the angle $\theta$ these remain orthogonal as can be seen if we generate the basis vectors for ${ \theta = \pi/3 }$.
-			\begin{figure}[h!]
-				\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_3.png}
-				\caption{$ (\cos{\pi/3}, \sin{\pi/3})^T = (1/2, \sqrt{3}/2)^T,\;  (-\sin{\pi/3}, \cos{\pi/3})^T = (-\sqrt{3}/2, 1/2)^T $}
-			\end{figure}
+		\bigskip
+		\begin{corollary}\label{coro:dim-V-orthogonal-vectors-are-basis}
+			A set of pairwise orthogonal vectors in an inner product space $V$ with cardinality $\dim V$ is a basis of $V$.
+		\end{corollary}
+		\begin{proof}
+			This is a consequence of \autoref{prop:pairwise-orthogonal-set-is-linearly-independent}.
+		\end{proof}
 	
-		
-		\bigskip\bigskip
+		\biggerskip
+		\subsubsection{Orthonormal Bases in Coordinate Spaces}
+		\bigskip
+		\labeledProposition{Let ${ B = \{\v_1,\v_2,\dots,\v_n\} }$ be an orthonormal basis of an inner product space $V$ and let ${ \w \in V }$. Let the coordinates of $\w$ \wrt the basis $B$ be $\alpha_i$ for ${ 1 \leq i \leq n }$. Then the coordinates $\alpha_i$  are given by 
+			\[ \alpha_i = \inner{\w}{\v_i}. \]
+		}{inner-prod-of-vector-with-orthonormal-basis-vector-is-coordinate}
+		\begin{proof}
+			\[\begin{aligned}
+				\inner{\w}{\v_i} &= \inner{\alpha_1\v_1 + \alpha_2\v_2 + \cdots + \alpha_n\v_n}{\v_i} \\
+				&= \alpha_1\inner{\v_1}{\v_i} + \alpha_2\inner{\v_2}{\v_i} + \cdots + \alpha_n\inner{\v_n}{\v_i} &\sidecomment{} \\
+				&= \alpha_i\inner{\v_i}{\v_i} &\sidecomment{$\because$ pairwise orthogonal} \\
+				&= \alpha_i. &\sidecomment{$\because \norm{\v_i} = 1$}  \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+		\medskip
+		\labeledProposition{Let ${ p: V \times V \longmapsto \R{} }$ be an inner product defined on a vector space $V$ and ${ B \subset V }$ be an orthonormal basis \wrt the inner product $p$ and let ${ \v_B,\w_B \in V }$ be vectors expressed in coordinates \wrt the basis $B$. Then the inner product
+			\[ p(\v_B, \w_B) = {\v_B}\dotprod{\w_B}, \]
+			$p$ is equal to the dot product.
+		}{}
+		\begin{proof}
+			Let the inner product $p$ be denoted by the usual inner product notation ${ \inner{\u_1}{\u_2} = p(\u_1,\u_2) }$ and let the orthonormal basis be ${ B = \{\b_1,\dots,\b_n\} }$. Then,
+			\[\begin{aligned}
+				\inner{\v_B}{\w_B} &= \inner{\alpha_1\b_1 + \cdots + \alpha_n\b_n}{\beta_1\b_1 + \cdots + \beta_n\b_n} \\
+				&= \inner{\alpha_1\b_1}{\beta_1\b_1} + \cdots + \inner{\alpha_n\b_n}{\beta_n\b_n} &\sidecomment{$\because i \neq j \implies \inner{\b_i}{\b_j} = 0 $}\\
+				&= \alpha_1\beta_1\inner{\b_1}{\b_1} + \cdots + \alpha_n\beta_n\inner{\b_n}{\b_n} \\
+				&= \alpha_1\beta_1 + \cdots + \alpha_n\beta_n    &\sidecomment{$\because \inner{\b_i}{\b_i} = 1 $}. \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+		\biggerskip
+		\subsubsubsection{Example}
+		\begin{exe}
+			\ex{Consider an inner product defined over $\R{2}$ given by
+				\[ \inner{\x}{\y} = \x^T A \y  \eqword{where}  A = \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix}. \]
+				This is an inner product because:				
+				\subheading{Symmetry}
+				Since $A$ is symmetric and the inner product --- being a ${ 1 \times 1 }$ matrix --- is also symmetric we have,
+					\[ \inner{\x}{\y} = \inner{\x}{\y}^T = (\x^T A \y)^T = \y^T A^T \x = \y^T A \x = \inner{\y}{\x}. \]
+				\subheading{Linearity in first argument}	
+				By the linearity of matrix multiplication,
+					\[ \inner{\alpha\x + \z}{\y} = (\alpha\x + \z) A \y = \alpha \x A \y + \z A \y = \alpha\inner{\x}{\y} + \inner{\z}{\y}. \]
+				\subheading{Reflexive positive definiteness and only 0 for $\0$}
+				If we define ${ \x = (x_1, x_2)^T \in \R{2} }$ then,
+				\[ \inner{\x}{\x} = 5x_1^2 + 4x_1x_2 + x_2^2 = (\sqrt{5}x_1 + \frac{2x_2}{\sqrt{5}}) + \frac{x_2^2}{5} \]
+				which expression clearly implies that
+				\[ \inner{\x}{\x} \geq 0 \eqand \x = \0 \implies \inner{\x}{\x} = 0. \]
+				On the other hand, if ${ \inner{\x}{\x} = 0 }$, since we have,
+				\[ (\sqrt{5}x_1 + \frac{2x_2}{\sqrt{5}}) \geq 0 \eqand \frac{x_2^2}{5} \geq 0 \]
+				then we can deduce that
+				\[\begin{aligned}
+					&& (\sqrt{5}x_1 + \frac{2x_2}{\sqrt{5}}) &= 0 = \frac{x_2^2}{5} \\
+					&\implies & x_2 &= 0 \\
+					&\implies & x_1 &= 0 \\
+					&\therefore & \x &= \0.
+				\end{aligned}\]
+				Having established that we have defined an inner product on $\R{2}$, we can use it to determine orthogonality of vectors in the space. If we let ${ \v = (1,1)^T }$ then the space of vectors orthogonal to $\v$ is the orthogonal complement (\ref{def:orthogonal-complement}) to the span of $\v$,
+				\[ O = (\operatorname{Lin} \{\v\})^\perp = \setc{ \w \in \R{2} }{ \inner{\w}{\v} = 0 }. \]
+				Since,
+				\[\begin{aligned}
+					&& \inner{\w}{\v} &= 0 \nn
+					&\iff & \w^T \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}1 \\ 1\end{bmatrix} &= 0 \nn
+					&\iff & \begin{bmatrix}w_1 \\ w_2\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}1 \\ 1\end{bmatrix} &= 0 \nn
+					&\iff & 7 w_1 + 3 w_2 &= 0
+				\end{aligned}\]
+				then the set $O$ is
+				\[ O = \setc{ (w_1,w_2) \in \R{2} }{ 7 w_1 + 3 w_2 = 0 }. \]
+				The set $O$ is clearly a 1-d vector space and so we can select any vector from it as a basis of it,
+				\[ O = t \begin{bmatrix}-3 \\ 7\end{bmatrix} \eqword{for} t \in R{}. \]
+				Then we have an orthonormal basis (orthogonal \wrt this inner product) if we normalize the two basis vectors,
+				\[ \left\{ \begin{bmatrix}1 \\ 1\end{bmatrix}, \begin{bmatrix}-3 \\ 7\end{bmatrix} \right\}. \]
+				So we need to calculate the norms,
+				\[ \begin{bmatrix}1 & 1\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}1 \\ 1\end{bmatrix} = 7 + 3 = 10, \]
+				\[ \begin{bmatrix}-3 & 7\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}-3 \\ 7\end{bmatrix} = 3 + 7 = 10. \]
+				\note{It is a coincidence that these values have turned out to be equal.}
+				So the set
+				\[ B = \left\{ \frac{1}{\sqrt{10}} \begin{bmatrix}1 \\ 1\end{bmatrix}, \frac{1}{\sqrt{10}} \begin{bmatrix}-3 \\ 7\end{bmatrix} \right\} \]
+				is an orthonormal basis for the inner product space defined by $\R{2}$ equipped with the inner product ${ \x^T A \y }$.\\
+				
+				If we now express a couple of vectors \wrt the orthonormal basis $B$,
+				\[ \inv{[B]} = \frac{1}{\sqrt{10}} \begin{bmatrix}7 & 3 \\ -1 & 1\end{bmatrix}. \]
+				\[ 
+					\y = \begin{bmatrix}3 \\ 4\end{bmatrix}, \; 
+					\y_B = \frac{1}{\sqrt{10}} \begin{bmatrix}7 & 3 \\ -1 & 1\end{bmatrix} \begin{bmatrix}3 \\ 4\end{bmatrix} = 
+						\frac{1}{\sqrt{10}} \begin{bmatrix}33 \\ 1\end{bmatrix}. 
+				\]
+				\[ 
+					\z = \begin{bmatrix}6 \\ 1\end{bmatrix}, \; 
+					\z_B = \frac{1}{\sqrt{10}} \begin{bmatrix}7 & 3 \\ -1 & 1\end{bmatrix} \begin{bmatrix}6 \\ 1\end{bmatrix} = 
+						\frac{1}{\sqrt{10}} \begin{bmatrix}45 \\ -5\end{bmatrix}. 
+				\]
+				then their inner product
+				\[\begin{aligned}
+					\inner{\y}{\z} &= \begin{bmatrix}3 & 4\end{bmatrix} A \begin{bmatrix}6 \\ 1\end{bmatrix} \nn
+					&= \begin{bmatrix}3 & 4\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}6 \\ 1\end{bmatrix} \nn
+					&= \begin{bmatrix}3 & 4\end{bmatrix} \begin{bmatrix} 32 \\ 13 \end{bmatrix} \nn
+					&= 32 \times 3 + 13 \times 4 = 148,
+				\end{aligned}\]
+				while the dot product of the vectors \wrt the orthonormal basis is
+				\[\begin{aligned}
+					\y_B \dotprod \z_B &= \frac{1}{\sqrt{10}} \begin{bmatrix}33 \\ 1\end{bmatrix} \dotprod \frac{1}{\sqrt{10}} \begin{bmatrix}45 \\ -5\end{bmatrix} \nn
+					&= \frac{1}{10} (33 \times 45 + 1 \times -5) = 148.
+				\end{aligned}\]
+			}
+		\end{exe}
+	
+		\biggerskip
+		\subsubsubsection{Intuition of Orthogonal Bases}
+		If we consider what an orthonormal basis would look like in coordinate vectors: Obviously, the standard basis is an orthonormal basis as,
+			\[ \begin{bmatrix}1\\0\\0\end{bmatrix} \dotprod \begin{bmatrix}0\\1\\0\end{bmatrix} = 0 \]
+		and clearly for any ${ i,j }$ such that ${ i \neq j }$, ${ \e{i} \dotprod \e{j} = 0 }$ and ${\e{i}, \e{j} }$ have unit length.\\\\
+		We can form other orthonormal bases in $\R{3}$ though. The vectors,
+		\[ \begin{bmatrix}1\\1\\0\end{bmatrix} \dotprod \begin{bmatrix}-1\\1\\0\end{bmatrix} = 0 \]
+		are orthogonal but do not have unit length. We can make them unit length, though, by dividing them by $\sqrt{2}$ so that,
+		\[ \begin{bmatrix}1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}-1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
+		is also an orthonormal basis of $\R{3}$.\\\\
+		Another orthonormal basis of $\R{3}$ is
+		\[ \begin{bmatrix}\cos\theta\\\sin\theta\\0\end{bmatrix},\, \begin{bmatrix}-\sin\theta\\\cos\theta\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
+		for any angle $\theta$ measured anticlockwise from the $x$-axis. Actually this is the general case of which the previous example is a special case when ${ \theta = \pi / 2 }$.
+		\pagebreak	
+		\begin{figure}[h!]
+			\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_2.png}
+			\caption{$ (\cos{\pi/4}, \sin{\pi/4})^T = (1/\sqrt{2}, 1/\sqrt{2})^T,\;  (-\sin{\pi/4}, \cos{\pi/4})^T = (-1/\sqrt{2}, 1/\sqrt{2})^T $}
+		\end{figure}
+		\\But for any value of the angle $\theta$ these remain orthogonal as can be seen if we generate the basis vectors for ${ \theta = \pi/3 }$.
+		\begin{figure}[h!]
+			\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_3.png}
+			\caption{$ (\cos{\pi/3}, \sin{\pi/3})^T = (1/2, \sqrt{3}/2)^T,\;  (-\sin{\pi/3}, \cos{\pi/3})^T = (-\sqrt{3}/2, 1/2)^T $}
+		\end{figure}
+		\clearpage
+	
+
 		\subsubsection{Orthogonal Operators}
 		\bigskip
 		\boxeddefinition{A matrix whose columns form an orthonormal basis is called an \textbf{orthogonal matrix}.\\\\
@@ -2843,7 +3146,7 @@
 		}
 	
 		\medskip
-		\labeledProposition{If a matrix $A$ is orthogonal then ${ A^T = \inv{A}}$.}{orthogonal_matrix_transpose_is_inverse}
+		\labeledProposition{A matrix $A$ is orthogonal iff ${ A^T = \inv{A}}$.}{orthogonal_matrix_transpose_is_inverse}
 		\begin{proof}
 			$A$ is an orthogonal matrix so, by definition, its columns form an orthogonal basis. Then,
 			\begin{align*}
@@ -2883,8 +3186,22 @@
 					  = I_n.
 			\]
 			Clearly, the same effect would be seen for ${ AA^T }$ and so,
-			\[ A^TA = AA^T = I \iff A^T = \inv{A}. \qedhere \]
+			\[ A^TA = AA^T = I \iff A^T = \inv{A}. \]
+			
+			Conversely, we can reverse the logic and it is easy to see that if ${ A^T A = I }$ then,
+			\begin{enumerate}[label=(\roman*)]
+				\item{since the diagonal entries are all 1, if $\u_i$ is a column of $A$, then ${ \u_i \dotprod \u_i = 1 }$;}
+				\item{since the off-diagonal entries are all 0, if ${ \u_i, \u_j }$ with ${ i \neq j }$ are distinct columns of $A$, then  ${ \u_i \dotprod \u_j = 0 }$.}
+			\end{enumerate}
+			Therefore, the columns of $A$ form an orthogonal basis and thus, by definition, $A$ is an orthogonal matrix.
 		\end{proof}
+	
+		\note{This provides another way of seeing \autoref{prop:inner-prod-of-vector-with-orthonormal-basis-vector-is-coordinate}: If $[B]$ is the matrix whose columns are the vectors of an orthonormal basis then --- just as with any change of basis --- the vector $\x$ \wrt the standard basis, has coordinates \wrt the basis $B$ given by,
+			\[ \inv{[B]}\x. \]
+			But, since $[B]$ is an orthogonal matrix,
+			\[ \inv{[B]}\x = [B]^T\x \]
+			which is the vector whose $i$-th row component is the dot product of the $i$-th column of $[B]$ and $\x$.
+		}
 	
 		\bigskip
 		\labeledProposition{Left multiplication by an orthogonal matrix preserves the dot product. In other words, for all vectors ${ \v,\w }$, $A$ is an orthogonal matrix if and only if,
@@ -2909,14 +3226,14 @@
 			&\iff & \v^T(A^TA - I)\w &= 0. &
 			\end{align*}
 			Now for any arbitrary matrix $B$, 
-			\[ e_i^TBe_j = b_{ij} \]
+			\[ \e{i}^T B \e{j} = b_{ij} \]
 			where $b_{ij}$ is the $(i,j)$th element of $B$. Then, for
-			\[ e_i^TBe_j = 0 \]
-			to be true \textit{for all possible} ${ e_i,e_j }$ would require that, 
+			\[ \e{i}^T B \e{j} = 0 \]
+			to be true \textit{for all possible} ${ \e{i},\e{j} }$ would require that, 
 			\[ \forall i,j \logicsep b_{ij} = 0 \iff B = [0] \]
 			where $[0]$ is the zero matrix. Therefore,
 			\[ \forall \v,\w \logicsep \v^T(A^TA - I)\w = 0 \iff A^TA - I = [0] \iff A^TA = I \]
-			and so if $A$ preserves the dot product then it is orthogonal.
+			which, by \autoref{prop:orthogonal_matrix_transpose_is_inverse}, implies that $A$ is orthogonal. So if $A$ preserves the dot product then it is orthogonal.
 		\end{proof}
 	
 	
@@ -2951,6 +3268,42 @@
 		
 		\medskip
 		\note{The subgroup of the general linear group formed by the orthogonal matrices is called the \textbf{orthogonal group} and is denoted $O_n$.}
+		
+		\biggerskip
+		\subsubsection{Gram-Schmidt Orthonormalisation}
+		\boxeddefinition{The process known as \textbf{Orthonormalisation} takes a set of linearly independent vectors and returns an orthonormal set of the same cardinality as the original set and in the same space spanned by the original set.\\ Since the orthonormal set has the same cardinality as the original set, by \autoref{coro:dim-V-orthogonal-vectors-are-basis}, it is an orthonormal basis for the space spanned by the original set.}
+		
+		\biggerskip
+		The Gram-Schmidt algorithm is as follows:
+		\begin{algorithm}
+			\begin{algorithmic}
+				\REQUIRE A $k$-length linearly independent set of vectors ${ S = \{\v_1,\dots,\v_k\} \subset V }$ where $V$ is an inner product space, and an initially-empty set ${ O = \{\} }$.
+				\ENSURE A $k$-length orthonormal set of vectors ${ O = \{\u_1, \dots, \u_k \} }$ \suchthat ${ \operatorname{Lin} O = \operatorname{Lin} S }$.
+				\STATE % empty line
+				\FOR {$i=1$ to $k$}
+				\STATE find $\w$, a basis for the orthogonal complement of $O$ in ${ O \cup \{\v_i\} }$.
+				\STATE ${ \u_i \leftarrow \frac{\w}{\norm{\w}} }$
+				\ENDFOR 
+			\end{algorithmic}
+		\end{algorithm}
+		
+	
+		\medskip
+		The process of finding the orthogonal complement on iteration number $i$ is to find the set of vectors
+		\[ O^\perp = \setc{\w \in O \cup \{\v_i\}}{\forall \u \in O \logicsep \w \perp \u}. \]
+	
+		For ${ \w \in O^\perp }$ we need, for every ${ \u_j \in O }$,
+		\[\begin{aligned}
+			&& \inner{\w}{\u_j} &= 0 \\
+			&\iff & \inner{\alpha_1 \u_1 + \cdots + \alpha_{i-1} \u_{i-1} + \alpha_i \v_i}{\u_j} &= 0 \\
+			&\iff & \inner{\alpha_j \u_j + \alpha_i \v_i}{\u_j} &= 0 &\sidecomment{by orthogonality} \\
+			&\iff & \alpha_j + \alpha_i \inner{\v_i}{\u_j}  &= 0 &\sidecomment{${ \because \norm{\u_j} = 1 }$} \\
+			&\iff & \alpha_j &= -\alpha_i \inner{\v_i}{\u_j}.
+		\end{aligned}\]
+		So, if we set ${ \alpha_i = 1 }$ then we get
+		\[ \w = \v_i - \inner{\v_i}{\u_1}\u_1 - \inner{\v_i}{\u_2}\u_2 - \cdots - \inner{\v_i}{\u_{i-1}}\u_{i-1}. \]
+		Clearly, our only degree of freedom in the definition of the vector $\w$ is the value of $\alpha_i$. However, if we were to use some other value, ${ \alpha_i = \beta }$, then the result would be ${ \beta \w }$, a scaling of $\w$ by $\beta$. As a result, this is clearly a 1-dimensional space in which any vector will suffice as a basis. So we can use $\w$ as the basis vector and then, it is a simple matter to normalize it and add it to the set $O$.
+				
 	}
 
 

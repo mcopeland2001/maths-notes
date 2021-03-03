@@ -7,7 +7,7 @@ function search() {
 
 pdflatex -synctex=1 -interaction=nonstopmode --output-directory=../build 'Pure Mathematics.tex'
 cp -p "../build/Pure Mathematics.pdf" "../pdf/Pure Mathematics.pdf"
-start ""  "..\pdf\Pure Mathematics.pdf"
+# start ""  "..\pdf\Pure Mathematics.pdf"
 # search "vector spaces"
 # cp -p "../build/vector spaces.pdf" "../pdf/vector spaces.pdf"
 

@@ -16,6 +16,8 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
+\usepackage{algorithmic}
+\usepackage{algorithm}
 %\usepackage{esvect} provides longer over arrows (not currently in use)
 
 \usepackage[T1]{fontenc}
@@ -91,6 +93,10 @@
 	tabsize=2	                   		% sets default tabsize to 2 spaces
 }
 
+% init code for algorithmic package
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
 
 
 \input{search.tex}
@@ -150,14 +156,15 @@
 \def\0{\vec{\bm{0}}}
 \def\x{\vec{\bm{x}}}
 \def\y{\vec{\bm{y}}}
+\def\z{\vec{\bm{z}}}
 \def\b{\vec{\bm{b}}}
 \newcommand{\e}[1]{\vec{\bm{e_#1}}}
 
 \newcommand{\bigsetc}[2]{\left\{#1\; \middle\vert \;#2\right\}}
 \renewcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\cardinality}{\abs}
-%\renewcommand{\norm}{\abs}
 \newcommand{\dotprod}{\boldsymbol{\cdot}}
+\newcommand{\inner}[2]{\langle #1,\, #2 \rangle}
 \newcommand{\congruent}[2]{\equiv #1 \modulo{#2}}
 \newcommand{\conj}[1]{\overline{#1}}
 
