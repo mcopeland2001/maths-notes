@@ -2816,6 +2816,18 @@
 		\end{enumerate}
 		}\label{def:inner-product}
 	
+		\boxeddefinition{\textbf{(Complex Inner Product)} For the complex field $\C{}$, a slightly modified definition of the inner product is required. This is because, by \autoref{prop:complex-field-is-not-ordered}, $\C{}$ is not an ordered field which means that, if the inner product over the complex field returned a complex number result, then there would be no definition of positive definite as there is no ordering between 0 and the complex result. So, the inner product over the complex field is defined as follows.\\
+			
+			The complex inner product is a real-valued binary function on vectors from the same vector space
+			\[ f: V \times V \longmapsto \R{} \]			
+			that satisfies:
+			\begin{enumerate}[label=(\roman*)]
+				\item{Commutative: ${ \inner{\x}{\y} = \inner{\y}{\x} }$;}
+				\item{Linear in its first argument: ${ \inner{\alpha\u + \beta\v}{\w} = \alpha\inner{\u}{\w} + \beta\inner{\v}{\w} }$;}
+				\item{With its conjugate, positive semi-definite and only zero for the zero vector: ${ \inner{\x}{\conj{\x}} \geq 0 }$ with ${ \inner{\x}{\conj{\x}} = 0 \iff \x = \0 }$.}
+			\end{enumerate}
+		}\label{def:complex-inner-product}
+	
 		\boxeddefinition{A vector space that is equipped with (i.e. has defined on it) an inner product is called an \textbf{inner product space}.}
 		
 		\boxeddefinition{An inner product induces a \textbf{norm} on a vector space $V$ such that the norm of a vector ${ \v \in V }$ --- denoted ${ \norm{\v} }$ --- is defined as
@@ -3023,10 +3035,10 @@
 		\end{proof}
 	
 		\medskip
-		\labeledProposition{Let ${ p: V \times V \longmapsto \R{} }$ be an inner product defined on a vector space $V$ and ${ B \subset V }$ be an orthonormal basis \wrt the inner product $p$ and let ${ \v_B,\w_B \in V }$ be vectors expressed in coordinates \wrt the basis $B$. Then the inner product
-			\[ p(\v_B, \w_B) = {\v_B}\dotprod{\w_B}, \]
-			$p$ is equal to the dot product.
-		}{}
+		\labeledProposition{Let ${ p: V \times V \longmapsto \R{} }$ be a non-standard inner product defined on a vector space $V$ and ${ B \subset V }$ be an orthonormal basis \wrt the inner product $p$. Let ${ \v,\w \in V }$ and let ${ \v_B,\w_B \in V }$ be vectors ${ \v,\w }$ expressed in coordinates \wrt the basis $B$. Then the inner product
+			\[ p(\v, \w) = \v_B \dotprod \w_B, \]
+			$p$ is equal to the dot product on the vectors expressed \wrt the orthonormal basis.
+		}{any-inner-product-of-two-vectors-is-equal-to-dot-product-of-the-vectors-wrt-orthonormal-basis}
 		\begin{proof}
 			Let the inner product $p$ be denoted by the usual inner product notation ${ \inner{\u_1}{\u_2} = p(\u_1,\u_2) }$ and let the orthonormal basis be ${ B = \{\b_1,\dots,\b_n\} }$. Then,
 			\[\begin{aligned}
@@ -3284,8 +3296,9 @@
 				\STATE find $\w$, a basis for the orthogonal complement of $O$ in ${ O \cup \{\v_i\} }$.
 				\STATE ${ \u_i \leftarrow \frac{\w}{\norm{\w}} }$
 				\ENDFOR 
-			\end{algorithmic}
+			\end{algorithmic}	
 		\end{algorithm}
+		% Note: This article: https://www.math-linux.com/latex-26/faq/latex-faq/article/how-to-write-algorithm-and-pseudocode-in-latex-usepackage-algorithm-usepackage-algorithmic says, at the end, that the algorithmic package used here is not compatible with hyperref.
 		
 	
 		\medskip
@@ -3303,7 +3316,46 @@
 		So, if we set ${ \alpha_i = 1 }$ then we get
 		\[ \w = \v_i - \inner{\v_i}{\u_1}\u_1 - \inner{\v_i}{\u_2}\u_2 - \cdots - \inner{\v_i}{\u_{i-1}}\u_{i-1}. \]
 		Clearly, our only degree of freedom in the definition of the vector $\w$ is the value of $\alpha_i$. However, if we were to use some other value, ${ \alpha_i = \beta }$, then the result would be ${ \beta \w }$, a scaling of $\w$ by $\beta$. As a result, this is clearly a 1-dimensional space in which any vector will suffice as a basis. So we can use $\w$ as the basis vector and then, it is a simple matter to normalize it and add it to the set $O$.
-				
+		
+		
+		
+		\biggerskip
+		\subsubsection{Orthogonal Diagonalisation}
+		\bigskip
+		\boxeddefinition{\textbf{(Orthogonal Diagonalisation)} A matrix is said to be \textbf{orthogonally diagonalisable} if there is an orthogonal matrix that diagonalises it.}
+		
+		\medskip
+		\labeledProposition{A matrix is orthogonally diagonalisable iff there exists an orthonormal eigenbasis.}{orthogonally-diagonalisable-iff-exists-an-orthonormal-eigenbasis}
+		\begin{proof}
+			This is a consequence of the definition of orthogonal diagonalisation, the definition of an orthogonal matrix \addref, and the equivalence of diagonalisation and the existence of an eigenbasis \addref.
+		\end{proof}
+	
+%		\bigskip
+%		\labeledTheorem{\textbf{(Spectral Theorem for Symmetric Matrices.)} A matrix is orthogonally diagonlisable if and only if it is symmetric.}{matrix-orthogonally-diagonalisable-iff-symmetric}
+%		\begin{proof}
+%		\end{proof} TODO
+	
+		\bigskip
+		\labeledProposition{If a matrix is orthogonally diagonalisable then it is symmetric.}{matrix-orthogonally-diagonalisable-implies-symmetric}
+		\begin{proof}
+			If a matrix $A$ is orthogonally diagonalisable then there exists an orthogonal matrix $P$ such that,
+			\[ D = \inv{P}AP \]
+			is diagonal. Since the matrix $D$ is diagonal, it is symmetrical and equal to its transpose so we can reason,
+			\[ D^T = D \implies (\inv{P}AP)^T = \inv{P}AP. \]
+			Furthermore, $P$ is an orthogonal matrix so, by \addref, ${ P^T = \inv{P} }$. So,
+			\[\begin{aligned}
+				&& (\inv{P}AP)^T &= \inv{P}AP \\
+				&\iff & P^T A^T (\inv{P})^T &= \inv{P}AP \\
+				&\iff & \inv{P} A^T (P^T)^T &= \inv{P}AP \\
+				&\iff & \inv{P} A^T P &= \inv{P}AP \\
+				&\iff & A^T &= A.  \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{If a matrix is symmetric then eigenvectors corresponding to distinct eigenvalues are orthogonal.}{symmetric-matrix-eigenvecs-of-distinct-eigenvals-are-orthogonal}
+		\begin{proof}
+		\end{proof}
 	}
 
 

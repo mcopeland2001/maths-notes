@@ -148,16 +148,16 @@
 		\biggerskip
 		\subsubsection{Euclidean Division (a.k.a Integer Division)}
 		\boxeddefinition{Given two integers $a$ and $b$, with ${ b \neq 0 }$, if we find two integers $q$ and $r$ such that
-			\[ a = bq + r, \hspace{15pt} 0 ≤ r < |b| \]
+			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
 			where $|b|$ denotes the absolute value of $b$, then this process is referred to as \textbf{Euclidean Division} or \textbf{Integer Division}.\\
 			
 			In the above: $a$ is called the \textbf{dividend}, $b$ is called the \textbf{divisor}, $q$ is called the \textbf{quotient} and $r$ is called the \textbf{remainder}.
 		}
 		\labeledTheorem{\textbf{(Division Theorem.)} Given two integers $a$ and $b$, with ${ b \neq 0 }$, there exist unique integers $q$ and $r$ such that
-			\[ a = bq + r, \hspace{15pt} 0 ≤ r < |b| \]
+			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
 			where $|b|$ denotes the absolute value of $b$.}{division-theorem}
 		\begin{proof}
-			proof \href{https://en.wikipedia.org/wiki/Euclidean_division#Proof}{wikipedia}
+			proof \href{https://en.wikipedia.org/wiki/Euclidean_division\#Proof}{wikipedia}
 		\end{proof}
 		
 		
@@ -387,17 +387,34 @@
 		\end{proof}
 	}
 
+
+
+% --------------------- break ---------------------
+
+
 	\pagebreak
-	\searchableSubsection{Complex Number}{number theory, complex numbers}{\bigskip
+	\searchableSubsection{Complex Numbers}{number theory, complex numbers}{
+		\bigskip
+		\subsubsection{The Exponential Form}
+		\boxeddefinition{The \textbf{exponential form} of a complex number ${ z = a + ib }$ is defined as
+			\[ z = r e^{i\theta} \eqword{for} r,\theta \in \R{} \]
+			where $\theta$ is an angle in radians. This implies that
+			\[ r e^{i\alpha} = r e^{i(\alpha + 2n\pi)} \eqword{for} n \in \Z{}. \]
+		}\label{def:complex-exponential}
+		
+		\bigskip
+		\subsubsection{The Modulus}
+		\medskip
 		\boxeddefinition{The \textbf{modulus} of a complex number, $z = a + bi$, is the quantity defined as,
-			\[ \abs{z} = \sqrt{a^2 + b^2}. \]
+			\[ \modulus{z} = \sqrt{a^2 + b^2}. \]
 		}
-		\textcolor{red}{TODO: modulus is also called "absolute value" and can be calculated as product with conjugate}
+		
+		\medskip
 		The modulus obeys the following properties:
 		\begin{itemize}
-			\item{$ \abs{z_1z_2} = \abs{z_1}\abs{z_2} $}
+			\item{$ \modulus{z_1z_2} = \modulus{z_1}\modulus{z_2} $}
 		\end{itemize}
-	
+		
 		\bigskip
 		\[ e^{(a+bi)t} = e^a (\cos{t} + i \sin{t})^b = e^a (\cos{bt} + i \sin{bt}) \]
 		where we have used
@@ -411,56 +428,73 @@
 		\end{aligned}\]
 		(more difficult to prove for non-even integer powers)
 		
+		\bigskip
 		\subsubsection{The Complex Conjugate}
-		\[\begin{aligned}
-			\conj{z + w} &= \conj{(a + bi) + (c + di)} \\
-			&= \conj{(a + c) + i(b + d)} \\
-			&= (a + c) - (b + d)i \\
-			&= (a - bi) + (c - di) \\
-			&= \conj{z} + \conj{w}.
-		\end{aligned}\]
+		\boxeddefinition{\textbf{(Complex Conjugate)} For a complex number ${ z = a + ib }$, the \textbf{conjugate} of $z$, denoted $\conj{z}$, is defined as,
+			\[ \conj{z} = a - ib. \]
+		}
+	
+		\medskip
+		\labeledProposition{Properties of the complex conjugate:
+			\begin{enumerate}[label=(\roman*)]
+				\item{${ z = re^{i\theta} \iff \conj{z} = re^{-i\theta} }$}
+				\item{${ \conj{z + w} = \conj{z} + \conj{w} }$}
+				\item{${ \conj{zw} = \conj{z} \, \conj{w} }$}
+				\item{${ \overline{\left(\frac{z}{w}\right)} = \frac{\overline{z}}{\overline{w}} }$}
+				\item{${ z \conj{z} = \modulus{z}^2 }$}
+			\end{enumerate}
+		}{complex-conjugate-properties}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item{
+					Since cosine is an even function and sine is an odd function, we have
+					\[\begin{aligned}
+						&& z &= re^{i\theta} = r(\cos\theta + i\sin\theta) \\
+						&\iff & \conj{z} &= r(\cos\theta - i\sin\theta) &\sidecomment{using defn. of conjugate}\\
+						&\iff & \conj{z} &= r(\cos(-\theta) + i\sin(-\theta)) \\ 
+						&\iff & \conj{z} &= re^{i(-\theta)} = re^{-i\theta}.
+					\end{aligned}\]
+				}
+				\item{
+					\[\begin{aligned}
+						\conj{z + w} &= \conj{(a + bi) + (c + di)} \\
+						&= \conj{(a + c) + i(b + d)} \\
+						&= (a + c) - (b + d)i \\
+						&= (a - bi) + (c - di) \\
+						&= \conj{z} + \conj{w}.
+					\end{aligned}\]
+				}
+				\item{
+					\[\begin{aligned}
+						\conj{zw} &= \conj{(a + bi)(c + di)} \\
+						&= \conj{(ac - bd) + (ad + bc)i} \\
+						&= (ac - bd) - (ad + bc)i \\
+						&= (a - bi)(c - di) \\
+						&= \conj{z} \, \conj{w}.
+					\end{aligned}\]
+				}
+				\item{
+					\[\begin{aligned}
+						\overline{\left(\frac{z}{w}\right)} &= \overline{ \left(\frac{z \, \overline{w}}{w \, \overline{w}}\right) } \nn
+						&= \overline{ \left(\frac{z \, \overline{w}}{\abs{w}}\right) } = \frac{\overline{z} \, w}{\abs{w}} \nn
+						&= \frac{\overline{z} \, w}{w \, \overline{w}} = \frac{\overline{z}}{\overline{w}} \nn
+					\end{aligned}\]
+				}
+				\item{
+					\[\begin{aligned}
+						z \conj{z} &= (a + bi)(a - bi) \\
+						&= a^2 - b^2 i^2 \\
+						&= a^2 + b^2 = \modulus{z}^2
+					\end{aligned}\]
+					and also
+					\[\begin{aligned}
+						z \conj{z} &= re^{i\theta} \cdot re^{-i\theta} \\
+						&= r^2 = \modulus{z}^2.
+					\end{aligned}\]
+				}
+			\end{enumerate}
+		\end{proof}
 		
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledProposition{The conjugate of a product of complex numbers is equal to the product of their conjugates.}{conjugate-of-complex-product-equal-to-product-of-conjugates}
-			\begin{proof}
-				\[\begin{aligned}
-					\conj{zw} &= \conj{(a + bi)(c + di)} \\
-					&= \conj{(ac - bd) + (ad + bc)i} \\
-					&= (ac - bd) - (ad + bc)i \\
-					&= (a - bi)(c - di) \\
-					&= \conj{z} \, \conj{w}.
-				\end{aligned}\]
-			\end{proof}
-		\end{tcolorbox}
-	
-		\[\begin{aligned}
-			\overline{\left(\frac{z}{w}\right)} &= \overline{ \left(\frac{z \, \overline{w}}{w \, \overline{w}}\right) } \nn
-			&= \overline{ \left(\frac{z \, \overline{w}}{\abs{w}}\right) } = \frac{\overline{z} \, w}{\abs{w}} \nn
-			&= \frac{\overline{z} \, w}{w \, \overline{w}} = \frac{\overline{z}}{\overline{w}} \nn
-		\end{aligned}\]
-	
-		\biggerskip
-		\subsubsection{The Fundamental Theorem of Algebra}
-		\begin{theorem}[Fundamental Theorem of Algebra]\label{theo:fundamental-theorem-of-algebra}
-			Every non-constant single-variable polynomial with complex coefficients has at least one complex root.
-		\end{theorem}
-		\begin{proof}
-			\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra#Proofs}{wikipedia}
-		\end{proof}
-		\begin{corollary}
-			Every non-constant degree-$n$ single-variable polynomial with complex coefficients has exactly $n$ complex roots when counted with the multiplicity.
-		\end{corollary}
-		\begin{proof}
-			This is equivalent to the Fundamental Theorem of Algebra because if we have a degree-$n$ polynomial with complex coefficients,
-			\[ p_n(z) = a_n z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0 \]
-			then the theorem tells us that this polynomial has at least one complex root. Let $r_n$ be a root of $p_n(z)$. Then,
-			\[ p_n(z) = (z - r_n)p_{n-1}(z). \]
-			But since $p_{n-1}(z)$ is a degree-$n-1$ polynomial with complex coefficients, the theorem also assures us that it too has at least one complex root, say $r_{n-1}$ so that
-			\[ p_n(z) = (z - r_n)(z - r_{n-1})p_{n-2}(z). \]
-			Clearly, we can proceed in this way until we obtain
-			\[ p_n(z) = a(z - r_n)(z - r_{n-1})\cdots(z - r_1) \]
-			for some constant $a$. Since the roots $r_i$ may not be distinct, this shows that $p_n(z)$ has $n$ roots when counted with the multiplicity.
-		\end{proof}
 	}
 		
 		

@@ -472,6 +472,22 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		and since $\inv{B}$ and $\inv{A}$ both exist then their product exists.
 		Furthermore, this holds for a product of any finite sequence of invertible matrices $A_1A_2\cdots A_n$ which can easily be shown by induction on the associative product.
 		\end{proof}
+	
+		\bigskip
+		\labeledProposition{If two ${ m \times n }$ matrices $A$ and $B$ are defined over a vector space $V$ then,
+			\[ \left[\; \forall \x,\y \in V \logicsep \; \x^T A \y = \x^T B \y \;\right] \implies A = B. \]
+		}{quadratic-forms-equal-for-all-vectors-in-space-implies-matrices-are-equal}
+		\begin{proof}
+			Firstly, observe that, for any arbitrary matrix $M$,
+			\[ \e{i}^T M \e{j} = m_{ij} \]
+			where $m_{ij}$ denotes the $i,j$-th element of the matrix $M$. So, if we let ${ \x,\y }$ range over ${ \e{i},\e{j} }$ for ${ 1 \leq i \leq m, \, 1 \leq j \leq n }$, then, for $A$ and $B$ satisfying the condition, we must have
+			\[ \forall i,j \logicsep \e{i}^T A \e{j} = \e{i}^T B \e{j} \]
+			which implies that
+			\[ \forall i,j \logicsep a_{ij} = b_{ij} \]
+			where $a_{ij}, b_{ij}$ denote the $i,j$-th element of the matrices $A,B$ respectively.\\
+			
+			Since the matrices $A$ and $B$ are equal in all elements, ${ A = B }$.
+		\end{proof}
 	}
 
 
@@ -501,6 +517,21 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			and the definition of symmetric matrices tells us that for symmetric $A$ and $B$,
 			\[ A^T = A \eqand B^T = B. \]
 			Therefore ${ (BA)^T = AB. }$
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{$A$ is a symmetric matrix in $\R{n \times n}$ iff, for any ${ \x,\y \in \R{n} }$,
+			\[ A\x \dotprod \y = \x \dotprod A\y. \]
+		}{A-is-symmetric-real-matrix-then-Ax-dot-y-equals-x-dot-Ay}
+		\begin{proof}
+			Assume $A$ is a symmetric matrix in ${ \R{n \times n} }$. Then, using ${ \v \dotprod \w = \v^T \w }$,
+			\[ A\x \dotprod \y = (A\x)^T \y = \x^T A^T \y = \x^T A\y = \x \dotprod A\y. \]
+			Conversely, if we assume that $A$ is a (not-necessarily symmetric) matrix in ${ \R{n \times n} }$ and ${ A\x \dotprod \y = \x \dotprod A\y }$ then, if we use $a_j$ to denote the $j$-th column of the matrix $A$ and $a_{ij}$ to denote the $i,j$-th element of $A$,
+			\[\begin{aligned}
+				&& A \e{j} \dotprod \e{i} &= \e{j} \dotprod A \e{i} \\
+				&\iff & a_j \dotprod \e{i} &= \e{j} \dotprod a_i \\
+				&\iff & a_{ij} &= a_{ji}.
+			\end{aligned}\]
 		\end{proof}
 		
 		\bigskip\bigskip
