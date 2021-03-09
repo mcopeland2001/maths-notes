@@ -429,8 +429,26 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		\begin{proof}
 			In ${ A + B }$ the ${ (i,j) }$ element is ${ A_{ij} + B_{ij} }$ so the ${ (i,j) }$ element of ${ (A + B)^T }$ is ${ A_{ji} + B_{ji} }$ which clearly is also the ${ (i,j) }$ element of ${  A^T + B^T }$. \qedhere
 		\end{proof}
-		
+	
 		\bigskip
+		\labeledProposition{If two ${ m \times n }$ matrices $A$ and $B$ are defined over a vector space $V$ then,
+			\[ \left[\; \forall \x,\y \in V \logicsep \; \x^T A \y = \x^T B \y \;\right] \implies A = B. \]
+		}{quadratic-forms-equal-for-all-vectors-in-space-implies-matrices-are-equal}
+		\begin{proof}
+			Firstly, observe that, for any arbitrary matrix $M$,
+			\[ \e{i}^T M \e{j} = m_{ij} \]
+			where $m_{ij}$ denotes the $i,j$-th element of the matrix $M$. So, if we let ${ \x,\y }$ range over ${ \e{i},\e{j} }$ for ${ 1 \leq i \leq m, \, 1 \leq j \leq n }$, then, for $A$ and $B$ satisfying the condition, we must have
+			\[ \forall i,j \logicsep \e{i}^T A \e{j} = \e{i}^T B \e{j} \]
+			which implies that
+			\[ \forall i,j \logicsep a_{ij} = b_{ij} \]
+			where $a_{ij}, b_{ij}$ denote the $i,j$-th element of the matrices $A,B$ respectively.\\
+			
+			Since the matrices $A$ and $B$ are equal in all elements, ${ A = B }$.
+		\end{proof}
+	
+	
+		
+		\biggerskip
 		\subsubsection{Matrix inverse}
 		\boxeddefinition{Inverse property is: If there exists a matrix B such that $ AB = BA = I $ then $B$ is the \textbf{inverse} of $A$ and $A$ is the inverse of $B$.}
 		
@@ -473,20 +491,33 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 		Furthermore, this holds for a product of any finite sequence of invertible matrices $A_1A_2\cdots A_n$ which can easily be shown by induction on the associative product.
 		\end{proof}
 	
-		\bigskip
-		\labeledProposition{If two ${ m \times n }$ matrices $A$ and $B$ are defined over a vector space $V$ then,
-			\[ \left[\; \forall \x,\y \in V \logicsep \; \x^T A \y = \x^T B \y \;\right] \implies A = B. \]
-		}{quadratic-forms-equal-for-all-vectors-in-space-implies-matrices-are-equal}
+		
+		\biggerskip
+		\subsubsection{Conjugate Matrix}
+		\boxeddefinition{The conjugate matrix $\conj{A}$ is formed by taking the complex conjugate of every element in $A$. That's to say, if the $i,j$-th elements of $A$ are $a_{ij}$ then the corresponding elements of $\conj{A}$ are $\conj{a_{ij}}$.}
+		
+		\medskip
+		\labeledProposition{${ \conj{A\v} = \conj{A} \, \conj{\v} }$}{conjugate-of-matrix-times-vector-is-conjugate-matrix-times-conjugate-vector}
 		\begin{proof}
-			Firstly, observe that, for any arbitrary matrix $M$,
-			\[ \e{i}^T M \e{j} = m_{ij} \]
-			where $m_{ij}$ denotes the $i,j$-th element of the matrix $M$. So, if we let ${ \x,\y }$ range over ${ \e{i},\e{j} }$ for ${ 1 \leq i \leq m, \, 1 \leq j \leq n }$, then, for $A$ and $B$ satisfying the condition, we must have
-			\[ \forall i,j \logicsep \e{i}^T A \e{j} = \e{i}^T B \e{j} \]
-			which implies that
-			\[ \forall i,j \logicsep a_{ij} = b_{ij} \]
-			where $a_{ij}, b_{ij}$ denote the $i,j$-th element of the matrices $A,B$ respectively.\\
-			
-			Since the matrices $A$ and $B$ are equal in all elements, ${ A = B }$.
+			Let the $i,j$-th elements of $A$ be denoted $a_{ij}$ and the $i$-th element of a vector $\v$ be denoted $v_i$. Then, using the properties of the complex conjugate (\ref{prop:complex-conjugate-properties}),
+			\[\begin{aligned}
+				&& A\v &= \begin{bmatrix}
+					v_1 a_{11} + \cdots + v_n a_{1n}\\
+					\vdots \\
+					v_1 a_{n1} + \cdots + v_n a_{nn}
+				\end{bmatrix} \nnn
+				&\implies & \conj{A\v} &= 	\begin{bmatrix}
+												\conj{v_1 a_{11} + \cdots + v_n a_{1n}}\\
+												\vdots \\
+												\conj{v_1 a_{n1} + \cdots + v_n a_{nn}}
+											\end{bmatrix}  
+										= 	\begin{bmatrix}
+												\conj{v_1} \conj{a_{11}} + \cdots + \conj{v_n} \conj{a_{1n}}\\
+												\vdots \\
+												\conj{v_1} \conj{a_{n1}} + \cdots + \conj{v_n} \conj{a_{nn}}
+											\end{bmatrix}
+										= \conj{A} \, \conj{\v}. \qedhere
+			\end{aligned}\]
 		\end{proof}
 	}
 

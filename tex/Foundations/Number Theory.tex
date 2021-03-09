@@ -395,12 +395,13 @@
 	\pagebreak
 	\searchableSubsection{Complex Numbers}{number theory, complex numbers}{
 		\bigskip
-		\subsubsection{The Exponential Form}
-		\boxeddefinition{The \textbf{exponential form} of a complex number ${ z = a + ib }$ is defined as
-			\[ z = r e^{i\theta} \eqword{for} r,\theta \in \R{} \]
-			where $\theta$ is an angle in radians. This implies that
-			\[ r e^{i\alpha} = r e^{i(\alpha + 2n\pi)} \eqword{for} n \in \Z{}. \]
-		}\label{def:complex-exponential}
+		\boxeddefinition{Complex numbers are the members of the set
+			\[ \C{} = \setc{a + bi}{a,b \in \R{}} \]
+			and $i$ is the imaginary number such that ${ i^2 = -1 }$.
+			\note{In some contexts (e.g. physics), $j$ is sometimes used as the imaginary number.}
+			
+			If ${ z = a + bi }$ is a complex number then ${ \RePart(z) = a }$ and ${ \ImPart(z) = b }$.
+		}\label{defn:complex-numbers}
 		
 		\bigskip
 		\subsubsection{The Modulus}
@@ -408,12 +409,65 @@
 		\boxeddefinition{The \textbf{modulus} of a complex number, $z = a + bi$, is the quantity defined as,
 			\[ \modulus{z} = \sqrt{a^2 + b^2}. \]
 		}
-		
+	
 		\medskip
-		The modulus obeys the following properties:
-		\begin{itemize}
-			\item{$ \modulus{z_1z_2} = \modulus{z_1}\modulus{z_2} $}
-		\end{itemize}
+		\labeledProposition{Properties of the modulus of complex numbers (${ z,z_1,z_2 }$ refer to complex numbers):
+			\begin{enumerate}[label=(\roman*)]
+				\item{Real-valued: ${ \forall z \logicsep \modulus{z} \in \R{} }$.}
+				\item{Positive definiteness (\href{https://en.wikipedia.org/wiki/Definite_quadratic_form}{wikipedia}): \\
+					\[ \modulus{0} = 0 \eqand \forall z \neq 0 \logicsep \modulus{z} > 0. \]
+				}
+				\item{${ \modulus{z} \geq \RePart(z) \land \modulus{z} \geq \ImPart(z) }$.}
+				\item{${ \modulus{z_1z_2} = \modulus{z_1}\modulus{z_2} }$.}
+				\item{${ \modulus{z_1 + z_2} \leq \modulus{z_1} + \modulus{z_2} }$.}
+			\end{enumerate}
+		}{complex-modulus-properties}
+		\begin{proof}\nl
+			Using the definition of a complex number \ref{defn:complex-numbers}:
+			\begin{enumerate}[label=(\roman*)]
+				\item{For ${ z = a + ib }$ we have 
+					\[  a,b \in \R{} \implies \sqrt{a^2 + b^2} \in \R{}. \]
+				}
+				\item{For ${ z = a + ib }$ we have ${ a,b \in \R{} }$ so we can use the properties of the real numbers to deduce,
+					\[ a = b = 0 \implies a^2 + b^2 = 0 \implies \modulus{z} = \sqrt{a^2 + b^2} = 0. \]
+					\[ a,b \neq 0 \implies a^2 + b^2 > 0 \implies \modulus{z} = \sqrt{a^2 + b^2} > 0.  \]
+				}
+				\item{From the definition, if ${ z = a + bi }$ then ${ \RePart(z) = a }$ and ${ \ImPart(z) = b }$ and the modulus,
+					\[ \modulus{z} = \sqrt{a^2 + b^2} = \sqrt{\RePart(z)^2 + \ImPart(z)^2} \, \geq \, \RePart(z), \ImPart(z). \]
+				}
+				\item{Firstly observe that, for ${ z_1 = a_1 + b_1 i, \, z_2 = a_2 + b_2 i }$ we have,
+					\[\begin{aligned}
+						z_1 z_2 &= (a_1 + b_1 i)(a_2 + b_2 i) \\
+						&= a_1 a_2 + (a_1 b_2 + a_2 b_1)i - b_1 b_2 \\
+						&= (a_1 a_2 - b_1 b_2) + (a_1 b_2 + a_2 b_1)i.
+					\end{aligned}\]
+					Then,
+					\[\begin{aligned}
+						\modulus{z_1 z_2} &= [(a_1 a_2 - b_1 b_2)^2 + (a_1 b_2 + a_2 b_1)^2]^{\frac{1}{2}} \\
+						&= [a_1^2 a_2^2 - 2 a_1 a_2 b_1 b_2 + b_1^2 b_2^2 + a_1^2 b_2^2 + 2 a_1 a_2 b_1 b_2 + a_2^2 b_1^2]^{\frac{1}{2}} \\
+						&= [a_1^2 a_2^2 + b_1^2 b_2^2 + a_1^2 b_2^2 + a_2^2 b_1^2]^{\frac{1}{2}} \\
+						&= [(a_1^2 + b_1^2)(a_2^2 + b_2^2)]^{\frac{1}{2}} \\
+						&= [(a_1^2 + b_1^2)]^{\frac{1}{2}} \, [(a_2^2 + b_2^2)]^{\frac{1}{2}} \\
+						&= \modulus{z_1}\modulus{z_2}.
+					\end{aligned}\]
+				}
+				\item{\TODO{prove triangle inequality for complex modulus: https://tutorial.math.lamar.edu/Extras/ComplexPrimer/ConjugateModulus.aspx}}
+			\end{enumerate}
+		\end{proof}
+	
+	
+		\bigskip
+		\subsubsection{The Exponential Form}
+		\boxeddefinition{The \textbf{exponential form} of a complex number ${ z = a + ib }$ is defined as
+			\[ z = r e^{i\theta} \eqword{for} r,\theta \in \R{} \]
+			where $r$ is the modulus $\modulus{z}$ and $\theta$ is an angle in radians. This implies that
+			\[ r e^{i\alpha} = r e^{i(\alpha + 2n\pi)} \eqword{for} n \in \Z{}. \]
+			The angle ${ \theta = \alpha + 2n\pi \in (-\pi, \pi] }$ is known as the \textbf{principal argument} and is denoted \textbf{arg(z)}.
+		}\label{def:complex-exponential}
+		
+		
+		\bigskip
+		\TODO{De Moivres' Formula}
 		
 		\bigskip
 		\[ e^{(a+bi)t} = e^a (\cos{t} + i \sin{t})^b = e^a (\cos{bt} + i \sin{bt}) \]
@@ -437,6 +491,7 @@
 		\medskip
 		\labeledProposition{Properties of the complex conjugate:
 			\begin{enumerate}[label=(\roman*)]
+				\item{${ z = \conj{z} \iff \ImPart(z) = 0 }$}
 				\item{${ z = re^{i\theta} \iff \conj{z} = re^{-i\theta} }$}
 				\item{${ \conj{z + w} = \conj{z} + \conj{w} }$}
 				\item{${ \conj{zw} = \conj{z} \, \conj{w} }$}
@@ -446,6 +501,14 @@
 		}{complex-conjugate-properties}
 		\begin{proof}\nl
 			\begin{enumerate}[label=(\roman*)]
+				\item{
+					\[\begin{aligned}
+						&& z &= \conj{z} \\
+						&\iff & a + ib &= a - ib \\
+						&\iff & ib &= -ib \\
+						&\iff & b &= -b \implies b = 0.
+					\end{aligned}\]
+				}
 				\item{
 					Since cosine is an even function and sine is an odd function, we have
 					\[\begin{aligned}

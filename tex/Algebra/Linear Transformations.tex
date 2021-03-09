@@ -1207,6 +1207,21 @@
  			\[ \alpha_1(c_r - c_1)\v_1 + \cdots \alpha_{r-1}(c_r - c_{r-1})\v_{r-1} = \0. \]
  			Now we can use the induction hypothesis to assert that ${ \v_1,\dots,\v_{r-1} }$ are linearly independent implying that ${ \alpha_1,\dots,\alpha_{r-1} = 0 }$. This, in turn, implies that ${ \alpha_r = 0 }$ meaning that ${ \v_1,\dots,\v_r }$ is linearly independent.
  		\end{proof}
+ 	
+ 	
+ 		\bigskip
+ 		\labeledProposition{If we consider an $n \times n$ matrix $A$ with real entries as a matrix in $\C{n \times n}$ and it has a complex eigenvalue $\lambda$ with a corresponding eigenvector $\v$, then the complex conjugate $\conj{\lambda}$ is also an eigenvalue and has a corresponding eigenvector $\conj{\v}$, the complex conjugate of $\v$.}{complex-eigenvalues-and-eigenvectors-come-in-pairs-with-their-conjugates}
+ 		\begin{proof}
+ 			\[\begin{aligned}
+ 				&& A\v &= \lambda\v \\
+ 				&\iff & \conj{A\v} &= \conj{\lambda\v} \\
+ 				&\iff & \conj{A} \, \conj{\v} &= \conj{\lambda} \, \conj{\v} &\sidecomment{by \ref{prop:conjugate-of-matrix-times-vector-is-conjugate-matrix-times-conjugate-vector}}.
+ 			\end{aligned}\]
+ 			But $A$ is a matrix with only real entries and so ${ \conj{A} = A }$. So the previous result implies that
+ 			\[ A \conj{\v} = \conj{\lambda} \, \conj{\v} \]
+ 			which means that $\conj{\lambda}$ is an eigenvalue of $A$ with a corresponding eigenvector $\conj{\v}$. 
+ 		\end{proof}
+ 	
 	 
 	 	\bigskip\medskip
 	 	\subsubsection{Examples of Eigenvectors and Eigenvalues}
@@ -2801,165 +2816,90 @@
 
 	\pagebreak
 	\searchableSubsection{Inner Product Spaces}{linear algebra}{
-		
-		\boxeddefinition{An \textbf{inner product} is a generalization of the dot product of Euclidean coordinate spaces to arbitrary abstract spaces that need not be Euclidean or represented by coordinate spaces.\\
-		
-		As such, it is a real-valued binary function on vectors from the same vector space (i.e. an operation on vectors)
-			\[ f: V \times V \longmapsto \R{} \]
-		that satisfies the same properties as the Euclidean dot product \autoref{prop:properties_of_dot_product}.\\
-		
-		The inner product is:
-		\begin{enumerate}[label=(\roman*)]
-			\item{Commutative: ${ \inner{\x}{\y} = \inner{\y}{\x} }$;}
-			\item{Linear in its first argument: ${ \inner{\alpha\u + \beta\v}{\w} = \alpha\inner{\u}{\w} + \beta\inner{\v}{\w} }$;}
-			\item{Reflexively positive semi-definite and only zero for the zero vector: ${ \inner{\x}{\x} \geq 0 }$ with ${ \inner{\x}{\x} = 0 \iff \x = \0 }$.}
-		\end{enumerate}
+
+		\bigskip
+		\boxeddefinition{\textbf{(Inner Product Space)} Let $\F{}$ denote either the field of real numbers $\R{}$ or the field of complex numbers $\C{}$.\\
+			
+			An \textbf{inner product space} is a vector space $V$ over the field $\F{}$ together with a map
+			\[ \inner{\cdot}{\cdot} : V \times V \longmapsto \F{} \]
+			called an \textbf{inner product} that satisfies the following conditions for all vectors ${ \x,\y,\z \in V }$ and all scalars ${ \alpha,\beta \in \F{} }$.
+			
+			\begin{enumerate}[label=(\roman*)]
+				\item{\textbf{Conjugate Symmetry: } ${ \inner{\x}{\y} = \conj{\inner{\y}{\x}} }$,}
+				\item{\textbf{Linearity in the first argument: }\\ $~$\hspace{134pt} ${ \inner{\alpha\x + \beta\y}{\z} = \alpha\inner{\x}{\z} + \beta\inner{\y}{\z} }$,}
+				\item{\textbf{Positive definiteness: } ${ \inner{\x}{\x} \geq 0 }$ with ${ \inner{\x}{\x} = 0 \iff \x = \0 }$.}
+			\end{enumerate}
 		}\label{def:inner-product}
 	
-		\boxeddefinition{\textbf{(Complex Inner Product)} For the complex field $\C{}$, a slightly modified definition of the inner product is required. This is because, by \autoref{prop:complex-field-is-not-ordered}, $\C{}$ is not an ordered field which means that, if the inner product over the complex field returned a complex number result, then there would be no definition of positive definite as there is no ordering between 0 and the complex result. So, the inner product over the complex field is defined as follows.\\
-			
-			The complex inner product is a real-valued binary function on vectors from the same vector space
-			\[ f: V \times V \longmapsto \R{} \]			
-			that satisfies:
-			\begin{enumerate}[label=(\roman*)]
-				\item{Commutative: ${ \inner{\x}{\y} = \inner{\y}{\x} }$;}
-				\item{Linear in its first argument: ${ \inner{\alpha\u + \beta\v}{\w} = \alpha\inner{\u}{\w} + \beta\inner{\v}{\w} }$;}
-				\item{With its conjugate, positive semi-definite and only zero for the zero vector: ${ \inner{\x}{\conj{\x}} \geq 0 }$ with ${ \inner{\x}{\conj{\x}} = 0 \iff \x = \0 }$.}
-			\end{enumerate}
-		}\label{def:complex-inner-product}
-	
-		\boxeddefinition{A vector space that is equipped with (i.e. has defined on it) an inner product is called an \textbf{inner product space}.}
+		\bigskip
+		\labeledProposition{For a vector space $V$ over the field $\F{}$, whether $\F{}$ is the real number field $\R{}$ or the complex number field $\C{}$, we have, for all ${ \x \in \F{} }$,
+			\[ \inner{\x}{\x} \in \R{}. \]
+		}{inner-product-of-vector-with-itself-is-real-valued}
+		\begin{proof}
+			Property (i) of the inner product (\ref{def:inner-product}) --- conjugate symmetry --- implies that
+			\[ \inner{\x}{\x} = \conj{\inner{\x}{\x}} \]
+			and, by \autoref{prop:complex-conjugate-properties}, it then follows that
+			\[ \ImPart(\inner{\x}{\x}) = 0. \]
+			Therefore ${ \inner{\x}{\x} \in \R{} }$.
+		\end{proof}
+		\note{This is why the inner product can be described as "positive definite" even on complex fields where there is no concept of positive and negative because the complex numbers are not ordered (ref: \autoref{prop;complex-field-is-not-ordered}).}
 		
-		\boxeddefinition{An inner product induces a \textbf{norm} on a vector space $V$ such that the norm of a vector ${ \v \in V }$ --- denoted ${ \norm{\v} }$ --- is defined as
-			\[ \norm{\v} = \sqrt{\inner{\v}{\v}}. \]
-			By the properties of the inner product,
-			\[ \inner{\v}{\v} \geq 0 \in \R{} \implies \norm{\v} \geq 0 \in \R{}. \]
-			So, the norm is a real-valued positive semi-definite function
-			\[ f: V \longmapsto \R{}. \]
-			A vector space equipped with a norm is called a \textbf{normed} vector space.
-		}
-		\boxeddefinition{A \textbf{unit vector} is a vector in a normed vector space that has norm equal to 1.\\
-			
-			If a vector ${ \v \in V }$ of arbitrary norm is divided by its norm (i.e. scalar multiplied by the reciprocal of its norm), then
-			\[ \u = \frac{1}{\norm{\v}} \v \]
-			is a unit vector colinear with $\v$. This process is known as \textbf{normalization} of the vector $\v$.
-		}
-		
-		\biggerskip
-		\note{In a Euclidean space if two parametric lines have the same direction vector,
-			\[ l_1(t_1) = \V{p}_1 + t_1\v, \; \; l_2(t_2) = \V{p}_2 + t_2\v \]
-			then the distance between them remains constant at all points on the lines. This is Euclid's 5th postulate, known as {\normalfont The Parallel Postulate} (\href{https://en.wikipedia.org/wiki/Parallel_postulate}{wikipedia}).\\\\
-			In this case, the distance is defined as,
-			\[ d(t_1) = \min_{t_2} \, \norm{(\V{p}_2 + t_2\v) - (\V{p}_1 + t_1\v)}  \]
-			where the norm used here is the Euclidean norm (\ref{def:euclidean-norm}). This Euclidean norm is defined as,
-			\[ \norm{\v} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} \]
-			for ${ \v \in \R{n} }$. Each component of $\v$ represents a scaling of a standard basis vector ${ v_i \e{i} }$ whose resultant length --- and therefore, norm --- will be $v_i$. The vector $\v$ is the sum of these component vectors,
-			\[ \v = \sum_{i = 1}^n v_i \e{i} = v_1 \e{1} + v_2 \e{2} + \cdots + v_n \e{n} \]
-			and, since the standard basis vectors are orthogonal and so subtend right angles with each other, we can use pythagoras theorem to deduce that
+		\bigskip
+		\labeledProposition{The inner product is \textbf{conjugate linear} in its second argument. That's to say, if $V$ is an inner product space over the field $\F{}$ and ${ \x,\y,\z \in V }$ and ${ \alpha,\beta \in \F{} }$, then
+			\[ \inner{\x}{\alpha\y + \beta\z} = \conj{\alpha}\inner{\x}{\y} + \conj{\beta}\inner{\x}{\z}.  \]
+		}{inner-product-is-conjugate-linear-in-second-argument}
+		\begin{proof}
+			Using the definition of the inner product in \ref{def:inner-product}:
 			\[\begin{aligned}
-				\norm{\v}^2 &= \norm{v_1 \e{1}}^2 + \norm{v_2 \e{2}}^2 + \cdots + \norm{v_n \e{n}}^2 \\[4pt]
-				&= v_1^2 + v_2^2 + \cdots + v_n^2.
+				\inner{\x}{\alpha\y + \beta\z} &= \conj{\inner{\alpha\y + \beta\z}{\x}} &\sidecomment{by conjugate symmetry} \\
+				&= \conj{\alpha\inner{\y}{\x} + \beta\inner{\z}{\x}} &\sidecomment{by linearity of 1st argument} \\
+				&= \conj{\alpha} \conj{\inner{\y}{\x}} + \conj{\beta}\conj{\inner{\z}{\x}} &\sidecomment{by complex conjugate properties: \ref{prop:complex-conjugate-properties}} \\
+				&= \conj{\alpha} \inner{\x}{\y} + \conj{\beta} \inner{\x}{\z} &\sidecomment{by conjugate symmetry}. \qedhere
 			\end{aligned}\]
-			That's to say, the Euclidean norm, which is also the metric (i.e. definition of distance) in Euclidean space, relies on the assumption of an orthogonal basis. Meanwhile, the constancy of the metric value \wrt the coordinates (i.e. that the distance between parallel lines is constant) makes Euclidean space "flat".\\\\
-			If we consider WGS-84 GPS coordinate space as an example of a non-Euclidean space: the axes --- latitude and longitude --- form an orthogonal basis at the equator and also, even though the longitude lines converge at the poles, they remain orthogonal to the lines of latitude. So, even though the coordinate bases are orthogonal everywhere, the metric function that returns the distance between two coordinates in the space, depends on the latitude. It is for this reason that it is a non-Euclidean space.\\\\
-			In general, an inner product space may not be a metric space, may not be a coordinate space, and --- if we are working with coordinates \wrt a basis --- the basis may not be orthogonal.
-		}
+		\end{proof}
 	
-		\note{If the metric is equal to the norm then parallel vectors will remain the same distance apart? (i.e. the space is flat?) Maybe because the distance between two coordinate points remains the same? Between two coordinate points we can define a vector whose length is the vector norm, if that is also the distance, then the distance depends in a constant way on the coordinates and so the space is not "curved". (?) If we take vectors defined as displacements in the gps coordinate system then the length of the vector depends only on the difference in the coordinates not in where the starting point is (as we would expect because vectors do not have a particular starting point) but the distance represented by the displacement depends on the latitude of the starting point.}
-		
+		\bigskip
+		\labeledProposition{For any inner product space, for $\x$ in the space,
+			\[ \inner{\0}{\x} = \inner{\x}{\0} = 0. \]
+		}{inner-product-with-zero-vector-is-zero}
+		\begin{proof}
+			\[\begin{aligned}
+				&& \inner{\0}{\x} &= \inner{\0 + \0}{\x} &\sidecomment{by props. of $\0$ vector} \\
+				&\iff & \inner{\0}{\x} &= \inner{\0}{\x} + \inner{\0}{\x} &\sidecomment{by prop. (ii) of inner product} \\
+				&\iff & \inner{\0}{\x} - \inner{\0}{\x} &= \inner{\0}{\x} &\sidecomment{by props. of $\R{}$} \\
+				&\iff & 0 &= \inner{\0}{\x}. \nnn
+				&& \inner{\x}{\0} &= \inner{\x}{\0 + \0} \\
+				&\iff & \inner{\x}{\0} &= \inner{\x}{\0} + \inner{\x}{\0} &\sidecomment{} \\
+				&\iff & 0 &= \inner{\x}{\0}.
+			\end{aligned}\]
+		\end{proof}
+	
+	
+	
 		\biggerskip
 		\subsubsubsection{Example}
 		\begin{exe}
-			\ex{It is possible to define an inner product over the space of degree-n real polynomials $P_n(\R{})$ by, for ${ p,q \in P_n(\R{}) }$,
+			\ex{It is possible to define an inner product over the space of degree-$n$ real polynomials $P_n(\R{})$ by, for ${ p,q \in P_n(\R{}) }$,
 				\[ \inner{p}{q} = \sum_{i = 1}^{n+1} p(x_i)q(x_i) \]
 				for any distinct ${ x_1,x_2,\dots,x_{n+1} \in \R{} }$. This inner product satisfies 
 				\[ \inner{\v}{\v} = 0 \iff \v = \0 \]
-				because, for $p(x_i)^2$ to equal 0 at $n+1$ distinct $x_i$ values, it must have $n+1$ roots -- which is not possible unless $p$ is the zero function (refer: \autoref{prop:three_points_identify_quadratic}).
+				because, for $p(x_i)^2$ to equal 0 at $n+1$ distinct $x_i$ values, it must have $n+1$ roots -- which is not possible unless $p$ is the zero function (refer: \autoref{prop:three_points_identify_quadratic}).\\
+				
+				Similarly, we could define the following inner product over the space of degree-$n$ complex polynomials $P_n(\C{})$,
+				\[ \inner{p}{q} = \sum_{i = 1}^{n+1} p(x_i) \, \conj{q(x_i)}. \]
 			}
 		\end{exe}
 	
-		\biggerskip
-		\subsubsubsection{Generalized Geometry}
-		In a bare inner product space there are no points or coordinates and no metric defining distance between points or coordinates. Nevertheless, we can define the angle between two vectors in terms of the inner product and the induced norm.\\
-		
-		\boxeddefinition{\textbf{(Orthogonality)} Let $V$ be an inner product space and ${ \x,\y \in V }$. Then the angle $\theta$ between the vectors $\x$ and $\y$ is defined as,
-			\[ \cos\theta = \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \iff \theta = \inv\cos\left( \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \right). \]
-			
-			The vectors $\x$ and $\y$ are said to be \textbf{orthogonal} --- denoted ${ \x \perp \y }$ --- iff ${ \inner{\x}{\y} = 0 }$. In which case, we have
-			\[ \theta = \inv\cos(0) = \pm \frac{\pi}{2}. \]
-		}\label{def:angle-between-vectors-and-orthogonality}
+		\bigskip
+		\subsubsubsection{Orthogonality}
+		\boxeddefinition{\textbf{(Orthogonality)} The vectors $\x$ and $\y$ in an innner product space are said to be \textbf{orthogonal} --- denoted ${ \x \perp \y }$ --- iff ${ \inner{\x}{\y} = 0 }$.
+		}\label{def:orthogonality}
 	
 		\boxeddefinition{\textbf{(Orthogonal Complement)} Let $V$ be an inner product space and ${ S \subset V }$. Then the \textbf{orthogonal complement} of $S$ is defined as,
 			\[ S^\perp = \setc{\v \in V}{\forall \x \in S \logicsep \v \perp \x}. \]
 		}\label{def:orthogonal-complement}
-		
-		\begin{lemma}\label{lem:squared-norm-of-sum-of-vectors}
-			Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
-			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 2\inner{\x}{\y}. \]
-		\end{lemma}
-		\begin{proof}
-			\[\begin{aligned}
-				\norm{\x + \y}^2 &= \inner{\x + \y}{\x + \y} \\
-				&= \inner{\x}{\x + \y} + \inner{\y}{\x + \y} &\sidecomment{} \\
-				&= \inner{\x}{\x} + \inner{\x}{\y} + \inner{\y}{\x} + \inner{\y}{\y} &\sidecomment{} \\
-				&= \inner{\x}{\x} + \inner{\y}{\y} + 2\inner{\x}{\y} &\sidecomment{by inner product properties}. \qedhere
-			\end{aligned}\]
-		\end{proof}
 	
-		\biggerskip
-		\labeledTheorem{\textbf{(Generalized Pythagoras Theorem.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. If $\x$ and $\y$ are orthogonal then,
-			\[ \norm{\x + \y}^2 = \norm{\x}^2 + \norm{\y}^2. \]
-		}{generalized-pythagoras-theorem}
-		\begin{proof}\nl[2]
-			If $\x$ and $\y$ are orthogonal then ${ \inner{\x}{\y} = 0 }$. Then the \autoref{lem:squared-norm-of-sum-of-vectors} gives us,
-			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 0 = \norm{\x}^2 + \norm{\y}^2. \qedhere \]
-		\end{proof}
-		 
-	
-		\biggerskip
-		\labeledTheorem{\textbf{(Cauchy-Schwarz Inequality.)} Let ${ \x,\y \in V }$ be vectors in a normed vector space. Then,
-			\[ \abs{\inner{\x}{\y}} \leq \norm{\x}\norm{\y}. \]
-		}{cauchy-schwarz-inequality}
-		\begin{proof}\nl[2]
-			For all ${ \alpha \in \R{} }$ we have,
-			\[\begin{aligned}
-				&& \norm{\alpha \x + \y}^2 &\geq 0 \\
-				&\iff & \inner{\alpha\x + \y}{\alpha\x + \y} &\geq 0 \\
-				&\iff & \inner{\alpha\x}{\alpha\x + \y} + \inner{\y}{\alpha\x + \y} &\geq 0 \\
-				&\iff & \inner{\alpha\x}{\alpha\x} + \inner{\alpha\x}{\y} + \inner{\y}{\alpha\x} + \inner{\y}{\y} &\geq 0 \\
-				&\iff & \alpha^2\inner{\x}{\x} + 2\alpha\inner{\x}{\y} + \inner{\y}{\y} &\geq 0 &\sidecomment{by inner product properties}.
-			\end{aligned}\]
-			We can re-arrange this result as a real-valued quadratic in $\alpha$,
-			\[ p(\alpha) = \inner{\x}{\x}\alpha^2 + 2\inner{\x}{\y}\alpha + \inner{\y}{\y} \]
-			which has discriminant
-			\[\begin{aligned}
-				d &= (2\inner{\x}{\y})^2 - 4\inner{\x}{\x}\inner{\y}{\y} \\
-				&= 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,).
-			\end{aligned}\]
-			Since we have that ${ \forall \alpha \in \R{} \logicsep p(\alpha) \geq 0 }$ we can deduce that the discriminant ${ d \leq 0 }$ and so,
-			\[\begin{aligned}
-				&& 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,) &\leq 0 \nn
-				&\iff & \inner{\x}{\y}^2 &\leq \inner{\x}{\x}\inner{\y}{\y} \nn
-				&\iff & -\sqrt{\inner{\x}{\x}\inner{\y}{\y}} \leq \inner{\x}{\y} &\leq \sqrt{\inner{\x}{\x}\inner{\y}{\y}} \nn
-				&\iff & \abs{\inner{\x}{\y}} &\leq \norm{\x}\norm{\y}. \qedhere
-			\end{aligned}\]
-		\end{proof}
-	
-		\biggerskip
-		\labeledTheorem{\textbf{(Triangle Inequality for Norms.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
-			\[ \norm{\x + \y} \leq \norm{\x} + \norm{\y}. \]
-		}{triangle-inequality-for-norms}
-		\begin{proof}\nl[2]
-			This follows from the \autoref{lem:squared-norm-of-sum-of-vectors} and Cauchy-Schwarz \ref{theo:cauchy-schwarz-inequality}:
-			\[\begin{aligned}
-				\norm{\x + \y}^2 &= \inner{\x}{\x} + \inner{\y}{\y} + 2\inner{\x}{\y} \\
-				&\leq \inner{\x}{\x} + \inner{\y}{\y} + 2\norm{\x}\norm{\y}  &\sidecomment{by Cauchy-Schwarz} \\
-				&= (\, \norm{\x} + \norm{\y} \,)^2. \qedhere
-			\end{aligned}\]
-		\end{proof}
-		\note{Compare with the Triangle Inequality for simple signed magnitudes: \ref{sssection:triangle-inequality}.}
-	
-		\biggerskip
+		\medskip
 		\labeledProposition{If a set of non-zero vectors in an inner product space is pairwise orthogonal, then it is also linearly independent.\\
 			
 			That's to say, if ${ \v_1, \v_2, \dots, \v_k \in V }$ are non-zero vectors in an inner product space such that, for each ${ 1 \leq i \neq j \leq k }$, we have ${ \v_i \perp \v_j }$, then ${ S = \{ \v_1, \v_2, \dots, \v_k \} }$ is linearly independent.
@@ -2983,6 +2923,233 @@
 			\end{aligned}\]
 			But all the vectors in $S$ are non-zero by construction so this is a contradiction.
 		\end{proof}	
+		
+
+		\bigskip
+		\subsubsection{The Standard Inner Product}
+		\bigskip
+		\boxeddefinition{The \textbf{Standard Inner Product} for real vector spaces is the Euclidean dot product \autoref{defn:dot-product}.\\
+			
+			For complex vector spaces the \textbf{Standard Inner Product} is similar to the dot product but with conjugation of the second argument:\\
+			
+			For ${ \x,\y \in \C{n} }$,
+			\[ \inner{\x}{\y} = \x^T \conj{\y} = x_1 \conj{y_1} + \cdots + x_n \conj{y_n}. \]
+			
+			This inner product exhibits conjugate symmetry because, using properties of the complex conjugate (\ref{prop:complex-conjugate-properties}) and modulus (\ref{prop:complex-modulus-properties}),
+			\[\begin{aligned}
+				\inner{\x}{\y} &= x_1 \conj{y_1} + \cdots + x_n \conj{y_n} \nn
+				&= \conj{\conj{x_1} y_1} + \cdots + \conj{\conj{x_n} y_n} &\sidecomment{} \nn
+				&= \conj{ \conj{x_1} y_1 + \cdots + \conj{x_n} y_n } &\sidecomment{} \nn
+				&= \conj{ y_1 \conj{x_1} + \cdots + y_n \conj{x_n} } \nn
+				&= \conj{ \inner{\y}{\x} }.
+			\end{aligned}\]
+		
+			And it is positive definite because,
+			\[\begin{aligned}
+				\inner{\x}{\x} &= x_1 \conj{x_1} + \cdots + x_n \conj{x_n} \\
+				&= \modulus{x_1}^2 + \cdots + \modulus{x_n}^2
+			\end{aligned}\]
+			and for each ${ \modulus{x_i}^2 }$,
+			\[ x_i = 0 \implies \modulus{x_i}^2 = 0 \eqand x_i \neq 0 \implies \modulus{x_i}^2 > 0. \]
+		}\label{def:standard-inner-product}
+		
+		
+		\bigskip
+		\subsubsection{Normed Spaces}
+		\bigskip
+		\boxeddefinition{An inner product induces a \textbf{norm} on a vector space $V$ such that the norm of a vector ${ \v \in V }$ --- denoted ${ \norm{\v} }$ --- is defined as
+			\[ \norm{\v} = \sqrt{\inner{\v}{\v}}. \]
+			Since the inner product is positive definite we have,
+			\[ \inner{\v}{\v} \geq 0 \in \R{}  \implies \norm{\v} \geq 0 \in \R{} \]
+			and also, 
+			\[ ( \inner{\v}{\v} = 0 \iff \v = \0 ) \implies ( \norm{\v} = 0 \iff \v = \0 ). \]
+			
+			Therefore, the norm is a real-valued positive definite function
+			\[ f: V \longmapsto \R{}. \]
+			A vector space equipped with a norm is called a \textbf{normed} vector space.
+		}\label{defn:vector-norm}
+		\boxeddefinition{A \textbf{unit vector} is a vector in a normed vector space that has norm equal to 1.\\
+			
+			If a vector ${ \v \in V }$ of arbitrary norm is divided by its norm (i.e. scalar multiplied by the reciprocal of its norm), then
+			\[ \u = \frac{1}{\norm{\v}} \v \]
+			is a unit vector colinear with $\v$. This process is known as \textbf{normalization} of the vector $\v$.
+		}
+	
+		\medskip
+		\labeledProposition{If $\x$ is a vector in a normed space over a field $\F{}$ and ${ \alpha \in \F{} }$ then,
+			\[ \norm{\alpha \x} = \modulus{\alpha} \norm{\x}. \]
+		}{norm-of-scaled-vector-is-modulus-of-scalar-times-norm-of-vector}
+		\begin{proof}
+			\[ \norm{\alpha \y} = \sqrt{\inner{\alpha\y}{\alpha\y}} = \sqrt{\alpha \conj{\alpha} \inner{\y}{\y}} = \sqrt{\modulus{\alpha}^2} \sqrt{\inner{\y}{\y}} = \modulus{\alpha} \norm{\x}. \]
+		\end{proof}
+		
+	
+		\biggerskip
+		\subsubsubsection{Generalized Geometry}
+		In a bare inner product space there are no points or coordinates and no metric defining distance between points or coordinates. Nevertheless, we can define the angle between two vectors in terms of the inner product and the induced norm.\\
+		
+		\boxeddefinition{\textbf{(Angle in Real Vector Space)} Let $V$ be an inner product space over the reals $\R{}$ and ${ \x,\y \in V }$. Then the angle $\theta$ between the vectors $\x$ and $\y$ is defined as,
+			\[ \cos\theta = \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \iff \theta = \inv\cos\left( \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \right). \]
+			
+			In the case that the vectors are orthogonal we have ${ \inner{\x}{\y} = 0 }$ so that,
+			\[ \theta = \inv\cos(0) = \pm \frac{\pi}{2}. \]
+		}\label{def:angle-in-real-vector-space}
+	
+		\boxeddefinition{\textbf{(Angle in Complex Vector Space)} In a complex vector space the geometrical significance of the "angle" as defined above is not so clear. As a result other concepts of angle are often used in complex spaces (see: \href{https://arxiv.org/pdf/math/9904077.pdf}{Scharnhorst,K. - Angles in Complex Vector Spaces}). One such alternative is typically referred to as the \textbf{Euclidean Angle} and defined by,
+				\[ \theta = \inv\cos\left( \frac{\RePart(\inner{\x}{\y})}{\norm{\x}\norm{\y}} \right) \]
+				where the inner product used is the complex standard inner product \ref{def:standard-inner-product}. This angle treats the complex scalars as two real numbers and then takes the angle between two such-defined real vectors.\\\\			
+				Another commonly used definition of angle in complex spaces is the \textbf{Hermitian Angle} defined by,
+				\[ \theta = \inv\cos\left( \frac{\modulus{\inner{\x}{\y}}}{\norm{\x}\norm{\y}} \right) \]
+				which is the ratio of the orthogonal projection (using the complex inner product) of $\x$ onto $\y$ divided by the norm of $\x$ (or the reverse).
+		}\label{def:angle-in-complex-vector-space}
+		
+		\bigskip
+		\note{In a Euclidean space if two parametric lines have the same direction vector,
+			\[ l_1(t_1) = \V{p}_1 + t_1\v, \; \; l_2(t_2) = \V{p}_2 + t_2\v \]
+			then the distance between them remains constant at all points on the lines. This is Euclid's 5th postulate, known as {\normalfont The Parallel Postulate} (\href{https://en.wikipedia.org/wiki/Parallel_postulate}{wikipedia}).\\\\
+			In this case, the distance is defined as,
+			\[ d(t_1) = \min_{t_2} \, \norm{(\V{p}_2 + t_2\v) - (\V{p}_1 + t_1\v)}  \]
+			where the norm used here is the Euclidean norm (\ref{def:euclidean-norm}). This Euclidean norm is defined as,
+			\[ \norm{\v} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} \]
+			for ${ \v \in \R{n} }$. Each component of $\v$ represents a scaling of a standard basis vector ${ v_i \e{i} }$ whose resultant length --- and therefore, norm --- will be $v_i$. The vector $\v$ is the sum of these component vectors,
+			\[ \v = \sum_{i = 1}^n v_i \e{i} = v_1 \e{1} + v_2 \e{2} + \cdots + v_n \e{n} \]
+			and, since the standard basis vectors are orthogonal and so subtend right angles with each other, we can use pythagoras theorem to deduce that
+			\[\begin{aligned}
+				\norm{\v}^2 &= \norm{v_1 \e{1}}^2 + \norm{v_2 \e{2}}^2 + \cdots + \norm{v_n \e{n}}^2 \\[4pt]
+				&= v_1^2 + v_2^2 + \cdots + v_n^2.
+			\end{aligned}\]
+			That's to say, the Euclidean norm, which is also the metric (i.e. definition of distance) in Euclidean space, relies on the assumption of an orthogonal basis. Meanwhile, the constancy of the metric value \wrt the coordinates (i.e. that the distance between parallel lines is constant) makes Euclidean space "flat".\\\\
+			If we consider WGS-84 GPS coordinate space as an example of a non-Euclidean space: the axes --- latitude and longitude --- form an orthogonal basis at the equator and also, even though the longitude lines converge at the poles, they remain orthogonal to the lines of latitude. So, even though the coordinate bases are orthogonal everywhere, the metric function that returns the distance between two coordinates in the space, depends on the latitude. It is for this reason that it is a non-Euclidean space.\\\\
+			In general, an inner product space may not be a metric space, may not be a coordinate space, and --- if we are working with coordinates \wrt a basis --- the basis may not be orthogonal.
+		}
+		
+		\note{If the metric is equal to the norm then parallel vectors will remain the same distance apart? (i.e. the space is flat?) Maybe because the distance between two coordinate points remains the same? Between two coordinate points we can define a vector whose length is the vector norm, if that is also the distance, then the distance depends in a constant way on the coordinates and so the space is not "curved". (?) If we take vectors defined as displacements in the gps coordinate system then the length of the vector depends only on the difference in the coordinates not in where the starting point is (as we would expect because vectors do not have a particular starting point) but the distance represented by the displacement depends on the latitude of the starting point.}
+		
+		
+		\biggerskip
+		\begin{lemma}\label{lem:squared-norm-of-sum-of-vectors}
+			Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
+			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 2\RePart(\inner{\x}{\y}). \]
+		\end{lemma}
+		\begin{proof}
+			\[\begin{aligned}
+				\norm{\x + \y}^2 &= \inner{\x + \y}{\x + \y} \\
+				&= \inner{\x}{\x + \y} + \inner{\y}{\x + \y} &\sidecomment{} \\
+				&= \inner{\x}{\x} + \inner{\x}{\y} + \inner{\y}{\x} + \inner{\y}{\y} &\sidecomment{} \\
+				&= \inner{\x}{\x} + \inner{\x}{\y} + \conj{\inner{\x}{\y}} + \inner{\y}{\y} &\sidecomment{by \ref{def:inner-product} prop. (i)} \\
+				&= \inner{\x}{\x} + \inner{\y}{\y} + 2\RePart(\inner{\x}{\y}).  &\sidecomment{${ \because z + \conj{z} = 2\RePart(z) }$}
+			\end{aligned}\]
+		\end{proof}
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Generalized Pythagoras Theorem.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. If $\x$ and $\y$ are orthogonal then,
+			\[ \norm{\x + \y}^2 = \norm{\x}^2 + \norm{\y}^2. \]
+		}{generalized-pythagoras-theorem}
+		\begin{proof}\nl[2]
+			If $\x$ and $\y$ are orthogonal then ${ \inner{\x}{\y} = 0 }$. Then the \autoref{lem:squared-norm-of-sum-of-vectors} gives us,
+			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 0 = \norm{\x}^2 + \norm{\y}^2. \qedhere \]
+		\end{proof}
+		 
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Cauchy-Schwarz Inequality.)} Let ${ \x,\y \in V }$ be vectors in an inner product space over the field $\F{}$ where $\F{}$ is either the field of real numbers $\R{}$ or the field of complex numbers $\C{}$. Then,
+			\[ \modulus{\inner{\x}{\y}} \leq \norm{\x}\norm{\y} \]
+			where the equality holds iff $\x$ and $\y$ are linearly dependent.
+		}{cauchy-schwarz-inequality}
+		\begin{proof}\nl[2]			
+			Assume that ${ \x = \0 }$ then,
+			\[\begin{aligned}
+				&& \modulus{\inner{\0}{\y}} &\leq \norm{\0}\norm{\y} \\
+				&\iff & \modulus{0} &\leq (0) \norm{\y} &\sidecomment{by \ref{prop:inner-product-with-zero-vector-is-zero} and inner product prop. (iii)} \\
+				&\iff & 0 &= 0.
+			\end{aligned}\]
+			If ${ \x \neq 0 }$ and ${ \y = \0 }$ we obtain the same result as, by \ref{prop:inner-product-with-zero-vector-is-zero}, ${ \inner{\x}{\0} = 0 }$ also. Clearly also, the same result holds if both are zero. So, if at least one of $\x$ and $\y$ is $\0$ then we have,
+			\[ \modulus{\inner{\x}{\y}} = \norm{\x}\norm{\y}. \]
+			
+			Conversely, assume that $\x$ and $\y$ are both non-zero. We can find the component of $\y$ that is orthogonal to $\x$ by forming a linear combination of $\x$ and $\y$ that is orthogonal to $\x$,
+			\[ \inner{\alpha_1 \x + \alpha_2 \y}{\x} = 0 \eqword{for} \alpha_1,\alpha_2 \in \F{}. \]
+			Solving for the scalars ${ \alpha_1, \alpha_2 }$,
+			\[\begin{aligned}
+				&& \inner{\alpha_1 \x + \alpha_2 \y}{\x} &= 0 \\
+				&\iff & \alpha_1 \inner{\x}{\x} + \alpha_2 \inner{\y}{\x} &= 0 &\sidecomment{} \\
+				&\iff & \alpha_1  &= - \frac{ \alpha_2 \inner{\y}{\x} }{ \inner{\x}{\x} }. \\
+			\end{aligned}\]
+			If we set ${ \alpha_2 = 1 }$ and define ${ \alpha = \frac{ \inner{\y}{\x} }{ \inner{\x}{\x} } }$ then,
+			\[ \z = \y - \frac{ \inner{\y}{\x} }{ \inner{\x}{\x} } \x = \y - \alpha \x \]
+			is orthogonal to $\x$.\\
+			
+			If we take the inner product of $\z$ with itself,
+			\[\begin{aligned}
+				&& \inner{\z}{\z} &= \inner{\y - \alpha \x}{\y - \alpha \x} \\
+				&\iff & \inner{\z}{\z} &= \inner{\y}{\y - \alpha \x} - \alpha \inner{\x}{\z} \\
+				&\iff & \inner{\z}{\z} &= \inner{\y}{\y - \alpha \x} &\sidecomment{${ \because \z \perp \x }$} \\
+				&\iff & \inner{\z}{\z} &= \inner{\y}{\y} - \conj{\alpha} \inner{\y}{\x} &\sidecomment{by \ref{prop:inner-product-is-conjugate-linear-in-second-argument}} \nn
+				&\iff & \inner{\z}{\z} &= \inner{\y}{\y} - \conj{\frac{ \inner{\y}{\x} }{ \inner{\x}{\x} }} \inner{\y}{\x} \nn
+				&\iff & \inner{\x}{\x} \inner{\z}{\z} &= \inner{\x}{\x} \inner{\y}{\y} - \conj{\inner{\y}{\x}} \inner{\y}{\x} \nn
+				&\iff & \inner{\x}{\x} \inner{\z}{\z} &= \inner{\x}{\x} \inner{\y}{\y} - \inner{\x}{\y} \conj{\inner{\x}{\y}} \nn
+				&\iff & \norm{\x}^2 \norm{\z}^2 &= \norm{\x}^2 \norm{\y}^2 - \modulus{\inner{\x}{\y}}^2.
+			\end{aligned}\]
+		
+			Since the norm is positive definite (\ref{defn:vector-norm}), 
+			\[\begin{aligned}
+				&& \norm{\x}^2 \norm{\z}^2 &\geq 0  \nn
+				&\iff & \norm{\x}^2 \norm{\y}^2 - \modulus{\inner{\x}{\y}}^2 &\geq 0  \nn
+				&\iff & \norm{\x}^2 \norm{\y}^2 &\geq \modulus{\inner{\x}{\y}}^2 \nn
+				&\iff & \norm{\x} \norm{\y} &\geq \modulus{\inner{\x}{\y}}.
+			\end{aligned}\]
+			The equality case happens when ${ \norm{\x}^2 \norm{\z}^2 = 0 }$ and, since $\x$ is non-zero by hypothesis, this implies that ${ \z = \0 }$. It then follows that
+			\[ \z = \y - \alpha \x = \0 \iff \y = \alpha \x  \]
+			meaning that $\x$ and $\y$ are colinear and so, linearly dependent. (The vector $\z$ was constructed to be the component of $\y$ that is orthogonal to $\x$ and so, if $\x$ and $\y$ are colinear, $\z$ will be $\0$.) Furthermore, the converse implication --- that equality implies linear dependence --- holds because, using \autoref{prop:norm-of-scaled-vector-is-modulus-of-scalar-times-norm-of-vector},
+			\[ \modulus{\inner{\x}{\y}} = \modulus{\inner{\alpha \y}{\y}} = \modulus{\alpha \, \norm{\y}^2} = \modulus{\alpha} \norm{\y} \norm{\y} = \norm{\alpha\y} \norm{\y}. \]
+			If we have instead ${ \y = \alpha \x }$, then the result is the same because ${ \modulus{\conj{\alpha}} = \modulus{\alpha} }$.\\
+			
+
+			\bigskip
+			\note{In the case where ${ \F{} = \R{} }$ we can use the following proof.\\\\ For all ${ \alpha \in \R{} }$ we have,
+			\[\begin{aligned}
+				&& \norm{\alpha \x + \y}^2 &\geq 0 \\
+				&\iff & \inner{\alpha\x + \y}{\alpha\x + \y} &\geq 0 \\
+				&\iff & \inner{\alpha\x}{\alpha\x + \y} + \inner{\y}{\alpha\x + \y} &\geq 0 \\
+				&\iff & \inner{\alpha\x}{\alpha\x} + \inner{\alpha\x}{\y} + \inner{\y}{\alpha\x} + \inner{\y}{\y} &\geq 0 \\
+				&\iff & \alpha^2\inner{\x}{\x} + 2\alpha\inner{\x}{\y} + \inner{\y}{\y} &\geq 0 &\sidecomment{by inner product properties}.
+			\end{aligned}\]
+			We can re-arrange this result as a real-valued quadratic in $\alpha$,
+			\[ p(\alpha) = \inner{\x}{\x}\alpha^2 + 2\inner{\x}{\y}\alpha + \inner{\y}{\y} \]
+			which has discriminant
+			\[\begin{aligned}
+				d &= (2\inner{\x}{\y})^2 - 4\inner{\x}{\x}\inner{\y}{\y} \\
+				&= 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,).
+			\end{aligned}\]
+			Since we have that ${ \forall \alpha \in \R{} \logicsep p(\alpha) \geq 0 }$ we can deduce that the discriminant ${ d \leq 0 }$ and so,
+			\[\begin{aligned}
+				&& 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,) &\leq 0 \nn
+				&\iff & \inner{\x}{\y}^2 &\leq \inner{\x}{\x}\inner{\y}{\y} \nn
+				&\iff & -\sqrt{\inner{\x}{\x}\inner{\y}{\y}} \leq \inner{\x}{\y} &\leq \sqrt{\inner{\x}{\x}\inner{\y}{\y}} \nn
+				&\iff & \abs{\inner{\x}{\y}} &\leq \norm{\x}\norm{\y}. \qedhere
+			\end{aligned}\]}
+		\end{proof}
+		\begin{corollary}\label{coro:real-or-imaginary-parts-of-inner-product-leq-product-of-norms}
+			Let ${ \x,\y \in V }$ be vectors in an inner product space over the field $\F{}$ where $\F{}$ is either the field of real numbers $\R{}$ or the field of complex numbers $\C{}$. Then,
+			\[ \RePart(\inner{\x}{\y}), \, \ImPart(\inner{\x}{\y}) \leq \norm{\x}\norm{\y}. \qedhere \]
+		\end{corollary}
+		\begin{proof}
+			This is a consequence of Cauchy-Schwarz and \autoref{prop:complex-modulus-properties} property (iii),
+			\[ \RePart(\inner{\x}{\y}), \, \ImPart(\inner{\x}{\y}) \leq \modulus{\inner{\x}{\y}} \leq \norm{\x}\norm{\y}. \]
+		\end{proof}
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Triangle Inequality for Norms.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
+			\[ \norm{\x + \y} \leq \norm{\x} + \norm{\y}. \]
+		}{triangle-inequality-for-norms}
+		\begin{proof}\nl[2]
+			This follows from the \autoref{lem:squared-norm-of-sum-of-vectors} and a corollary of Cauchy-Schwarz \ref{coro:real-or-imaginary-parts-of-inner-product-leq-product-of-norms}:
+			\[\begin{aligned}
+				\norm{\x + \y}^2 &= \inner{\x}{\x} + \inner{\y}{\y} + 2\RePart(\inner{\x}{\y}) \\
+				&\leq \inner{\x}{\x} + \inner{\y}{\y} + 2\norm{\x}\norm{\y}  &\sidecomment{by Cauchy-Schwarz} \\
+				&= (\, \norm{\x} + \norm{\y} \,)^2. \qedhere
+			\end{aligned}\]
+		\end{proof}
+		\note{Compare with the Triangle Inequality for simple signed magnitudes: \ref{sssection:triangle-inequality}.}
 	}
 
 
@@ -2995,7 +3162,7 @@
 	\pagebreak
 	\searchableSubsection{Orthonormal Bases and Orthogonal Operators}{linear algebra}{
 		\biggerskip
-		\boxeddefinition{A set of pairwise mutually orthogonal (see: \ref{def:angle-between-vectors-and-orthogonality}) unit vectors in an inner product space is called an \textbf{orthonormal set}.
+		\boxeddefinition{A set of pairwise mutually orthogonal (see: \ref{def:orthogonality}) unit vectors in an inner product space is called an \textbf{orthonormal set}.
 		}
 		\medskip
 		\subsubsection{Orthonormal Bases}
@@ -3004,10 +3171,10 @@
 	
 		\medskip
 		\labeledProposition{Let ${ U = \{\u_1,\dots, \u_n\} }$ be an orthonormal basis. Then, for any ${ \u_i,\u_j \in U,\, i \neq j }$,
-			\[ \u_i\dotprod\u_j = 0 \eqand \u_i\dotprod\u_i = 1 = \u_j\dotprod\u_j. \]}{properties_of_orthonormal_basis_vectors}
+			\[ \inner{\u_i}{\u_j} = 0 \eqand \inner{\u_i}{\u_i} = 1 = \inner{\u_j}{\u_j}. \]}{properties_of_orthonormal_basis_vectors}
 		\begin{proof}
-			The elements of $U$ are pairwise mutually orthogonal so --- by the definition of orthogonal vectors (\ref{def:angle-between-vectors-and-orthogonality}) --- ${ \u_i\dotprod\u_j = 0 }$ for ${ i \neq j }$. Furthermore,
-			\[ \u_i\dotprod\u_i = \norm{\u_i}^2 = 1 \]
+			The elements of $U$ are pairwise mutually orthogonal so --- by the definition of orthogonal vectors (\ref{def:orthogonality}) --- ${ \inner{\u_i}{\u_j} = 0 }$ for ${ i \neq j }$. Furthermore,
+			\[ \inner{\u_i}{\u_i} = \norm{\u_i}^2 = 1 \]
 			because the length of unit vectors is 1.
 		\end{proof}
 	
@@ -3037,15 +3204,15 @@
 		\medskip
 		\labeledProposition{Let ${ p: V \times V \longmapsto \R{} }$ be a non-standard inner product defined on a vector space $V$ and ${ B \subset V }$ be an orthonormal basis \wrt the inner product $p$. Let ${ \v,\w \in V }$ and let ${ \v_B,\w_B \in V }$ be vectors ${ \v,\w }$ expressed in coordinates \wrt the basis $B$. Then the inner product
 			\[ p(\v, \w) = \v_B \dotprod \w_B, \]
-			$p$ is equal to the dot product on the vectors expressed \wrt the orthonormal basis.
+			$p$ is equal to the standard inner product (\ref{def:standard-inner-product}) on the vectors expressed \wrt the orthonormal basis.
 		}{any-inner-product-of-two-vectors-is-equal-to-dot-product-of-the-vectors-wrt-orthonormal-basis}
 		\begin{proof}
 			Let the inner product $p$ be denoted by the usual inner product notation ${ \inner{\u_1}{\u_2} = p(\u_1,\u_2) }$ and let the orthonormal basis be ${ B = \{\b_1,\dots,\b_n\} }$. Then,
 			\[\begin{aligned}
 				\inner{\v_B}{\w_B} &= \inner{\alpha_1\b_1 + \cdots + \alpha_n\b_n}{\beta_1\b_1 + \cdots + \beta_n\b_n} \\
 				&= \inner{\alpha_1\b_1}{\beta_1\b_1} + \cdots + \inner{\alpha_n\b_n}{\beta_n\b_n} &\sidecomment{$\because i \neq j \implies \inner{\b_i}{\b_j} = 0 $}\\
-				&= \alpha_1\beta_1\inner{\b_1}{\b_1} + \cdots + \alpha_n\beta_n\inner{\b_n}{\b_n} \\
-				&= \alpha_1\beta_1 + \cdots + \alpha_n\beta_n    &\sidecomment{$\because \inner{\b_i}{\b_i} = 1 $}. \qedhere
+				&= \alpha_1 \conj{\beta_1} \inner{\b_1}{\b_1} + \cdots + \alpha_n \conj{\beta_n} \inner{\b_n}{\b_n} \\
+				&= \alpha_1 \conj{\beta_1} + \cdots + \alpha_n \conj{\beta_n}.    &\sidecomment{$\because \inner{\b_i}{\b_i} = 1 $} \qedhere
 			\end{aligned}\]
 		\end{proof}
 	
@@ -3158,7 +3325,7 @@
 		}
 	
 		\medskip
-		\labeledProposition{A matrix $A$ is orthogonal iff ${ A^T = \inv{A}}$.}{orthogonal_matrix_transpose_is_inverse}
+		\labeledProposition{A matrix $A$ is orthogonal iff ${ A^T = \inv{A}}$.\\ \TODO{This proof isn't compatible with complex spaces!}}{orthogonal_matrix_transpose_is_inverse}
 		\begin{proof}
 			$A$ is an orthogonal matrix so, by definition, its columns form an orthogonal basis. Then,
 			\begin{align*}
@@ -3217,7 +3384,7 @@
 	
 		\bigskip
 		\labeledProposition{Left multiplication by an orthogonal matrix preserves the dot product. In other words, for all vectors ${ \v,\w }$, $A$ is an orthogonal matrix if and only if,
-			\[ A\v \dotprod A\w = \v\dotprod\w. \]
+			\[ A\v \dotprod A\w = \v\dotprod\w. \]\\ \TODO{This proof isn't compatible with complex spaces!}
 		}{left_mult_by_ortho_matrix_preserves_dot_product}
 		\begin{proof}
 			Using \autoref{prop:orthogonal_matrix_transpose_is_inverse} and the matrix formula for the dot product we can deduce that, for all vectors ${ \v,\w }$,

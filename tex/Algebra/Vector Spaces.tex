@@ -156,7 +156,11 @@
 		\paragraph{Examples}
 		\begin{exe}
 			\ex{The space $\F{n}$ of n-dimensional row vectors is isomorphic to the space of n-dimensional column vectors.}
-			\ex{If we treat the set of complex numbers $\C{}$ as a vector space then the map ${ \phi: \R{2} \longmapsto \C{} }$ defined as ${ \phi(a,b) = a + bi }$ is an isomorphism.
+			\ex{If we treat the set of complex numbers $\C{}$ as a vector space \textit{over the reals} then the map ${ \phi: \R{2} \longmapsto \C{} }$ defined as,
+				\[ \phi(a,b) = a + bi \]
+				is an isomorphism. If we, however, treat $\C{}$ as a complex vector space (a vector space defined over the field of complex numbers $\C{}$) then it cannot be isomorphic to the real vector space $\R{2}$ because scalar multiplication by a complex scalar is undefined in $\R{2}$.\\
+				
+				$\R{2}$ and $\C{}$ \textit{are} isomorphic in the category of sets though; this means that there is a bijection between the sets and doesn't take into account any structure on the sets.
 			}
 		\end{exe}
 	}
@@ -1014,7 +1018,7 @@
 	\biggerskip
 	\boxeddefinition{The \textbf{dot product} of two coordinate vectors in an $n$-dimensional coordinate space is defined as,
 		\[ \v \dotprod \w = v_1w_1 + \cdots + v_nw_n = \v^T\w. \]
-	}
+	}\label{defn:dot-product}
 
 	\notation{The \textbf{dot product} may also be denoted ${ \langle \v,\w \rangle }$ but this notation may also refer to a literal coordinate vector, i.e.
 		\[ \begin{bmatrix}3\\7\end{bmatrix} = \langle 3,7\rangle = (3,7)^T. \]
