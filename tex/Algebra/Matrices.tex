@@ -700,6 +700,63 @@ We transform the unit square in the source space, $X$ in $\R{2}$, using the 2D t
 			\end{itemize}
 			Therefore, ${ S \leq GL_n(\F{}) }$.
 		\end{proof}
+	
+	
+		\biggerskip
+		\subsubsection{Hermitian Conjugate (a.k.a. Conjugate Transpose, a.k.a Adjoint)}
+		\boxeddefinition{If $A$ is a matrix in ${ \C{n \times n} }$ then the \textbf{hermitian conjugate} of $A$ is defined as
+			\[ A^* = \conj{A}^T. \]
+			The term "adjoint" is also often used to refer to the hermitian conjugate but this name is also used for the transpose of the cofactor matrix (see: \href{https://en.wikipedia.org/wiki/Adjugate_matrix}{wikipedia}).
+		}\label{def:hermitian-conjugate}
+	
+		\notation{The \textbf{hermitian conjugate} of $A$ is commonly denoted $A^*$ or $A^H$.}
+		
+		\note{Since the two operations to form the hermitian conjugate --- conjugation and transposition --- commute with each other, the conjugation doesn't affect the usual properties of the matrix transpose. So we have:
+			\begin{itemize}
+				\item{${ (A^*)^* = A }$ (compare ${ (A^T)^T = A }$)}
+				\item{${ (A + B)^* = A^* + B^* }$ (compare \autoref{prop:matrix-transpose-distributes-over-addition})}
+				\item{${ (AB)^* = B^* A^* }$ (compare \autoref{prop:transpose-of-product-is-reverse-product-of-transposes})}
+			\end{itemize}
+		}
+	
+		\medskip
+		\labeledProposition{For a matrix $A$ over a field $\F{}$ which may be the reals or the complex field, for a scalar ${ k \in \F{} }$,
+			\[ (k A)^* = \conj{k} A^*. \]
+		}{hermitian-conj-of-scalar-x-matrix-is-conj-of-scalar-x-hermitian-conj-of-matrix}
+		\begin{proof}
+			Using the fact that a scalar is invariant under transposition and the properties of the complex conjugate \ref{prop:complex-conjugate-properties},
+			\[ (k A)^* = \conj{(k A)^T} = \conj{k A^T} = \conj{k} \conj{A^T}. \]
+		\end{proof}
+	
+		
+		\biggerskip
+		\subsubsection{Hermitian Matrix}
+		\boxeddefinition{A matrix $A$ is a \textbf{hermitian matrix} iff it is equal to its hermitian conjugate, i.e.
+			\[ A = A^*. \]
+		}\label{def:hermitian-matrix}
+	
+		\labeledProposition{All real symmetric matrices are hermitian.}{real-symmetric-matrices-are-hermitian}
+		\begin{proof}
+			Let $A$ be a real symmetric matrix. Then,
+			\[ \conj{A} = A \eqand A = A^T. \]
+			Therefore,
+			\[ A^* = \conj{A}^T = A. \qedhere \]
+		\end{proof}
+	
+		\biggerskip
+		\subsubsubsection{Example}
+		\begin{exe}
+			\ex{An example of a hermitian matrix is
+				\[
+					\begin{bmatrix}
+						1 & 1 + 2i & 4 - i\\
+						1 - 2i & -3 & i\\
+						4 + i & -i & 2
+					\end{bmatrix}.
+				\]
+				The diagonal entries must always be real because they need to be equal to their conjugates while the off diagonal entries must be the conjugates of their corresponding entries across the diagonal (i.e. ${ a_{ij} = \conj{a_{ji}} }$).
+			}	
+		\end{exe}
 	}
 
 

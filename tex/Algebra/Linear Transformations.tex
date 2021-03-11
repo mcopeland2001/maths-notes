@@ -1222,6 +1222,21 @@
  			which means that $\conj{\lambda}$ is an eigenvalue of $A$ with a corresponding eigenvector $\conj{\v}$. 
  		\end{proof}
  	
+ 		\bigskip
+ 		\labeledProposition{A hermitian matrix has only real-valued eigenvalues.}{hermitian-matrix-has-only-real-eigenvalues}
+ 		\begin{proof}
+ 			Let $A$ be a hermitian matrix (\ref{def:hermitian-matrix}) and let $\lambda$ be an arbitrary eigenvalue of $A$ with $\v$ as an eigenvector corresponding to $\lambda$. Then,
+ 			\[\begin{aligned}
+ 				&& \v^* A \v &= \v^* A^* \v   &\sidecomment{${ \because A }$ is hermitian}\\
+ 				&\iff & \v^* (A \v) &= (A \v)^* \v   &\sidecomment{by props. of hermitian conjugate \ref{def:hermitian-conjugate}} \\
+ 				&\iff & \v^* (\lambda \v) &= (\lambda \v)^* \v   &\sidecomment{by eigenvalue property}\\
+ 				&\iff & \v^* (\lambda \v) &= \conj\lambda \v^* \v   &\sidecomment{by \ref{prop:hermitian-conj-of-scalar-x-matrix-is-conj-of-scalar-x-hermitian-conj-of-matrix}}\\
+ 				&\iff & \lambda \norm{\v}^2 &= \conj\lambda \norm{\v}^2   &\sidecomment{by defn. of induced norm \ref{def:vector-norm}} \\
+ 				&\iff & \lambda &= \conj\lambda   &\sidecomment{${ \because \v \neq \0 \implies \norm{\v} > 0 }$ so has inverse} \\
+ 				&\therefore & \lambda &\in \R{}.  \qedhere
+ 			\end{aligned}\]
+ 		\end{proof}
+ 	
 	 
 	 	\bigskip\medskip
 	 	\subsubsection{Examples of Eigenvectors and Eigenvalues}
@@ -2923,6 +2938,8 @@
 			\end{aligned}\]
 			But all the vectors in $S$ are non-zero by construction so this is a contradiction.
 		\end{proof}	
+	
+	
 		
 
 		\bigskip
@@ -2930,10 +2947,13 @@
 		\bigskip
 		\boxeddefinition{The \textbf{Standard Inner Product} for real vector spaces is the Euclidean dot product \autoref{defn:dot-product}.\\
 			
-			For complex vector spaces the \textbf{Standard Inner Product} is similar to the dot product but with conjugation of the second argument:\\
+			For complex vector spaces the \textbf{Standard Complex Inner Product} is similar to the dot product but with conjugation of the second argument:\\
 			
 			For ${ \x,\y \in \C{n} }$,
-			\[ \inner{\x}{\y} = \x^T \conj{\y} = x_1 \conj{y_1} + \cdots + x_n \conj{y_n}. \]
+			\[ \inner{\x}{\y} = \y^* \x = x_1 \conj{y_1} + \cdots + x_n \conj{y_n} \]
+			where ${ \y^* = \conj{\y}^T }$ is the hermitian conjugate (\ref{def:hermitian-conjugate}).
+			
+			\note{Some authors have the standard complex inner product as ${ \inner{\x}{\y} = \x^T \, \conj{\y} }$ but this is for compatibility with an inner product that is linear in the second argument (and conjugate linear in the first).}
 			
 			This inner product exhibits conjugate symmetry because, using properties of the complex conjugate (\ref{prop:complex-conjugate-properties}) and modulus (\ref{prop:complex-modulus-properties}),
 			\[\begin{aligned}
@@ -2952,7 +2972,25 @@
 			and for each ${ \modulus{x_i}^2 }$,
 			\[ x_i = 0 \implies \modulus{x_i}^2 = 0 \eqand x_i \neq 0 \implies \modulus{x_i}^2 > 0. \]
 		}\label{def:standard-inner-product}
-		
+	
+		\bigskip
+		\labeledProposition{The eigenvectors corresponding to distinct eigenvalues of a Hermitian matrix are orthogonal.}{hermitian-matrix-eigenvectors-for-distinct-eigenvalues-are-orthogonal}
+		\begin{proof}
+			Let $A$ be a hermitian matrix (\ref{def:hermitian-matrix}). Let $\lambda_1$ and $\lambda_2$ be distinct eigenvalues of $A$ and let $\v_1$ be an eigenvector corresponding to $\lambda_1$ and $\v_2$ an eigenvector corresponding to $\lambda_2$. Then,
+			\[\begin{aligned}
+				&& \v_1^* A \v_2 &= \v_1^* A^* \v_2     &\sidecomment{$\because A$ is hermitian}\\
+				&\iff & \v_1^* (A \v_2) &= (A \v_1)^* \v_2     &\sidecomment{by props. of hermitian conjugate \ref{def:hermitian-conjugate}} \\
+				&\iff & \v_1^* (\lambda_2 \v_2) &= (\lambda_1 \v_1)^* \v_2    &\sidecomment{by eigenvalue property} \\
+				&\iff & \v_1^* \lambda_2 \v_2 &= \conj\lambda_1 \v_1^* \v_2    &\sidecomment{by \ref{prop:hermitian-conj-of-scalar-x-matrix-is-conj-of-scalar-x-hermitian-conj-of-matrix}} \\
+				&\iff & \lambda_2 \v_1^* \v_2 &= \lambda_1 \v_1^* \v_2    &\sidecomment{by \ref{prop:hermitian-matrix-has-only-real-eigenvalues}} \\
+				&\iff & (\lambda_2 - \lambda_1) \v_1^* \v_2 &= 0 \\
+				&\therefore & \v_1^* \v_2 &= 0.   &\sidecomment{${ \because \lambda_1 \neq \lambda_2 \implies \lambda_2 - \lambda_1 \neq 0 }$}
+			\end{aligned}\]
+			This last result says that the standard complex inner product of $\v_1$ and $\v_2$ is zero. We can therefore deduce that $\v_1$ and $\v_2$ are orthogonal.
+		\end{proof}
+		\TODO{does this result imply that the eigenvectors are orthogonal \wrt every basis and every inner product or only the standard basis and inner product?}
+	
+	
 		
 		\bigskip
 		\subsubsection{Normed Spaces}
@@ -2967,7 +3005,7 @@
 			Therefore, the norm is a real-valued positive definite function
 			\[ f: V \longmapsto \R{}. \]
 			A vector space equipped with a norm is called a \textbf{normed} vector space.
-		}\label{defn:vector-norm}
+		}\label{def:vector-norm}
 		\boxeddefinition{A \textbf{unit vector} is a vector in a normed vector space that has norm equal to 1.\\
 			
 			If a vector ${ \v \in V }$ of arbitrary norm is divided by its norm (i.e. scalar multiplied by the reciprocal of its norm), then
@@ -3090,7 +3128,7 @@
 				&\iff & \norm{\x}^2 \norm{\z}^2 &= \norm{\x}^2 \norm{\y}^2 - \modulus{\inner{\x}{\y}}^2.
 			\end{aligned}\]
 		
-			Since the norm is positive definite (\ref{defn:vector-norm}), 
+			Since the norm is positive definite (\ref{def:vector-norm}), 
 			\[\begin{aligned}
 				&& \norm{\x}^2 \norm{\z}^2 &\geq 0  \nn
 				&\iff & \norm{\x}^2 \norm{\y}^2 - \modulus{\inner{\x}{\y}}^2 &\geq 0  \nn
