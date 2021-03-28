@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 
 
@@ -145,12 +145,18 @@
 		It is typically the case that when modelling some system with vectors, the system contains more structure than is represented by a vector space. Furthermore, if we view a vector space as an abelian group then the group only describes a part of the vector space structure. These abstractions --- vector space and group --- allow us to see what is generalizable about a system and what is specific to the system in question.
 	
 	
-		\bigskip\bigskip
-		\subsubsubsection{Isomorphisms between vector spaces}
-		\boxeddefinition{An \textbf{isomorphism} ${ \phi: V \longmapsto V' }$ -- where $V$ and $V'$ are defined over the same field $F$ -- is a bijective map compatible with the vector laws of composition. That's to say, for all ${ \V{v}, \V{v'} \in V,\, c \in F }$,
+		\biggerskip
+		\subsubsection{Isomorphisms between vector spaces}
+		\medskip
+		\boxeddefinition{\textbf{(Isomorphism of Vector Spaces)} An isomorphism between vector spaces ${ \phi: V \longmapsto V' }$ -- where $V$ and $V'$ are defined over the same field $F$ -- is defined as a bijective map compatible with the vector laws of composition.\\
+			
+		That's to say, for all ${ \V{v}, \V{v'} \in V,\, c \in F }$,
 			\[ \phi(\V{v} + \V{v'}) = \phi(\V{v}) + \phi(\V{v'}) \eqand \phi(c\V{v}) = c\phi(\V{v}). \]
 			
-		}
+		}\label{def:isomorphism-of-vector-spaces}
+	
+		\medskip
+		\note{In many contexts isomorphic vector spaces can be regarded as different representations of the same thing and used interchangeably. However, in some contexts the different identities of isomorphic vector spaces are relevant. So, it is important that we distinguish carefully between "equal" vector spaces and merely isomorphic vector spaces.\\\\ For example, any finite vector spaces of the same dimension and defined on the same field are isomorphic so two distinct lines in the cartesian planes represent two different but isomorphic 1-dimensional vector spaces in $\R{2}$. Clearly there are many situations where regarding these as equal would be nonsense however, in a good number of situations we are only interested in the fact that they are 1-dimensional vector subspaces of $\R{2}$ and their difference can be ignored.}
 	
 		\medskip
 		\paragraph{Examples}
@@ -882,11 +888,48 @@
 	\begin{proof}
 		Any basis of $W$ is a linearly independent set in $V$ and can be extended to a basis of $V$ by adding a set of linearly independent vectors $S$. Then $S$ is a basis of a subspace $W'$ such that any vector in $V$ is in ${ W + W' }$ and since their bases are linearly independent this sum of spaces is a direct sum ${ W \oplus W' }$. Therefore, ${ W \oplus W' = V }$.
 	\end{proof}
+	\note{Notes about \autoref{prop:subspaces-have-a-complement-wrt-direct-sum}:
+		\begin{itemize}
+			\item{It is not necessary that there be only one such subspace $W'$. In fact, often there are an infinite number of such subspaces. All such spaces are isomorphic.}
+			\item{The proposition that all subspaces have a complement space can also be proven for infinite-dimensional spaces if we use the Axiom of Choice (\ref{sssection:axiom-of-choice}).}
+		\end{itemize}
+	}
 	
 	\bigskip
-	\subsubsection{Quotient Spaces in Finite-Dimensional Vector Spaces}
-	\boxeddefinition{The subspace $W'$ of $V$ such that ${ W \oplus W' = V }$ is called the \textbf{quotient space of $V$ by $W$} and is denoted ${ V/W }$.}
-	Further information: \href{https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)}{wikipedia}).}
+	\subsubsection{Vector Complement Spaces and Quotient Spaces}
+	\boxeddefinition{\textbf{(Complement Space)} A subspace $W'$ of a finite-dimensional vector space $V$ such that ${ W \oplus W' = V }$ is called a \textit{complement space}. While there may be many such spaces $W'$, they are equivalent upto isomorphism.
+	}\label{def:vector-complement-space}
+	\boxeddefinition{The subspace $W'$ of $V$ such that ${ W \oplus W' = V }$ is called the \textbf{quotient space of $V$ by $W$} and is denoted ${ V/W }$. \wrong 
+		\TODO{copy correct definition from wikipedia}
+	}\label{def:vector-quotient-space}
+	
+	Further information: \href{https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)}{wikipedia}.
+	
+	\biggerskip
+	\begin{exe}
+		\ex{Consider the vector space $\R{2}$ and let $W$ be the subspace created by the linear combinations of the vector ${ (1,1)^T }$ --- i.e. the line ${ y = x }$ shown in red in the diagrams below.\\
+			
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=200pt]{\resourceDir/img/vector_cosets_in_quotient_space.png}
+			\caption{The green and blue lines are both cosets of $W$ in $\R{2}$ and elements in the quotient space.}
+			\label{fig:vector_cosets_in_quotient_space}
+		\end{figure}
+	
+		\autoref{fig:vector_cosets_in_quotient_space} shows two of the cosets of $W$ in $\R{2}$ as green and blue lines. The cosets such as these are the elements of the quotient space and they are the infinite number of lines parallel to ${ y = x }$. They are parallel because they are affine spaces whose associated vector space is the linear combinations of ${ (1,1)^T }$ --- these linear combinations form the kernel of the quotient map and the elements of the quotient space are the additive cosets with the kernel of the quotient map.\\
+		
+		\autoref{fig:vector_subspaces_isomorphic_to_quotient_space} shows two of the complement spaces as green and blue lines. Such complement spaces are the subspaces $W'$ of $\R{2}$ such that ${ W \oplus W' = \R{2} }$. Any non-parallel line is such a subspace. Each point on such a line represents a vector that is an element of the complement space and is also a point in a line parallel to ${ y = x }$. In this way, any one of the possible complement spaces $W'$ is isomorphic to the quotient space.
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=200pt]{\resourceDir/img/vector_subspaces_isomorphic_to_quotient_space.png}
+			\caption{The green and blue lines are both complement spaces --- subspaces $W'$ such that ${ W \oplus W' = \R{2} }$.}
+			\label{fig:vector_subspaces_isomorphic_to_quotient_space}
+		\end{figure}	
+		}
+	\end{exe}
+	\clearpage
+	
 }
 
 
@@ -1191,7 +1234,14 @@
 		we get the same vector defined \wrt to the basis $B'$.
 	}
 
-	\bigskip\bigskip
+
+
+
+% ---------------- break ------------------
+\pagebreak
+
+
+
 	\subsubsection{Euclidean Coordinate Spaces}
 	\bigskip
 	\boxeddefinition{The \textbf{Euclidean coordinate spaces} are the real coordinate spaces $\R{n}$ equipped with the \textbf{standard norm},
@@ -1258,6 +1308,83 @@
 	\begin{corollary}
 		Geometric orthogonality --- that's to say perpendicularity --- is equivalent to the dot product definition of orthogonality.
 	\end{corollary}
+
+
+
+
+% ---------------- break ------------------
+\pagebreak
+
+	
+	
+	\subsubsection{Complex Coordinate Spaces}
+	\bigskip
+	\boxeddefinition{A \textbf{Complex vector space} is a space of vectors defined over the field $\C{}$ and, as such, the vector coordinates and the scalars are complex numbers. Similarly to the Euclidean spaces, a standard norm is defined,
+		\[ \norm{\v} = \sqrt{v_1 \conj{v_1} + \cdots + v_n \conj{v_n}} = \sqrt{\modulus{v_1}^2 + \cdots + \modulus{v_n}^2} \]
+		which is considered to be the \textbf{length} of the vector in the space $\C{n}$.
+	}\label{def:complex-vector-space}
+
+	\biggerskip
+	\labeledProposition{The additive group in vector space $\C{n}$ is isomorphic to the additive group in Euclidean space $\R{2n}$.}{complex-n-space-additive-group-is-isomorphic-to-euclidean-2n-space}
+	\begin{proof}
+		If we take the standard basis of $\C{2}$,
+		\[ \left\{ \begin{bmatrix}1 \\ 0\end{bmatrix}, \begin{bmatrix}0 \\ 1\end{bmatrix} \right\} \]
+		then an arbitrary vector in $\C{2}$ is expressed as,
+		\[ \begin{bmatrix}z_1 \\ z_2\end{bmatrix} = \begin{bmatrix}a + bi \\ c + di\end{bmatrix}. \]
+		We can also express this as,
+		\[ a \begin{bmatrix}1 \\ 0\\ 0\\ 0\end{bmatrix} + b \begin{bmatrix}0 \\ 1\\ 0\\ 0\end{bmatrix} + c \begin{bmatrix}0 \\ 0\\ 1\\ 0\end{bmatrix} 
+			+ d \begin{bmatrix}0 \\ 0\\ 0\\ 1\end{bmatrix}. \]
+		The mapping between these two representations is an isomorphism of the additive groups $(\C{2}, +)$ and $(\R{4}, +)$. Clearly the same approach can be followed for any greater dimension ${ n > 2 }$.
+	\end{proof}
+	\note{This isomorphism of additive groups is not compatible with complex scalar multiplication so the vector spaces cannot be said to be an isomorphism of vector spaces (ref: \ref{def:isomorphism-of-vector-spaces}). To see this take the example of the vector ${ (i, 1)^T \in \C{2} }$ and the scalar multiplication,
+		\[ i \begin{bmatrix}i \\ 1\end{bmatrix} = \begin{bmatrix}-1 \\ i\end{bmatrix}. \]
+		Clearly there is no real scalar $\alpha$ such that,
+		\[ \alpha \begin{bmatrix}0 \\ 1\\ 1\\ 0\end{bmatrix} = \begin{bmatrix}-1 \\ 0\\ 0\\ 1\end{bmatrix}. \]
+	However, in a situation where scalar multiplication can be restricted to only real-valued scalars it may be possible to consider the spaces as isomorphic.}
+
+	\bigskip
+	\labeledProposition{For the conjugate pair ${ \v,\conj{\v} \in \C{n} }$,
+		\[ \operatorname{Lin} \, \{ \v, \,\conj{\v} \} = \operatorname{Lin} \, \{ \RePart{\v}, \,\ImPart{\v} \} \]
+		where ${ \RePart{\v}, \ImPart{\v} }$ are vectors with real-valued components in $\C{n}$.
+	}{linear-span-of-conjugate-pair-vectors-is-span-of-real-and-imaginary-parts}
+	\begin{proof}\nl
+		Let ${ \v = \begin{bmatrix}a + bi \\ c + di\end{bmatrix} }$ and so ${ \conj\v = \begin{bmatrix}a - bi \\ c - di\end{bmatrix} }$. These vectors can be expressed as
+		\[ 
+			\begin{bmatrix}a \\ c\end{bmatrix} + i \begin{bmatrix}b \\ d\end{bmatrix} \eqand 
+			\begin{bmatrix}a \\ c\end{bmatrix} - i \begin{bmatrix}b \\ d\end{bmatrix}.
+		\]
+		Therefore we have,
+		\[
+			\v, \conj\v \in \operatorname{Lin} \, \left\{ \begin{bmatrix}a \\ c\end{bmatrix}, \, \begin{bmatrix}b \\ d\end{bmatrix} \right\}
+						= \operatorname{Lin} \, \{ \RePart{\v}, \,\ImPart{\v} \}
+		\]
+		and so,
+		\[ \operatorname{Lin} \, \{ \v, \,\conj{\v} \} = \operatorname{Lin} \, \{ \RePart{\v}, \,\ImPart{\v} \} \]
+		as required.
+	\end{proof}
+
+	\bigskip
+	\labeledProposition{Let ${ A \in \C{n \times n} }$ and ${ \v \in \C{n} }$ be any vector in the complex space with ${ \u = \RePart{\v} }$. Then,
+		\[ A\v + A\conj\v = 2A\u. \]
+	}{complex-matrix-times-vector-plus-conjugate-of-same-vector-is-twice-matrix-times-real-part-of-vector}
+	\begin{proof}
+		Let ${ A \in \C{n \times n} }$ be decomposed into
+		\[ A = \RePart{A} + i\ImPart{A} = B + iC \]
+		and a vector ${ \v \in \C{n} }$ be decomposed into
+		\[ \v = \RePart\v + i\ImPart\v = \u + i\w. \]
+		Then
+		\[\begin{aligned}
+			A\v &= (B + iC)(\u + i\w) \\
+			&= B\u + iB\w + iC\u + i^2C\w \\
+			&= (B\u - C\w) + i(C\u + B\w), \\
+			\\
+			A\conj\v &= (B + iC)(\u - i\w) \\
+			&= B\u - iB\w + iC\u - i^2C\w \\
+			&= (B\u + C\w) + i(C\u - B\w).
+		\end{aligned}\]
+		So
+		\[ A\v + A\conj\v = 2B\u + 2iC\u = 2(B + iC)\u = 2A\u. \qedhere \]
+	\end{proof}
 }
 	
 \end{document}

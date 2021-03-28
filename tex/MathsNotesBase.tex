@@ -8,21 +8,21 @@
 
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{centernot}
-\usepackage{listings}
-\usepackage[pdftex]{graphicx}
-\usepackage{color}
-\usepackage{bm}
 \usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
 \usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 %\usepackage{esvect} provides longer over arrows (not currently in use)
 
+\usepackage{centernot}
+\usepackage{listings}
+\usepackage[pdftex]{graphicx}
+\usepackage{color}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{amsfonts}
 \usepackage{epstopdf}
 \usepackage[table]{xcolor}
 \usepackage{siunitx}
@@ -170,6 +170,8 @@
 \newcommand{\modulus}[1]{\abs{#1}} % semantic alias of \abs for complex conjugate
 \newcommand{\ImPart}{\operatorname{Im}}
 \newcommand{\RePart}{\operatorname{Re}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 
 \newcommand*{\V}[1]{\vec{\bm{#1}}}
@@ -192,11 +194,12 @@
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}{Proposition}[section]
-\newtheorem*{definition}{Definition}
 \newtheorem{axiom}{Axiom}[section]
 \newtheorem{corollary}{Corollary}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{claim}{Claim}[section]
+\theoremstyle{remark}
+\newtheorem*{definition}{Definition}
 
 
 \newcommand{\labeledProposition}[2]{

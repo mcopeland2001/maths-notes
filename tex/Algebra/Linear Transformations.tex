@@ -88,6 +88,9 @@
 			Then,
 				\[ T(\x) = \w \iff \x \in (\v + K). \]
 		\end{corollary}
+		\begin{corollary}\label{coro:linear-transformation-is-injective-iff-kernel-is-trivial}
+			Let ${ T: V \longmapsto W }$ be any linear transformation with kernel ${ K = \operatorname{ker} T }$. $T$ is injective iff the kernel is trivial ${ K = \{\0\} }$.
+		\end{corollary}
 	
 		\medskip
 		\labeledProposition{Linear Independence is preserved across a linear transformation iff the transformation is injective.}{linear_independence_not_preserved_across_homomorphic_lin_transform}
@@ -221,7 +224,7 @@
 				}
 			\end{itemize}
 		\end{proof}
-		\note{Note that this is the linear algebra version of \autoref{theo:first_isomorphism_theorem}.}
+		\note{Note that this is the linear algebra version of \autoref{theo:first_isomorphism_theorem} and also a combination of \autoref{prop:lin_transform_fibres_are_additive_cosets_of_kernel} and the definition of the vector quotient space \ref{def:vector-quotient-space}.}
 
 	
 		\biggerskip
@@ -868,128 +871,7 @@
 		}
 	
 		
-		\bigskip
-		\labeledProposition{Let $A$ be the matrix of a linear operator $T$ with respect to the basis $B$ of dimension $n$. The matrices $A'$ which represent $T$ with respect to other bases are those of the form,
-			\[ A' = PA\inv{P} \]
-			where ${ P \in GL_n(\F{}) }$.
-		}{operator_matrix_wrt_to_1_base_wrt_to_other_bases}
-		\begin{proof}
-			A linear operator is a specialization of a linear transformation where the domain and codomain are the same set so we can use the definition (\ref{def:matrix_of_lin_transform_wrt_bases}) of the matrix of a linear transformation \wrt to two different bases and simply set the two bases to the same set $B$. This produces,
-			\[ T(\x) = A\x_B = \b_B \]
-			so that,
-			\[ [B]A = [T(\b_1) \cdots T(\b_n)] \iff A = \inv{[B]}[T(\b_1) \cdots T(\b_n)]. \]		
-			Now let there be another basis $B'$ related to $B$ by,
-			\[ [B] = [B']P \iff [B]\inv{P} = [B'], \]
-			\[ P\x_B = \x_{B'}. \]
-			To define a matrix $A'$ that performs the same linear transformation as $A$ \wrt to the basis $B'$ we need,
-			\[ T(\x) = A'\x_{B'} = \b_{B'} \]
-			and
-			\[ [B']A' = [T(\b_1') \cdots T(\b_n')] \iff A' = \inv{[B']}[T(\b_1') \cdots T(\b_n')]. \]
-			If we have the vectors of $B'$ encoded in $B$-coordinates then we can use the transformed version of the basis $B$ to produce the transformed version of the basis $B'$,
-			\[ [T(\b_1') \cdots T(\b_n')] = [T(\b_1) \cdots T(\b_n)]\inv{[B]}[B'] = [T(\b_1) \cdots T(\b_n)]\inv{P}. \]
-			If we now note that,
-			\[ A = \inv{[B]}[T(\b_1) \cdots T(\b_n)] \eqand A' = \inv{[B']}[T(\b_1') \cdots T(\b_n')]  \]
-			then,
-			\begin{align*}
-			&& A' &= \inv{[B']}[T(\b_1) \cdots T(\b_n)]\inv{P} \\
-			&\iff & A' &= \inv{[B']}[B]A\inv{P} &\sidecomment{} \\
-			&\iff & A' &= PA\inv{P}. &\sidecomment{} \qedhere
-			\end{align*}
-		\end{proof}
-	
-		\bigskip
-		\subsubsection{Similar Matrices}\label{sssection:similar-matrices}
-		\bigskip
-		\boxeddefinition{If two matrices ${ A,A' }$ are related by,
-			\[ A' = PA\inv{P} \]
-			for some ${ P \in GL_n(\F{}) }$ then they are known as \textbf{similar} matrices or \textbf{conjugates}.
-		}
-		\medskip
-		\note{Note:
-			\begin{itemize}
-				\item{Similar matrices represent the same linear transformation expressed with respect to different bases.}
-				\item{In general, linear maps are not invertible so the matrix $A$ is not necessarily a member of a group. So, this use of the term "conjugation" only equates to the term in group theory within the general linear group $GL_n(\F{})$.}
-				\item{Similar matrices have the same determinant which means that they expand or contract the space by the same amount. This is to be expected as they represent the same linear transformation defined against different bases.}
-			\end{itemize}		
-		}
 		
-		\medskip
-		\subsubsection{Intuition of Similar Matrices}
-		\[ A' = PA\inv{P} \iff A'P = PA \]
-		$P$ is the change of basis matrix such that ${ \x_{B'} = P\x_B }$. So $P$ is $B_{B'}$ the basis vectors of $B$ \wrt to $B'$. Another way of looking at it: ${ P = \inv{[B']}[B] }$ so it decodes coordinates in $B$-coords to standard coordinates and then encodes them into $B'$-coords. Meanwhile $A$ transforms the basis vectors of $B$ and then encodes the result in $B$-coords so the schematic of $A$ is ${ A = \inv{[B]}[T(B)] }$.\\
-		So 
-		\[ PA = P\inv{[B]}[T(B)] = \inv{[B']}[B]\inv{[B]}[T(B)] = \inv{[B']}[T(B)]. \]
-		By similar reasoning the schematic of $A'$ is ${ A' = \inv{[B']}[T(B')] }$. But also we have,
-		\[ A' = PA\inv{P} = (\inv{[B']}[B])(\inv{[B]}[T(B)])(\inv{[B]}[B']) = \inv{[B']}[T(B)]\inv{[B]}[B'] \]
-		so that,
-		\begin{align*}
-		&& \inv{[B']}[T(B')] &= \inv{[B']}[T(B)]\inv{[B]}[B'] \\
-		&\iff & [T(B')] &= [T(B)]\inv{[B]}[B']. &\sidecomment{} \\
-		\end{align*}
-		What this last result is saying is that if we take the basis vectors of $B'$ and encode them in $B$-coordinates and then apply the result to the transformed basis of $B$ then the result is the transformed basis of $B'$ defined in standard coordinates.\\\\
-		So, we have,
-		\[ A'P = PA = \inv{[B']}[T(B)] \]
-		\[ \inv{P}A' = A\inv{P} = \inv{[B]}[T(B)]\inv{[B]}[B'] = \inv{[B]}[T(B')]. \]
-		
-		
-		\bigskip
-		\begin{tcolorbox}[breakable,enhanced jigsaw,colframe=white,colback=white,boxrule=0pt,arc=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt]
-			\labeledTheorem{If $A$ is similar to a matrix ${ \tilde{A} = \inv{P}AP }$ then 
-				\[ A^n = (P \tilde{A} \inv{P})^n = P \tilde{A}^n \inv{P}. \]
-			}{exponentiation-of-similar-matrices}
-			\begin{proof}
-				Remembering that matrix multiplication is not, in general, commutative,
-				\begin{align*}
-					&& A^n &= (P \tilde{A} \inv{P})(P \tilde{A} \inv{P})\cdots(P \tilde{A} \inv{P}) \\
-					&&  &= P \tilde{A} (\inv{P})(P) \tilde{A} (\inv{P}P) \cdots (\inv{P}P) \tilde{A} \inv{P} \\
-					&&  &= P \tilde{A}^n \inv{P}. \qedhere
-				\end{align*}
-			\end{proof}
-		\end{tcolorbox}
-		
-		\bigskip
-		\labeledProposition{Similarity of matrices is an equivalence relation.}{matrix_similarity_is_equiv_relation}
-		\begin{proof}
-			For any ${ M,N \in GL_n(\F{}) }$, similarity is an equivalence relation because of the following properties.
-			
-			\paragraph{\small{Reflexivity:}}
-			\begin{align*}
-			& N = I^{-1}NI \\
-			\therefore \; & N \sim N
-			\end{align*}
-			
-			\paragraph{\small{Symmetry:}}
-			\begin{align*}
-			& & N &= P^{-1}MP \\
-			&\iff & NP^{-1} &= P^{-1}M(PP^{-1}) \\
-			&\iff & NP^{-1} &= P^{-1}M \\
-			&\iff & PNP^{-1} &= (PP^{-1})M \\
-			&\iff & PNP^{-1} &= M \\
-			&\iff & R^{-1}NR &= M,\;\; R \in X\\
-			&\;\;\therefore & N \sim M &\iff M \sim N
-			\end{align*}
-			
-			\paragraph{\small{Transitivity:}}
-			\begin{align*}
-			& & N &= P^{-1}MP,\;\; M = Q^{-1}AQ \\
-			&\implies & N &= P^{-1}(Q^{-1}AQ)P \\
-			&\iff & N &= (P^{-1}Q^{-1})A(QP) \\
-			&\iff & N &= R^{-1}AR,\;\; R \in X\\
-			&\;\;\therefore & (N \sim M) & \wedge (M \sim Q) \iff (N \sim Q)
-			\end{align*}
-		\end{proof}
-	
-		\bigskip
-		\labeledProposition{Similar matrices have the same determinant.}{similar-matrices-have-same-determinant}
-		\begin{proof}
-			Let ${ A' = PA\inv{P} }$ where $P$ is a change of basis matrix. Then,
-			\begin{align*}
-			\det{A'} &= \det{PA\inv{P}}\\
-			 &= (det{P}) \cdot (\det{A}) \cdot (\det{\inv{P}})\\
-			 &= (\det{P}) \cdot (\det{A}) \cdot (1/\det{P})\\
-			 &= \det{A}. \qedhere
-			\end{align*}
-		\end{proof}
 		
 		
 		
@@ -1170,6 +1052,20 @@
 		 }
 	 
 	 	\bigskip
+	 	\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$.%
+	 		\begin{enumerate}[label=(\roman*)]
+	 			\item{If $V$ has dimension $n$, then $T$ has at most $n$ eigenvalues.}
+	 			\item{If $\F{}$ is the field of complex numbers and ${ V \neq 0 }$, then $T$ has at least one eigenvalue, and hence it has an eigenvector.}
+	 		\end{enumerate}
+	 	}{num-eigenvalues}
+	 	\begin{proof}\nl
+	 		\begin{enumerate}[label=(\roman*)]
+	 			\item{For any field $\F{}$, a polynomial of degree $n$ can have at most $n$ different roots (see Artin[373]). Since $T$ is defined over a vector space of dimension $n$, the degree of the characteristic polynomial of $T$ is $n$. Then, by \autoref{theo:eigenvalues_are_roots_of_characteristic_poly} we can have a maximum of $n$ eigenvalues.}
+	 			\item{Every polynomial of positive degree with complex coefficients has at least one complex root. This fact is called the Fundamental Theorem of Algebra (\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{wikipedia}).}
+	 		\end{enumerate}
+	 	\end{proof}
+	 
+	 	\bigskip
 	 	\labeledTheorem{The eigenspace of an eigenvalue is a vector subspace.}{eigenspaces-are-vector-subspaces}
 	 	\begin{proof}
 	 		Let $S$ be the set of all eigenvectors of a linear operator $T$ corresponding to a particular eigenvalue $c$. Then the eigenspace is defined as,
@@ -1222,24 +1118,40 @@
  			which means that $\conj{\lambda}$ is an eigenvalue of $A$ with a corresponding eigenvector $\conj{\v}$. 
  		\end{proof}
  	
+ 	
+ 	
  		\bigskip
- 		\labeledProposition{A hermitian matrix has only real-valued eigenvalues.}{hermitian-matrix-has-only-real-eigenvalues}
+ 		\labeledProposition{Let ${ A \in \C{n \times n} }$ be a matrix in complex space but that \textit{has only real entries} and let $A$ have a real eigenvalue $\lambda$. Then we can find a basis of the eigenspace of $\lambda$ containing only real vectors.}{for-real-matrix-in-complex-space-a-real-eigenvalue-has-real-eigenvectors}
  		\begin{proof}
- 			Let $A$ be a hermitian matrix (\ref{def:hermitian-matrix}) and let $\lambda$ be an arbitrary eigenvalue of $A$ with $\v$ as an eigenvector corresponding to $\lambda$. Then,
+ 			Let ${ A \in \C{n \times n} }$ have only real entries and a real eigenvalue $\lambda$. Suppose $\v$ is a complex eigenvector of $A$ corresponding to $\lambda$. Then,
  			\[\begin{aligned}
- 				&& \v^* A \v &= \v^* A^* \v   &\sidecomment{${ \because A }$ is hermitian}\\
- 				&\iff & \v^* (A \v) &= (A \v)^* \v   &\sidecomment{by props. of hermitian conjugate \ref{def:hermitian-conjugate}} \\
- 				&\iff & \v^* (\lambda \v) &= (\lambda \v)^* \v   &\sidecomment{by eigenvalue property}\\
- 				&\iff & \v^* (\lambda \v) &= \conj\lambda \v^* \v   &\sidecomment{by \ref{prop:hermitian-conj-of-scalar-x-matrix-is-conj-of-scalar-x-hermitian-conj-of-matrix}}\\
- 				&\iff & \lambda \norm{\v}^2 &= \conj\lambda \norm{\v}^2   &\sidecomment{by defn. of induced norm \ref{def:vector-norm}} \\
- 				&\iff & \lambda &= \conj\lambda   &\sidecomment{${ \because \v \neq \0 \implies \norm{\v} > 0 }$ so has inverse} \\
- 				&\therefore & \lambda &\in \R{}.  \qedhere
+ 				&& A\v &= \lambda \v \\
+ 				&\iff & \conj{A\v} &= \conj{\lambda \v} &\sidecomment{} \\
+ 				&\iff & A \conj{\v} &= \lambda \conj{\v}. &\sidecomment{$A$ and $\lambda$ are real} \\
  			\end{aligned}\]
+ 			So $\conj{\v}$ is also an eigenvector of $\lambda$. Then, by \autoref{prop:linear-span-of-conjugate-pair-vectors-is-span-of-real-and-imaginary-parts} the two real vectors $\RePart{\v}$ and $\ImPart{\v}$ span the same space as $\v$ and $\conj\v$ and so can also be chosen as eigenvectors for $\lambda$.
+ 		\end{proof}
+ 		\note{It may also be possible to prove this using the definition of the eigenspace as the nullspace of the matrix $(A - \lambda I)$ but the above proof is constructive.}
+ 	
+ 	
+ 		\bigskip
+ 		\labeledProposition{If two matrices $A$ and $B$ have the same eigenvalues (with the same multiplicity) and corresponding eigenvectors and one of the matrices is diagonalisable, then ${ A = B }$.}{diagonalisable-matrices-with-same-eigenvals-and-eigenvecs-are-equal}
+ 		\begin{proof}
+ 			\WLOG assume that $A$ is diagonalisable. Since $B$ has the same eigenvectors as $A$, it must have the same dimension and since it has the same eigenvalues with the same multiplicity as $A$, it must also be diagonalisable.\\
+ 			
+ 			By diagonalisability,
+ 			\[ D_1 = \inv{P_1} A P_1 \eqand D_2 = \inv{P_2} B P_2. \]
+ 			Since $B$ has the same eigenvalues as $A$, the diagonal entries must be the same upto order (\addref). We can choose them to be in the same order and then we have,
+ 			\[ D_1 = D_2. \]
+ 			Each of these eigenvalues in the diagonal entries has an associated eigenvector in the matrices $P_1$ and $P_2$ and, since these eigenvectors are the same in both $A$ and $B$, and we have chosen the order of the eigenvalues in the diagonalisation to be the same, then the order of the eigenvectors in $P_1$ and $P_2$ also must be the same. So we have,
+ 			\[ P_1 = P_2. \]
+ 			Therefore,
+ 			\[ A = P_1 D_1 \inv{P_1} = P_2 D_2 \inv{P_2} = B. \]	
  		\end{proof}
  	
-	 
-	 	\bigskip\medskip
-	 	\subsubsection{Examples of Eigenvectors and Eigenvalues}
+ 	
+	 	\biggerskip
+	 	\subsubsubsection{Examples of Eigenvectors and Eigenvalues}
 	 	\begin{exe}
 	 		\item{If we take the matrix,
 	 			\[ 
@@ -1328,8 +1240,14 @@
 
 	\pagebreak
 	\searchableSubsection{Diagonalisation}{linear algebra}{
-		\bigskip\bigskip
-		\boxeddefinition{The process of determining a diagonal matrix that is similar to a given matrix of a linear operator is known as \textbf{diagonalisation}.}
+		\biggerskip
+		\boxeddefinition{\textbf{(Diagonalisation)} The process of determining a diagonal matrix that is similar to a given matrix of a linear operator is known as \textbf{diagonalisation}.}
+		\boxeddefinition{\textbf{(Eigenbasis)} If a linear operator $T$ is defined over a vector space $V$, an \textit{eigenbasis} of $T$ is a basis of $V$ consisting solely of eigenvectors of $T$.\\
+			
+		If $A$ is the matrix of $T$ \wrt the standard basis and $P$ is the matrix whose columns are the elements of the eigenbasis of $T$ then, by \autoref{prop:diagonal_iff_every_basis_vector_eigenvector},
+			\[ \inv{P} A P = D \]
+		is diagonal.
+		}\label{def:eigenbasis}
 		
 		\bigskip
 		\subsubsection{Existence of Eigenvectors}
@@ -1499,19 +1417,7 @@
 	
 		\medskip\note{As a result of this we can refer to the characteristic polynomial, determinant and trace of a linear operator $T$ without reference to a particular matrix or basis.}
 		
-		\bigskip
-		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional vector space $V$.%
-			\begin{enumerate}[label=(\roman*)]
-				\item{If $V$ has dimension $n$, then $T$ has at most $n$ eigenvalues.}
-				\item{If $\F{}$ is the field of complex numbers and ${ V \neq 0 }$, then $T$ has at least one eigenvalue, and hence it has an eigenvector.}
-			\end{enumerate}
-		}{num-eigenvalues}
-		\begin{proof}\nl
-			\begin{enumerate}[label=(\roman*)]
-				\item{For any field $\F{}$, a polynomial of degree $n$ can have at most $n$ different roots (see Artin[373]). Since $T$ is defined over a vector space of dimension $n$, the degree of the characteristic polynomial of $T$ is $n$. Then, by \autoref{theo:eigenvalues_are_roots_of_characteristic_poly} we can have a maximum of $n$ eigenvalues.}
-				\item{Every polynomial of positive degree with complex coefficients has at least one complex root. This fact is called the Fundamental Theorem of Algebra (\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{wikipedia}).}
-			\end{enumerate}
-		\end{proof}
+
 	
 		\bigskip
 		\labeledProposition{Let $T$ be a linear operator on a finite-dimensional complex vector space $V$. There is a basis $B$ of $V$ such that the matrix $A$ of $T$ is upper triangular.}{complex_space_exists_basis_st_matrix_is_upper_triang}
@@ -1598,7 +1504,7 @@
 		\begin{proof}
 			As above, for an eigenvector $\v$ with eigenvalue $c$,
 			\[ p(T)\v = p(c)\v. \]
-			But now, $p(t)$ is the characteristic polynomial of $T$ and $c$, as an eigenvalue of $T$, \textit{is a root of the characteristic polynomial}. So, for any eigenvector of $T$,
+			But now, $p(t)$ is the characteristic polynomial of $T$ and $c$, as an eigenvalue of $T$, \textit{is a root of the characteristic polynomial}. So, for any eigenvector of $T$ corresponding to the eigenvalue $c$,
 			\[  p(T)\v = p(c)\v = 0\v = 0. \]
 			Since $T$ is diagonalizable, there exists a basis of the space $V$ comprised solely of eigenvectors. Therefore, for any vector ${ \v \in V }$, we can express it as a linear combination of eigenvectors each of which will be mapped to the zero vector by $p(T)$.
 		\end{proof}
@@ -2825,1212 +2731,50 @@
 
 
 
-
-% -------------------- break ------------------
-
-
-	\pagebreak
-	\searchableSubsection{Inner Product Spaces}{linear algebra}{
-
-		\bigskip
-		\boxeddefinition{\textbf{(Inner Product Space)} Let $\F{}$ denote either the field of real numbers $\R{}$ or the field of complex numbers $\C{}$.\\
-			
-			An \textbf{inner product space} is a vector space $V$ over the field $\F{}$ together with a map
-			\[ \inner{\cdot}{\cdot} : V \times V \longmapsto \F{} \]
-			called an \textbf{inner product} that satisfies the following conditions for all vectors ${ \x,\y,\z \in V }$ and all scalars ${ \alpha,\beta \in \F{} }$.
-			
-			\begin{enumerate}[label=(\roman*)]
-				\item{\textbf{Conjugate Symmetry: } ${ \inner{\x}{\y} = \conj{\inner{\y}{\x}} }$,}
-				\item{\textbf{Linearity in the first argument: }\\ $~$\hspace{134pt} ${ \inner{\alpha\x + \beta\y}{\z} = \alpha\inner{\x}{\z} + \beta\inner{\y}{\z} }$,}
-				\item{\textbf{Positive definiteness: } ${ \inner{\x}{\x} \geq 0 }$ with ${ \inner{\x}{\x} = 0 \iff \x = \0 }$.}
-			\end{enumerate}
-		}\label{def:inner-product}
-	
-		\bigskip
-		\labeledProposition{For a vector space $V$ over the field $\F{}$, whether $\F{}$ is the real number field $\R{}$ or the complex number field $\C{}$, we have, for all ${ \x \in \F{} }$,
-			\[ \inner{\x}{\x} \in \R{}. \]
-		}{inner-product-of-vector-with-itself-is-real-valued}
-		\begin{proof}
-			Property (i) of the inner product (\ref{def:inner-product}) --- conjugate symmetry --- implies that
-			\[ \inner{\x}{\x} = \conj{\inner{\x}{\x}} \]
-			and, by \autoref{prop:complex-conjugate-properties}, it then follows that
-			\[ \ImPart(\inner{\x}{\x}) = 0. \]
-			Therefore ${ \inner{\x}{\x} \in \R{} }$.
-		\end{proof}
-		\note{This is why the inner product can be described as "positive definite" even on complex fields where there is no concept of positive and negative because the complex numbers are not ordered (ref: \autoref{prop;complex-field-is-not-ordered}).}
-		
-		\bigskip
-		\labeledProposition{The inner product is \textbf{conjugate linear} in its second argument. That's to say, if $V$ is an inner product space over the field $\F{}$ and ${ \x,\y,\z \in V }$ and ${ \alpha,\beta \in \F{} }$, then
-			\[ \inner{\x}{\alpha\y + \beta\z} = \conj{\alpha}\inner{\x}{\y} + \conj{\beta}\inner{\x}{\z}.  \]
-		}{inner-product-is-conjugate-linear-in-second-argument}
-		\begin{proof}
-			Using the definition of the inner product in \ref{def:inner-product}:
-			\[\begin{aligned}
-				\inner{\x}{\alpha\y + \beta\z} &= \conj{\inner{\alpha\y + \beta\z}{\x}} &\sidecomment{by conjugate symmetry} \\
-				&= \conj{\alpha\inner{\y}{\x} + \beta\inner{\z}{\x}} &\sidecomment{by linearity of 1st argument} \\
-				&= \conj{\alpha} \conj{\inner{\y}{\x}} + \conj{\beta}\conj{\inner{\z}{\x}} &\sidecomment{by complex conjugate properties: \ref{prop:complex-conjugate-properties}} \\
-				&= \conj{\alpha} \inner{\x}{\y} + \conj{\beta} \inner{\x}{\z} &\sidecomment{by conjugate symmetry}. \qedhere
-			\end{aligned}\]
-		\end{proof}
-	
-		\bigskip
-		\labeledProposition{For any inner product space, for $\x$ in the space,
-			\[ \inner{\0}{\x} = \inner{\x}{\0} = 0. \]
-		}{inner-product-with-zero-vector-is-zero}
-		\begin{proof}
-			\[\begin{aligned}
-				&& \inner{\0}{\x} &= \inner{\0 + \0}{\x} &\sidecomment{by props. of $\0$ vector} \\
-				&\iff & \inner{\0}{\x} &= \inner{\0}{\x} + \inner{\0}{\x} &\sidecomment{by prop. (ii) of inner product} \\
-				&\iff & \inner{\0}{\x} - \inner{\0}{\x} &= \inner{\0}{\x} &\sidecomment{by props. of $\R{}$} \\
-				&\iff & 0 &= \inner{\0}{\x}. \nnn
-				&& \inner{\x}{\0} &= \inner{\x}{\0 + \0} \\
-				&\iff & \inner{\x}{\0} &= \inner{\x}{\0} + \inner{\x}{\0} &\sidecomment{} \\
-				&\iff & 0 &= \inner{\x}{\0}.
-			\end{aligned}\]
-		\end{proof}
-	
-	
-	
-		\biggerskip
-		\subsubsubsection{Example}
-		\begin{exe}
-			\ex{It is possible to define an inner product over the space of degree-$n$ real polynomials $P_n(\R{})$ by, for ${ p,q \in P_n(\R{}) }$,
-				\[ \inner{p}{q} = \sum_{i = 1}^{n+1} p(x_i)q(x_i) \]
-				for any distinct ${ x_1,x_2,\dots,x_{n+1} \in \R{} }$. This inner product satisfies 
-				\[ \inner{\v}{\v} = 0 \iff \v = \0 \]
-				because, for $p(x_i)^2$ to equal 0 at $n+1$ distinct $x_i$ values, it must have $n+1$ roots -- which is not possible unless $p$ is the zero function (refer: \autoref{prop:three_points_identify_quadratic}).\\
-				
-				Similarly, we could define the following inner product over the space of degree-$n$ complex polynomials $P_n(\C{})$,
-				\[ \inner{p}{q} = \sum_{i = 1}^{n+1} p(x_i) \, \conj{q(x_i)}. \]
-			}
-		\end{exe}
-	
-		\bigskip
-		\subsubsubsection{Orthogonality}
-		\boxeddefinition{\textbf{(Orthogonality)} The vectors $\x$ and $\y$ in an innner product space are said to be \textbf{orthogonal} --- denoted ${ \x \perp \y }$ --- iff ${ \inner{\x}{\y} = 0 }$.
-		}\label{def:orthogonality}
-	
-		\boxeddefinition{\textbf{(Orthogonal Complement)} Let $V$ be an inner product space and ${ S \subset V }$. Then the \textbf{orthogonal complement} of $S$ is defined as,
-			\[ S^\perp = \setc{\v \in V}{\forall \x \in S \logicsep \v \perp \x}. \]
-		}\label{def:orthogonal-complement}
-	
-		\medskip
-		\labeledProposition{If a set of non-zero vectors in an inner product space is pairwise orthogonal, then it is also linearly independent.\\
-			
-			That's to say, if ${ \v_1, \v_2, \dots, \v_k \in V }$ are non-zero vectors in an inner product space such that, for each ${ 1 \leq i \neq j \leq k }$, we have ${ \v_i \perp \v_j }$, then ${ S = \{ \v_1, \v_2, \dots, \v_k \} }$ is linearly independent.
-		}{pairwise-orthogonal-set-is-linearly-independent}
-		\begin{proof}
-			Assume there exists a linear dependence relation between some subset of $S$,
-			\[ \alpha_1 \x_1 + \alpha_2 \x_2 + \cdots + \alpha_m \x_m = \0 \]
-			for ${ \x_1,\x_2,\dots,\x_m \in S }$ and ${ \alpha_1,\alpha_2,\dots,\alpha_m \neq 0 }$. Then, any vector in the dependence relation can be expressed as a linear combination of the others,
-			\[ \x_1 = -\frac{1}{\alpha_1}(\alpha_2 \x_2 + \cdots + \alpha_m \x_m). \]
-			Now, since the elements of $S$ are pairwise orthogonal, we have
-			\[ \inner{\x_i}{\x_j} = 0 \eqword{for} 1 \leq i \neq j \leq m. \]
-			Therefore,
-			\[\begin{aligned}
-				&& \inner{\x_1}{\x_2} &= 0 \\
-				&\iff & \inner{-\frac{1}{\alpha_1}(\alpha_2 \x_2 + \cdots + \alpha_m \x_m)}{\x_2} &= 0 &\sidecomment{} \nn
-				&\iff & -\frac{1}{\alpha_1}\inner{(\alpha_2 \x_2 + \cdots + \alpha_m \x_m)}{\x_2} &= 0 &\sidecomment{by \ref{def:inner-product}} \nn
-				&\iff & \alpha_2\inner{\x_2}{\x_2} + \alpha_3\inner{\x_3}{\x_2} + \cdots + \alpha_m\inner{\x_m}{\x_2} &= 0 &\sidecomment{by \ref{def:inner-product}} \nn
-				&\iff & \alpha_2\inner{\x_2}{\x_2} + 0 + \cdots + 0 &= 0 &\sidecomment{by pairwise orthogonality} \nn
-				&\iff & \alpha_2\inner{\x_2}{\x_2} &= 0 \nn
-				&\iff & \x_2 &= \0. &\sidecomment{by \ref{def:inner-product}}
-			\end{aligned}\]
-			But all the vectors in $S$ are non-zero by construction so this is a contradiction.
-		\end{proof}	
-	
-	
-		
-
-		\bigskip
-		\subsubsection{The Standard Inner Product}
-		\bigskip
-		\boxeddefinition{The \textbf{Standard Inner Product} for real vector spaces is the Euclidean dot product \autoref{defn:dot-product}.\\
-			
-			For complex vector spaces the \textbf{Standard Complex Inner Product} is similar to the dot product but with conjugation of the second argument:\\
-			
-			For ${ \x,\y \in \C{n} }$,
-			\[ \inner{\x}{\y} = \y^* \x = x_1 \conj{y_1} + \cdots + x_n \conj{y_n} \]
-			where ${ \y^* = \conj{\y}^T }$ is the hermitian conjugate (\ref{def:hermitian-conjugate}).
-			
-			\note{Some authors have the standard complex inner product as ${ \inner{\x}{\y} = \x^T \, \conj{\y} }$ but this is for compatibility with an inner product that is linear in the second argument (and conjugate linear in the first).}
-			
-			This inner product exhibits conjugate symmetry because, using properties of the complex conjugate (\ref{prop:complex-conjugate-properties}) and modulus (\ref{prop:complex-modulus-properties}),
-			\[\begin{aligned}
-				\inner{\x}{\y} &= x_1 \conj{y_1} + \cdots + x_n \conj{y_n} \nn
-				&= \conj{\conj{x_1} y_1} + \cdots + \conj{\conj{x_n} y_n} &\sidecomment{} \nn
-				&= \conj{ \conj{x_1} y_1 + \cdots + \conj{x_n} y_n } &\sidecomment{} \nn
-				&= \conj{ y_1 \conj{x_1} + \cdots + y_n \conj{x_n} } \nn
-				&= \conj{ \inner{\y}{\x} }.
-			\end{aligned}\]
-		
-			And it is positive definite because,
-			\[\begin{aligned}
-				\inner{\x}{\x} &= x_1 \conj{x_1} + \cdots + x_n \conj{x_n} \\
-				&= \modulus{x_1}^2 + \cdots + \modulus{x_n}^2
-			\end{aligned}\]
-			and for each ${ \modulus{x_i}^2 }$,
-			\[ x_i = 0 \implies \modulus{x_i}^2 = 0 \eqand x_i \neq 0 \implies \modulus{x_i}^2 > 0. \]
-		}\label{def:standard-inner-product}
-	
-		\bigskip
-		\labeledProposition{The eigenvectors corresponding to distinct eigenvalues of a Hermitian matrix are orthogonal.}{hermitian-matrix-eigenvectors-for-distinct-eigenvalues-are-orthogonal}
-		\begin{proof}
-			Let $A$ be a hermitian matrix (\ref{def:hermitian-matrix}). Let $\lambda_1$ and $\lambda_2$ be distinct eigenvalues of $A$ and let $\v_1$ be an eigenvector corresponding to $\lambda_1$ and $\v_2$ an eigenvector corresponding to $\lambda_2$. Then,
-			\[\begin{aligned}
-				&& \v_1^* A \v_2 &= \v_1^* A^* \v_2     &\sidecomment{$\because A$ is hermitian}\\
-				&\iff & \v_1^* (A \v_2) &= (A \v_1)^* \v_2     &\sidecomment{by props. of hermitian conjugate \ref{def:hermitian-conjugate}} \\
-				&\iff & \v_1^* (\lambda_2 \v_2) &= (\lambda_1 \v_1)^* \v_2    &\sidecomment{by eigenvalue property} \\
-				&\iff & \v_1^* \lambda_2 \v_2 &= \conj\lambda_1 \v_1^* \v_2    &\sidecomment{by \ref{prop:hermitian-conj-of-scalar-x-matrix-is-conj-of-scalar-x-hermitian-conj-of-matrix}} \\
-				&\iff & \lambda_2 \v_1^* \v_2 &= \lambda_1 \v_1^* \v_2    &\sidecomment{by \ref{prop:hermitian-matrix-has-only-real-eigenvalues}} \\
-				&\iff & (\lambda_2 - \lambda_1) \v_1^* \v_2 &= 0 \\
-				&\therefore & \v_1^* \v_2 &= 0.   &\sidecomment{${ \because \lambda_1 \neq \lambda_2 \implies \lambda_2 - \lambda_1 \neq 0 }$}
-			\end{aligned}\]
-			This last result says that the standard complex inner product of $\v_1$ and $\v_2$ is zero. We can therefore deduce that $\v_1$ and $\v_2$ are orthogonal.
-		\end{proof}
-		\TODO{does this result imply that the eigenvectors are orthogonal \wrt every basis and every inner product or only the standard basis and inner product?}
-	
-	
-		
-		\bigskip
-		\subsubsection{Normed Spaces}
-		\bigskip
-		\boxeddefinition{An inner product induces a \textbf{norm} on a vector space $V$ such that the norm of a vector ${ \v \in V }$ --- denoted ${ \norm{\v} }$ --- is defined as
-			\[ \norm{\v} = \sqrt{\inner{\v}{\v}}. \]
-			Since the inner product is positive definite we have,
-			\[ \inner{\v}{\v} \geq 0 \in \R{}  \implies \norm{\v} \geq 0 \in \R{} \]
-			and also, 
-			\[ ( \inner{\v}{\v} = 0 \iff \v = \0 ) \implies ( \norm{\v} = 0 \iff \v = \0 ). \]
-			
-			Therefore, the norm is a real-valued positive definite function
-			\[ f: V \longmapsto \R{}. \]
-			A vector space equipped with a norm is called a \textbf{normed} vector space.
-		}\label{def:vector-norm}
-		\boxeddefinition{A \textbf{unit vector} is a vector in a normed vector space that has norm equal to 1.\\
-			
-			If a vector ${ \v \in V }$ of arbitrary norm is divided by its norm (i.e. scalar multiplied by the reciprocal of its norm), then
-			\[ \u = \frac{1}{\norm{\v}} \v \]
-			is a unit vector colinear with $\v$. This process is known as \textbf{normalization} of the vector $\v$.
-		}
-	
-		\medskip
-		\labeledProposition{If $\x$ is a vector in a normed space over a field $\F{}$ and ${ \alpha \in \F{} }$ then,
-			\[ \norm{\alpha \x} = \modulus{\alpha} \norm{\x}. \]
-		}{norm-of-scaled-vector-is-modulus-of-scalar-times-norm-of-vector}
-		\begin{proof}
-			\[ \norm{\alpha \y} = \sqrt{\inner{\alpha\y}{\alpha\y}} = \sqrt{\alpha \conj{\alpha} \inner{\y}{\y}} = \sqrt{\modulus{\alpha}^2} \sqrt{\inner{\y}{\y}} = \modulus{\alpha} \norm{\x}. \]
-		\end{proof}
-		
-	
-		\biggerskip
-		\subsubsubsection{Generalized Geometry}
-		In a bare inner product space there are no points or coordinates and no metric defining distance between points or coordinates. Nevertheless, we can define the angle between two vectors in terms of the inner product and the induced norm.\\
-		
-		\boxeddefinition{\textbf{(Angle in Real Vector Space)} Let $V$ be an inner product space over the reals $\R{}$ and ${ \x,\y \in V }$. Then the angle $\theta$ between the vectors $\x$ and $\y$ is defined as,
-			\[ \cos\theta = \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \iff \theta = \inv\cos\left( \frac{\inner{\x}{\y}}{\norm{\x}\norm{\y}} \right). \]
-			
-			In the case that the vectors are orthogonal we have ${ \inner{\x}{\y} = 0 }$ so that,
-			\[ \theta = \inv\cos(0) = \pm \frac{\pi}{2}. \]
-		}\label{def:angle-in-real-vector-space}
-	
-		\boxeddefinition{\textbf{(Angle in Complex Vector Space)} In a complex vector space the geometrical significance of the "angle" as defined above is not so clear. As a result other concepts of angle are often used in complex spaces (see: \href{https://arxiv.org/pdf/math/9904077.pdf}{Scharnhorst,K. - Angles in Complex Vector Spaces}). One such alternative is typically referred to as the \textbf{Euclidean Angle} and defined by,
-				\[ \theta = \inv\cos\left( \frac{\RePart(\inner{\x}{\y})}{\norm{\x}\norm{\y}} \right) \]
-				where the inner product used is the complex standard inner product \ref{def:standard-inner-product}. This angle treats the complex scalars as two real numbers and then takes the angle between two such-defined real vectors.\\\\			
-				Another commonly used definition of angle in complex spaces is the \textbf{Hermitian Angle} defined by,
-				\[ \theta = \inv\cos\left( \frac{\modulus{\inner{\x}{\y}}}{\norm{\x}\norm{\y}} \right) \]
-				which is the ratio of the orthogonal projection (using the complex inner product) of $\x$ onto $\y$ divided by the norm of $\x$ (or the reverse).
-		}\label{def:angle-in-complex-vector-space}
-		
-		\bigskip
-		\note{In a Euclidean space if two parametric lines have the same direction vector,
-			\[ l_1(t_1) = \V{p}_1 + t_1\v, \; \; l_2(t_2) = \V{p}_2 + t_2\v \]
-			then the distance between them remains constant at all points on the lines. This is Euclid's 5th postulate, known as {\normalfont The Parallel Postulate} (\href{https://en.wikipedia.org/wiki/Parallel_postulate}{wikipedia}).\\\\
-			In this case, the distance is defined as,
-			\[ d(t_1) = \min_{t_2} \, \norm{(\V{p}_2 + t_2\v) - (\V{p}_1 + t_1\v)}  \]
-			where the norm used here is the Euclidean norm (\ref{def:euclidean-norm}). This Euclidean norm is defined as,
-			\[ \norm{\v} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} \]
-			for ${ \v \in \R{n} }$. Each component of $\v$ represents a scaling of a standard basis vector ${ v_i \e{i} }$ whose resultant length --- and therefore, norm --- will be $v_i$. The vector $\v$ is the sum of these component vectors,
-			\[ \v = \sum_{i = 1}^n v_i \e{i} = v_1 \e{1} + v_2 \e{2} + \cdots + v_n \e{n} \]
-			and, since the standard basis vectors are orthogonal and so subtend right angles with each other, we can use pythagoras theorem to deduce that
-			\[\begin{aligned}
-				\norm{\v}^2 &= \norm{v_1 \e{1}}^2 + \norm{v_2 \e{2}}^2 + \cdots + \norm{v_n \e{n}}^2 \\[4pt]
-				&= v_1^2 + v_2^2 + \cdots + v_n^2.
-			\end{aligned}\]
-			That's to say, the Euclidean norm, which is also the metric (i.e. definition of distance) in Euclidean space, relies on the assumption of an orthogonal basis. Meanwhile, the constancy of the metric value \wrt the coordinates (i.e. that the distance between parallel lines is constant) makes Euclidean space "flat".\\\\
-			If we consider WGS-84 GPS coordinate space as an example of a non-Euclidean space: the axes --- latitude and longitude --- form an orthogonal basis at the equator and also, even though the longitude lines converge at the poles, they remain orthogonal to the lines of latitude. So, even though the coordinate bases are orthogonal everywhere, the metric function that returns the distance between two coordinates in the space, depends on the latitude. It is for this reason that it is a non-Euclidean space.\\\\
-			In general, an inner product space may not be a metric space, may not be a coordinate space, and --- if we are working with coordinates \wrt a basis --- the basis may not be orthogonal.
-		}
-		
-		\note{If the metric is equal to the norm then parallel vectors will remain the same distance apart? (i.e. the space is flat?) Maybe because the distance between two coordinate points remains the same? Between two coordinate points we can define a vector whose length is the vector norm, if that is also the distance, then the distance depends in a constant way on the coordinates and so the space is not "curved". (?) If we take vectors defined as displacements in the gps coordinate system then the length of the vector depends only on the difference in the coordinates not in where the starting point is (as we would expect because vectors do not have a particular starting point) but the distance represented by the displacement depends on the latitude of the starting point.}
-		
-		
-		\biggerskip
-		\begin{lemma}\label{lem:squared-norm-of-sum-of-vectors}
-			Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
-			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 2\RePart(\inner{\x}{\y}). \]
-		\end{lemma}
-		\begin{proof}
-			\[\begin{aligned}
-				\norm{\x + \y}^2 &= \inner{\x + \y}{\x + \y} \\
-				&= \inner{\x}{\x + \y} + \inner{\y}{\x + \y} &\sidecomment{} \\
-				&= \inner{\x}{\x} + \inner{\x}{\y} + \inner{\y}{\x} + \inner{\y}{\y} &\sidecomment{} \\
-				&= \inner{\x}{\x} + \inner{\x}{\y} + \conj{\inner{\x}{\y}} + \inner{\y}{\y} &\sidecomment{by \ref{def:inner-product} prop. (i)} \\
-				&= \inner{\x}{\x} + \inner{\y}{\y} + 2\RePart(\inner{\x}{\y}).  &\sidecomment{${ \because z + \conj{z} = 2\RePart(z) }$}
-			\end{aligned}\]
-		\end{proof}
-	
-		\biggerskip
-		\labeledTheorem{\textbf{(Generalized Pythagoras Theorem.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. If $\x$ and $\y$ are orthogonal then,
-			\[ \norm{\x + \y}^2 = \norm{\x}^2 + \norm{\y}^2. \]
-		}{generalized-pythagoras-theorem}
-		\begin{proof}\nl[2]
-			If $\x$ and $\y$ are orthogonal then ${ \inner{\x}{\y} = 0 }$. Then the \autoref{lem:squared-norm-of-sum-of-vectors} gives us,
-			\[ \norm{\x + \y}^2 = \inner{\x}{\x} + \inner{\y}{\y} + 0 = \norm{\x}^2 + \norm{\y}^2. \qedhere \]
-		\end{proof}
-		 
-	
-		\biggerskip
-		\labeledTheorem{\textbf{(Cauchy-Schwarz Inequality.)} Let ${ \x,\y \in V }$ be vectors in an inner product space over the field $\F{}$ where $\F{}$ is either the field of real numbers $\R{}$ or the field of complex numbers $\C{}$. Then,
-			\[ \modulus{\inner{\x}{\y}} \leq \norm{\x}\norm{\y} \]
-			where the equality holds iff $\x$ and $\y$ are linearly dependent.
-		}{cauchy-schwarz-inequality}
-		\begin{proof}\nl[2]			
-			Assume that ${ \x = \0 }$ then,
-			\[\begin{aligned}
-				&& \modulus{\inner{\0}{\y}} &\leq \norm{\0}\norm{\y} \\
-				&\iff & \modulus{0} &\leq (0) \norm{\y} &\sidecomment{by \ref{prop:inner-product-with-zero-vector-is-zero} and inner product prop. (iii)} \\
-				&\iff & 0 &= 0.
-			\end{aligned}\]
-			If ${ \x \neq 0 }$ and ${ \y = \0 }$ we obtain the same result as, by \ref{prop:inner-product-with-zero-vector-is-zero}, ${ \inner{\x}{\0} = 0 }$ also. Clearly also, the same result holds if both are zero. So, if at least one of $\x$ and $\y$ is $\0$ then we have,
-			\[ \modulus{\inner{\x}{\y}} = \norm{\x}\norm{\y}. \]
-			
-			Conversely, assume that $\x$ and $\y$ are both non-zero. We can find the component of $\y$ that is orthogonal to $\x$ by forming a linear combination of $\x$ and $\y$ that is orthogonal to $\x$,
-			\[ \inner{\alpha_1 \x + \alpha_2 \y}{\x} = 0 \eqword{for} \alpha_1,\alpha_2 \in \F{}. \]
-			Solving for the scalars ${ \alpha_1, \alpha_2 }$,
-			\[\begin{aligned}
-				&& \inner{\alpha_1 \x + \alpha_2 \y}{\x} &= 0 \\
-				&\iff & \alpha_1 \inner{\x}{\x} + \alpha_2 \inner{\y}{\x} &= 0 &\sidecomment{} \\
-				&\iff & \alpha_1  &= - \frac{ \alpha_2 \inner{\y}{\x} }{ \inner{\x}{\x} }. \\
-			\end{aligned}\]
-			If we set ${ \alpha_2 = 1 }$ and define ${ \alpha = \frac{ \inner{\y}{\x} }{ \inner{\x}{\x} } }$ then,
-			\[ \z = \y - \frac{ \inner{\y}{\x} }{ \inner{\x}{\x} } \x = \y - \alpha \x \]
-			is orthogonal to $\x$.\\
-			
-			If we take the inner product of $\z$ with itself,
-			\[\begin{aligned}
-				&& \inner{\z}{\z} &= \inner{\y - \alpha \x}{\y - \alpha \x} \\
-				&\iff & \inner{\z}{\z} &= \inner{\y}{\y - \alpha \x} - \alpha \inner{\x}{\z} \\
-				&\iff & \inner{\z}{\z} &= \inner{\y}{\y - \alpha \x} &\sidecomment{${ \because \z \perp \x }$} \\
-				&\iff & \inner{\z}{\z} &= \inner{\y}{\y} - \conj{\alpha} \inner{\y}{\x} &\sidecomment{by \ref{prop:inner-product-is-conjugate-linear-in-second-argument}} \nn
-				&\iff & \inner{\z}{\z} &= \inner{\y}{\y} - \conj{\frac{ \inner{\y}{\x} }{ \inner{\x}{\x} }} \inner{\y}{\x} \nn
-				&\iff & \inner{\x}{\x} \inner{\z}{\z} &= \inner{\x}{\x} \inner{\y}{\y} - \conj{\inner{\y}{\x}} \inner{\y}{\x} \nn
-				&\iff & \inner{\x}{\x} \inner{\z}{\z} &= \inner{\x}{\x} \inner{\y}{\y} - \inner{\x}{\y} \conj{\inner{\x}{\y}} \nn
-				&\iff & \norm{\x}^2 \norm{\z}^2 &= \norm{\x}^2 \norm{\y}^2 - \modulus{\inner{\x}{\y}}^2.
-			\end{aligned}\]
-		
-			Since the norm is positive definite (\ref{def:vector-norm}), 
-			\[\begin{aligned}
-				&& \norm{\x}^2 \norm{\z}^2 &\geq 0  \nn
-				&\iff & \norm{\x}^2 \norm{\y}^2 - \modulus{\inner{\x}{\y}}^2 &\geq 0  \nn
-				&\iff & \norm{\x}^2 \norm{\y}^2 &\geq \modulus{\inner{\x}{\y}}^2 \nn
-				&\iff & \norm{\x} \norm{\y} &\geq \modulus{\inner{\x}{\y}}.
-			\end{aligned}\]
-			The equality case happens when ${ \norm{\x}^2 \norm{\z}^2 = 0 }$ and, since $\x$ is non-zero by hypothesis, this implies that ${ \z = \0 }$. It then follows that
-			\[ \z = \y - \alpha \x = \0 \iff \y = \alpha \x  \]
-			meaning that $\x$ and $\y$ are colinear and so, linearly dependent. (The vector $\z$ was constructed to be the component of $\y$ that is orthogonal to $\x$ and so, if $\x$ and $\y$ are colinear, $\z$ will be $\0$.) Furthermore, the converse implication --- that equality implies linear dependence --- holds because, using \autoref{prop:norm-of-scaled-vector-is-modulus-of-scalar-times-norm-of-vector},
-			\[ \modulus{\inner{\x}{\y}} = \modulus{\inner{\alpha \y}{\y}} = \modulus{\alpha \, \norm{\y}^2} = \modulus{\alpha} \norm{\y} \norm{\y} = \norm{\alpha\y} \norm{\y}. \]
-			If we have instead ${ \y = \alpha \x }$, then the result is the same because ${ \modulus{\conj{\alpha}} = \modulus{\alpha} }$.\\
-			
-
-			\bigskip
-			\note{In the case where ${ \F{} = \R{} }$ we can use the following proof.\\\\ For all ${ \alpha \in \R{} }$ we have,
-			\[\begin{aligned}
-				&& \norm{\alpha \x + \y}^2 &\geq 0 \\
-				&\iff & \inner{\alpha\x + \y}{\alpha\x + \y} &\geq 0 \\
-				&\iff & \inner{\alpha\x}{\alpha\x + \y} + \inner{\y}{\alpha\x + \y} &\geq 0 \\
-				&\iff & \inner{\alpha\x}{\alpha\x} + \inner{\alpha\x}{\y} + \inner{\y}{\alpha\x} + \inner{\y}{\y} &\geq 0 \\
-				&\iff & \alpha^2\inner{\x}{\x} + 2\alpha\inner{\x}{\y} + \inner{\y}{\y} &\geq 0 &\sidecomment{by inner product properties}.
-			\end{aligned}\]
-			We can re-arrange this result as a real-valued quadratic in $\alpha$,
-			\[ p(\alpha) = \inner{\x}{\x}\alpha^2 + 2\inner{\x}{\y}\alpha + \inner{\y}{\y} \]
-			which has discriminant
-			\[\begin{aligned}
-				d &= (2\inner{\x}{\y})^2 - 4\inner{\x}{\x}\inner{\y}{\y} \\
-				&= 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,).
-			\end{aligned}\]
-			Since we have that ${ \forall \alpha \in \R{} \logicsep p(\alpha) \geq 0 }$ we can deduce that the discriminant ${ d \leq 0 }$ and so,
-			\[\begin{aligned}
-				&& 4(\, \inner{\x}{\y}^2 - \inner{\x}{\x}\inner{\y}{\y} \,) &\leq 0 \nn
-				&\iff & \inner{\x}{\y}^2 &\leq \inner{\x}{\x}\inner{\y}{\y} \nn
-				&\iff & -\sqrt{\inner{\x}{\x}\inner{\y}{\y}} \leq \inner{\x}{\y} &\leq \sqrt{\inner{\x}{\x}\inner{\y}{\y}} \nn
-				&\iff & \abs{\inner{\x}{\y}} &\leq \norm{\x}\norm{\y}. \qedhere
-			\end{aligned}\]}
-		\end{proof}
-		\begin{corollary}\label{coro:real-or-imaginary-parts-of-inner-product-leq-product-of-norms}
-			Let ${ \x,\y \in V }$ be vectors in an inner product space over the field $\F{}$ where $\F{}$ is either the field of real numbers $\R{}$ or the field of complex numbers $\C{}$. Then,
-			\[ \RePart(\inner{\x}{\y}), \, \ImPart(\inner{\x}{\y}) \leq \norm{\x}\norm{\y}. \qedhere \]
-		\end{corollary}
-		\begin{proof}
-			This is a consequence of Cauchy-Schwarz and \autoref{prop:complex-modulus-properties} property (iii),
-			\[ \RePart(\inner{\x}{\y}), \, \ImPart(\inner{\x}{\y}) \leq \modulus{\inner{\x}{\y}} \leq \norm{\x}\norm{\y}. \]
-		\end{proof}
-	
-		\biggerskip
-		\labeledTheorem{\textbf{(Triangle Inequality for Norms.)} Let $V$ be an inner product space and ${ \x,\y \in V }$. Then,
-			\[ \norm{\x + \y} \leq \norm{\x} + \norm{\y}. \]
-		}{triangle-inequality-for-norms}
-		\begin{proof}\nl[2]
-			This follows from the \autoref{lem:squared-norm-of-sum-of-vectors} and a corollary of Cauchy-Schwarz \ref{coro:real-or-imaginary-parts-of-inner-product-leq-product-of-norms}:
-			\[\begin{aligned}
-				\norm{\x + \y}^2 &= \inner{\x}{\x} + \inner{\y}{\y} + 2\RePart(\inner{\x}{\y}) \\
-				&\leq \inner{\x}{\x} + \inner{\y}{\y} + 2\norm{\x}\norm{\y}  &\sidecomment{by Cauchy-Schwarz} \\
-				&= (\, \norm{\x} + \norm{\y} \,)^2. \qedhere
-			\end{aligned}\]
-		\end{proof}
-		\note{Compare with the Triangle Inequality for simple signed magnitudes: \ref{sssection:triangle-inequality}.}
-	}
-
-
-
-
-
-% -------------------- break ------------------
-
-
-	\pagebreak
-	\searchableSubsection{Orthonormal Bases and Orthogonal Operators}{linear algebra}{
-		\biggerskip
-		\boxeddefinition{A set of pairwise mutually orthogonal (see: \ref{def:orthogonality}) unit vectors in an inner product space is called an \textbf{orthonormal set}.
-		}
-		\medskip
-		\subsubsection{Orthonormal Bases}
-		\boxeddefinition{A basis consisting of an orthonormal set of vectors is known as an \textbf{orthonormal basis}.
-		}
-	
-		\medskip
-		\labeledProposition{Let ${ U = \{\u_1,\dots, \u_n\} }$ be an orthonormal basis. Then, for any ${ \u_i,\u_j \in U,\, i \neq j }$,
-			\[ \inner{\u_i}{\u_j} = 0 \eqand \inner{\u_i}{\u_i} = 1 = \inner{\u_j}{\u_j}. \]}{properties_of_orthonormal_basis_vectors}
-		\begin{proof}
-			The elements of $U$ are pairwise mutually orthogonal so --- by the definition of orthogonal vectors (\ref{def:orthogonality}) --- ${ \inner{\u_i}{\u_j} = 0 }$ for ${ i \neq j }$. Furthermore,
-			\[ \inner{\u_i}{\u_i} = \norm{\u_i}^2 = 1 \]
-			because the length of unit vectors is 1.
-		\end{proof}
-	
-		\bigskip
-		\begin{corollary}\label{coro:dim-V-orthogonal-vectors-are-basis}
-			A set of pairwise orthogonal vectors in an inner product space $V$ with cardinality $\dim V$ is a basis of $V$.
-		\end{corollary}
-		\begin{proof}
-			This is a consequence of \autoref{prop:pairwise-orthogonal-set-is-linearly-independent}.
-		\end{proof}
-	
-		\biggerskip
-		\subsubsection{Orthonormal Bases in Coordinate Spaces}
-		\bigskip
-		\labeledProposition{Let ${ B = \{\v_1,\v_2,\dots,\v_n\} }$ be an orthonormal basis of an inner product space $V$ and let ${ \w \in V }$. Let the coordinates of $\w$ \wrt the basis $B$ be $\alpha_i$ for ${ 1 \leq i \leq n }$. Then the coordinates $\alpha_i$  are given by 
-			\[ \alpha_i = \inner{\w}{\v_i}. \]
-		}{inner-prod-of-vector-with-orthonormal-basis-vector-is-coordinate}
-		\begin{proof}
-			\[\begin{aligned}
-				\inner{\w}{\v_i} &= \inner{\alpha_1\v_1 + \alpha_2\v_2 + \cdots + \alpha_n\v_n}{\v_i} \\
-				&= \alpha_1\inner{\v_1}{\v_i} + \alpha_2\inner{\v_2}{\v_i} + \cdots + \alpha_n\inner{\v_n}{\v_i} &\sidecomment{} \\
-				&= \alpha_i\inner{\v_i}{\v_i} &\sidecomment{$\because$ pairwise orthogonal} \\
-				&= \alpha_i. &\sidecomment{$\because \norm{\v_i} = 1$}  \qedhere
-			\end{aligned}\]
-		\end{proof}
-	
-		\medskip
-		\labeledProposition{Let ${ p: V \times V \longmapsto \R{} }$ be a non-standard inner product defined on a vector space $V$ and ${ B \subset V }$ be an orthonormal basis \wrt the inner product $p$. Let ${ \v,\w \in V }$ and let ${ \v_B,\w_B \in V }$ be vectors ${ \v,\w }$ expressed in coordinates \wrt the basis $B$. Then the inner product
-			\[ p(\v, \w) = \v_B \dotprod \w_B, \]
-			$p$ is equal to the standard inner product (\ref{def:standard-inner-product}) on the vectors expressed \wrt the orthonormal basis.
-		}{any-inner-product-of-two-vectors-is-equal-to-dot-product-of-the-vectors-wrt-orthonormal-basis}
-		\begin{proof}
-			Let the inner product $p$ be denoted by the usual inner product notation ${ \inner{\u_1}{\u_2} = p(\u_1,\u_2) }$ and let the orthonormal basis be ${ B = \{\b_1,\dots,\b_n\} }$. Then,
-			\[\begin{aligned}
-				\inner{\v_B}{\w_B} &= \inner{\alpha_1\b_1 + \cdots + \alpha_n\b_n}{\beta_1\b_1 + \cdots + \beta_n\b_n} \\
-				&= \inner{\alpha_1\b_1}{\beta_1\b_1} + \cdots + \inner{\alpha_n\b_n}{\beta_n\b_n} &\sidecomment{$\because i \neq j \implies \inner{\b_i}{\b_j} = 0 $}\\
-				&= \alpha_1 \conj{\beta_1} \inner{\b_1}{\b_1} + \cdots + \alpha_n \conj{\beta_n} \inner{\b_n}{\b_n} \\
-				&= \alpha_1 \conj{\beta_1} + \cdots + \alpha_n \conj{\beta_n}.    &\sidecomment{$\because \inner{\b_i}{\b_i} = 1 $} \qedhere
-			\end{aligned}\]
-		\end{proof}
-	
-		\biggerskip
-		\subsubsubsection{Example}
-		\begin{exe}
-			\ex{Consider an inner product defined over $\R{2}$ given by
-				\[ \inner{\x}{\y} = \x^T A \y  \eqword{where}  A = \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix}. \]
-				This is an inner product because:				
-				\subheading{Symmetry}
-				Since $A$ is symmetric and the inner product --- being a ${ 1 \times 1 }$ matrix --- is also symmetric we have,
-					\[ \inner{\x}{\y} = \inner{\x}{\y}^T = (\x^T A \y)^T = \y^T A^T \x = \y^T A \x = \inner{\y}{\x}. \]
-				\subheading{Linearity in first argument}	
-				By the linearity of matrix multiplication,
-					\[ \inner{\alpha\x + \z}{\y} = (\alpha\x + \z) A \y = \alpha \x A \y + \z A \y = \alpha\inner{\x}{\y} + \inner{\z}{\y}. \]
-				\subheading{Reflexive positive definiteness and only 0 for $\0$}
-				If we define ${ \x = (x_1, x_2)^T \in \R{2} }$ then,
-				\[ \inner{\x}{\x} = 5x_1^2 + 4x_1x_2 + x_2^2 = (\sqrt{5}x_1 + \frac{2x_2}{\sqrt{5}}) + \frac{x_2^2}{5} \]
-				which expression clearly implies that
-				\[ \inner{\x}{\x} \geq 0 \eqand \x = \0 \implies \inner{\x}{\x} = 0. \]
-				On the other hand, if ${ \inner{\x}{\x} = 0 }$, since we have,
-				\[ (\sqrt{5}x_1 + \frac{2x_2}{\sqrt{5}}) \geq 0 \eqand \frac{x_2^2}{5} \geq 0 \]
-				then we can deduce that
-				\[\begin{aligned}
-					&& (\sqrt{5}x_1 + \frac{2x_2}{\sqrt{5}}) &= 0 = \frac{x_2^2}{5} \\
-					&\implies & x_2 &= 0 \\
-					&\implies & x_1 &= 0 \\
-					&\therefore & \x &= \0.
-				\end{aligned}\]
-				Having established that we have defined an inner product on $\R{2}$, we can use it to determine orthogonality of vectors in the space. If we let ${ \v = (1,1)^T }$ then the space of vectors orthogonal to $\v$ is the orthogonal complement (\ref{def:orthogonal-complement}) to the span of $\v$,
-				\[ O = (\operatorname{Lin} \{\v\})^\perp = \setc{ \w \in \R{2} }{ \inner{\w}{\v} = 0 }. \]
-				Since,
-				\[\begin{aligned}
-					&& \inner{\w}{\v} &= 0 \nn
-					&\iff & \w^T \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}1 \\ 1\end{bmatrix} &= 0 \nn
-					&\iff & \begin{bmatrix}w_1 \\ w_2\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}1 \\ 1\end{bmatrix} &= 0 \nn
-					&\iff & 7 w_1 + 3 w_2 &= 0
-				\end{aligned}\]
-				then the set $O$ is
-				\[ O = \setc{ (w_1,w_2) \in \R{2} }{ 7 w_1 + 3 w_2 = 0 }. \]
-				The set $O$ is clearly a 1-d vector space and so we can select any vector from it as a basis of it,
-				\[ O = t \begin{bmatrix}-3 \\ 7\end{bmatrix} \eqword{for} t \in R{}. \]
-				Then we have an orthonormal basis (orthogonal \wrt this inner product) if we normalize the two basis vectors,
-				\[ \left\{ \begin{bmatrix}1 \\ 1\end{bmatrix}, \begin{bmatrix}-3 \\ 7\end{bmatrix} \right\}. \]
-				So we need to calculate the norms,
-				\[ \begin{bmatrix}1 & 1\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}1 \\ 1\end{bmatrix} = 7 + 3 = 10, \]
-				\[ \begin{bmatrix}-3 & 7\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}-3 \\ 7\end{bmatrix} = 3 + 7 = 10. \]
-				\note{It is a coincidence that these values have turned out to be equal.}
-				So the set
-				\[ B = \left\{ \frac{1}{\sqrt{10}} \begin{bmatrix}1 \\ 1\end{bmatrix}, \frac{1}{\sqrt{10}} \begin{bmatrix}-3 \\ 7\end{bmatrix} \right\} \]
-				is an orthonormal basis for the inner product space defined by $\R{2}$ equipped with the inner product ${ \x^T A \y }$.\\
-				
-				If we now express a couple of vectors \wrt the orthonormal basis $B$,
-				\[ \inv{[B]} = \frac{1}{\sqrt{10}} \begin{bmatrix}7 & 3 \\ -1 & 1\end{bmatrix}. \]
-				\[ 
-					\y = \begin{bmatrix}3 \\ 4\end{bmatrix}, \; 
-					\y_B = \frac{1}{\sqrt{10}} \begin{bmatrix}7 & 3 \\ -1 & 1\end{bmatrix} \begin{bmatrix}3 \\ 4\end{bmatrix} = 
-						\frac{1}{\sqrt{10}} \begin{bmatrix}33 \\ 1\end{bmatrix}. 
-				\]
-				\[ 
-					\z = \begin{bmatrix}6 \\ 1\end{bmatrix}, \; 
-					\z_B = \frac{1}{\sqrt{10}} \begin{bmatrix}7 & 3 \\ -1 & 1\end{bmatrix} \begin{bmatrix}6 \\ 1\end{bmatrix} = 
-						\frac{1}{\sqrt{10}} \begin{bmatrix}45 \\ -5\end{bmatrix}. 
-				\]
-				then their inner product
-				\[\begin{aligned}
-					\inner{\y}{\z} &= \begin{bmatrix}3 & 4\end{bmatrix} A \begin{bmatrix}6 \\ 1\end{bmatrix} \nn
-					&= \begin{bmatrix}3 & 4\end{bmatrix} \begin{bmatrix} 5 & 2\\ 2 & 1 \end{bmatrix} \begin{bmatrix}6 \\ 1\end{bmatrix} \nn
-					&= \begin{bmatrix}3 & 4\end{bmatrix} \begin{bmatrix} 32 \\ 13 \end{bmatrix} \nn
-					&= 32 \times 3 + 13 \times 4 = 148,
-				\end{aligned}\]
-				while the dot product of the vectors \wrt the orthonormal basis is
-				\[\begin{aligned}
-					\y_B \dotprod \z_B &= \frac{1}{\sqrt{10}} \begin{bmatrix}33 \\ 1\end{bmatrix} \dotprod \frac{1}{\sqrt{10}} \begin{bmatrix}45 \\ -5\end{bmatrix} \nn
-					&= \frac{1}{10} (33 \times 45 + 1 \times -5) = 148.
-				\end{aligned}\]
-			}
-		\end{exe}
-	
-		\biggerskip
-		\subsubsubsection{Intuition of Orthogonal Bases}
-		If we consider what an orthonormal basis would look like in coordinate vectors: Obviously, the standard basis is an orthonormal basis as,
-			\[ \begin{bmatrix}1\\0\\0\end{bmatrix} \dotprod \begin{bmatrix}0\\1\\0\end{bmatrix} = 0 \]
-		and clearly for any ${ i,j }$ such that ${ i \neq j }$, ${ \e{i} \dotprod \e{j} = 0 }$ and ${\e{i}, \e{j} }$ have unit length.\\\\
-		We can form other orthonormal bases in $\R{3}$ though. The vectors,
-		\[ \begin{bmatrix}1\\1\\0\end{bmatrix} \dotprod \begin{bmatrix}-1\\1\\0\end{bmatrix} = 0 \]
-		are orthogonal but do not have unit length. We can make them unit length, though, by dividing them by $\sqrt{2}$ so that,
-		\[ \begin{bmatrix}1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}-1/\sqrt{2}\\1/\sqrt{2}\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-		is also an orthonormal basis of $\R{3}$.\\\\
-		Another orthonormal basis of $\R{3}$ is
-		\[ \begin{bmatrix}\cos\theta\\\sin\theta\\0\end{bmatrix},\, \begin{bmatrix}-\sin\theta\\\cos\theta\\0\end{bmatrix},\, \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-		for any angle $\theta$ measured anticlockwise from the $x$-axis. Actually this is the general case of which the previous example is a special case when ${ \theta = \pi / 2 }$.
-		\pagebreak	
-		\begin{figure}[h!]
-			\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_2.png}
-			\caption{$ (\cos{\pi/4}, \sin{\pi/4})^T = (1/\sqrt{2}, 1/\sqrt{2})^T,\;  (-\sin{\pi/4}, \cos{\pi/4})^T = (-1/\sqrt{2}, 1/\sqrt{2})^T $}
-		\end{figure}
-		\\But for any value of the angle $\theta$ these remain orthogonal as can be seen if we generate the basis vectors for ${ \theta = \pi/3 }$.
-		\begin{figure}[h!]
-			\includegraphics[width=\linewidth]{\resourceDir/img/orthonormal_bases_theta_pi_by_3.png}
-			\caption{$ (\cos{\pi/3}, \sin{\pi/3})^T = (1/2, \sqrt{3}/2)^T,\;  (-\sin{\pi/3}, \cos{\pi/3})^T = (-\sqrt{3}/2, 1/2)^T $}
-		\end{figure}
-		\clearpage
-	
-
-		\subsubsection{Orthogonal Operators}
-		\bigskip
-		\boxeddefinition{A matrix whose columns form an orthonormal basis is called an \textbf{orthogonal matrix}.\\\\
-			The operation of left multiplication by such a matrix is called an \textbf{orthogonal operator}.
-		}
-	
-		\medskip
-		\labeledProposition{A matrix $A$ is orthogonal iff ${ A^T = \inv{A}}$.\\ \TODO{This proof isn't compatible with complex spaces!}}{orthogonal_matrix_transpose_is_inverse}
-		\begin{proof}
-			$A$ is an orthogonal matrix so, by definition, its columns form an orthogonal basis. Then,
-			\begin{align*}
-			&& A^TA &=
-					\begin{bmatrix}
-						a_{11} & a_{21} & \cdots & a_{n1}\\
-						a_{12} & a_{22} & \cdots & a_{n2}\\
-						\vdots \\
-						a_{1n} & a_{2n} & \cdots & a_{nn}
-					\end{bmatrix}
-					\begin{bmatrix}
-						a_{11} & a_{12} & \cdots & a_{1n}\\
-						a_{21} & a_{22} & \cdots & a_{2n}\\
-						\vdots \\
-						a_{n1} & a_{n2} & \cdots & a_{nn}
-					\end{bmatrix} \\
-			&&  &= \begin{bmatrix}
-						a_{11}^2 + \cdots + a_{n1}^2 & a_{11}a_{12} + \cdots + a_{n1}a_{n2} & \cdots\\
-						a_{12}a_{11} + \cdots + a_{n2}a_{n1} & a_{12}^2 + \cdots + a_{n2}^2 & \cdots\\
-						\vdots \\
-						\cdots & \cdots & \cdots & a_{1n}^2 + \cdots + a_{nn}^2
-					\end{bmatrix}
-			\end{align*}
-			Along the main diagonal the components take the form
-			\[ a_{1j}^2 + a_{2j}^2 + \cdots + a_{nj}^2 = a_j \dotprod a_j \]
-			where ${ a_j }$ is the $j$th column of the matrix $A$. But the columns of $A$ are vectors in an orthonormal basis and so ${ a_j \dotprod a_j= 1 }$.\\
-			Furthermore, the off-diagonal values take the form
-			\[ a_{1j}a_{1j'} + \cdots + a_{nj}a_{nj'} = a_j \dotprod a_{j'} \]
-			for ${ j \neq j' }$. Since the columns are from an orthonormal basis we know that ${ a_j \dotprod a_{j'} = 0 }$.\\
-			Therefore the resultant matrix looks like,
-			\[ A^TA = \begin{bmatrix}
-						1 & 0 & \cdots & 0\\
-						0 & 1 & \cdots & 0\\
-						\vdots\\
-						0 & 0 & \cdots & 1
-					  \end{bmatrix}
-					  = I_n.
-			\]
-			Clearly, the same effect would be seen for ${ AA^T }$ and so,
-			\[ A^TA = AA^T = I \iff A^T = \inv{A}. \]
-			
-			Conversely, we can reverse the logic and it is easy to see that if ${ A^T A = I }$ then,
-			\begin{enumerate}[label=(\roman*)]
-				\item{since the diagonal entries are all 1, if $\u_i$ is a column of $A$, then ${ \u_i \dotprod \u_i = 1 }$;}
-				\item{since the off-diagonal entries are all 0, if ${ \u_i, \u_j }$ with ${ i \neq j }$ are distinct columns of $A$, then  ${ \u_i \dotprod \u_j = 0 }$.}
-			\end{enumerate}
-			Therefore, the columns of $A$ form an orthogonal basis and thus, by definition, $A$ is an orthogonal matrix.
-		\end{proof}
-	
-		\note{This provides another way of seeing \autoref{prop:inner-prod-of-vector-with-orthonormal-basis-vector-is-coordinate}: If $[B]$ is the matrix whose columns are the vectors of an orthonormal basis then --- just as with any change of basis --- the vector $\x$ \wrt the standard basis, has coordinates \wrt the basis $B$ given by,
-			\[ \inv{[B]}\x. \]
-			But, since $[B]$ is an orthogonal matrix,
-			\[ \inv{[B]}\x = [B]^T\x \]
-			which is the vector whose $i$-th row component is the dot product of the $i$-th column of $[B]$ and $\x$.
-		}
-	
-		\bigskip
-		\labeledProposition{Left multiplication by an orthogonal matrix preserves the dot product. In other words, for all vectors ${ \v,\w }$, $A$ is an orthogonal matrix if and only if,
-			\[ A\v \dotprod A\w = \v\dotprod\w. \]\\ \TODO{This proof isn't compatible with complex spaces!}
-		}{left_mult_by_ortho_matrix_preserves_dot_product}
-		\begin{proof}
-			Using \autoref{prop:orthogonal_matrix_transpose_is_inverse} and the matrix formula for the dot product we can deduce that, for all vectors ${ \v,\w }$,
-			\begin{align*}
-			&& A\v \dotprod A\w &= (A\v)^T A\w \\
-			&&  &= \v^TA^TA\w &\sidecomment{} \\
-			&&  &= \v^T\w &\sidecomment{$A$ is orthogonal so ${A^TA = I}$} \\
-			&&  &= \v \dotprod \w
-			\end{align*}
-			which is to say that an orthogonal matrix preserves the dot product.\\
-			
-			Conversely, if we assume that $A$ preserves the dot product then, for all vectors ${ \v,\w }$,
-			\begin{align*}
-			&& A\v \dotprod A\w &= \v \dotprod \w  \\
-			&\iff & (A\v)^TA\w &= \v^T\w & \\
-			&\iff & \v^TA^TA\w &= \v^T\w & \\
-			&\iff & \v^TA^TA\w - \v^T\w &= 0 & \sidecomment{both terms are scalars}\\
-			&\iff & \v^T(A^TA - I)\w &= 0. &
-			\end{align*}
-			Now for any arbitrary matrix $B$, 
-			\[ \e{i}^T B \e{j} = b_{ij} \]
-			where $b_{ij}$ is the $(i,j)$th element of $B$. Then, for
-			\[ \e{i}^T B \e{j} = 0 \]
-			to be true \textit{for all possible} ${ \e{i},\e{j} }$ would require that, 
-			\[ \forall i,j \logicsep b_{ij} = 0 \iff B = [0] \]
-			where $[0]$ is the zero matrix. Therefore,
-			\[ \forall \v,\w \logicsep \v^T(A^TA - I)\w = 0 \iff A^TA - I = [0] \iff A^TA = I \]
-			which, by \autoref{prop:orthogonal_matrix_transpose_is_inverse}, implies that $A$ is orthogonal. So if $A$ preserves the dot product then it is orthogonal.
-		\end{proof}
-	
-	
-		\bigskip
-		\labeledProposition{The determinant of any orthogonal matrix is 1 or -1.}{determinant_of_orthogonal_matrix}
-		\begin{proof}
-			If a matrix $A$ is orthogonal then ${ A^TA = I }$ which implies that,
-			\[ det(A^T)det(A) = det(I) = 1. \]
-			By \autoref{prop:determinant_of_matrix_equal_to_its_transpose}, ${ det(A^T) = det(A) }$ so,
-			\[ det(A^T)det(A) = det(A)^2 = 1 \iff \sqrt{det(A)} = 1 \iff det(A) = \pm 1.  \qedhere \]
-		\end{proof}
-	
-		\note{If an orthogonal operator has determinant equal to 1 it is described as \textbf{orientation preserving} and if it is equal to -1 it is described as \textbf{orientation reversing}.}
-		
-		\bigskip
-		\labeledProposition{The orthogonal matrices form a subgroup of $GL_n(\F{})$.}{orthogonal-matrices-are-subgroup}
-		\begin{proof}
-			Let ${ S = \setc{ A \in GL_n(\F{}) }{ A^TA = I } }$. Then,
-			\begin{itemize}
-				\item{$S$ is nonempty because ${ I \in S }$.}
-				\item{For ${ B,C \in S }$,
-					\[ (BC)^T(BC) = C^TB^T(BC) = C^T(B^TB)C = I \]
-					so ${ BC \in S }$.
-				}
-				\item{For ${ B \in S }$, by \autoref{prop:orthogonal_matrix_transpose_is_inverse}, ${ \inv{B} = B^T }$ and
-					\[ (B^T)^TB^T = BB^T = B\inv{B} = I \]
-					so $S$ contains inverses.
-				}
-			\end{itemize}
-			Therefore ${ S \leq GL_n(\F{}) }$.	
-		\end{proof}
-		
-		\medskip
-		\note{The subgroup of the general linear group formed by the orthogonal matrices is called the \textbf{orthogonal group} and is denoted $O_n$.}
-		
-		\biggerskip
-		\subsubsection{Gram-Schmidt Orthonormalisation}
-		\boxeddefinition{The process known as \textbf{Orthonormalisation} takes a set of linearly independent vectors and returns an orthonormal set of the same cardinality as the original set and in the same space spanned by the original set.\\ Since the orthonormal set has the same cardinality as the original set, by \autoref{coro:dim-V-orthogonal-vectors-are-basis}, it is an orthonormal basis for the space spanned by the original set.}
-		
-		\biggerskip
-		The Gram-Schmidt algorithm is as follows:
-		\begin{algorithm}
-			\begin{algorithmic}
-				\REQUIRE A $k$-length linearly independent set of vectors ${ S = \{\v_1,\dots,\v_k\} \subset V }$ where $V$ is an inner product space, and an initially-empty set ${ O = \{\} }$.
-				\ENSURE A $k$-length orthonormal set of vectors ${ O = \{\u_1, \dots, \u_k \} }$ \suchthat ${ \operatorname{Lin} O = \operatorname{Lin} S }$.
-				\STATE % empty line
-				\FOR {$i=1$ to $k$}
-				\STATE find $\w$, a basis for the orthogonal complement of $O$ in ${ O \cup \{\v_i\} }$.
-				\STATE ${ \u_i \leftarrow \frac{\w}{\norm{\w}} }$
-				\ENDFOR 
-			\end{algorithmic}	
-		\end{algorithm}
-		% Note: This article: https://www.math-linux.com/latex-26/faq/latex-faq/article/how-to-write-algorithm-and-pseudocode-in-latex-usepackage-algorithm-usepackage-algorithmic says, at the end, that the algorithmic package used here is not compatible with hyperref.
-		
-	
-		\medskip
-		The process of finding the orthogonal complement on iteration number $i$ is to find the set of vectors
-		\[ O^\perp = \setc{\w \in O \cup \{\v_i\}}{\forall \u \in O \logicsep \w \perp \u}. \]
-	
-		For ${ \w \in O^\perp }$ we need, for every ${ \u_j \in O }$,
-		\[\begin{aligned}
-			&& \inner{\w}{\u_j} &= 0 \\
-			&\iff & \inner{\alpha_1 \u_1 + \cdots + \alpha_{i-1} \u_{i-1} + \alpha_i \v_i}{\u_j} &= 0 \\
-			&\iff & \inner{\alpha_j \u_j + \alpha_i \v_i}{\u_j} &= 0 &\sidecomment{by orthogonality} \\
-			&\iff & \alpha_j + \alpha_i \inner{\v_i}{\u_j}  &= 0 &\sidecomment{${ \because \norm{\u_j} = 1 }$} \\
-			&\iff & \alpha_j &= -\alpha_i \inner{\v_i}{\u_j}.
-		\end{aligned}\]
-		So, if we set ${ \alpha_i = 1 }$ then we get
-		\[ \w = \v_i - \inner{\v_i}{\u_1}\u_1 - \inner{\v_i}{\u_2}\u_2 - \cdots - \inner{\v_i}{\u_{i-1}}\u_{i-1}. \]
-		Clearly, our only degree of freedom in the definition of the vector $\w$ is the value of $\alpha_i$. However, if we were to use some other value, ${ \alpha_i = \beta }$, then the result would be ${ \beta \w }$, a scaling of $\w$ by $\beta$. As a result, this is clearly a 1-dimensional space in which any vector will suffice as a basis. So we can use $\w$ as the basis vector and then, it is a simple matter to normalize it and add it to the set $O$.
-		
-		
-		
-		\biggerskip
-		\subsubsection{Orthogonal Diagonalisation}
-		\bigskip
-		\boxeddefinition{\textbf{(Orthogonal Diagonalisation)} A matrix is said to be \textbf{orthogonally diagonalisable} if there is an orthogonal matrix that diagonalises it.}
-		
-		\medskip
-		\labeledProposition{A matrix is orthogonally diagonalisable iff there exists an orthonormal eigenbasis.}{orthogonally-diagonalisable-iff-exists-an-orthonormal-eigenbasis}
-		\begin{proof}
-			This is a consequence of the definition of orthogonal diagonalisation, the definition of an orthogonal matrix \addref, and the equivalence of diagonalisation and the existence of an eigenbasis \addref.
-		\end{proof}
-	
-%		\bigskip
-%		\labeledTheorem{\textbf{(Spectral Theorem for Symmetric Matrices.)} A matrix is orthogonally diagonlisable if and only if it is symmetric.}{matrix-orthogonally-diagonalisable-iff-symmetric}
-%		\begin{proof}
-%		\end{proof} TODO
-	
-		\bigskip
-		\labeledProposition{If a matrix is orthogonally diagonalisable then it is symmetric.}{matrix-orthogonally-diagonalisable-implies-symmetric}
-		\begin{proof}
-			If a matrix $A$ is orthogonally diagonalisable then there exists an orthogonal matrix $P$ such that,
-			\[ D = \inv{P}AP \]
-			is diagonal. Since the matrix $D$ is diagonal, it is symmetrical and equal to its transpose so we can reason,
-			\[ D^T = D \implies (\inv{P}AP)^T = \inv{P}AP. \]
-			Furthermore, $P$ is an orthogonal matrix so, by \addref, ${ P^T = \inv{P} }$. So,
-			\[\begin{aligned}
-				&& (\inv{P}AP)^T &= \inv{P}AP \\
-				&\iff & P^T A^T (\inv{P})^T &= \inv{P}AP \\
-				&\iff & \inv{P} A^T (P^T)^T &= \inv{P}AP \\
-				&\iff & \inv{P} A^T P &= \inv{P}AP \\
-				&\iff & A^T &= A.  \qedhere
-			\end{aligned}\]
-		\end{proof}
-	
-		\bigskip
-		\labeledProposition{If a matrix is symmetric then eigenvectors corresponding to distinct eigenvalues are orthogonal.}{symmetric-matrix-eigenvecs-of-distinct-eigenvals-are-orthogonal}
-		\begin{proof}
-		\end{proof}
-	}
-
-
-% --------------------
-
-
-\pagebreak
-\searchableSubsection{Linear and Affine Transformations}{linear algebra}{
-	\bigskip\bigskip
-	\subsubsection{Affine Spaces}
-	\boxeddefinition{An \textbf{affine space} is a generalization of a Euclidean space in which there is no particular point designated as the origin. As a result vectors can be viewed as displacements rather than points.\\\\
-		Let $V$ be a vector space and $P$ be a set of points. Then we can form an affine space over $V$ and $P$ by defining the vectors in $V$ as displacements connecting members of $P$ such that, for ${ Q_1,Q_2 \in P,\, \v \in V }$,
-		\[ Q_1 + \v = Q_2 \iff Q_2 - Q_1 = \v \iff Q_1 - Q_2 = -\v. \]
-	}
-	\boxeddefinition{A \textbf{frame} of an affine space is an extension of a basis of its underlying vector space to include a point designated as an origin. If ${ \v_1,\dots,\v_n }$ is a basis of a vector space $V$ and $Q$ is a point in the set of points $P$, then ${ F = (\v_1,\dots,\v_n, Q) }$ is a frame of the affine space over $V$ and $P$.}
-	\boxeddefinition{The \textbf{dimension} of an affine space is the dimension of the underlying vector space.}
-	
-	\bigskip
-	\labeledProposition{Any linear combination of points in an affine space where the coefficients sum to 0 results in a vector.}{sum_affine_points_with_coeffs_sum_to_zero_are_vectors}
-	\begin{proof}
-		Let $S$ be a sum of $n$ points ${ Q_i \in P }$ in an affine space associated with a vector space $V$ such that,
-		\[ S = \sum_{i=0}^n \alpha_i Q_i  \eqand \sum_{i=0}^n \alpha_i = 0. \]
-		Then, if we take the partial sum of the first two points,
-		\[ S_2 = \alpha_1 Q_1 + \alpha_2 Q_2 = \alpha_1(Q_1 - Q_2) + (\alpha_1 + \alpha_2)Q_2 \]
-		and then the next partial sum of the first three points,
-		\begin{align*}
-		S_3 &= \alpha_1(Q_1 - Q_2) + (\alpha_1 + \alpha_2)Q_2 + \alpha_3 Q_3 \\
-		&= \alpha_1(Q_1 - Q_2) +  (\alpha_1 + \alpha_2)(Q_2 - Q_3) +  (\alpha_1 + \alpha_2 + \alpha_3) Q_3
-		\end{align*}
-		we can see that, by induction, the $n$th sum is,
-		\begin{align*}
-		S &= \alpha_1(Q_1 - Q_2) \\
-		&\hspace{20pt} + (\alpha_1 + \alpha_2)(Q_2 - Q_3)\\
-		&\hspace{20pt} + (\alpha_1 + \alpha_2 + \alpha_3)(Q_3 - Q_4)\\
-		&\hspace{24pt} \vdots\\
-		&\hspace{20pt} + (\alpha_1 + \cdots + \alpha_{n-1})(Q_{n-1} - Q_n)\\
-		&\hspace{20pt} + (\alpha_1 + \cdots + \alpha_n)Q_n.
-		\end{align*}
-		But we have ${ \alpha_1 + \cdots + \alpha_n = 0 }$ so the final term is 0. As a result $S$ is a summation of terms of the form,
-		\[ (\alpha_1 + \cdots + \alpha_{i-1})(Q_{i-1} - Q_i) \]
-		where ${ Q_{i-1} - Q_i }$ is a vector. Therefore $S$ is a linear combination of vectors in $V$ and is therefore also a vector in $V$.
-	\end{proof}
-	\begin{corollary}
-		\label{coro:sum_affine_points_with_coeffs_sum_to_one_are_vectors}
-		Any linear combination of points in an affine space where the coefficients sum to 1 results in a point.
-	\end{corollary}
-	\begin{proof}
-		In the preceding proof if we had, instead, ${ \alpha_1 + \cdots + \alpha_n = 1 }$ then the final term would equal $Q_n$ and the resulting summation would be a vector plus the point $Q_n$. Therefore the sum is a point.
-	\end{proof}
-
-	\pagebreak
-	\subsubsection{Intuition of Affine Spaces}
-	\begin{wrapfigure}{l}{0.5\textwidth}
-		\includegraphics[width=0.9\linewidth]{\resourceDir/img/320px-Affine_space_R3.png} 
-		\label{fig:affine_space_schematic}
-	\end{wrapfigure}
-	A translated linear subspace of a vector space like $P_2$ above that no longer passes through the origin is referred to as an \textbf{affine subspace}. It is not a vector space as ${ \0 \notin P_2 }$ and ${ \V{a},\V{b} \in P_2 }$ but ${ \V{a} + \V{b} \notin P_2 }$. 
-	However, if we instead consider displacements between points --- e.g. ${ \V{b} - \V{a} }$ --- then we see the relationship between affine spaces and vector spaces: ${ \V{b} - \V{a} \in P_1 }$. The displacements between points in $P_2$ form a linear subspace. So we can define an affine space $A$ based on the set of points in $P_2$ and the vectors in $P_1$.
-	
-
-	\bigskip
-	\subsubsection{Affine Combinations}
-	\boxeddefinition{An \textbf{affine combination} of vectors is a combination such that the coefficients sum to 1.}
-	\note{The definition of an affine combination differs from that of a convex combination in that the coefficients of a convex combination are additionally required to be non-negative.}
-	
-	\bigskip
-	In an affine space there is no particular point designated as the origin but we can describe vector displacements between points as an ordered pair of points, for example, ${ (p,a) = \V{pa} }$. Affine combinations of displacements agree on the resulting point with linear combinations in the corresponding Euclidean space.\\
-	For example, imagine a point $p$ in an affine space is at coordinates ${ (-1,4) }$ in the corresponding Euclidean space and similarly points $a$ and $b$ are at ${ (3,4) }$ and ${ (6,1) }$ respectively. Then, if we take an affine combination of the displacements to $a$ and $b$ the resulting point is independent of the chosen origin point.
-%	\begin{wrapfigure}{l}{0.5\textwidth}
-%		\includegraphics[width=\linewidth]{\resourceDir/img/affine_combinations_example.png} 
-%		\label{fig:affine_combinations_example}
-%	\end{wrapfigure}
-%	
-	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=300px]{\resourceDir/img/affine_combinations_example.png}
-		\caption{\small The diagram shows the affine combination ${ 2\V{a} - \V{b} = 2\V{pa} - \V{pb} }$ where $\V{a}$ denotes the usual position vector in the Euclidean space.}
-		\label{fig:affine_combinations_example}
-	\end{figure}
-
-	
-	
-	\bigskip\bigskip\bigskip
-	\subsubsection{Affine Transformations}
-	\boxeddefinition{Let ${ T: A_1 \longmapsto A_2 }$ be a mapping between the affine spaces $A_1$ and $A_2$. Then $T$ is an \textbf{affine transformation} if:
-		\begin{itemize}
-			\item{$T$ maps vectors to vectors and points to points.}
-			\item{$T$ is a linear transformation over the vectors in the underlying vector space.}
-			\item{${ T(Q + \v) = T(Q) + T(\v) }$.}
-		\end{itemize}
-	}
-
-	\medskip
-	\note{In an affine space a \textbf{translation} can be regarded as a change of frame in which we \textbf{change the origin point} while the vector basis may remain unchanged.}
-	
-	\medskip
-	\labeledProposition{Affine transformations preserve parallelism.}{affine_transformations_preserve_parallelism}
-	\begin{proof}
-		Let $A$ be an affine space defined over a set of points $P$ and a vector space $V$ and let ${ Q_1,Q_2 \in P }$ and ${ \v \in V }$. Then, for ${ s,t \in \F{} }$,
-		\[ l_1 = Q_1 + t\v \eqand l_2 = Q_2 + s\v \]
-		are parallel lines in $A$. Let $T$ be an arbitrary affine transformation over $A$. Then,
-		\[ l_1' = T(l_1) = T(Q_1) + tT(\v) \eqand l_2' = T(l_2) = T(Q_2) + sT(\v) \]
-		are also parallel.
-	\end{proof}
-
-	\medskip
-	\labeledProposition{An affine transformation that preserves the dot product is left multiplication by an orthogonal matrix.}{dot-product-preserving-affine-trans-is-left-mult-by-ortho-matrix}
-	\begin{proof}
-		Firstly, note that if a transformation $m$ preserves the dot product and also fixes the standard basis vectors $\e{i}$ then,
-		\[ m(\e{i}) = \e{i} \eqand x_i = \x \dotprod \e{i} = m(\x) \dotprod m(\e{i}) = m(\x) \dotprod \e{i} = m(\x)_i. \]
-		Therefore, such a transformation $m$ is the identity transformation.\\
-		Now, assume a transformation $m'$ preserves the dot product (but does not necessarily fix the standard basis vectors) in $\R{n}$ and let 
-		\[ B' = \{ m'(\e{1}),\dots,m'(\e{n}) \} \]
-		be the transformed standard basis vectors. Then, if $[B']$ is the matrix whose columns are the elements of $B'$ then, because $m'$ preserves the dot product, $[B']$ is an orthogonal matrix as, by \autoref{prop:orthogonal-matrices-are-subgroup}, is $\inv{[B']}$. So, composing this with $m'$,
-		\[ m'' = \inv{[B']}m' \]
-		is a transformation that both preserves the dot product and fixes the standard basis vectors. Therefore we have,
-		\[ m'' = I_n = \inv{[B']}m' \iff [B'] = m' \]
-		so that $m'$ is left multiplication by $[B']$, an orthogonal matrix.
-	\end{proof}
-
-	\bigskip\bigskip
-	\subsubsubsection{Properties of affine transformations}
-	We can characterize affine transformations according to their form and behaviour in the Euclidean spaces $\R{2}$ and $\R{3}$. Specifically, whether the transformation:
-	\begin{enumerate}
-		\item{Fixes the origin: ${ T(\0) = \0 }$}
-		\item{Preserves the dot product: ${ T(\v)\dotprod T(\w) = \v\dotprod\w }$, matrix is orthogonal}
-		\item{Preserves distances: ${ \norm{T(\v) - T(\w)} = \norm{\v - \w} }$}
-		\item{Preserves angles: matrix is scalar multiple of orthogonal matrix}		
-		\item{Preserves orientation: transformation does not include a reflection, determinant of matrix is positive}
-		\item{Preserves parallelism: transformation exhibits affine property (linearity under affine combinations)}
-	\end{enumerate}
-
-	As we can see here, the property of preserving parallelism depends only on the affine property so clearly, all affine transformations exhibit this behaviour. As a consequence of preserving parallelism, affine transformations preserve the dimension of affine subspaces (points, lines, planes, etc.). They do not preserve distances between points however, but they do preserve ratios of distances between points lying on a straight line.\\
-	
-	\bigskip
-	\subsubsubsection{Classes of affine transformations}
-	The most common subclassifications of affine transformations are:
-	\begin{itemize}
-		\item{Linear: preserves the origin.}
-		\item{Conformal: preserves angles.}
-		\item{Isometry (also known as a congruent transformation): preserves distances in metric spaces and so also implicity, angles. In a Euclidean space these transformations are known as a Euclidean isometries or rigid transformations.}
-		\item{Rigid Motion: Euclidean isometry / rigid transformation that also preserves orientation.}
-	\end{itemize}
-
-	\bigskip
-	\subsubsection{Isometries}
-	\bigskip
-	A Euclidean isometry or rigid motion, for example, carries a triangle to a congruent triangle. So, it preserves distances and angles but not necessarily orientation (a reflection flips the orientation).\\
-	The composition of two rigid motions is a rigid motion and the inverse of a rigid motion is also a rigid motion. Therefore, the rigid motions of $\R{n}$ form a group under composition of operations. This group is called the \textit{group of motions} and denoted $M_n$.
-	
-	\bigskip
-	\labeledProposition{A rigid motion that fixes the origin preserves the dot product.}{non-translational-isometries-preserve-dot-product}
-	\begin{proof}
-		Let $m$ be a rigid motion that fixes the origin. Then $m$ is an isometry and so preserves distances and also $m$ maps the origin to the origin. So we have,
-		\[ \norm{m(\v) - m(\w)} = \norm{\v - \w} \eqand m(\0) = \0. \]
-		We can rewrite the isometry property as,
-		\begin{align*}
-		&& \sqrt{(m(\v) - m(\w))\dotprod(m(\v) - m(\w))} &= \sqrt{(\v - \w)\dotprod(\v - \w)}\\
-		&\iff & (m(\v) - m(\w))\dotprod(m(\v) - m(\w)) &= (\v - \w)\dotprod(\v - \w). &\sidecomment{}
-		\end{align*}
-		Now, if we take the case where ${ \w = \0 = m(\w) }$,
-		\begin{align*}
-		&& (m(\v) - \0)\dotprod(m(\v) - \0) &= (\v - \0)\dotprod(\v - \0) \\
-		&\iff & m(\v) \dotprod m(\v) &= \v \dotprod \v. &\sidecomment{}
-		\end{align*}
-		and we can deduce that ${ m(\x) \dotprod m(\x) = \x \dotprod \x }$ for any vector $\x$. Using this along with the properties of the dot product we obtain,
-		\begin{align*}
-		&& (m(\v) - m(\w))\dotprod(m(\v) - m(\w)) &= (\v - \w)\dotprod(\v - \w) \\
-		&\iff & m(\v)\dotprod m(\v) + m(\w)\dotprod m(\w) - 2m(\v)\dotprod m(\w) &= \v\dotprod\v + \w\dotprod\w - 2\v\dotprod\w &\sidecomment{} \\
-		&\iff & -2m(\v)\dotprod m(\w) &= -2\v\dotprod\w &\sidecomment{} \\
-		&\iff & m(\v)\dotprod m(\w) &= \v\dotprod\w. &\sidecomment{}
-		\end{align*}
-		
-		Therefore, $m$ preserves the dot product and, by \autoref{prop:dot-product-preserving-affine-trans-is-left-mult-by-ortho-matrix}, is left multiplication by an orthogonal matrix.
-	\end{proof}
-	\begin{corollary}
-		\label{coro:isometry-fixes-origin-left-mult-by-orthogonal-matrix}
-		A rigid motion that fixes the origin is left multiplication by an orthogonal matrix and, therefore, also a linear operator.
-	\end{corollary}
-
-	\medskip
-	\labeledProposition{Left multiplication by any orthogonal matrix is a Euclidean isometry (a rigid motion) that fixes the origin.}{left-mult-by-ortho-matrix-is-rigid-motion}
-	\begin{proof}
-		By, \autoref{prop:left_mult_by_ortho_matrix_preserves_dot_product}, left multiplication by an orthogonal matrix preserves the dot product. So, if $m$ is an affine transformation such that ${ m(\x) = A\x  }$ where $A$ is an orthogonal matrix then,
-		\begin{align*}
-		&& \norm{m(\v - \w)}^2 = m(\v - \w)\dotprod m(\v - \w) &= (\v - \w)\dotprod (\v - \w) = \norm{\v - \w}^2 \\
-		&\iff & \norm{m(\v - \w)} &= \norm{\v - \w} &\sidecomment{} \\
-		\end{align*}
-		But also, left multiplication by a matrix is a linear operator so ${ m(\v - \w) = m(\v) - m(\w) }$ meaning that,
-		\[ \norm{m(\v - \w)} = \norm{m(\v) - m(\w)} = \norm{\v - \w} \]
-		which is the isometry property for $m$.
-	\end{proof}
-	
-	
-	\bigskip\bigskip
-	\subsubsubsection{Linear}
-	Isometries that fix the origin are linear operators and rigid motions in Euclidean space.\\
-		
-	
-	\bigskip
-	\subsubsubsection{Translation}
-	If $T$ is a translation then, in general, ${ T(\0) \neq \0 }$ so translations do not fix the origin and, as a result, are \textbf{not} linear transformations. However, translations preserve distances and angles (and orientation because there is no reflection) so they are rigid motions. For example:
-	\begin{exe}
-		\ex{Let ${ \v = (v_1,\dots,v_n) }$ be any fixed vector in $\R{n}$. Then translation by $\v$ is the map,
-			\[ t_v(\x) = \x + \v = \begin{bmatrix}x_1 + v_1\\\vdots\\x_n + v_n\end{bmatrix} \]
-			which can be seen to be isometric (a rigid transformation) by,
-			\begin{align*}
-			&& t_v(\x) - t_v(\V{y}) = (\x + \v) - (\V{y} +\v) &= \x - \V{y} \\
-			&\implies & \norm{t_v(\x) - t_v(\V{y})} &= \norm{\x - \V{y}}. &\sidecomment{}
-			\end{align*}
-		}
-	\end{exe}
-
-	\medskip
-	\labeledProposition{Every rigid motion $m$ is the composition of an orthogonal linear operator and a translation. In other words, for some orthogonal matrix $A$ and fixed vector $\v$, it takes the form,
-		\[ m(\x) = A\x + \v. \]
-	}{every_rigid_motion_is_linear_op_plus_translation}
-	\begin{proof}
-		Let ${ \v = m(\0) }$ and ${ t_v(\x) = \x + \v }$ with inverse ${ t_{-v}(\x) = \x - \v }$. Then composing this with $m$, the resulting transformation,
-		\[ (t_{-v} \circ m)(\x) = m(\x) - \v \]
-		continues to be isometric --- because it is the composition of isometric transformations --- and it fixes the origin because ${ (t_{-v} \circ m)(\0) = m(\0) - \v = m(\0) - m(\0) = \0 }$. It is therefore, by \autoref{coro:isometry-fixes-origin-left-mult-by-orthogonal-matrix}, left multiplication by an orthogonal matrix. So we can represent it as,
-		\[ (t_{-v} \circ m)(\x) = t_{-v}(m(\x)) = A\x. \]
-		Since ${ t_{-v} = \inv{t_v} }$ we can apply $t_{v}$ to both sides of the equation,
-		\[ m(\x) = t_{v}(A\x) = A\x + \v. \]
-		The obtained representation is uniquely determined by $m$ as ${ \v = m(\0) }$ is clearly unique and then the translation $t_{-v}$ is uniquely determined by $\v$ and then ${ A = (t_{-v} \circ m) }$ is unique for a given $\v$ and $m$.
-	\end{proof}
-
-	\medskip\note{For a rigid motion ${ m(\x) = A\x + \v }$, $m$ is orientation-preserving if the matrix $A$ is orientation-preserving and orientation-reversing if $A$ is orientation-reversing.}
-	
-	\bigskip
-	\subsubsubsection{Rotation}
-	Rotations preserve distances, angles and orientation and so are rigid motions. Rotations also fix a vector which is known as the axis of rotation. If the axis of rotation contains the origin then they fix the origin and so are linear operators.
-	
-	\medskip
-	\labeledTheorem{The rotations of $\R{2}$ and $\R{3}$ about the origin are the linear operators whose matrices with respect to the standard basis are orthogonal and have determinant 1.}{rotations-of-r2-r3-about-origin-are-ortho-mat-det-1}
-	\begin{proof}
-		A rotation about the origin $m$ involves rotating the standard basis vectors through an angle $\theta$. It is in the definition of this rotation that the image of the standard basis vectors continue to subtend the same angle, ${ \pi/2 }$. Therefore, the rotation must preserve angles. It is also part of the definition that the image under rotation is not scaled so the rotation must preserve distances and must be a congruent transformation. Since the axis of rotation passes through the origin the origin is unchanged by this rotation and so these rotations are rigid motions that fix the origin and have the form,
-		\[ m(\x) = A\x \]
-		where $A$ is an orthogonal matrix. Additionally, rotations do not change the orientation of an shape and so their matrices have determinant 1.
-	\end{proof}
-
-	\medskip
-	\note{The rotation matrices --- orthogonal matrices with determinant 1 --- form a subgroup of the group $O_n$ of orthogonal matrices called the \textbf{special orthogonal group} and denoted $SO_n$.}
-	
-	\labeledProposition{Every member of the special orthogonal group ${ A \in SO_2 }$ is the matrix of a rotation.}{all-members-SO2-are-rotations}
-	\begin{proof}
-		Let ${ A \in SO_2 }$. Then $A$ is a ${ 2 \times 2 }$ orthogonal matrix with determinant 1. Let $\v_1$ be the first column of $A$ which, since $A$ is orthogonal, is a unit vector. Now assume that $R$ is the matrix of a rotation whose first column is $\v_1$ --- which is possible because $\v_1$ is a unit vector so $R$ can be orthogonal. Then the matrix
-		\[ B = \inv{R}A \]
-		fixes $\e{1}$ and also, as the composition of two orthogonal vectors, is orthogonal. Therefore the second column of $B$ is a unit vector orthogonal to $\e{1}$ which could be $\e{2}$ or $-\e{2}$. 
-		
-		However, $R$ is an orthogonal matrix with determinant 1 and so is a member of $SO_2$ which means that ${ \inv{R}A = B }$ is also in $SO_2$. 
-		
-		This, in turn, means that $B$ has determinant 1 which implies that the second column of $B$ is not $-\e{2}$ and is, therefore, $\e{2}$. So, we have obtained the result that ${ B = I = \inv{R}A }$ which implies that ${ R = A }$.
-	\end{proof}
-
-	\bigskip
-	\subsubsubsection{Rotating $\bm{\R{2}}$ about the origin}
-	Rotating the 2-d plane about the origin means that the axis of rotation is just the origin (so the fixed vector is $\0$).
-	
-	For example:
-	\begin{exe}
-		\ex{A rotation $\rho_{\theta}$ of the plane through an angle $\theta$ is a linear operator on $\R{2}$ whose matrix with respect to the standard basis is
-			\[ R = 	\begin{bmatrix}
-			\cos\theta & -\sin\theta\\
-			\sin\theta & \cos\theta
-			\end{bmatrix}.
-			\]
-			We can see that this is a rotation if we take ${ \x = (x_1,x_2)^T \in \R{2} }$ and write it in polar coordinates,
-			\[ \x = (r,\alpha). \]
-			So, relating the polar and rectangular coordinates,
-			\[ \x = (r\cos\alpha, r\sin\alpha)^T. \]
-			When we left-multiply by $R$,
-			\begin{align*}
-			R\x &= \begin{bmatrix}
-			\cos\theta & -\sin\theta\\
-			\sin\theta & \cos\theta
-			\end{bmatrix}
-			\begin{bmatrix}
-			r\cos\alpha\\
-			r\sin\alpha
-			\end{bmatrix} \\
-			&= \begin{bmatrix}
-			r\cos\alpha\cos\theta - r\sin\alpha\sin\theta\\
-			r\cos\alpha\sin\theta + r\sin\alpha\cos\theta
-			\end{bmatrix} \\
-			&= 	\begin{bmatrix}
-			r\cos{(\alpha + \theta)}\\
-			r\sin{(\alpha + \theta)}
-			\end{bmatrix}.
-			\end{align*}
-			Note that $R$ is orthogonal because
-			\[  \begin{bmatrix}
-			\cos\theta\\
-			\sin\theta
-			\end{bmatrix} \dotprod 
-			\begin{bmatrix}
-			-\sin\theta\\
-			\cos\theta
-			\end{bmatrix} = -\cos\theta\sin\theta + \sin\theta\cos\theta = 0 \]
-			and ${ det\,R = 1 }$,
-			\[ 
-			\begin{vmatrix}
-			\cos\theta & -\sin\theta\\
-			\sin\theta & \cos\theta
-			\end{vmatrix} = \cos^2\theta + \sin^2\theta = 1.
-			\]
-		}
-	\end{exe}
-
-	\bigskip
-	\subsubsubsection{Rotating $\bm{\R{3}}$ about the origin}	 
-	\boxeddefinition{Define $\rho$ as a rotation in $\R{3}$ around the origin if:
-	\begin{enumerate}[label=(\roman*)]
-		\item{$\rho$ is a rigid motion (orientation-preserving Euclidean isometry) that fixes the origin;}
-		\item{$\rho$ also fixes a nonzero vector $\v$;}
-		\item{$\rho$ operates as a rotation on the plane $P$ orthogonal to $\v$.}
-	\end{enumerate}}
-	\note{Note that this definition could be described as selecting a 2-dimensional subspace of $\R{3}$ and performing a 2-dimensional rotation on it as if it were $\R{2}$.}
-	Condition (i) implies, by \autoref{coro:isometry-fixes-origin-left-mult-by-orthogonal-matrix}, that $\rho$ is left multiplication by an orthogonal matrix. Condition (ii) states that $\rho$ has an eigenvector $\v$ with eigenvalue 1. Then, because $\rho$ preserves angles, the plane $P$ referenced in condition (iii) that is orthogonal to the eigenvector $\v$, must map to a plane that is orthogonal to the map of $\v$ in the image of $\rho$. But $\v$ is fixed by $\rho$ and is unchanged in the image. Also $\v$ uniquely identifies a plane orthogonal to it. Therefore the plane $P$ is unchanged in the image also. In other words, $P$ is an invariant subspace. So, condition (iii) says that the restriction of $\rho$ to this invariant subspace is a rotation.
-	
-	\bigskip
-	For example:
-	\begin{exe}
-		\ex{A rotation of $\R{3}$ about the origin can be described by a pair $(\v, \theta)$ consisting of a unit
-			vector $\v$, a vector of length 1, which lies in the axis of rotation, and a nonzero angle
-			$\theta$, the angle of rotation. The two pairs $(\v, \theta)$ and $(-\v, -\theta)$ represent the same rotation.
-			We also consider the identity map to be a rotation, though its axis is indeterminate.\\
-			The matrix representing a rotation through the angle $\theta$ about the vector $\e{1}$ is obtained easily from the $2 \times 2$ rotation matrix. It is
-			\[ A = \begin{bmatrix}
-					1 & 0 & 0\\
-					0 & \cos\theta & -\sin\theta\\
-					0 & \sin\theta & \cos\theta
-					\end{bmatrix}.
-			\]
-			Multiplication by $A$ fixes the first coordinate $x_1$ of a vector and operates by rotation on $(x_2, x_3)^T$. All rotations of $\R{3}$ are linear operators, but their matrices can be fairly complicated.
-		}
-	\end{exe}
-
-	\bigskip
-	\labeledProposition{Every element of $SO_3$ has eigenvalue 1.}{elements-of-SO3-have-eigenvalue-1}
-	\begin{proof}
-		Let ${ A \in SO_3 }$. Then $A$ is an orthogonal ${ 3 \times 3 }$ matrix with determinant equal to 1. Reasoning from orthogonality of $A$ we have,
-		\begin{align*}
-		&& A^TA &= I \\
-		&\iff & A^TA - A^T &= I - A^T &\sidecomment{} \\
-		&\iff & A^T(A - I) &= I - A^T &\sidecomment{} \\
-		&\iff & A^T(A - I) &= (I - A)^T. &\sidecomment{by \autoref{prop:matrix-transpose-distributes-over-addition}}
-		\end{align*}
-		If we take the determinants of both sides of this equation we obtain,
-		\begin{align*}
-		&& det(A^T)\cdot det(A - I) &= det((I-A)^T) &\sidecomment{by \autoref{prop:determinant_of_matrix_product}} \\
-		&\iff & det(A)\cdot det(A - I) &= det(I - A) &\sidecomment{by \autoref{prop:determinant_of_matrix_equal_to_its_transpose}} \\
-		&\iff & det(A - I) &= det(I - A). &\sidecomment{${ det(A) = 1 }$}
-		\end{align*}
-		But the dimension of $A$ being 3 implies that
-		\[ det(-A) = (-1)^3 det(A) = -det(A) \]
-		so that,
-		\[ det(A - I) = det(I - A) \iff det(A - I) = 0. \]
-		Therefore $A$ has the eigenvalue 1.
-	\end{proof}
-
-	\bigskip
-	\labeledProposition{The elements of $SO_3$ are precisely the rotations about the origin of $\R{3}$.}{elements-of-SO3-are-the-rotations-around-origin-in-R3}
-	\begin{proof}
-		Let ${ \rho: \R{3} \longmapsto \R{3} }$ be defined as ${ \rho(\x) = A\x }$ where ${ A \in SO_3 }$. Then,
-		\begin{itemize}
-			\item{by \autoref{prop:left-mult-by-ortho-matrix-is-rigid-motion} and orthogonality of ${ A \in SO_3 }$, left multiplication by $A$ is a rigid motion that fixes the origin. So $\rho$ is isometric and fixes the origin;}
-			\item{\autoref{prop:elements-of-SO3-have-eigenvalue-1} shows that every ${ A \in SO_3 }$ has eigenvalue 1 which implies that $\rho$ fixes a nonzero vector;}
-			\item{if we let $\v$ be the nonzero vector fixed by $\rho$ (i.e. its eigenvector with eigenvalue 1), then we can normalize it to find the unit vector parallel to $\v$, say $\u_1$. Next we can find two unit vectors orthogonal to $\u_1$ --- say $\u_2$ and $\u_3$ --- and these must be a basis for the plane orthogonal to $\v$. Furthermore, if we select $\u_2$ and $\u_3$ to be orthogonal to each other than ${ B = \{\u_1,\u_2,\u_3\} }$ is an orthonormal basis of $\R{3}$.\\
-				Now if we define ${ P = \inv{[B]} }$ then,
-				\[ A' = \inv{P}AP \]
-				is similar to the matrix $A$ and so has the same determinant, 1. Furthermore, because $B$ is an orthonormal basis, the matrices ${ [B],\, \inv{[B]} = P }$ are orthogonal. Since both $P$ and $A$ are orthogonal, ${ \inv{P}AP = A' }$ is orthogonal also. Since $A'$ is orthogonal and has determinant equal to 1, it is a member of $SO_3$.\\
-				If we examine the structure of $A'$, we see that the first column of $A'$ is $\v_1$ --- the unit vector in the direction of $\v$. Since $\v$ is an eigenvector of $\rho$ with eigenvalue 1, the first column of $A'$ is $\e{1}$ and since $A'$ is orthogonal, the other columns are orthogonal to the first. So the block structure of $A'$ looks like,
-				\[ A' = \begin{bmatrix}
-						1 & 0 \\
-						0 & R
-						\end{bmatrix} 
-				\]
-				where $R$ is a ${ 2 \times 2 }$ matrix.\\
-				We know that the determinant of $A'$ is 1 and this implies that the determinant of $R$ is also 1. Furthermore, $R$ must also be orthogonal and so ${ R \in SO_2 }$. So, by \autoref{prop:all-members-SO2-are-rotations}, $R$ is a rotation. Therefore $R$ represents a rotation of the plane orthogonal to $\v$ and this implies that $\rho$ rotates the plane orthogonal to $\v$ as required.
-			}
-		\end{itemize}
-	\end{proof}
-	
-	\bigskip
-	\subsubsubsection{Uniform Scaling}
-	Uniform scaling is a scalar multiple of an orthogonal matrix and is therefore a linear operator which means that it fixes the origin. It also preserves angles but not distances between points.
-	
-	
-	\bigskip\bigskip
-	\subsubsection{Conformal Transformations}
-	\bigskip
-	\subsubsubsection{Non-uniform Scaling}
-	Non-uniform scaling, however, its matrix is not a scalar multiple of an orthogonal matrix and, as such, it does not preserve angles. An important example is:
-	\begin{exe}
-		\ex{\textbf{Mercator projection}:\\\\
-			This is a map projection that was designed so that rhumb lines (lines of constant bearing over the surface of the earth) are straight lines on the map. To achieve this the projection ensures that a square on the surface of the earth presents as a square on the map.\\
-			Then, modelling the earth as a sphere of radius $R$, if lines of latitude are horizontal grid lines across the map, then each actual line of latitude with circumference ${ 2\pi R \cos\phi }$ where $\phi$ is the angle of latitude will present on the map as the same length as the equator, which in reality is ${ 2\pi R }$. So they appear to be a line of length ${ \cos\phi }$ times longer than they actually are, i.e. they are stretched by ${ \sec{\phi} }$.\\
-			So, the map projection will stretch the width of a square on the surface of the earth by ${ \sec{\phi} }$ and to maintain it as a square, it is necessary to stretch the height of the square by the same amount, ${ \sec{\phi} }$. The actual square on the surface of the earth has height (approximately for a small square) ${ R\Delta\phi }$ so, on the map we need a height ${ \Delta y \propto \Delta\phi\sec\phi }$. Therefore, we have,
-			\[ \frac{dy}{d\phi} = \sec\phi \implies y = \ln{(\tan\phi + \sec\phi)} + c \]
-			where $c$ is a constant that we can set to 0. 
-			See \url{https://www.math.ubc.ca/~israel/m103/mercator/mercator.html} for a description of this derivation. For more information on conformal map projections generally see: \href{https://arxiv.org/pdf/1412.7690.pdf}{Map Projection, York University, Toronto} and \href{http://diposit.ub.edu/dspace/bitstream/2445/121898/2/memoria.pdf}{Conformal Cartographic
-				Representations - University of Barcelona}.
-		}
-	\end{exe}
-	
-	\subsubsubsection{Reflection}
-	Reflection usually refers to a Euclidean Isometry (rigid transformation over a Euclidean space) that fixes a hyperplane (so a line in $\R{2}$ and a plane in $\R{3}$) but does not preserve orientation so is not a rigid motion. However, it may also refer to a transformation that fixes an affine space of lower dimension than a hyperplane --- for example, reflection in a point --- in which case it does preserve orientation and is, therefore, a rigid motion (in fact, reflection in the origin in $\R{2}$ is equal to rotation by $\pi$). Reflection may fix the origin or may not, depending on whether or not the origin is contained in the affine space fixed by the reflection.
-	
-	\bigskip
-	\subsubsection{Non-Rigid non-Conformal Transformations}
-	\bigskip
-	\subsubsubsection{Shear}
-	Shear neither preserves distances nor angles. It does preserve parallelism though (as do all affine transformations) and it also fixes the origin, so it is a linear operator.
-	
-	\bigskip\bigskip
-	\note{For more in-depth treatment of affine spaces and transformations see:
-		\begin{itemize}
-			\item{First two lectures of \href{https://web.ma.utexas.edu/users/dafr/M375T/}{University of Texas - Multivariable Analysis}.}
-			\item{\url{https://www.maa.org/sites/default/files/pdf/pubs/books/meg/meg_ch12.pdf}}
-		\end{itemize}
-	}
-}
-
-
 % ---------------- break -------------
 \pagebreak
+
+
+
 
 \searchableSubsection{Projections}{linear transformations, projections}{
 	\biggerskip
 	\subsubsection{Linear Operators as Projections}
-	\boxeddefinition{A linear operator ${ T: V \longmapsto V }$ is a \textbf{projection} on ${ W_1 \subseteq V }$ if
+	\boxeddefinition{\textbf{(Projection)} A linear operator ${ T: V \longmapsto V }$ is a \textit{projection} on ${ W_1 \subseteq V }$ if
 		\begin{enumerate}[label=(\roman*)]
 			\item{there exists a subspace ${ W_2 \subseteq V }$ such that ${ W_1 \oplus W_2 = V }$;}
 			\item{for ${ \v = \w_1 + \w_2 \in V }$ where ${ \w_1 \in W_1, \, \w_2 \in W_2 }$, we have
 				\[ T\v = T(\w_1 + \w_2) = \w_1. \]
 			}
 		\end{enumerate}
+		The projection of $V$ onto $W_1$ is described as \textit{parallel} to $W_2$ and is often denoted $P_{W_1}$. If we have,
+		\[ W_1^\perp = W_2 \]
+		then the projection is described as an \textit{orthogonal projection}.
 	}
 
-	\biggerskip
-	\subsubsubsection{Intuition}
-	If we attempt to project the $x$-axis of $\F{3}$ onto the $z$-axis,
-	\[ T\left( \begin{bmatrix}1\\0\\0\end{bmatrix} \right) = \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-	then this leads to the matrix,
-	\[ A = 	\begin{bmatrix}
-				0 & 0 & 0\\
-				0 & 0 & 0\\
-				1 & 0 & 0
-			\end{bmatrix}.
-	\]
-	But this is \textbf{not} a projection because ${ A^2 = 0 \neq A }$. The $z$-axis is not invariant under $A$; in fact, $A$ maps the $z$-axis to the origin.\\
-	
-	If we try to fix this by also satisfying,
-	\[ T\left( \begin{bmatrix}0\\0\\1\end{bmatrix} \right) = \begin{bmatrix}0\\0\\1\end{bmatrix} \]
-	we get the matrix,
-	\[ A = 	\begin{bmatrix}
-				0 & 0 & 0\\
-				0 & 0 & 0\\
-				1 & 0 & 1
-			\end{bmatrix}.
-	\]
-	\textit{This} matrix $A$, \textit{does} satisfy ${ A^2 = A }$ and \textit{is} therefore a projection of the $x$-axis onto the $z$-axis.\\
-	
-	
-	\biggerskip
-	\subsubsubsection{Deductions}
+	\medskip
+	\labeledProposition{If $T$ is a projection in a vector space $V$ then
+		\[ V = R(T) \oplus N(T) \]
+		where $R(T)$ and $N(T)$ denote the range and nullspace of $T$ respectively.
+	}{for-a-projection-the-direct-sum-of-the-range-and-nullspace-equals-the-space}
+	\begin{proof}
+		If $T$ is a projection then, by the definition,
+		\[ W_1 \oplus W_2 = V \eqand \forall \w_1 \in W_1,\w_2 \in W_2 \logicsep T(\w_1 + \w_2) = \w_1. \]
+		Then ${ R(T) \subseteq W_1 }$ and because, for every ${ \w_1 \in W_1 }$ there exists a ${ \v = \w_1 + \w_2 \in V }$ such that ${ T(\v) = \w_1 }$, also ${ W_1 \subseteq R(T) }$. Therefore, ${ R(T) = W_1 }$.\\
 		
-	\labeledProposition{If $T$ is a linear operator over a vector space $V$ and also, $T$ is a projection of $V$ onto $W$, then $W$ is $T$-invariant and the restriction of $T$ to $W$, $T_w$ is the identity operator on $W$, $I_w$.}{restriction-to-subspace-of-projection-onto-same-subspace-is-identity-operator}
+		Furthermore,
+		\[ T(\v) = T(\w_1 + \w_2) = \0 = \w_1 \implies \v = \w_1 + \w_2 = \0 + \w_2 = \w_2 \in W_2 \]
+		which implies that ${ N(T) \subseteq W_2 }$. Since also ${ T(\w_2) = T(\0 + \w_2) = \0 }$ then we also have
+		\[ W_2 \subseteq N(T) \]
+		and so ${ W_2 = N(T) }$.\\
+		
+		Therefore ${ V = R(T) \oplus N(T) }$ as required.
+	\end{proof}
+
+	\bigskip	
+	\labeledProposition{If $T$ is a linear operator over a vector space $V$ and $T$ is a projection of $V$ onto $W$, then $W$ is $T$-invariant and the restriction of $T$ to $W$ is the identity operator on $W$,
+		\[ T_W = I_W. \]
+	}{restriction-to-subspace-of-projection-onto-same-subspace-is-identity-operator}
 	\begin{proof}
 		If $T$ is a projection of $V$ onto $W$ then, for all ${ \v \in V }$ there is some ${ \w \in W }$ such that,
 		\[ T\v = \w. \]
@@ -4047,6 +2791,475 @@
 		We have obtained 
 		\[ T_w\w_2 = \w_2 \]
 		which implies that ${ T_w = I_w }$, the identity operator on $W$.
+	\end{proof}
+
+
+	\bigskip
+	\labeledProposition{A linear operator $T$ on a finite-dimensional vector space $V$ is a projection iff it is idempotent. That's to say,
+		\[ T^2 = T. \]
+	}{linear-operator-is-projection-iff-idempotent}
+	\begin{proof}
+		Let ${ W_1 \oplus W_2 = V }$ and $T$ be a projection such that for ${ \w_1 \in W_1, \w_2 \in W_2 }$,
+		\[ T(\w_1 + \w_2) = \w_1. \]
+		Then $T$ is clearly idempotent because
+		\[ T(T(\w_1 + \w_2)) = T(\w_1) = \w_1 = T(\w_1 + \w_2) \implies T^2 = T. \]
+		
+		\nl
+		Conversely, let $T$ be a linear operator on $V$ such that ${ T^2 = T }$. Then, for any ${ \v \in V }$,
+		\[\begin{aligned}
+			&& T(T\v) &= T\v \\
+			&\iff & T(T\v) - T\v &= \0 &\sidecomment{} \\
+			&\iff & T(T\v - \v) &= \0 &\sidecomment{} \\
+			&\iff & T\v - \v &\in N(T) &\sidecomment{} \\
+			&\iff & \exists \u \in N(T) \suchthat \v &= T\v + \u.
+		\end{aligned}\]
+		Since ${ T\v \in R(T) }$, this shows that
+		\[ R(T) + N(T) = V. \]
+		For any ${ \u \in R(T) \cap N(T) }$, since ${ \u \in R(T) }$ then there exists some ${ \v \in V }$ such that ${ \u = T\v }$ and also, since ${ \u \in N(T) }$, we have ${ T\u = \0 }$. Putting these together with the idempotence of $T$,
+		\[ \0 = T\u = T(T\u) = T(T\v) = T\v = \u. \]
+		Therefore, we can deduce that ${ R(T) \cap N(T) = \{\0\} }$ and so,
+		\[ R(T) \oplus N(T) = V. \]	
+		We can also deduce, using the idempotence, that for any ${ \w = T\v \in R(T) }$,
+		\[ T(\w) = T(T\v) = T^2\v = T\v = \w \implies \forall \w \in R(T) \logicsep T\w = \w. \]
+		So, if we let ${ W_1 = R(T), W_2 = N(T) }$ so that
+		\[ W_1 \oplus W_2 = V \]
+		and, for any ${ \v \in V }$, there exists ${ \w_1 \in W_1, \w_2 \in W_2 }$ such that $ \v = \w_1 + \w_2 $, then
+		\[ T\v = T(\w_1 + \w_2) = T(\w_1) + T(\w_2) = \w_1 + \0 = \w_1. \] 
+		Therefore, $T$ is a projection as required.
+	\end{proof}
+
+
+	\bigskip
+	\labeledProposition{A projection on a finite-dimensional inner product space on the reals with the standard inner product is orthogonal iff its matrix is symmetric.}{projection-on-finite-inner-prod-space-is-orthogonal-iff-matrix-is-symmetric}
+	\begin{proof}
+		Let $P$ be a projection on $V$, a finite-dimensional inner product space over the reals with the standard inner product. For convenience, let $P$ denote both the projection as a linear transformation and the matrix representing it.\\
+		
+		If $P$ is symmetric then
+		\[\begin{aligned}
+			&& P &= P^T &\sidecomment{by symmetry}\\
+			&\implies & N(P) &= N(P^T) = R(P)^\perp.  &\sidecomment{by \autoref{prop:real-matrix-nullspace-is-orthogonal-complement-of-rowspace}}
+		\end{aligned}\]
+		Since $P$ is a projection, by \autoref{prop:for-a-projection-the-direct-sum-of-the-range-and-nullspace-equals-the-space}, we also have
+		\[ V = R(P) \oplus N(P) = R(P) \oplus R(P)^\perp \]
+		and so symmetry of matrix $P$ implies that $P$ is an orthogonal projection.\\
+		
+		\nl
+		Conversely, if $P$ is an orthogonal projection then
+		\[ V = R(P) \oplus N(P) = R(P) \oplus R(P)^\perp \]
+		so define 
+		\[ W_1 = R(P) \eqand W_2 = N(P) = R(P)^\perp \]
+		and then, for any ${ \v,\v' \in V }$ there exists some 
+		\[ \w_1,\w_2,\w_1',\w_2' \suchthat \v = \w_1 + \w_2 \eqand \v' = \w_1' + \w_2'. \]
+		Then,
+		\[\begin{aligned}
+			\inner{P\v}{\v'} &= \inner{P(\w_1 + \w_2)}{\w_1' + \w_2'} \nn
+			&= \inner{P(\w_1)}{\w_1'} + \inner{P(\w_1)}{\w_2'} +\\
+			&\hspace{50pt} \inner{P(\w_2)}{\w_1'} + \inner{P(\w_2)}{\w_2'} &\sidecomment{} \nn
+			&= \inner{\w_1}{\w_1'} + \inner{\w_1}{\w_2'} + \inner{\0}{\w_1'} + \inner{\0}{\w_2'} &\sidecomment{${ \because P }$ is projection onto $W_1$} \\
+			&= \inner{\w_1}{\w_1'} + 0 + \inner{\0}{\w_1'} + \inner{\0}{\w_2'} &\sidecomment{${ \because W_1 \perp W_2 }$} \\
+			&= \inner{\w_1}{\w_1'} + 0 + 0 + 0 &\sidecomment{} \\
+			&= \inner{\w_1}{\w_1'} \\
+			&= \inner{\w_1 + \w_2}{P(\w_1' + \w_2')} = \inner{\v}{P\v'}.
+		\end{aligned}\]
+		By \autoref{prop:} then, $P$ is symmetric.\\
+		
+		We could also have said,
+		\[\begin{aligned}
+			&&(I - P)\v &= \v - P\v = \w_1 + \w_2 - \w_1 = \w_2 \\
+			&\implies & \inner{P\v}{(I - P)\v'} &= 0 \\
+			&\implies & v^T P^T (I - P) \v' &= 0
+		\end{aligned}\]
+		which, since it applies to any ${ \v,\v' \in V }$, by \autoref{prop:quadratic-forms-equal-for-all-vectors-in-space-implies-matrices-are-equal}, implies that ${ P^T (I - P) = 0 }$ and so
+		\[\begin{aligned}
+			&& P^T (I - P) = P^T - P^TP &= 0 \\
+			&\iff & P^T &= P^T P &\sidecomment{} \\
+			&\iff & P &= (P^T P)^T &\sidecomment{} \\
+			&\iff & P &= P^T P &\sidecomment{} \\
+			&\iff & P &= P^T.
+		\end{aligned}\]
+	\end{proof}
+
+
+	\bigskip
+	\labeledProposition{Let $V$ be a finite-dimensional inner product space over the reals with the standard inner product. Let $U$ be a subspace of $V$, $P$ the orthogonal projection of $V$ onto $U$, and ${ \v \in V }$ is an arbitrary vector.\\
+	
+	Then the closest point in $U$ to $\v$ is given by the orthogonal projection $P\v$ of the vector onto the space $U$.\\
+		
+	That's to say, for all ${ \u \in U }$,
+		\[ \norm{\v - \u} \geq \norm{\v - P\v}. \]
+	}{closest-point-in-subspace-to-a-vector-is-orthogonal-projection-of-vector-onto-subspace}
+	\begin{proof}
+		Since $P$ is the orthogonal projection of $V$ onto $U$, by \autoref{prop:for-a-projection-the-direct-sum-of-the-range-and-nullspace-equals-the-space}, we have
+		\[ R(P) \oplus N(P) = U + U^\perp = V. \]
+		So, for any ${ \v \in V }$,
+		\[ \v = P\v + (\v - P\v) \]
+		where ${ P\v \in U }$ and ${ \v - P\v \in U^\perp }$. 
+		\note{We can see that ${ \v - P\v \in U^\perp }$ by observing that, because of the idempotence of $P$, we have
+			\[ P(\v - P\v) = P\v - P^2\v = P\v - P\v = \0 \implies \v - P\v \in N(P) = U^\perp. \]
+		}
+		Then,
+		\[ \norm{\v - \u} = \norm{P\v + (\v - P\v) - \u} = \norm{(\v - P\v) + (P\v - \u)}  \]
+		where ${ P\v - \u \in U }$ because ${ P\v \in R(P) = U }$. Since the vectors ${ \v - P\v }$ and ${ P\v - \u }$ are orthogonal, by the Generalised Pythagoras Theorem (\autoref{theo:generalized-pythagoras-theorem}), we have
+		\[ \norm{\v - \u}^2 = \norm{(\v - P\v)}^2 + \norm{(P\v - \u)}^2. \]
+		By positive definiteness of the norm (\ref{def:vector-norm}),
+		\[\begin{aligned}
+			&&\norm{(P\v - \u)}^2 &\geq 0 \nn
+			&\implies & \norm{\v - \u}^2 &\geq \norm{(\v - P\v)}^2 &\sidecomment{} \nn
+			&\implies & \norm{\v - \u} &\geq \norm{(\v - P\v)}.  \qedhere
+		\end{aligned}\]
+	\end{proof}
+
+
+	\bigskip
+	\labeledProposition{Let ${ A \in \R{m \times n} }$ be a matrix of rank $n$ (i.e. full column rank). Then the matrix
+		\[ P = A \inv{(A^T A)} A^T \]
+		represents the orthogonal projection of $\R{m}$ onto the range of $A$.
+	}{expression-for-orthogonal-projection-of-codomain-of-any-real-matrix-onto-its-range}
+	\begin{proof}
+		\[\begin{aligned}
+			P^2 &= (A \inv{(A^T A)} A^T) (A \inv{(A^T A)} A^T) \\
+			&= A \inv{(A^T A)} (A^T A) \inv{(A^T A)} A^T &\sidecomment{} \\
+			&= A \inv{(A^T A)} A^T = P.
+		\end{aligned}\]
+		Therefore $P$ is idempotent and, by \autoref{prop:linear-operator-is-projection-iff-idempotent} then, $P$ is a projection.\\
+		
+		\[\begin{aligned}
+			P^T &= (A \inv{(A^T A)} A^T)^T \\
+			&= A (\inv{(A^T A)})^T A^T &\sidecomment{} \\
+			&= A \inv{(A^T A)^T} A^T &\sidecomment{by \autoref{prop:matrix-inverse-of-transpose-is-transpose-of-inverse}} \\
+			&= A \inv{(A^T A)} A^T = P.
+		\end{aligned}\]
+		Therefore $P$ is symmetric and, since it is also a projection, by \autoref{prop:projection-on-finite-inner-prod-space-is-orthogonal-iff-matrix-is-symmetric}, $P$ is an orthogonal projection.\\
+		
+		\[ P\x =  A \inv{(A^T A)} A^T \x = A (\inv{(A^T A)} A^T \x) = A\v \]
+		for some ${ \v \in V }$. Therefore ${ R(P) \subseteq R(A) }$.\\
+		
+		\[ A\x = A \inv{(A^T A)} (A^T A) \x = A \inv{(A^T A)} A^T (A\x) = A \inv{(A^T A)} A^T \v \]
+		for some ${ \v \in V }$. Therefore ${ R(A) \subseteq R(P) }$.\\
+		
+		So ${ R(P) = R(A) }$ and $P$ is an orthogonal projection onto the range of $A$ as required.
+	\end{proof}
+
+	\bigskip
+	\begin{corollary}\label{coro:normal-equation}
+		\textbf{(Normal Equation)} If a design matrix $X$ contains the samples of a dataset to which a model $\V{\theta}$ is to be fitted using least squares with the labels being the matrix $Y$, then the best fit model ${ \V{\hat\theta} }$ is given by
+			\[ \V{\hat\theta} = \inv{(X^T X)} X^T Y. \]
+	\end{corollary}
+	\begin{proof}
+		Fitting the model using the least squares method means finding the value of $\V{\theta}$ that minimises the squared error. That is
+		\[ \argmin_{\V{\theta}} \norm{Y - X\V{\theta}}^2. \]
+		By \autoref{prop:closest-point-in-subspace-to-a-vector-is-orthogonal-projection-of-vector-onto-subspace}, the value of $X\V{\theta}$ that miminises this cost function is obtained by the orthogonal projection of $Y$ onto the range of $X$, which by \autoref{prop:expression-for-orthogonal-projection-of-codomain-of-any-real-matrix-onto-its-range}, is 
+		\[ X\V{\hat\theta} = P_X Y = X \inv{(X^T X)} X^T Y \]
+		and so, resolving for the argument $\V{\hat\theta}$ we have
+		\[ \V{\hat\theta} = \inv{X} P_X Y = \inv{X} (X \inv{(X^T X)} X^T Y) = \inv{(X^T X)} X^T Y.   \qedhere \]
+	\end{proof}
+
+
+	\sep
+	\begin{exe}{% extra braces to scope \newcommand
+		\newcommand{\thet}{\V{\theta}} \newcommand{\theth}{\V{\hat\theta}}
+		\ex{If we attempt to project the $x$-axis of $\F{3}$ onto the $z$-axis,
+			\[ 
+			T\left( \begin{bmatrix}1\\0\\0\end{bmatrix} \right) = \begin{bmatrix}0\\0\\1\end{bmatrix}, \;  
+			T\left( \begin{bmatrix}0\\1\\0\end{bmatrix} \right) = \begin{bmatrix}0\\0\\0\end{bmatrix}, \;  
+			T\left( \begin{bmatrix}0\\0\\1\end{bmatrix} \right) = \begin{bmatrix}0\\0\\0\end{bmatrix}
+			\]
+			then this leads to the matrix,
+			\[ A = 	\begin{bmatrix}
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+				1 & 0 & 0
+			\end{bmatrix}.
+			\]
+			But this is \textbf{not} a projection because ${ A^2 = 0 \neq A }$. The $z$-axis is not invariant under $A$; in fact, $A$ maps the $z$-axis to the origin.\\
+			
+			If we try to fix this by also satisfying,
+			\[ T\left( \begin{bmatrix}0\\0\\1\end{bmatrix} \right) = \begin{bmatrix}0\\0\\1\end{bmatrix} \]
+			we get the matrix,
+			\[ A = 	\begin{bmatrix}
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+				1 & 0 & 1
+			\end{bmatrix}.
+			\]
+			\textit{This} matrix $A$, \textit{does} satisfy ${ A^2 = A }$ and \textit{is} therefore a projection of the $x$-axis onto the $z$-axis.
+		}
+		\biggerskip
+		\ex{Following on from example \ref{ex:orthogonal-complement-of-plane-in-R3}: Suppose
+			\[ U = \operatorname{Lin} \left\{ \begin{bmatrix}1\\ 2\\ -1\end{bmatrix}, \begin{bmatrix}1\\ 0\\ 1\end{bmatrix} \right\} \eqand 
+				W = U^\perp = \operatorname{Lin} \left\{ \begin{bmatrix}-1\\ 1\\ 1\end{bmatrix} \right\}. \]
+			Then, by \autoref{prop:vector-orthogonal-complement-is-complement-space},
+			\[ U \oplus W = \R{3} \]
+			so we can define a function $P_U$, the projection of $\R{3}$ onto $U$ parallel to $W$.\\
+			
+			For any ${ \x = (x,y,z)^T \in \R{3} }$, we can express it \wrt a basis that is the disjoint union of bases of $U$ and $W$,
+			\[
+				\begin{bmatrix}x\\ y\\ z\end{bmatrix} = \alpha_1 \begin{bmatrix}1\\ 2\\ -1\end{bmatrix} + 
+					\alpha_2 \begin{bmatrix}1\\ 0\\ 1\end{bmatrix} + \alpha_3 \begin{bmatrix}-1\\ 1\\ 1\end{bmatrix}.
+			\]
+			So we have,
+			\[
+				\begin{bmatrix}
+					1 & 1 & -1\\
+					2 & 0 & 1\\
+					-1 & 1 & 1
+				\end{bmatrix} \begin{bmatrix}\alpha_1\\ \alpha_2\\ \alpha_3\end{bmatrix} =
+				\begin{bmatrix}x\\ y\\ z\end{bmatrix}
+			\]
+			which gives
+			\[
+				 \begin{bmatrix}\alpha_1\\ \alpha_2\\ \alpha_3\end{bmatrix} = 
+				 \frac{1}{6}
+				 \begin{bmatrix}
+				 	x + 2y - z\\
+				 	3x + 3z\\
+				 	-2x + 2y + 2z
+				 \end{bmatrix}
+			\]
+			and so the expression of the vector in $\R{3}$ in this basis is
+			\[ 
+				\begin{bmatrix}x\\ y\\ z\end{bmatrix} = \frac{1}{6}\left( 
+									(x + 2y - z) \begin{bmatrix}1\\ 2\\ -1\end{bmatrix} + 
+				(3x + 3z) \begin{bmatrix}1\\ 0\\ 1\end{bmatrix} + (-2x + 2y + 2z) \begin{bmatrix}-1\\ 1\\ 1\end{bmatrix} 
+														\right)
+			\]
+			and the projection onto $U$ is therefore
+			\[\begin{aligned}
+				P_U((x,y,z)^T) &=  \frac{1}{6}\left(
+										\begin{bmatrix}(x + 2y - z)\\ 2(x + 2y - z)\\ -(x + 2y - z)\end{bmatrix} +  
+										\begin{bmatrix}(3x + 3z)\\ 0\\ (3x + 3z)\end{bmatrix}
+									\right) \nn
+				&= \frac{1}{6}\left( 
+						\begin{bmatrix}2(2x + y + z)\\ 2(x + 2y - z)\\ 2(x - y + 2z)\end{bmatrix}
+					\right) \nn
+				&= \frac{1}{3}\left( 
+						\begin{bmatrix}2x + y + z\\ x + 2y - z\\ x - y + 2z\end{bmatrix}
+					\right).
+			\end{aligned}\]
+		
+			We can instead calculate this by taking the matrix whose columns are the basis of $U$,
+			\[
+				A = [U] = 	\begin{bmatrix}
+								1 & 1\\
+								2 & 0\\
+								-1 & 1
+							\end{bmatrix}
+			\]
+			and using \autoref{prop:expression-for-orthogonal-projection-of-codomain-of-any-real-matrix-onto-its-range} to determine the orthogonal projection onto $U$ as
+			\[ P_U = A \inv{(A^T A)} A^T. \]
+			Since
+			\[ 
+				A^T A = \begin{bmatrix}
+							6 & 0\\
+							0 & 2
+						\end{bmatrix} \implies
+						\inv{A^T A} = 
+						\begin{bmatrix}
+							\frac{1}{6} & 0\\
+							0 & \frac{1}{2}
+						\end{bmatrix}
+			\]
+			we then have,
+			\[\begin{aligned}
+				P_U &= 	\begin{bmatrix}
+							1 & 1\\
+							2 & 0\\
+							-1 & 1
+						\end{bmatrix}
+						\frac{1}{6}
+						\begin{bmatrix}
+							1 & 0\\
+							0 & 3
+						\end{bmatrix}
+						\begin{bmatrix}
+							1 & 2 & -1\\
+							1 & 0 & 1
+						\end{bmatrix}
+						&\sidecomment{} \nn
+				&= 	\frac{1}{6}
+					\begin{bmatrix}
+						1 & 3\\
+						2 & 0\\
+						-1 & 3
+					\end{bmatrix} 
+					\begin{bmatrix}
+						1 & 2 & -1\\
+						1 & 0 & 1
+					\end{bmatrix}
+					&\sidecomment{} \nn
+				&= 	\frac{1}{6}
+					\begin{bmatrix}
+						4 & 2 & 2 \\
+						2 & 4 & -2 \\
+						2 & -2 & 4
+					\end{bmatrix}
+					&\sidecomment{} \nn
+				&= 	\frac{1}{3}
+					\begin{bmatrix}
+						2 & 1 & 1 \\
+						1 & 2 & -1 \\
+						1 & -1 & 2
+					\end{bmatrix}.
+			\end{aligned}\]
+		}
+		\biggerskip
+		\ex{Suppose we are trying to fit a linear model ${ Y = \theta_0 + \theta_1 X }$ to the following dataset.
+			\[
+				\begin{tabular}{ccc}
+					\toprule%
+					$X$ & $Y$ \\ \toprule%
+					0 & 1 \\
+					3 & 4 \\
+					6 & 5 \\ \bottomrule
+				\end{tabular} 
+			\]
+			We are trying to find a least squares solution (values of ${ \theta_0, \theta_1 }$ that minimise the squared error) to the system
+			\[\begin{aligned}
+				\theta_0 &= 1 \\
+				\theta_0 + 3\theta_1 &= 4 \\
+				\theta_0 + 6\theta_1 &= 5.
+			\end{aligned}\]
+			It's easy to see there is no exact solution (i.e. no solution with 0 squared error).\\
+			
+			If we describe this system in matrix form we have
+			\[
+				X\thet = Y \iff 
+				\begin{bmatrix}
+					1 & 0\\
+					1 & 3\\
+					1 & 6
+				\end{bmatrix}
+				\begin{bmatrix}
+					\theta_0\\
+					\theta_1
+				\end{bmatrix} = 
+				\begin{bmatrix}
+					1\\
+					4\\
+					5
+				\end{bmatrix}.
+			\]
+			Using \autoref{coro:normal-equation} to get the best fit value of $\thet$ we have,
+			\[ 
+				\theth = \inv{(X^T X)} X^T Y = \begin{bmatrix} \frac{4}{3}\\ \frac{2}{3}\end{bmatrix}.
+			\]
+			So the best fit model found is
+			\[ Y = \frac{4}{3} + \frac{2}{3} X. \]
+		}
+		\bigskip
+		\ex{The least squares fitting method can be used to fit non-linear models also. In this case, the non-linear model becomes linearized by the encoding of the features. For example, \TODO{LSE Further Linear Algebra [76]}
+		}
+	}% extra braces to scope \newcommand
+	\end{exe}
+}
+
+
+
+
+
+
+% ---------------- break -------------
+\pagebreak
+
+
+
+
+\searchableSubsection{Generalised Inverses}{linear transformations}{
+	\biggerskip
+	\subsubsection{Left and Right Inverses}
+	\boxeddefinition{Let $A$ be an ${ m \times n }$ matrix. Then the ${ m \times n }$ matrix $L$ is a \textit{left inverse} for $A$ iff
+		\[ LA = I_n \]
+		while the ${ n \times m }$ matrix $R$ is a \textit{right inverse} for $A$ iff
+		\[ AR = I_m. \]
+	}
+
+	\bigskip
+	\labeledProposition{Let $A$ be an ${ m \times n }$ matrix. Then $A$ has a \textbf{left} inverse iff:
+		\begin{enumerate}[label=(\roman*)]
+			\item{The nullspace of $A$ is the trivial nullspace $\{\0\}$;}
+			\item{$A$ is an injection: The equation ${ A\x = \b }$ has either no solution or one unique solution;}
+			\item{$A$ has rank $n$.}
+		\end{enumerate}
+	}{properties-of-matrix-with-left-inverse}
+	\begin{proof}\nl[4]
+		Let $L$ be a left inverse of $A$.
+		\begin{enumerate}[label=(\roman*)]
+			\item{Since, for any ${ \x \in N(A) }$,
+				\[ A\x =\0 \iff LA\x = L\0 = \0 \iff I_n\x = \x = \0, \]
+				we deduce that ${ N(A) = \{\0\} }$.
+			}
+			\item{It follows from the fact that the nullspace of $A$ is the trivial kernel that $A$ is an injection (\autoref{coro:linear-transformation-is-injective-iff-kernel-is-trivial}).}
+			\item{It also follows from the fact that the nullspace of $A$ is the trivial kernel that the nullity of $A$ is 0 and so the dimension formula for finite-dimensional linear transformations (\autoref{theo:linear_map_dimension_formula}) tells us that
+				\[ n = \operatorname{rank} A + \operatorname{nullity} A = \operatorname{rank} A + 0 \implies \operatorname{rank} A = n. \]
+			}
+		\end{enumerate}
+		It follows from the fact that $A$ has full column rank, by \autoref{prop:properties-of-full-column-rank-matrix-product-with-hermitian-conjugate}, ${ A^T A }$ is invertible and so
+		\[ L = (A^T A) A^T \]
+		is a left inverse of $A$.
+	\end{proof}
+	\begin{corollary}
+		If $A$ is an ${ m \times n }$ matrix with ${ m < n }$ then $A$ cannot have a left inverse.
+	\end{corollary}
+	\begin{corollary}
+		If $A$ is an ${ n \times n }$ square matrix with rank $n$ then there is a single unique left inverse equal to the right inverse. That's to say,
+		\[ L = \inv{A} = R. \]
+	\end{corollary}
+
+	
+	\bigskip
+	\labeledProposition{Let $A$ be an ${ m \times n }$ matrix. Then $A$ has a \textbf{right} inverse iff:
+		\begin{enumerate}[label=(\roman*)]
+			\item{${ A\x = \b }$ has at least one solution for every ${ \b \in \F{m} }$;}
+			\item{$A$ is a surjection: The range of $A$ is $\F{m}$;}
+			\item{$A$ has rank $m$.}
+		\end{enumerate}
+	}{properties-of-matrix-with-right-inverse}
+	\begin{proof}\nl[4]
+		Let $R$ be a right inverse of $A$.
+		\begin{enumerate}[label=(\roman*)]
+			\item{Since, for every ${ \b \in \F{m} }$
+				\[ A\x =\b \iff A\x = I_m\b = (AR)\b \iff A\x = A(R\b), \]
+				we can deduce that there exists at least one solution, namely ${ \x = R\b }$. (Note that we can't deduce that this is the only solution because $A$ is not, in general, invertible.)
+			}
+			\item{It follows from the fact that, for every ${ \b \in \F{m} }$ there exists at least one ${ \x = R\b \in \F{n} }$ such that ${ A\x = \b }$ that $A$ is surjective and its range is all of $\F{m}$.
+			}
+			\item{Since the rank of $A$ is, by definition, the dimension of its range, it follows then, from the fact that the range of $A$ is $\F{m}$ that the rank of $A$ is $m$.
+			}
+		\end{enumerate}
+		It follows from the fact that $A$ has full row rank that $A^T$ has full column rank and so, by \autoref{prop:properties-of-full-column-rank-matrix-product-with-hermitian-conjugate}, ${ (A^T)^T A^T = A A^T }$ is invertible and so
+		\[ R = (A A^T) A \]
+		is a right inverse of $A$.
+	\end{proof}
+	\begin{corollary}
+		If $A$ is an ${ m \times n }$ matrix with ${ m > n }$ then $A$ cannot have a right inverse.
+	\end{corollary}
+	\begin{corollary}
+		If $A$ is an ${ n \times n }$ square matrix with rank $n$ then there is a single unique right inverse equal to the left inverse. That's to say,
+		\[ R = \inv{A} = L. \]
+	\end{corollary}
+
+	\sep
+	\begin{exe}
+		\ex{\TODO{LSE FLA Example 6.2}}
+	\end{exe}
+
+
+
+	\biggerskip
+	\subsubsection{Weak and Strong Generalised Inverses}	
+	\boxeddefinition{\textbf{(Weak Generalised Inverse)} Let $A$ be an ${ m \times n }$ matrix. A \textit{weak generalised inverse} (WGI) of $A$, denoted by $A^g$, is any ${ n \times m }$ matrix such that
+		\[ A A^g A = A. \]
+	}
+
+	\medskip
+	\labeledProposition{Both left and right inverses are WGIs.}{left-and-right-inverses-are-WGIs}
+	\begin{proof}
+		Let $A$ be an ${ m \times n }$ matrix.\\
+		
+		If $L$ is a left inverse of $A$ then
+		\[ A L A = A I_n = A. \]
+		If $R$ is a right inverse of $A$ then
+		\[ A R A = I_m A = A. \]
 	\end{proof}
 }
 
