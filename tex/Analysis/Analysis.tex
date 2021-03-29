@@ -1,4 +1,4 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 
 
@@ -12,79 +12,97 @@
 	\searchableSection{Supremum and Infimum}{analysis}
 	
 	\searchableSubsection{Definitions}{analysis}{\bigskip
-		\boxeddefinition{An upper bound on a set A is a value $x$ such that,
+		\boxeddefinition{\textbf{(Bounded Set)} An \textit{upper bound} on a set A is a value $x$ such that,
 			\[ \forall a \in A, \, a \leq x \]
-			and a lower bound is similarly defined as a value $y$ such that,
+			and a \textit{lower bound} is similarly defined as a value $y$ such that,
 			\[ \forall a \in A, \, a \geq y. \]
-			A set is said to be \textbf{upper-bounded} if there exists some upper-bound on the set and is said to be \textbf{lower-bounded} if there exists some lower bound on the set. If there exists both upper and lower bounds then the set is said to be \textbf{bounded}.
+			A set is said to be \textit{upper-bounded} if there exists some upper-bound on the set and is said to be \textit{lower-bounded} if there exists some lower bound on the set. If there exists both upper and lower bounds then the set is said to be \textit{bounded}.
 		}
-		\boxeddefinition{The \textbf{supremum} of a upper-bounded set $A$ is a value $\sigma_A$ such that $\sigma_A$ is an upper bound on $A$ and, 
+		
+		\boxedaxiom{\textbf{(Continuum Property)} Every non-empty set of real numbers that is bounded above has a least upper bound and every non-empty set of real numbers that is bounded below has a greatest upper bound.}
+		
+		\boxeddefinition{\textbf{(Supremum)} The \textit{supremum} of an upper-bounded set $A$ is a value $\sigma_A$ such that $\sigma_A$ is an upper bound on $A$ and, 
 			\[ \sigma_A' < \sigma_A \iff \exists a \in A \suchthat a > \sigma_A' \]
 			which is to say that if $\sigma_A' < \sigma_A$ then $\sigma_A'$ is not an upper bound on $A$ and, if $\sigma_A'$ is not an upper bound on $A$ then it must be less than $\sigma_A$ since $\sigma_A$ is an upper bound on A.\\
-			An alternative, equivalent definition is,
+			
+			An alternative, equivalent definition is: For $\sigma_A$, an upper bound on $A$,
 			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a > \sigma_A - \epsilon. \]
 		}
-		\paragraph{Issue} Note that there is an apparent paradox here: This second definition implies that
-		\begin{align*}
-			&&  \forall \epsilon > 0 \logicsep \exists a \in A &\suchthat a + \epsilon > \sigma_A  \\
-			&\iff &\exists a \in A &\suchthat a \geq \sigma_A  &\sidecomment{}
-		\end{align*}
-		which result, when combined with the upper-bound property, gives
-		\begin{align*}
-			&& \exists a \in A &\suchthat (a \geq \sigma_A) \wedge (a \leq \sigma_A) \\
-			&\iff &\exists a \in A &\suchthat a = \sigma_A  &\sidecomment{}
-		\end{align*}
-		which says that there is always an element in the bounded set that is equal to the supremum. This is not correct - the supremum may be in the set or external to it.\\
-		The initial implication is not true, however. We cannot infer that ${ \exists a \in A \suchthat a \geq \sigma_A }$. This can be seen with another rearrangement,
+
+		\note{Rearranging the alternative definition we obtain,
 		\begin{align*}
 			&&  \forall \epsilon > 0 \logicsep \exists a \in A &\suchthat a + \epsilon > \sigma_A  \\
 			&\iff &\forall \epsilon > 0 \logicsep \exists a \in A &\suchthat \epsilon > \sigma_A - a  &\sidecomment{}
 		\end{align*}
-		which shows us that for any positive epsilon there needs to be an $a$ close enough to the value of $\sigma_A$ that the difference in their values is less than epsilon. Since $a$ can approach arbitrarily close to $\sigma_A$ this is achievable for any positive epsilon. This property seems to be equivalent to the fact that $\sigma_A$ is a \textit{limit point} of $A$ but that will be covered properly in Topology.
-		\bigskip\bigskip
+		which shows us that for any positive epsilon there needs to be an $a$ close enough to the value of $\sigma_A$ that the difference in their values is less than epsilon. Since $a$ can approach arbitrarily close to $\sigma_A$ this is achievable for any positive epsilon. This property seems to be equivalent to the fact that $\sigma_A$ is a \textit{limit point} of $A$ (see: Topology).}
 		
 		\boxeddefinition{The \textbf{infimum} of a lower-bounded set $A$ is defined similarly to the supremum: as a value $\tau_A$ such that $\tau_A$ is a lower bound on $A$ and, 
 			\[ \tau_A' > \tau_A \iff \exists a \in A \suchthat a < \tau_A' \]
 			or alternatively,
 			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a < \tau_A + \epsilon. \]
 		}
-		\notation{The supremum of $A$ is denoted $sup \, A$ and the infimum is denoted $inf \, A$.}
+		\notation{The supremum of $A$ is denoted ${ \sup A }$ and the infimum is denoted ${ \inf A }$.}
 	}
 
 	\bigskip
-	\searchableSubsection{Deductions using the supremum and infimum}{analysis}{\smallskip
+	\searchableSubsection{Deductions using the supremum and infimum}{analysis}{
+		\bigskip
+		
 		\labeledProposition{If a bounded set $A \subset \R{}$ has the property that,
 			\[ \forall x,y \in A \logicsep \abs{x - y} < 1 \]
 			then it follows that,
-			\[ (sup \, A - inf \, A) \leq 1. \]
+			\[ (\sup A - \inf A) \leq 1. \]
 		}{sup_minus_inf_max_difference}
-		\begin{proof}
-			Let $ \sigma_A = sup \, A $ and $ \tau_A = inf \, A $ and \WLOG assume that $x > y$. By the definitions of the supremum and infimum we have,
-			\begin{align*}
-			&& \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x > \sigma_A - \epsilon) \wedge (y < \tau_A + \epsilon)  \\
-			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x > \sigma_A - \epsilon) \wedge (-y > -\tau_A - \epsilon)  &\sidecomment{}\\
-			&\iff & \forall \epsilon > 0 \logicsep \exists x,y \in A &\logicsep (x - y) > (\sigma_A - \tau_A) - 2\epsilon  &\sidecomment{}\\
-			\end{align*}
-			Now suppose, for contradiction, that $ (\sigma_A - \tau_A) > 1 $ then we can say that,
+		\begin{proof}\nl[8]
+			Let ${ \sigma_A = \sup A }$ and ${ \tau_A = \inf A }$. Then,
+			\[ 
+				\forall \epsilon_1 > 0 \logicsep \exists x \in A \suchthat x - \epsilon_1 < \tau_A \eqand 
+				\forall \epsilon_2 > 0 \logicsep \exists y \in A \suchthat y + \epsilon_2 > \sigma_A. 
+			\]
+			If we let
+			\[ 0 < \epsilon < \min \left\{ \epsilon_1, \epsilon_2 \right\} \]
+			then ${ \forall \epsilon_1,\epsilon_2 > 0 \logicsep \exists x,y \in A }$ such that
+			\[  (x - \epsilon < \tau_A) \; \land (y + \epsilon > \sigma_A) \]
+			and so
+			\begin{equation}
+				\sigma_A - \tau_A < (y + \epsilon) - (x - \epsilon) = (y - x) + 2\epsilon. \tag{*}
+			\end{equation}
+			
+			\nl[8]
+			If we then, further constrict the value of $\epsilon$ so that
+			\[ 0 < \epsilon < \min \left\{ \epsilon_1, \epsilon_2, \frac{\sigma_A - \tau_A}{2} \right\} \]
+			then equation (*) becomes			
+			\[ \sigma_A - \tau_A < (y - x) + 2\epsilon < (y - x) + (\sigma_A - \tau_A) \]
+			so that ${ y - x > 0 }$.
+			
+			\nl[8]
+			Now suppose, for contradiction, that ${ (\sigma_A - \tau_A) > 1 }$. Then we can say that,
 			\[ \exists r > 0 \logicsep (\sigma_A - \tau_A) = 1 + r. \] 
-			If we then constrict $\epsilon$ such that,
-			\[ \epsilon < \frac{r}{2} \iff 2\epsilon < r \iff r - 2\epsilon > 0 \]
-			then the previous result tells us that, for $ 0 < \epsilon < \frac{r}{2} $,
-			\begin{align*}
-			&& \exists x,y \in A &\logicsep (x - y) > (\sigma_A - \tau_A) - 2\epsilon  \\
-			&\iff & \exists x,y \in A &\logicsep (x - y) > 1 + r - 2\epsilon > 1  &\sidecomment{}
-			\end{align*}
+			If we then, once again, further constrict $\epsilon$ such that,
+			\[ 0 < \epsilon < \min \left\{ \epsilon_1, \epsilon_2, \frac{\sigma_A - \tau_A}{2}, \frac{r}{2} \right\} \]
+			then equation (*) further becomes,
+			\[\begin{aligned}
+				&& \sigma_A - \tau_A &< (y - x) + 2\epsilon \\
+				&\iff & \sigma_A - \tau_A &< (y - x) + r &\sidecomment{} \\
+				&\iff & 1 + r &< (y - x) + r &\sidecomment{} \\
+				&\iff & 1 &< y - x. 
+			\end{aligned}\]
+			
+			Since ${ y - x > 0 }$ we, therefore, have
+			\[ \abs{y - x} > 1 \]
 			which contradicts the set property that $ \forall x,y \in A, \, \abs{x - y} < 1 $. So this shows that $ (\sigma_A - \tau_A) \leq 1 $.
 		\end{proof}
+	
+	
 		\bigskip
 		\labeledProposition{Let $A \subset \R{}$ be a bounded set and let $B$ be the set defined by
 			\[ B = \setc{b}{b = f(a), \; a \in A} \]
 			where the function $f$ is some strictly monotonic function.
 			Then it follows that,
-			\[ sup \, B = f(sup \, A). \]
+			\[ \sup B = f(\sup A). \]
 		}{monotonic_functions_preserve_supremum}
 		\begin{proof}
-			A is bounded and so $\sigma_A = sup \, A$ exists. So, using the supremum properties we have,
+			A is bounded and so ${ \sigma_A = \sup A }$ exists. So, using the supremum properties we have,
 			\begin{align*}
 			&& \forall a \in A \logicsep a &\leq \sigma_A  \\
 			&\iff & \forall a \in A \logicsep f(a)  &\leq f(\sigma_A)  &\sidecomment{by monotonicity of f}\\
@@ -98,7 +116,7 @@
 			&\iff & \sigma_B' < \sigma_B  &\implies \exists b \in B \suchthat b > \sigma_B'.	
 			\end{align*}
 			Therefore $\sigma_B$ satisfies both requirements of the supremum and we have shown that,
-			\[ sup \, B = f(sup \, A). \]
+			\[ \sup B = f(\sup A). \]
 		\end{proof}
 	}
 	

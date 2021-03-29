@@ -109,6 +109,26 @@
 			xk &= \int_a^t f(x) \dif x = F(t) - F(a) \\
 			xkK &= \int_a^t f(x) \dif x + C = F(t) - F(a) + C.
 		\end{align*}
+	
+	
+		\biggerskip
+		\subsubsection{Improper Integrals}
+		\bigskip
+		\boxeddefinition{\textbf{(Improper Integral)} An integral is called \textit{improper} if the interval it is defined over is half-open. That's to say, if either of the interval bounds $a$ or $b$ in the integral
+			\[ \int_a^b f(t) \dif t \]
+		is infinity or the function is undefined at that point. The value of such an integral is defined as, if we take the case where the interval is open at the upper bound,
+			\[ \int_a^b f(t) \dif t = \lim_{x \to b} \, \int_a^x f(t) \dif t. \]
+		
+		\nl[6]	
+		More precisely, if the integrand function is undefined at the point ${ t = b }$ then
+			\[ \int_a^b f(t) \dif t = \lim_{x \to b^-} \, \int_a^x f(t) \dif t \]
+		and if the function is undefined at the point ${ t = a }$ then
+			\[ \int_a^b f(t) \dif t = \lim_{x \to a^+} \, \int_x^b f(t) \dif t. \]
+		Meanwhile if ${ b = \infty }$ then
+			\[ \int_a^b f(t) \dif t = \int_a^\infty f(t) \dif t = \lim_{x \to \infty} \, \int_a^x f(t) \dif t \]
+		and similarly if ${ a = -\infty }$ then
+		\[ \int_a^b f(t) \dif t = \int_{-\infty}^b f(t) \dif t = \lim_{x \to -\infty} \, \int_x^b f(t) \dif t. \]
+		}
 	}
 
 
