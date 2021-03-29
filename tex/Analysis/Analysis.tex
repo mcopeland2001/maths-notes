@@ -154,16 +154,17 @@
 				\ex {\textbf{Non-convergent Oscillation}\\\\
 				The sequence $ a_n = (-1)^n $ is divergent despite always remaining bounded within the interval $ [-1, 1] $ as it neither converges to 1 or to -1.}\label{ex:flipping_sign}
 				\ex {\textbf{Limit of an Infinite Recurrence}\\\\
-					Take the sequence given by,
+					Take the (convergent) sequence given by,
 					\[ a_1 = 1, \; a_{n+1} = \frac{a_n}{2} + \frac{3}{2a_n} \;\; (n \ge 1). \]
 					Assume there is an equilibrium value, $a^*$, then
 					\begin{align*}
-						&&a^* &= \frac{a^*}{2} + \frac{3}{2a^*}  \\
-						&\iff &2(a^*)^2  &= (a^*)^2 + 3  &\sidecomment{}\\
-						&\iff &(a^*)^2  &= 3  &\sidecomment{}\\
-						&\iff &a^*  &= \sqrt{3}  &\sidecomment{$\forall n, a_n \geq 0$}\\
+						&&a^* &= \frac{a^*}{2} + \frac{3}{2a^*}  \nn
+						&\iff &2 {a^*}^2  &= {a^*}^2 + 3  &\sidecomment{}\nn
+						&\iff &{a^*}^2  &= 3  &\sidecomment{}\nn
+						&\iff &a^*  &= \sqrt{3}.  &\sidecomment{$\forall n, a_n \geq 0$}
 					\end{align*}
-					So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction. Note, however, that the fact that there is an equilibrium value does \textit{not}, by itself, prove that this sequence converges (although this sequence does).
+					So $\sqrt{3}$ is the steady-state value that this recurrence converges to as $n \to \infty$. If the recurrence didn't converge then the assumption of an equilibrium value would result in a contradiction. Note, however, that the fact that there is an equilibrium value does \textit{not}, by itself, prove that this sequence converges (although this sequence does).\\
+					That's to say, given that this sequence is convergent, its limit will be the equilibrium value but, if it weren't convergent, then the equilibrium value would never be obtained.
 				}\label{ex:infinite_recurrence}
 			\end{exe}
 			
@@ -216,7 +217,9 @@
 		\end{lemma}
 		\begin{proof}
 			This can be proven quite easily using induction. Taking the base case of a set of cardinality one, clearly there is a maximum and a minimum both of which are the sole element of the set. Then, the induction step is to say, given a set $S$ that has a maximum, $s_{max}$, and a minimum, $s_{min}$, if we add a new element $e$, then if $e$ is greater than $s_{max}$ it is the maximum of the new set and if it is less than $s_{min}$ it is the minimum of the new set. Otherwise, the previous maximum and minimum also pertain to the new set. Therefore, adding a new element to a set that has a maximum and a minimum creates a new set with a maximum and a minimum.
+			\note{This is in fact the \textit{Well-Ordering Principle} (see: \ref{sssection:well-ordering-theorem}).}
 		\end{proof}
+	
 		\bigskip
 		\labeledProposition{Any convergent sequence is bounded.}{convergent_seqs_bounded}
 		\begin{proof}
