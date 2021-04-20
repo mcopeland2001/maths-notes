@@ -23,15 +23,47 @@
 			\[ L(P) = \sum_{i = 0}^{n-1} (x_{i+1} - x_i) \min_{ x_i \leq x \leq x_{i+1} }{ f(x) } \]
 			where each ${ x_i \in P }$. The \textbf{upper estimate} is similarly defined as,
 			\[ U(P) = \sum_{i = 0}^{n-1} (x_{i+1} - x_i) \max_{ x_i \leq x \leq x_{i+1} }{ f(x) }. \]
-		}
+		}\label{def:lower-and-upper-estimates-of-area-under-curve}
+		
 		\boxeddefinition{Let $P(n)$ be a partition of cardinality $n+1$ over the interval $[a,b]$. If, for a function $f(x)$,
 			\[ \lim_{n \to \infty} L(P(n)) = \lim_{n \to \infty} U(P(n)) = I \]
 			then the \textbf{Riemann Integral} of $f(x)$ over $P(n)$ is defined as,
 			\[ \int_a^b f(x) \dif x = I. \]
-		}
+		}\label{def:riemann-integral}
+	
+		\bigskip
+		\labeledProposition{Let $f$ and $g$ be integrable functions on an interval $[a,b]$ such that
+			\[ \forall x \in [a,b] \logicsep f(x) \leq g(x). \]
+			Then,
+			\[ \int_a^b f(x) \dif x \leq \int_a^b g(x) \dif x. \]
+		}{g-is-upper-bound-for-f-implies-integral-of-g-is-upper-bound-for-integral-of-f}
+		\begin{proof}\nl[4]
+			Since ${ \forall x \in [a,b] \logicsep f(x) \leq g(x) }$ then, for any ${ a \leq x_1 < x_2 \leq b }$,
+			\[ \min_{ x_1 \leq x \leq x_2 } f(x) \leq \min_{ x_1 \leq x \leq x_2 } g(x) \eqand \max_{ x_1 \leq x \leq x_2 } f(x) \leq \max_{ x_1 \leq x \leq x_2 } g(x). \]
+			Therefore, if ${ L_f(P(n)), U_f(P(n)) }$ is the lower and upper estimates (\ref{def:lower-and-upper-estimates-of-area-under-curve}) of the area under the curve of $f(x)$ and similarly ${ L_g(P(n)), U_g(P(n)) }$, then we must have,
+			\[ \lim_{n \to \infty} L_f(P(n)) \leq \lim_{n \to \infty} L_g(P(n)) \eqand \lim_{n \to \infty} U_f(P(n)) \leq \lim_{n \to \infty} U_g(P(n)). \]
+			It follows then, that the Riemann Integral (\ref{def:riemann-integral}) of $f(x)$ over the interval $[a,b]$ must be less than or equal to that of $g(x)$ over the same interval.
+		\end{proof}
+		\smallskip
+		\begin{corollary}\label{coro:g-is-lower-bound-for-f-implies-integral-of-g-is-lower-bound-for-integral-of-f}
+			Let $f$ and $g$ be integrable functions on an interval $[a,b]$ such that
+				\[ \forall x \in [a,b] \logicsep f(x) \geq g(x). \]
+			Then,
+				\[ \int_a^b f(x) \dif x \geq \int_a^b g(x) \dif x. \]
+		\end{corollary}
+		\begin{proof}\nl[4]
+			By \autoref{prop:g-is-upper-bound-for-f-implies-integral-of-g-is-upper-bound-for-integral-of-f}, since
+			\[ \forall x \in [a,b] \logicsep f(x) \geq g(x) \iff \forall x \in [a,b] \logicsep -f(x) \leq -g(x) \]
+			we therefore have,
+			\[\begin{aligned}
+				&&\int_a^b -f(x) \dif x &\leq \int_a^b -g(x) \dif x \nn
+				&\iff & -\int_a^b f(x) \dif x &\leq -\int_a^b g(x) \dif x &\sidecomment{by linearity of integration} \nn
+				&\iff & \int_a^b f(x) \dif x &\geq \int_a^b g(x) \dif x. \qedhere
+			\end{aligned}\]
+		\end{proof}
 		
 		
-		\bigskip\subsubsubsection{Example}
+		\sep
 		\begin{exe}
 			\item{Suppose ${ f(x) = e^x }$ and we define a partition over the interval $[0,1]$,
 				\[ P(n) = \{0, \frac{1}{n}, \frac{2}{n}, \dots, \frac{n-1}{n}, 1\}. \]
@@ -111,7 +143,33 @@
 		\end{align*}
 	
 	
-		\biggerskip
+		\bigskip
+		\subsubsection{Change of Variable}
+		\bigskip
+		There are two types of variable substitution.
+		\begin{itemize}
+			\item{Substitution: ${ x = g(u) }$,
+				\[ \int_a^b f(x) \dif x = \int_a^b f(g(u)) \dif\, (g(u)) = \int_{\inv{g}(a)}^{\inv{g}(b)} f(g(u)) g'(u) \dif u. \]
+				
+				For example, making the substitution ${ x = \sin\theta }$ in,
+				\[\begin{aligned}
+					\int_0^1 \frac{1}{\sqrt{1 - x^2}} \dif x &= \int_0^1 \frac{1}{\sqrt{1 - \sin^2\theta}} \dif\, (\sin\theta) \nnn
+					&= \int_{\inv{\sin}(0)}^{\inv{\sin}(1)} \frac{1}{\sqrt{1 - \sin^2\theta}} \cos\theta \dif \theta &\sidecomment{} \nnn
+					&= \int_0^{\frac{\pi}{2}} \frac{1}{\sqrt{1 - \sin^2\theta}} \cos\theta \dif \theta &\sidecomment{} \nnn
+					&= \int_0^{\frac{\pi}{2}} \dif \theta = \frac{\pi}{2}.
+				\end{aligned}\]	
+			}
+			\bigskip
+			\item{"Reverse" Substitution: ${ u = g(x) }$,
+				\[ \int_a^b f(x) \dif x = \int_{g(a)}^{g(b)} f(x) \frac{1}{g'(x)} \dif u. \]
+				
+				For example, making the substitution ${ u = \frac{x}{a} }$ in,
+				\[ \int_a^{at} f(x) \dif x = \int_1^t f(au) a \dif u = a \int_1^t f(au) \dif u. \]
+			}
+		\end{itemize}
+	
+	
+		\pagebreak
 		\subsubsection{Improper Integrals}
 		\bigskip
 		\boxeddefinition{\textbf{(Improper Integral)} An integral is called \textit{improper} if the interval it is defined over is half-open. That's to say, if either of the interval bounds $a$ or $b$ in the integral
@@ -129,6 +187,162 @@
 		and similarly if ${ a = -\infty }$ then
 		\[ \int_a^b f(t) \dif t = \int_{-\infty}^b f(t) \dif t = \lim_{x \to -\infty} \, \int_x^b f(t) \dif t. \]
 		}
+	
+		\note{An integral over an interval that is open at both ends such as,
+			 \[ \int_{-\infty}^\infty f(t) \dif t \]
+			 is defined as the sum of two improper integrals over the half-open intervals,
+			 \[ \int_{-\infty}^\infty f(t) \dif t = \int_0^\infty f(t) \dif t + \int_{-\infty}^0 f(t) \dif t. \]
+			 If either of the two summand integrals diverges, then their sum is defined as divergent. The result of this is that, even if the integrand is an odd function so that for all ${ a > 0 \in \R{} }$,
+			 \[ \int_{-a}^a f(t) \dif t = 0, \]
+			 the integral
+			 \[ \int_{-\infty}^\infty f(t) \dif t \]
+			 may (or may not) be defined as divergent. The reason for this is that, although if the upper and lower bounds go to infinity at the same rate (as in the case of $a$ and $-a$), then we indeed have a limit of 0, this is not true if the bounds are allowed to vary independently. If the bounds vary independently then the value of the integral depends on the rate at which the bounds go to infinity. This causes a problem for the definition of the Riemann Integral and so these integrals are commonly defined to be divergent (see example \ref{ex:symmetric-improper-integral-of-odd-function}).\\
+			 However, in some circumstances (most notably distribution theory), another definition of the integral may be used: the Lebesgue Integral with the Cauchy Principal Value (see: \href{https://en.wikipedia.org/wiki/Cauchy_principal_value}{wikipedia}).
+		}
+
+		
+		\bigskip
+		\labeledTheorem{\textbf{(Direct Comparison Test)} If ${ 0 \leq f(t) \leq g(t) }$ for all ${ t > T \in \R{} }$ then
+			\[ \int_T^\infty g(t) \dif t \text{ converges } \implies \int_T^\infty f(t) \dif t \text{ converges } \]
+			and if ${ 0 \leq g(t) \leq f(t) }$ for all ${ t > T \in \R{} }$ then
+			\[ \int_T^\infty g(t) \dif t \text{ diverges } \implies \int_T^\infty f(t) \dif t \text{ diverges. } \]
+		}{integral-direct-comparison-test}
+		\begin{proof}\nl[4]
+			By \autoref{prop:g-is-upper-bound-for-f-implies-integral-of-g-is-upper-bound-for-integral-of-f}, we have that, if ${ 0 \leq f(t) \leq g(t) }$ for all ${ t > T \in \R{} }$ then,
+			\[ \int_T^\infty f(t) \dif t \leq \int_T^\infty g(t) \dif t \]
+			and so, if the integral of $g$ over this interval is finite then so must the integral of $f$ be also.\\
+			
+			Also, by \autoref{coro:g-is-lower-bound-for-f-implies-integral-of-g-is-lower-bound-for-integral-of-f}, if ${ 0 \leq g(t) \leq f(t) }$ for all ${ t > T \in \R{} }$ then,
+			\[ \int_T^\infty f(t) \dif t \geq \int_T^\infty g(t) \dif t \]
+			and so, if the integral of $g$ over this interval is infinite then so must the integral of $f$ be also.
+		\end{proof}
+	
+		\medskip
+		\begin{corollary}
+			If $f$ is an integrable function and is lower bounded on ${ [a,\infty) }$ by ${ c > 0 \in \R{} }$ such that 
+			\[ \forall x \in [a,b] \logicsep f(x) \geq c, \]
+			then
+			\[ \int_a^\infty f(x) \dif x \text{ diverges. } \]
+		\end{corollary}
+		\begin{proof}
+			Since
+			\[ \int_a^\infty c \dif x = c \int_a^\infty \dif x = c [x]_a^\infty = \infty \]
+			diverges, \autoref{theo:integral-direct-comparison-test} tells us that the integral of $f$ also diverges.
+		\end{proof}
+	
+		\medskip
+		\begin{corollary}
+			If $f$ and $g$ are non-negative integrable functions and on ${ [a,\infty) }$ we have
+			\[ \int_a^\infty f(x) \dif x \text{ converges } \]
+			and, for some ${ M \geq 0 }$,
+			\[ g(x) \leq M, \]
+			then
+			\[ \int_a^\infty f(x)g(x) \dif x \text{ converges. } \]
+		\end{corollary}
+		\begin{proof}
+			If the integral of $f$ over the interval converges then it must evaluate to a finite value and we can therefore also deduce that
+			\[ M\int_a^\infty f(x) \dif x = \int_a^\infty Mf(x) \dif x \text{ converges. } \]
+			Since, for ${ x \in [a,\infty) }$,
+			\[ f(x)g(x) \leq Mf(x) \]
+			we can therefore use \autoref{theo:integral-direct-comparison-test} to reason that
+			\[ \int_a^\infty f(x)g(x) \dif x \text{ converges. } \qedhere \]
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{
+			\[ \int_1^\infty f(x) \dif x \text{ converges } \implies \int_1^\infty f(x^2) \dif x \text{ converges } \]
+			but
+			\[ \int_1^\infty f(x^2) \dif x \text{ converges } \centernot\implies \int_1^\infty f(x) \dif x \text{ converges. } \]
+		}{}
+		\begin{proof}\nl[4]
+			\[\begin{aligned}
+				\int_1^\infty f(x) \dif x &= \int_1^\infty f(u^2) \dif\, (u^2) \nn
+				&= \int_1^\infty f(u^2) 2u \dif u \nn
+				&\therefore \int_1^\infty f(u^2) 2u \dif u \text{ converges. } \nn
+			\end{aligned}\]
+			Since, for ${ u \in [1,\infty) }$, we have ${ f(u^2) 2u \geq f(u^2) }$, by \autoref{theo:integral-direct-comparison-test},
+			\[ \int_1^\infty f(u^2) \dif u \text{ converges. } \]
+			
+			Clearly then also, the convergence of $f(x^2)$ over the same interval doesn't allow us to draw any such similar conclusion about the convergence of $f(x)$. For example, let $f$ be the function ${ f(t) = 1/t }$. Then,
+			\[ \int_1^\infty f(x^2) \dif x \text{ converges } \]
+			but
+			\[ \int_1^\infty f(x) \dif x \text{ diverges. }  \qedhere \]
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Limit Comparison Test)} If $f(t)$ and $g(t)$ are both positive for all ${ t \geq a }$ then, for the test value
+			\[ T = \lim_{t \to \infty} \frac{f(t)}{g(t)}, \]
+			\begin{itemize}
+				\item{if ${ T = 1 }$ then
+					\[ \int_a^\infty f(t) \dif t \text{ converges } \iff \int_a^\infty g(t) \dif t \text{ converges; } \]
+				}
+				\item{if ${ T = 0 }$ then
+					\[ \int_a^\infty g(t) \dif t \text{ converges } \implies \int_a^\infty f(t) \dif t \text{ converges. } \]
+				}
+			\end{itemize}	
+		}{}
+		\begin{proof}\nl[4]
+			\TODO{reference relevant theorem in Analysis}\\
+			\TODO{add notes in Calculus about algebra of limits of functions \wrt when we take the limit of a fraction where one or both of the numerator and denominator are going infinite (and so we can't apply the algebra of limits until we have transformed it to a ratio of finite limits).}\\
+			
+		\end{proof}
+		\TODO{note about limit of ratio being 1 not being equivalent to the numerator and denominator having the same limit: that applies when the limits are finite and non-zero but if they are zero or infinite then the limit of the ratio gives indication of speed of going to zero or infinity. ref: L'Hopital's rule.}
+		\note{Note that if the limits of $f(t)$ and $g(t)$ as ${ t \to \infty }$ are both finite and non-zero then we have case (vi) of \autoref{prop:func-finite-limit-algebra} where the limit of the ratio is simply the ratio of the limits of $f(t)$ and $g(t)$. Also, if one of the limits is finite and non-zero and the other is tending to zero or infinity then the limit is just as we would expect from the limits of e.g. polynomial fractions. That's to say, a finite numerator over a denominator that's tending to zero results in an infinite limit and if the denominator is tending to infinity then the result is a limit of zero.\\\\ However, if both limits are zero or infinite then we need to employ L'H\^{o}pital's rule to obtain the limit of the ratio (see: \href{https://web.ma.utexas.edu/users/m408n/m408c/CurrentWeb/LM4-4-11.php}{UTexas}). So, in each case, the result of the limit of the ratio is an indicator of whether the numerator or denominator is going to infinity or zero faster or slower than the numerator. \question{Do we have a problem if e.g. the numerator is going to zero while the denominator is going to infinity?}}
+	
+	
+		\sep
+		\begin{exe}
+			\ex{${\bm{ \int_1^\infty \frac{1}{x + 1} \dif x }}$:\\
+				 
+				 This integral does not converge despite the integrand ${ \frac{1}{x + 1} \leq \frac{1}{x} }$ for all $x$ over the integration. However, ${ \int_1^\infty \frac{1}{x^{3/2}} \dif x }$ does converge.
+			}
+			\bigskip
+			\ex{${\bm{ \int_1^\infty \frac{\pi}{2} - \inv{\tan}(x) \dif x }}$:\\
+				
+				This integral diverges because, if we use L'Hopital's rule to take the limit
+				\[\begin{aligned}
+					\lim_{x \to \infty} \frac{\frac{\pi}{2} - \inv{\tan}(x)}{\frac{1}{x}} &= \lim_{x \to \infty} \frac{-\frac{1}{1 + x^2}}{-\frac{1}{x^2}} \nn
+					&= \lim_{x \to \infty} \frac{x^2}{1 + x^2} &\sidecomment{} \nn
+					&= \lim_{x \to \infty} \frac{1}{\frac{1}{x^2} + 1} = 1.
+				\end{aligned}\]
+				So, the integral exhibits the same behaviour at infinity as ${ \int_1^\infty \frac{1}{x} \dif x }$ which diverges. \addref
+			}
+			\bigskip
+			\ex{${\bm{ \int_2^\infty \frac{1}{x(\ln(x))^r} \dif x }}$:\\
+				
+				This integral converges for all ${ r > 1 \in \R{} }$ because
+				\[ \int_2^\infty \frac{1}{x(\ln(x))^r} \dif x = \int_{\ln{2}}^\infty \frac{1}{(\ln(x))^r} \dif\, (\ln{x}) \]
+				and so, for ${ u(x) = \ln(x) }$ we have
+				\[ \int_{\ln{2}}^\infty \frac{1}{u^r} \dif u  \]
+				which, by \addref, converges for ${ r > 1 }$.
+			}
+			\bigskip
+			\ex{${\bm{ \int_1^\infty \frac{1}{\sqrt{x^4 + x^3} - x^2} \dif x }}$:\\
+							
+				Observe that
+				\[\begin{aligned}
+					\frac{1}{\sqrt{x^4 + x^3} - x^2} &= \frac{1}{\sqrt{x^4 + x^3} - x^2} \cdot \frac{\sqrt{x^4 + x^3} + x^2}{\sqrt{x^4 + x^3} + x^2} \nn
+					&= \frac{\sqrt{x^4 + x^3} + x^2}{x^3} \nn
+					&= \frac{\sqrt{x^4(1 + \frac{1}{x})} + x^2}{x^3} \nn
+					&= \frac{x^2((1 + \frac{1}{x}) + 1)}{x^3} \nn
+					&= \frac{(1 + \frac{1}{x}) + 1}{x}.
+				\end{aligned}\]
+				We can guess that this will behave asymptotically similarly to ${ \frac{2}{x} }$ and so we perform the ratio test \addref,
+				\[ \frac{ \frac{(1 + \frac{1}{x}) + 1}{x} }{ \frac{2}{x} } = \frac{(1 + \frac{1}{x}) + 1}{2} \to 1 \eqword{as} x \to \infty. \]
+				Therefore, the integral behaves similarly to
+				\[ \int_1^\infty \frac{2}{x} \dif x = 2 \int_1^\infty \frac{1}{x} \dif x \]
+				which diverges by the divergence of ${ \int_1^\infty \frac{1}{x} \dif x }$ (\addref).
+			}
+			\bigskip
+			\ex{${\bm{ \int_{-\infty}^\infty \frac{x}{1 + x^2} \dif x }}$:\\
+				
+				This is an example of a symmetric improper integral of an odd function such that, for all ${ a > 0 \in \R{} }$,
+				\[ \int_{-a}^a \frac{x}{1 + x^2} \dif x = 0. \]
+				But this integral is defined to be the sum of the limits,
+				\[ \lim_{a_1 \to -\infty, \, a_2 \to \infty} \left( \int_{a_1}^0 \frac{x}{1 + x^2} \dif x + \int_0^{a_2} \frac{x}{1 + x^2} \dif x \right) \]
+				and since both the summands are infinite and have no defined limit, the sum is also undefined. Therefore, the Riemann Integral is undefined (or divergent).
+			}\label{ex:symmetric-improper-integral-of-odd-function}
+		\end{exe}
 	}
 
 

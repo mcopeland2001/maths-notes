@@ -23,6 +23,33 @@
 			\[ a + a = 1a + 1a = (1 + 1)a. \]
 			In so doing, it establishes a relationship between the two groups: the additive group and the multiplicative group.
 		}
+	
+		
+		\biggerskip
+		\subsubsection{Real-Number Exponentiation}\label{sssection:real-number-exponentiation}
+		
+		\subheading{Positive exponents}
+		\bigskip
+		Let ${ a \in \F{} }$. Then
+		\[\begin{aligned}
+			2a &= a + a, \nn
+			3a &= a + a + a, \nn
+			a^2 = aa &= \underbrace{a + a + \cdots + a}_{a \text{ times}}, \nn
+			a^3 = aaa &= \underbrace{a + a + \cdots + a}_{a \text{ times}} \, \underbrace{a + a + \cdots + a}_{a \text{ times}}.
+		\end{aligned}\]
+		So, exponentiation by a positive integer can be defined in any field using the properties of the additive group.\\
+		
+		Let ${ a \in \Q{} }$. Then
+		\[\begin{aligned}
+			\frac{7}{2} a &= \underbrace{a + a + a}_{\floor{\frac{7}{2}} = 3 \text{ times}} + \frac{1}{2} a, \nn
+			q &= a^{\frac{1}{2}} \in \Q{}, \nn
+			q^2 = qq &= \underbrace{q + q + \cdots + q}_{q \text{ times}}, \nn
+			\exists m,n \in \N{} \suchthat q &= \frac{m}{n} \implies \nn
+			qq = \frac{m}{n}\frac{m}{n} &= \underbrace{\frac{m}{n} + \frac{m}{n} + \cdots + \frac{m}{n}}_{\floor{\frac{m}{n}} \text{ times}} + \left(\frac{m \bmod n}{n}\right) \frac{m}{n}.
+		\end{aligned}\]
+		So, exponentiation by a rational number can be defined in $\Q{}$.\\
+		
+		Therefore, since the reals can be expressed as summations of series of rationals, exponentiation by any real number can be defined in $\R{}$.
 		
 		\biggerskip
 		\subsubsection{Subfields}

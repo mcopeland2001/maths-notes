@@ -367,7 +367,7 @@
 			\[ \norm{\alpha \x} = \modulus{\alpha} \norm{\x}. \]
 		}{norm-of-scaled-vector-is-modulus-of-scalar-times-norm-of-vector}
 		\begin{proof}
-			\[ \norm{\alpha \y} = \sqrt{\inner{\alpha\y}{\alpha\y}} = \sqrt{\alpha \conj{\alpha} \inner{\y}{\y}} = \sqrt{\modulus{\alpha}^2} \sqrt{\inner{\y}{\y}} = \modulus{\alpha} \norm{\x}. \]
+			\[ \norm{\alpha \x} = \sqrt{\inner{\alpha\x}{\alpha\x}} = \sqrt{\alpha \conj{\alpha} \inner{\x}{\x}} = \sqrt{\modulus{\alpha}^2} \sqrt{\inner{\x}{\x}} = \modulus{\alpha} \norm{\x}. \]
 		\end{proof}
 		
 		
@@ -537,7 +537,39 @@
 			\end{aligned}\]
 		\end{proof}
 		\note{Compare with the Triangle Inequality for simple signed magnitudes: \ref{sssection:triangle-inequality}.}
-	
+		
+		
+		\biggerskip
+		\subsubsubsection{Summary of Norm Properties}
+		\labeledProposition{A norm is a real-valued function that:
+			\begin{enumerate}[label=(\roman*)]
+				\item{is positive definite;}
+				\item{is homomorphic \wrt scalar multiplication;}
+				\item{exhibits the triangle inequality.}
+			\end{enumerate}
+		}{norm-properties}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item{By the definition of the induced norm, \ref{def:vector-norm}, the norm is positive definite.}
+				\item{If we consider a field $\F{}$ to be a 1-dimensional vector space, then the norm of a vector $\v = \alpha \in \F{} $ in such a space is
+					\[ \norm{\v} = \sqrt{\inner{\v}{\v}} = \sqrt{\alpha^2} = \modulus{\alpha}. \]
+					Therefore \autoref{prop:norm-of-scaled-vector-is-modulus-of-scalar-times-norm-of-vector} implies that
+					\[ \norm{\alpha \x} = \modulus{\alpha} \norm{\x} = \norm{\alpha} \norm{\x}. \]
+				}
+				\item{By \autoref{theo:triangle-inequality-for-norms}, norms exhibit the triangle inequality.}
+			\end{enumerate}
+		\end{proof}	
+		\begin{corollary}
+			The absolute value function in $\R{}$ and the modulus function in $\C{}$ are norms in their respective fields.
+		\end{corollary}
+		\begin{proof}
+			This is implied by the reasoning above in (ii). We can also see it by examining the properties of the absolute value and modulus functions that they are also:
+			\begin{enumerate}[label=(\roman*)]
+				\item{positive definite by definition (\ref{ssection:absolute-value}, \ref{prop:complex-modulus-properties});}
+				\item{homomorphic \wrt scalar multiplication (\ref{prop:product-of-absolute-vals-is-absolute-val-of-product}, \ref{prop:complex-modulus-properties});}
+				\item{exhibit the triangle inequality (\ref{sssection:triangle-inequality}, \ref{prop:complex-modulus-properties}).}
+			\end{enumerate}
+		\end{proof}
 
 	}
 	

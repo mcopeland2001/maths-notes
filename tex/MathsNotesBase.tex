@@ -131,8 +131,11 @@
 \newcommand{\TODO}[1]{\textcolor{blue}{\small{\underline{TODO:} #1}}}
 \newcommand{\addref}{\TODO{add reference}}
 \newcommand{\references}[1]{\small \textit{references:} #1}
+\newcommand{\question}[1]{\textcolor{gray}{\small \underline{Question:} #1}}
 
 \DeclarePairedDelimiterX\setc[2]{\{}{\}}{\,#1 \,\;\delimsize\vert\;\, #2\,}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclareRobustCommand{\N}[1]{\mathbb{N}^{#1}}
 \DeclareRobustCommand{\R}[1]{\mathbb{R}^{#1}}
 \DeclareRobustCommand{\Z}[1]{\mathbb{Z}^{#1}}
@@ -219,6 +222,7 @@
 \def\theoremautorefname{Theorem}
 \def\corollaryautorefname{Corollary}
 \def\lemmaautorefname{Lemma}
+\def\axiomautorefname{Axiom}
 
 % \def\exautorefname{Example} doesn't work - don't know why
 

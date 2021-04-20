@@ -1,0 +1,77 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+
+
+
+\date{\vspace{-6ex}}
+
+
+\begin{document}	
+	\searchableSection{Limits}{calculus, limits}
+	\biggerskip
+	\searchableSubsection{Calculating Limits}{calculus, limits}{\label{ssection:calculating-limits}
+		Prove "Algebra of Infinite Limits" in Analysis:
+		\begin{itemize}
+			\item{${ \lim_{x \to a} f(x) = \infty, c > 0 \in \R{} \implies \lim_{x \to a} cf(x) = \infty }$}
+			\item{${ \lim_{x \to a} f(x) = \infty \implies \lim_{x \to a} \abs{f(x)} = \infty }$}
+			\item{${ \lim_{x \to a} f(x) = 0, c > 0 \in \R{} \implies \lim_{x \to a} c/f(x) = \infty }$}	
+		\end{itemize}
+		\nl[6]
+		\begin{itemize}
+			\item{All finite limits can be manipulated with the algebra of limits}
+			\item{Then, prove that if $\lim_{x \to a} f(x) = 0$ then $\lim_{x \to a} 1/f(x) = \infty$}
+			\item{Then remaining indeterminate forms are:
+				\begin{enumerate}
+					\item{${ \infty - \infty }$}
+					\item{${ \infty \times -\infty }$}
+					\item{${ 0 \times \infty }$}
+					\item{${ \frac{0}{0} }$}
+					\item{${ \frac{\infty}{\infty} }$}
+				\end{enumerate}
+				where the last 2 cases are handled by L'H\^{o}pital's rule.
+			}
+		\end{itemize}
+		
+		\bigskip
+		Let ${ f, g : \R{} \longmapsto \R{} }$ be two functions such that ${ \lim_{x \to a} f(x) = L }$ and ${ \lim_{x \to a} g(x) = M }$ where $a$, $L$ and $M$ may be infinity.\\
+		If $L$ and $M$ are both finite and non-zero then we can simply apply the algebra of limits from \autoref{prop:func-finite-limit-algebra} to determine the value of the limit of some simple algebraic combination of $f$ and $g$.\\
+		However, if both are infinite then we will need to manipulate the expression until we obtain one that can be decomposed into expressions whose limits are finite and can be combined using the algebra. 
+		
+		\subsection{Classes of Asymptotic Behaviour}
+		We can identify three classes of asymptotic behaviour of a function $f(x)$ as ${ x \to a }$ (where $a$ may be infinity), distinguished by the value of
+		\[ L = \lim_{x \to a} f(x). \]
+		These are functions $f(x)$ such that:
+		\begin{enumerate}[label=(\roman*)]
+			\item{${ L = 0 }$;}
+			\item{${ 0 < L < \infty }$;}
+			\item{${ L = \infty }$.}
+		\end{enumerate}
+	
+		Functions of classes (i) and (ii) can always be combined using \autoref{prop:func-finite-limit-algebra} apart from the specific exemption if a function of class (i) is a denominator.\\
+		Linear combinations including one function of class (iii) are dominated by it. For example, if $A$ is some number, we have,
+		\[  A + \infty = \infty = \infty - A \]
+		and
+		\[ A - \infty = -\infty = -A - \infty. \]
+		Furthermore
+		Products and ratios involving functions of classes (i) and (iii) are more complicated and need discussing at some length.
+		
+		\subsubsection{Products and Ratios}
+		
+	}
+	
+	\searchableSubsection{Limits of Ratios}{calculus, limits}{
+		\bigskip
+		Three cases of the limits of $f(t)$ and $g(t)$ as ${ t \to \infty }$:
+		\begin{itemize}
+			\item{both limits are finite: In this case we can apply (vi) of \autoref{prop:func-finite-limit-algebra} and the result $T$ will be finite. (note that if the denominator is 0 we can just swap the numerator and the denominator since we are only interested in the comparison.)}
+			\item{both limits are zero or infinite: In this case we can apply L'H\^{o}pital's rule (\ref{sssection:l_hopitals_rule}) and the result $T$ could be finite or infinite.}
+			\item{if one of the numerator or denominator is going infinite then we need to divide both by the dominant factor in the denominator so as to obtain a fraction with a numerator and denominator which both remain finite as ${ t \to \infty }$.}
+		\end{itemize}
+		\question{do we have some problem cases where the one is zero and the other infinite and they can't be converted into a ratio of both zeroes or infinites?}
+		
+		\bigskip
+		\subsubsection{\texorpdfstring{L'H\^{o}pital's Rule}{L'Hôpital's Rule}}\label{sssection:calc_l_hopitals_rule}
+		see: \href{https://web.ma.utexas.edu/users/m408n/m408c/CurrentWeb/LM4-4-11.php}{UTexas}
+	}
+	
+\end{document}

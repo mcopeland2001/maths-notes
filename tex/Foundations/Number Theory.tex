@@ -349,11 +349,11 @@
 		\begin{align*}			
 			\vert{x + y}\vert =
 				\begin{cases} 
-      \vert{x}\vert + \vert{y}\vert & x,y \geq 0 \\
-      \vert{ -\vert{x}\vert + \vert{y}\vert }\vert & x < 0,y \geq 0 \\
-      \vert{ \vert{x}\vert - \vert{y}\vert }\vert & x \geq 0,y < 0 \\
-      \vert{ -(\vert{x}\vert + \vert{y}\vert) }\vert & x,y < 0
-   \end{cases}
+			      \vert{x}\vert + \vert{y}\vert & x,y \geq 0 \\
+			      \vert{ -\vert{x}\vert + \vert{y}\vert }\vert & x < 0,y \geq 0 \\
+			      \vert{ \vert{x}\vert - \vert{y}\vert }\vert & x \geq 0,y < 0 \\
+			      \vert{ -(\vert{x}\vert + \vert{y}\vert) }\vert & x,y < 0
+			   \end{cases}
 			\iff
 				\begin{cases} 
 					\vert{ \vert{x}\vert + \vert{y}\vert }\vert & x,y \geq 0 \text{ or } x,y < 0) \\
@@ -366,14 +366,14 @@
 		and this is known as the "triangle inequality".\bigskip
 		
 		\bigskip
-		\labeledProposition{$\vert{x - y}\vert \leq \vert{x - z}\vert + \vert{y - z}\vert$}{asdfa}
+		\labeledProposition{$\vert{x - y}\vert \leq \vert{x - z}\vert + \vert{y - z}\vert$}{diff-of-two-vals-is-leq-sum-of-diff-of-vals-with-third-val}
 		\begin{proof}
 		\begin{align*}
 			\vert{x - y}\vert = \vert{(x - z) + (z - y)}\vert \leq \vert{x - z}\vert + \vert{z - y}\vert = \vert{x - z}\vert + \vert{y - z}\vert
 		\end{align*}
 		\end{proof}
 		
-		\labeledProposition{$\vert{x - y}\vert \geq \vert{ \vert{x}\vert - \vert{y}\vert }\vert$}{asdfa}
+		\labeledProposition{$\vert{x - y}\vert \geq \vert{ \vert{x}\vert - \vert{y}\vert }\vert$}{reverse-triangle-inequality}
 		\begin{proof}
 		Need to show $-\vert{x - y}\vert \leq \vert{x}\vert - \vert{y}\vert \leq \vert{x - y}\vert$. So, prove as two separate inequalities:
 		\begin{align*}				
@@ -386,6 +386,27 @@
 		\end{align*}
 		\end{proof}
 	}
+
+
+
+
+% --------------------- break ---------------------
+\pagebreak
+
+\searchableSubsection{Rational Numbers}{number theory, rational numbers}{
+	\TODO{construction of the rationals from the integers.}
+}
+
+
+
+% --------------------- break ---------------------
+\pagebreak
+
+	\searchableSubsection{Real Numbers}{number theory, real numbers}{
+		\question{Should the reals be considered a superclass of the naturals or the other way around? Answer: We would have to use the approach that is used in computer programming languages. That's to say, reals are a wider type (so similar to a base class) and operations are, effectively defined over the wider type. So, if a natural number is combined under some operation with a real number then the result is a real number.}
+		\TODO{some words about constructing the reals from the rationals.}
+	}
+
 
 
 
@@ -402,6 +423,34 @@
 			
 			If ${ z = a + bi }$ is a complex number then ${ \RePart(z) = a }$ and ${ \ImPart(z) = b }$.
 		}\label{defn:complex-numbers}
+	
+		\bigskip
+		\subsubsection{Roots of Quadratics}
+		\bigskip
+		\labeledProposition{For any numbers $a$ and $b$,
+			\[ (a^2 + b^2) - 2ab = (a - b)^2. \]
+		}{for-any-two-numbers-the-sum-of-squares-minus-twice-product-is-the-square-of-the-difference}
+		\begin{proof}
+			\[ (a - b)^2 = a^2 - 2ab + b^2 \iff (a^2 + b^2) - 2ab = (a - b)^2. \]
+		\end{proof}
+		\begin{corollary}
+			Let ${ z \in \C{}, a,b \in \R{} }$ and
+			\[ p(z) = (z + a)(z + b) = z^2 + (a + b)z + ab \]
+			be a complex polynomial with real coefficients. Then the discriminant of $p(z)$ is
+			\[ (a + b)^2 - 4ab = a^2 + b^2 + 2ab - 4ab = (a^2 + b^2) - 2ab = (a - b)^2. \]
+			So the roots of $p(z)$ are:
+			\begin{itemize}
+				\item{real-valued and distinct if:
+					\[ (a - b)^2 > 0; \]
+				}
+				\item{real-valued and equal if:
+					\[ (a - b)^2 = 0; \]
+				}
+				\item{complex-valued and conjugates if:
+					\[ (a - b)^2 < 0. \]
+				}
+			\end{itemize}
+		\end{corollary}
 		
 		\bigskip
 		\subsubsection{The Modulus}
@@ -411,15 +460,23 @@
 		}
 	
 		\medskip
+		\labeledProposition{The modulus of a complex number is greater than or equal to the real part or the imaginary part. That's to say, for any ${ z \in \C{} }$,
+			\[ \modulus{z} \geq \RePart(z) \land \modulus{z} \geq \ImPart(z). \]
+		}{complex-modulus-geq-real-or-imaginary-part}
+		\begin{proof}
+			From the definition, if ${ z = a + bi }$ then ${ \RePart(z) = a }$ and ${ \ImPart(z) = b }$ and the modulus,
+			\[ \modulus{z} = \sqrt{a^2 + b^2} = \sqrt{\RePart(z)^2 + \ImPart(z)^2} \, \geq \, \RePart(z), \ImPart(z). \]
+		\end{proof}
+	
+		\medskip
 		\labeledProposition{Properties of the modulus of complex numbers (${ z,z_1,z_2 }$ refer to complex numbers):
 			\begin{enumerate}[label=(\roman*)]
 				\item{Real-valued: ${ \forall z \logicsep \modulus{z} \in \R{} }$.}
 				\item{Positive definiteness (\href{https://en.wikipedia.org/wiki/Definite_quadratic_form}{wikipedia}): \\
 					\[ \modulus{0} = 0 \eqand \forall z \neq 0 \logicsep \modulus{z} > 0. \]
 				}
-				\item{${ \modulus{z} \geq \RePart(z) \land \modulus{z} \geq \ImPart(z) }$.}
-				\item{${ \modulus{z_1z_2} = \modulus{z_1}\modulus{z_2} }$.}
-				\item{${ \modulus{z_1 + z_2} \leq \modulus{z_1} + \modulus{z_2} }$.}
+				\item{Homomorphism \wrt scalar multiplication: ${ \modulus{z_1z_2} = \modulus{z_1}\modulus{z_2} }$.}
+				\item{Triangle Inequality: ${ \modulus{z_1 + z_2} \leq \modulus{z_1} + \modulus{z_2} }$.}
 			\end{enumerate}
 		}{complex-modulus-properties}
 		\begin{proof}\nl
@@ -432,9 +489,6 @@
 					\[ a = b = 0 \implies a^2 + b^2 = 0 \implies \modulus{z} = \sqrt{a^2 + b^2} = 0. \]
 					\[ a,b \neq 0 \implies a^2 + b^2 > 0 \implies \modulus{z} = \sqrt{a^2 + b^2} > 0.  \]
 				}
-				\item{From the definition, if ${ z = a + bi }$ then ${ \RePart(z) = a }$ and ${ \ImPart(z) = b }$ and the modulus,
-					\[ \modulus{z} = \sqrt{a^2 + b^2} = \sqrt{\RePart(z)^2 + \ImPart(z)^2} \, \geq \, \RePart(z), \ImPart(z). \]
-				}
 				\item{Firstly observe that, for ${ z_1 = a_1 + b_1 i, \, z_2 = a_2 + b_2 i }$ we have,
 					\[\begin{aligned}
 						z_1 z_2 &= (a_1 + b_1 i)(a_2 + b_2 i) \\
@@ -444,19 +498,53 @@
 					Then,
 					\[\begin{aligned}
 						\modulus{z_1 z_2} &= [(a_1 a_2 - b_1 b_2)^2 + (a_1 b_2 + a_2 b_1)^2]^{\frac{1}{2}} \\
-						&= [a_1^2 a_2^2 - 2 a_1 a_2 b_1 b_2 + b_1^2 b_2^2 + a_1^2 b_2^2 + 2 a_1 a_2 b_1 b_2 + a_2^2 b_1^2]^{\frac{1}{2}} \\
-						&= [a_1^2 a_2^2 + b_1^2 b_2^2 + a_1^2 b_2^2 + a_2^2 b_1^2]^{\frac{1}{2}} \\
-						&= [(a_1^2 + b_1^2)(a_2^2 + b_2^2)]^{\frac{1}{2}} \\
-						&= [(a_1^2 + b_1^2)]^{\frac{1}{2}} \, [(a_2^2 + b_2^2)]^{\frac{1}{2}} \\
+						&= [{a_1}^2 {a_2}^2 - 2 a_1 a_2 b_1 b_2 + {b_1}^2 {b_2}^2 + {a_1}^2 {b_2}^2 + 2 a_1 a_2 b_1 b_2 + {a_2}^2 {b_1}^2]^{\frac{1}{2}} \\
+						&= [{a_1}^2 {a_2}^2 + {b_1}^2 {b_2}^2 + {a_1}^2 {b_2}^2 + {a_2}^2 {b_1}^2]^{\frac{1}{2}} \\
+						&= [({a_1}^2 + {b_1}^2)({a_2}^2 + {b_2}^2)]^{\frac{1}{2}} \\
+						&= [({a_1}^2 + {b_1}^2)]^{\frac{1}{2}} \, [({a_2}^2 + {b_2}^2)]^{\frac{1}{2}} \\
 						&= \modulus{z_1}\modulus{z_2}.
 					\end{aligned}\]
 				}
-				\item{\TODO{prove triangle inequality for complex modulus: https://tutorial.math.lamar.edu/Extras/ComplexPrimer/ConjugateModulus.aspx}}
+				\item{Let ${ z_1 = a_1 + b_1 i, \, z_2 = a_2 + b_2 i }$. Then,
+					\[\begin{aligned}
+						\modulus{z_1 + z_2}^2 &= \modulus{(a_1 + a_2) + (b_1 + b_2)i}^2 \nn
+						&= (a_1 + a_2)^2 + (b_1 + b_2)^2 \nn
+						&= {a_1}^2 + {a_2}^2 + 2 a_1 a_2 + {b_1}^2 + {b_2}^2 + 2 b_1 b_2 \nn
+						&= ({a_1}^2 + {a_2}^2 + {b_1}^2 + {b_2}^2) + 2 (a_1 a_2 + b_1 b_2),
+					\end{aligned}\]
+					\nl
+					\[\begin{aligned}
+						(\modulus{z_1} + \modulus{z_2})^2 &= (\sqrt{{a_1}^2 + {b_1}^2} + \sqrt{{a_2}^2 + {b_2}^2})^2 \nn
+						&= {a_1}^2 + {b_1}^2 + 2 \sqrt{({a_1}^2 + {b_1}^2)({a_2}^2 + {b_2}^2)} + {a_2}^2 + {b_2}^2 \nn
+						&= ({a_1}^2 + {a_2}^2 + {b_1}^2 + {b_2}^2) + 2 \sqrt{({a_1}^2 + {b_1}^2)({a_2}^2 + {b_2}^2)}.
+					\end{aligned}\]
+					\nl
+					So
+					\[\begin{aligned}
+						&& \modulus{z_1 + z_2}^2 &\leq (\modulus{z_1} + \modulus{z_2})^2 \nn
+						&\iff & (a_1 a_2 + b_1 b_2) &\leq \sqrt{({a_1}^2 + {b_1}^2)({a_2}^2 + {b_2}^2)} \nn
+						&\iff & (a_1 a_2 + b_1 b_2)^2 &\leq ({a_1}^2 + {b_1}^2)({a_2}^2 + {b_2}^2) \nn
+						&\iff & (a_1 a_2)^2 + (b_1 b_2)^2 + 2 a_1 a_2 b_1 b_2 &\leq \\
+						&&& ({a_1}{a_2})^2 + ({a_1}{b_2})^2 + ({b_1}{a_2})^2 + ({b_1}{b_2})^2 \nn
+						&\iff & 2 a_1 a_2 b_1 b_2 &\leq ({a_1}{b_2})^2 + ({b_1}{a_2})^2 \nn
+						&\iff & 2 (a_1 b_2) (b_1 a_2) &\leq ({a_1}{b_2})^2 + ({b_1}{a_2})^2 \nn
+					\end{aligned}\]
+					By \autoref{prop:for-any-two-numbers-the-sum-of-squares-minus-twice-product-is-the-square-of-the-difference}, for any numbers ${ p = a_1 b_2, q = b_1 a_2 }$,
+					\[ 2 p q \leq p^2 + q^2. \]
+					\note{Equality is attained when 
+						\[ a_1 b_2 = b_1 a_2 \iff a_1 + b_1 = \alpha (a_2 + b_2) \]
+						 for ${ \alpha = \frac{a_1}{a_2} = \frac{b_1}{b_2} }$. This is actually an instance of Cauchy-Schwarz (\autoref{theo:cauchy-schwarz-inequality}).
+					 }
+				}
 			\end{enumerate}
 		\end{proof}
+		\begin{corollary}
+			If $\C{}$ is considered to be a 1-dimensional vector space over itself, then the modulus function is a vector norm (definition: \ref{def:vector-norm}, properties: \autoref{prop:norm-properties}) in this space.
+		\end{corollary}
 	
 	
-		\bigskip
+	
+		\biggerskip
 		\subsubsection{The Exponential Form}
 		\boxeddefinition{The \textbf{exponential form} of a complex number ${ z = a + ib }$ is defined as
 			\[ z = r e^{i\theta} \eqword{for} r,\theta \in \R{} \]
@@ -482,7 +570,9 @@
 		\end{aligned}\]
 		(more difficult to prove for non-even integer powers)
 		
-		\bigskip
+		
+		
+		\biggerskip
 		\subsubsection{The Complex Conjugate}
 		\boxeddefinition{\textbf{(Complex Conjugate)} For a complex number ${ z = a + ib }$, the \textbf{conjugate} of $z$, denoted $\conj{z}$, is defined as,
 			\[ \conj{z} = a - ib. \]

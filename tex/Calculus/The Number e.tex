@@ -110,7 +110,7 @@
 		Then, taking logs of both sides,
 		\begin{align*}
 		&& \ln{e} &= \ln{\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n} \\[8pt]
-		&&  &= \lim_{n \to \infty} \ln{\left(1 + \frac{1}{n}\right)^n} &\sidecomment{by \autoref{theo:comps_continuous_functions_are_continuous}} \\[8pt]
+		&&  &= \lim_{n \to \infty} \ln{\left(1 + \frac{1}{n}\right)^n} &\sidecomment{by \autoref{prop:composition-of-continuous-funcs-is-continuous}} \\[8pt]
 		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)}}{1/n} &\sidecomment{using \autoref{prop:log-x-to-power-r-is-r-times-log-x}} \\[8pt]
 		&&  &= \lim_{n \to \infty} \frac{\ln{\left(1 + \frac{1}{n}\right)} - \ln{1}}{1/n} &\sidecomment{} \\[8pt]
 		&&  &= \lim_{h \to 0} \frac{\ln{\left(1 + h\right)} - \ln{1}}{h} &\sidecomment{} \\[8pt]
@@ -129,7 +129,7 @@
 	\bigskip\bigskip\bigskip
 	\subsubsection{\texorpdfstring{$e^x$}{e to the power x}}\label{sssection:e-to-the-power-x}
 	\bigskip
-	Taking the limit definition of $e$ (definition (i)) and raising it to the power of $x$, by (vi) of \autoref{theo:func-limit-properties}, we have
+	Taking the limit definition of $e$ (definition (i)) and raising it to the power of $x$, by (vi) of \autoref{prop:func-finite-limit-algebra}, we have
 	\[ e^x = \left[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n\right]^x = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{xn}. \]
 	If we expand this out using binomial theorem we get,
 	\begin{align*}
