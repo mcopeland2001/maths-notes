@@ -4,11 +4,20 @@
 
 \begin{document}
 
-\searchableSection{Number Theory}{number theory}
+\searchableSection{Numbers}{numbers}
+	\biggerskip
+	
 		
-	\searchableSubsection{Natural Numbers}{number theory, natural numbers}{
-		
+	\searchableSubsection{Natural Numbers}{numbers, natural numbers}{
+		\bigskip
+		\subsubsection{Pre-requisites}
+		Certain assumptions are required before even the definition of natural numbers. Most of these correspond to Euclid's "Common Notions" (\href{http://pi.math.cornell.edu/~dwh/books/eg00/00EG-AA/}{Cornell Uni - Euclid's Definitions, Postulates and Common Notions}). In particular, these give general notions of equivalence and substitutability of equal objects,
+		\[ a = b \implies c + a = c + b. \]
+		Also required are some fundamental axioms of logic often referred to as the \href{https://en.wikipedia.org/wiki/Law_of_thought}{Laws of Thought - Wikipedia}.
+			
+		\bigskip
 		\subsubsection{Peano Axioms}
+		
 		\begin{axiom}{Closure under addition:}\\ For all $a,b \in \N{}$ we have $a + b \in \N{}$.	
 		\end{axiom}
 		\begin{axiom}{Closure under multiplication:}\\ For all $a,b \in \N{}$ we have $a \times b \in \N{}$.
@@ -34,9 +43,15 @@
 		\begin{axiom}{Trichotomous property:}\\ For all $a,b \in \N{}$ exactly one of the following is true: $a = b,\; a < b,\; b < a$.
 		\end{axiom}
 	
+		Not formally one of Peano's axioms but also required is the following axiom:
+		\begin{axiom}{Well-Ordering Principle: see \ref{sssection:well-ordering-theorem}:}\\ Every non-empty subset of $\N{}$ has a least element.
+		\end{axiom}
+		
+	
 		\bigskip
 		\notation{We also write $ab$ for $a \times b$.}
-				
+		
+		\biggerskip		
 		\labeledProposition{If $a,b \in \N{}$ satisfy $a \times b = a$, then $b = 1$.}{mult_identity_unique}
 			\begin{proof}
 			\begin{align*}
@@ -64,13 +79,68 @@
 			But, closure of multiplication and $m \times m < m$ together contradict the assumption that $m$ is the least element of $\N{}$.\\
 			Therefore $m$ cannot be less than $1$. Since we know that $1 \in \N{}$ and that the minimum element of $\N{}$, $m$, cannot be less than $1$, it follows that $1$ must be the minimum element of $\N{}$ and $m = 1$.
 		\end{proof}
+	
+		
+		
+		\biggerskip
+		\subsubsection{Induction}
+		\bigskip
+		\labeledTheorem{\textbf{(Induction Principle)} Let ${f: \N{} \longmapsto X }$ be a bijective function from the naturals to some set of objects $X$ and let ${ P: X \longmapsto \B{} }$ be a predicate. Then, for ${ N < k \in \N{} }$,
+			\[ P(f(N)) \land [\, P(f(k) \implies P(f(k+1) \,] \; \implies \; \forall n > N \in \N{} \logicsep P(f(n)). \]}{induction-principle}
+		\begin{proof}
+			Assume for contradiction that
+			\[ P(f(N)) \land [\, P(f(k) \implies P(f(k+1) \,] \tag{*} \]
+			but there exists some ${ n > N \in \N{} }$ such that ${ \lnot P(f(n)) }$. Then, the set
+			\[ S = \setc{n \in \N{}}{ n > N \; \land \; \lnot P(f(n)) } \]
+			is non-empty. By the Well-Ordering Principle (\ref{sssection:well-ordering-theorem}), there is a least element of $S$. Let $a$ be the least element of $S$.\\
+			
+			Since, by \autoref{prop:mult_identity_least_element}, 1 is the least element of $\N{}$, either ${ N = 1 }$ or ${ 1 < N }$. In either case, ${ 1 < a }$. Therefore, by the definition of $<$, ${ \exists b \in \N{} }$ such that ${ 1 + b = a }$. By commutativity of addition therefore, ${ b + 1 = a }$ and, again invoking the definition of $<$, we have ${ b < a }$. Since ${ b < a }$, ${ b \centernot\in S }$ and we have ${ P(f(b)) }$. But, by (*), we have
+			\[ P(f(b)) \implies P(f(b+1)) = P(f(a)). \]
+			But this implies that ${ a \centernot\in S }$ which contradicts the definition of $a$.
+		\end{proof}
 	}
 
 
-	\searchableSubsection{Integers}{number theory, integers}{
-		
-		\TODO{construction of the integers from peano natural numbers}
 
+
+%-------------- break -------------
+\pagebreak
+
+	
+	
+	\searchableSubsection{Integers}{numbers, integers}{
+		
+		\biggerskip
+		\subsubsection{Construction of Integers from Peano Numbers}
+		\bigskip
+		\boxeddefinition{\textbf{(Integers)} An integer $n$ is defined as an equivalence class of a relation on the set of ordered pairs of naturals,
+			\[ \rel \subset (\N{} \times \N{}) \times (\N{} \times \N{}) \]
+			defined as, for ${ a,b,c,d \in \N{} }$,
+			\[ (a,b) \rel (c,d) \iff a + d = c + b. \]
+			
+			Using $[x]$ to denote the equivalence class of $x$, addition and multiplication are defined as follows:
+			\begin{itemize}
+				\item ${ n_1 + n_2 = [(a,b)] + [(c,d)] = [(a+c, b+d)] }$
+				\item ${ n_1 \times n_2 = [(a,b)] \times [(c,d)] = [(ac + bd, ad + bc)] }$
+			\end{itemize}
+		
+			Ordering is defined as
+			\[ [(a,b)] < [(c,d)] \iff a + d < b + c. \]
+		}
+	
+		\notation{We assign the standard notations to the integers as defined above (where $[x]$ denotes the equivalence class of $x$):
+			\begin{itemize}
+				\item ${ [(1,1)] = 0 }$
+				\item ${ [(n+1,1)] = n \eqand [(1,n+1)] = -n }$
+			\end{itemize}
+		}
+	
+		\biggerskip
+		\boxedaxiom{\textbf{(Well-Ordering Principle for Integers)} Any non-empty set of integers that has a lower bound, has a least member.}
+		
+		
+		
+		\biggerskip
 		\subsubsection{Odd and Even Numbers}\bigskip
 		
 		\begin{definition}
@@ -299,7 +369,7 @@
 		\TODO{There is also another approach given in the Cambridge University Discrete Mathematics lecture notes}
 	}
 	
-	\searchableSubsection{Absolute Value}{number theory, absolute value}{
+	\searchableSubsection{Absolute Value}{numbers, absolute value}{
 	\label{ssection:absolute-value}
 	\bigskip
 	
@@ -393,7 +463,7 @@
 % --------------------- break ---------------------
 \pagebreak
 
-\searchableSubsection{Rational Numbers}{number theory, rational numbers}{
+\searchableSubsection{Rational Numbers}{numbers, rational numbers}{
 	\TODO{construction of the rationals from the integers.}
 }
 
@@ -402,7 +472,7 @@
 % --------------------- break ---------------------
 \pagebreak
 
-	\searchableSubsection{Real Numbers}{number theory, real numbers}{
+	\searchableSubsection{Real Numbers}{numbers, real numbers}{
 		\question{Should the reals be considered a superclass of the naturals or the other way around? Answer: We would have to use the approach that is used in computer programming languages. That's to say, reals are a wider type (so similar to a base class) and operations are, effectively defined over the wider type. So, if a natural number is combined under some operation with a real number then the result is a real number.}
 		\TODO{some words about constructing the reals from the rationals.}
 	}
@@ -414,7 +484,7 @@
 
 
 	\pagebreak
-	\searchableSubsection{Complex Numbers}{number theory, complex numbers}{
+	\searchableSubsection{Complex Numbers}{numbers, complex numbers}{
 		\bigskip
 		\boxeddefinition{Complex numbers are the members of the set
 			\[ \C{} = \setc{a + bi}{a,b \in \R{}} \]

@@ -24,6 +24,22 @@
 			In so doing, it establishes a relationship between the two groups: the additive group and the multiplicative group.
 		}
 	
+		\bigskip
+		\labeledTheorem{\textbf{(Difference of Cubes)} For ${ a,b \in \F{} }$,
+			\[ a^3 - b^3 = (a - b)(a^2 + b^2 + ab). \]
+		}{difference-of-cubes}
+		\begin{proof}
+			\[\begin{aligned}
+				&(a - b)(a^2 + b^2 + ab) \\
+				&= (a^3 + ab^2 + a^2b) - (ba^2 + b^3 + bab)  &\sidecomment{by distributive law}\\
+				&= (a^3 + ab^2 + a^2b) - (a^2b + b^3 + ab^2)  &\sidecomment{by commutativity of multiplication}\\
+				&= a^3 + ab^2 + a^2b + (-a^2b) + (-b^3) + (-ab^2)  &\sidecomment{by distributive law}\\
+				&= (a^3 + (-b^3)) + (ab^2 + (-ab^2)) + (a^2b + (-a^2b))  &\sidecomment{by associativity of +}\\
+				&= (a^3 + (-b^3)) + 0 + 0 = a^3 - b^3.  &\sidecomment{by additive inverse}\\
+			\end{aligned}\]
+		\end{proof}
+		\note{Note that the above proof does not require the multiplicative inverse property of fields and so a field is sufficient but not necessary. For this reason, the above theorem holds also in the integers $\Z{}$ although it wouldn't be defined in the naturals $\N{}$ as, e.g. $(-b^3)$ would be undefined.}
+	
 		
 		\biggerskip
 		\subsubsection{Real-Number Exponentiation}\label{sssection:real-number-exponentiation}

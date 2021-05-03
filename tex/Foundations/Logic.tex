@@ -1,0 +1,23 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+
+	\searchableSubsection{Logic}{logic}{
+		\biggerskip
+		\subsubsection{Basic Identities}
+		
+		\subheading{Negation of Universals and Existentials}
+		\[ \lnot (\forall n \logicsep P(n)) \equiv \exists n \logicsep \lnot P(n) \]
+		\[ \lnot (\exists n \logicsep P(n)) \equiv \forall n \logicsep \lnot P(n) \]
+		
+		\subheading{De Morgan's Law}
+		\[ \lnot (P \land Q) \equiv \lnot P \lor \lnot Q \]
+		
+		\subheading{Implication}
+		\[ P \implies Q \equiv \lnot Q \lor P \]
+		\[ P \implies Q \equiv \lnot Q \implies \lnot P \]
+		\note{Note the (informally agreed) operator precedence rules for logical operators: \href{http://intrologic.stanford.edu/intrologic/glossary/operator_precedence.html}{Stanford}.}
+	}
+\end{document}

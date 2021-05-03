@@ -128,6 +128,29 @@
 
 	\searchableSubsection{Sequences}{analysis}{
 		\biggerskip
+		\boxeddefinition{\textbf{(Sequence)} A (real-valued) \textit{sequence} is a function from the naturals to the reals,
+			\[ f: \N{}\longmapsto \R{}. \]
+			The value $f(n)$ is called the \textit{n\textsuperscript{th} term} of the sequence.\\
+			
+			A sequence may be defined either:
+			\begin{itemize}
+				\item{Explicitly, by defining the function $f$ as an expression of the term number $n$,
+					\[ f(n) = h(n) \]
+					where $h$ is some real-valued function of arity 1.
+				}
+				\item{Inductively, by specifying one or more initial terms and a recurrence that specifies term $n$ as a function of one or more previous terms,
+					\[\begin{aligned}
+						&f(1) = \alpha_1, \, \dots , \, f(k) = \alpha_k, \nn
+						&f(n) = h(f(n-1), \dots, f(n-k))
+					\end{aligned}\]
+					where ${ \alpha_1, \dots, \alpha_k \in \R{} }$ and $h$ is some real-valued function of arity $k$.
+				}
+			\end{itemize}
+		}
+		\notation{A sequence may be denoted $(f(n))_{n=1}^\infty$ or $(f(n))$, where $f$ is the function that defines the sequence or, a more informal notation is common where $(a_n)_{n=1}^\infty$ or $(a_n)$ (or sometimes $\{a_n\}$) is used to denote the sequence with $a_n$ referring to the $n$-th term.
+		}
+		
+		\bigskip
 		\boxeddefinition{\textbf{(Bounded Sequence)} If $a_n$ is a sequence and $ S = \setc{a_n}{n \in \N{}} $ then $a_n$ is said to be \textbf{bounded below} if $S$ has a lower bound and \textbf{bounded above} if $S$ has an upper bound, and \textbf{bounded} if it is bounded above and below.
 		}\label{def:bounded-sequence}
 		
@@ -140,18 +163,32 @@
 	
 		\subsubsection{Limits of Sequences}
 		\bigskip
-		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend} to $L$ or have the \textbf{limit} $L$ iff,
+		\boxeddefinition{\textbf{(Sequence Convergence)} A sequence $a_n$ is said to \textbf{tend} to $L$ or have the \textbf{limit} $L$ iff,
 			\[ \forall \epsilon > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \abs{a_{n} - L} < \epsilon. \]
-		}\label{def:tend-to-L}
+		}\label{def:seq-tends-to-L}
 		\boxeddefinition{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{\mbox{$\epsilon$-neighbourhood of $L$}}.}
 		
-		\boxeddefinition{A sequence $a_n$ is said to \textbf{tend to infinity} iff,
+		\boxeddefinition{\textbf{(Sequence Divergence)} A sequence $a_n$ is said to \textbf{tend to infinity} iff,
 			\[ \forall M > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} > M \]
 			and \textbf{tend to minus-infinity} iff,
 			\[ \forall M < 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} < M. \]
-		}
+		}\label{def:seq-tends-to-infinity}
 	
-		\boxeddefinition{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}		
+		\boxeddefinition{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
+		
+		\note{A mnemonic for the taxonomy of convergence/divergence behaviours.\\\\
+			\begin{tabular}[h!]{|c|c|c|c|}
+				\cline{1-4}
+				convergent & \multicolumn{3}{c|}{divergent}\\
+				\cline{1-4}
+				bounded & bounded & \multicolumn{2}{c|}{unbounded} \\
+				\cline{2-4}
+				& oscillatory & oscillatory & non-oscillatory \\
+				\cline{3-4}
+				& & unbounded oscillatory & ${ \to \infty }$ or ${ \to -\infty }$\\
+				\cline{1-4}
+			\end{tabular}
+		}		
 		
 		\bigskip
 		\note{Note that if we were to use a less formal description of a limit, for example, if we say that a sequence tends to some value $L$ when the terms of the sequence \textit{gets closer and closer to} $L$, then we encounter the following problems:
@@ -172,7 +209,7 @@
 		\begin{proof}
 			Suppose $L_1$ and $L_2$ are both limits of the sequence $a_n$ and that
 			\[  L_1 \neq L_2 \implies \abs{L_2 - L_1} = d > 0. \]
-			By the definition of the limit of a sequence \ref{def:tend-to-L},
+			By the definition of the limit of a sequence \ref{def:seq-tends-to-L},
 			\[ \forall \epsilon_1 > 0 \in \R{} \logicsep \exists N_1 \in \N{} \logicsep \forall n > N_1 \logicsep \abs{a_n - L_1} < \epsilon_1, \]
 			\[ \forall \epsilon_2 > 0 \in \R{} \logicsep \exists N_2 \in \N{} \logicsep \forall n > N_2 \logicsep \abs{a_n - L_2} < \epsilon_2. \]
 			Let ${ \epsilon_1 = \epsilon_2 = \epsilon }$ so that, for all $\epsilon$,
@@ -241,7 +278,7 @@
 			\[ \forall n > N \logicsep \abs{a_n - \sigma} < \epsilon. \]
 			This result was shown for an arbitrary, strictly positive, value of $\epsilon$ so we therefore have,
 			\[ \forall \epsilon > 0 \in \R{} \logicsep \exists N \in \N{} \logicsep \forall n > N \logicsep \abs{a_n - \sigma} < \epsilon \]
-			which, by the definition of the limit of a sequence (\ref{def:tend-to-L}), is to say that the sequence $a_n$ converges to the limit $\sigma$.
+			which, by the definition of the limit of a sequence (\ref{def:seq-tends-to-L}), is to say that the sequence $a_n$ converges to the limit $\sigma$.
 		\end{proof}
 		
 		\medskip
@@ -251,6 +288,42 @@
 		\begin{corollary}\label{coro:decreasing-seq-bounded-below-converges-to-infimum}
 			A decreasing sequence that is bounded below converges to the infimum of its elements.
 		\end{corollary}
+	
+		\bigskip
+		\labeledProposition{If a sequence $a_n$ converges to $L$ and ${ a_n \geq M }$ for all ${ n \in \N{} }$ then,
+			\[ L \geq M. \]
+		}{if-a-seq-is-geq-M-and-converges-to-L-then-L-is-geq-M}
+		\begin{proof}
+			By the definition of the limit of a sequence (\ref{def:seq-tends-to-L}),
+			\[ \forall \epsilon > 0 \in \R{} \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a_n - L} < \epsilon. \]
+			Suppose, for contradiction, that ${ L < M }$. Then there exists ${ \epsilon = M - L > 0 \in \R{} }$ and since ${ a_n \geq M }$, we have for all $n$,
+			\[ a_n \geq M \iff a_n - L \geq M - L = \epsilon. \]
+			But the definition of the limit of $a_n$ implies that
+			\[ -\epsilon < a_n - L < \epsilon \]
+			and so, ${ L < M }$ and ${ a_n \geq M }$ together, contradict the convergence of $a_n$ to $L$.\\
+			It follows that ${ L \geq M }$.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{If a sequence $(a_n)$ converges to $L$ and a sequence $(b_n)$ converges to $M$ then,
+			\[ \forall n \in \N{} \logicsep a_n \leq b_n \implies L \leq M. \]
+		}{seq-terms-geq-implies-seq-limit-geq}
+		\begin{proof}
+			Assume for contradiction that ${ L > M }$. Then there exists some ${ \epsilon = \frac{L - M}{4} > 0 \in \R{} }$ so that,
+			\[ \exists N_1 \logicsep \forall n > N_1 \in \N{} \logicsep \abs{a_n - L} < \epsilon = \frac{L - M}{4} \]
+			and also
+			\[ \exists N_2 \logicsep \forall n > N_2 \in \N{} \logicsep \abs{b_n - M} < \epsilon = \frac{L - M}{4} \]
+			so we can take ${ N = \max \{N_1,N_2\} }$ and then, for all ${ n > N \in \N{} }$,
+			\[ \abs{(a_n - b_n) + (M - L)} = \abs{(a_n - L) + (M - b_n)} \leq \abs{a_n - L} + \abs{b_n - M} < 2\epsilon. \]
+			It follows then that,
+			\[\begin{aligned}
+				&& \abs{(a_n - b_n) + (M - L)} &< \frac{L - M}{2} \nn
+				&\iff & \frac{M - L}{2} < (a_n - b_n) + (M - L) &<  \frac{L - M}{2} &\sidecomment{} \nn
+				&\iff & \frac{1}{2}(L - M) < a_n - b_n &<  \frac{3}{2}(L - M).
+			\end{aligned}\]
+			But the assumption ${ L > M }$ implies that ${ L - M > 0 }$ so the above result implies that ${ a_n - b_n > 0 }$ also. This contradicts the construction of the sequences in which ${ a_n \leq b_n }$ for all $n$.
+		\end{proof}
+
 	
 		
 	
@@ -573,15 +646,13 @@
 
 		\subsubsection{Subsequences}
 		\bigskip
-		\boxeddefinition{\textbf{(Subsequence)} Let ${ (a_n)_{n \in \N{}} }$ be a sequence and consider some strictly increasing natural
-			numbers ${ \{ k_1, k_2, k_3, \dots \} }$ such that ${ k_1 < k_2 < k_3 < k_4 < \dots }$ Then the sequence ${ (a_{k_n})_{n \in \N{}} }$ is
-			called a \textit{subsequence} of the sequence ${ (a_n)_{n \in \N{}} }$.\\
-	
-			A subsequence is always infinite.
+		\boxeddefinition{\textbf{(Subsequence)} Let ${ (a_n)_{n \in \N{}} }$ be a sequence and let $f$ be a strictly increasing function ${ \N{} \longmapsto \N{} }$. Then the sequence ${ (a_{f(n)})_{n \in \N{}} }$ is called a \textit{subsequence} of the sequence ${ (a_n)_{n \in \N{}} }$.\\
+
+		Equivalently, if ${ A = \setc{f(n)}{n \in \N{}} \subseteq \N{} }$ then the subsequence ${ (a_{f(n)})_{n \in \N{}} }$ can also be referred to as ${ (a_{n})_{n \in A} }$.
 		}\label{def:subsequence}
 	
 		\medskip
-		\labeledProposition{If $a_n$ is a sequence that tends to a limit, then any subsequence of it tends to the same limit.}{subseq_tends_to_same_limit}
+		\labeledProposition{If $a_n$ is a sequence that tends to a limit, then any subsequence of it tends to the same limit.}{subseq-tends-to-same-limit}
 		\begin{proof}
 			Firstly, notice that if the $n$th index of some subsequence is $k_n$ then $k_n \geq n$ (because the subsequence can only skip terms of the original - it can't add in terms). So then, if we have a sequence $a_n$ that tends to a limit $a$ and an arbitrary subsequence $a_{k_n}$ then,
 			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a_n - a} < \epsilon \implies \abs{a_{k_n} - a} < \epsilon \]
@@ -608,9 +679,7 @@
 		\end{proof}
 
 
-%	\pagebreak
-%	\searchableSubsection{Examples of limits of sequences}{analysis}{\TODO{move these examples to limits of sequences section}
-%		\bigskip
+
 		\sep
 		\begin{exe}
 			\ex {\textbf{\small{ Let ${ (a_n)_{n \in \N{}} }$ be a sequence, and let ${ (b_n)_{n \in \N{}} }$ be the sequence defined by 
@@ -627,7 +696,7 @@
 				&\iff & \abs{a_n} - \abs{a} &\geq -\abs{a_n - a}  &\sidecomment{} \\
 				\end{align*}
 				which both together imply that ${ \abs{ \abs{a_n} - \abs{a} } \leq \abs{a_n - a} }$.\\
-				The latter non-implication is easy to see if one thinks of a sequence that consists of two subsequences that converge to 2 and -2. Then, their absolute value would converge to 2 but their values do not converge. Remember \autoref{prop:subseq_tends_to_same_limit}, for a sequence to converge to a limit, every subsequence of it must converge to the same limit.\\
+				The latter non-implication is easy to see if one thinks of a sequence that consists of two subsequences that converge to 2 and -2. Then, their absolute value would converge to 2 but their values do not converge. Remember \autoref{prop:subseq-tends-to-same-limit}, for a sequence to converge to a limit, every subsequence of it must converge to the same limit.\\
 			}
 			\bigskip
 			\ex {\textbf{\small{ What is the behaviour as ${ n \to \infty }$ of the following: }}\\\\
@@ -695,7 +764,7 @@
 				which is of the form,
 				\[ a_n < \alpha^n C \]
 				for constant $C$. So we have bound the values of the sequence below ${ \alpha^n C }$ which clearly goes to 0 as ${ n \to \infty }$. Since we are told that the sequence is positive so that $a_n$ is also bounded below by 0, we can conclude, by Sandwich Theorem, that ${ a_n \to 0 }$ as ${ n \to \infty. \hspace{10pt}\qed}$\\\\
-				An alternative way of showing the same thing is to use the algebra of limits and the fact that, in a convergent sequence, any subsequence must also converge to the same limit (\autoref{prop:subseq_tends_to_same_limit}) to deduce that if ${ a_n \to L }$ then we must also have ${ a_{n+1} \to L }$. Then, if ${ L \neq 0 }$ we can apply the algebra of limits to obtain,
+				An alternative way of showing the same thing is to use the algebra of limits and the fact that, in a convergent sequence, any subsequence must also converge to the same limit (\autoref{prop:subseq-tends-to-same-limit}) to deduce that if ${ a_n \to L }$ then we must also have ${ a_{n+1} \to L }$. Then, if ${ L \neq 0 }$ we can apply the algebra of limits to obtain,
 				\[ \lim_{n \to \infty} \frac{a_{n+1}}{a_n} = \frac{L}{L} = 1 \]
 				which contradicts ${ \frac{a_{n+1}}{a_n} < \alpha < 1 }$. Therefore, ${ L = 0.  \hspace{10pt}\qed}$\\\\
 				On the other hand, if ${ \frac{a_{n+1}}{a_n} \to 1 }$ as ${ n \to \infty }$ then the sequence may converge to 0 or to some other value. For example:
@@ -710,8 +779,469 @@
 					even though
 					\[ \lim_{n \to \infty} \frac{1}{n} = 0. \]
 				\end{enumerate}
-		}
+			}
+						
+			\ex The sequence $n^{(-1)^n}$ has a subsequence that goes infinite (when the exponent is positive) and another which converges to 0 (when the exponent is negative).
+			\label{convergent-subsequence-of-a_n-does-not-prove-that-a_n-converges}
 		\end{exe}
+
+
+
+
+
+
+% -------------- break ----------------
+\pagebreak
+
+
+	\searchableSubsection{Series}{analysis, real analysis}{
+		\bigskip
+		\boxeddefinition{\textbf{(Series)} Let $(a_n)_{n=1}^\infty$ be a sequence and let, for ${ n \in \N{} }$,
+			\[ s_n = a_1 + a_2 + \cdots + a_n = \sum_{i=1}^n a_i \]
+			be the $n$-th partial sum of the terms of the sequence $(a_n)_{n=1}^\infty$. Then, the sequence $(s_n)_{n=1}^\infty$ is called a \textit{series}, denoted $\sum a_n$, with $n$-th term $a_n$ and $n$-th partial sum $s_n$.
+		}
+		\boxeddefinition{\textbf{(Series Convergence)} A series $\sum a_n$ is \textit{convergent} iff the sequence of partial sums $(s_n)_{n=1}^\infty$ is convergent and divergent iff the sequence of partial sums is divergent.\\
+			
+		If this sequence converges to a finite value $L$ we say that the \textit{series converges to $L$} or the series \textit{has sum $L$}.
+		}\label{def:series-convergence}
+	
+		\boxeddefinition{\textbf{(Series Rearrangement)} A \textit{rearrangement} of a series ${ \sum a_n }$ is a series ${ \sum a_{f(n)} }$ where $f$ is a permutation of $\N{}$. In other words, the rearrangement contains the same terms as the original series but appearing in a different order.}
+	
+		\boxeddefinition{\textbf{(Non-negative Series)} A series is described as \textit{non-negative} (or \textit{positive}) if all its terms are non-negative. That's to say, the sequence $\sum a_n$ is non-negative iff
+			\[ \forall n \in \N{} \logicsep a_n \geq 0. \]
+		}\label{def:non-negative-series}
+	
+		\boxeddefinition{\textbf{(Alternating Series)} A series is described as \textit{alternating} if its terms are alternately positive and negative.}
+		
+		\notation{The series $(s_n)_{n=1}^\infty$ with $n$-th term $a_n$ is typically denoted ${ \sum a_n }$ but some authors use the notation ${ \sum_{n=1}^\infty a_n }$ which has the disadvantage that it may be confused with the sum to infinity of the series (which may or may not exist depending on whether the series converges).}
+		
+		\note{A series may also be finite but finite series necessarily converge and so are not a subject of study in Analysis (but may be studied in Calculus).}
+	
+	
+	
+		\biggerskip
+		\labeledProposition{If a series $\sum a_n$ converges then the terms ${ a_n \to 0 }$ as ${ n \to \infty }$.}{convergent-series-has-terms-that-go-to-0}
+		\begin{proof}
+			Let ${ f: \N{}\longmapsto \N{} }$ be defined as
+			\[ f(n) = n-1. \]
+			Then $f$ is a strictly increasing function over the naturals and so, by the definition \ref{def:subsequence}, $(s_{f(n)})$ is a subsequence of the sequence of partial sums $(s_n)$ of the series $\sum a_n$. By \autoref{prop:subseq-tends-to-same-limit} then, the subsequence $(s_{f(n)})$ tends to the same limit as $(s_n)$.\\
+			Since both sequences tend to some finite limit $L$, we can use \autoref{prop:func-finite-limit-algebra} to evaluate the limit,
+			\[ \lim_{n \to \infty} (s_{f(n)} - s_n) = L - L = 0. \]
+			Since ${ f(n) = n-1 }$, it follows that
+			\[ (s_{f(n)} - s_n) = (s_{n-1} - s_n) = a_n \]
+			and so
+			\[ \lim_{n \to \infty} (s_{f(n)} - s_n) = \lim_{n \to \infty} a_n = 0.  \qedhere \]
+		\end{proof}
+	
+	
+		\bigskip
+		\labeledProposition{\textbf{(Algebra of Series)} Let ${ \sum a_n }$ be a series that converges to $L$ and ${ \sum b_n }$ be a series that converges to $M$. Then for any real number $C$,
+			\begin{enumerate}[label=(\roman*)]
+				\item{${ \sum_{n=1}^\infty C a_n = C L }$}
+				\item{${ \sum_{n=1}^\infty (a_n + b_n) = L + M }$}
+			\end{enumerate}
+		}{series-limit-algebra}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item Let
+					\[ s_n = \sum_{i=1}^n a_i \]
+					be the $n$-th partial sum of ${ \sum a_n }$. Then
+					\[ t_n = \sum_{i=1}^n C a_i = C \sum_{i=1}^n a_i = C s_n. \]
+					Using \autoref{prop:func-finite-limit-algebra}, we can therefore deduce
+					\[ \lim_{n \to \infty} s_n = L \implies \lim_{n \to \infty} t_n = \lim_{n \to \infty} C s_n = C L.  \]
+				
+				\bigskip
+				\item Let
+					\[ s_n = \sum_{i=1}^n a_i, t_n = \sum_{i=1}^n b_i \]
+					be the $n$-th partial sums of ${ \sum a_n }$ and ${ \sum b_n }$ respectively.
+					Then
+					\[ u_n = \sum_{i=1}^n a_i + b_i = \sum_{i=1}^n a_i + \sum_{i=1}^n b_i = s_n + t_n \]
+					and we can use \autoref{prop:func-finite-limit-algebra} to deduce
+					\[ \lim_{n \to \infty} u_n = \lim_{n \to \infty} s_n + t_n = L + M. \]
+			\end{enumerate}
+		\end{proof}
+		\note{Note that linear combinations of series conform to the algebra of (finite) limits of sequences \autoref{prop:func-finite-limit-algebra}; which is to be expected as the series is a sum of the terms of a sequence. Also, as expected, due to the lack of distributivity of addition over multiplication, the series algebra does not work for products --- e.g. if ${ \sum a_n }$ and ${ \sum b_n }$ converge then it does \textbf{not} follow that the product series ${ \sum a_n b_n }$ converges (see: \ref{ex:absolutely-convergent-series-whose-square-diverges}).}
+	
+	
+		\biggerskip
+		\subsubsection{Non-negative Series}
+		\biggerskip
+		\labeledProposition{If a series is non-negative then its partial sums are monotonically increasing.}{non-negative-series-is-monotonically-increasing}
+		\begin{proof}
+			Let $s_n$ be the $n$-th partial sum of the sequence $\sum a_n$. For all $n$, 
+			\[ a_n \geq 0 \implies s_n - s_{n-1} \geq 0 \iff s_n \geq s_{n-1}. \]
+			Therefore, the sequence of partial sums $(s_n)_{n=1}^\infty$ is monontonically increasing. 
+		\end{proof}
+				
+		\bigskip
+		\labeledProposition{If a series $\sum a_n$ is non-negative (\ref{def:non-negative-series}), then either the series converges or it goes to infinity. That's to say, if the series diverges, then the $n$-th partial sum ${ s_n \to \infty }$ as ${ n \to \infty }$.}{non-negative-series-either-converges-or-goes-to-infinity}
+		\begin{proof}
+			By \autoref{prop:non-negative-series-is-monotonically-increasing}, the sequence of $n$-th partial sums $(s_n)$ is increasing. In addition, the sequence either has an upper bound or it does not. By \autoref{prop:increasing_bounded_seqs_have_limit}, if it has an upper bound then it converges which, by the definition \ref{def:series-convergence}, is to say that the sequence $\sum a_n$ converges.\\
+			
+			Alternatively, if does not have an upper bound then
+			\[ \forall K \in \R{} \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep s_n > K \]
+			which, by the definition \ref{def:seq-tends-to-infinity}, is to say that ${ \lim_{n \to \infty} s_n = \infty }$.
+		\end{proof}
+	
+	
+		
+		\nl[20]
+		\subsubsubsection{Well-known Non-negative Series}
+		\medskip
+		\labeledTheorem{\textbf{(Geometric Series)} Let ${ a, r \in \R{} }$. Then the series ${ \sum ar^{n-1} }$,
+			\begin{enumerate}[label=(\roman*)]
+				\item{converges to ${ \frac{1}{a-r} }$ if ${ \abs{r} < 1 }$;}
+				\item{diverges if ${ \abs{r} \geq 1 }$.}
+			\end{enumerate}
+		}{geometric-series-convergence-conditions}
+		\begin{proof}\nl
+			The sum of a geometric progression, for ${ r = 1 }$ is given by ${ s_n = na }$ and, for ${ r \neq 1 }$, is given by
+			\[ s_n = \frac{ar^n - a}{r - 1} = \frac{a}{r - 1} (r^n - 1). \]
+			So, the limit of this sum as ${ n \to \infty }$ is given by,
+			\[ \lim_{n \to \infty} s_n = \lim_{n \to \infty} \frac{a}{r - 1} (r^n - 1) = \frac{a}{r - 1} \lim_{n \to \infty} (r^n - 1). \]
+			Then, by \autoref{prop:geometric-progression-sequence-diverges-or-converges-to-0-or-initial-value},
+			\begin{enumerate}[label=(\roman*)]
+				\item{if ${ \abs{r} < 1 }$, then
+					\[ \lim_{n \to \infty} r^n = 0 \implies \lim_{n \to \infty} (r^n - 1) = -1 \implies \lim_{n \to \infty} s_n = -\frac{a}{r - 1} = \frac{a}{1 - r}. \]
+				}
+				\item{if ${ \abs{r} \geq 1 }$, then either:
+					\begin{itemize}
+						\item{${ \abs{r} > 1 }$ and so
+							\[ \lim_{n \to \infty} r^n \text{ diverges } \implies \lim_{n \to \infty} s_n \text{ diverges, } \]
+							\note{if ${ r < -1 }$, the sequence $(r^n)$ oscillates unboundedly}
+						}
+						\item{${ \abs{r} = 1 \iff r \in \{-1, 1\} }$ and, if ${ r = 1 }$ then
+							\[ \lim_{n \to \infty} s_n = \lim_{n \to \infty} na = a \lim_{n \to \infty} n = \infty \]
+							or else ${ r = -1 }$ and ${ \lim_{n \to \infty} r^n = \lim_{n \to \infty} (-1)^n }$ which alternates between -1 and 1 and so diverges in a bounded oscillatory fashion.
+						}
+					\end{itemize}
+				}
+			\end{enumerate}
+		\end{proof}
+	
+	
+%		\bigskip
+%		\labeledTheorem{\textbf{Harmonic Series} The harmonic series ${ \sum \frac{1}{n} }$ diverges.}{harmonic-series-diverges}
+%		\begin{proof}
+%			Let ${ s_n = \sum_{i=1}^n \frac{1}{i} }$ be the $n$-th partial sum of the series ${ \sum \frac{1}{n} }$ and let ${ f: \N{} \longmapsto \N{} }$ be the monotonically increasing function,
+%			\[ f(n) = 2n \]
+%			so that $(s_{f(n)})$ is a subsequence of $(s_n)$.\\
+%			
+%			Suppose, for contradiction, that $(s_n)$ converges to a finite limit $L$. Then, by \autoref{prop:subseq-tends-to-same-limit}, $(s_{f(n)})$ also converges to $L$ and so, using the algebra of finite limits (\autoref{prop:func-finite-limit-algebra}),
+%			\[ \lim_{n \to \infty} (s_{f(n)} - s_n) = L - L = 0. \tag{*} \]
+%			If we expand out the expression ${ s_{f(n)} - s_n }$, we can deduce that, for all ${ n \in \N{} }$,
+%			\[\begin{aligned}
+%				s_{f(n)} - s_n &= s_{2n} - s_n \nn
+%				&= \sum_{i=1}^{2n} \frac{1}{i} - \sum_{i=1}^n \frac{1}{i} &\sidecomment{} \nn
+%				&= \sum_{i=n+1}^{2n} \frac{1}{i} &\sidecomment{} \nn
+%				&= \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{2n} &\sidecomment{} \nn
+%				&> \frac{1}{2n} + \frac{1}{2n} + \cdots + \frac{1}{2n} = \frac{n}{2n} = \frac{1}{2}.
+%			\end{aligned}\]
+%			But by \autoref{prop:if-a-seq-is-geq-M-and-converges-to-L-then-L-is-geq-M} we have
+%			\[ \forall n \logicsep (s_{f(n)} - s_n) \geq \frac{1}{2} \implies \lim_{n \to \infty} (s_{f(n)} - s_n) \geq \frac{1}{2} \]
+%			which contradicts (*).\\
+%			
+%			Therefore, the series diverges.
+%		\end{proof}   TODO: old version - delete this?
+	
+		\bigskip
+		\labeledTheorem{\textbf{Harmonic Series} The harmonic series ${ \sum \frac{1}{n} }$ diverges.}{harmonic-series-diverges}
+		\begin{proof}\nl[2]
+			Let ${ s_n = \sum_{i=1}^n \frac{1}{i} }$ be the $n$-th partial sum of the series ${ \sum \frac{1}{n} }$ and let ${ f: \N{} \longmapsto \N{} }$ be the monotonically increasing function,
+			\[ f(n) = 2^{n-1} n \]
+			so that $(s_{f(n)})$ is a subsequence of $(s_n)$.\\
+			
+			Suppose, for contradiction, that $(s_n)$ converges to a finite limit $L$. Then, by \autoref{prop:subseq-tends-to-same-limit}, $(s_{f(n)})$ also converges to $L$ and so, by \autoref{prop:convergent-series-has-terms-that-go-to-0},
+			\[ \lim_{n \to \infty} (s_{f(n)} - s_{f(n-1)}) = 0. \tag{*} \]
+			\nl
+			If we expand out the expression ${ s_{f(n)} - s_{f(n-1)} }$, we can deduce that, for all ${ n \in \N{} }$,
+			\[\begin{aligned}
+				s_{f(n)} - s_{f(n-1)} &= s_{2m} - s_m  &\sidecomment{for some ${ m \in \N{} }$} \nn
+				&= \sum_{i=1}^{2m} \frac{1}{i} - \sum_{i=1}^m \frac{1}{i} &\sidecomment{} \nn
+				&= \sum_{i=m+1}^{2m} \frac{1}{i} &\sidecomment{} \nn
+				&= \frac{1}{m+1} + \frac{1}{m+2} + \cdots + \frac{1}{2m} &\sidecomment{} \nn
+				&> \frac{1}{2m} + \frac{1}{2m} + \cdots + \frac{1}{2m} = \frac{m}{2m} = \frac{1}{2}.
+			\end{aligned}\]
+			\nl
+			But by \autoref{prop:if-a-seq-is-geq-M-and-converges-to-L-then-L-is-geq-M} we have
+			\[ \forall n \logicsep (s_{f(n)} - s_{f(n-1)}) \geq \frac{1}{2} \implies \lim_{n \to \infty} (s_{f(n)} - s_{f(n-1)}) \geq \frac{1}{2} \]
+			which contradicts (*).\\
+			
+			Therefore, the series diverges.
+		\end{proof}
+		\note{Compare with 
+			\[ \int_a^{ab} \frac{1}{t} \dif t = \int_1^b \frac{a}{au} \dif u= \int_1^b \frac{1}{u} \dif u = \ln(b) \]
+			which is to say that the value of integral of $1/t$ between $a$ and $ab$ doesn't depend on the value of $a$. In other words, if the interval of integration is from some $x$ to $cx$ for constant $c$, then the value of the integral is ${ \ln(c) }$.
+		}
+	
+		\bigskip
+		\labeledProposition{The series ${ \sum \frac{1}{n^k} }$,
+			\begin{enumerate}[label=(\roman*)]
+				\item diverges if ${ k \leq 1 }$;
+				\item converges if ${ k > 1 }$.
+			\end{enumerate}
+		}{series-n-exp-minus-k-diverges-if-k-leq-1-and-converges-if-k-gt-1}
+		\begin{proof}\nl
+			Let $(s_n)$ be the sequence of partial sums of ${ \sum 1/n^k }$.
+			\begin{enumerate}[label=(\roman*)]
+				\item Assume ${ k \leq 1 \in \R{} }$. Then, for all ${ n \in \N{} }$,
+				\[ n^k < n \iff \frac{1}{n^k} > \frac{1}{n}. \]
+				Furthermore, since both ${ \sum 1/n }$ and ${ \sum 1/n^k }$ are non-negative series, by \autoref{prop:non-negative-series-either-converges-or-goes-to-infinity}, they can only converge to a finite limit or go to infinity. By \autoref{theo:harmonic-series-diverges}, the harmonic series ${ \sum 1/n }$ goes to infinity. Therefore, ${ \sum 1/n^k }$ must be unbounded and also go to infinity.
+				
+				\bigskip
+				\item Assume ${ k > 1 }$. The series ${ \sum 1/n^k }$ is non-negative and so it is monotonically increasing (\autoref{prop:non-negative-series-is-monotonically-increasing}). It follows then that
+				 \[ 2^n - 1 \geq n \implies s_{2^n - 1} \geq s_n \]
+				 and so the subsequence $(s_{2^n - 1})$ is an upper bound on the sequence $(s_n)$. If $(s_{2^n - 1})$ is upper bounded then this will imply that $(s_n)$ is upper bounded and then, by \autoref{prop:increasing_bounded_seqs_have_limit}, $(s_n)$ must converge.\\
+				 
+				 Consider the partial sums of $(s_{2^n - 1})$,
+				 \[\begin{aligned}
+				 	s_{2^n - 1} &= \sum_{i=1}^{2^n - 1} \frac{1}{i^k} \nnn
+				 	&= \frac{1}{1^k} + \frac{1}{2^k} + \cdots + \frac{1}{(2^n - 1)^k} &\sidecomment{} \nnn
+				 	&= 1 + \left(\frac{1}{2^k} + \frac{1}{3^k}\right) + \left(\frac{1}{4^k} + \frac{1}{5^k} + \frac{1}{6^k} + \frac{1}{7^k}\right) + \cdots \nn
+				 	&\hspace{20pt} + \left(\frac{1}{(2^{n-1})^k} + \frac{1}{(2^{n-1} + 1)^k} + \cdots + \frac{1}{(2^n - 1)^k}\right) &\sidecomment{} \\
+				 \end{aligned}\]
+			 	 where we have grouped terms into groups of $1, 2, 4, 8, \dots, 2^{n-1}$ terms. The sum of each such group is of the form, for ${ m \in \N{} \cup \{0\} }$,
+			 	 \[ \frac{1}{(2^m + 0)^k} + \frac{1}{(2^m + 1)^k} + \cdots + \frac{1}{(2^m + (2^m - 1))^k} \leq \frac{2^m}{(2^m)^k} = \frac{1}{2^{m(k-1)}}. \]
+			 	 Therefore, if we let ${ t_n =  }$
+			 	 \[\begin{aligned}
+			 	 	s_{2^n - 1} &\leq \sum_{m=0}^{n-1} \frac{1}{2^{m(k-1)}} \nn
+			 	 	&= \frac{\frac{1}{2^{n(k-1)}} - 1}{\frac{1}{2^{(k-1)}} - 1}
+			 	 \end{aligned}\]
+		 	 	\nl
+		 	 	and the limit as ${ n \to \infty }$ of this upper bound on $s_{2^n - 1}$ is
+		 	 	\[ \lim_{n \to \infty} \frac{\frac{1}{2^{n(k-1)}} - 1}{\frac{1}{2^{(k-1)}} - 1} = \frac{0 - 1}{\frac{1}{2^{(k-1)}} - 1} = \frac{1}{1 - \frac{1}{2^{(k-1)}}} = \frac{1}{1 - 2^{(1-k)}}. \]
+		 	 	So we have found a convergent sequence that is an upper bound on $(s_{2^n - 1})$ and so $(s_{2^n - 1})$ is upper bound and, therefore, $(s_n)$ converges.
+			\end{enumerate}
+		\end{proof}
+	
+		\nl[20]
+		\subsubsubsection{Convergence Tests for Non-negative Series}
+		\bigskip
+		\labeledTheorem{\textbf{(Comparison Test)} Suppose $(a_n)$ and $(b_n)$ are non-negative sequences. Then:
+			\begin{enumerate}[label=(\roman*)]
+				\item If ${ a_n \leq b_n }$ for all ${ n \in \N{} }$, then
+					\begin{itemize}
+						\item if ${ \sum b_n }$ converges then ${ \sum a_n }$ converges and 
+							\[ \sum_{n=1}^\infty a_n \leq \sum_{n=1}^\infty b_n, \]
+						\item if ${ \sum a_n }$ diverges then ${ \sum b_n }$ diverges;
+					\end{itemize}
+				\bigskip
+				\item If there exists some $N$ such that ${ a_n \leq b_n }$ for all ${ n > N \in \N{} }$, then
+					\begin{itemize}
+						\item if ${ \sum b_n }$ converges then ${ \sum a_n }$ converges,
+						\item if ${ \sum a_n }$ diverges then ${ \sum b_n }$ diverges;
+					\end{itemize}
+				\bigskip
+				\item If 
+					\[ L = \lim_{n \to \infty} \frac{a_n}{b_n} \]
+					is finite and non-zero, then
+					\[ \sum a_n \text{ converges } \iff \sum b_n \text{ converges. } \]
+			\end{enumerate}
+		}{series-comparison-test}
+		\begin{proof}\nl
+			Let $s_n$ and $t_n$ be the $n$-th partial sums of ${ \sum a_n }$ and ${ \sum b_n }$ respectively. Since the terms $a_n$ and $b_n$ are non-negative, by \autoref{prop:non-negative-series-is-monotonically-increasing}, the sequences $(s_n)$ and $(t_n)$ are monotonically increasing.
+			\begin{enumerate}[label=(\roman*)]
+				\item Assume ${ a_n \leq b_n }$ for all ${ n \in \N{} }$. Then
+					\[ s_n = \sum_{i=1}^n a_n \leq \sum_{i=1}^n b_n = t_n \]
+					which is to say that $t_n$ is an upper bound for $s_n$. Since ${ \sum b_n }$ converges, by definition $t_n$ converges. Since $t_n$ converges, by \autoref{prop:convergent_seqs_bounded} it is bounded, and in particular, upper bounded. The upper bound on $t_n$ must transitively be an upper bound on $s_n$ also. Then, since $(s_n)$ is monotonically increasing, by \autoref{prop:increasing_bounded_seqs_have_limit}, $(s_n)$ is convergent. Furthermore, by \autoref{coro:increasing-seq-bounded-above-converges-to-supremum},
+					\[ \lim_{n \to \infty} t_n = \sup \setc{t_n}{n \in \N{}} \leq \sup \setc{s_n}{n \in \N{}} = \lim_{n \to \infty} s_n. \]
+					\nl
+					If, on the other hand, ${ \sum a_n }$ diverges, by the increasing property and \autoref{prop:non-negative-series-either-converges-or-goes-to-infinity}, it must go to infinity (which is to say that the partial sums $s_n$ go to infinity). Therefore, the partial sums $t_n$ must also go to infinity and so, by definition, ${ \sum b_n }$ diverges also.
+				\bigskip
+				\item Assume there exists some $N$ such that ${ a_n \leq b_n }$ for all ${ n > N \in \N{} }$. Then
+					\[ \sum_{i=N+1}^n a_n \leq \sum_{i=N+1}^n b_n. \]
+					Let
+					\[ s_N = \sum_{i=1}^N a_n \eqand t_N = \sum_{i=1}^N b_n. \]
+					So we have,
+					\[ s_n = s_N + \sum_{i=N+1}^n a_n \eqand t_n = t_N + \sum_{i=N+1}^n b_n \]
+					and then it follows that
+					\[\begin{aligned}
+						&& \sum_{i=N+1}^n a_n &\leq \sum_{i=N+1}^n b_n \nn
+						&\iff & s_N + \sum_{i=N+1}^n a_n &\leq s_N + \sum_{i=N+1}^n b_n \nn
+						&\iff & s_n &\leq t_n - t_N + s_N \nn
+						&\iff & s_n &\leq t_n + (s_N - t_N).
+					\end{aligned}\]
+					In a similar fashion to (i): Convergence of the series $\sum b_n$ implies that the sequence $(t_n)$ converges, which by \autoref{prop:convergent_seqs_bounded}, implies that it is upper bounded. Since ${ s_N - t_N }$ is some constant, the upper bound on $t_n$ means that $s_n$ also has an upper bound, and, being monotonically increasing, by \autoref{prop:increasing_bounded_seqs_have_limit}, is therefore convergent.\\
+					
+					If ${ \sum a_n }$ diverges on the other hand, then by \autoref{prop:non-negative-series-either-converges-or-goes-to-infinity}, we have
+					\[ \lim_{n \to \infty} s_n = \infty \implies \lim_{n \to \infty} [t_n + (s_N - t_N)] = \infty \implies \lim_{n \to \infty} t_n = \infty \]
+					which is to say that ${ \sum b_n }$ diverges.
+				\bigskip
+				\item Suppose we have
+					\[ L = \lim_{n \to \infty} \frac{a_n}{b_n}. \]
+					Then, by the definition of the limit of sequences (\ref{def:seq-tends-to-L}), for all ${ \epsilon > 0 \in \R{} }$, there exists some $N$ such that,
+					\[ \forall n > N \logicsep \abs{\frac{a_n}{b_n} - L} < \epsilon \]
+					which is to say
+					\[ L - \epsilon < \frac{a_n}{b_n} < \epsilon + L. \]
+					Let ${ K \in \R{} }$ be a constant such that ${ K = \epsilon + L }$. Then,
+					\[ a_n < K b_n \eqand b_n < \frac{1}{K} a_n \]
+					for all ${ n > N \in \N{} }$. If ${ \sum b_n }$ converges then by the algebra of series (\autoref{prop:series-limit-algebra}), ${ \sum K b_n }$ also converges and we can apply (ii) to deduce that ${ \sum a_n }$ converges also. Similarly, if ${ \sum a_n }$ converges then ${ \sum \frac{1}{K} a_n }$ converges and applying (ii) we obtain the result that ${ \sum b_n }$ converges also.
+			\end{enumerate}
+		\end{proof}
+	
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Ratio Test)} Let ${ \sum a_n }$ be a non-negative series with the property that
+			\[ L = \lim_{n \to \infty} \frac{a_{n+1}}{a_n} \]
+			where $L$ may be infinity. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ L < 1 \implies \sum a_n \text{ converges, } }$
+				\item ${ L > 1 \implies \sum a_n \text{ diverges. } }$
+			\end{enumerate}
+		}{series-ratio-test}
+		\begin{proof}
+			\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item In the case that ${ L < 1 }$, there exists some $N$ such that, for all ${ n > N \in \N{} }$ and ${ \epsilon < 1 - L }$,
+				\[ \abs{\frac{a_{n+1}}{a_n} - L} < \epsilon \iff L - \epsilon < \frac{a_{n+1}}{a_n} < L + \epsilon. \]
+				Let ${ r = \epsilon + L }$. Then,
+				\[ \frac{a_{n+1}}{a_n} < r \iff a_{n+1} < r a_n \]
+				with ${ 0 < r < 1 }$. Therefore, the sum of the terms after $N$,
+				\[ \sum_{i=N+1}^\infty a_i <  \sum_{i=1}^\infty r^i a_N \]
+				which is a geometric series with absolute common ratio less than one. Therefore, by \autoref{theo:geometric-series-convergence-conditions}, the sum of the terms after $N$ is convergent and finite and since, the sum of the finite number of terms upto $N$ is necessarily finite also, we conclude that the series converges. Since this is a convergent upper bound on ${ \sum a_n }$, by \autoref{theo:series-comparison-test}, ${ \sum a_n }$ converges.
+				\medskip
+				\item In the case that ${ L > 1 }$, we can use a similar argument to show that the sequence ${ \sum a_n }$ is lower bounded by a geometric sequence with absolute common ratio greater than 1 so that \autoref{theo:geometric-series-convergence-conditions} tells us that this lower bound diverges. Then, again applying the \autoref{theo:series-comparison-test}, ${ \sum a_n }$ diverges.
+			\end{enumerate}
+		\end{proof}
+		\note{Note that the Ratio Test makes no inference if the limit of the ratio of consecutive terms is equal to 1. In this case the series may or may not converge. For example, ${ \sum 1/n }$ and ${ \sum 1/n^2 }$ both have a ratio of consecutive terms that tends to 1 but the first diverges while the second converges.}
+		
+		\bigskip
+		\labeledTheorem{\textbf{(Root Test)} Let ${ \sum a_n }$ be a non-negative series with the property that
+			\[ L = \lim_{n \to \infty} {a_n}^{1/n} \]
+			where $L$ may be infinity. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ L < 1 \implies \sum a_n \text{ converges, } }$
+				\item ${ L > 1 \implies \sum a_n \text{ diverges. } }$
+		\end{enumerate}}{series-root-test}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item Assume ${ L < 1 }$ so that for some ${ 0 < r < 1 }$,
+				\[ \lim_{n \to \infty} {a_n}^{1/n} < 1 \implies \exists N \logicsep \forall n > N \logicsep {a_n}^{1/n} < r \]
+				which is to say that ${ a_n < r^n }$ and therefore the series ${ \sum a_n }$ is upper bounded by the series ${ \sum r^n }$. Since ${ \abs{r} < 1 }$, by \autoref{theo:geometric-series-convergence-conditions}, the series ${ \sum r^n }$ converges and so by \autoref{theo:series-comparison-test}, ${ \sum a_n }$ converges also.
+				
+				\bigskip
+				\item Similarly, if ${ L > 1 }$ we can lower bound the series ${ \sum a_n }$ with a geometric series with common ratio ${ \abs{r} > 1 }$ and, using \autoref{theo:geometric-series-convergence-conditions}, deduce that this lower bound series diverges which, since it is a non-negative series, by \autoref{prop:non-negative-series-either-converges-or-goes-to-infinity}, means that the partial sums go to infinity. Therefore the partial sums of ${ \sum a_n }$ also go to infinity. 
+			\end{enumerate}			
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Integral Test)} Let ${ a \geq 1 \in \R{} }$ and ${ f: \R{} \longmapsto \R{} }$ be a positive, decreasing, integrable function on ${ [a, \infty) }$. Then the series ${ \sum f(n) }$ converges iff the improper integral ${ \int_a^\infty f(t) \dif t }$ exists.}{series-integral-test}
+		\begin{proof}
+			Denote $n$-th partial sum of ${ \sum f(n) }$, $s_n$. Then
+			\[ s_n = \sum_{i=1}^n f(i). \]
+			By the definition of the Riemmann Integral \ref{def:riemann-integral} and the upper and lower estimates used in the definition \ref{def:lower-and-upper-estimates-of-area-under-curve}, since $f$ is a decreasing function, the upper estimate of the integral ${ \int_a^b f(t) \dif t }$ --- for some ${ b > a \in \R{} }$ --- over the partition ${ P = \{ a+1, a+2,\dots, b\} }$ is
+			\[ U(P) = \sum_{i=a}^{b-1} (x_{i+1} - x_i) \max_{ x_i \leq x \leq x_{i+1} }{ f(x) }. \]
+			But for this partition $P$ we have ${ (x_{i+1} - x_i) = 1 }$ and since $f$ is a decreasing function, for all ${ a \leq i \leq b-1 }$,
+			\[ \max_{ x_i \leq x \leq x_{i+1} }{ f(x) } = \max_{ i \leq x \leq i+1 }{ f(x) } = f(i). \]
+			So the upper estimate becomes, letting ${ n = b-1 }$,
+			\[ U(P) = \sum_{i=a}^{b-1} f(i) = s_n - s_a \]
+			the $n$\textsuperscript{th} partial sum minus the $a$\textsuperscript{th} partial sum of the series ${ \sum f(n) }$. Since the upper estimate is, by definition, an upper bound on the value of the integral we therefore have,
+			\[ s_n - s_a \geq \int_a^b f(t) \dif t \iff s_n \geq \int_a^b f(t) \dif t + s_a. \]
+			Since $f$ is a positive function, the integral ${ \int_a^b f(t) \dif t }$ is positive and so, if $b$ is allowed to go to infinity, then the value of the integral must, by \autoref{prop:non-negative-series-either-converges-or-goes-to-infinity}, either converge to a finite limit or tend to infinity.\\
+			If the integral goes to infinity (i.e. the improper integral doesn't exist) then $s_n$, being an upper bound on its value, must also go to infinity. On the other hand, if the integral exists (i.e. it converges to a finite limit) then, by the definition of the Riemann Integral, the upper and lower estimates must converge. Therefore $(s_n)$ converges.
+		\end{proof}
+	
+	
+		\biggerskip
+		\subsubsection{Absolute and Conditional Convergence}
+		\bigskip
+		\boxeddefinition{\textbf{(Series Absolute Convergence)} If a series ${ \sum a_n }$ is such that ${ \sum \abs{a_n} }$ is a convergent series, then the series ${ \sum a_n }$ is described as \textit{absolutely convergent}.\\
+		
+		Clearly, for non-negative series in which, by definition, ${ \forall n \logicsep a_n = \abs{a_n} }$, convergence implies absolute convergence.}
+	
+		\boxeddefinition{\textbf{(Series Conditional Convergence)} If a series ${ \sum a_n }$ is such that ${ \sum \abs{a_n} }$ is a divergent series but the original series ${ \sum a_n }$ is a convergent series, then the series ${ \sum a_n }$ is described as \textit{conditionally convergent}.}
+		
+		\bigskip
+		\labeledProposition{Absolute convergence implies conditional convergence.}{series-absolute-convergence-implies-conditional-convergence}
+		\begin{proof}
+			Let ${ \sum a_n }$ be an absolutely convergent sequence and consider the sequence ${ \sum \abs{a_n} - a_n }$. For each term, since $a_n$ either equals $\abs{a_n}$ or $-\abs{a_n}$, then
+			\[ \abs{a_n} - a_n \in \{ 0, 2\abs{a_n} \}. \]
+			Therefore, the series ${ \sum \abs{a_n} - a_n }$ is non-negative and upper-bounded by the series ${ \sum 2 \abs{a_n} }$. Since by construction, ${ \sum \abs{a_n} }$ converges, we can apply the algebra of series (\autoref{prop:series-limit-algebra}) to deduce that ${ \sum 2 \abs{a_n} = 2 \sum \abs{a_n} }$ and thus, that ${ \sum 2 \abs{a_n} }$ is also convergent. Therefore, by \autoref{prop:increasing_bounded_seqs_have_limit}, ${ \sum \abs{a_n} - a_n }$ converges.\\
+			
+			Now we have two convergent series: ${ \sum \abs{a_n} }$ and ${ \sum \abs{a_n} - a_n }$. Since they both converge, we can apply the algebra of series (\autoref{prop:series-limit-algebra}) again to determine that
+			\[ \sum \abs{a_n} - \sum \abs{a_n} - a_n = \sum a_n \]
+			also converges.
+		\end{proof}
+		\note{Note that the triangle inequality tells us that ${ \sum \abs{a_n} }$ is an upper bound on ${ \sum a_n }$ but because ${ \sum a_n }$ is not a non-negative sequence, convergence of ${ \sum \abs{a_n} }$ does \textbf{not} imply that ${ \sum a_n }$ converges: it may diverge to negative infinity or oscillate boundedly.}
+		
+		\biggerskip
+		\TODO{complete this proof}
+		\labeledProposition{A convergent series that is not non-negative (conditionally converges?) doesn't necessarily converge to same limit after rearrangement}{}
+		\begin{proof}
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{If a series is non-negative and convergent (i.e. absolutely convergent) then its value is invariant to rearrangements.}{convergent-non-negative-series-has-same-value-after-rearrangement}
+		\begin{proof}
+			This proof requires the Cauchy Criterion of Convergence: see: \href{https://math.stackexchange.com/questions/475841/absolutely-convergent-series-has-constant-sum}{math.stackexchange}. 
+		\end{proof}
+		
+		
+		\bigskip
+		\labeledTheorem{\textbf{(LAST: Leibniz Alternating Series Test)} Let
+			\[ \sum a_n = (-1)^{n+1} b_n. \]
+			If
+			\begin{itemize}
+				\item ${ b_n \geq 0 }$,
+				\item $(b_n)$ is monotonically decreasing, and
+				\item ${ \lim_{n \to \infty} b_n = 0 }$,
+			\end{itemize}
+			then ${ \sum a_n }$ converges.
+		}{series-alternating-series-test}
+		\begin{proof}\nl[3]
+			Let $s_n$ be the $n$-th partial sum of the series ${ \sum a_n }$. Then
+			\[ s_n = b_1 - b_2 + b_3 - b_4 + \cdots = (b_1 - b_2) + (b_3 - b_4) + \cdots = c_1 + c_2  + \cdots \]
+			where, because $(b_n)$ is a positive, monotonically decreasing sequence, the sequence $(c_n)$ is positive. So the even-numbered partial sums take the form
+			\[ s_{2n} = c_1 + c_2 + \cdots + c_n \]
+			and the subsequence $(s_{2n})$ is therefore positive and monotonically increasing.\\
+			
+			In addition, if we group the terms differently then the $n$-th partial sum,
+			\[ s_n = b_1 - (b_2 - b_3) - (b_4 - b_5) - \cdots = b_1 - d_1 - d_2 - \cdots \]
+			where the sequence $(d_n)$ is positive. Therefore ${ s_n \leq b_1 }$. \TODO{check this proof against rearrangements}
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Riemann Rearrangement Theorem)} \TODO{complete this}}{}
+		\begin{proof}
+		\end{proof}
+	
+		\nl[10]
+		\subsubsubsection{Tests for Absolute Convergence}
+		\TODO{tests for absolute convergence}
+	
+		\sep
+		\begin{exe}
+			\ex The series ${ \sum (-1)^n/\sqrt{n} }$ converges but if the partial sums are squared, ${ \sum (-1)^{2n}/n }$ diverges. So this is an example of a non-linear combination of series.
+			\label{ex:absolutely-convergent-series-whose-square-diverges}
+			
+			\bigskip
+			\ex Consider the series
+				\[ \sum \frac{n + 2}{n^2}. \]
+				If we examine the limit of the ratio of consecutive terms (i.e. perform the Ratio Test \autoref{theo:series-ratio-test}) we find, 
+				\[\begin{aligned}
+					\frac{(n+1) + 2}{(n+1)^2} \cdot \frac{n^2}{n+2} &= \frac{n^3 + 3n^2}{(n^2 + 2n + 1)(n + 2)} \nn
+					&= \frac{n^3 + 3n^2}{n^3 + 4n^2 + 5n + 2} \nn
+					&= \frac{1 + 3/n}{1 + 4/n + 5/n^2 + 2/n^3} \to 1.
+				\end{aligned}\]
+				So the Ratio Test is inconclusive. But we can, instead, use the Comparison Test (\autoref{theo:series-comparison-test}) by examining the dominant behaviours of the numerator and denominator of the terms of the series, we can reason that it's asymptotic behaviour is likely similar to ${ \sum 1/n }$, the Harmonic Series (\autoref{theo:harmonic-series-diverges}). Performing the Comparison Test we obtain,
+				\[ \frac{n + 2}{n^2} \cdot \frac{n}{1} = \frac{n + 2}{n} = \frac{1 + 2/n}{1} \to 1. \]
+				So the limit of the ratio of the terms of the sequence with the terms of the sequence of the harmonic series also tends to 1. In this case we can draw a conclusion: that the asymptotic behaviour of the series under test is the same as that of the harmonic series. We therefore deduce that the series diverges.
+			
+			\bigskip
+			\ex Consider the series
+				\[ \sum \frac{1}{n\log{n}}. \]
+				\note{Here $\log{x}$ refers to the natural log (see: \href{https://math.stackexchange.com/questions/293783/when-log-is-written-without-a-base-is-the-equation-normally-referring-to-log-ba}{math.stackexchange}).}
+				We have
+				\[ \frac{1}{n^2} < \frac{1}{n\log{n}} < \frac{1}{n} \]
+				so we can't use a comparison with ${ 1/n^r }$ for some $r$. So we use the Integral Test \autoref{theo:series-integral-test} as follows.				
+				\[\begin{aligned}
+					\int_2^n \frac{1}{t\log{t}} \dif t &= \int_{\log{2}}^{\log{n}} \frac{1}{u} \dif u &\sidecomment{${ u = \log{t} \implies \dif t = t \dif u }$} \nn
+					&= [\log{u}]_{\log{2}}^{\log{n}} \nn
+					&= \log{\log{n}} - \log{\log{2}}.
+				\end{aligned}\]
+				Since ${ \lim_{n \to \infty} \log{n} = \infty }$, as ${ n \to \infty }$, $\log{n}$ is growing without bound. Therefore, ${ \log{\log{n}} }$ is also growing without bound and so the integral diverges.
+		\end{exe}
+	}
 
 	
 
@@ -1091,7 +1621,11 @@
 	
 		\sep
 		\begin{exe}
-			\ex {\textbf{Prove that if ${\bm{ f: \R{} \mapsto \R{} \suchthat f(x) = x^2 + x }}$ then ${\bm{ \lim_{x \to 2} f(x) = 6 }}$.}\\
+			\ex {\textbf{Using the definition of the limit we can deduce that if 
+					\[ \bm{ f: \R{} \mapsto \R{} \suchthat f(x) = x^2 + x } \]
+				then
+					\[ \bm{ \lim_{x \to 2} f(x) = 6 }. \]
+				}
 				
 				Let ${ 0 < \abs{x - 2} <\delta }$ and consider some arbitrary ${ \epsilon > 0 }$. Then we have,
 				\[ \abs{(x^2 + x) - 6} = \abs{(x - 2)(x + 3)} \leq \abs{x - 2}\abs{x + 3} < \delta \abs{x + 3}. \]
@@ -1534,16 +2068,6 @@
 	\end{enumerate}
 	Maybe the fact that ${ \frac{\Delta y}{y_n} }$ goes to 0 faster as ${ n \to \infty }$ in the first case indicates that it converges before it gets to 0?
 
-
-
-
-% -------------- break ----------------
-\pagebreak
-
-
-	\searchableSubsection{Series}{analysis, real analysis}{
-		\bigskip
-	}
 
 
 

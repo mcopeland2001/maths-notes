@@ -1,0 +1,292 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+
+	\searchableSubsection{Functions}{Discrete Maths}{
+		\biggerskip
+		\boxeddefinition{\textbf{(Function)} A \textit{function} or \textit{mapping} associates every element in its \textit{domain} set with a single element in its \textit{codomain} set.\\
+			
+		Informally, a function sets up a relation between sets that is either many-to-1 or 1-to-1 but cannot be 1-to-many or many-to-many.
+		}
+		
+		\notation{If $f$ is a function with domain $X$ and codomain $Y$, then we write:
+			\[ f: X \longmapsto Y. \]
+		}
+	
+		\boxeddefinition{\textbf{(Function Image)} Let ${ f: X \longmapsto Y }$. Then the set ${ I \subseteq Y }$ such that,
+			\[ I = \setc{y \in Y}{\exists x \in X \logicsep f(x) = y} \]
+			is known as the \textit{image} of $Y$.
+		}
+	
+		\notation{There are various notations for the image of a function, depending on context, but a common notation when dealing with general functions is
+			\[ f(X) = \setc{y \in Y}{\exists x \in X \logicsep f(x) = y}. \]
+			This notation allows for a natural notation for the image of subsets of the domain: If ${ Z \subset X }$ then the image of $Z$ under $f$ can be written $f(Z)$.
+		}
+	
+		\boxeddefinition{\textbf{(Identity Function)} The \textit{identity function} associates every element in its \textit{domain} set with the same element. As a result its codomain is necessarily equal to its domain.\\
+		The identity function from the set $X$ to itself is often denoted $id_X$.
+		}
+	
+		\boxeddefinition{\textbf{(Function Inverse)} If $f$ is a function ${ f: X \longmapsto Y }$ then $g$ is an inverse function of $f$ iff $g$ is a function ${ Y \longmapsto X }$ such that
+			\[ f g = id_Y \eqand g f = id_X \]
+			which is to say,
+			\[ (f g)(y) = y \eqand (g f)(x) = x. \]
+		}
+	
+		\boxeddefinition{\textbf{(Function Left/Right Inverse)} \TODO{needs review!} If $f$ is a function ${ f: X \longmapsto Y }$ and ${ I \subseteq Y }$ is the image of $f$, then $g$ is a \textit{left inverse} function of $f$ iff $g$ is a function ${ I \longmapsto X }$ such that
+			\[ f g = id_I \eqand g f = id_X \]
+			which is to say, for ${ i \in I }$ and for any ${ x \in X }$, 
+			\[ (f g)(i) = i \eqand (g f)(x) = x. \]
+			
+			Similarly, $h$ is a \textit{right inverse} function of $f$ iff $h$ is a function ${ I \longmapsto X }$ such that
+			\[ f g = id_Y \eqand g f = id_I \]
+			which is to say, for ${ i \in I }$ and for any ${ y \in Y }$, 
+			\[ (f g)(y) = y \eqand (g f)(i) = i. \]
+		}
+	
+		\boxeddefinition{\textbf{(Function Pre-Image)} Let ${ f: X \longmapsto Y }$ and let ${ Z \subset Y }$. Then the set ${ P \subseteq X }$ such that,
+			\[ P = \setc{x \in X}{\exists z \in Z \logicsep f(x) = z} \]
+			is known as the \textit{pre-image} or \textit{inverse image} of $Z$ under $f$.
+		}
+		
+		\notation{The most common notation for the pre-image of a set $Z$ is $\inv{f}(Z)$ but care must be taken not to confuse this notation with an inverse function; the pre-image is a set and, in fact, the function $f$ may be uninvertible.
+		}
+	
+		\boxeddefinition{\textbf{(Surjection, Injection, Bijection)} A function ${ f: X \longmapsto Y }$ is \textit{surjective} iff
+			\[ \forall y \in Y \logicsep \exists x \in X \logicsep f(x) = y; \]
+			\textit{injective} iff
+			\[ \forall x_1, x_2 \in X \logicsep f(x_1) = f(x_2) \implies x_1 = x_2; \]
+			and \textit{bijective} iff both injective and surjective.
+		}
+		
+		\notation{The set ${ S \subset \N{} }$ defined as
+			\[ S = \setc{n \in \N{}}{n < m+1} \]
+			has a standard notation $\N{}_m$.
+		}
+		\note{Contrast this with the notation $\F{m}$ (\ref{ssection:notation-S-dimensional-F-space}) which refers to the set of all functions ${ \N{}_m \longmapsto \F{} }$.}
+		
+		
+		
+		\biggerskip
+		\labeledProposition{A bijection is a 1-to-1 mapping.}{bijection-is-1-to-1-mapping}
+		\begin{proof}
+			If a function ${ f: X \longmapsto Y }$ is bijective then it is injective and surjective. Surjectivity of the function means that every ${ y \in Y }$ is mapped to by at least one ${ x \in X }$ and injectivity means that every ${ y \in Y }$ is mapped to be at most one ${ x \in X }$.
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{The restriction of an injection to a subset of the domain is an injection.}{restriction-of-injection-is-injection}
+		\begin{proof}
+			Let ${ f: X \longmapsto Y }$ be an injection so that, for any ${ x_1, x_2 \in X }$, if ${ f(x_1) = f(x_2) }$ then ${ x_1 = x_2 }$. If we define the restriction
+			\[ g: Z \subset X \longmapsto Y \suchthat g(z) = f(z), \]
+			then we clearly also have, for any ${ z_1, z_2 \in Z }$,
+			\[ g(z_1) = g(z_2) \iff f(z_1) = f(z_2) \iff z_1 = z_2. \] 
+		\end{proof}
+		\note{The same is not, in general, true of surjections.}
+		
+		
+		\bigskip
+		\labeledProposition{A function has a left inverse iff the function is injective.}{function-has-left-inverse-iff-injective}
+		\TODO{needs review!}
+		\begin{proof}
+			Let ${ f: X \longmapsto Y }$ and let ${ I \subseteq Y }$ be the image of $f$.\\
+			
+			Assume $f$ is an injection. Then for any ${ x_1, x_2 \in X }$, if ${ x_1 \neq x_2 }$ then ${ f(x_1) \neq f(x_2) }$ so for each ${ i \in I }$ there exists a unique ${ x \in X }$ such that ${ f(x) = i }$. Therefore we can define a function,
+			\[ g: I \longmapsto X \suchthat g(i) = x \]
+			and we have, for all ${ i \in I }$,
+			\[ f(g(i)) = i \implies fg = id_I \]
+			and also, for all ${ x \in X }$,
+			\[ g(f(x)) = x \implies gf = id_X. \]
+			
+			Conversely, assume $f$ has a left inverse ${ g: I \longmapsto X }$. Then we have, for all ${ x \in X }$,
+			\[ g(f(x)) = x \implies gf = id_X. \]
+			Suppose, for contradiction, that $f$ is not injective. Then there exist some ${ x_1, x_2 \in X }$ with ${ x_1 \neq x_2 }$ but ${ f(x_1) = f(x_2) }$. But this, together with ${ gf = id_X }$ means that ${ x_1 = g(f(x_1)) = g(f(x_2)) = x_2 }$ which is a contradiction.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{A function has a right inverse iff the function is surjective.}{function-has-right-inverse-iff-surjective}
+		\begin{proof}
+			\TODO{needs review!}
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{A function has an inverse iff the function is bijective.}{function-has-inverse-iff-bijective}
+		\begin{proof}
+%			Let ${ f: X \longmapsto Y }$ and let $g$ be an inverse of $f$ such that ${ (gf)(x) = g(f(x)) = x }$. If $f$ is not surjective then there exists ${ y \in Y }$ such that there does not exist any ${ x \in X }$ with ${ f(x) = y }$. 
+			\TODO{complete this}
+		\end{proof}
+	
+		\medskip
+		\labeledProposition{The inverse of a function is unique.}{function-inverses-are-unique}
+		\begin{proof}
+			\TODO{complete}
+		\end{proof}
+		
+		
+		
+		
+		
+		\biggerskip
+		\subsubsection{Composition and Cardinality}
+		
+		\bigskip
+		\boxeddefinition{\textbf{(Function Composition)} If $f$ and $g$ are two functions,
+			\[ f: X \longmapsto Y \eqand g: Z \longmapsto X \]
+			then the composition of $f$ and $g$, denoted ${ f\circ g }$ is the function defined as,
+			\[ f \circ g : Z \longmapsto Y  \suchthat (f\circ g)(z) = f(g(z)). \]
+			Function composition is associative:
+			\[ f \circ g \circ h = (f \circ g) \circ h = f \circ (g \circ h). \]
+		}
+		\notation{The composition of functions $f$ and $g$ is also often denoted $fg$ although this can cause confusion with the pointwise product.}
+		
+		\boxeddefinition{\textbf{(Set Cardinality)} If there exists a bijection between $\N{}_m$ and a set $X$ then we say that $X$ has \textit{cardinality} equal to $m$, denoted ${ \cardinality{X} = m }$.}\label{def:set-cardinality}
+		
+	
+		\biggerskip
+		\labeledProposition{Composition preserves injectivity and surjectivity.}{composition-preserves-injectivity-and-surjectivity}
+		\begin{proof}
+			Let 
+			\[ f: X \longmapsto Y \eqand g: Y \longmapsto Z. \]
+			Then the composition ${ h = gf }$ is a function ${ h: X \longmapsto Z }$.\\
+			
+			Assume $f$ and $g$ are both injections. Then, for any ${ x_1, x_2 \in X }$,
+			\[\begin{aligned}
+				&& h(x_1) &= h(x_2) \\
+				&\iff & g(f(x_1)) &= g(f(x_2)) &\sidecomment{by defn. of composition} \\
+				&\iff & f(x_1) &= f(x_2) &\sidecomment{by injectivity of $g$} \\
+				&\iff & x_1 &= x_2. &\sidecomment{by injectivity of $f$}
+			\end{aligned}\]
+			Therefore, the composition $h = gf$ is an injection.\\
+			
+			Assume $f$ and $g$ are both surjections. Then, by surjectivity of $g$, for any ${ z \in Z }$, there is some ${ y \in Y }$ such that ${ g(y) = z }$.
+			Furthermore, by surjectivity of $f$, for any ${ y \in Y }$, there is some ${ x \in X }$ such that ${ f(x) = y }$. Therefore,
+			\[ \forall z \in Z \logicsep \exists x \in X \logicsep g(f(x)) = z. \]
+			Therefore, the composition $h = gf$ is a surjection.
+		\end{proof}
+		\begin{corollary}\label{coro:composition-of-bijections-is-bijection}
+			A composition of bijections is a bijection.
+		\end{corollary}
+		\begin{corollary}
+			The set of bijective functions forms a group (see: \ref{def:group}) with function composition.
+		\end{corollary}
+		\begin{proof}
+			\begin{itemize}
+				\item Function composition is associative by definition.
+				\item The composition of bijections is a bijection (by \autoref{coro:composition-of-bijections-is-bijection}) so function composition closes over the set of bijective functions.
+				\item Bijective functions have inverses under function composition (by \autoref{prop:function-has-inverse-iff-bijective}).
+			\end{itemize}
+		\end{proof}
+	
+	
+		
+		\nl[4]
+		\labeledTheorem{\textbf{(Pigeonhole Principle)} Let $m$ be a natural number. Then, for all ${ n \in \N{} }$, if there exists an injection ${ \N{}_n \longmapsto \N{}_m }$ then ${ n \leq m }$.}{pigeonhole-principle}
+		\begin{proof}
+			We will prove this by induction on the cardinality of the domain of the injection. The base case of ${ n = 1 }$ holds trivially as ${ m \in \N{} }$ and so, by \autoref{prop:mult_identity_least_element}, ${ 1 = n \leq m }$.\\
+			
+			For the induction step we assume that the proposition holds for some ${ n = k > 1 }$ so that, if there is an injection ${ \N{}_k \longmapsto \N{}_m }$, then ${ k \leq m }$.\\
+			
+			Now we consider the case ${ n = k+1 }$: Assume we have an injection ${ f: \N{}_{k+1} \longmapsto \N{}_m }$. Since ${ k+1 > k > 1 }$, there are at least two distinct elements in $\N{}_{k+1}$ --- which is to say ${ \N{}_2 \subseteq \N{}_{k+1} }$. Since $f$ is an injection, we have ${ f(1) \neq f(2) }$ and so there are at least two distinct elements in $\N{}_m$ and we deduce that ${ m > 1 }$.\\
+			
+			Since ${ m > 1 }$, let ${ s + 1 = m }$. Either there is some ${ a \in \N{}_k }$ such that ${ f(a) = m = s+1 }$ or there is not.
+			\begin{itemize}
+				\item If there is no ${ a \in \N{}_k }$ such that ${ f(a) = m = s+1 }$ then the restriction of $f$ to $\N{}_k$, by \autoref{prop:restriction-of-injection-is-injection}, is an injection and, by the induction hypothesis we can deduce that
+				\[ k \leq s \iff k + 1 \leq s + 1 = m. \]
+				
+				\bigskip
+				\item Conversely, if there is some ${ a \in \N{}_k }$ such that ${ f(a) = m = s+1 }$ then, because $f$ is an injection and so we must have ${ f(k+1) \neq f(a) }$, we can deduce that
+				\[ f(k+1) < m = s+1 \iff f(k+1) \leq s. \]
+				So we can define an injection from $\N{}_k$ to $\N{}_s$ using $f(k+1)$ as follows,
+				\[	g: \N{}_k \longmapsto \N{}_s \suchthat g(x) = 	\begin{cases}
+					f(k+1) & x = a \\
+					f(x) & x \neq a.	
+				\end{cases}
+				\]
+				The function $g$ is guaranteed to be injective because $f$ is injective and all we've done is change the mapping of ${ a \in \N{}_k }$ to return the element mapped to by ${ k+1 \centernot\in \N{}_k }$. Since $g$ is an injection, we can now employ the induction hypothesis to deduce that
+				\[ k \leq s \iff k + 1 \leq s + 1 = m. \qedhere \]
+			\end{itemize}
+		\end{proof}
+		
+		
+		\bigskip
+		\labeledProposition{If a function ${ f: X \longmapsto Y }$ is injective then ${ \cardinality{X} \leq \cardinality{Y} }$.}{injection-from-X-to-Y-implies-cardinality-of-X-leq-to-that-of-Y}
+		\begin{proof}
+			Let ${ \cardinality{X} = m }$ and the ${ \cardinality{Y} = n }$. Then, by the definition of cardinality (\ref{def:set-cardinality}), there exist bijections
+			\[ g_1: \N{}_m \longmapsto X \eqand g_2: \N{}_n \longmapsto Y. \]
+			So, the composition ${ g_2 f g_1 }$
+			So, for any ${ n_1, n_2 \in \N{}_m }$,
+			\[\begin{aligned}
+				&&  &=  \\
+				&\iff &  &=  &\sidecomment{} \\
+			\end{aligned}\]
+			\TODO{complete}
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{If a function ${ f: X \longmapsto Y }$ is surjective then ${ \cardinality{Y} \leq \cardinality{X} }$.}{}
+		\begin{proof}
+			Let ${ f: X \longmapsto Y }$ be a surjection so that, by definition, for every ${ y \in Y }$, there exists at least one ${ x \in X }$ such that ${ f(x) = y }$. The definition of a function states that it associates every element in the domain with a single element in the codomain so, for every ${ x \in X }$, there is one and only one ${ y \in Y }$ such that ${ f(x) = y }$.\TODO{complete}
+		\end{proof}
+	
+		\begin{corollary}
+			If a function ${ f: X \longmapsto Y }$ is bijective then ${ \cardinality{Y} = \cardinality{X} }$.
+		\end{corollary}
+		\begin{proof}
+			\[ \cardinality{Y} \leq \cardinality{X} \; \land \; \cardinality{Y} \geq \cardinality{X} \implies \cardinality{Y} = \cardinality{X}. \]
+		\end{proof}
+		
+		\TODO{this probably is a corollary}
+		\labeledProposition{The cardinality of the image of a function is less than or equal to that of the domain of the function. That's to say, if $I$ is the image of the function,
+			\[ f: X \longmapsto Y \]
+			then 
+			\[ \cardinality{I} \leq \cardinality{X}. \]
+		}{}
+		\begin{proof}
+			\TODO{complete this}
+		\end{proof}
+		
+		
+		
+		\sep
+		\begin{exe}
+			\ex \textit{In any room full of people, there will always be at least two people with the same number of friends in the room.}\\
+			
+			\TODO{complete this}
+			
+			\ex \textit{If there are 5 points in the plane $\R{2}$ with integer co-ordinates then there must be at least one pair, say $(x_1,y_1)$ and $(x_2,y_2)$, whose midpoint, given by
+				\[ \left( \frac{x_1 + x_2}{2}, \, \frac{y_1 + y_2}{2} \right), \]
+				has integer co-ordinates.}\\
+			
+			\TODO{complete this}
+			
+			\ex \textit{In a set of ${ n > 1 }$ integers there exists a non-empty subset whose sum is divisible by $n$.}\\
+			
+			\TODO{complete this}
+		\end{exe}
+		\sep
+	
+	
+
+	
+		
+		\biggerskip
+		\subsubsection{Infinite Sets}
+		
+		\boxeddefinition{\textbf{(Infinite Set)} A set $X$ is described as \textit{infinite} if there is no ${ n \in \N{} }$ such that ${ \cardinality{X} = n }$.}
+		
+		\bigskip
+		\labeledProposition{The set of natural numbers $\N{}$ is infinite.}{natural-numbers-is-infinite-set}
+		\begin{proof}
+			Suppose for contradiction that there is some ${ n \in \N{} }$ such that ${ \cardinality{\N{}} = n }$. Then there exists a bijection,
+			\[ f: \N{}_n \longmapsto \N{}. \]
+			Consider the value,
+			\[ m = \sum_{i \in \N{}_n} f(i) = f(1) + f(2) + \cdots + f(n). \]
+			By closure of addition of naturals we have ${ m \in \N{} }$ but for the naturals we also have,
+			\[ \forall n \in \N{} \logicsep 1 \leq n \implies \forall i \in \N{}_n \logicsep f(i) < m. \]
+			Therefore, there is no ${ i \in \N{}_n }$ such that ${ f(i) = m }$ which contradicts the surjectivity of $f$ and therefore also the bijectivity of $f$.
+		\end{proof}
+		\note{Note a certain similarity here between this proof and Euler's proof of the infinitude of the primes.}
+		
+	}
+\end{document}

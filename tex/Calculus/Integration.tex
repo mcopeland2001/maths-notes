@@ -29,7 +29,8 @@
 			\[ \lim_{n \to \infty} L(P(n)) = \lim_{n \to \infty} U(P(n)) = I \]
 			then the \textbf{Riemann Integral} of $f(x)$ over $P(n)$ is defined as,
 			\[ \int_a^b f(x) \dif x = I. \]
-		}\label{def:riemann-integral}
+			\label{def:riemann-integral}
+		}
 	
 		\bigskip
 		\labeledProposition{Let $f$ and $g$ be integrable functions on an interval $[a,b]$ such that
@@ -216,6 +217,7 @@
 			\[ \int_T^\infty f(t) \dif t \geq \int_T^\infty g(t) \dif t \]
 			and so, if the integral of $g$ over this interval is infinite then so must the integral of $f$ be also.
 		\end{proof}
+		\note{\TODO{note about functions compared in DCT needing to be positive.}}
 	
 		\medskip
 		\begin{corollary}
@@ -253,7 +255,7 @@
 			\[ \int_1^\infty f(x) \dif x \text{ converges } \implies \int_1^\infty f(x^2) \dif x \text{ converges } \]
 			but
 			\[ \int_1^\infty f(x^2) \dif x \text{ converges } \centernot\implies \int_1^\infty f(x) \dif x \text{ converges. } \]
-		}{}
+		}{integral-of-func-of-x-converges-implies-func-of-x-squared-converges-but-converse-is-not-true}
 		\begin{proof}\nl[4]
 			\[\begin{aligned}
 				\int_1^\infty f(x) \dif x &= \int_1^\infty f(u^2) \dif\, (u^2) \nn
@@ -270,25 +272,39 @@
 		\end{proof}
 	
 		\bigskip
-		\labeledTheorem{\textbf{(Limit Comparison Test)} If $f(t)$ and $g(t)$ are both positive for all ${ t \geq a }$ then, for the test value
-			\[ T = \lim_{t \to \infty} \frac{f(t)}{g(t)}, \]
+		\labeledTheorem{\textbf{(Limit Comparison Test)} If $f(t)$ and $g(t)$ are both positive for all ${ t \in [a,b) }$ then, for the test value
+			\[ T = \lim_{t \to b} \frac{f(t)}{g(t)}, \]
 			\begin{itemize}
 				\item{if ${ T = 1 }$ then
-					\[ \int_a^\infty f(t) \dif t \text{ converges } \iff \int_a^\infty g(t) \dif t \text{ converges; } \]
+					\[ \int_a^b f(t) \dif t \text{ converges } \iff \int_a^b g(t) \dif t \text{ converges; } \]
 				}
 				\item{if ${ T = 0 }$ then
-					\[ \int_a^\infty g(t) \dif t \text{ converges } \implies \int_a^\infty f(t) \dif t \text{ converges. } \]
+					\[ \int_a^b g(t) \dif t \text{ converges } \implies \int_a^b f(t) \dif t \text{ converges. } \]
 				}
+				\item{if ${ T = \infty }$ then
+					\[ \int_a^b g(t) \dif t \text{ diverges } \implies \int_a^b f(t) \dif t \text{ diverges. } \]
+				}
+				\TODO{Why do the functions $f$ and $g$ have to be positive?}
 			\end{itemize}	
-		}{}
+		}{integral-limit-comparison-test}
 		\begin{proof}\nl[4]
-			\TODO{reference relevant theorem in Analysis}\\
-			\TODO{add notes in Calculus about algebra of limits of functions \wrt when we take the limit of a fraction where one or both of the numerator and denominator are going infinite (and so we can't apply the algebra of limits until we have transformed it to a ratio of finite limits).}\\
-			
+			If ${ T = 1 }$ then the numerator and denominator are growing at the same rate as ${ t \to b }$ and so convergence of one implies convergence of the other. If, on the other hand, ${ T = 0 }$ then the numerator is growing more slowly than the denominator and so if the denominator converges then the numerator must also converge. Conversely, if ${ T = \infty }$ then the numerator is growing faster than the denominator and so, if the denominator diverges then the numerator must also diverge.
 		\end{proof}
-		\TODO{note about limit of ratio being 1 not being equivalent to the numerator and denominator having the same limit: that applies when the limits are finite and non-zero but if they are zero or infinite then the limit of the ratio gives indication of speed of going to zero or infinity. ref: L'Hopital's rule.}
-		\note{Note that if the limits of $f(t)$ and $g(t)$ as ${ t \to \infty }$ are both finite and non-zero then we have case (vi) of \autoref{prop:func-finite-limit-algebra} where the limit of the ratio is simply the ratio of the limits of $f(t)$ and $g(t)$. Also, if one of the limits is finite and non-zero and the other is tending to zero or infinity then the limit is just as we would expect from the limits of e.g. polynomial fractions. That's to say, a finite numerator over a denominator that's tending to zero results in an infinite limit and if the denominator is tending to infinity then the result is a limit of zero.\\\\ However, if both limits are zero or infinite then we need to employ L'H\^{o}pital's rule to obtain the limit of the ratio (see: \href{https://web.ma.utexas.edu/users/m408n/m408c/CurrentWeb/LM4-4-11.php}{UTexas}). So, in each case, the result of the limit of the ratio is an indicator of whether the numerator or denominator is going to infinity or zero faster or slower than the numerator. \question{Do we have a problem if e.g. the numerator is going to zero while the denominator is going to infinity?}}
 	
+		\note{In \autoref{theo:integral-limit-comparison-test}, the functions $f$ and $g$ must be positive because this makes the integral strictly increasing as $t$ goes to the limit point and so it either converges or goes infinite. If the integrand function takes negative values also then the value of the integral may be oscillating as $t$ goes to the limit point and so it could be divergent even though bound. For example,
+			\[ \lim_{t \to \infty} \frac{\sin{x}}{x^2} \]
+			\TODO{this example doesn't work? have I thought about this correctly?}
+		}
+	
+		\bigskip
+		\note{\TODO{work out how to write this up better}\\\\
+		The strategy for using the limit comparison test is:
+		\begin{enumerate}
+			\item{Look for an integrable function that can be limit tested against the function under test to obtain the desired result;}
+			\item{Integrate the integrable function to show that it is convergent/divergent depending on requirement.}
+		\end{enumerate}
+		}
+		\TODO{note or example(s) to show that convergence of integrals is convergence of series not sequences.}
 	
 		\sep
 		\begin{exe}

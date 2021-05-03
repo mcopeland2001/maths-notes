@@ -10,33 +10,64 @@
 	\searchableSection{Limits}{calculus, limits}
 	\biggerskip
 	\searchableSubsection{Calculating Limits}{calculus, limits}{\label{ssection:calculating-limits}
-		Prove "Algebra of Infinite Limits" in Analysis:
+		\bigskip
+		\begin{enumerate}[label=(\arabic*)]
+			\item{If the expression is a composition of functions that tend to finite limits (with the exception of a denominator tending to 0) then we can use the algebra of limits (\autoref{prop:func-finite-limit-algebra}).}
+			\item{Otherwise we can try to use the algebra of infinite limits (\autoref{prop:func-infinite-limit-algebra}).}
+			\item{Else look for algebraic manipulations to reduce the expression to one that can be solved using (1) or (2).}
+			\item{Else use L'H\^{o}pital's Rule.}
+		\end{enumerate}
+	
+		\nl[4]
+		For example, the forms:
+		\begin{enumerate}
+			\item{${ (\infty) - (\infty), \, (\infty) \times (-\infty) }$: These are case (3) in which we look for algebraic manipulations that reduce the problem to case (1) or (2).}
+			\item{${ \frac{0}{0}, \, \frac{\infty}{\infty} }$: Case (4), L'H\^{o}pital's Rule}
+			\item{${ (0) \times (\infty) }$: This case can be reduced to (4) by converting the product to a ratio.}
+			\item{${ \frac{0}{\infty} }$: This case can be reduced to (1) by expressing it as ${ (0) \times (\frac{1}{\infty}) }$ and then treating the second operand (the ratio) as case (2) to obtain the form ${ (0) \times (0) = 0 }$.}
+		\end{enumerate}
+	
+		\sep
+		\begin{exe}
+			\ex{$\lim_{x\to\infty} \left[\left(x^3 + x^2\right)^\frac{1}{3} - x\right]$:\\
+			
+				First, note that 
+				\[ \lim_{x \to \infty} \left(x^3 + x^2\right)^\frac{1}{3} = \infty \eqand \lim_{x \to \infty} x = \infty. \]
+				So the expression we are trying to find the limit of takes the form ${ (\infty) - (\infty) }$ and so this is case (3) and we need to look for algebraic manipulations that can transform it into one of the other cases.\\
+				
+				We can use the difference of cubes (\autoref{theo:difference-of-cubes}) as follows.
+				\[\begin{aligned}
+					&\left(x^3 + x^2\right)^\frac{1}{3} - x \\
+					&= \left(x^3 + x^2\right)^\frac{1}{3} - x \cdot \frac{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} \nnn
+					&= \frac{\left(x^3 + x^2\right) - x^3}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} &\sidecomment{by \autoref{theo:difference-of-cubes}}\nnn
+					&= \frac{x^2}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} \nnn
+					&= \frac{\frac{1}{x^2}}{\frac{1}{x^2}}\cdot\frac{x^2}{\left(x^3 + x^2\right)^\frac{2}{3} + x^2 + x\left(x^3 + x^2\right)^\frac{1}{3}} \nnn
+					&= \frac{1}{\left(1 + \frac{1}{x}\right)^\frac{2}{3} + 1 + \frac{1}{x}\left(x^3 + x^2\right)^\frac{1}{3}} \nnn
+					&= \frac{1}{\left(1 + \frac{1}{x}\right)^\frac{2}{3} + 1 + \left(1 + \frac{1}{x}\right)^\frac{1}{3}}. \nnn
+				\end{aligned}\]
+				Now we have reduced it to an expression that is a composition of functions that have finite limits so it can now be solved as an instance of case (1).
+				\[\begin{aligned}
+					&\lim_{x\to\infty} \left[\left(x^3 + x^2\right)^\frac{1}{3} - x\right] \nnn
+					&= \lim_{x\to\infty} \frac{1}{\left(1 + \frac{1}{x}\right)^\frac{2}{3} + 1 + \left(1 + \frac{1}{x}\right)^\frac{1}{3}} \nnn
+					&= \frac{\lim_{x\to\infty} 1}{\lim_{x\to\infty} \left(1 + \frac{1}{x}\right)^\frac{2}{3} + \lim_{x\to\infty} 1 + \lim_{x\to\infty} \left(1 + \frac{1}{x}\right)^\frac{1}{3}} &\sidecomment{by \autoref{prop:func-finite-limit-algebra}} \nnn
+					&= \frac{1}{1 + 1 + 1} = \frac{1}{3}.
+				\end{aligned}\]
+			}
+		\end{exe}
+	
+		\bigskip
+		\subsubsection{\texorpdfstring{L'H\^{o}pital's Rule}{L'Hôpital's Rule}}\label{sssection:calc_l_hopitals_rule}
+		see: \href{https://web.ma.utexas.edu/users/m408n/m408c/CurrentWeb/LM4-4-11.php}{UTexas}
 		\begin{itemize}
-			\item{${ \lim_{x \to a} f(x) = \infty, c > 0 \in \R{} \implies \lim_{x \to a} cf(x) = \infty }$}
-			\item{${ \lim_{x \to a} f(x) = \infty \implies \lim_{x \to a} \abs{f(x)} = \infty }$}
-			\item{${ \lim_{x \to a} f(x) = 0, c > 0 \in \R{} \implies \lim_{x \to a} c/f(x) = \infty }$}	
-		\end{itemize}
-		\nl[6]
-		\begin{itemize}
-			\item{All finite limits can be manipulated with the algebra of limits}
-			\item{Then, prove that if $\lim_{x \to a} f(x) = 0$ then $\lim_{x \to a} 1/f(x) = \infty$}
-			\item{Then remaining indeterminate forms are:
-				\begin{enumerate}
-					\item{${ \infty - \infty }$}
-					\item{${ \infty \times -\infty }$}
-					\item{${ 0 \times \infty }$}
-					\item{${ \frac{0}{0} }$}
-					\item{${ \frac{\infty}{\infty} }$}
-				\end{enumerate}
-				where the last 2 cases are handled by L'H\^{o}pital's rule.
+			\item{L'H\^{o}pital's Rule does not apply if the limit of derivatives does not exist (though some sources say that the limit being infinite is an 'existing' limit in this case - which would leave only oscillatory divergent functions as not having limits - needs confirmation)}
+			\item{\href{https://math.stackexchange.com/questions/1342202/why-doesnt-lhopitals-rule-work-in-this-case/1342222}{math.stackexchange discussion}}
+			\item{Example of L'H\^{o}pital's Rule failing to find a simple limit: 
+				\[ \lim_{x \to \infty} \frac{ \sqrt{4x^2 + 3} }{ x + 3 } \]
 			}
 		\end{itemize}
 		
-		\bigskip
-		Let ${ f, g : \R{} \longmapsto \R{} }$ be two functions such that ${ \lim_{x \to a} f(x) = L }$ and ${ \lim_{x \to a} g(x) = M }$ where $a$, $L$ and $M$ may be infinity.\\
-		If $L$ and $M$ are both finite and non-zero then we can simply apply the algebra of limits from \autoref{prop:func-finite-limit-algebra} to determine the value of the limit of some simple algebraic combination of $f$ and $g$.\\
-		However, if both are infinite then we will need to manipulate the expression until we obtain one that can be decomposed into expressions whose limits are finite and can be combined using the algebra. 
-		
+		 
+		\biggerskip
 		\subsection{Classes of Asymptotic Behaviour}
 		We can identify three classes of asymptotic behaviour of a function $f(x)$ as ${ x \to a }$ (where $a$ may be infinity), distinguished by the value of
 		\[ L = \lim_{x \to a} f(x). \]
@@ -52,26 +83,29 @@
 		\[  A + \infty = \infty = \infty - A \]
 		and
 		\[ A - \infty = -\infty = -A - \infty. \]
-		Furthermore
-		Products and ratios involving functions of classes (i) and (iii) are more complicated and need discussing at some length.
+		Products and ratios involving functions of classes (i) and (iii) are resolved by looking at the derivatives of the functions -- i.e. using L'H\^{o}pital's Rule.
 		
-		\subsubsection{Products and Ratios}
+		\medskip
+		\subsubsection{Orders of Growth}
+		see: \href{https://en.wikipedia.org/wiki/Asymptotic_analysis}{wikipedia - Asymptotic Analysis}\\
 		
-	}
-	
-	\searchableSubsection{Limits of Ratios}{calculus, limits}{
-		\bigskip
-		Three cases of the limits of $f(t)$ and $g(t)$ as ${ t \to \infty }$:
-		\begin{itemize}
-			\item{both limits are finite: In this case we can apply (vi) of \autoref{prop:func-finite-limit-algebra} and the result $T$ will be finite. (note that if the denominator is 0 we can just swap the numerator and the denominator since we are only interested in the comparison.)}
-			\item{both limits are zero or infinite: In this case we can apply L'H\^{o}pital's rule (\ref{sssection:l_hopitals_rule}) and the result $T$ could be finite or infinite.}
-			\item{if one of the numerator or denominator is going infinite then we need to divide both by the dominant factor in the denominator so as to obtain a fraction with a numerator and denominator which both remain finite as ${ t \to \infty }$.}
-		\end{itemize}
-		\question{do we have some problem cases where the one is zero and the other infinite and they can't be converted into a ratio of both zeroes or infinites?}
+		Let a test value $T$ be defined as,
+		\[ T = \lim_{t \to \infty} \frac{f(t)}{g(t)}. \]
+		Since,
+		\[ \frac{f(t)}{g(t)} - 1 = \frac{f(t) - g(t)}{g(t)} \]
+		we therefore have
+		\[ \lim_{t \to \infty} \frac{f(t)}{g(t)} = 1 \implies \lim_{t \to \infty} \frac{f(t)}{g(t)} - 1 = \lim_{t \to \infty} \frac{f(t) - g(t)}{g(t)} = 0. \]
+		This will be the case if the function,
+		\[ h(x) = f(x) - g(x) \]
+		has a lower order of growth then $g(x)$. This can be seen most easily with polynomials. Say, for example,
+		\[ f(x) = \alpha_3 x^3 + \alpha_2 x^2 + \alpha_1 x + \alpha_0 \eqand g(x) = \beta_3 x^3 + \beta_2 x^2 + \beta_1 x + \beta_0 \]
+		then we have
+		\[ h(x) = (\alpha_3 - \beta_3) x^3 + (\alpha_2 - \beta_2) x^2 + (\alpha_1 - \beta_1) x + (\alpha_0 - \beta_0). \]
+		If ${ \alpha_3 = \beta_3 }$ then the order of $h$ is lower than that of $g$ and so ${ \frac{h(x)}{g(x)} \to 0 }$ which means that ${ T = 1 }$ and $f$ and $g$ have the same order.\\
 		
-		\bigskip
-		\subsubsection{\texorpdfstring{L'H\^{o}pital's Rule}{L'Hôpital's Rule}}\label{sssection:calc_l_hopitals_rule}
-		see: \href{https://web.ma.utexas.edu/users/m408n/m408c/CurrentWeb/LM4-4-11.php}{UTexas}
+		In general, if $f$ and $g$ have the same degree, then the degree of $h$ is less than or equal to the degree of $g$ and so $T$ will be 0 --- in the case that the degree of $h$ is lower than that of $g$ --- and some finite non-zero number in the case that the degree of $h$ is the same as that of $g$.\\
+		
+		On the other hand, if the degree of $f$ is greater than that of $g$ then the degree of $h$ will also be greater than that of $g$ and so ${ \frac{h(x)}{g(x)} \to \infty }$ and the value of $T$ will be infinite.
 	}
 	
 \end{document}

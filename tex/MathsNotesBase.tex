@@ -106,7 +106,9 @@
 \newcommand\sectionTitle\Huge
 \newcommand\subsectionTitle\Large
 \newcommand{\biggerskip}{\bigskip\bigskip}
-\newcommand\subsubsubsection[1]{\textbf{\textit{#1}}\nopagebreak\\[8pt]\nopagebreak}% this is the level below the last toc/bookmark level
+\newcommand\subsubsubsection[1]{{\fontfamily{lmr}\selectfont
+		\textbf{\textit{#1}}\nopagebreak\\[4pt]\nopagebreak
+}}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
 \newcommand{\divides}{\mid}
@@ -114,6 +116,7 @@
 \newcommand{\eqand}{\hspace{10pt}\text{and}\hspace{10pt}}
 \newcommand{\eqword}[1]{\hspace{10pt}\text{#1}\hspace{10pt}}
 \newcommand{\modulo}[1]{\;(\bmod\; #1)}
+\newcommand{\rel}{\; R \;}
 \newcommand{\uminus}{\scalebox{0.5}[1.0]{$-$}}  % unary minus scaled by argument
 \newcommand{\nn}{\\[6pt]}
 \newcommand{\nnn}{\\[8pt]}
@@ -142,6 +145,7 @@
 \DeclareRobustCommand{\C}[1]{\mathbb{C}^{#1}}
 \DeclareRobustCommand{\Q}[1]{\mathbb{Q}^{#1}}
 \DeclareRobustCommand{\F}[1]{\mathbb{F}^{#1}}
+\DeclareRobustCommand{\B}[1]{\mathbb{B}^{#1}}
 \DeclareRobustCommand{\inv}[1]{{#1}^{-1}}
 \DeclareRobustCommand{\logicsep}{\;.\;}
 
@@ -226,7 +230,7 @@
 
 % \def\exautorefname{Example} doesn't work - don't know why
 
-\newcommand{\boxeddefinition}[1]{\noindent\fbox{%
+\newcommand{\boxeddefinition}[1]{\noindent\fbox{% TODO: add label argument and put label in environment
 		\parbox{\textwidth}{%
 			\begin{definition}
 				#1
