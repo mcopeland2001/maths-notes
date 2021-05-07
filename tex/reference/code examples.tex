@@ -20,16 +20,6 @@
 		&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
 		&\iff & \phi(ba\inv{a}) &= 1.
 	\end{aligned}\]
-%	\begin{align*}
-%		&& a \in ker \; \phi \iff \phi(a) &= 1 \\
-%		&\implies & \phi(ba\inv{a}) &= \phi(a) \cdot 1 \cdot \phi(\inv{a}) \\
-%		&\iff & \phi(ba\inv{a}) &= \phi(a)\inv{\phi(a)} &\sidecomment{using \autoref{prop:isomorphism_preserves_structure}} \\
-%		&\iff & \phi(ba\inv{a}) &= 1.
-%	\end{align*}	
-%	\begin{align*}
-%		&&  &=  \\
-%		&\iff &  &=  &\sidecomment{} \\
-%	\end{align*}
 
 	\subsection{Propositions and Theorems}
 	\labeledProposition{}{}
@@ -139,5 +129,20 @@
 		a^2 = aa &= \underbrace{a + a + \cdots + a}_{a \text{ times}}, \nn
 		a^3 = aaa &= \underbrace{a + a + \cdots + a}_{a \text{ times}} \, \underbrace{a + a + \cdots + a}_{a \text{ times}}.
 	\end{aligned}\]
+
+	
+	\subsection{Algorithms}
+	The Gram-Schmidt algorithm is as follows:
+	\begin{algorithm}
+		\begin{algorithmic}
+			\REQUIRE A $k$-length linearly independent set of vectors ${ S = \{\v_1,\dots,\v_k\} \subset V }$ where $V$ is an inner product space, and an initially-empty set ${ O = \{\} }$.
+			\ENSURE A $k$-length orthonormal set of vectors ${ O = \{\u_1, \dots, \u_k \} }$ \suchthat ${ \operatorname{Lin} O = \operatorname{Lin} S }$.
+			\STATE % empty line
+			\FOR {$i=1$ to $k$}
+			\STATE find $\w$, a basis for the orthogonal complement of $O$ in ${ O \cup \{\v_i\} }$.
+			\STATE ${ \u_i \leftarrow \frac{\w}{\norm{\w}} }$
+			\ENDFOR 
+		\end{algorithmic}	
+	\end{algorithm}
 	
 \end{document}

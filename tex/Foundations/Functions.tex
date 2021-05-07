@@ -9,7 +9,7 @@
 		\boxeddefinition{\textbf{(Function)} A \textit{function} or \textit{mapping} associates every element in its \textit{domain} set with a single element in its \textit{codomain} set.\\
 			
 		Informally, a function sets up a relation between sets that is either many-to-1 or 1-to-1 but cannot be 1-to-many or many-to-many.
-		}
+		\label{def:function}}
 		
 		\notation{If $f$ is a function with domain $X$ and codomain $Y$, then we write:
 			\[ f: X \longmapsto Y. \]
@@ -33,7 +33,7 @@
 			\[ f g = id_Y \eqand g f = id_X \]
 			which is to say,
 			\[ (f g)(y) = y \eqand (g f)(x) = x. \]
-		}
+		\label{def:function-inverse}}
 	
 		\boxeddefinition{\textbf{(Function Left/Right Inverse)} \TODO{needs review!} If $f$ is a function ${ f: X \longmapsto Y }$ and ${ I \subseteq Y }$ is the image of $f$, then $g$ is a \textit{left inverse} function of $f$ iff $g$ is a function ${ I \longmapsto X }$ such that
 			\[ f g = id_I \eqand g f = id_X \]
@@ -67,7 +67,14 @@
 		}
 		\note{Contrast this with the notation $\F{m}$ (\ref{ssection:notation-S-dimensional-F-space}) which refers to the set of all functions ${ \N{}_m \longmapsto \F{} }$.}
 		
-		
+		\boxeddefinition{\textbf{(Function Composition)} If $f$ and $g$ are two functions,
+			\[ f: X \longmapsto Y \eqand g: Z \longmapsto X \]
+			then the composition of $f$ and $g$, denoted ${ f\circ g }$ is the function defined as,
+			\[ f \circ g : Z \longmapsto Y  \suchthat (f\circ g)(z) = f(g(z)). \]
+			Function composition is associative:
+			\[ f \circ g \circ h = (f \circ g) \circ h = f \circ (g \circ h). \]
+		}
+		\notation{The composition of functions $f$ and $g$ is also often denoted $fg$ although this can cause confusion with the pointwise product.}
 		
 		\biggerskip
 		\labeledProposition{A bijection is a 1-to-1 mapping.}{bijection-is-1-to-1-mapping}
@@ -85,6 +92,41 @@
 		\end{proof}
 		\note{The same is not, in general, true of surjections.}
 		
+		\bigskip
+		\labeledProposition{Composition preserves injectivity and surjectivity.}{composition-preserves-injectivity-and-surjectivity}
+		\begin{proof}
+			Let 
+			\[ f: X \longmapsto Y \eqand g: Y \longmapsto Z. \]
+			Then the composition ${ h = gf }$ is a function ${ h: X \longmapsto Z }$.\\
+			
+			Assume $f$ and $g$ are both injections. Then, for any ${ x_1, x_2 \in X }$,
+			\[\begin{aligned}
+				&& h(x_1) &= h(x_2) \\
+				&\iff & g(f(x_1)) &= g(f(x_2)) &\sidecomment{by defn. of composition} \\
+				&\iff & f(x_1) &= f(x_2) &\sidecomment{by injectivity of $g$} \\
+				&\iff & x_1 &= x_2. &\sidecomment{by injectivity of $f$}
+			\end{aligned}\]
+			Therefore, the composition $h = gf$ is an injection.\\
+			
+			Assume $f$ and $g$ are both surjections. Then, by surjectivity of $g$, for any ${ z \in Z }$, there is some ${ y \in Y }$ such that ${ g(y) = z }$.
+			Furthermore, by surjectivity of $f$, for any ${ y \in Y }$, there is some ${ x \in X }$ such that ${ f(x) = y }$. Therefore,
+			\[ \forall z \in Z \logicsep \exists x \in X \logicsep g(f(x)) = z. \]
+			Therefore, the composition $h = gf$ is a surjection.
+		\end{proof}
+		\begin{corollary}\label{coro:composition-of-bijections-is-bijection}
+			A composition of bijections is a bijection.
+		\end{corollary}
+		\medskip
+		\begin{corollary}
+			The set of bijective functions forms a group (see: \ref{def:group}) with function composition.
+		\end{corollary}
+		\begin{proof}\nl
+			\begin{itemize}
+				\item Function composition is associative by definition.
+				\item The composition of bijections is a bijection (by \autoref{coro:composition-of-bijections-is-bijection}) so function composition closes over the set of bijective functions.
+				\item Bijective functions have inverses under function composition (by \autoref{prop:function-has-inverse-iff-bijective}).
+			\end{itemize}
+		\end{proof}
 		
 		\bigskip
 		\labeledProposition{A function has a left inverse iff the function is injective.}{function-has-left-inverse-iff-injective}
@@ -113,74 +155,61 @@
 		\bigskip
 		\labeledProposition{A function has an inverse iff the function is bijective.}{function-has-inverse-iff-bijective}
 		\begin{proof}
-%			Let ${ f: X \longmapsto Y }$ and let $g$ be an inverse of $f$ such that ${ (gf)(x) = g(f(x)) = x }$. If $f$ is not surjective then there exists ${ y \in Y }$ such that there does not exist any ${ x \in X }$ with ${ f(x) = y }$. 
-			\TODO{complete this}
+			Let ${ f: X \longmapsto Y }$.\\
+			
+			Suppose $f$ is a bijection. Then, by \autoref{prop:bijection-is-1-to-1-mapping}, $f$ maps one and only one $x$ to one and only one $y$. Therefore, we can define
+			\[ g: Y \longmapsto X \suchthat g(y) = x \eqword{where} f(x) = y \]
+			and then we have
+			\[ \forall x \in X \logicsep g(f(x)) = x \eqand \forall y \in Y \logicsep f(g(y)) = y \]
+			which is to say that $g$ is an inverse of $f$.
+			
+			\nl[4]
+			Suppose $f$ has an inverse $g$. Then, by definition of the inverse (\ref{def:function-inverse}), we have
+			\[ gf = id_X \iff \forall x \in X \logicsep g(f(x)) = x  \tag{1} \]
+			and also
+			\[ \forall y \in Y \logicsep fg = id_Y \iff f(g(y)) = y. \tag{2} \]
+			Using (1) we can reason, for ${ x_1, x_2 \in X }$,
+			\[\begin{aligned}
+				&& f(x_1) &= f(x_2) \\
+				&\iff & g(f(x_1)) &= g(f(x_2)) &\sidecomment{by defn. of function \ref{def:function}} \\
+				&\iff & x_1 &= x_2 &\sidecomment{${ \because gf = id_X }$} \\
+			\end{aligned}\]
+			which is to say that $f$ is injective.\\
+			Using (2) we can reason, for all ${ y \in Y }$,
+			\[ \exists g(y) \in X \logicsep f(g(y)) = y \implies \exists x \in X \logicsep f(x) = y \]
+			which is to say that $f$ is surjective.\\
+			So $f$ is a bijection.
 		\end{proof}
 	
 		\medskip
-		\labeledProposition{The inverse of a function is unique.}{function-inverses-are-unique}
+		\labeledProposition{The inverse of a function (if it exists) is unique.}{function-inverses-are-unique}
 		\begin{proof}
-			\TODO{complete}
+			Let ${ f: X \longmapsto Y }$ and assume that $g$ and $h$ are inverses of $f$.\\
+			
+			The proposition can be proven in a number of equivalent ways. One way is to use only the associativity of function composition to reason,
+			\[ g(y) = (hf)(g(y)) = ((hf)g))(y) = (h(fg))(y) = h((fg)(y)) = h(y). \]
+			We also can use just the definition of a function to reason,
+			\[ \forall x \in X \logicsep g(f(x)) = x = h(f(x)) \implies \forall y \in Y \logicsep g(y) = h(y). \]
+			Alternatively, we can use the group properties of the group formed by function composition over the set of invertible functions to reason,
+			\[ gf = id_X = hf \iff gfg = hfg \iff g \circ id_Y = h \circ id_Y \iff g = h. \]
+		\end{proof}
+		\note{Compare the proof of uniqueness of inverses in Group Theory \ref{sssection:corollaries-of-group-axioms}.}
+		
+		\medskip
+		\labeledProposition{The inverse of a function is a bijection.}{function-inverses-are-bijective}
+		\begin{proof}
+			Using the definition of function inverses (\ref{def:function-inverse}) it's clear to see that if $g$ is an inverse of $f$ then $f$ is also an inverse of $g$. Therefore, by \autoref{prop:function-has-inverse-iff-bijective}, $g$ is bijective.
 		\end{proof}
 		
 		
 		
-		
-		
 		\biggerskip
-		\subsubsection{Composition and Cardinality}
-		
+		\subsubsection{Cardinality}
 		\bigskip
-		\boxeddefinition{\textbf{(Function Composition)} If $f$ and $g$ are two functions,
-			\[ f: X \longmapsto Y \eqand g: Z \longmapsto X \]
-			then the composition of $f$ and $g$, denoted ${ f\circ g }$ is the function defined as,
-			\[ f \circ g : Z \longmapsto Y  \suchthat (f\circ g)(z) = f(g(z)). \]
-			Function composition is associative:
-			\[ f \circ g \circ h = (f \circ g) \circ h = f \circ (g \circ h). \]
-		}
-		\notation{The composition of functions $f$ and $g$ is also often denoted $fg$ although this can cause confusion with the pointwise product.}
-		
-		\boxeddefinition{\textbf{(Set Cardinality)} If there exists a bijection between $\N{}_m$ and a set $X$ then we say that $X$ has \textit{cardinality} equal to $m$, denoted ${ \cardinality{X} = m }$.}\label{def:set-cardinality}
+		\boxeddefinition{\textbf{(Set Cardinality)} If there exists a bijection between $\N{}_m$ and a set $X$ then we say that $X$ has \textit{cardinality} equal to $m$, denoted ${ \cardinality{X} = m }$. \label{def:set-cardinality}}
 		
 	
 		\biggerskip
-		\labeledProposition{Composition preserves injectivity and surjectivity.}{composition-preserves-injectivity-and-surjectivity}
-		\begin{proof}
-			Let 
-			\[ f: X \longmapsto Y \eqand g: Y \longmapsto Z. \]
-			Then the composition ${ h = gf }$ is a function ${ h: X \longmapsto Z }$.\\
-			
-			Assume $f$ and $g$ are both injections. Then, for any ${ x_1, x_2 \in X }$,
-			\[\begin{aligned}
-				&& h(x_1) &= h(x_2) \\
-				&\iff & g(f(x_1)) &= g(f(x_2)) &\sidecomment{by defn. of composition} \\
-				&\iff & f(x_1) &= f(x_2) &\sidecomment{by injectivity of $g$} \\
-				&\iff & x_1 &= x_2. &\sidecomment{by injectivity of $f$}
-			\end{aligned}\]
-			Therefore, the composition $h = gf$ is an injection.\\
-			
-			Assume $f$ and $g$ are both surjections. Then, by surjectivity of $g$, for any ${ z \in Z }$, there is some ${ y \in Y }$ such that ${ g(y) = z }$.
-			Furthermore, by surjectivity of $f$, for any ${ y \in Y }$, there is some ${ x \in X }$ such that ${ f(x) = y }$. Therefore,
-			\[ \forall z \in Z \logicsep \exists x \in X \logicsep g(f(x)) = z. \]
-			Therefore, the composition $h = gf$ is a surjection.
-		\end{proof}
-		\begin{corollary}\label{coro:composition-of-bijections-is-bijection}
-			A composition of bijections is a bijection.
-		\end{corollary}
-		\begin{corollary}
-			The set of bijective functions forms a group (see: \ref{def:group}) with function composition.
-		\end{corollary}
-		\begin{proof}
-			\begin{itemize}
-				\item Function composition is associative by definition.
-				\item The composition of bijections is a bijection (by \autoref{coro:composition-of-bijections-is-bijection}) so function composition closes over the set of bijective functions.
-				\item Bijective functions have inverses under function composition (by \autoref{prop:function-has-inverse-iff-bijective}).
-			\end{itemize}
-		\end{proof}
-	
-	
-		
-		\nl[4]
 		\labeledTheorem{\textbf{(Pigeonhole Principle)} Let $m$ be a natural number. Then, for all ${ n \in \N{} }$, if there exists an injection ${ \N{}_n \longmapsto \N{}_m }$ then ${ n \leq m }$.}{pigeonhole-principle}
 		\begin{proof}
 			We will prove this by induction on the cardinality of the domain of the injection. The base case of ${ n = 1 }$ holds trivially as ${ m \in \N{} }$ and so, by \autoref{prop:mult_identity_least_element}, ${ 1 = n \leq m }$.\\
@@ -214,36 +243,39 @@
 		\begin{proof}
 			Let ${ \cardinality{X} = m }$ and the ${ \cardinality{Y} = n }$. Then, by the definition of cardinality (\ref{def:set-cardinality}), there exist bijections
 			\[ g_1: \N{}_m \longmapsto X \eqand g_2: \N{}_n \longmapsto Y. \]
-			So, the composition ${ g_2 f g_1 }$
-			So, for any ${ n_1, n_2 \in \N{}_m }$,
-			\[\begin{aligned}
-				&&  &=  \\
-				&\iff &  &=  &\sidecomment{} \\
-			\end{aligned}\]
-			\TODO{complete}
+			Since bijections are also injections, and inverses are also bijections (\autoref{prop:function-inverses-are-bijective}), $g_1$ and $\inv{g_2}$ are injections. Therefore, by \autoref{prop:composition-preserves-injectivity-and-surjectivity}, the composition ${ h = \inv{g_2} f g_1 }$ is an injection. Since $h$ is an injection ${ \N{}_m \longmapsto \N{}_n }$, by \autoref{theo:pigeonhole-principle}, we have ${ m \leq n }$ and so, by the definition of cardinality, ${ \cardinality{X} \leq \cardinality{Y} }$.
 		\end{proof}
 		
 		\bigskip
-		\labeledProposition{If a function ${ f: X \longmapsto Y }$ is surjective then ${ \cardinality{Y} \leq \cardinality{X} }$.}{}
+		\labeledProposition{If a function ${ f: X \longmapsto Y }$ is surjective then ${ \cardinality{Y} \leq \cardinality{X} }$.}{surjection-from-X-to-Y-implies-cardinality-of-X-geq-to-that-of-Y}
 		\begin{proof}
-			Let ${ f: X \longmapsto Y }$ be a surjection so that, by definition, for every ${ y \in Y }$, there exists at least one ${ x \in X }$ such that ${ f(x) = y }$. The definition of a function states that it associates every element in the domain with a single element in the codomain so, for every ${ x \in X }$, there is one and only one ${ y \in Y }$ such that ${ f(x) = y }$.\TODO{complete}
+			Let ${ f: X \longmapsto Y }$ be a surjection so that, by definition, for every ${ y \in Y }$, there exists at least one ${ x \in X }$ such that ${ f(x) = y }$. Then ${ \cardinality{Y} \leq \cardinality{X} }$.\\
+			
+			More formally: The surjectivity of $f$ means that every ${ y \in Y }$ has a non-empty pre-image
+			\[ I(y) = \setc{x \in X}{f(x) = y}. \]
+			So we can define a function
+			\[ g: Y \longmapsto X \suchthat g(y) = x \]
+			for ${ x \in I(y) }$ (we assume that some selection rule is available). Since $g$ maps each $y$ to an element in its pre-image and these pre-images, by definition, must be disjoint, $g$ is an injection. Therefore, by \autoref{prop:injection-from-X-to-Y-implies-cardinality-of-X-leq-to-that-of-Y}, we have ${ \cardinality{Y} \leq \cardinality{X} }$.
 		\end{proof}
 	
-		\begin{corollary}
+		\begin{corollary}\label{coro:bijection-from-X-to-Y-implies-cardinality-of-X-eq-to-that-of-Y}
 			If a function ${ f: X \longmapsto Y }$ is bijective then ${ \cardinality{Y} = \cardinality{X} }$.
 		\end{corollary}
 		\begin{proof}
-			\[ \cardinality{Y} \leq \cardinality{X} \; \land \; \cardinality{Y} \geq \cardinality{X} \implies \cardinality{Y} = \cardinality{X}. \]
+			By definition of bijection, $f$ is an injection. Also, by \autoref{prop:function-inverses-are-bijective}, $\inv{f}$ is a bijection and therefore also an injection. So we have an injection in both directions
+			\[ f: X \longmapsto Y \eqand \inv{f}: Y \longmapsto X. \]
+			Therefore, by \autoref{prop:injection-from-X-to-Y-implies-cardinality-of-X-leq-to-that-of-Y},
+			\[ \cardinality{X} \leq \cardinality{Y} \; \land \; \cardinality{Y} \leq \cardinality{X} \implies \cardinality{X} = \cardinality{Y}. \]
 		\end{proof}
-		
-		\TODO{this probably is a corollary}
-		\labeledProposition{The cardinality of the image of a function is less than or equal to that of the domain of the function. That's to say, if $I$ is the image of the function,
+	
+		\begin{corollary}
+			The cardinality of the image of a function is less than or equal to that of the domain of the function. That's to say, if $I$ is the image of the function,
 			\[ f: X \longmapsto Y \]
 			then 
 			\[ \cardinality{I} \leq \cardinality{X}. \]
-		}{}
+		\end{corollary}
 		\begin{proof}
-			\TODO{complete this}
+			By the definition of the image of a function, the function is a surjection onto the image. Therefore, by \autoref{prop:surjection-from-X-to-Y-implies-cardinality-of-X-geq-to-that-of-Y}, we have ${ \cardinality{I} \leq \cardinality{X} }$.
 		\end{proof}
 		
 		
@@ -252,15 +284,25 @@
 		\begin{exe}
 			\ex \textit{In any room full of people, there will always be at least two people with the same number of friends in the room.}\\
 			
-			\TODO{complete this}
+			Say there are $n$ people in the room. Then, if there is a person in the room that is friends with all the other people in the room, then that person has ${ n - 1 }$ friends in the room. This is the maximum number of friends anyone can have in the room, and it also means that there is no-one with 0 friends in the room. Conversely, if there is someone with 0 friends in the room then there can't be anyone with ${ n - 1 }$ friends in the room.\\
+			So, if we set up a function ${ f: P \longmapsto \N{} \cup \{0\} }$ from the set of people $P$ to the number of friends they have in the room, then the image of $f$ can contain 0 or $n-1$ but not both. So, the image of $f$,
+			\[ f(P) \subseteq \N{}_{n-2} \cup \{0\} \eqword{or} f(P) \subseteq \N{}_{n-1}. \]
+			Either way, the maximum cardinality of the image of $f$ is ${ n - 1 }$ which is obviously less than $n$, the number of people. Therefore, there cannot be any injection from the set of people to the set of numbers of friends and there must be two people with the same number of friends.
 			
 			\ex \textit{If there are 5 points in the plane $\R{2}$ with integer co-ordinates then there must be at least one pair, say $(x_1,y_1)$ and $(x_2,y_2)$, whose midpoint, given by
 				\[ \left( \frac{x_1 + x_2}{2}, \, \frac{y_1 + y_2}{2} \right), \]
 				has integer co-ordinates.}\\
 			
-			\TODO{complete this}
+			A midpoint co-ordinate --- say the $x$ co-ordinate with formula ${ \frac{x_1 + x_2}{2} }$ --- will be an integer when the sum ${ x_1 + x_2 }$ is even. By \autoref{prop:laws-of-addition-of-odd-and-even-numbers}, this will happen when both $x_1$ and $x_2$ are even or both are odd.\\
+			For each of the 5 points the $x$ and $y$ co-ordinates may be odd or even in 4 different combinations: (odd, odd), (odd, even), (even, even), (even, odd). Since there are 5 points and only 4 possible combinations of odd and even, there cannot be an injection from points to odd/even combinations and, therefore, there must be, at least, one pair of points with the same combination. The midpoint of such a pair of points has integer co-ordinates.
 			
-			\ex \textit{In a set of ${ n > 1 }$ integers there exists a non-empty subset whose sum is divisible by $n$.}\\
+			\ex \textit{Let ${ (a_1,a_2,\dots, a_n) }$ be a list of integers for ${ n > 1 }$. Then there exists a non-empty sublist whose sum is divisible by $n$.}\\
+			
+			Let $s_j$ be the partial sum ${ \sum_{i=1}^j a_i }$ for ${ 1 \leq j \leq n }$ and let ${ m_j = s_j \bmod n }$. Since there are only $n$ distinct values in modulo-$n$, the values $m_j$ must either:
+			\begin{itemize}
+				\item include all the modulo-$n$ values including 0, in which case the sublist ${ (a_1,a_2,\dots, a_j) }$ for the $j$ such that ${ m_j = 0 }$ has a sum that divides by $n$;
+				\item or else there are ${ 1 \leq i < j \leq n }$ such that ${ m_j = m_i }$ and then the sublist ${ (a_{i+1},a_{i+2}, \dots, a_j) }$ has a sum that divides by $n$.
+			\end{itemize}
 			
 			\TODO{complete this}
 		\end{exe}

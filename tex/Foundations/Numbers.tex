@@ -80,6 +80,37 @@
 			Therefore $m$ cannot be less than $1$. Since we know that $1 \in \N{}$ and that the minimum element of $\N{}$, $m$, cannot be less than $1$, it follows that $1$ must be the minimum element of $\N{}$ and $m = 1$.
 		\end{proof}
 	
+	
+		\biggerskip
+		\subsubsection{Odd and Even Numbers}\bigskip
+		\bigskip
+		\boxeddefinition{\textbf{(Even number)} An \textit{even} number, $n \in \Z{}$, is one that satisfies,
+			\[ \exists\,m \in \Z\; \cdot \; n = 2m. \]
+		}
+		
+		\boxeddefinition{\textbf{(Odd number)} An \textit{odd} number, $n \in \Z{}$, is one that satisfies,
+			\[ \exists\,m \in \Z\; \cdot \; n = 2m + 1 \]
+		}
+		
+		
+		\bigskip
+		\labeledProposition{\textbf{(Laws of addition of odd and even numbers)}
+			\begin{enumerate}[label=(\roman*)]
+				\item The sum of even numbers is even;
+				\item the sum of odd numbers is even;
+				\item the sum of an odd number and an even number is odd.
+		\end{enumerate}}{laws-of-addition-of-odd-and-even-numbers}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item Let ${ a = 2m }$ and ${ b = 2n }$. Then
+				\[ a + b = 2m + 2n = 2(m + n). \]
+				\item Let ${ a = 2m + 1 }$ and ${ b = 2n + 1 }$. Then 
+				\[ a + b = 2m + 1 + 2n + 1 = 2(m + n + 1). \]
+				\item Let ${ a = 2m }$ and ${ b = 2n + 1 }$. Then 
+				\[ a + b = 2m + 2n +1 = 2(m + n) + 1. \]
+			\end{enumerate}
+		\end{proof}
+	
 		
 		
 		\biggerskip
@@ -98,6 +129,14 @@
 			\[ P(f(b)) \implies P(f(b+1)) = P(f(a)). \]
 			But this implies that ${ a \centernot\in S }$ which contradicts the definition of $a$.
 		\end{proof}
+		\medskip
+		\begin{corollary}\label{coro:strong-induction-principle}
+			\textbf{(Strong Induction Principle)} Let ${f: \N{} \longmapsto X }$ be a bijective function from the naturals to some set of objects $X$ and let ${ P: X \longmapsto \B{} }$ be a predicate. Then, for ${ N < k \in \N{} }$,
+			\[\begin{aligned}
+				[\, \forall k \leq N \logicsep P(f(k)) \,] \;\, &\land \;\, [\, \forall k \leq N \logicsep P(f(k) \implies P(f(k+1) \,] \nn
+				\implies &\forall n > N \in \N{} \logicsep P(f(n)).
+			\end{aligned}\]
+		\end{corollary}
 	}
 
 
@@ -135,159 +174,376 @@
 			\end{itemize}
 		}
 	
+		\boxeddefinition{\textbf{(Positivity and Negativity)} The most common convention is that 0 is neither positive nor negative and so, the positive integers $\Z{+}$ do not include 0 (likewise the negative integers $\Z{-}$). To include 0 we must refer to the non-negative integers $\Z{+}_0$ or $\N{}_0$.}
+	
 		\biggerskip
-		\boxedaxiom{\textbf{(Well-Ordering Principle for Integers)} Any non-empty set of integers that has a lower bound, has a least member.}
+		\boxedaxiom{\textbf{(Well-Ordering Principle for Integers)} Any non-empty set of integers that has a lower bound, has a least member. \label{axiom:well-ordering-principle-for-integers}}
 		
+	
+	
+		
+		\biggerskip
+		\subsubsection{Divisibility and Primality}
+		\bigskip
+		\boxeddefinition{\textbf{(Integer Divisibility)} For integers $a$ and $b$, we say that $a$ \textit{divides} $b$ --- denoted ${ a \divides b }$ --- iff
+			\[ \exists z \in \Z{} \logicsep b = za. \]
+			The integer 0 has the following properties \wrt integer divisibility,
+			\[ \forall z \in \Z{} \logicsep z \divides 0  \eqand  0 \divides x \implies x = 0. \] 
+		}
+		\note{Note that Integer Divisibiity "$\divides$" is a boolean-valued operator: it doesn't provide the result of the division. This is especially relevant given the convention that ${ 0 \divides 0 }$ as division by 0, in fact, is undefined.}	
+		
+		\boxeddefinition{\textbf{(Euclidean Division)} Given two integers $a$ and $b$, with ${ b \neq 0 }$, if we find two integers $q$ and $r$ such that
+			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
+			where $|b|$ denotes the absolute value of $b$, then this process is referred to as \textit{Euclidean Division} or \textit{Integer Division}.\\
+			
+			In the above: $a$ is called the \textit{dividend}, $b$ is called the \textit{divisor}, $q$ is called the \textit{quotient} and $r$ is called the \textit{remainder}.
+		\label{def:euclidean-division}}
+	
+		\boxeddefinition{\textbf{(Divisor)} The \textit{divisors} or \textit{factors} of an integer are the integers (not including itself but including 1) that evenly divide it --- which is to say, the divisors for which Euclidean (Integer) Division produces a remainder of 0 or alternatively, the set of divisors of an integer $a$ is
+			\[ D_a = \setc{m \in \Z{}}{m \divides a}. \]
+		Sometimes the term \textit{divisor} is used to refer to the positive such integers only but sometimes these are, more specifically, referred to as \textit{proper divisors}. The use of the term \textit{divisor} in the context of integer division is yet another usage of the term.
+		\label{def:integer-divisor}}
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(Division Theorem a.k.a. Remainder Theorem.)} Given two integers $a$ and $b$, with ${ b \neq 0 }$, there exist unique integers $q$ and $r$ such that
+			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
+			where $|b|$ denotes the absolute value of $b$.}{division-theorem}
+		\begin{proof}
+			Consider first the case ${ b < 0 }$. Setting ${ b' = -b }$ and ${ q' = -q }$, the equation ${ a = bq + r }$ may be rewritten as ${ a = b'q' + r }$ and the inequality ${ 0 \leq r < \abs{b} }$ may be rewritten as ${ 0 \leq r < \abs{b'} }$. This reduces the existence for the case ${ b < 0 }$ to that of the case ${ b > 0 }$. \\
+			Similarly, if ${ a < 0 }$ and ${ b > 0 }$, setting ${ a' = -a }$, ${ q' = -q - 1 }$, and ${ r' = b - r }$, the equation ${ a = bq + r }$ may be rewritten as ${ a' = bq' + r' }$, and the inequality ${ 0 \leq r < \abs{b} }$ may be rewritten as ${ 0 \leq r' < \abs{b} }$. Thus the proof of the existence is reduced to the case ${ a \geq 0 }$ and ${ b > 0 }$ --- which will be considered in the remainder of the proof.\\
+			
+			Let ${ \N{}_0 = \N{} \cup \{0\} }$ and let ${ Q = \setc{m \in \N{}_0}{bm \leq a} }$. Then $Q$ is non-empty because ${ 0 \in Q }$ and $Q$ is finite because
+			\[ bm \leq a \; \land \; b > 0 \implies m \leq bm \leq a \]
+			so $Q$ is an upper-bounded set of positive integers and, by \ref{axiom:well-ordering-principle-for-integers} therefore, has a maximum element. Let $q$ be the maximum element and let 
+			\[ r = a - bq > 0. \]
+			Since $q$ is the maximum element of $Q$,
+			\[ b(q+1) > a \iff bq + b > a \iff b > a - bq = r. \]
+			Therefore ${ a = bq + r }$ and ${ 0 \leq r < b }$.\\
+			
+			It remains to be shown that the integers $q$ and $r$ are unique. Suppose that $q'$ and $r'$ are also integers satisfying
+			\[ a = bq' + r' = bq + r. \]
+			Suppose \WLOG that ${ q \geq q' }$. Then,
+			\[ 0 \leq r = a - bq \leq a - bq' = r' < b \]
+			which implies that
+			\[\begin{aligned}
+				&& 0 &\leq r' - r < b \\
+				&\iff & 0 &\leq (a - bq') - (a - bq) < b &\sidecomment{} \\
+				&\iff & 0 &\leq bq - bq' < b \\
+				&\iff & 0 &\leq b(q - q') < b \\
+				&\iff & 0 &\leq q - q' < 1.
+			\end{aligned}\]
+			But $q$ and $q'$ are both positive integers so, by closure of addition of integers, ${ q - q' }$ is also an integer. Therefore
+			\[ 0 \leq q - q' < 1 \implies q - q' = 0 \iff q = q' \iff r = r'. \]
+		\end{proof}
+	
+		
+		\biggerskip
+		\subsubsubsection{Greatest Common Divisor (a.k.a. Highest Common Factor)}
+		\nl[4]
+		\boxeddefinition{\textbf{(Greatest Common Divisor (gcd))}
+			The \textit{greatest common divisor} of two integers $a$ and $b$ --- at least one of which is non-zero --- is the greatest divisor of both $a$ and $b$.\\
+			That's to say, if $d$ is the greatest common divisor of $a$ and $b$ then,
+			\[\begin{aligned}
+				d &= \max D_a \cap D_b = \max \setc{z \in \Z{}}{(z \divides a) \; \land \; (z \divides b)} \nn
+				&= \max \setc{z \in \Z{}}{\exists m,n \in \Z{} \logicsep a = mz \; \land \; b = nz}.
+			\end{aligned}\]
+		\label{def:greatest-common-divisor}}
+		\boxeddefinition{\textbf{(Coprime Numbers)} Two integers are said to be \textit{coprime} if their gcd is 1. \label{def:coprime-numbers}}
+		
+		\biggerskip
+		\labeledProposition{The greatest common divisor always exists.}{gcd-existence}
+		\begin{proof}
+			Let $a$ and $b$ be integers with at least one of them non-zero and let
+			\[ D_a \cap D_b = \setc{z \in \Z{}}{\exists m,n \in \Z{} \logicsep a = mz \; \land \; b = nz}. \]
+			$D_a \cap D_b$ is non-empty because 1 is always a member. Furthermore, each ${ z \in D_a \cap D_b }$ must be such that ${ z \leq \min \{ \abs{a}, \abs{b} \} }$. Therefore, $D_a \cap D_b$ is a non-empty set of upper-bounded integers and so, by \autoref{axiom:well-ordering-principle-for-integers}, has a unique maximum --- which is the gcd.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{The greatest common divisor is always positive.}{gcd-positivity}
+		\begin{proof}
+			Let $a$ and $b$ be integers with at least one of them non-zero and let $d$ be the greatest common divisor of $a$ and $b$ so that,
+			\[ d = \max D_a \cap D_b = \max \setc{z \in \Z{}}{\exists m,n \in \Z{} \logicsep a = mz \; \land \; b = nz}. \]
+			Firstly, notice that ${ 0 \centernot\in D_a \cap D_b }$ because at least one of $a$ and $b$ is non-zero. So ${ d \neq 0 }$.\\
+			
+			Suppose ${ d < 0 }$. Then, since $d$ is the maximum of ${ D_a \cap D_b }$, for each ${ z \in D_a \cap D_b }$ we have ${ z < 0 }$ and also, for some ${ m,n \in \Z{} }$,
+			\[ a = mz \eqand b = nz. \]
+			But then we also have,
+			\[  a = (-m)(-z) \eqand b = (-n)(-z) \]
+			which implies that, for ${ p = -m,\, q = -n \in \Z{} }$,
+			\[ a = p(-z) \; \land \; b = q(-z). \]
+			Therefore ${ -z \in D_a \cap D_b }$. But 
+			\[ z < 0 \implies -z > 0 > d. \]
+			This contradicts the definition of $d$ as the maximum of ${ D_a \cap D_b }$.\\
+			
+			Therefore ${ d > 0 }$.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{If $d$ is the gcd of $a$ and $b$ such that, for some ${ m,n \in \Z{} }$,
+			\[ a = md \; \land \; b = nd, \]
+			then $m$ and $n$ are coprime.
+		}{if-d-is-gcd-of-a-and-b-then-quotients-of-a-and-b-by-d-are-coprime}
+		\begin{proof}
+			Let $e$ be the gcd of $m$ and $n$. By \autoref{prop:gcd-positivity}, we have ${ e \in \Z{+} }$. Suppose, for contradiction, that $m$ and $n$ are not coprime so that ${ e \neq 1 }$. Then, because ${ e \in \Z{+} }$, we must have ${ e > 1 }$. Since $e$ is a common divisor of $m$ and $n$, there exist some ${ p,q \in \Z{} }$ such that ${ m = p e }$ and ${ n = q e }$. Then we also have,
+			\[ a = md = p e d \; \land \; b = nd = q e d \]
+			meaning that ${ e d }$ is a common divisor of $a$ and $b$. Since ${ e > 1 }$ it follows that ${ e d > d }$ which contradicts the assumption that $d$ is the greatest common divisor of $a$ and $b$.\\
+			Therefore,  $m$ and $n$ are coprime. 
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Any integer linear combination of two integers $a$ and $b$ is a multiple of the gcd of $a$ and $b$.}{integer-linear-combination-is-multiple-of-gcd}
+		\begin{proof}
+			Let $d$ be the gcd of $a$ and $b$ and let ${ p,q \in \Z{} }$ be arbitrary integers. Then ${ pa + qb }$ is an arbitrary integer linear combination of $a$ and $b$ and, by the definition of the gcd (\ref{def:greatest-common-divisor}), there exists ${ m,n \in \Z{} }$ such that 
+			\[ pa + qb = p(md) + q(nd) = (pm)d + (qn)d = (pm + qn)d. \]
+			By closure of the multiplication and addition over the integers we have ${ pm + qn \in \Z{} }$. Therefore if we let ${ z = pm + qn \in \Z{} }$ then we have ${ pa + qb = zd }$.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Any integer linear combination of integers $a$ and $b$, summing to a positive value, is greater than or equal to the gcd of $a$ and $b$.}{integer-linear-combination-is-greater-than-or-equal-gcd}
+		\begin{proof} 
+			Let $d$ be the gcd of $a$ and $b$ and let ${ p,q \in \Z{} }$ be arbitrary integers such that ${ c = pa + qb > 0 }$ is an arbitrary positive-valued integer linear combination of $a$ and $b$.\\
+			
+			By \autoref{prop:integer-linear-combination-is-multiple-of-gcd}, every integer linear combination of $a$ and $b$ has a value that is a multiple of the gcd, so we have some ${ z \in \Z{} }$ such that
+			\[ c = zd. \]
+			By \autoref{prop:gcd-positivity}, the gcd is positive and, by hypothesis, $c$ is positive also. It follows then that ${ z \geq 1 }$. We can therefore deduce
+			\[ c = zd \iff \frac{c}{d} = z \geq 1 \]
+			which is to say that ${ c \geq d }$.
+		\end{proof}
+	
+		\bigskip
+		\note{Note in relation to \autoref{prop:integer-linear-combination-is-greater-than-or-equal-gcd}:
+			\begin{itemize}
+				\item This only applies to integer linear combinations summing to a positive value. It is perfectly possible to have such combinations summing to 0 or negative values --- which, by definition, would be less than the gcd.
+				\item Be careful not to fall into the confusion of thinking that every divisor of the value of an integer linear combination of integers $a$ and $b$ must also divide the gcd of $a$ and $b$. This does not follow. For example, if $p$ and $q$ are both even then the integer linear combination ${ pa + qb }$ divides by 2 regardless of the value of the gcd of $a$ and $b$.
+			\end{itemize}	
+		}
+	
+		
+		\bigskip
+		\labeledProposition{If euclidean division (\ref{def:euclidean-division}) of $a$ by $b$ yields 
+			\[ a = bq + r \]
+			then
+			\[ \operatorname{gcd} a,b = \operatorname{gcd} b,r. \]
+		}{gcd-of-a-and-b-eq-to-bcd-b-and-remainder-of-dividing-a-by-b}
+		\begin{proof}
+			Since ${ r = a - bq }$, any divisor of $r$ must also divide $a$. Therefore, the set of divisors of $r$ and $b$ is the same set as the set of divisors of $a$ and $b$. As a result, they have the same maximum --- which is the gcd.
+		\end{proof}
+		\note{Note that the result is not true of ${ \operatorname{gcd} a,r }$ because $r$ is not the remainder after dividing by $a$.}
+		
+		\biggerskip
+		\subsubsubsection{Euclid's Algorithm for the gcd}
+		\nl[3]
+		\autoref{prop:gcd-of-a-and-b-eq-to-bcd-b-and-remainder-of-dividing-a-by-b} leads to the following algorithm for calculating the gcd of $a$ and $b$.
+		\begin{algorithm}[H]
+			\caption{gcd a,b}
+			\begin{algorithmic}
+				\REQUIRE Two integers $a$ and $b$, not both zero.
+				\ENSURE The greatest common divisor of $a$ and $b$.
+				\STATE % empty line
+				\IF {$b = 0$}
+				\RETURN a.
+				\ELSE
+				\STATE ${ r \leftarrow }$ remainder after integer division (\ref{def:euclidean-division}) of $a$ by $b$.
+				\RETURN gcd $b$, $r$
+				\ENDIF 
+			\end{algorithmic}	
+		\end{algorithm}
+	
+		\textit{Analysis of the gcd algorithm:}\\
+		
+		Denote the arguments $a$ and $b$ on the $i$-th iteration of the algorithm as $a_i$ and $b_i$.\\
+		
+		On each iteration, ${ a_i = b_{i-1} }$ and the argument $b_i$ becomes the remainder after integer division of the argument $a_{i-1}$ by $b_{i-1}$ of the previous iteration. So, for each iteration $i$, we have 
+			\[ a_i = b_{i-1} \eqand 0 \leq b_i < \abs{b_{i-1}}. \]
+		So the arguments $b_i$ are becoming non-negative and decreasing in absolute value and the arguments $a_i$ are taking on the previous iteration's value of $b_i$. Therefore both arguments are decreasing towards 0 but $b_i$ leads the way each time. Since this is integer arithmetic, eventually $b_i$ will become 0 while $a_i$ is not yet 0, and so the recursion will terminate.
+		
+		Let the arguments to the 1st iteration be ${ a_1 = a,\, b_1 = b }$. Then the 2nd iteration of the algorithm executes with ${ a_2 = b_1,\, b_2 = a_1 - b_1 q_1 }$ and the 3rd iteration, ${ a_3 = b_2,\, b_3 = a_2 - b_2 q_2 }$ and so on. If the algorithm terminates on the $n$-th iteration, then the final state is ${ a_n = b_{n-1},\, b_n = 0 }$. The result returned is
+		\[\begin{aligned}
+			d &= a_n = b_{n-1} \\
+			&= a_{n-2} - b_{n-2} q_{n-2} \\
+			&= a_{n-2} - (a_{n-3} - b_{n-3} q_{n-3}) q_{n-2} \\
+			&= b_{n-3} - (a_{n-3} - b_{n-3} q_{n-3}) q_{n-2} \\
+			&= (1 + q_{n-3} q_{n-2}) b_{n-3} - a_{n-3} \\
+			&\vdots
+		\end{aligned}\]
+		we can continue unpacking the result until we get to an expression in terms of $a_1$ and $b_1$.\\
+		
+		\textit{Example:}
+		
+		\[\begin{aligned}
+			\operatorname{gcd} 8,14 &= \operatorname{gcd} 14,8 \\
+			&= \operatorname{gcd} 8,6 \\
+			&= \operatorname{gcd} 6,2 \\
+			&= \operatorname{gcd} 2,0 \\
+			&= 2.
+		\end{aligned}\]
+		Then we can unpack the result as follows,
+		\[\begin{aligned}
+			2 &= 8 - (1)6 \\
+			&= 8 - (1)(14 - (1)8) \\
+			&= (2)8 - (1)14.
+		\end{aligned}\]
+
+
+
+		\bigskip
+		\labeledProposition{Let $a$ and $b$ be integers, not both zero and let ${ d = \operatorname{gcd} a,b }$. Then
+			\[ \exists m,n \in \Z{} \logicsep d = ma + nb. \]
+		}{two-non-zero-integers-have-some-integer-linear-combination-equal-to-their-gcd}
+		\begin{proof}
+			The proof is the analysis of the gcd algorithm above. 
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{Let $a$ and $b$ be integers with ${ d = \operatorname{gcd} a,b }$. Then, for any ${ c \in \Z{} }$, 
+			\[ (c \divides a) \; \land \; (c \divides b) \implies (c \divides d). \]
+		}{if-c-is-a-common-divisor-of-a-and-b-then-it-also-divides-the-gcd-of-a-and-b}
+		\begin{proof}
+			By gcd definition (\ref{def:greatest-common-divisor}),
+			\[ \exists m,n \in \Z{} \logicsep d = ma + nb \]
+			and also
+			\[  c \divides a \iff \exists p \in \Z{} a = pc \eqand c \divides b \iff \exists q \in \Z{} b = qc. \]
+			Therefore,
+			\[ d = mpc + nqc = (mp + nq)c \]
+			where, by closure of multiplication and addition of integers, we have
+			\[ d = (mp + nq)c \implies \exists z \in \Z{} \logicsep d = zc \]
+			which is to say that ${ c \divides d }$.
+		\end{proof}
+		\note{Note that it is \textbf{not} the case, in general, that if ${ c \divides a }$ and ${ d = \max D_a }$ is the maximum divisor of $a$, then ${ c \divides d }$. \TODO{review this!}}
+		
+		\bigskip
+		\labeledProposition{Let $a$ and $b$ be coprime integers. Then,
+			\[ (a \divides r) \; \land \; (b \divides r) \implies (ab \divides r). \]
+		}{if-a-and-b-are-coprime-and-both-divide-r-then-ab-divides-r}
+		\begin{proof}
+			By the definition of coprime numbers (\ref{def:coprime-numbers}), we have ${ \operatorname{gcd} a,b = 1 }$. Then, by \autoref{prop:two-non-zero-integers-have-some-integer-linear-combination-equal-to-their-gcd}, we also have some ${ m,n \in \Z{} }$ such that,
+			\[ 1 = ma + nb. \]
+			Furthermore,
+			\[ a \divides r \implies \exists p \in \Z{} \logicsep r = pa \eqand b \divides r \implies \exists q \in \Z{} \logicsep r = qb. \]
+			Putting these together we have,
+			\[ r = r \times 1 = r(ma + nb) = rma + rnb = (qb)ma + (pa)nb = ab(qm + pn). \]
+			So ${ ab \divides r }$.
+		\end{proof}
+		\note{Note that this is not generally true. Take the example of 2 and 4:
+			\[ 2 \divides 4 \eqand 4 \divides 4 \eqword{but} (2 \times 4) \centernot\divides 4. \]
+		}
 		
 		
 		\biggerskip
-		\subsubsection{Odd and Even Numbers}\bigskip
+		\subsubsubsection{Lowest Common Multiple}\label{sssec:lowest_common_multiple}
+		\nl[2]
+		The lowest common multiple of two numbers is formed by the multiplication of all the prime factors that occur in the two numbers where repititions of prime factors are important. That's to say, the lowest common multiple of 4 and 8 is not 2 (which is the highest common factor/greatest common divisor) but 8 because in 8, the factor 2 occurs three times (as $2^3$) and it occurs twice in 4,
+		\[ lcm(4,8) = lcm(2\times2, 2\times2\times2) = 2\times2\times2. \]
 		
-		\begin{definition}
-		An \textbf{even} number, $n \in \Z{}$, is one that satisfies,
-		\[ \exists\,m \in \Z\; \cdot \; n = 2m \]
-		\end{definition}
-		
-		\begin{definition}
-		An \textbf{odd} number, $n \in \Z{}$, is one that satisfies,
-		\[ \exists\,m \in \Z\; \cdot \; n = 2m + 1 \]
-		\end{definition}
-		
-		\subsubsection{Consequences}
-		Sum of even numbers, $m + n$:
-		\begin{align*}
-		m + n &= 2k + 2l \hspace{15pt} \text{where $k,l \in \Z{}$} &\sidecomment{by defn. of even no.s $m,n$} \\
- &= 2(k + l) \\
- &= 2q      \hspace{15pt} \text{where $q \in \Z{}$}
-		\end{align*}
-		So $m + n$ is also even.
-		However, if $m + n$ is even:
-		\begin{align*}
-		m + n &= 2k \hspace{15pt} \text{where $k \in \Z{}$} &\sidecomment{by defn. of even $m + n$} \\
-		k &= \frac{m}{2} + \frac{n}{2}\\
-		\end{align*}
-		So $m$ and $n$ are not necessarily even. A counterexample is 
-		\[3 + 5 = 8 \iff \frac{3}{2} + \frac{5}{2} = 4 \]
-		To summarize:
-		\begin{itemize}
-		\item{$m,n$ even $ \implies m + n$ even}
-		\item{$m + n$ even $ \implies m,n$ even \wrong} 
-		\end{itemize}
+		The general formula for the lowest common multiple may be expressed in terms of the gcd as follows
+		\[ d = gcd(a, b) \implies lcm(a, b) = d \times (a/d) \times (b/d). \]
 
 	
-		\pagebreak
-		\subsubsection{The Fundamental Theorem of Arithmetic}\bigskip
+		\biggerskip
+		\subsubsubsection{Prime Numbers}
+		\note{The concept of primality has been extended to negative numbers and complex numbers (see this exchange for a discussion: \href{https://math.stackexchange.com/questions/1002459/do-we-have-negative-prime-numbers}{math.stackexchange}) but the standard definition is limited to the context of non-negative integers. That is the sole context of the following discussion of primality.}
 		
-		\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
-		More formally, an integer, $p$, is prime if it is greater than 1 and,
-		\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
+		\bigskip
+		\boxeddefinition{\textbf{(Prime and Composite Numbers)} A \textit{prime} number has precisely two divisors: 1 and itself. A \textit{composite} number has more than two divisors. The special cases 0 and 1 are neither prime nor composite.\\
+			
+		A positive integer ${ a > 1 }$ is \textit{prime} iff there \textit{does not} exist ${ m, n \in \Z{+} }$
+			\[ \frac{a}{m} = n \; \land \; m \centernot\in \{1,a\} \]
+		and is \textit{composite} if there \textit{does} exist some such ${ m, n \in \Z{+} }$.
+		}
 		
-		\paragraph{Primality $ \implies $ Unique Prime Factorization:}
-		\begin{quote}
-			``Any number either is prime or is measured by some prime number.''\\
-			\textit{Euclid, Elements Book VII, Proposition 32}
-		\end{quote}
-		So, if an integer $n$ is not prime then,
-		\begin{align*} 
-		\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
-		\iff n = ab
-		\end{align*}
-		Then, for $a$ (the same applies to $b$),
-		\begin{align*}
-		\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
-		\iff n = cd
-		\end{align*}
-		We can continue to descend like this until we must eventually encounter one or more primes.
-		Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
-		\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
-		But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
+		\note{The reasons for 0 and 1 not being categorized either as prime or as composite are described in this conversation: \href{https://math.stackexchange.com/questions/2535010/why-is-zero-not-composite}{math.stackexchange}.}
+	
+		\biggerskip
+		\note{
+			\begin{quote}
+				``Any number either is prime or is measured by some prime number.''\\
+				\textit{Euclid, Elements Book VII, Proposition 32}
+			\end{quote}
+		}
+		\labeledProposition{Every positive integer either is prime or is divided by some prime.}{}
+		\begin{proof}
+			A positive integer ${ z > 1 \in \Z{+} }$ is either prime or is composite. If it is composite then there exists ${ m,n \in \Z{} }$ such that,
+			\[ \frac{z}{m} = n. \]
+			But then, $n$ is also a positive integer greater than 1 that either is prime or is composite and so we can repeat the process until we necessarily reach a number that is not composite and is greater than 1. Such a number is, by definition, prime.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{\textbf{(Euclid's Lemma)} If $p$ is a prime number then, for integers $a$ and $b$,
+			\[ (p \divides ab) \implies (p \divides a) \; \lor \; (p \divides b). \]
+		}{if-a-prime-p-divides-ab-then-p-divides-a-or-p-divides-b}
+		\begin{proof}
+			If ${ p \centernot\divides a }$ then, since $p$ is prime, $p$ and $a$ are coprime. Then, by \autoref{prop:if-a-and-b-are-coprime-and-both-divide-r-then-ab-divides-r},
+			\[ (p \divides ab) \; \land \; (a \divides ab) \implies (pa \divides ab). \]
+			But ${ pa \divides ab }$ clearly implies that ${ p \divides b }$.
+		\end{proof}
 		
+%		\paragraph{Definition of prime number:} An integer that is only divided cleanly by itself and one.
+%		More formally, an integer, $p$, is prime if it is greater than 1 and,
+%		\[ \exists!\,m,n \in \Z\; \cdot \;\frac{p}{m} = n \wedge (m \neq p \wedge m \neq 1) \]
+%		
+%		\paragraph{Primality $ \implies $ Unique Prime Factorization:}
+%		\begin{quote}
+%			``Any number either is prime or is measured by some prime number.''\\
+%			\textit{Euclid, Elements Book VII, Proposition 32}
+%		\end{quote}
+%		So, if an integer $n$ is not prime then,
+%		\begin{align*} 
+%		\exists\,a,b \in \Z\; \cdot \; \frac{n}{a} = b \\
+%		\iff n = ab
+%		\end{align*}
+%		Then, for $a$ (the same applies to $b$),
+%		\begin{align*}
+%		\exists\,c,d \in \Z\,,\,c,d \not\in \{1,a\}\; \cdot \; \frac{n}{a} = b \\
+%		\iff n = cd
+%		\end{align*}
+%		We can continue to descend like this until we must eventually encounter one or more primes.
+%		Furthermore, if a number, $n$, has a prime factorization, $p_1p_2$ then,
+%		\[ n = p_1p_2 = p_3p_4 \iff \frac{p_1}{p_3} = \frac{p_4}{p_2} = n \]
+%		But $\frac{p_1}{p_3} = n$ contradicts the definition of primeness of $p_1$. Therefore prime factorizations are unique.
+
+		\bigskip
+		\labeledTheorem{\textbf{(Fundamental Theorem of Arithmetic)} Every integer greater than 1 can be expressed as a product of primes that is unique upto ordering.}{fundamental-theorem-of-arithmetic}
 		\paragraph{Proof of existence}
 		\begin{proof}
 			It must be shown that every integer greater than $ 1 $ is either prime or a product of primes. First, $ 2 $ is prime. Then, by strong induction, assume this is true for all numbers greater than $ 1 $ and less than $ n $. 
 			If $ n $ is prime, there is nothing more to prove. 
 			Otherwise, there are integers $ a, b $ where $ n = ab $, and $ 1 < a \leq b < n $. By the induction hypothesis, $ a = p_1p_2...p_j \text{ and } b = q_1q_2...q_k $ are products of primes. But then $ n = ab = p_1p_2...p_jq_1q_2...q_k $ is a product of primes.
 		\end{proof}
-		
 		\paragraph{Proof of uniqueness}
 		\begin{proof}
 			Suppose, to the contrary, that there is an integer that has two distinct prime factorizations. Let $ n $ be the least such integer and write $ n = p_1 p_2 ... p_j = q_1 q_2 ... q_k $, where each $ p_i \text{ and } q_i $ is prime. (Note that $ j $ and $ k $ are both at least $ 2 $.) We see that $ p_1 \text{ divides } q_1 q_2 ... q_k\text{ , so } p_1\text{  divides some } q_i $ by Euclid's lemma. Without loss of generality, say that $ p_1 \text{ divides } q_1 $. Since $ p_1 $ and $ q_1 $ are both prime, it follows that $ p_1 = q_1 $. Returning to our factorizations of $ n $, we may cancel these two terms to conclude that $ p_2 ... p_j = q_2 ... q_k $. We now have two distinct prime factorizations of some integer strictly smaller than $ n $, which contradicts the minimality of $ n $.
 		\end{proof}
+		
+		
 	
 		
-		\biggerskip
-		\subsubsection{Euclidean Division (a.k.a Integer Division)}
-		\boxeddefinition{Given two integers $a$ and $b$, with ${ b \neq 0 }$, if we find two integers $q$ and $r$ such that
-			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
-			where $|b|$ denotes the absolute value of $b$, then this process is referred to as \textbf{Euclidean Division} or \textbf{Integer Division}.\\
-			
-			In the above: $a$ is called the \textbf{dividend}, $b$ is called the \textbf{divisor}, $q$ is called the \textbf{quotient} and $r$ is called the \textbf{remainder}.
-		}
-		\labeledTheorem{\textbf{(Division Theorem.)} Given two integers $a$ and $b$, with ${ b \neq 0 }$, there exist unique integers $q$ and $r$ such that
-			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
-			where $|b|$ denotes the absolute value of $b$.}{division-theorem}
-		\begin{proof}
-			proof \href{https://en.wikipedia.org/wiki/Euclidean_division\#Proof}{wikipedia}
-		\end{proof}
+%		\biggerskip
+%		\subsubsection{Euclidean Division (a.k.a Integer Division)}
+%		\boxeddefinition{Given two integers $a$ and $b$, with ${ b \neq 0 }$, if we find two integers $q$ and $r$ such that
+%			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
+%			where $|b|$ denotes the absolute value of $b$, then this process is referred to as \textbf{Euclidean Division} or \textbf{Integer Division}.\\
+%			
+%			In the above: $a$ is called the \textbf{dividend}, $b$ is called the \textbf{divisor}, $q$ is called the \textbf{quotient} and $r$ is called the \textbf{remainder}.
+%		}
+%		\labeledTheorem{\textbf{(Division Theorem.)} Given two integers $a$ and $b$, with ${ b \neq 0 }$, there exist unique integers $q$ and $r$ such that
+%			\[ a = bq + r, \hspace{15pt} 0 \leq r < |b| \]
+%			where $|b|$ denotes the absolute value of $b$.}{division-theorem}
+%		\begin{proof}
+%			proof \href{https://en.wikipedia.org/wiki/Euclidean_division\#Proof}{wikipedia}
+%		\end{proof}
 		
 		
 		\pagebreak
+		\TODO{move this to Discrete Maths?}
 		\subsubsection{Modular Arithmetic}\bigskip
-		
-		\subsubsubsection{Greatest Common Divisor \tiny{(also called Highest Common Factor)}}
-		\boxeddefinition{
-			The \textbf{Greatest Common Divisor (gcd)} of two integers -- say $a$ and $b$ -- is an integer $d$ that satisfies,
-			\[ d = z_1a + z_2b \]
-			for some ${ z_1,z_2 \in \Z{}. }$ This means that, whenever we are adding or subtracting multiples of the two numbers $a$ and $b$, the result will always be a multiple of $d$ and, therefore also, $d$ is the smallest such result obtainable.
+		\bigskip	
+		\notation{The notation ${ a \equiv b \modulo{n} }$ means that $a$ is congruent to $b$ in modulo-$n$. The notation ${ a \bmod n }$ refers to the modulo operation which is the remainder between 0 and ${ n - 1 }$ of the integer division of $a$ by $n$ (some computer implementations return a negative remainder if the dividend or divisor is negative (see: \href{https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/}{blog post about this issue})).\\
+			
+			The notations are related by (assuming the remainder selected is the one between 0 and ${ n - 1 }$),
+			\[ a \equiv b \modulo{n} \iff a \bmod n = b. \]
 		}
-		The greatest common divisor of 16 and 6 can be visualized as follows:
-		\begin{align*}			
-		\vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert \textcolor{red}{\cdot \cdot \cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$16 = 6 \times 2 + 4$}\\			
-		\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{blue}{\cdot \cdot \cdot\, \cdot} \vert &&\sidecomment{$6 = 4 \times 1 + 2$}\\		
-		\cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \cdot \vert \textcolor{green}{\cdot\, \cdot} \vert \textcolor{green}{\cdot\, \cdot} \vert &&\sidecomment{$4 = 2 \times 2 + 0$}\\		
-		\end{align*}
-		This implies the algorithm:		
-		\begin{align*}
-		\textbf{gcd}(&a, b):\\
-			&\text{if }\; b == 0\; \text{ then}\\
-			&\;\;\;\;\text{return } \; a\\
-			&\text{else}\\
-			&\;\;\;\;\text{return } \;\textbf{gcd}(b, a \bmod b)\\
-			&\text{end if}					
-		\end{align*}
 		
-		\note{The greatest common divisor of $a$ and $b$ is the smallest difference of multiples of $a$ and $b$. This is because -- for any difference, $d$, of multiples of $a$ and $b$ -- we have,
-		\[ d = ma + nb \text{ for } m,n \in \Z{} \]
-		and, if ${ g = gcd(a,b) }$ then, by definition, $g$ divides both $a$ and $b$ and, therefore, also divides $d$. So any such sum (or difference) of integer multiples of $a$ and $b$ is a multiple of $g$.}
-		
-		\labeledProposition{For non-zero integers $a$ and $b$, if $a = bq + r$ where $q,r \in \Z{}$, then $gcd(a, b) = gcd(b, r) = gcd(b, a \bmod b)$.}{gcd_remainder}
-			\begin{proof}
-			$(a \bmod b) = r = a - bq$. For any $m \suchthat m \divides a \text{ and } m \divides b$ we must also have $m \divides (a - bq)$ so the set of divisors of $a$ and $b$ is a subset of the set of divisors of $b$ and $r = (a \bmod b)$. Conversely, for any $m \suchthat m \divides b \text{ and } m \divides r = (a \bmod b)$ we have that $m \divides (bq + r) = a$ so the set of divisors of $b$ and $r = (a \bmod b)$ is a subset of the set of divisors of $a$ and $b$. So the sets are equal proving that they must have the same maximum element - the greatest common divisor.
-			\end{proof}
-		
-		\labeledProposition{If $d = gcd(a, b)$ then there is no integer linear combination of $a$ and $b$ that equals any positive value less than $d$.}{gcd_min_linear_combination}
-		\begin{proof}
-			Assume $d = gcd(a,b)$ and that ${ \exists\, e < d \in \N{}, m,n \in \Z{} \suchthat e = am + bn }$. Then,
-			\begin{align*}
-				&&e = am + bn &= dz_1m + dz_2n = d(z_1m + z_2n) \hspace{10pt} \text{ for } z_1, z_2 \in \Z{} \\
-				&\iff &z_1m + z_2n &= \frac{e}{d} \not\in \Z{}
-			\end{align*}
-			where we know that ${ \frac{e}{d} \not\in \Z{} }$ because ${ e < d }$. But the field properties of the integers ensures that the integers are closed under integer linear combinations so that $z_1m + z_2n \in \Z{}$. Therefore such an $e$ does not exist.
-		\end{proof}
-	
-		\begin{corollary}
-			\label{coro:integer_linear_combination_is_multiple_of_gcd}
-			If $d = gcd(a, b)$ then every integer linear combination of $a$ and $b$ is a multiple of $d$.
-		\end{corollary}
-		\begin{proof}
-			\autoref{prop:gcd_min_linear_combination} showed that there is no integer linear combination of $a$ and $b$ less than $d$. Suppose that we have,
-			\[ e > d  \in \N{}, m,n \in \Z{} \suchthat e = am + bn \]
-			then, because $d$ divides both $a$ and $b$,
-			\[ e = adz_1 + bdz_2 = d(az_1 + bz_2), \hspace{10pt} z_1,z_2 \in \Z{}. \]
-			Now the closure of the integer field means that ${ z_3 = az_1 + bz_2 \in \Z{} }$ so that,
-			\[ e = z_3d \implies d \divides e. \]
-		\end{proof}
-	
+		\biggerskip
 		\labeledProposition{A number ${ x \in \Z{}_m }$ has a multiplicative inverse if and only if ${ gcd(x,m) = 1 }$.}{modular_inverse_iff_gcd_is_1}
 		\begin{proof}
 			Assume ${ \inv{x} }$ is a multiplicative inverse for ${ x \in \Z{}_m }$. Then,
@@ -295,13 +551,6 @@
 			This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
 			Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
 		\end{proof}
-	
-		\subsubsubsection{Lowest Common Multiple}\label{sssec:lowest_common_multiple}
-		The lowest common multiple of two numbers is formed by the multiplication of all the prime factors that occur in the two numbers where repititions of prime factors are important. That's to say, the lowest common multiple of 4 and 8 is not 2 (which is the highest common factor/greatest common divisor) but 8 because in 8, the factor 2 occurs three times (as $2^3$) and it occurs twice in 4,
-		\[ lcm(4,8) = lcm(2\times2, 2\times2\times2) = 2\times2\times2. \]
-		
-		The general formula for the lowest common multiple may be expressed in terms of the gcd as follows
-		\[ d = gcd(a, b) \implies lcm(a, b) = d \times (a/d) \times (b/d). \]
 	
 	
 		
@@ -368,6 +617,13 @@
 		So, here, $4$ divides $a^2 - b^2$ with $3$ remainder. So the proposition is proven as we have proven all the possible cases.\\
 		\TODO{There is also another approach given in the Cambridge University Discrete Mathematics lecture notes}
 	}
+
+
+
+% -------------- break ----------------
+\pagebreak
+
+
 	
 	\searchableSubsection{Absolute Value}{numbers, absolute value}{
 	\label{ssection:absolute-value}
