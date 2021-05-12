@@ -1,0 +1,98 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+
+	\searchableSubsection{Modular Arithmetic}{discrete maths, modular arithmetic}{
+		\biggerskip
+		
+		\subsubsection{Modular Arithmetic}
+		\bigskip
+		\boxeddefinition{\textbf{(Congruence Modulo $m$)} Two integers $a$ and $b$ are said to be \textit{congruent modulo $m$} --- denoted ${ a \equiv b \modulo{m} }$ --- iff integer division of $a$ and $b$ produces the same remainder. That's to say, if there exist ${ p,m \in \Z{} }$ such that,
+			\[ a = pm + r \eqand b = qm + r \]
+			with ${ 0 \leq r < m }$.\\
+			In such a case, we have
+			\[ b - a = qm - pm = m(q - p) \]
+			which leads to another description of congruence modulo $m$: $a$ and $b$ are \textit{congruent modulo $m$} iff
+			\[ m \divides (b - a). \]
+		}
+		\notation{The notation ${ a \equiv b \modulo{n} }$ means that $a$ is congruent to $b$ in modulo-$n$. The notation ${ a \bmod n }$ refers to the modulo operation which is the remainder between 0 and ${ n - 1 }$ of the integer division of $a$ by $n$ (some computer implementations return a negative remainder if the dividend or divisor is negative (see: \href{https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/}{blog post about this issue})).\\
+			
+			The relationship between the notations is that: if the modulo operation is assumed to return the remainder $b$ such that ${ 0 \leq b < n }$, then
+			\[ a \equiv b \modulo{n} \iff a \bmod n = b. \]
+		}
+		
+		\biggerskip
+		\labeledProposition{Let ${ m \in \N{} }$ and ${ a,b,c,d \in \Z{} }$ with
+			\[ a \equiv b \modulo{m} \eqand c \equiv d \modulo{m}. \]
+			Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ a + c \equiv b + d \modulo{m} }$
+				\item ${ a - c \equiv b - d \modulo{m} }$
+				\item ${ ac \equiv bd \modulo{m} }$
+				\item ${ \forall z \in \Z{} \logicsep za \equiv zb \modulo{m} }$
+				\item ${ \forall n \in \N{} \logicsep a^n \equiv b^n \modulo{m} }$
+			\end{enumerate}
+		}{algebra-of-congruence-modulo}
+		\begin{proof}\nl
+			Let ${ a = n_a m + r_1, b = n_b m + r_1, c = n_c m + r_2, d = n_d m + r_2 }$.
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ a + c \equiv b + d \modulo{m} }$				
+				\[ a + c = n_a m + r_1 + n_c m + r_2 = (n_a + n_c)m + (r_1 + r_2) \]
+				
+				\item ${ a - c \equiv b - d \modulo{m} }$
+				\[ a - c = n_a m + r_1 - n_c m - r_2 = (n_a - n_c)m + (r_1 - r_2) \]
+				
+				\item ${ ac \equiv bd \modulo{m} }$
+				\[ ac = (n_a m + r_1)(n_c m + r_2) = (n_a n_c + r_1 n_c + r_2 n_a)m + r_1 r_2. \]
+				
+				\item ${ \forall z \in \Z{} \logicsep za \equiv zb \modulo{m} }$
+				\[ za = z(n_a m + r_1) = (z n_a)m + z r_1 \]
+				\[ zb = z(n_b m + r_1) = (z n_b)m + z r_1 \]
+				
+				\item ${ \forall n \in \N{} \logicsep a^n \equiv b^n \modulo{m} }$
+				\[ a^n = (n_a m + r_1)^n = p_0 m^n + p_1 m^{n-1} + \cdots + p_{n-1} m + {r_1}^n \]
+				\[ b^n = (n_b m + r_1)^n = q_0 m^n + q_1 m^{n-1} + \cdots + q_{n-1} m + {r_1}^n \]
+			\end{enumerate}
+		\end{proof}
+		
+		
+		\bigskip
+		\labeledProposition{A number ${ x \in \Z{}_m }$ has a multiplicative inverse if and only if ${ gcd(x,m) = 1 }$.}{modular_inverse_iff_gcd_is_1}
+		\begin{proof}
+			Assume ${ \inv{x} }$ is a multiplicative inverse for ${ x \in \Z{}_m }$. Then,
+			\[ \inv{x}x = 1 \iff \inv{x}x \congruent{1}{m} \iff \inv{x}{x} = am + 1, \hspace{10pt} a \in \Z{}. \]
+			This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
+			Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
+		\end{proof}
+	
+	
+		\sep
+		\begin{exe}
+			\ex There is a well-known test for divisibility of an integer by 9: If the digits sum to a value that is divisible by 9, then the number divides by 9. So, 18 divides by 9 because 1 + 8 = 9. This can be explained with modulo-9 arithmetic.\\
+			
+			An integer in standard decimal format has the form,
+			\[ n = d_0 + d_1 10^1 + d_2 10^2 + \cdots + d_k 10^k. \]
+			Since ${ 10 \equiv 1 \modulo{9} }$, we can apply (v) of \autoref{prop:algebra-of-congruence-modulo} to deduce that, for all ${ i \in \N{} }$, 
+			\[ 10^i \equiv 1 \modulo{9} \]
+			and then applying (i) of \autoref{prop:algebra-of-congruence-modulo}, we have
+			\[ d_0 + d_1 10^1 + d_2 10^2 + \cdots + d_k 10^k \equiv d_0 + d_1 + d_2 + \cdots + d_k \modulo{9}. \]
+			So, if the sum of the digits of $n$ divides by 9 then $n$ divides by 9.
+			
+			\biggerskip
+			\ex Suppose we need to determine if there exist any integers $a$ and $b$ that satisfy
+			\[ 7 a^2 - 15 b^2 = 1. \]
+			Since 15 is divisible by 5, in modulo-5 arithmetic subtracting $15 b^2$ is an identity operation. That's to say,
+			\[ 7 a^2 - 15 b^2 = 7 a^2 \modulo{5}. \]
+			So the equation becomes,
+			\[ 7 a^2 \equiv 1 \modulo{5}. \]
+			Now modulo-5 consists of ${ \{0,1,2,3,4\} }$ so, applying (5) \autoref{prop:algebra-of-congruence-modulo}, we have
+			\[ a^2 \modulo{5} \in \{ 0, 1, 4, 9 \equiv 4, 16 \equiv 1 \} = \{ 0, 1, 4 \} \] 
+			and so, applying (iv) of \autoref{prop:algebra-of-congruence-modulo}, we have
+			\[ 7 a^2 \modulo{5} \in \{ 0, 7 \equiv 2, 28 \equiv 3 \} = \{ 0, 2, 3 \}. \]
+			Since there are no possibilities that are congruent 1 in modulo-5, the equation cannot be satisfied.
+			\note{Note that we could have chosen to work in modulo-7 but then we would have needed to consider a greater number of possiblities because modulo-7 has 8 distinct values as opposed to the 6 in modulo-5.}
+		\end{exe}
+	}
+\end{document}

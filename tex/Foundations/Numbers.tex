@@ -240,8 +240,12 @@
 		\biggerskip
 		\subsubsubsection{Greatest Common Divisor (a.k.a. Highest Common Factor)}
 		\nl[4]
-		\boxeddefinition{\textbf{(Greatest Common Divisor (gcd))}
-			The \textit{greatest common divisor} of two integers $a$ and $b$ --- at least one of which is non-zero --- is the greatest divisor of both $a$ and $b$.\\
+		\boxeddefinition{\textbf{(Common Divisor (gcd))} A \textit{common divisor} of two integers $a$ and $b$ is an integer ${ c \in \Z{} }$ such that
+			\[ c \in D_a \cap D_b = \setc{z \in \Z{}}{(z \divides a) \; \land \; (z \divides b)}. \]
+			A common divisor of $a$ and $b$ divides any integer linear combination of $a$ and $b$: If $z$ is a common divisor of $a$ and $b$ then there exist ${ p,q \in \Z{} }$ such that
+			\[ ma + nb = mzp + nzq = z(mp + nq). \]
+		}
+		\boxeddefinition{\textbf{(Greatest Common Divisor (gcd))} The \textit{greatest common divisor} of two integers $a$ and $b$ --- at least one of which is non-zero --- is the greatest divisor of both $a$ and $b$.\\
 			That's to say, if $d$ is the greatest common divisor of $a$ and $b$ then,
 			\[\begin{aligned}
 				d &= \max D_a \cap D_b = \max \setc{z \in \Z{}}{(z \divides a) \; \land \; (z \divides b)} \nn
@@ -289,34 +293,50 @@
 			meaning that ${ e d }$ is a common divisor of $a$ and $b$. Since ${ e > 1 }$ it follows that ${ e d > d }$ which contradicts the assumption that $d$ is the greatest common divisor of $a$ and $b$.\\
 			Therefore,  $m$ and $n$ are coprime. 
 		\end{proof}
-	
-		\bigskip
-		\labeledProposition{Any integer linear combination of two integers $a$ and $b$ is a multiple of the gcd of $a$ and $b$.}{integer-linear-combination-is-multiple-of-gcd}
+		\begin{corollary}
+			If $d$ is the gcd of $a$ and $b$ and ${ e \in D_a \cap D_b }$ --- that is $e$ is a common divisor of $a$ and $b$ --- then ${ e \divides d }$.
+		\end{corollary}
 		\begin{proof}
-			Let $d$ be the gcd of $a$ and $b$ and let ${ p,q \in \Z{} }$ be arbitrary integers. Then ${ pa + qb }$ is an arbitrary integer linear combination of $a$ and $b$ and, by the definition of the gcd (\ref{def:greatest-common-divisor}), there exists ${ m,n \in \Z{} }$ such that 
-			\[ pa + qb = p(md) + q(nd) = (pm)d + (qn)d = (pm + qn)d. \]
-			By closure of the multiplication and addition over the integers we have ${ pm + qn \in \Z{} }$. Therefore if we let ${ z = pm + qn \in \Z{} }$ then we have ${ pa + qb = zd }$.
-		\end{proof}
-	
-		\bigskip
-		\labeledProposition{Any integer linear combination of integers $a$ and $b$, summing to a positive value, is greater than or equal to the gcd of $a$ and $b$.}{integer-linear-combination-is-greater-than-or-equal-gcd}
-		\begin{proof} 
-			Let $d$ be the gcd of $a$ and $b$ and let ${ p,q \in \Z{} }$ be arbitrary integers such that ${ c = pa + qb > 0 }$ is an arbitrary positive-valued integer linear combination of $a$ and $b$.\\
-			
-			By \autoref{prop:integer-linear-combination-is-multiple-of-gcd}, every integer linear combination of $a$ and $b$ has a value that is a multiple of the gcd, so we have some ${ z \in \Z{} }$ such that
-			\[ c = zd. \]
-			By \autoref{prop:gcd-positivity}, the gcd is positive and, by hypothesis, $c$ is positive also. It follows then that ${ z \geq 1 }$. We can therefore deduce
-			\[ c = zd \iff \frac{c}{d} = z \geq 1 \]
-			which is to say that ${ c \geq d }$.
-		\end{proof}
-	
-		\bigskip
-		\note{Note in relation to \autoref{prop:integer-linear-combination-is-greater-than-or-equal-gcd}:
+			By \autoref{prop:if-d-is-gcd-of-a-and-b-then-quotients-of-a-and-b-by-d-are-coprime}, we have coprime ${ m,n \in \Z{} }$ such that
+			\[ a = md \; \land \; b = nd \]
+			and by ${ e \in D_a \cap D_b }$ we have
+			\[ e \divides a = md  \eqand e \divides b = nd. \]
+			Since $m$ and $n$ are coprime, their only common divisors are 1 and -1. So the above implies that either:
 			\begin{itemize}
-				\item This only applies to integer linear combinations summing to a positive value. It is perfectly possible to have such combinations summing to 0 or negative values --- which, by definition, would be less than the gcd.
-				\item Be careful not to fall into the confusion of thinking that every divisor of the value of an integer linear combination of integers $a$ and $b$ must also divide the gcd of $a$ and $b$. This does not follow. For example, if $p$ and $q$ are both even then the integer linear combination ${ pa + qb }$ divides by 2 regardless of the value of the gcd of $a$ and $b$.
-			\end{itemize}	
-		}
+				\item ${ e \in \{-1,1\} }$: in which case ${ e \divides d }$ as it divides every integer;
+				\item ${ e \centernot\in \{-1,1\} }$: in which case we must have ${ e \divides d }$.
+			\end{itemize}
+		\end{proof}
+	
+
+	
+%		\bigskip
+%		\labeledProposition{Any integer linear combination of two integers $a$ and $b$ is a multiple of the gcd of $a$ and $b$.}{integer-linear-combination-is-multiple-of-gcd}
+%		\begin{proof}
+%			Let $d$ be the gcd of $a$ and $b$ and let ${ p,q \in \Z{} }$ be arbitrary integers. Then ${ pa + qb }$ is an arbitrary integer linear combination of $a$ and $b$ and, by the definition of the gcd (\ref{def:greatest-common-divisor}), there exists ${ m,n \in \Z{} }$ such that 
+%			\[ pa + qb = p(md) + q(nd) = (pm)d + (qn)d = (pm + qn)d. \]
+%			By closure of the multiplication and addition over the integers we have ${ pm + qn \in \Z{} }$. Therefore if we let ${ z = pm + qn \in \Z{} }$ then we have ${ pa + qb = zd }$.
+%		\end{proof}
+%	
+%		\bigskip
+%		\labeledProposition{Any integer linear combination of integers $a$ and $b$, summing to a positive value, is greater than or equal to the gcd of $a$ and $b$.}{integer-linear-combination-is-greater-than-or-equal-gcd}
+%		\begin{proof} 
+%			Let $d$ be the gcd of $a$ and $b$ and let ${ p,q \in \Z{} }$ be arbitrary integers such that ${ c = pa + qb > 0 }$ is an arbitrary positive-valued integer linear combination of $a$ and $b$.\\
+%			
+%			By \autoref{prop:integer-linear-combination-is-multiple-of-gcd}, every integer linear combination of $a$ and $b$ has a value that is a multiple of the gcd, so we have some ${ z \in \Z{} }$ such that
+%			\[ c = zd. \]
+%			By \autoref{prop:gcd-positivity}, the gcd is positive and, by hypothesis, $c$ is positive also. It follows then that ${ z \geq 1 }$. We can therefore deduce
+%			\[ c = zd \iff \frac{c}{d} = z \geq 1 \]
+%			which is to say that ${ c \geq d }$.
+%		\end{proof}
+%	
+%		\bigskip
+%		\note{Note in relation to \autoref{prop:integer-linear-combination-is-greater-than-or-equal-gcd}:
+%			\begin{itemize}
+%				\item This only applies to integer linear combinations summing to a positive value. It is perfectly possible to have such combinations summing to 0 or negative values --- which, by definition, would be less than the gcd.
+%				\item Be careful not to fall into the confusion of thinking that every divisor of the value of an integer linear combination of integers $a$ and $b$ must also divide the gcd of $a$ and $b$. This does not follow. For example, if $p$ and $q$ are both even then the integer linear combination ${ pa + qb }$ divides by 2 regardless of the value of the gcd of $a$ and $b$.
+%			\end{itemize}	
+%		}
 	
 		
 		\bigskip
@@ -399,17 +419,14 @@
 			\[ (c \divides a) \; \land \; (c \divides b) \implies (c \divides d). \]
 		}{if-c-is-a-common-divisor-of-a-and-b-then-it-also-divides-the-gcd-of-a-and-b}
 		\begin{proof}
-			By gcd definition (\ref{def:greatest-common-divisor}),
+			By \autoref{prop:two-non-zero-integers-have-some-integer-linear-combination-equal-to-their-gcd},
 			\[ \exists m,n \in \Z{} \logicsep d = ma + nb \]
 			and also
-			\[  c \divides a \iff \exists p \in \Z{} a = pc \eqand c \divides b \iff \exists q \in \Z{} b = qc. \]
-			Therefore,
-			\[ d = mpc + nqc = (mp + nq)c \]
-			where, by closure of multiplication and addition of integers, we have
-			\[ d = (mp + nq)c \implies \exists z \in \Z{} \logicsep d = zc \]
-			which is to say that ${ c \divides d }$.
+			\[ c \divides a \implies c \divides ma \eqand c \divides b \implies c \divides nb \]
+			and therefore
+			\[ c \divides (ma + nb) = d. \qedhere \]
 		\end{proof}
-		\note{Note that it is \textbf{not} the case, in general, that if ${ c \divides a }$ and ${ d = \max D_a }$ is the maximum divisor of $a$, then ${ c \divides d }$. \TODO{review this!}}
+
 		
 		\bigskip
 		\labeledProposition{Let $a$ and $b$ be coprime integers. Then,
@@ -532,29 +549,12 @@
 %			proof \href{https://en.wikipedia.org/wiki/Euclidean_division\#Proof}{wikipedia}
 %		\end{proof}
 		
-		
-		\pagebreak
-		\TODO{move this to Discrete Maths?}
-		\subsubsection{Modular Arithmetic}\bigskip
-		\bigskip	
-		\notation{The notation ${ a \equiv b \modulo{n} }$ means that $a$ is congruent to $b$ in modulo-$n$. The notation ${ a \bmod n }$ refers to the modulo operation which is the remainder between 0 and ${ n - 1 }$ of the integer division of $a$ by $n$ (some computer implementations return a negative remainder if the dividend or divisor is negative (see: \href{https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/}{blog post about this issue})).\\
-			
-			The notations are related by (assuming the remainder selected is the one between 0 and ${ n - 1 }$),
-			\[ a \equiv b \modulo{n} \iff a \bmod n = b. \]
-		}
-		
-		\biggerskip
-		\labeledProposition{A number ${ x \in \Z{}_m }$ has a multiplicative inverse if and only if ${ gcd(x,m) = 1 }$.}{modular_inverse_iff_gcd_is_1}
-		\begin{proof}
-			Assume ${ \inv{x} }$ is a multiplicative inverse for ${ x \in \Z{}_m }$. Then,
-			\[ \inv{x}x = 1 \iff \inv{x}x \congruent{1}{m} \iff \inv{x}{x} = am + 1, \hspace{10pt} a \in \Z{}. \]
-			This means that we must have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$. Now if we have ${ d = gcd(x,m) }$ then by \autoref{coro:integer_linear_combination_is_multiple_of_gcd} we must have ${ d \divides 1 }$. Therefore ${ d = 1 }$.\\\\
-			Clearly, also, if we have ${ gcd(x,m) = 1 }$ then we also have ${ 1 = am + bx }$ for some ${ a,b \in \Z{} }$ and by following the previous logic in reverse we obtain that ${ b = \inv{x} }$ is the multiplicative inverse of ${ x \in \Z{}_m }$.
-		\end{proof}
 	
 	
-		
-		\pagebreak
+% ------------- break -------------		
+\pagebreak
+
+
 		\subsubsection{Some Proofs on the Integers}\bigskip
 	
 		\labeledProposition{For any integer $m$, $\sqrt{m}$ is rational iff $m$ is a square, i.e. $m=a^2$ for some integer $a$.}{rationality_of_sqrt_integers}
