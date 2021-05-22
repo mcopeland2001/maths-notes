@@ -106,8 +106,8 @@
 \newcommand\sectionTitle\Huge
 \newcommand\subsectionTitle\Large
 \newcommand{\biggerskip}{\bigskip\bigskip}
-\newcommand\subsubsubsection[1]{{\fontfamily{lmr}\selectfont
-		\textbf{\textit{#1}}\nopagebreak\\[4pt]\nopagebreak
+\newcommand\subsubsubsection[1]{{\fontfamily{pbk}\selectfont
+		\textit{#1}\nopagebreak\\[4pt]\nopagebreak
 }}% this is the level below the last toc/bookmark level
 \newcommand\problem[1]{\paragraph{#1}}
 \newcommand\sidecomment[1]{ \text{\scriptsize{#1}} }
@@ -132,7 +132,7 @@
 
 \newcommand{\wrong}{\begingroup\color{red}\text{Wrong!}\endgroup}
 \newcommand{\TODO}[1]{\textcolor{blue}{\small{\underline{TODO:} #1}}}
-\newcommand{\addref}{\TODO{add reference}}
+\newcommand{\addref}[1][]{\TODO{reference(#1)}}
 \newcommand{\references}[1]{\small \textit{references:} #1}
 \newcommand{\question}[1]{\textcolor{gray}{\small \underline{Question:} #1}}
 
@@ -165,6 +165,7 @@
 \def\y{\vec{\bm{y}}}
 \def\z{\vec{\bm{z}}}
 \def\b{\vec{\bm{b}}}
+\def\a{\vec{\bm{a}}}
 \newcommand{\e}[1]{\vec{\bm{e_#1}}}
 
 \newcommand{\bigsetc}[2]{\left\{#1\; \middle\vert \;#2\right\}}

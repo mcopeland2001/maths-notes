@@ -28,7 +28,7 @@
 			
 			An alternative, equivalent definition is: For $\sigma_A$, an upper bound on $A$,
 			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a > \sigma_A - \epsilon. \]
-		}
+		}\label{def:supremum}
 
 		\note{Rearranging the alternative definition we obtain,
 		\begin{align*}
@@ -41,7 +41,7 @@
 			\[ \tau_A' > \tau_A \iff \exists a \in A \suchthat a < \tau_A' \]
 			or alternatively,
 			\[ \forall \epsilon > 0, \, \exists a \in A \suchthat a < \tau_A + \epsilon. \]
-		}
+		}\label{def:infimum}
 		\notation{The supremum of $A$ is denoted ${ \sup A }$ and the infimum is denoted ${ \inf A }$.}
 		
 		
@@ -117,6 +117,63 @@
 			Therefore $\sigma_B$ satisfies both requirements of the supremum and we have shown that,
 			\[ \sup B = f(\sup A). \]
 		\end{proof}
+
+
+
+	
+		
+% -------------- break ----------------
+\pagebreak
+
+
+
+		\subsubsection{Open and Closed Sets in \texorpdfstring{$\R{}$}{R}}
+		\note{\question{This material depends on sequence convergence covered later. Is it possible to fix this ordering?}}
+		\bigskip
+		\boxeddefinition{\textbf{(Neighbourhood)} The interval $ (L - \epsilon, L + \epsilon) $ is called the \textit{\mbox{$\epsilon$-neighbourhood of $L$}}.}
+		
+		\boxeddefinition{\textbf{(Open Sets in $\R{}$)} A set ${ X \subseteq \R{} }$ is an \textit{open set} iff every ${ x \in X }$ has an $\epsilon$-neighbourhood around it that is wholly contained in the set. That's to say,
+			\[ \exists \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \subseteq X. \]
+		\label{def:open-set}}
+	
+		\boxeddefinition{\textbf{(Closed Set)} A set is a \textit{closed set} iff every convergent sequence of values in the set converges to a value contained in the set.\\
+			
+		Formally, if a set ${ X \subseteq \R{} }$ is a \textit{closed set} then every convergent sequence $(x_n)$ with ${ x_n \in X }$ for all ${ n \in \N{} }$ has
+		\[ \lim_{n \to \infty} x_n \; \in X. \]
+		\label{def:closed-set}}
+	
+	
+		\nl[12]
+		\labeledProposition{The union of a collection of open sets is an open set.}{union-of-open-sets-is-an-open-set}
+		\begin{proof}
+			Let $I$ be some indexing set and ${ \setc{U_i}{i \in I} }$ be an indexed collection of sets. Then, if each $U_i$ is an open set, then we have, by the definition of an open set (\ref{def:open-set}), for all ${ i \in I }$,
+			\[ \forall x \in U_i \logicsep \exists \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \subseteq U_i. \]
+			But also
+			\[ (x - \epsilon, x + \epsilon) \subseteq U_i \; \implies \; (x - \epsilon, x + \epsilon) \subseteq \bigcup_{i \in I} U_i. \]
+			Therefore, if each $U_i$ is an open set it follows that $\bigcup_{i \in I} U_i$ is an open set also.
+		\end{proof}
+	
+		
+		\nl[6]
+		\sep
+		\begin{exe}
+			\ex Any open interval is an open set but the reverse is not, in general, the case. For example,
+			\[ S = (1,2) \cup (3,4) \]
+			is an open set but is not an open interval (it is not an interval at all).
+			
+			\bigskip
+			\ex Let ${ I = (1,\infty) }$ be an indexing set and define the indexed collection of sets,
+			\[ C = \setc{A_i}{i \in I} \suchthat A_i = (1/i, 2]. \]
+			Then,
+			\[ \bigcup_{i \in I} A_i = (0, 2]. \]
+			
+			\nl[12]
+			For any ${ A_i \in C }$ we have ${ A_i \subseteq (0, 2] }$ and
+			\[ \forall i \in I \logicsep A_i \subseteq (0, 2] \; \implies \; \bigcup_{i \in I} A_i \subseteq (0, 2]. \]
+			Conversely, if ${ x \in (0, 2] }$ then ${ 0 < x \leq 2 }$. Since ${ I = (1,\infty) }$, for any ${ x \in (0, 2] }$, there exists ${ i \in I }$ such that
+			\[ i > 1/x \; \implies \; 1/i < x \leq 2 \; \implies \; x \in A_i \; \implies \; x \in \bigcup_{i \in I} A_i. \]
+			Therefore ${ (0, 2] \subseteq \bigcup_{i \in I} A_i }$.
+		\end{exe}
 	}
 
 
@@ -127,6 +184,7 @@
 
 
 	\searchableSubsection{Sequences}{analysis}{
+	
 		\biggerskip
 		\boxeddefinition{\textbf{(Sequence)} A (real-valued) \textit{sequence} is a function from the naturals to the reals,
 			\[ f: \N{}\longmapsto \R{}. \]
@@ -163,18 +221,17 @@
 	
 		\subsubsection{Limits of Sequences}
 		\bigskip
-		\boxeddefinition{\textbf{(Sequence Convergence)} A sequence $a_n$ is said to \textbf{tend} to $L$ or have the \textbf{limit} $L$ iff,
+		\boxeddefinition{\textbf{(Sequence Convergence)} A sequence $a_n$ is said to \textit{tend} to $L$ or have the \textit{limit} $L$ iff,
 			\[ \forall \epsilon > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \abs{a_{n} - L} < \epsilon. \]
+			In such a case, the sequence is said to be \textit{convergent}.
 		}\label{def:seq-tends-to-L}
-		\boxeddefinition{The interval $ (L - \epsilon, L + \epsilon) $ is called the \textbf{\mbox{$\epsilon$-neighbourhood of $L$}}.}
 		
-		\boxeddefinition{\textbf{(Sequence Divergence)} A sequence $a_n$ is said to \textbf{tend to infinity} iff,
+		\boxeddefinition{\textbf{(Sequence Divergence)} A sequence $a_n$ is said to \textit{tend to infinity} iff,
 			\[ \forall M > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} > M \]
-			and \textbf{tend to minus-infinity} iff,
+			and \textit{tend to minus-infinity} iff,
 			\[ \forall M < 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, a_{n} < M. \]
-		}\label{def:seq-tends-to-infinity}
-	
-		\boxeddefinition{A sequence that has a limit is called \textbf{convergent} and otherwise is called \textbf{divergent}. Note that \textbf{divergent} sequences include both sequences that remain bounded but oscillate without converging and those that tend to infinity (or minus-infinity).}
+			In either case, or if the sequence oscillates without converging, the sequence is described as \textit{divergent}.
+		}\label{def:seq-diverges}
 		
 		\note{A mnemonic for the taxonomy of convergence/divergence behaviours.\\\\
 			\begin{tabular}[h!]{|c|c|c|c|}
@@ -191,7 +248,7 @@
 		}		
 		
 		\bigskip
-		\note{Note that if we were to use a less formal description of a limit, for example, if we say that a sequence tends to some value $L$ when the terms of the sequence \textit{gets closer and closer to} $L$, then we encounter the following problems:
+		\note{Note that if we were to use a less formal description of a limit, for example, if we say that a sequence tends to some value $L$ when the terms of the sequence \textit{get closer and closer to} $L$, then we encounter the following problems:
 			\begin{itemize}
 				\item{that the sequence gets closer and closer to many numbers so that this does not specify a single specific limit.}
 				\item{that the sequence can have a limit but it's not the case that every term is closer than the previous term to the limit. For example,
@@ -787,7 +844,123 @@
 
 
 
+		\biggerskip
+		\subsubsection{Sequences in Euclidean m-space}
+		\bigskip
+		\boxeddefinition{\textbf{(Bounded Subset of $\R{m}$)} A subset $B$ of $\R{m}$ is described as \textit{bounded} iff
+			\[ \exists M \geq 0 \in \R{} \logicsep \forall \x,\y \in B \logicsep \norm{\x - \y} \leq M \]
+			where ${ \norm{\x - \y} }$ denotes the Euclidean norm (\ref{def:euclidean-norm}).
+		}\label{def:bounded-subset-of-euclidean-m-space}
+	
+	
+		\biggerskip
+		\subheading{Intuition of Bounded Subsets in $\R{2}$}
+		\bigskip
+		Figures \ref{fig:bounded-subset-of-Rm-around-origin} and \ref{fig:bounded-subset-of-Rm-not-around-origin} show two bounded subsets: one around the origin and the other not containing the origin.
+		\note{Note that there is no reason that an arbitrary subset need be circular even though the examples here are.}
+		Notice that, whether the subset is centred on the origin or not, ${ \x - \y }$ and ${ \x - \z }$ are the same vector in both cases with the maximum length vector being ${ \x - \z }$. So both subsets have the same $M$ such that ${ \forall \x,\y \logicsep \norm{\x - \y} \leq M }$.\\
+		
+		Addition of vectors, however, does not exhibit the same invariance as can be seen by the difference in ${ \x + \y }$ in the two subsets.
+		
+		\begin{figure}[h!]
+			\begin{minipage}{0.9\textwidth} 
+				\includegraphics[width=\linewidth]{\resourceDir/img/Analysis/bounded_subset_of_Rm_centred_on_the_origin.png}    
+				\caption{A bounded subset of $\R{m}$ centred on the origin.}
+				\label{fig:bounded-subset-of-Rm-around-origin}  
+			\end{minipage}
+			  
+			\vspace{0.75cm}
+			\begin{minipage}{0.9\textwidth} 
+				\includegraphics[width=\linewidth]{\resourceDir/img/Analysis/bounded_subset_of_Rm_not_centred_on_the_origin.png}    
+				\caption{A bounded subset of $\R{m}$ not centred on the origin.}
+				\label{fig:bounded-subset-of-Rm-not-around-origin}   
+			\end{minipage}			
+		\end{figure}
 
+		\biggerskip
+		\labeledProposition{A subset $B$ of $\R{m}$ is bounded iff
+			\[ \exists M \geq 0 \in \R{} \logicsep \forall \x \in B \logicsep \norm{\x} \leq M. \]
+		}{bounded-subset-contains-bounded-length-vectors}
+		\begin{proof}
+			Using the unique additive inverse of a vector (\autoref{prop:unique_additive_inverse}) and the general norm properties (\autoref{prop:norm-properties}), for any ${ \x,\y \in \R{m} }$,
+			\[\begin{aligned}
+				&& \norm{\x} &= \norm{\x - \y + \y} &\sidecomment{by additive inverse of vectors}\\
+				&\iff & \norm{\x} &\leq \norm{\x - \y} + \norm{\y} &\sidecomment{by triangle inequality of norms} \\
+				&\iff & \norm{\x} - \norm{\y} &\leq \norm{\x - \y}  &(1)
+			\end{aligned}\]
+			and
+			\[\begin{aligned}
+				&& \norm{\x - \y} &= \norm{\x + (-\y)} &\sidecomment{by additive inverse of vectors}\\
+				&\iff & \norm{\x - \y} &\leq \norm{\x} + \norm{-\y} &\sidecomment{by triangle inequality of norms} \\
+				&\iff & \norm{\x - \y} &\leq \norm{\x} + \abs{-1}\norm{\y} &\sidecomment{by norm properties} \\
+				&\iff & \norm{\x - \y} &\leq \norm{\x} + \norm{\y}.  &(2)
+			\end{aligned}\]
+			\nl
+			If, ranging over ${ \x \in B }$, $\norm{\x}$ is unbounded then, for some fixed $\y$ and $\norm{\y}$, ${ \norm{\x} - \norm{\y} }$ is unbounded. But then (1) tells us that ${ \norm{\x - \y} }$ is also unbounded. Therefore, the definition of a bounded subset of $\R{m}$ (\ref{def:bounded-subset-of-euclidean-m-space}) implies the proposition,
+			\[ \exists M \logicsep \forall \x,\y \in B \logicsep \norm{\x - \y} \leq M \; \implies \; \exists K \logicsep \forall \x \in B \logicsep \norm{\x} \leq K. \]
+			Conversely, if $\norm{\x}$ is bounded by a constant $K$ then ${ \norm{\x} + \norm{\y} }$ is bounded by $2K$. Then (2) allows us to deduce that the proposition also implies the definition of a bounded subset of $\R{m}$,
+			\[ \norm{\x - \y} \leq \norm{\x} + \norm{\y} \leq 2K \; \implies \; \exists M = 2K \logicsep \forall \x,\y \in B \logicsep \norm{\x} + \norm{\y} \leq M. \]
+		\end{proof}
+	
+	
+	
+		\biggerskip
+		\subheading{Convergence of Sequences in $\R{m}$}
+		\nl[6]
+		\boxeddefinition{\textbf{(Sequence Convergence in $\R{m}$)} Sequence convergence in $\R{m}$ is similar to convergence in $\R{}$ except that the absolute value becomes the vector norm. So, the sequence $(\x_n)$ \textit{tends to} $\y$ iff
+			\[ \forall \epsilon > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \norm{\x_{n} - \y} < \epsilon. \]
+		\label{def:seq-tends-to-y-in-Rm}}
+	
+		\boxeddefinition{\textbf{(Neighbourhood in $\R{m}$)} The \textit{\mbox{$\epsilon$-neighbourhood of $\y$}} in $\R{m}$ is similar to a bounded subset (\ref{def:bounded-subset-of-euclidean-m-space}) except that it's open. That's to say, it's the set $B$ such that,		
+			\[ \exists \epsilon \geq 0 \in \R{} \logicsep \forall \x \in B \logicsep \norm{\x - \y} < \epsilon. \]
+		}
+		
+		\boxeddefinition{\textbf{(Sequence Divergence in $\R{m}$)} A sequence $(\x_n)$ in $\R{m}$ diverges to infinity if
+			\[ \forall M > 0 \in \R{} ,\, \exists N \in \N{} \suchthat \forall n > N ,\, \norm{x_{n}} > M. \]
+			That's to say, any set that contains the sequence is unbounded and, conversely, any sequence in a bounded set cannot exhibit this behaviour.\\
+			
+			A sequence in $\R{m}$ may also oscillate boundedly without converging on any point (in this case the sequence would be divergent and yet contained within a bounded set) but unbounded oscillation would come under the concept of diverging to infinity as the norm is non-negative and goes to infinity in this case.\\
+			
+			\question{Is the concept of divergence in $\R{m}$ actually used in practice?}
+		\label{def:seq-diverges-in-Rm}}
+		
+		\note{A mnemonic for the taxonomy of convergence/divergence behaviours in $\R{m}$. Note that there are fewer classes of behaviour because we use the non-negative norm.\\\\
+			\begin{tabular}[h!]{|c|c|c|}
+				\cline{1-3}
+				convergent & \multicolumn{2}{c|}{divergent}\\
+				\cline{1-3}
+				bounded & bounded & unbounded \\
+				\cline{2-3}
+				& oscillatory & ${ \to \infty }$ \\
+				\cline{1-3}			
+			\end{tabular}
+		}
+	
+		\notation{For a sequence $(\x_n)$ in $\R{m}$, denote the $m$ components of the $n$-th term of the sequence $\x_n$ as ${ x_{1n}, x_{2n}, \dots, x_{mn} }$.}
+	
+		\biggerskip
+		\labeledProposition{A sequence $(\x_n)$ in $\R{m}$ converges to ${ \y \in \R{m} }$ iff each sequence $(x_{in})$ converges to $y_i$ for ${ 1 \leq i \leq m }$.
+		}{seq-in-Rm-converges-iff-every-component-converges-to-same-point}
+		\begin{proof}
+			For any ${ n \in \N{} }$,
+			\[ \norm{\x_n - \y} = \sqrt{ (x_{1n} - y_1)^2 + (x_{2n} - y_2)^2 + \cdots + (x_{mn} - y_m)^2 }. \]
+			Let
+			\[ \epsilon_{max} = \max_{1 \leq i \leq m} x_{in} - y_i. \]
+			Then
+			\[\begin{aligned}
+				&& \norm{\x_n - \y} &\leq \sqrt{m\, {\epsilon_{max}}^2} \nn
+				&\iff & \norm{\x_n - \y} &\leq \sqrt{m}\, \epsilon_{max}.
+			\end{aligned}\]
+			If each sequence $(x_{in})$ converges to $y_i$ then, for all ${ \epsilon > 0 \in \R{} }$, there exists some $N$ such that
+			\[ \forall n > N \in \N{} \logicsep \epsilon_{max} < \frac{\epsilon}{\sqrt{m}} \; \implies \; \norm{\x_n - \y} < \epsilon \]
+			so $(\x_n)$ converges to $\y$.\\
+			
+			Conversely, the norm of a vector is greater than or equal to the norm of each component. So, if ${ \norm{\x_n - \y} < \epsilon }$ for some ${ \epsilon }$, then
+			\[ \epsilon_{max} \leq \norm{\x_n - \y} < \epsilon \]
+			and so for ${ 1 \leq i \leq m }$
+			\[ \norm{x_{in} - y_i} < \epsilon \]
+			which shows that convergence of $\x_n$ to $\y$ implies convergence of each $x_{in}$ to each $y_i$.
+		\end{proof}
 
 
 % -------------- break ----------------
@@ -807,7 +980,7 @@
 	
 		\boxeddefinition{\textbf{(Series Rearrangement)} A \textit{rearrangement} of a series ${ \sum a_n }$ is a series ${ \sum a_{f(n)} }$ where $f$ is a permutation of $\N{}$. In other words, the rearrangement contains the same terms as the original series but appearing in a different order.}
 	
-		\boxeddefinition{\textbf{(Non-negative Series)} A series is described as \textit{non-negative} (or \textit{positive}) if all its terms are non-negative. That's to say, the sequence $\sum a_n$ is non-negative iff
+		\boxeddefinition{\textbf{(Non-negative Series)} A series is described as \textit{non-negative} if all its terms are non-negative. That's to say, the sequence $\sum a_n$ is non-negative iff
 			\[ \forall n \in \N{} \logicsep a_n \geq 0. \]
 		}\label{def:non-negative-series}
 	
@@ -865,6 +1038,9 @@
 	
 		\biggerskip
 		\subsubsection{Non-negative Series}
+		{\tiny 
+			\hyperref[ssssection:well-known-non-negative-series]{Well-Known Series} \hspace{20pt} \hyperref[ssssection:convergence-tests-for-non-negative-series]{Convergence Tests}
+		}
 		\biggerskip
 		\labeledProposition{If a series is non-negative then its partial sums are monotonically increasing.}{non-negative-series-is-monotonically-increasing}
 		\begin{proof}
@@ -880,13 +1056,13 @@
 			
 			Alternatively, if does not have an upper bound then
 			\[ \forall K \in \R{} \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep s_n > K \]
-			which, by the definition \ref{def:seq-tends-to-infinity}, is to say that ${ \lim_{n \to \infty} s_n = \infty }$.
+			which, by the definition \ref{def:seq-diverges}, is to say that ${ \lim_{n \to \infty} s_n = \infty }$.
 		\end{proof}
 	
 	
 		
 		\nl[20]
-		\subsubsubsection{Well-known Non-negative Series}
+		\subsubsubsection{Well-known Non-negative Series}\label{ssssection:well-known-non-negative-series}
 		\medskip
 		\labeledTheorem{\textbf{(Geometric Series)} Let ${ a, r \in \R{} }$. Then the series ${ \sum ar^{n-1} }$,
 			\begin{enumerate}[label=(\roman*)]
@@ -919,30 +1095,6 @@
 			\end{enumerate}
 		\end{proof}
 	
-	
-%		\bigskip
-%		\labeledTheorem{\textbf{Harmonic Series} The harmonic series ${ \sum \frac{1}{n} }$ diverges.}{harmonic-series-diverges}
-%		\begin{proof}
-%			Let ${ s_n = \sum_{i=1}^n \frac{1}{i} }$ be the $n$-th partial sum of the series ${ \sum \frac{1}{n} }$ and let ${ f: \N{} \longmapsto \N{} }$ be the monotonically increasing function,
-%			\[ f(n) = 2n \]
-%			so that $(s_{f(n)})$ is a subsequence of $(s_n)$.\\
-%			
-%			Suppose, for contradiction, that $(s_n)$ converges to a finite limit $L$. Then, by \autoref{prop:subseq-tends-to-same-limit}, $(s_{f(n)})$ also converges to $L$ and so, using the algebra of finite limits (\autoref{prop:func-finite-limit-algebra}),
-%			\[ \lim_{n \to \infty} (s_{f(n)} - s_n) = L - L = 0. \tag{*} \]
-%			If we expand out the expression ${ s_{f(n)} - s_n }$, we can deduce that, for all ${ n \in \N{} }$,
-%			\[\begin{aligned}
-%				s_{f(n)} - s_n &= s_{2n} - s_n \nn
-%				&= \sum_{i=1}^{2n} \frac{1}{i} - \sum_{i=1}^n \frac{1}{i} &\sidecomment{} \nn
-%				&= \sum_{i=n+1}^{2n} \frac{1}{i} &\sidecomment{} \nn
-%				&= \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{2n} &\sidecomment{} \nn
-%				&> \frac{1}{2n} + \frac{1}{2n} + \cdots + \frac{1}{2n} = \frac{n}{2n} = \frac{1}{2}.
-%			\end{aligned}\]
-%			But by \autoref{prop:if-a-seq-is-geq-M-and-converges-to-L-then-L-is-geq-M} we have
-%			\[ \forall n \logicsep (s_{f(n)} - s_n) \geq \frac{1}{2} \implies \lim_{n \to \infty} (s_{f(n)} - s_n) \geq \frac{1}{2} \]
-%			which contradicts (*).\\
-%			
-%			Therefore, the series diverges.
-%		\end{proof}   TODO: old version - delete this?
 	
 		\bigskip
 		\labeledTheorem{\textbf{Harmonic Series} The harmonic series ${ \sum \frac{1}{n} }$ diverges.}{harmonic-series-diverges}
@@ -1014,8 +1166,10 @@
 			\end{enumerate}
 		\end{proof}
 	
+		
+		
 		\nl[20]
-		\subsubsubsection{Convergence Tests for Non-negative Series}
+		\subsubsubsection{Convergence Tests for Non-negative Series}\label{ssssection:convergence-tests-for-non-negative-series}
 		\bigskip
 		\labeledTheorem{\textbf{(Comparison Test)} Suppose $(a_n)$ and $(b_n)$ are non-negative sequences. Then:
 			\begin{enumerate}[label=(\roman*)]
@@ -1145,35 +1299,97 @@
 		\biggerskip
 		\subsubsection{Absolute and Conditional Convergence}
 		\bigskip
-		\boxeddefinition{\textbf{(Series Absolute Convergence)} If a series ${ \sum a_n }$ is such that ${ \sum \abs{a_n} }$ is a convergent series, then the series ${ \sum a_n }$ is described as \textit{absolutely convergent}.\\
+		\boxeddefinition{\textbf{(Absolute Convergence)} If a series ${ \sum a_n }$ is such that ${ \sum \abs{a_n} }$ is a convergent series, then the series ${ \sum a_n }$ is described as \textit{absolutely convergent}.\\
 		
 		Clearly, for non-negative series in which, by definition, ${ \forall n \logicsep a_n = \abs{a_n} }$, convergence implies absolute convergence.}
 	
-		\boxeddefinition{\textbf{(Series Conditional Convergence)} If a series ${ \sum a_n }$ is such that ${ \sum \abs{a_n} }$ is a divergent series but the original series ${ \sum a_n }$ is a convergent series, then the series ${ \sum a_n }$ is described as \textit{conditionally convergent}.}
+		\boxeddefinition{\textbf{(Conditional Convergence)} If a series ${ \sum a_n }$ is such that ${ \sum \abs{a_n} }$ is a divergent series but the original series ${ \sum a_n }$ is a convergent series, then the series ${ \sum a_n }$ is described as \textit{conditionally convergent}.}
 		
-		\bigskip
-		\labeledProposition{Absolute convergence implies conditional convergence.}{series-absolute-convergence-implies-conditional-convergence}
-		\begin{proof}
-			Let ${ \sum a_n }$ be an absolutely convergent sequence and consider the sequence ${ \sum \abs{a_n} - a_n }$. For each term, since $a_n$ either equals $\abs{a_n}$ or $-\abs{a_n}$, then
-			\[ \abs{a_n} - a_n \in \{ 0, 2\abs{a_n} \}. \]
-			Therefore, the series ${ \sum \abs{a_n} - a_n }$ is non-negative and upper-bounded by the series ${ \sum 2 \abs{a_n} }$. Since by construction, ${ \sum \abs{a_n} }$ converges, we can apply the algebra of series (\autoref{prop:series-limit-algebra}) to deduce that ${ \sum 2 \abs{a_n} = 2 \sum \abs{a_n} }$ and thus, that ${ \sum 2 \abs{a_n} }$ is also convergent. Therefore, by \autoref{prop:increasing_bounded_seqs_have_limit}, ${ \sum \abs{a_n} - a_n }$ converges.\\
+		\notation{Let ${ \sum a_n^+ }$ denote the series whose terms are the positive terms of the sequence $a_n$ and, similarly, ${ \sum a_n^- }$ the series of the negative terms of $a_n$.\\
 			
-			Now we have two convergent series: ${ \sum \abs{a_n} }$ and ${ \sum \abs{a_n} - a_n }$. Since they both converge, we can apply the algebra of series (\autoref{prop:series-limit-algebra}) again to determine that
-			\[ \sum \abs{a_n} - \sum \abs{a_n} - a_n = \sum a_n \]
-			also converges.
-		\end{proof}
-		\note{Note that the triangle inequality tells us that ${ \sum \abs{a_n} }$ is an upper bound on ${ \sum a_n }$ but because ${ \sum a_n }$ is not a non-negative sequence, convergence of ${ \sum \abs{a_n} }$ does \textbf{not} imply that ${ \sum a_n }$ converges: it may diverge to negative infinity or oscillate boundedly.}
+		More formally, define
+			\[ 	a_n^+ = \begin{cases}
+							a_n & a_n > 0 \\
+							0   & a_n \leq 0
+						\end{cases}  \eqand
+				a_n^- = \begin{cases}
+							0 & a_n \geq 0 \\
+							a_n   & a_n < 0.
+						\end{cases}
+			\]
+		Then we have the following relationships:
+			\begin{itemize}
+				\item ${ \sum a_n = \sum a_n^+  + \sum a_n^- }$
+				\item ${ \sum \abs{a_n} = \sum a_n^+  - \sum a_n^- }$.
+			\end{itemize}
+		}
 		
 		\biggerskip
-		\TODO{complete this proof}
-		\labeledProposition{A convergent series that is not non-negative (conditionally converges?) doesn't necessarily converge to same limit after rearrangement}{}
+		\labeledProposition{Let ${ \sum a_n }$ be an arbitrary series. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ \sum a_n^+ }$ is monotonically increasing and so either converges or diverges to infinity; and
+				\item ${ \sum a_n^- }$ is monotonically decreasing and so either converges or diverges to negative infinity.
+			\end{enumerate}
+		}{series-of-positive-terms-is-increasing-series-of-negative-terms-is-decreasing}
 		\begin{proof}
+			\begin{enumerate}[label=(\roman*)]
+				\item Clearly ${ \sum a_n^+ }$ is a non-negative series and so, by \autoref{prop:non-negative-series-is-monotonically-increasing}, is monotonically increasing and then, by \autoref{prop:increasing_bounded_seqs_have_limit}, either converges or diverges to infinity.
+				\item Considering the series ${ \sum a_n^- }$ on the other hand, we have
+				\[ \sum a_n^- = -\sum -a_n^- \]
+				where $\sum -a_n^-$ is a monotonically increasing sequence and so, by similar reasoning, it follows that $\sum -a_n^-$ either converges or diverges to infinity. Therefore, ${ \sum a_n^- }$ either converges or diverges to negative infinity.
+			\end{enumerate}
 		\end{proof}
+		
+		\bigskip
+		\labeledProposition{Absolute convergence implies convergence.}{series-absolute-convergence-implies-conditional-convergence}
+		\begin{proof}
+			\note{Note that the triangle inequality tells us that ${ \sum \abs{a_n} }$ is an upper bound on ${ \sum a_n }$ but because ${ \sum a_n }$ is not a non-negative sequence, convergence of ${ \sum \abs{a_n} }$ does \textbf{not} imply that ${ \sum a_n }$ converges: it may oscillate boundedly (if it oscillated unboundedly then it wouldn't be absolutely convergent).}
+			
+			Let ${ \sum a_n }$ be an absolutely convergent sequence and consider the series ${ \sum a_n + \abs{a_n} }$. For each term of this series we have,
+			\[ 0 <= a_n + \abs{a_n} \leq 2\abs{a_n} \] 
+			so ${ \sum (a_n + \abs{a_n}) }$ is a non-negative series upper-bounded by ${ \sum 2\abs{a_n} }$ which is convergent because, by the absolute convergence and the algebra of convergent series (\autoref{prop:series-limit-algebra}), ${ \sum 2\abs{a_n} = 2 \sum \abs{a_n} }$ is convergent. Therefore, by \autoref{prop:non-negative-series-is-monotonically-increasing} and \autoref{prop:increasing_bounded_seqs_have_limit}, ${ \sum (a_n + \abs{a_n}) }$ is convergent.\\
+			
+			Now, again using the algebra of convergent series, we have, 
+			\[ \sum a_n = \sum (a_n + \abs{a_n}) - \sum \abs{a_n} \]
+			must be convergent also.
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{A conditionally convergent series doesn't necessarily converge to the same limit after rearrangement.}{conditionally-convergent-series-value-not-invariant-under-rearrangement}
+		\begin{proof}
+			Consider the Taylor expansion of ${ \ln(1+x) }$,
+			\[\begin{aligned}
+				\ln(1+x) &= \ln(1) + \left(\dod{\ln}{x}\Bigr\rvert_{x=1}\right) \frac{x}{1!} + \left(\dod[2]{\ln}{x}\Bigr\rvert_{x=1}\right) \frac{x^2}{2!} + \left(\dod[3]{\ln}{x}\Bigr\rvert_{x=1}\right) \frac{x^3}{3!} + \cdots \nnn
+				&= 0 + \left(\frac{1}{1}\right) \frac{x}{1!} + \left(\frac{-1}{1^2}\right) \frac{x^2}{2!} + \left(\frac{2}{1^3}\right) \frac{x^3}{3!} + \left(\frac{-3 \times 2}{1^4}\right) \frac{x^4}{4!} + \cdots &\sidecomment{} \nnn
+				&= \sum_{n=1}^\infty (-1)^{n+1} \frac{(n-1)!}{n!} x^n = \sum_{n=1}^\infty (-1)^{n+1}\, \frac{x^n}{n}.
+			\end{aligned}\]
+			\note{Note that we could also have obtained the same result by noting that the sum of an infinite geometric series with initial term 1 and ${ \abs{r} < 1 }$, where $r$ is the common ratio, is given by
+				\[ \frac{1}{1 - r}. \]
+				If $r$ is negative then we have ${ r = -t }$ for some positive $t$ and,
+				\[ \frac{1}{1 + t} = 1 - t + t^2 - t^3 + \cdots \]
+				Integrating both sides \wrt $t$ we get,
+				\[ \int_1^x \frac{1}{1 + t} \dif t = t - \frac{t^2}{2} + \frac{t^3}{3} - \frac{t^4}{4} + \cdots \]
+			}
+			So, using this to obtain a series summing to $\ln(2)$, we have
+			\[ \ln(2) = \ln(1 + 1) = \sum_n (-1)^{n+1}\, \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \frac{1}{8} + \cdots  \tag{1} \]
+			Then, using the algebra of convergent series (\autoref{prop:series-limit-algebra}),
+			\[ \frac{1}{2} \ln(2) = \frac{1}{2} \sum_n (-1)^{n+1}\, \frac{1}{n} = \frac{1}{2} - \frac{1}{4} + \frac{1}{6} - \frac{1}{8} + \cdots \]
+			and adding in a zero for every odd-numbered term,
+			\[ \frac{1}{2} \ln(2) = 0 + \frac{1}{2} + 0 - \frac{1}{4} + 0 + \frac{1}{6} + 0 - \frac{1}{8} + 0 + \cdots  \tag{2} \]
+			Now adding (1) and (2),
+			\[\begin{aligned}
+				&& \ln(2) + \frac{1}{2} \ln(2) &= 1 + 0 + \frac{1}{3} - \frac{1}{2} + \frac{1}{5} + 0 + \frac{1}{7} - \frac{1}{4} + \cdots  \nnn
+				& \iff & \frac{3}{2} \ln(2) &= 1 + \frac{1}{3} - \frac{1}{2} + \frac{1}{5} + \frac{1}{7} - \frac{1}{4} + \cdots
+			\end{aligned}\]
+			Here we have obtained an expression that the algebra of convergent series tells us evaluates to ${ \frac{3}{2} \ln(2) }$ but that is clearly a rearrangement of (1) which we know converges to ${ \ln(2) }$.\\
+			Note also that (1) is conditionally convergent because if we take the absolute value of every term then the series becomes the harmonic series (\autoref{theo:harmonic-series-diverges}). So (1) is an example of a conditionally convergent series whose value changes upon rearrangement.
+		\end{proof}
+		
 	
 		\bigskip
-		\labeledProposition{If a series is non-negative and convergent (i.e. absolutely convergent) then its value is invariant to rearrangements.}{convergent-non-negative-series-has-same-value-after-rearrangement}
+		\labeledProposition{If a series is absolutely convergent then its value is invariant to rearrangements.}{convergent-non-negative-series-has-same-value-after-rearrangement}
 		\begin{proof}
-			This proof requires the Cauchy Criterion of Convergence: see: \href{https://math.stackexchange.com/questions/475841/absolutely-convergent-series-has-constant-sum}{math.stackexchange}. 
+			This proof requires the Cauchy Criterion of Convergence (see: \href{https://math.stackexchange.com/questions/475841/absolutely-convergent-series-has-constant-sum}{math.stackexchange}). 
 		\end{proof}
 		
 		
@@ -1183,38 +1399,217 @@
 			If
 			\begin{itemize}
 				\item ${ b_n \geq 0 }$,
-				\item $(b_n)$ is monotonically decreasing, and
-				\item ${ \lim_{n \to \infty} b_n = 0 }$,
+				\item ${ \lim_{n \to \infty} b_n = 0 }$, and
+				\item $(b_n)$ is monotonically decreasing;
 			\end{itemize}
-			then ${ \sum a_n }$ converges.
+			then ${ \sum a_n }$ converges.\\
 		}{series-alternating-series-test}
-		\begin{proof}\nl[3]
-			Let $s_n$ be the $n$-th partial sum of the series ${ \sum a_n }$. Then
-			\[ s_n = b_1 - b_2 + b_3 - b_4 + \cdots = (b_1 - b_2) + (b_3 - b_4) + \cdots = c_1 + c_2  + \cdots \]
-			where, because $(b_n)$ is a positive, monotonically decreasing sequence, the sequence $(c_n)$ is positive. So the even-numbered partial sums take the form
+		\begin{proof}
+			\note{Note that the described series is not necessarily absolutely convergent because ${ \sum \abs{a_n} = \sum b_n }$ is a non-negative series whose terms converge to 0. So, it could still be a divergent series like, for example, the harmonic series (\autoref{theo:harmonic-series-diverges}). So, the proof will use the fact that $(b_n)$ is monotonically decreasing and the alternation of the signs to prove the proposition.
+			}
+			Let $s_n$ be the $n$-th partial sum of the series ${ \sum a_n }$. Then, consider the even-numbered partial sums,
+			\[\begin{aligned}
+				s_{2n} &= b_1 - b_2 + b_3 - b_4 + \cdots + b_{n-1} - b_n \\
+				&= (b_1 - b_2) + (b_3 - b_4) + \cdots + (b_{n-1} - b_n) \\
+				&= c_1 + c_2  + \cdots + c_n
+			\end{aligned}\]
+			where, because $(b_n)$ is monotonically decreasing, each $c_i$ is non-negative. So the even-numbered partial sums take the form
 			\[ s_{2n} = c_1 + c_2 + \cdots + c_n \]
-			and the subsequence $(s_{2n})$ is therefore positive and monotonically increasing.\\
+			and the subsequence $(s_{2n})$, by \autoref{prop:non-negative-series-is-monotonically-increasing}, is therefore monotonically increasing.\\
 			
-			In addition, if we group the terms differently then the $n$-th partial sum,
-			\[ s_n = b_1 - (b_2 - b_3) - (b_4 - b_5) - \cdots = b_1 - d_1 - d_2 - \cdots \]
-			where the sequence $(d_n)$ is positive. Therefore ${ s_n \leq b_1 }$. \TODO{check this proof against rearrangements}
+			If we consider the odd-numbered partial sums,
+			\[\begin{aligned}
+				s_{2n+1} &= b_1 - b_2 + b_3 - b_4 + \cdots + b_{n-2} - b_{n-1} + b_n \\
+				&= (b_1 - b_2) + (b_3 - b_4) + \cdots + (b_{n-2} - b_{n-1}) + b_n \\
+				&= c_1 + c_2  + \cdots + c_{n-1} + b_n
+			\end{aligned}\]
+			which, by the same reasoning and the fact that ${ b_n \geq 0 }$, shows that the subsequence $(s_{2n+1})$ is also monotonically increasing.\\
+			
+			Therefore $(s_n)$ is monotonically increasing.\\
+			
+			In addition, if we group the terms differently then the $2n$-th partial sum,
+			\[ s_{2n} = b_1 - (b_2 - b_3) - (b_4 - b_5) - \cdots - (b_{n-2} - b_{n-1}) - b_n = b_1 - d_1 - d_2 - \cdots - b_n \]
+			where each $d_i$ is non-negative. So every even-numbered partial sum is upper-bounded by $b_1$.\\
+			
+			If we consider the odd-numbered partial sums,
+			\[ s_{2n+1} = b_1 - (b_2 - b_3) - (b_4 - b_5) - \cdots - (b_{n-1} - b_n) = b_1 - d_1 - d_2 - \cdots - d_n \]
+			where, again, each $d_i$ is non-negative. So every odd-numbered partial sum is upper-bounded by $b_1$ also.\\
+			
+			Therefore, for all $n$, we have ${ s_n \leq b_1 }$ and so $(s_n)$ is upper-bounded. Since $(s_n)$ is a monotonically increasing, upper-bounded sequence and so, by \autoref{prop:increasing_bounded_seqs_have_limit}, converges, then, by definition, the series ${ \sum a_n }$ converges.
+		\end{proof}
+	
+		
+		
+		\nl[12]
+		\begin{lemma}\label{lem:conditionally-convergent-series-comprises-infinte-positive-and-negative-series}
+			In any conditionally convergent series, the sum of the positive terms is a divergent series and the sum of the negative series is a divergent series.
+		\end{lemma}
+		\begin{proof}
+			Let ${ \sum a_n }$ be a conditionally convergent series and consider it as the sum of the series of its positive and negative terms,
+			\[ \sum a_n = \sum a_n^+ + \sum a_n^-. \]
+			If both ${ \sum a_n^+ }$ and ${ \sum a_n^- }$ are convergent, then 
+			\[ \sum \abs{a_n} = \sum \abs{a_n^+} + \sum \abs{a_n^-} = \sum a_n^+ - \sum a_n^- \]
+			which, by \autoref{prop:series-limit-algebra}, is convergent also. But then ${ \sum a_n }$ is absolutely convergent which contradicts the hypothesis of conditional convergence.\\
+			
+			So we need to investigate the cases where one or both of ${ \sum a_n^+ }$ and ${ \sum a_n^- }$ are divergent. By \autoref{prop:series-of-positive-terms-is-increasing-series-of-negative-terms-is-decreasing}, ${ \sum a_n^+ }$ is either finite or goes to positive infinity and ${ \sum a_n^- }$ is either finite or goes to negative infinity.\\
+			
+			If ${ \sum a_n^+ }$ goes to positive infinity while ${ \sum a_n^- }$ is finite then ${ \sum a_n }$ goes to positive infinity and so is not conditionally convergent. Likewise, if ${ \sum a_n^- }$ goes to negative infinity while ${ \sum a_n^+ }$ is finite, then ${ \sum a_n }$ goes to negative infinity and so is not conditionally convergent.\\
+			
+			Therefore, the only situation that is consistent with conditional convergence of ${ \sum a_n }$ is for both ${ \sum a_n^+ }$ to be going to positive infinity and ${ \sum a_n^- }$ to be going to negative infinity.
+		\end{proof}
+	
+		\medskip
+		\labeledTheorem{\textbf{(Riemann Rearrangement Theorem)} If ${ \sum a_n }$ is a conditionally convergent series then, for any ${ r \in \R{} }$, there is some rearrangement of ${ \sum a_n }$ that converges to $r$.}{riemann-rearrangement-theorem}
+		\begin{proof}
+			Let ${ \sum a_n }$ be a conditionally convergent series. Then, by \autoref{lem:conditionally-convergent-series-comprises-infinte-positive-and-negative-series}, ${ \sum a_n^+ }$ diverges to infinity and ${ \sum a_n^- }$ diverges to negative infinity and also, by \autoref{prop:series-of-positive-terms-is-increasing-series-of-negative-terms-is-decreasing}, ${ \sum a_n^+ }$ is monotonically increasing and ${ \sum a_n^- }$ is monotonically decreasing.\\
+
+			Denote the partial sum of the positive series ${ t_n = \sum_{i=1}^n a_i^+ }$ and the partial sum of the negative series ${ u_n = \sum_{i=1}^n a_i^- }$. Since ${ \sum a_n^+ }$ diverges to infinity, its partial sums increase unboundedly and so, if ${ r \geq 0 }$, then there exists some $N_1$ such that
+			\[ t_{N_1} > r. \]
+			If we choose the minimum such $N_1$ then either ${ N_1 = 1 }$, in which case we have
+			\[ 0 \leq r < t_{N_1} = t_1 \]
+			or else ${ N_1 > 1 }$, in which case we have
+			\[ t_{N_1 - 1} \leq r < t_{N_1}. \]
+			So, if we let ${ m = 0 }$ in the case that ${ N_1 = 1 }$ and ${ m = t_{N_1 - 1} }$ in the case that ${ N_1 > 1 }$, then in both cases we have
+			\[ t_{N_1} - m = a_{N_1}^+. \]
+			Therefore, in both cases we can deduce that,
+			\[\begin{aligned}
+				&& m &\leq r < t_{N_1} \nn
+				&\iff & -m &\geq -r > -t_{N_1} \nn
+				&\iff & -t_{N_1} &< -r \leq -m \nn
+				&\iff & 0 &< t_{N_1} - r \leq t_{N_1} - m \nn
+				&\iff & 0 &< t_{N_1} - r \leq a_{N_1}^+.
+			\end{aligned}\]
+		
+			Similarly, if ${ r < 0 }$, since ${ \sum a_n^- }$ diverges to negative infinity, we can find an $N_1$ such that
+			\[ u_{N_1} < r. \]
+			Again the minimum such $N_1$ could be 1 or greater than 1 so we either have,
+			\[ u_{N_1} < r < 0 \eqword{or} u_{N_1} < r < u_{N_1 - 1}. \]
+			Again, letting $m$ be either 0 or $u_{N_1 - 1}$ we have,
+			\[\begin{aligned}
+				&& u_{N_1} &< r < m \nn
+				&\iff & -m &< -r < -u_{N_1} \nn
+				&\iff & u_{N_1} - m &< u_{N_1} - r < 0 \nn
+				&\iff & a_{N_1}^- &< u_{N_1} - r < 0.
+			\end{aligned}\]
+		
+			So, after this process, if $r$ was non-negative then we have
+			\[ \abs{t_{N_1} - r} \leq a_{N_1}^+ \]
+			and, if $r$ was negative, we have
+			\[ \abs{u_{N_1} - r} < \abs{a_{N_1}^-}. \]
+			So, if we denote $s_1$ the accumulated sum after the 1st iteration of this process then
+			\[ s_1 = 	\begin{cases}
+							t_{N_1} & r \geq 0 \\
+							u_{N_1} & r < 0
+						\end{cases} 
+			\]
+			and we have ensured that
+			\[ \abs{s_1 - r} \leq \max \{ a_{N_1}^+, \abs{a_{N_1}^-} \} < \max \{ a_{N_1}^+ + 1, \abs{a_{N_1}^-} \}. \]
+			
+			Denote ${ d_1 = \max \{ a_{N_1}^+ + 1, \abs{a_{N_1}^-} \} }$. Then, after the first iteration we have confined the value of $s_1$ to a $d_1$-neighbourhood of $r$. If we perform another similar iteration, then
+			\[ d_2 = \max \{ a_{N_2}^+ + 1, \abs{a_{N_2}^-} \} < d_1 \]
+			because ${ \sum a_n }$ is (conditionally) convergent and so, by \autoref{prop:convergent-series-has-terms-that-go-to-0},
+			\[ a_n \to 0 \eqword{as} n \to \infty \implies \abs{a_n} \to 0 \eqword{as} n \to \infty. \]
+			
+			It follows that, for any ${ \epsilon > 0 \in \R{} }$, there exists a number of iterations $i$ such that, for every iteration ${ j \geq i }$,
+			\[ \abs{s_j - r} < \epsilon. \]
+			
+			This shows that there always exists a rearrangement of the terms of a conditionally convergent sequence that converges to $r$.	
+		\end{proof}
+	
+		\nl[12]
+		\subsubsubsection{Tests for Absolute Convergence}
+		\note{Since, for any series ${ \sum a_n }$, the series ${ \sum \abs{a_n} }$ is a non-negative series, testing for absolute convergence means using the tests for convergence of non-negative series against ${ \sum \abs{a_n} }$.}
+		
+		\bigskip
+		\labeledTheorem{\textbf{(Generalised Comparison Test)} Suppose $(a_n)$ and $(b_n)$ are non-negative sequences. Then:
+			\begin{enumerate}[label=(\roman*)]
+				\item If ${ \abs{a_n} \leq \abs{b_n} }$ for all ${ n \in \N{} }$, then
+				\begin{itemize}
+					\item if ${ \sum \abs{b_n} }$ converges then ${ \sum \abs{a_n} }$ converges and so ${ \sum a_n }$ converges also, and 
+					\[ \sum_{n=1}^\infty \abs{a_n} \leq \sum_{n=1}^\infty \abs{b_n}, \]
+					\item if ${ \sum \abs{a_n} }$ diverges then ${ \sum \abs{b_n} }$ diverges;
+				\end{itemize}
+				\bigskip
+				\item If there exists some $N$ such that ${ \abs{a_n} \leq \abs{b_n} }$ for all ${ n > N \in \N{} }$, then
+				\begin{itemize}
+					\item if ${ \sum \abs{b_n} }$ converges then ${ \sum \abs{a_n} }$ converges and so ${ \sum a_n }$ converges also,
+					\item if ${ \sum \abs{a_n} }$ diverges then ${ \sum \abs{b_n} }$ diverges;
+				\end{itemize}
+				\bigskip
+				\item If 
+				\[ L = \lim_{n \to \infty} \frac{a_n}{b_n} \]
+				is finite and non-zero, then
+				\[ \sum \abs{a_n} \text{ converges } \implies \sum b_n \text{ converges, } \]
+				\[ \sum \abs{b_n} \text{ converges } \implies \sum a_n \text{ converges. } \]
+			\end{enumerate}
+		}{series-generalised-comparison-test}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item The convergence of ${ \sum a_n }$ follows from convergence of ${ \sum \abs{a_n} }$ by \autoref{prop:series-absolute-convergence-implies-conditional-convergence}. The divergence of the absolute series does not imply divergence of the original series because the series may be conditionally convergent.
+				\bigskip
+				\item The reasoning is similar to (i).
+				\bigskip
+				\item By \autoref{theo:series-comparison-test}, if $L$ is finite,
+				\[ L = \lim_{n \to \infty} \frac{a_n}{b_n} \implies \;\; \sum \abs{a_n} \text{ converges } \iff \sum \abs{b_n} \text{ converges. } \]
+				We cannot deduce, however, that
+				\[ \sum a_n \text{ converges } \iff \sum b_n \text{ converges, } \]
+				because, if for example, ${ \sum a_n }$ converges conditionally then
+				\[ \sum a_n \text{ converges } \centernot\implies \sum \abs{a_n} \text{ converges. } \]
+			\end{enumerate}
 		\end{proof}
 	
 		\bigskip
-		\labeledTheorem{\textbf{(Riemann Rearrangement Theorem)} \TODO{complete this}}{}
+		\labeledTheorem{\textbf{(Generalised Ratio Test)} Let ${ \sum a_n }$ be a series with the property that
+			\[ L = \lim_{n \to \infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} \]
+			where $L$ may be infinity. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ L < 1 \implies \sum a_n \text{ converges, } }$
+				\item ${ L > 1 \implies \sum a_n \text{ diverges. } }$
+			\end{enumerate}
+		}{series-generalised-ratio-test}
 		\begin{proof}
+			This test using the ratio of the absolute value of consecutive terms of the series is equally as strong in its conclusions as the corresponding test for non-negative series \autoref{theo:series-ratio-test} because the proof of the corresponding test for non-negative series uses infinite geometric series and the convergence of geometric series (\autoref{theo:geometric-series-convergence-conditions}) depends on the absolute value of the common ratio.
 		\end{proof}
 	
-		\nl[10]
-		\subsubsubsection{Tests for Absolute Convergence}
-		\TODO{tests for absolute convergence}
+		\bigskip
+		\labeledTheorem{\textbf{(Generalised Root Test)} Let ${ \sum a_n }$ be a series with the property that
+			\[ L = \lim_{n \to \infty} \abs{a_n}^{1/n} \]
+			where $L$ may be infinity. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ L < 1 \implies \sum a_n \text{ converges, } }$
+				\item ${ L > 1 \implies \sum a_n \text{ diverges. } }$
+		\end{enumerate}}{series-generalised-root-test}
+		\begin{proof}
+			This is similar to \autoref{theo:series-generalised-ratio-test} in that the proof of the corresponding test for non-negative series \autoref{theo:series-root-test} uses the convergence of infinite geometric series which depends on the absolute value of the common ratio.
+		\end{proof}
+	
+	
+		\biggerskip
+		\subsubsubsection{Power Series}
+		\nl[2]
+		\boxeddefinition{\textbf{(Power Series)} A \textit{power series} is a series of the form ${ \sum a_n x^n }$ for ${ x \in \R{} }$ or, more generally, a power series about ${ x = c }$ is
+			\[ \sum a_n (x - c)^n. \]
+		}
+		\note{There also exist "formal" power series (\href{https://en.wikipedia.org/wiki/Formal_power_series}{wikipedia}) which are not required to converge because they are used for their construction of a sequence of coefficients. The most well-known example of this usage is generating functions (\href{https://en.wikipedia.org/wiki/Generating_function}{wikipedia}) in combinatorics.}
+		
+		\boxeddefinition{\textbf{(Radius of Convergence)} If a power series ${ \sum a_n x^n }$ converges for all ${ x \in (R,R) }$ (where $R$ may be infinite) and diverges for all $x$ such that ${ \abs{x} > R }$, then $R$ is known as the \textit{radius of convergence} of the series.\\
+			
+		Behaviour at the boundary where ${ \abs{x} = R }$ is not determined by the radius of convergence and must be considered separately.
+		}
+		
+		\bigskip
+		\labeledProposition{Every power series has a radius of convergence.}{every-power-series-has-a-radius-of-convergence}
+		\begin{proof}
+			\question{Is this proven by the Cauchy-Hadamard theorem (\href{https://en.wikipedia.org/wiki/Cauchy-Hadamard_theorem}{wikipedia}) ?}
+		\end{proof}
+		
 	
 		\sep
 		\begin{exe}
 			\ex The series ${ \sum (-1)^n/\sqrt{n} }$ converges but if the partial sums are squared, ${ \sum (-1)^{2n}/n }$ diverges. So this is an example of a non-linear combination of series.
 			\label{ex:absolutely-convergent-series-whose-square-diverges}
 			
-			\bigskip
+			\biggerskip
 			\ex Consider the series
 				\[ \sum \frac{n + 2}{n^2}. \]
 				If we examine the limit of the ratio of consecutive terms (i.e. perform the Ratio Test \autoref{theo:series-ratio-test}) we find, 
@@ -1227,7 +1622,7 @@
 				\[ \frac{n + 2}{n^2} \cdot \frac{n}{1} = \frac{n + 2}{n} = \frac{1 + 2/n}{1} \to 1. \]
 				So the limit of the ratio of the terms of the sequence with the terms of the sequence of the harmonic series also tends to 1. In this case we can draw a conclusion: that the asymptotic behaviour of the series under test is the same as that of the harmonic series. We therefore deduce that the series diverges.
 			
-			\bigskip
+			\biggerskip
 			\ex Consider the series
 				\[ \sum \frac{1}{n\log{n}}. \]
 				\note{Here $\log{x}$ refers to the natural log (see: \href{https://math.stackexchange.com/questions/293783/when-log-is-written-without-a-base-is-the-equation-normally-referring-to-log-ba}{math.stackexchange}).}
@@ -1240,6 +1635,61 @@
 					&= \log{\log{n}} - \log{\log{2}}.
 				\end{aligned}\]
 				Since ${ \lim_{n \to \infty} \log{n} = \infty }$, as ${ n \to \infty }$, $\log{n}$ is growing without bound. Therefore, ${ \log{\log{n}} }$ is also growing without bound and so the integral diverges.
+				
+			\biggerskip
+			\ex The alternating series
+			\[ \sum (-1)^{n+1} \frac{\sqrt{n}}{n + 1} \]
+			can be shown to converge using the LAST (\autoref{theo:series-alternating-series-test}).\\
+			
+			First we note that ${ \forall n \in \N{} \logicsep \frac{\sqrt{n}}{n + 1} > 0 }$ and that
+			\[ \lim_{n \to \infty} \frac{\sqrt{n}}{n + 1} = \lim_{n \to \infty} \frac{1}{\sqrt{n} + \frac{1}{\sqrt{n}}} = 0. \]
+			
+			So we only need to show that
+			\[ \forall n \in \N{} \logicsep \frac{\sqrt{n + 1}}{(n + 1) + 1} > \frac{\sqrt{n}}{n + 1}. \]
+			There are many ways to show this; presented here are a couple of ways of particular interest.\\
+			
+			Firstly, we can show that the ratio of consecutive terms cannot exceed 1. This needs to be clearly distinguished from the Ratio Test (\autoref{theo:series-ratio-test}) for convergence of series in which we show that the series converges if the ratio of consecutive terms tends to a limit below 1. In this case we are just showing that the sequence of terms (actually the absolute value of the terms) is monotonically decreasing.\\
+			
+			After calculation the ratio of consecutive terms becomes
+			\[ \sqrt{\frac{n^3 + 3n^2 + 3n + 1}{n^3 + 4n^2 + 4n}} \]
+			and we can observe that, for any real number, ${ 3n^2 < 4n^2 }$ and, since $n$ is in fact a natural number, we have			
+			\[ n \in \N{} \implies n \geq 1 \implies (3n + 1 \leq 4n). \]
+			Therefore, the ratio of consecutive terms is less than 1.\\
+			
+			Another interesting way to show this is by treating the sequence index $n$ as a real number and considering the function
+			\[ f(x) = \frac{\sqrt{x}}{x + 1} \]
+			so we can take the derivative,
+			\[ f'(x) = \frac{\frac{x+1}{2\sqrt{x}} - \sqrt{x}}{(x + 1)^2} = \frac{1 - x}{2\sqrt{x}(x + 1)^2}. \]
+			Then we can see that the denominator is positive for all positive $x$ and, for ${ x \geq 1 }$, the numerator is non-positive. Therefore
+			\[ \forall x > 1 \logicsep f'(x) \leq 0 \]
+			which shows that the terms are monotonically decreasing.
+			
+			\biggerskip
+			\ex The exponential function is defined as a power series
+			\[ \exp(x) = \sum_{n=1}^\infty \frac{x^n}{n!}. \]
+			This function is defined for all ${ x \in \R{} }$ because the radius of convergence of the power series is infinite (i.e. the series converges for ${ x \in (-\infty, \infty) }$). This can be shown using the generalised ratio test (\autoref{theo:series-generalised-ratio-test}) as
+			\[ \frac{ \abs{x^{n+1}} }{ (n+1)! } \cdot \frac{ n! }{ \abs{x^n} } = \frac{\abs{x}}{n + 1} \]
+			clearly goes to 0 as ${ n \to \infty }$ for any value of $x$.
+			
+			\biggerskip
+			\ex To determine the radius of convergence of the series
+			\[ \sum \frac{x^n}{n} \]
+			we will use multiple tests.\\
+			
+			Firstly, using the generalised ratio test (\autoref{theo:series-generalised-ratio-test}),
+			\[ \frac{ \abs{x^{n+1}} }{ n + 1 } \cdot \frac{ n }{ \abs{x^n} } = \frac{\abs{x}n}{n+1} = \abs{x} \cdot \frac{n}{n+1} \]
+			we see that the ratio of consecutive terms tends to $\abs{x}$ as ${ n \to \infty }$. So, the test tells us that this series converges if ${ \abs{x} < 1 }$ and diverges if ${ \abs{x} > 1 }$. It doesn't, however, tell us what happens if ${ \abs{x} = 1 }$. So we will need to use alternative methods to deal with this case.\\
+			
+			If ${ \abs{x} = 1 }$ then either:
+			\begin{itemize}
+				\item ${ x = 1 }$, in which case the series becomes the harmonic series and, by \autoref{theo:harmonic-series-diverges}, diverges; or
+				\item ${ x = -1 }$, in which case the series becomes
+				\[ \sum \frac{ (-1)^n }{ n } = - \sum \frac{ (-1)^{n+1} }{ n } = - \sum (-1)^{n+1} \frac{1}{n} \]
+				where the final form of the series can now be deduced, using the LAST test (\autoref{theo:series-alternating-series-test}), to converge to some finite value $S$ and so the original series, using the algebra of convergent series (\autoref{prop:series-limit-algebra}), converges to $-S$.
+			\end{itemize}
+		
+			\nl[2]
+			Therefore, the series converges for ${ x \in [-1, 1) }$.
 		\end{exe}
 	}
 
@@ -1256,6 +1706,12 @@
 		\bigskip
 		\boxeddefinition{\textbf{(Bounded Function)} For a subset $X$ of the domain of a function $f$, we say that $f$ is \textit{bounded} on $X$ if there exists $M$ such that ${ \abs{f(x)} \leq M }$ for each ${ x \in X }$.}\label{def:bounded-function}
 		\boxeddefinition{\textbf{(Bound of a Function)} We define the supremum (or maximum) of $f$ on $X$ as ${ \sup \setc{f(x)}{x \in X} }$ (or ${ \max \setc{f(x)}{x \in X} }$ if it exists).}
+		\boxeddefinition{\textbf{(Local Minimum/Maximum)} If there exists a $\delta$-neighbourhood around a point $c$ such that,
+			\[ \forall x \in (c - \delta, c + \delta) \logicsep f(c) \leq f(x) \]
+			then we say that $f$ has a \textit{local minimum} at $c$. Similarly, if, for $x$ in the $\delta$-neighbourhood, ${ f(c) \geq f(x) }$ then we say that $f$ has a \textit{local maximum} at $c$.\\
+			
+			Note that the maximum or minimum of a function is not necessarily a local maximum or minimum because the extreme value may occur at the boundary of an interval or at a discontinuity so that there is no neighbourhood around (i.e. either side) of the point that meets the requirement.
+		\label{def:local-minimum-and-maximum}}
 		
 		\bigskip
 		\labeledProposition{If two functions $f(x)$ and $g(x)$ are bounded on the interval ${ X \subseteq \R{} }$ then their product $f(x)g(x)$ is bounded but, in general, their ratio $f(x)/g(x)$ is not. That's to say,
@@ -1286,8 +1742,13 @@
 			which shows that, because $\abs{g(x)}$ can be an arbitrarily small positive value, the value of the ratio $f(x)/g(x)$ is unbounded.
 		\end{proof}
 		
-		\bigskip
-		\subsubsection{Limits of Functions}
+		\nl[8]
+		\group{
+		\subsubsection{Limits of Functions}		
+		{\tiny 
+			\hyperref[prop:func-finite-limit-algebra]{algebra of finite function limits} \hspace{20pt} \hyperref[prop:func-infinite-limit-algebra]{algebra of infinite function limits}\\
+		}}
+
 		\boxeddefinition{\textbf{(Function tends to a value)} Let ${ f: \R{} \mapsto \R{} }$ be a function. We say that $L$ is the \textit{limit of $f(x)$ as $x$ approaches $a$} if, for each ${ \epsilon > 0 }$ there exists ${ \delta > 0 }$ such that,
 			\[ 0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon. \]
 		}\label{def:function-tends-to-a-value}
@@ -1298,7 +1759,9 @@
 			\[ 0 < \abs{x - a} < \delta \implies f(x) < K. \]
 		}\label{def:func-tends-to-infinity}
 	
-		\note{\textbf{Important}: Note that the limit of the function $f(x)$ as ${ x \to a }$ does not depend on the value $f(a)$ of the function at ${ x = a }$. For this reason, the above definitions specify ${ 0 < \abs{x - a} < \delta }$ rather than simply ${ \abs{x - a} < \delta }$.}
+		\note{\textbf{Important}: Note that the limit of the function $f(x)$ as ${ x \to a }$ does not depend on the value $f(a)$ of the function at ${ x = a }$. For this reason, the above definitions specify ${ 0 < \abs{x - a} < \delta }$ rather than simply ${ \abs{x - a} < \delta }$.\\\\
+			Possibly also for this reason, we tend to prove theorems about the continuity (\ref{def:continuity}) of functions rather than about their limits: if the proofs were about function limits we would always have to take care to remove the possibility of ${ x = a }$ as the behaviour at the point doesn't affect the limit. If we do the proof on continuity, on the other hand, then we can just make inferences on all $x$ such that ${ \abs{x - a} < \delta }$.
+		}
 		\bigskip
 		
 		\boxeddefinition{\textbf{(One-Sided Limit)} Let ${ f : \R{} \to \R{} }$ be a function. We say that $L$ is the \textit{limit of $f(x)$ as $x$ approaches $a$ from the left (or from below)}, denoted by ${ \lim_{x \to a^-} f(x) = L }$, if for each ${ \epsilon > 0 }$, there exists ${ \delta > 0 }$ such that,
@@ -1504,7 +1967,7 @@
 						\end{align*}
 					\end{proof}
 					\note{What follows is a tentative, speculative proof for irrational powers and will hopefully be confirmed or corrected at a later date.}
-					If we view an arbitrary irrational number $r$ as a Cauchy sequence then it is a convergent sum of an infinite series of rational terms. So, for ${ q_1,q_2,\dots \in \Q{} }$
+					We can view an arbitrary irrational number $r$ as a convergent series of rational terms. So, for ${ q_1,q_2,\dots \in \Q{} }$
 					\[ x^r = x^{(q_1 + q_2 + \cdots)} = x^{q_1}x^{q_2}\cdots \]
 					where 
 					\[ \lim_{i \to \infty} q_i = 0 \implies \lim_{i \to \infty} x^{q_i} = 1. \]
@@ -1621,14 +2084,13 @@
 	
 		\sep
 		\begin{exe}
-			\ex {\textbf{Using the definition of the limit we can deduce that if 
-					\[ \bm{ f: \R{} \mapsto \R{} \suchthat f(x) = x^2 + x } \]
+			\ex {Using the definition of the limit we can deduce that if 
+					\[ f: \R{} \mapsto \R{} \suchthat f(x) = x^2 + x \]
 				then
-					\[ \bm{ \lim_{x \to 2} f(x) = 6 }. \]
-				}
+					\[ \lim_{x \to 2} f(x) = 6 . \]
 				
 				Let ${ 0 < \abs{x - 2} <\delta }$ and consider some arbitrary ${ \epsilon > 0 }$. Then we have,
-				\[ \abs{(x^2 + x) - 6} = \abs{(x - 2)(x + 3)} \leq \abs{x - 2}\abs{x + 3} < \delta \abs{x + 3}. \]
+				\[ \abs{(x^2 + x) - 6} = \abs{(x - 2)(x + 3)} = \abs{x - 2}\abs{x + 3} < \delta \abs{x + 3}. \]
 				\note{It might be tempting at this point to say that, since we are examining the behaviour when $x$ approaches 2, we can assume ${ x \approx 2 \iff (x+3) \approx 5 }$ and then we can set ${ \delta = \frac{\epsilon}{6} }$, but we need to find explicit bounds for expressions.}
 				We can use the triangle inequality (\ref{sssection:triangle-inequality}) to determine that,
 				\[ \abs{x + 3} = \abs{x - 2 + 5} \leq \abs{x - 2} + 5 < \delta + 5 \]
@@ -1688,7 +2150,10 @@
 	
 	
 	\subsubsection{Continuity}
-	\bigskip
+	{\tiny 
+		\hyperref[ssssection:continuity-over-sequences]{continuity over sequences} \hspace{20pt} \hyperref[ssssection:continuity-on-closed-intervals]{continuity-on-closed-intervals}\\
+	}
+
 	\boxeddefinition{\textbf{(Continuity at a point)} 
 		A function $ f $ is \textit{continuous at a point $a$} if
 		\begin{itemize}
@@ -1702,9 +2167,10 @@
 		\[ f(x) = f(a) \implies \abs{f(x) - f(a)} = 0 < \epsilon. \]
 		Therefore, if $f(a)$ is defined and ${ \lim_{x \to a} f(x) = f(a) }$, then
 		\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \suchthat \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon. \]		
-	}
+	\label{def:continuity}}
 	
-	\boxeddefinition{\textbf{(Continuous Function)} A function is \textit{continuous} if it is \textit{continuous at every point}.}
+	\boxeddefinition{\textbf{(Continuous Function)} A function is \textit{continuous} if it is \textit{continuous at every point in its domain}.}
+	
 	\boxeddefinition{\textbf{(Continuity on a closed interval)} A function is \textit{continuous on the closed interval $[a, b]$} if it is
 		\begin{itemize}
 			\item{continuous at every point in the open interval ${ (a, b) }$,}
@@ -1740,96 +2206,40 @@
 		\[ \lim_{x \to a} (f \circ g)(x) = \lim_{x \to a} f(g(x)) = f(\lim_{x \to a} g(x)). \]
 	\end{corollary}
 
-	\bigskip
-	\subsubsection{Functions over sequences}
-	The following proposition gives an alternative definition of continuity over convergent sequences rather than explicit subsets of $\R{}$.
-	\labeledProposition{A function $ f $ is continuous at $ a $ if and only if for each sequence $ (x_n) $ such that ${ \lim_{n \to \infty} x_n = a  }$ we have ${ \lim_{n \to \infty} f(x_n) = f(a) }$.}{continuity-of-functions-over-sequences}
-	\note{
-		Before the proof, an important point to note is that this theorem applies to "each sequence" with the described limit. This is important as it is possible to find an individual sequence such that the inference is not valid. For example, the constant sequence ${ \forall n \in \N{} \logicsep x_n = a }$ clearly tends to $a$ as ${ n \to \infty }$ but this would not imply continuity of $f$ as the limit of $f(x_n)$ for such a sequence would amount to saying that ${ f(a) = f(a) }$. The definition of continuity is assertion of the equality of the limit of $f$ over values in the neighbourhood of $a$ (but not at $a$ itself) with the value of $f$ at $a$. So, continuity is implied by the fact that the limit of $f(x_n)$ for the constant sequence $x_n = a$ is equal to the limit of $f(x_n)$ for all other sequences $x_n$ whose limit is $a$.\\
-		Another way of looking at it is that $f$ is continuous at $a$ because the limit there equals $f(a)$ however the argument converges to $a$.
-	}
+	\nl[12]
+	\subsubsubsection{Continuity over sequences}\label{ssssection:continuity-over-sequences}
+	\nl[4]
+	The following proposition gives an alternative definition of continuity over convergent sequences rather than explicit subsets of $\R{}$. An important point to note is that this proposition applies to "each sequence" with the described limit. This is important as it is possible to find an individual sequence such that the inference is not valid.\\
+	
+	For example, the constant sequence ${ \forall n \in \N{} \logicsep x_n = a }$ clearly tends to $a$ as ${ n \to \infty }$ but this would not imply continuity of $f$ as the limit of $f(x_n)$ for such a sequence would amount to saying that ${ f(a) = f(a) }$; in actual fact it doesn't say anything about the limit of $f$ at $a$ because the definition of the limit of a function doesn't depend on the behaviour at the point (\ref{def:continuity}). The definition of continuity is assertion of the equality of the limit of $f$ over values in the neighbourhood of $a$ (but not at $a$ itself) with the value of $f$ at $a$. So, continuity is implied by the fact that the limit of $f(x_n)$ for the constant sequence $x_n = a$ is equal to the limit of $f(x_n)$ for all other sequences $x_n$ whose limit is $a$.\\
+	
+	Another way of looking at it is that $f$ is continuous at $a$ because the limit there equals $f(a)$ however the argument converges to $a$.\\
+	
+	Refer to example \ref{ex:limit-at-a-point-requires-the-function-to-converge-to-the-same-value-over-every-sequence-converging-to-the-point}.
+	
+	\bigskip	
+	\labeledProposition{A function $ f $ is continuous at $a$ if and only if for each sequence $(x_n)$ such that ${ \lim_{n \to \infty} x_n = a  }$ we have ${ \lim_{n \to \infty} f(x_n) = f(a) }$.}{continuity-of-functions-over-sequences}
 	\begin{proof}
-		Breaking it down into two propositions we have,
-		\begin{equation}
-			(\forall x_n \suchthat \lim_{n \to \infty} x_n = a) \; \lim_{n \to \infty} f(x_n) = f(a) \tag{$P_1$}
-		\end{equation}
-		\begin{equation}
-			\forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \tag{$P_2$}
-		\end{equation}
-		and we need to show that ${ P_1 \iff P_2. }$\\\\
-%			So, to begin with we'll assume $P_1$ and show that ${ P_1 \implies P_2. }$\\
-%			Unpacking $P_1$ we have a function $f$ such that
-%			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon \tag{1} \] 
-%			where $x_n$ is a sequence such that
-%			\[ \forall \delta > 0 \logicsep \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta. \tag{2} \]
-%			Then, if we choose a particular ${ \epsilon > 0 }$, there exists some $N$ such that for all ${ n > N }$ we have ${ \abs{f(x_n) - f(a)} < \epsilon }$. Now there will also be some $N' \leq N$ so that ${ \forall n > N }$, we also have ${ n > N' }$ and so there is some $\delta$ such that ${ \abs{x_n - a} < \delta }$.\\
-%			Furthermore, since $P_1$ says that this is the case \textit{whenever} we have an $x_n$ such as this,
-%			\[ \abs{f(x_n) - f(a)} \centernot< \epsilon \implies \abs{x_n - a} \centernot< \delta \]
-%			which means that
-%			\[ \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
-%			We therefore have,
-%			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
-%			which is the statement of continuity of $f$ in $P_2$. \TODO{is this a valid proof of ${ P_1 \implies P_2 }$?}
+		Suppose that for each sequence $(x_n)$ such that ${ \lim_{n \to \infty} x_n = a  }$ we have ${ \lim_{n \to \infty} f(x_n) = f(a) }$. Then, for any ${ \epsilon > 0 \in \R{} }$ there exists some $N$ such that for all ${ n > N \in \N{} }$,
+		\[ \abs{f(x_n) - f(a)} < \epsilon \]
+		and also,
+		\[ \abs{x_n - a} < \delta \]
+		for some ${ \delta > 0 \in \R{} }$. Since this applies to all such sequences it follows that
+		\[ \abs{x - a} < \delta \; \implies \; \abs{f(x) - f(a)} < \epsilon \]
+		and so ${ \lim_{x \to a} f(x) = f(a) }$ and $f$ is continuous at $a$.\\
 		
-		
-%			Since $P_1$ says that this is the case \textit{whenever} we have an $x_n$ such as this, $P_1$ may be rewritten as
-%			\[ \forall \epsilon > 0 \logicsep (\exists N \logicsep \forall n > N \in \N{}) \logicsep \exists \delta > 0 \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
-%			\TODO{rewrite this part: show that ${ \forall n > N }$ both bounds are true and that if the bound on the function is not true then the bound on $x_n$ must also not be true -- therefore the implication is proven.}
-%			Now, if we remove reference to the number of the term of the sequences - ${ N,n }$ - we have
-%			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
-%			which is the statement of continuity of $f$ in $P_2$.
-		
-%			\nl[16]
-%			Next we prove ${ P_2 \implies P_1. }$\\
-%			So now we begin by assuming $P_2$ which was that,
-%			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon. \]
-%			Actually, it is quite easy to apply a similar logic as previously but in reverse to make the converse implication. We can choose any $\epsilon$ and there exists some $\delta$ such that $P_2$ holds. Then, as we have seen previously in (2), $P_1$ tells us that, for this value of $\delta$,
-%			\[ \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta \]
-%			and $P_2$ tells us that,
-%			\[ \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
-%			Putting the two together we get,
-%			\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon \]
-%			which implies that
-%			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon. \]
-%			So we have shown that $P_2$ implies that (2) implies (1) which is ${ P_2 \implies P_1 }$ as required.\\\\
-		
-		
-		Unpacking $P_1$ we have a function $f$ such that
-		\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon \tag{1} \] 
-		where $x_n$ is a sequence such that
-		\[ \forall \delta > 0 \logicsep \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta. \tag{2} \]
-		
-		\nl[6]
-		Firstly, it is easily shown that ${ P_2 \implies P_1 }$. We begin by assuming $P_2$ which was that,
-		\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon. \]
-		We can choose any $\epsilon$ and there exists some $\delta$ such that $P_2$ holds. Then, as we can see in (2), $P_1$ tells us that, for this value of $\delta$,
-		\[ \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta \]
-		and $P_2$ tells us that,
-		\[ \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon. \]
-		Putting the two together we get,
-		\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \exists N' \logicsep \forall n > N' \in \N{} \logicsep \abs{x_n - a} < \delta \implies \abs{f(x_n) - f(a)} < \epsilon \]
-		which implies that
-		\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{f(x_n) - f(a)} < \epsilon. \]
-		So we have shown that $P_2$ implies that (2) implies (1) which is ${ P_2 \implies P_1 }$ as required.\\
-		
-		\nl[6]
-		To prove the converse ${ P_1 \implies P_2 }$ we will use a proof by contradiction.\\
-		So, we are assuming $P_1$ but also assuming, for contradiction, that $P_2$ is false. Then we are negating the statement,
-		\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
-		so we are asserting that,
-		\[ \exists \epsilon > 0 \logicsep \nexists \delta > 0 \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon \]
-		which is equivalent to
-		\[ \exists \epsilon > 0 \logicsep \forall \delta > 0 \logicsep \abs{x - a} < \delta \centernot\implies \abs{f(x) - f(a)} < \epsilon \]
-		or alternatively,
-		\[ \exists \epsilon > 0 \logicsep \forall \delta > 0 \logicsep \exists x \logicsep (\abs{x - a} < \delta) \wedge (\abs{f(x) - f(a)} \geq \epsilon).  \tag{*} \]
-		So (*) says that $\lnot{P_2}$ is equivalent to the statement that there exists some ${ \epsilon > 0 }$ such that for all ${ \delta > 0 }$ there will be some $x$ in the $\delta$-neighbourhood of $a$ such that ${ \abs{f(x) - f(a)} \geq \epsilon }$. To prove that this implies $\lnot{P_1}$ we will need to show that it follows that there exists some sequence $x_n$ such that ${ x_n \to a }$ as ${ n \to \infty }$ but also that ${ \lim_{n \to \infty} f(x_n) \neq f(a) }$.\\
-		
-		Now, if we choose a value of $\delta$ that depends on a natural number $n$ in such a way that ${ \delta \to 0 }$ as ${ n \to \infty }$ -- for example, if ${ \delta = 1/n }$ -- then the $\delta$-neighbourhoods around $a$ will get smaller as ${ n \to \infty. }$ Then we can select an $x$ from the $\delta$-neighbourhood that corresponds to a particular value of $n$ and call it $x_n$ and, in this way, we create a sequence $x_n$ that converges to $a$. So we have ${ \lim_{n \to \infty} x_n = a. }$\\
-		
-		But now, if we fix the value of $\epsilon$ to a value that satisfies (*) then (*) tells us that, for every $\delta$ there is an $x_n$ in the $\delta$-neighbourhood of $a$ with ${ \abs{f(x_n) - f(a)} \geq \epsilon }$. We can choose this value for $x_n$ and so, construct a sequence $x_n$ that converges to $a$ but
-		\[ \lim_{n \to \infty} f(x_n) \neq f(a). \]
-		This contradicts hypothesis $P_1$ and so ${ \lnot{P_2} \implies \lnot{P_1} }$.
+		Conversely, suppose that $f$ is not continuous at $a$. Then
+		\[\begin{aligned}
+			&& \lnot ( \forall \epsilon > 0 \in \R{} \logicsep \exists \delta \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon ) \\
+			&\iff & \exists \epsilon > 0 \in \R{} \logicsep \lnot ( \exists \delta \logicsep \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon ) \\
+			&\iff & \exists \epsilon > 0 \in \R{} \logicsep \forall \delta \logicsep \lnot ( \abs{x - a} < \delta \implies \abs{f(x) - f(a)} < \epsilon ) \\
+			&\iff & \exists \epsilon > 0 \in \R{} \logicsep \forall \delta \logicsep \exists x \logicsep \abs{x - a} < \delta \; \land \; \abs{f(x) - f(a)} \geq \epsilon.
+		\end{aligned}\]
+		So, there exists a value of $\epsilon$ such that, for all ${ \delta > 0 }$, there is some $x$ in the $\delta$-neighbourhood of $a$ with ${ \abs{f(x) - f(a)} \geq \epsilon }$ and we can construct a sequence of such $x$-values in $\delta$-neighbourhoods with decreasing $\delta$ by establishing a relationship between the sequence index $n$ and $\delta$ such that $\delta$ decreases with increasing $n$. The simplest such relationship is
+		\[ \delta = 1/n. \]
+		Then $(x_n)$ is a sequence such that each term $x_n$ is an $x$-value in the $\delta$-neighbourhood of $a$ with ${ \abs{f(x) - f(a)} \geq \epsilon }$ and, since $\delta$ is decreasing with increasing $n$ we have ${ \lim_{n \to \infty} x_n = a }$ but there is no $N$ such that, for all ${ n > N }$, ${ \abs{f(x) - f(a)} < \epsilon }$. Therefore ${ \lim_{n \to \infty} f(x_n) \neq f(a) }$.
 	\end{proof}
+	\smallskip
 	\begin{corollary}\label{cor:lim_of_func_of_convergent_sequence_is_func_of_limit}
 		For a function $f$ that is continuous at $a$, 
 		\[ \lim_{n \to \infty} f(x_n) = f\left( \lim_{n \to \infty} x_n \right). \]
@@ -1838,10 +2248,9 @@
 		This is just a rewriting of \autoref{prop:continuity-of-functions-over-sequences}.
 	\end{proof}
 
-	\biggerskip
-	\subsubsection{Continuous Functions on Closed Intervals}
 	
-	\subsubsection{Examples of continuity}
+	
+	\sep
 	\begin{exe}
 		\ex{
 			The indicator function for rational numbers within the reals, known as the \textbf{Dirichlet Function},
@@ -1869,44 +2278,61 @@
 		}\label{ex:reciprocal_function}
 	\end{exe}
 	
-	\subsubsection{Extreme Value Theorem}
-	\TODO{consider rewrite: \\
-		If a function $f$ is continous on the closed interval ${ [a,b] }$ then it attains a maximum and minimum on the interval.
-	}
-	\labeledTheorem{Let $f$ be continous on ${ [a,b] }$. Then $f$ is bounded on ${ [a,b] }$ and it achieves its maximum; that's to say, the supremum is equal to the maximum.}{extreme_value_theorem}
-	\note{
-		Note that, even if $f$ is defined at every point in ${ [a,b] }$, if it is not continuous then it \textit{may} not be bounded. There \textit{do} exist functions that are not continuous but bounded (for example the Dirichlet Function \ref{ex:dirichlet_function}) but there also exist functions that are not continuous and unbounded such as the reciprocal function \ref{ex:reciprocal_function}. So, functions that are not continuous on a closed interval may be bounded or not; and functions that are continuous on an open interval also may or may not be bounded (again, the reciprocal function is an example of a function that is continuous on an open interval but not bounded); but here we will show that functions that are continuous on a closed interval must be bounded on that interval.
-	}
-	\begin{proof}
-		It may be tempting to begin trying to prove this by reasoning as follows.\\			
-		\begin{displayquote}
-		That $f$ is continuous on ${ [a,b] }$ means that, for any ${ c \in (a,b) }$,
-		\[ \forall \epsilon > 0 \logicsep \exists \delta > 0 \logicsep \abs{x - c} < \delta \implies \abs{f(x) - f(c)} < \epsilon. \]
-		This means that the value of $f(x)$ must be finite everywhere in ${ (a,b) }$ as, choosing any fixed point $c$ in the open interval, ${ \abs{x - c} }$ is finite and, therefore, less than some $\delta$ thus implying that ${ \abs{f(x) - f(c)} < \epsilon }$ for some finite $\epsilon \dots$\\
-		\end{displayquote}
-		
-		However this is \textbf{dead wrong!} If we take the example of the reciprocal function (\ref{ex:reciprocal_function}) over the interval ${ (0,1] }$: If we take $x$-values approaching 0, the value of $f(x)$ grows unbounded. For any given $x$-value it will be less than some finite $\epsilon$ but we can always find another $x$-value with a greater value of $f(x)$. So, there is no maximum $\epsilon$ and so, also no maximum value of $f(x)$ on the interval.\\
-		
-		Another tempting way to prove this is as follows.\\
-		
-		\begin{displayquote}
-		A closed interval is an interval such that every sequence of values in the interval converges to a point in the interval.\\ 
-		That $f$ is continuous on ${ [a,b] }$ implies that for every sequence, $x_n$, of values in ${ [a,b] }$ that converges to some point in ${ c \in [a,b] }$, ${ \lim_{n \to \infty} f(x_n) = f(c) }$. Furthermore, that the interval is closed implies that every sequence of values in the interval converges to a point in the interval. Therefore, we can conclude that $f(x)$ at every point in ${ [a,b] }$ exists and is finite so that $f$ is bounded and obtains a maximum on the interval.\\
-		\end{displayquote}
-		
-		There are two issues with this:
-		\begin{enumerate}
-			\item{The statement about the nature of a closed interval that the proof relies upon has not been proven.}
-			\item{That $f(x)$ is defined and finite for all ${ x \in [a,b] }$ is taken as proof that the function is bounded and obtains a maximum in the interval.}
-		\end{enumerate}
-		To deal with issue (1) -- if we're not going to prove the proposition about closed intervals as a pre-requisite of the proof -- we need to develop a proof that doesn't rely on this characteristic of closed intervals. To deal with (2) meanwhile, we need to explicitly prove boundedness and that $f$ obtains a maximum.\\
-		The proof given in LSE Abstract Mathematics course material follows.\\
-		
-		\begin{displayquote}
-		Suppose first that $ f $ is unbounded above. For each ${ n \in N }$, let $ x_n $ be a point in ${ [a, b] }$ such that ${ f(x_n) > n }$. The sequence $ (x_n) $ is bounded, so has a convergent subsequence ${ (x_{k_n}) }$, tending to some limit $ c $ (by Theorem 10.11). Necessarily ${ c \in [a, b] }$. Since $ f $ is continuous at $ c $, ${ f(x_{k_n}) \to f(c) }$ as ${ n \to \infty }$. But this contradicts the construction of the sequence $ (x_n) $, since ${ f(x_{k_n}) > n \to \infty }$. So $ f $ is bounded above. Let ${ M = \text{sup}\setc{f(x)}{x \in [a, b]} }$. For each ${ n \in N }$, let $ x_n $ be a point in ${ [a, b] }$ such that ${ f(x_n) > M - \frac{1}{n} }$. Again take a convergent subsequence ${ (x_{k_n}) }$ of $ (x_n) $, tending to some limit ${ c \in [a, b] }$. Arguing as before, we see ${ f(c) = M }$.
-		\end{displayquote}
 	
-		This proof says: Assume that $f$ is unbounded on the interval. Then we can construct a sequence of $x$-values such that, for the $n$th value $x_n$, ${ f(x_n) > n }$. This is possible because, if $f$ is unbounded, for any value of $n$, there is some subinterval of $x$-values such that for each of them ${ f(x) > n }$ and any interval of the real numbers contains an infinite number of real numbers and so, a sequence $x_n$ with ${ n \to \infty }$. Note that, at this point, $x_n$ is an arbitrary sequence which is not necessarily convergent (it could bounce around the interval).\\
+	
+	
+	\nl[16]
+	\subsubsubsection{Continuity on Closed Intervals}\label{ssssection:continuity-on-closed-intervals}
+	\nl[6]
+	\boxeddefinition{\textbf{(Closed Interval)} A \textit{closed} interval is an interval in which every convergent sequence of values in the interval, converges to a point in the interval.
+	\label{def:closed-interval}}
+
+	\paragraph{The Extreme Value Theorem} shows that if a function is continuous on a closed interval then it follows that the function is bounded and attains both its maximum and minimum (i.e. its supremum is a maximum and its infimum is a minimum) on the interval.
+	\note{Note that, even if $f$ is defined at every point in ${ [a,b] }$, if it is not continuous then it \textit{may} not be bounded. There \textit{do} exist functions that are not continuous but bounded (for example the Dirichlet Function \ref{ex:dirichlet_function}) but there also exist functions that are not continuous and unbounded such as the reciprocal function (\ref{ex:reciprocal_function}). So, functions that are not continuous on a closed interval may be bounded or not; and functions that are continuous on an open interval also may or may not be bounded (again, the reciprocal function is an example of a function that is continuous on an open interval but not bounded); but here we will show that functions that are continuous on a closed interval must be bounded on that interval and then it will also follow that the maximum and minimum is attained.
+	}
+
+	\bigskip
+	\begin{lemma}\label{lem:continuity-on-closed-interval-implies-boundedness}
+		Let $f: \R{} \longmapsto \R{} $ be continous on ${ [a,b] }$. Then $f$ is bounded on ${ [a,b] }$.
+	\end{lemma}
+	\begin{proof}
+		Assume for contradiction, that $f$ is unbounded above on the interval. Then for any ${ M \in \R{} }$, there is some ${ x \in [a,b] }$ such that ${ f(x) > M }$. So there is a sequence $(x_n)$ such that, for all ${ n \in \N{} }$,
+		\[ x_n \in [a,b] \; \land \; f(x_n) > n. \]
+		But $(x_n)$ is a bounded sequence and so, by Bolzano-Weierstrass (\autoref{theo:every_bounded_seq_has_convergent_subseq}), has a convergent subsequence $(x_{k_n})$ which must converge to some point in the interval, say $c$. But then continuity of $f$ on the interval and \autoref{prop:continuity-of-functions-over-sequences} imply that ${ \lim_{k_n \to \infty} f(x_{k_n}) = f(c) }$ but
+		\[ f(x_{k_n}) > k_n \; \implies \; f(x_{k_n}) \to \infty \eqword{as} k_n \to \infty. \]
+		Therefore $f$ is bounded above.\\
+		By a similar argument we can show that $f$ must also be bounded below.
+	\end{proof}
+
+	\bigskip
+	\begin{lemma}\label{lem:continuity-and-boundedness-on-closed-interval-implies-supremum-is-max-and-infimum-is-min}
+		Let $f: \R{} \longmapsto \R{} $ be continous and bounded on ${ [a,b] \subset \R{} }$. Then $f$ attains its maximum and minimum on ${ [a,b] }$.
+	\end{lemma}
+	\begin{proof}
+		Since $f$ is bounded on ${ [a,b] }$, the set ${ S = \setc{ f(x) \in \R{} }{ x \in [a,b] } }$ is bounded. Then, by \autoref{axiom:continuum-property}, $S$ has a supremum and an infimum. Let ${ \sigma = \sup S }$. Then, by the definition of the supremum (\ref{def:supremum}),
+		\[ \forall \epsilon > 0 \in \R{} \logicsep \exists s \in S \logicsep s + \epsilon > \sigma \iff \sigma - s < \epsilon. \]
+		Therefore, if we let ${ \epsilon = 1/n }$, then there is a sequence $(x_n)$ such that, for all ${ n \in \N{} }$,
+		\[ x_n \in [a,b] \; \land \; \sigma - f(x_n) < \epsilon = 1/n \]
+		where, because $\sigma$ is an upper bound on $f(x_n)$ we have 
+		\[ \sigma - f(x_n) = \abs{\sigma - f(x_n)} < \epsilon. \]
+		So, clearly, for any value of $\epsilon$, there exists an ${ N = 1/\epsilon }$ such that,
+		\[ \forall n > N \in \N{} \logicsep \abs{\sigma - f(x_n)} < \epsilon \]
+		and ${ \lim_{n \to \infty} f(x_n) = \sigma }$.\\
+		
+		Furthermore, since the sequence $(x_n)$ is bounded in the interval $[a,b]$, by Bolzano-Weierstrass (\autoref{theo:every_bounded_seq_has_convergent_subseq}), it has a convergent subsequence $(x_{k_n})$ which must converge to some point in the interval, say $c$. But then continuity of $f$ on the interval and \autoref{prop:continuity-of-functions-over-sequences} imply that
+		\[ f\left( \lim_{k_n \to \infty} x_{k_n} \right) = f(c) = \sigma. \]
+		
+		Therefore, $f$ attains its supremum. By a similar argument we can show that $f$ also attains its infimum.
+	\end{proof}
+
+	\bigskip
+	\labeledTheorem{\textbf{(Extreme Value Theorem)} If a real-valued function $f$ is continous on the closed interval ${ [a,b] }$ then it attains a maximum and minimum on the interval.}{extreme-value-theorem}
+	\begin{proof}
+		By \autoref{lem:continuity-on-closed-interval-implies-boundedness}, $f$ is bounded on the interval and then, by \autoref{lem:continuity-and-boundedness-on-closed-interval-implies-supremum-is-max-and-infimum-is-min}, $f$ attains a maximum and minimum.
+	\end{proof}
+
+	\bigskip
+	\note{This proof of Extreme Value Theorem says: Assume that $f$ is unbounded on the interval. Then we can construct a sequence of $x$-values such that, for the $n$th value $x_n$, ${ f(x_n) > n }$. This is possible because, if $f$ is unbounded, for any value of $n$, there is some subinterval of $x$-values such that for each of them ${ f(x) > n }$ and any interval of the real numbers contains an infinite number of real numbers and so, a sequence $x_n$ with ${ n \to \infty }$. Note that, at this point, $x_n$ is an arbitrary sequence which is not necessarily convergent (it could bounce around the interval).\\
 		Then, we notice that this sequence $x_n$ is necessarily bounded (as it is a subinterval of ${ [a,b] }$) and so we invoke the Bolzano-Weierstrass Theorem, \autoref{theo:every_bounded_seq_has_convergent_subseq} (called Theorem 10.11 in the quoted proof), to deduce that it has a convergent subsequence which we call $x_{k_n}$ and call its limit $c$.\\
 		At this point we can use the continuity of $f$ on the interval to deduce that ${ f(x_{k_n}) \to f(c) }$ as ${ n \to \infty }$ by which we obtain a contradiction to the condition we set on the values of $x_{k_n}$ when we constructed the sequence -- namely that ${ f(x_{k_n}) > n }$. Notice that this is constructing a sequence $x_{k_n}$ such that $f(x_{k_n})$ grows without bound as ${ n \to \infty }$ and then saying, "but the limit of $x_{k_n}$ as ${ n \to \infty }$ is $c$ which is inside the interval and so (by continuity) the limit of $f(x_{k_n})$ as ${ n \to \infty }$ is $f(c)$ -- a fixed finite value". This is the point where the fact that the interval ${ [a,b] }$ is closed comes into play -- if the interval were not closed it would be possible that $c$ was not inside the interval and then we would not be able to invoke continuity to assert that the limit of $f(x_{k_n})$ over this sequence was finite.\\
 		So, now we have shown that if a function is continuous over a closed interval then assuming that the function is unbounded produces a contradiction and, therefore, we can conclude that it is, in fact, bounded.\\
@@ -1914,14 +2340,18 @@
 		\[ M = \text{sup}\setc{f(x)}{x \in [a, b]} \]
 		and we need to show that there is such an $x$-value in ${ [a,b] }$ that ${ f(x) = M }$. In an open interval this might not be the case as the supremum of the function on the interval might occur as the limit of $f$ over a sequence of $x$-values converging to a point that lies outside the interval. So, in this case, we construct a convergent sequence such that ${ f(x_{k_n}) \to M }$ as ${ n \to \infty }$ by selecting $x_n$ such that ${ f(x_n) = M - \frac{1}{n} }$. This is possible because the definition of the supremum says that, because it is the \textit{lowest} upper bound,
 		\[ \forall \epsilon > 0 \logicsep \exists f(x_n) \logicsep f(x_n) > M - \epsilon \]
-		and so we are letting ${ \epsilon = \frac{1}{n} }$. Then, as previously, we take a convergent subsequence of this sequence and name it $x_{k_n}$. So, as before, we have a sequence converging on some point, we'll call it ${ c \in [a,b] }$, at which $f$ is continuous so that ${ f(x_{k_n}) \to M }$ as ${ n \to \infty }$ implies that ${ M = f(c) }$. This, in turn, means that $f$ obtains a maximum in the interval.			 
-	\end{proof}
+		and so we are letting ${ \epsilon = \frac{1}{n} }$. Then, as previously, we take a convergent subsequence of this sequence and name it $x_{k_n}$. So, as before, we have a sequence converging on some point, we'll call it ${ c \in [a,b] }$, at which $f$ is continuous so that ${ f(x_{k_n}) \to M }$ as ${ n \to \infty }$ implies that ${ M = f(c) }$. This, in turn, means that $f$ obtains a maximum in the interval.
+	}
+	
+
 
 	\bigskip
-	\subsubsection{Intermediate Value Theorem}
-	\labeledTheorem{Let $f$ be continuous on ${ [a,b] }$ with ${ f(a) < f(b) }$. Then, for all ${ K \suchthat f(a) < K < f(b) }$, there exists some ${ c \in (a,b) }$ with ${ f(c) = K }$.
+	\paragraph{The Intermediate Value Theorem} says that if a function is continuous on a closed interval and takes different value at the bounds of the function, then it must also attain any value in between the values that it attains at the bounds of the interval.\\
+	Note that this theorem is \textit{not} written for an interval such that ${ f(a) \leq f(b) }$ because if ${ f(a) = f(b) }$ then the only ${ K \suchthat f(a) \leq K \leq f(b) }$ is ${ f(a) = K = f(b) }$. But now it is \textit{not} true to say that there exists some ${ c \in (a,b) }$ with ${ f(c) = K }$ as there is no reason why the value of $f(x)$ at the bounds of the interval should be repeated somewhere in the interior of the interval.
+	
+	\bigskip
+	\labeledTheorem{\textbf{(Intermediate Value Theorem)} Let $f$ be continuous on ${ [a,b] }$ with ${ f(a) < f(b) }$. Then, for all ${ K \suchthat f(a) < K < f(b) }$, there exists some ${ c \in (a,b) }$ with ${ f(c) = K }$.
 	}{intermediate_value_theorem}
-	\note{Note that this theorem is \textbf{not} written for an interval such that ${ f(a) \leq f(b) }$ because if ${ f(a) = f(b) }$ then the only ${ K \suchthat f(a) \leq K \leq f(b) }$ is ${ f(a) = K = f(b) }$. But now it is \textbf{not} true to say that there exists some ${ c \in (a,b) }$ with ${ f(c) = K }$ as there is no reason why the value of $f(x)$ at the bounds of the interval should be repeated somewhere in the interior of the interval.}
 	\note{\question{What is wrong with the following proof?}
 		\begin{proof}Suppose ${ \centernot\exists x \in [a,b] \suchthat f(a) < f(x) < f(b) }$. Since we know that at ${ x = a }$ the value is $f(a)$ and at ${ x = b }$ the value is $f(b)$ with ${ f(b) > f(a) }$, we can deduce that,
 		\[ \exists c \in [a,b] \suchthat \lim_{x \to c^-} f(x) = f(a) \land \lim_{x \to c^+} f(x) = f(b). \]
@@ -1936,57 +2366,29 @@
 		Let $f$ be continuous on ${ [a,b] }$ with ${ f(a) < 0 < f(b) }$. Then there exists some ${ c \in (a,b) }$ with ${ f(c) = 0 }$.
 	\end{lemma}
 	\begin{proof}
-		A first attempt at this proof is given below.\\
-		\begin{displayquote}
-			Continuity at the interval bounds $a$ and $b$ means that, for some ${ \epsilon_1, \epsilon_2 > 0 }$,
-			\[ \exists \delta_1 \logicsep 0 \leq x - a < \delta_1 \implies \abs{f(x) - f(a)} < \epsilon_1, \]
-			\[ \exists \delta_2 \logicsep 0 \leq b - x < \delta_2 \implies \abs{f(x) - f(b)} < \epsilon_2. \]
-			
-			So, we have a lower neighbourhood around $f(a)$ and an upper neighbourhood around $f(b)$ as follows,
-			\[ f(a) - \epsilon_1 < f(x) < f(a) + \epsilon_1, \]
-			\[ f(b) - \epsilon_2 < f(x) < f(b) + \epsilon_2 \]
-			If ${ \epsilon_1 > \abs{f(a)} }$ and ${ \epsilon_2 > \abs{f(b)} }$ then both neighbourhoods contain ${ f(x) = 0 }$. Therefore, there is some interval of $x$ such that ${ f(x) }$ lies inside both the lower and upper neighbourhood -- in the overlap of the two. In the overlap we have,
-			\[ f(b) - \epsilon_2 < f(x) < f(a) + \epsilon_1. \]
-			Now if we let $\epsilon_1$ vary freely but make $\epsilon_2$ a function of $\epsilon_1$ like so,
-			\[ \epsilon_2 = f(a) + f(b) + \epsilon_1 \]
-			then we still have ${ \epsilon_1 > \abs{f(a)} }$ and ${ \epsilon_2 > \abs{f(b)} }$ as,
-			\[ \epsilon_1 > \abs{f(a)} \iff -\epsilon_1 < f(a) < \epsilon_1 \iff 0 < f(a) + \epsilon_1 < 2\epsilon_1 \]
-			so ${ \epsilon_2 > f(b) }$ and, conversely, if we assume that ${ \epsilon_2 > \abs{f(b)} }$ then,
-			\[ \epsilon_2 > \abs{f(b)} \iff -\epsilon_2 < f(b) < \epsilon_2 \iff -\epsilon_2 - f(b) < 0 < \epsilon_2 - f(b) \]
-			\[ \epsilon_1 = \epsilon_2 - f(a) - f(b) > -f(a) = \abs{f(a)} \hspace{20pt}\sidecomment{since ${ f(a) < 0 }$}. \]
-			Therefore,
-			\[ \epsilon_2 = f(a) + f(b) + \epsilon_1 \implies [ \epsilon_1 > \abs{f(a)} \iff \epsilon_2 > \abs{f(b)} ]. \]
-			Now we have,
-			\[ f(b) - \epsilon_2 = -f(a) - \epsilon_1 < f(x) < f(a) + \epsilon_1 \]
-			which is equivalent to
-			\[ \abs{f(x)} < f(a) + \epsilon_1 = \epsilon_3. \]
-			Now, since ${ f(a) + \epsilon_1 > 0 }$ we also have ${ \epsilon_3 > 0 }$ and it can become arbitrarily small by making ${ \abs{f(a)} - \epsilon_1 }$ arbitrarily small. So we have shown that continuity over the closed interval and ${ f(a) < f(b) }$ imply that we can find subintervals of ${ [a,b] }$ such that ${ f(x) }$ is constricted to ever-decreasing neighbourhoods of 0. In other words, for some ${c \suchthat a < c < b, \; f(x) \to 0 }$ as  ${ x \to c }$ and since $f$ is continuous on the interval this implies that ${ f(c) = 0 }$ also. 
-		\end{displayquote}
-		This is not bad but suffers from vagueness in a couple of areas: the overlap of the lower and upper neighbourhoods probably needs to be more precisely defined and, certainly, the final part of the proof stating that confining $f(x)$ to ever-decreasing neighbourhoods of 0 implies that there is some $c$ such that ${ f(c) = 0 }$ needs to be drawn much more explicitly.\\\\
-		Here is the proof given in LSE Abstract Mathematics.\\
-		\begin{displayquote}
-			We construct a sequence of intervals ${ [a_n, b_n] }$ such that
-			\begin{enumerate}
-				\item{${ f(a_n) < 0,\; f(b_n) > 0 }$ for each $ n $}
-				\item{${ [a_{n+1}, b_{n+1}] \subseteq [a_n, b_n] }$ for each $ n $.}
-			\end{enumerate}				
-			We start by letting ${ [a_1, b_1] = [a, b]. }$ Then for each ${ n \geq 1 }$, we define ${ [a_{n+1}, b_{n+1}] }$ as follows.\\
-			
-			Let ${ c_n = (a_n + b_n)/2 }$, be the midpoint of the previous interval. If ${ f(c_n) = 0, }$ then the
-			theorem is proved and so we need not continue constructing intervals!\\
-			
-			Otherwise, if ${ f(c_n) < 0 }$, we define ${ a_{n+1} = c_n }$ and ${ b_{n+1} = b_n }$. And if ${ f(c_n) > 0 }$, we define
-			${ b_{n+1} = c_n }$ and ${ a_{n+1} = a_n }$. Note that the condition 1. is satisfied by choosing our intervals in this manner.
-			Moreover, note that the ${ (n + 1) }$st interval is half the size of the $n$th interval and so
-			${ b_{n+1} - a_{n+1} \leq (b_1 - a_1)/2^n }$. It follows that
-			\[ \lim_{n \to \infty} (b_n - a_n) = 0.  \tag{3}\]
-			
-			Finally, note that $ (a_n) $ is increasing and bounded above (by $ b_1 $) and so it has a limit; similarly $ (b_n) $ is decreasing and bounded below and so has a limit. Thus by (3) (and algebra of limits) these limits are equal to, say, c. Thus by continuity (using \autoref{prop:continuity-of-functions-over-sequences}),
-			\[ f(c) = \lim_{n \to \infty} f(b_n) \geq 0, \]
-			where the last inequality follows from the fact that each ${ f(b_n) \geq 0 }$ (in fact > 0). Similarly,
-			\[ f(c) = \lim_{n \to \infty} f(a_n) \leq 0. \]
-			Thus $ f(c) $ must be equal to zero, and the proof is complete.
-		\end{displayquote}
+		We construct a sequence of intervals ${ [a_n, b_n] }$ such that
+		\begin{enumerate}
+			\item{${ f(a_n) < 0,\; f(b_n) > 0 }$ for each $ n $}
+			\item{${ [a_{n+1}, b_{n+1}] \subseteq [a_n, b_n] }$ for each $ n $.}
+		\end{enumerate}				
+		We start by letting ${ [a_1, b_1] = [a, b]. }$ Then for each ${ n \geq 1 }$, we define ${ [a_{n+1}, b_{n+1}] }$ as follows.\\
+		
+		Let ${ c_n = (a_n + b_n)/2 }$, be the midpoint of the previous interval. If ${ f(c_n) = 0, }$ then the
+		theorem is proved and so we need not continue constructing intervals!\\
+		
+		Otherwise, if ${ f(c_n) < 0 }$, we define ${ a_{n+1} = c_n }$ and ${ b_{n+1} = b_n }$. And if ${ f(c_n) > 0 }$, we define
+		${ b_{n+1} = c_n }$ and ${ a_{n+1} = a_n }$. Note that the condition 1. is satisfied by choosing our intervals in this manner.
+		Moreover, note that the ${ (n + 1) }$st interval is half the size of the $n$th interval and so
+		${ b_{n+1} - a_{n+1} \leq (b_1 - a_1)/2^n }$. It follows that
+		\[ \lim_{n \to \infty} (b_n - a_n) = 0.  \tag{*}\]
+		
+		Finally, note that $(a_n)$ is increasing and bounded above (by $b_1$) and so it has a limit; similarly $(b_n)$ is decreasing and bounded below and so has a limit. Thus by (*), and algebra of finite limits (\autoref{prop:func-finite-limit-algebra}), these limits are equal to, say, $c$. Thus by continuity (using \autoref{prop:continuity-of-functions-over-sequences}),
+		\[ f(c) = \lim_{n \to \infty} f(b_n) \geq 0, \]
+		where the last inequality follows from the fact that each ${ f(b_n) \geq 0 }$ (in fact > 0). 
+		\note{Note that ${ f(b_n) > 0 }$ so the limit of $f(b_n)$ is ${ \geq 0 }$.}
+		Similarly,
+		\[ f(c) = \lim_{n \to \infty} f(a_n) \leq 0. \]
+		Thus $ f(c) $ must be equal to zero, and the proof is complete.
 	\end{proof}
 	Clearly, the general proof of the Intermediate Value Theorem follows naturally from this because,
 	\begin{itemize}
@@ -2003,19 +2405,22 @@
 	\begin{proof}
 		Let ${ h(x) = f(x) - x }$ so that ${ f(c) = c }$ if and only if ${ h(c) = 0 }$. Then also we have,
 		\[ a \leq f(x) \leq b \implies h(a) \geq 0,\; h(b) \leq 0. \]
-		But this means that, either one of $h(a)$ or $h(b)$ is equal to 0 or neither are. In the case that one of them is equal to 0 then we have found our $c$ such that ${ f(c) = c }$. Otherwise, if neither is equal to 0, then we must have ${ h(a) > 0 }$ and ${ h(b) < 0 }$. So, we may apply the Intermediate Value Theorem to conclude that there exists ${ c \in (a,b) }$ such that ${ h(c) = 0 }$ which is to say ${ f(c) = c }$.
+		If either of $h(a)$ or $h(b)$ is equal to 0 then we have found our $c$ such that ${ f(c) = c }$. Otherwise, if neither is equal to 0, then we must have ${ h(a) > 0 }$ and ${ h(b) < 0 }$. So, we may apply the Intermediate Value Theorem to conclude that there exists ${ c \in (a,b) }$ such that ${ h(c) = 0 }$ which is to say ${ f(c) = c }$.
 	\end{proof}
 
-	\bigskip
-	\subsubsection{Examples of reasoning with the Intermediate Value Theorem}
+
+
+	\sep
 	\begin{exe}
 		\ex{\textit{Suppose the real function $f$ is continuous, positive and unbounded on $\R{}$ and that ${ \inf \setc{f(x)}{x \in \R{}} = 0 }$. Use the Intermediate Value Theorem to prove that the range of $f$ is ${ (0,\infty) }$. }\\\\
-			Let ${ y \in (0,1) }$. We show that there is some ${ c \in \R{} }$ such that ${ f(c) = y }$. This shows that the range is the whole of ${ (0,1) }$. (The fact that it is no larger follows from the given fact that $ f $ is positive.)\\
+			Let ${ y \in (0,\infty) }$. We show that there is some ${ c \in \R{} }$ such that ${ f(c) = y }$. This shows that the range is the whole of ${ (0,\infty) }$. (The fact that it is no larger follows from the given fact that $ f $ is positive.)\\
 			Now,  ${ \text{inf}\,f(\R{}) = \text{inf}\,\setc{f(x)}{x \in \R{}} = 0 }$, so, since ${ y > 0 }$, there must be some ${ y_1 \in f(\R{}) }$ with ${ y_1 < y }$. This means there is some ${ x_1 \in \R{} }$ such that ${ y_1 = f(x_1) < y }$.\\
 			Similarly, because $ f $ is unbounded, which means $ f(\R{}) $ is unbounded, there must be some ${ y_2 \in f(\R{}) }$ with ${ y_2 > y }$ and there will be some ${ x_2 \in \R{} }$ such that ${ y_2 = f(x_2) > y }$.\\
 			Then $ y $ lies between $ f(x_1) $ and $ f(x_2) $ and, since $ f $ is continuous, the Intermediate Value Theorem shows that there is some $ c $ between $ x_1 $ and $ x_2 $ with ${ f(c) = y }$.
 		}
-			\ex{\textit{Suppose the real function $g$ is continuous on $\R{}$ and that $g$ maps ${ [a,b] }$ into ${ [d,e] }$ and maps ${ [d,e] }$ into ${ [a,b] }$ where ${ a < b,\; d < e }$. By considering the function
+	
+		\bigskip
+		\ex{\textit{Suppose the real function $g$ is continuous on $\R{}$ and that $g$ maps ${ [a,b] }$ into ${ [d,e] }$ and maps ${ [d,e] }$ into ${ [a,b] }$ where ${ a < b,\; d < e }$. By considering the function
 					\[ k(x) = g(g(x)), \]
 			prove that there are ${ p,q \in \R{} }$ such that
 				\[ g(p) = q,\; g(q) = p. \]
@@ -2027,13 +2432,81 @@
 			\[ h(x) = g(x) - x \]
 			and then we have
 			\[ h(p) = g(p) - p = q - p, \; h(q) = g(q) - q = p - q \]
-			so that ${ h(p) = -h(q) }$ and, therefore, ${ h(x) }$ changes sign between $p$ and $q$. (Note that we don't know which of $p$ and $q$ is the lower end and upper end of the interval but we know that between the two values the function changes sign.) Then, applying the Intermediate Value Theorem we have some $c$ between $p$ and $q$ such that,
-			\[ h(c) = 0 \iff g(c) - c = 0 \iff g(c) = c. \]
+			so that ${ h(p) = -h(q) }$ and therefore, either:
+			\begin{itemize}
+				\item ${ h(p) = 0 = h(q) }$, in which case ${ p = c = q }$ such that ${ g(c) = c }$; or else
+				\item ${ h(x) }$ changes sign between $p$ and $q$. (Note that we don't know which of $p$ and $q$ is the lower end and upper end of the interval but we know that between the two values the function changes sign.) Then, applying the Intermediate Value Theorem we have some $c$ between $p$ and $q$ such that,
+				\[ h(c) = 0 \iff g(c) - c = 0 \iff g(c) = c. \]
+			\end{itemize}
+			
 		}
 	\end{exe}
 	
 
+	
+	\nl[18]
+	\subsubsection{Functions in $\R{m}$}
+	\bigskip
+	\labeledProposition{Let ${ f: \R{n} \longmapsto \R{m} }$ and ${ f_1,f_2,\dots,f_m: \R{n} \longmapsto \R{} }$ such that
+		\[ \forall \x \in \R{n} \logicsep f(\x) = (f_1(\x), f_2(\x), \dots, f_m(\x))^T. \]
+		Then $f$ is continuous at ${ \y \in \R{n} }$ iff every $f_i$ for ${ 1 \leq i \leq m }$ is continuous at $\y$.
+	}{vector-valued-function-is-continuous-iff-each-component-function-is-continuous}
+	\begin{proof}
+		This is a direct consequence of \autoref{prop:seq-in-Rm-converges-iff-every-component-converges-to-same-point}.
+	\end{proof}
 
+	\bigskip
+	\labeledProposition{All linear functions are continuous.}{all-linear-functions-are-continuous}
+	\begin{proof}
+		Let ${ f: \R{n} \longmapsto \R{m} }$ be a linear function. Then, by \autoref{prop:every-lin-transform-is-left-multiplication-by-a-particular-matrix}, $f$ can be represented as left multiplication by a ${ m \times n }$ matrix. Let ${ A \in \R{m \times n} }$ be such that, for all ${ \x \in \R{n} }$,
+		\[ f(\x) = A \x. \]
+		Then, by \autoref{prop:vector-valued-function-is-continuous-iff-each-component-function-is-continuous}, $f$ will be continuous at ${ \a \in \R{n} }$ if, for each $i$ such that ${ 1 \leq i \leq m }$,
+		\[ f_i(\x) = \inner{\e{i}}{A\x} = \e{i}^T A \x \]
+		is continuous at $\a$.\\
+		Assume we have $\x$ in some $\delta$-neighbourhood of $\a$ so that ${ \norm{\x - \a} < \delta }$. For any $i$,
+		\[\begin{aligned}
+			\norm{f_i(\x) - f_i(\a)} &= \norm{\e{i}^T A \x - \e{i}^T A \a} \nn
+			&= \norm{\e{i}^T A (\x - \a)}  &\sidecomment{} \nn
+			&\leq \norm{\e{i}^T A} \norm{\x - \a}  &\sidecomment{by cauchy-schwartz (\autoref{theo:cauchy-schwarz-inequality})} \nn
+			&\leq \delta \norm{\e{i}^T A}.  &\sidecomment{equality case is if 0}
+		\end{aligned}\]
+		Since $\norm{\e{i}^T A}$ is the norm of the first row of $A$, it is just some non-negative constant real number, say $k$. Assume $k$ is non-zero. So, the result that
+		\[ \norm{\x - \a} < \delta \; \implies \; \norm{f_i(\x) - f_i(\a)} < \delta k \]
+		means that for any ${ \epsilon = \delta k }$ there is a $\delta$-neighbourhood around $\a$ such that, for any $\x$ in the neighbourhood, $f_i(\x)$ is in the $\epsilon$-neighbourhood of $f_i(\a)$. Therefore $f_i$ is continuous.\\
+		Consider the case where ${ k = 0 }$: In this case the function $f_i$ is identically 0 and so, as a constant function, is trivially continuous.\\
+		It follows then that, in all cases, $f$ is continuous.
+	\end{proof}
+
+
+	\nl[12]
+	\sep
+	\begin{exe}
+		\ex Let ${ f,g: \R{2} \setminus \{ (0,0)^T \} \longmapsto \R{} }$ and let $f$ be given by,
+		\[ f\begin{pmatrix}x_1\\x_2\end{pmatrix} = \frac{{x_2}^2 - {x_1}^2}{{x_1}^2 + {x_2}^2} \]
+		and $g$ be given by,
+		\[ g\begin{pmatrix}x_1\\x_2\end{pmatrix} = \frac{x_1{x_2}^2}{{x_1}^2 + {x_2}^4}. \]
+		
+		Let's examine the behaviour of the functions as ${ \x \to \0 }$ along a straight line defined by
+		\[ x_2 = \alpha x_1 \eqword{for constant} \alpha \in \R{}. \]
+		So, for ${ t \in \R{} }$,
+		\[ \x = t \begin{pmatrix}1\\ \alpha\end{pmatrix} \to \begin{pmatrix}0\\0\end{pmatrix} \eqword{as} t \to 0. \]
+		
+		Firstly, we find an expression for the function values along such a line (note that the functions are not linear so we do not have ${ f(t\v) = tf(\v) }$),
+		\[ f\begin{pmatrix}t\\ \alpha t\end{pmatrix} = \frac{(\alpha t)^2 - t^2}{t^2 + (\alpha t)^2} = \frac{\alpha^2 - 1}{1 + \alpha^2}, \]
+		\[ g\begin{pmatrix}t\\ \alpha t\end{pmatrix} = \frac{t(\alpha t)^2}{t^2 + (\alpha t)^4} = \frac{t\alpha^2}{1 + \alpha^4 t^2}. \]
+		
+		\nl[2]
+		The expression for $f$ tells us that, as ${ \x \to \0 }$ along a straight line, the value of $f$ is constant at a value that depends on the value of the constant $\alpha$. So, for different lines corresponing to different values of $\alpha$, the value of $f$ is different. Therefore, since as ${ \x \to \0 }$ along different lines it has a different value, ${ \lim_{\x \to \0} f(\x) }$ \textit{does not exist}.\\
+		
+		On the other hand, the expression for $g$ tells us that, as ${ \x \to \0 }$ along a straight line, the value of $g$ goes to 0 regardless of the value of the constant $\alpha$. That's to say, along whichever straight line in $\R{2}$ we approach the origin, $g$ is going to 0. However, \textit{we cannot conclude that the limit of $g$ exists at $\0$} because this only covers the behaviour over straight lines. By \autoref{prop:continuity-of-functions-over-sequences} (\TODO{this proposition is about continuity; is it worth separating it into a proposition about limits of functions with a corollary about continuity?}), the limit of the function only exists at a point if the function converges to the same value along all sequences that converge to the point.\\
+		
+		In this case we can construct a sequence that follows a parabolic path towards the origin, ${ x_1 = \alpha {x_2}^2 }$, parametrically expressed as
+		\[ \x = \begin{pmatrix}\alpha t^2\\ t\end{pmatrix} \to \begin{pmatrix}0\\0\end{pmatrix} \eqword{as} t \to 0. \]
+		The expression for the value of $g$ along this parabola comes out as,
+		\[ g\begin{pmatrix}\alpha t^2\\ t\end{pmatrix} = \frac{(\alpha t^2) t^2}{(\alpha t^2)^2 + t^4} = \frac{\alpha}{\alpha^2 + 1}. \]
+		Therefore, for $g$, along parabolic lines of this form, the value of $g$ is a constant depending on the value of $\alpha$. So, once again, over different sequences (defined by different values of $\alpha$) approaching $\0$, the value of $g$ is converging to (actually staying constant at) different values. Once again then, the limit of $g$ \textit{does not exist} at $\0$.
+		\label{ex:limit-at-a-point-requires-the-function-to-converge-to-the-same-value-over-every-sequence-converging-to-the-point}
+	\end{exe}
 
 
 
@@ -2077,6 +2550,322 @@
 
 	\searchableSubsection{Differentiation}{analysis, real analysis}{
 		\bigskip
+		\boxeddefinition{\textbf{(Differentiability)} A function $f$ over $\R{}$ is \textit{differentiable} over an interval ${ (a,b) \subset \R{} }$ iff, for all ${ y \in (a,b) }$, the limit
+			\[ \lim_{x \to y} \frac{f(x) - f(y)}{x - y} \]
+			exists. This implies, by the definition of the limit, that the left and right limits, denoted $f_r'$ and $f_l'$, \textit{both exist and are equal}.
+		\label{def:differentiability}}
+		
+		
+		\biggerskip
+		\labeledProposition{Differentiability at a point $c$ implies continuity at $c$.}{differentiability-implies-continuity}
+		\begin{proof}
+			Differentiability at $c$, by definition (\ref{def:differentiability}), implies that
+			\[ \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = L \]
+			for some finite ${ L \in \R{} }$. Since we also have,
+			\[ \lim_{x \to c} (x - c) = 0 \]
+			which, clearly, is a finite limit, we can use the algebra of finite limits (\autoref{prop:func-finite-limit-algebra}) to deduce that
+			\[ \left( \lim_{x \to c} (x - c) \right) \left( \lim_{x \to c} \frac{f(x) - f(c)}{x - c} \right) = \lim_{x \to c} (f(x) - f(c)). \]
+			Therefore,
+			\[ 0 \times L = 0 = \lim_{x \to c} (f(x) - f(c)) \]
+			and so ${ \lim_{x \to c} f(x) = f(c) }$ as is necessary for continuity. Then, we can also reason that $f(c)$ must be defined and finite for an expression involving it to be defined and finite, and so differentiability also implies that $f(c)$ is defined and finite.\\
+			
+			Therefore, $f$ is continuous at $c$.
+		\end{proof}
+	
+		\bigskip
+		\labeledProposition{\textbf{(Product and Quotient Rule)} Let $f,g$ be defined on ${ (a,b) }$ and differentiable at ${ c \in (a,b) }$. Then,
+			\begin{enumerate}[label=(\roman*)]
+				\item ${ (f + g)'(c) = f'(c) + g'(c) }$;
+				\item ${ (fg)'(c) = f'(c)g(c) + f(c)g'(c) }$ where $fg$ denotes the pointwise product;
+				\item if ${ g(c) \neq 0 }$ then ${ (f/g)'(c) = \frac{ f'(c)g(c) - f(c)g'(c) }{ g(c)^2 } }$.
+			\end{enumerate}
+		}{differentiation-product-and-quotient-rule}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item Because $f'(c)$ and $g'(c)$ both exist the derivatives are finite and we can apply the algebra of finite limits (\autoref{prop:func-finite-limit-algebra}) so that,
+				\[ \lim_{x \to c} \frac{f(x) + g(x) - f(c) - g(c)}{x - c} = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} + \lim_{x \to c} \frac{g(x) - g(c)}{x - c}. \]
+				
+				\bigskip
+				\item Since $f$ and $g$ are both differentiable on the interval, by \autoref{prop:differentiability-implies-continuity}, they are also both continuous. Therefore,
+				\[\begin{aligned}
+					&\lim_{x \to c} \frac{f(x)g(x) - f(c)g(c)}{x - c} \nnn
+					&= \lim_{x \to c} \frac{f(x)g(x) - f(c)g(c) + f(x)g(c) - f(x)g(c)}{x - c} \nnn
+					&= \lim_{x \to c} \frac{(f(x)g(c) - f(c)g(c)) + (f(x)g(x) - f(x)g(c))}{x - c} \nnn
+					&= \lim_{x \to c} g(c)\frac{f(x) - f(c)}{x - c} + \lim_{x \to c} f(x)\frac{g(x) - g(c)}{x - c} &\sidecomment{by \autoref{prop:func-finite-limit-algebra}} \nnn
+					&= f'(c)g(c) + f(c)g'(c).  &\sidecomment{by continuity}
+				\end{aligned}\]
+				
+				\bigskip
+				\item Using ${ g(c) \neq 0 }$ and the continuity of $f$ and $g$ at $c$,
+				\[\begin{aligned}
+					&\lim_{x \to c} \frac{f(x)/g(x) - f(c)/g(c)}{x - c} \nnn
+					&= \lim_{x \to c} \frac{1}{x - c} \frac{f(x)g(c) - f(c)g(x)}{g(x)g(c)} \nnn
+					&= \lim_{x \to c} \frac{1}{g(x)g(c)} \frac{ f(x)g(c) - f(c)g(x) + f(x)g(x) - f(x)g(x) }{ x - c } \nnn
+					&= \lim_{x \to c} \frac{1}{g(x)g(c)} \frac{ (f(x)g(x) - f(c)g(x)) + (f(x)g(c) - f(x)g(x)) }{ x - c } \nnn
+					&= \lim_{x \to c} \frac{1}{g(x)g(c)} \left( g(x)\frac{ f(x) - f(c) }{ x - c } - f(x)\frac{ g(x) - g(c) }{ x - c } \right) \nnn
+					&= \frac{ f'(c)g(c) - f(c)g'(c) }{ g(c)^2 }. &\sidecomment{by continuity}
+				\end{aligned}\]
+			\end{enumerate}
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Chain Rule)} Let $f$ be defined on ${ (a,b) }$ and differentiable at ${ c \in (a,b) }$. Let $g$ be defined on the image of $f$ and differentiable at ${ f(c) }$. Then,
+			\[ h(x) = (g \circ f)(x) \]
+			defined for all ${ x \in (a,b) }$, is differentiable at $c$ and its derivative, evaluated at $c$,
+			\[ h'(x) = g'(f(c)) f'(c). \]
+		}{differentiation-chain-rule}
+		\begin{proof}
+			Observe that the equation,
+			\[ \frac{ g(f(x)) - g(f(c)) }{ x - c } = \frac{ g(f(x)) - g(f(c)) }{ f(x) - f(c) } \cdot \frac{ f(x) - f(c) }{ x - c } \]
+			establishes the algebraic relationship we are looking for. However, we cannot take the limit,
+			\[ \lim_{x \to c} \left( \frac{ g(f(x)) - g(f(c)) }{ f(x) - f(c) } \cdot \frac{ f(x) - f(c) }{ x - c } \right) \]
+			because we cannot guarantee that, for any $x$ in the neighbourhood of $c$, ${ f(x) \neq f(c) }$. So we need to create a function that is guaranteed to be continuous on any neighbourhood of $c$,
+			\[ G(t) = \begin{cases}
+						\frac{ g(t) - g(f(c)) }{ t - f(c) }  & t \neq f(c) \nnn
+						g'(f(c))  &  t = f(c).	
+					  \end{cases}
+			\]
+			Differentiability of $f$, by \autoref{prop:differentiability-implies-continuity}, ensures continuity so that ${ f(x) \to f(c) }$ as ${ x \to c }$ and so
+			\[ \lim_{x \to c} G(f(x)) = g'(f(c)). \]
+			Then,
+			\[ \lim_{x \to c} \frac{ g(f(x)) - g(f(c)) }{ x - c } = \lim_{x \to c} \left( G(f(x)) \frac{ f(x) - f(c) }{ x - c } \right). \]
+			Since the limits as ${ x \to c }$ of both expressions in the product $G(f(x))$ and $\frac{ f(x) - f(c) }{ x - c }$ exist and are finite we can use the algebra of finite limits (\autoref{prop:func-finite-limit-algebra}), to obtain the result
+			\[ \lim_{x \to c} \left( G(f(x)) \frac{ f(x) - f(c) }{ x - c } \right) = g'(f(c)) f'(c). \qedhere \]
+		\end{proof}
+	
+	
+		\nl[8]
+		\labeledProposition{If ${ f'(a) > 0 }$ then there exists ${ \delta > 0 }$ such that, for all ${ h \in (0,\delta) }$,
+			\[ f(a - h) < f(a) < f(a + h). \]
+		}{sign-of-derivative-at-point-determines-relative-size-of-function-values-in-neighbourhood-of-point}
+		\begin{proof}
+			Suppose ${ f'(a) > 0 }$. Then, by the definition of the derivative and the definition of a limit,
+			\[ \forall \epsilon > 0 \in \R{} \logicsep \exists \delta \logicsep 0 < \abs{x - a} < \delta \implies \abs{\frac{f(x) - f(a)}{x - a} - f'(a)} < \epsilon. \]
+			So we have
+			\[ f'(a) - \epsilon < \frac{f(x) - f(a)}{x - a} < f'(a) + \epsilon \]
+			and if we restrict ${ \epsilon < f'(a) }$ then
+			\[ \frac{f(x) - f(a)}{x - a} > 0. \]
+			Let ${ h = \abs{x - a} }$. Then
+			\[ 0 < \abs{x - a} < \delta \implies 0 < h < \delta \]
+			and
+			\[ 
+				\frac{f(x) - f(a)}{x - a} = \begin{cases}
+												\frac{f(a + h) - f(a)}{h}  & x \geq a \nnn
+												\frac{f(a - h) - f(a)}{-h}  & x < a.
+											\end{cases}
+			\]
+			So, for ${ x \geq a }$,
+			\[ \frac{f(a + h) - f(a)}{h} > 0 \implies f(a + h) > f(a) \]
+			and for ${ x < a }$,
+			\[ \frac{f(a - h) - f(a)}{-h} > 0 \implies f(a - h) < f(a). \]
+		\end{proof}
+		\begin{corollary}\label{coro:sign-of-derivative-at-point-determines-relative-size-of-function-values-in-neighbourhood-of-point}
+			\autoref{prop:sign-of-derivative-at-point-determines-relative-size-of-function-values-in-neighbourhood-of-point} can be rewritten as: If ${ f'(a) > 0 }$ then there exists a $\delta$-neighbourhood of $a$ such that, for all ${ x,y \in (a - \delta, a + \delta) }$,
+			\[ x < a < y \; \iff \; f(x) < f(a) < f(y). \]
+		\end{corollary}
+	
+		
+		\nl[8]
+		\labeledProposition{If a function ${ f: \R{} \longmapsto \R{} }$ has a local minimum (or maximum) at a point $c$ and the derivative of $f$ at $c$, $f'(c)$ exists, then we have 
+			\[ f'(c) = 0. \]
+		}{derivative-is-0-at-local-maxima-and-minima}
+		\begin{proof}
+			By the definition of a local minimum (\ref{def:local-minimum-and-maximum}), if $f$ has a local minimum at $c$ then for some ${ \delta > 0 }$,
+			\[ \forall x \in (c - \delta, c + \delta) \logicsep f(c) \leq f(x). \]
+			It follows that, for ${ x \in I = (c - \delta, c + \delta) }$,
+			\[ f(x) \geq f(c) \implies f(x) - f(c) \geq 0 \]
+			so that
+			\[ x < c \; \implies \; \frac{f(x) - f(c)}{x - c} \leq 0 \]
+			and
+			\[ x > c \; \implies \; \frac{f(x) - f(c)}{x - c} \geq 0. \]
+			But since $f'(c)$ exists, we must have
+			\[ \lim_{x \to c^-} \frac{f(x) - f(c)}{x - c} = \lim_{x \to c^-+} \frac{f(x) - f(c)}{x - c} \]
+			therefore
+			\[ \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = f'(c) = 0. \]
+			
+			\bigskip
+			\subheading{Alternative topological proof}
+			\nl
+			\TODO{review this proof after studying topology}\\
+			By \autoref{coro:sign-of-derivative-at-point-determines-relative-size-of-function-values-in-neighbourhood-of-point}, if ${ f'(c) > 0 }$ then, for all $x$ and $y$ in some $\delta$-neighbourhood of $a$, we have
+			\[ x < a < y \; \iff \; f(x) < f(a) < f(y) \]
+			and if ${ f'(c) > 0 }$, then for all $x$ and $y$ in some $\delta$-neighbourhood of $a$, we have
+			\[ x < a < y \; \iff \; f(x) < f(a) < f(y). \]
+			But if $f$ has a local minimum at $c$ then there exists a $\delta$-neighbourhood such that, for all $x$ and $y$ in some $\delta$-neighbourhood of $a$,
+			\[ x < a < y \; \centernot\implies \; f(x) < f(a) < f(y) \]
+			because for all ${ x,y \in (c - \delta, c + \delta) }$, ${ f(x),f(y) \geq f(c) }$. All these $\delta$-neighbourhoods must intersect so this is a contradiction.
+			Therefore
+			\[ f'(c) \centernot< 0 \; \land \; f'(c) \centernot> 0 \; \implies \; f'(c) = 0. \]
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Rolle's Theorem)} If a real-valued function $f$ is continuous on ${ [a,b] }$ and differentiable on ${ (a,b) }$ and
+			\[ f(a) = f(b), \]
+			then there exists some ${ c \in (a,b) }$ such that
+			\[ f'(c) = 0. \]
+		}{rolles-theorem}
+		\begin{proof}
+			By continuity of $f$ on the closed interval $[a,b]$ and \autoref{theo:extreme-value-theorem}, $f$ attains its maximum and minimum on the interval. If one such extreme point is in ${ (a,b) }$ rather than at the bounds $a$ or $b$, then there is a neighbourhood around the extreme point and so we have a local maximum or minimum, at which, by \autoref{prop:derivative-is-0-at-local-maxima-and-minima}, the derivative is 0.\\
+			
+			If $f$ is constant on the interval then every point in the interval is both a maximum and a minimum and so we have ${ c \in (a,b) }$ such that ${ f'(c) = 0 }$. Alternatively, if we have more than one value of the $f$ on the interval, then ${ f(a) = f(b) }$ could be the maximum or the minimum but not both. So, in this case also, there must be an extreme point in ${ (a,b) }$ and so, again we have ${ c \in (a,b) }$ such that ${ f'(c) = 0 }$.
+		\end{proof}
+	
+		\bigskip
+		\labeledTheorem{\textbf{(Mean-Value Theorem)} If a real-valued function $f$ is continuous on ${ [a,b] }$ and differentiable on ${ (a,b) }$ then there exists ${ c \in (a,b) }$ such that
+			\[ f(b) - f(a) = f'(c)(b - a). \]
+		}{mean-value-theorem}
+		\begin{proof}
+			If ${ a = b }$ then ${ b - a = 0 }$ and 
+			\[ f(b) = f(a) \implies f(b) - f(a) = 0. \]
+			So the theorem is trivially satisfied.\\
+			
+			Assume ${ a \neq b }$. Let
+			\[ g(x) = f(x) - \left( \frac{f(b) - f(a)}{b - a} \right) x. \]
+			Then $g$ is continuous on ${ [a,b] }$ and differentiable on ${ (a,b) }$ and
+			\[ g(a) = \frac{b f(a) - a f(b)}{b - a} = g(b). \]
+			Therefore, by \autoref{theo:rolles-theorem}, there exists ${ c \in (a,b) }$ such that ${ g'(c) = 0 }$.\\
+			
+			Looking at the derivative of $g$,
+			\[ g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a} \]
+			so that ${ g'(c) = 0 }$ implies
+			\[\begin{aligned}
+				&& f'(c) - \frac{f(b) - f(a)}{b - a} &= 0 \nn
+				&\iff & \frac{f(b) - f(a)}{b - a} &= f'(c) \nn
+				&\iff & f(b) - f(a) &= f'(c)(b - a).  \qedhere
+			\end{aligned}\]
+		\end{proof}
+	
+		
+		\biggerskip
+		\sep
+		\begin{exe}
+			\ex Suppose we are looking for an approximation to the value of ${ \sqrt{n + 1} - \sqrt{n} }$ for ${ n \in \N{} }$. We can consider instead the function
+			\[ f(x) = \sqrt{x} \]
+			on the interval ${ (0,\infty) }$. The function $f$ is differentiable on this interval so we can take the derivative and use the Mean Value Theorem (\autoref{theo:mean-value-theorem}),
+			\[ f(n + 1) - f(n) = f'(c)(n + 1 - n) = f'(c) = \frac{1}{2\sqrt{c}} \]
+			for some ${ c \in (n, n+1) }$. Therefore,
+			\[ \frac{1}{2\sqrt{n+1}} \leq f(n + 1) - f(n) \leq \frac{1}{2\sqrt{n}}. \]
+			\note{Note that the standard linear approximation would only have produced
+				\[ f(n + 1) - f(n) \approx \frac{1}{2\sqrt{n}} \]
+				without any bounds to indicate the accuracy of the approximation.
+			}
+		\end{exe}
+	
+	
+	
+		
+		\nl[12]
+		\subsubsection{Differentiation in \texorpdfstring{$\R{n}$}{Rn}}
+		\biggerskip
+		
+		\subsubsubsection{Differentiation $\R{n} \longmapsto \R{}$}
+		\nl[4]
+		\boxeddefinition{\textbf{(Partial Derivative)} For a function ${ f: \R{n} \longmapsto \R{} }$, the \textit{partial derivative} $\tpd{f}{x_i}$ at a point ${ \a \in \R{n} }$ is the rate of change of the function at $\a$ \textit{only} \wrt the component $x_i$ (i.e. holding the other components fixed).\\
+		
+		Formally,
+		\[ \dpd{f}{x_i}(\a) = \lim_{h \to 0} \frac{ f(a_1,\dots,a_{i-1},a_i + h,a_{i+1},\dots, a_n) - f(\a) }{ h }. \]
+		}
+	
+		\boxeddefinition{\textbf{(Directional Derivative)} If $\u$ is a unit vector (\ref{def:unit-vector}) --- in this context often referred to as a \textit{direction vector} --- then the \textit{directional derivative of $f$ in the direction $\u$} at $\a$ is defined as,
+			\[ \Dif_{\u} f(\a) = \lim_{h \to 0} \frac{ f(\a + h\u) - f(\a) }{ h }. \]
+		\label{def:directional-derivative}}
+		\note{The partial derivative can be viewed as a special case of the directional derivative in which the direction vector is one of the standard basis vectors $\e{i}$. That's to say, the partial derivative is a directional derivative along an axis.}
+		
+		\boxeddefinition{\textbf{(Gradient ${ \R{n} \longmapsto \R{} }$)} If $f$ is a real-valued function in $n$ variables then its \textit{gradient} at ${ \a \in \R{n} }$ is defined to be the column vector,
+			\[ 
+				\nabla f(\a) = 	\begin{bmatrix}
+									\tpd{f}{x_1}(\a) \nnn
+									\tpd{f}{x_2}(\a) \nnn
+									\vdots \\
+									\tpd{f}{x_n}(\a)
+								\end{bmatrix}.
+			\]
+		}
+	
+		\biggerskip
+		\labeledProposition{If ${ f: \R{n} \longmapsto \R{} }$ then
+			\[ \Dif_{\u} f(\a) = (\nabla f(\a))^T \u. \]
+		}{}
+		\begin{proof}\nl
+			Let ${ g(h) = f(\a + h\u) }$. Then
+			\[g'(0) = \lim_{j \to 0} \frac{ g(j) - g(0) }{ j } = \lim_{j \to 0} \frac{ f(\a + j\u) - f(\a) }{ j } = \Dif_{\u} f(\a) \]
+			where we have used the definition of the directional deriviative (\ref{def:directional-derivative}).\\
+			
+			Now, if we treat the argument to $f$ as a function, ${ \x(h) = \a + h\u }$, then by the chain rule (\autoref{theo:differentiation-chain-rule}),
+			\[ g(h) = f(\x(h)) \; \implies \; g'(h) = f'(\x(h)) \x'(h) \]
+			and
+			\[ f'(\x(h)) \x'(h) = \dpd{f}{x_1} \dod{x_1}{h} + \dpd{f}{x_2} \dod{x_2}{h} + \cdots + \dpd{f}{x_n} \dod{x_n}{h}. \]
+			
+			Since ${ \x : \R{} \longmapsto \R{n} }$ we can view it as component functions ${ x_i: \R{} \longmapsto \R{} }$ for ${ 1 \leq i \leq n }$, and similarly taking $a_i$ and $u_i$ as the $i$-th components of $\a$ and $\u$ respectively, we have
+			\[ \dod{x_i}{h} = \lim_{j \to 0} \frac{ x_i(h + j) - x_i(h) }{ j } = \lim_{j \to 0} \frac{ (a_i + (h + j) u_i) - (a_i + h u_i) }{ j } = u_i. \]
+			
+			So we have
+			\[ g'(h) = \dpd{f}{x_1} u_1 + \dpd{f}{x_2} u_2 + \cdots + \dpd{f}{x_n} u_n \]
+			and so
+			\[ g'(0) = \dpd{f}{x_1}(\a) u_1 + \dpd{f}{x_2}(\a) u_2 + \cdots + \dpd{f}{x_n}(\a) u_n = (\nabla f(\a))^T \u. \]
+			Therefore, ${ \Dif_{\u} f(\a) = (\nabla f(\a))^T \u }$ as required.
+		\end{proof}
+
+		
+		
+		\nl[24]
+		\group{
+		\subsubsubsection{Differentiation $\R{n} \longmapsto \R{m}$}
+		
+		\boxeddefinition{\textbf{(Derivative ${ \R{n} \longmapsto \R{m} }$)} A function ${ f: \R{n} \longmapsto \R{m} }$ is said to be \textit{differentiable} if there exists a matrix ${ A \in \R{m \times n} }$ that describes a linear function ${ \x \longmapsto A\x }$ from ${ \R{n} \longmapsto \R{m} }$ such that
+			\[ \lim_{h \to 0} \frac{ f(\a + \V{h}) - f(\a) - A\V{h} }{ \norm{\V{h}} } = 0. \]
+			The matrix $A$ and the linear function it describes are known as the \textit{derivative of $f$} or the \textit{Jacobian of $f$} at $\a$ and are denoted $\Dif f(\a)$.
+			\[
+				\Dif f(\a) = \begin{bmatrix}
+								(\nabla f_1(\a))^T \\
+								(\nabla f_2(\a))^T \\
+								\vdots \\
+								(\nabla f_n(\a))^T \\
+							 \end{bmatrix} =
+						 	 \begin{bmatrix}
+						 	 	\tpd{f_1}{x_1}(\a) & \tpd{f_1}{x_2}(\a) & \cdots & \tpd{f_1}{x_n}(\a) \nn
+						 	 	\tpd{f_2}{x_1}(\a) & \tpd{f_2}{x_2}(\a) & \cdots & \tpd{f_2}{x_n}(\a) \nn
+						 	 	\vdots \nn
+						 	 	\tpd{f_m}{x_1}(\a) & \tpd{f_m}{x_2}(\a) & \cdots & \tpd{f_m}{x_n}(\a).
+						 	 \end{bmatrix}
+			\]
+		\label{def:jacobian}}}
+	
+	
+		\bigskip
+		\labeledProposition{For a function ${ f: \R{n} \longmapsto \R{m} }$ at a point ${ \a \in \R{n} }$,
+			\begin{enumerate}[label=(\roman*)]
+				\item the limit ${ \lim_{\x \to \a} f(\a) }$ exists iff, for every sequence $(\x_n)$ that converges to $\a$ with at most finitely many terms such that ${ \x_n = \a }$, ${ \lim_{n \to \infty} f(\x_n) = \a }$;
+				\item the function is differentiable at $\a$ iff each $\tpd{f_i}{x_j}$, the partial derivative of each component function \wrt each component of $\x$, exists in some neighbourhood of $\a$ and is continuous at $\a$;
+				\item if any component function $f_i$ for ${ 1 \leq i \leq m }$ is discontinuous at $\a$ then $f$ is not differentiable at $\a$.
+			\end{enumerate}
+		}{derivative-Rn-to-Rm-properties}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item This results directly from the definition of the limit of a function (\ref{def:function-tends-to-a-value}).
+				\item This is required for the existence of the Jacobian (\ref{def:jacobian}) as, obviously, each component of the matrix needs to be a defined value but also: since, by \autoref{prop:all-linear-functions-are-continuous}, all linear functions are continuous and, by \autoref{prop:vector-valued-function-is-continuous-iff-each-component-function-is-continuous}, continuity of the Jacobian requires that each component function be continuous, it follows that each partial derivative in the Jacobian must be continuous.
+				\item This is a consequence of the requirements of (ii) and, by \autoref{prop:differentiability-implies-continuity}, the fact that continuity of each partial derivative requires continuity of each component function. 
+			\end{enumerate}
+		\end{proof}
+		
+		
+		\nl[6]
+		\sep
+		\begin{exe}
+			\ex Suppose that ${ f: \R{2} \longmapsto \R{} }$ is given by
+			\[ f\begin{pmatrix}x\\ y\end{pmatrix} = \begin{cases}
+														\frac{ x^2 y }{ x^4 + y^2 } & (x,y)^T \neq \0 \nn
+														0         & (x,y)^T = \0.
+													\end{cases} 
+			\]
+			Let ${ \v = (u,v)^T }$ be a direction vector and take the derivative at ${ \a = \0 \in \R{2} }$,
+			\[ \frac{ f(\0 + t\v) - f(\0) }{ t } = \frac{1}{t} \left(  \frac{ (tu)^2 (tv) }{ (tu)^4 + (tv)^2 } \right) = \frac{ u^2 v }{ t^2 u^4 + v^2 }. \tag{*} \]
+			Then, for direction vectors with ${ v \neq 0 }$, (*) tends to the finite constant ${ u^2 / v }$ as ${ t \to 0 }$. On the other hand, for direction vectors with either ${ u = 0 }$ or ${ v = 0 }$, the numerator of (*) is 0 and so its value is fixed at 0 independently of the value of $t$. Note that we cannot have \textit{both} $u$ \textit{and} $v$ 0 because the direction vector must have unit length.\\
+			
+			So, in all directions, the directional derivatives exist. However, $f$ is \textit{not} differentiable at $\0$. We can see this because, for example,
+			\[ \lim_{t \to 0} f(t, t^2) = \frac{ t^4 }{ 2 t^4 } = \frac{1}{2} \neq 0 \]
+			so $f$ is discontinuous at $\0$. By (iii) of \autoref{prop:derivative-Rn-to-Rm-properties}, it follows that $f$ is not differentiable.
+		\end{exe}
 	}
   
 \end{document}

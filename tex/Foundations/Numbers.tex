@@ -731,6 +731,15 @@
 	\searchableSubsection{Real Numbers}{numbers, real numbers}{
 		\question{Should the reals be considered a superclass of the naturals or the other way around? Answer: We would have to use the approach that is used in computer programming languages. That's to say, reals are a wider type (so similar to a base class) and operations are, effectively defined over the wider type. So, if a natural number is combined under some operation with a real number then the result is a real number.}
 		\TODO{some words about constructing the reals from the rationals.}
+		
+		\biggerskip
+		\labeledProposition{For any real numbers $x$ and $y$,
+			\[ x^2 + y^2 \geq 2xy \]
+		}{}
+		\begin{proof}
+			For any real number $r$, we have ${ r^2 \geq 0 }$. So, if $x$ and $y$ are real then $x + y$ is real and,
+			\[ (x - y)^2 = x^2 + y^2 - 2xy \geq 0 \; \implies \; x^2 + y^2 \geq 2xy.  \qedhere \]
+		\end{proof}
 	}
 
 

@@ -21,4 +21,54 @@
 		\[ P \implies Q \equiv \lnot Q \implies \lnot P \]
 		\note{Note the (informally agreed) operator precedence rules for logical operators: \href{http://intrologic.stanford.edu/intrologic/glossary/operator_precedence.html}{Stanford}.}
 	}
+
+	\nl[12]
+	\searchableSubsection{Sets}{set theory}{
+		\bigskip
+		\boxeddefinition{\textbf{(Intersection and Union)} Let $S$ be a set and ${ A,B \subseteq S }$. Then the intersection of $A$ and $B$ is defined as
+			\[ A \cap B = \setc{x}{x \in A \; \land \; x \in B} \]
+			and the union of $A$ and $B$ is defined as
+			\[ A \cup B = \setc{x}{x \in A \; \lor \; x \in B}. \]
+		}
+	
+		\boxeddefinition{\textbf{(Collection/Family of Sets)} Let $S$ be a set and $I$ be a non-empty indexing set (see: \href{https://en.wikipedia.org/wiki/Index_set}{wikipedia}) such that for each ${ i \in I }$ there exists ${ A_i \subseteq S }$. Then the set of sets,
+			\[ \setc{A_i}{i \in I} \]
+			is known as a \textit{collection} or \textit{family} of sets.
+		}
+		\notation{We denote the intersection of an indexed family of sets,
+			\[ \bigcap_{i \in I} A_i = \setc{x}{ \forall i \in I \logicsep x \in A_i } \]
+			and the union,
+			\[ \bigcup_{i \in I} A_i = \setc{x}{ \exists i \in I \logicsep x \in A_i }. \]
+		}
+	
+		\biggerskip
+		\labeledTheorem{\textbf{(De Morgan Laws for Sets)} Let $S$ be a set and $I$ be a non-empty indexing set such that for each ${ i \in I }$ there exists ${ A_i \subseteq S }$. Then
+			\begin{enumerate}[label=(\roman*)]
+				\item  ${  S \setminus (\bigcap_I A_i) = \bigcup_I (S \setminus A_i)  }$
+				\item  ${ S \setminus (\bigcup_I A_i) = \bigcap_I (S \setminus A_i).  }$
+			\end{enumerate}
+		}{set-de-morgan-laws}
+		\begin{proof}\nl
+			\begin{enumerate}[label=(\roman*)]
+				\item  
+				\[\begin{aligned}
+					&S \setminus \bigcap_I A_i \\
+					&= \setc{x}{ x \in S \; \land \lnot (x \in A_1 \land x \in A_2 \land \cdots \land x \in A_n) } \\
+					&= \setc{x}{ x \in S \; \land [ \lnot (x \in A_1) \lor \lnot (x \in A_2) \lor \cdots \lor \lnot (x \in A_n) ] }  &\sidecomment{} \\
+					&= \setc{x}{ [x \in S \; \land \lnot (x \in A_1)] \lor \cdots \lor [x \in S \; \land \lnot (x \in A_n)] }  &\sidecomment{} \\
+					&= \bigcup_I (S \setminus A_i).
+				\end{aligned}\]
+				
+				\bigskip
+				\item
+				\[\begin{aligned}
+					&S \setminus (\bigcup_I A_i) \\
+					&= \setc{x}{ x \in S \; \land \lnot (x \in A_1 \lor x \in A_2 \lor \cdots \lor x \in A_n) } &\sidecomment{} \\
+					&= \setc{x}{ x \in S \; \land [\lnot (x \in A_1) \land \cdots \land \lnot (x \in A_n)] } &\sidecomment{} \\
+					&= \setc{x}{ [x \in S \; \land \lnot (x \in A_1)] \land \cdots \land [x \in S \; \land \lnot (x \in A_n)] } &\sidecomment{} \\
+					&= \bigcap_I (S \setminus A_i).
+				\end{aligned}\]
+			\end{enumerate}
+		\end{proof}
+	}
 \end{document}
