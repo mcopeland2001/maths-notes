@@ -11,8 +11,13 @@
 
 	\searchableSection{Real Analysis}{analysis}
 	
-	\searchableSubsection{Sets of Real Numbers}{analysis}{\bigskip		
-		\subsubsection{Supremum and Infimum}
+	\searchableSubsection{Bounded Sets}{analysis}{
+		{\tiny 
+			\hyperref[ssssection:bounded-subsets-of-Rm]{bounded subsets of $\R{m}$} \hspace{20pt} \hyperref[]{}\\
+		}
+		\nl[12]
+		\subsubsubsection{Bounded Subsets of $\R{}$}
+		\nl[2]
 		\boxeddefinition{\textbf{(Bounded Set)} An \textit{upper bound} on a set A is a value $x$ such that,
 			\[ \forall a \in A, \, a \leq x \]
 			and a \textit{lower bound} is similarly defined as a value $y$ such that,
@@ -117,161 +122,66 @@
 			Therefore $\sigma_B$ satisfies both requirements of the supremum and we have shown that,
 			\[ \sup B = f(\sup A). \]
 		\end{proof}
-
-
-
-	
 		
-% -------------- break ----------------
-\pagebreak
-
-
-
-		\subsubsection{Open and Closed Sets in \texorpdfstring{$\R{}$}{R}}
-		\note{\question{This material depends on sequence convergence covered later. Is it possible to fix this ordering?}}
-		\bigskip
-		\boxeddefinition{\textbf{(Neighbourhood)} The interval $ (L - \epsilon, L + \epsilon) $ is called the \textit{\mbox{$\epsilon$-neighbourhood of $L$}}.}
 		
-		\boxeddefinition{\textbf{(Open Sets in $\R{}$)} A set ${ X \subseteq \R{} }$ is an \textit{open set} iff every ${ x \in X }$ has an $\epsilon$-neighbourhood around it that is wholly contained in the set. That's to say,
-			\[ \exists \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \subseteq X. \]
-		\label{def:open-set}}
-	
-		\boxeddefinition{\textbf{(Closed Set)} A set is a \textit{closed set} iff every convergent sequence of values in the set converges to a value contained in the set.\\
-			
-		Formally, if a set ${ X \subseteq \R{} }$ is a \textit{closed set} then every convergent sequence $(x_n)$ with ${ x_n \in X }$ for all ${ n \in \N{} }$ has
-		\[ \lim_{n \to \infty} x_n \; \in X. \]
-		\label{def:closed-set}}
 		
-		\note{Note that sets may be both open and closed or neither open or closed. For example:
-			\begin{itemize}
-				\item The set of all real numbers $\R{}$ is both open and closed; and
-				\item the interval ${ (0,1] }$ is neither open nor closed.
-			\end{itemize}
-			It's also worth noting that ${ [1, \infty) }$ may appear to be neither open nor closed but is, in fact, closed.
-		}
-	
-	
 		\nl[12]
-		\labeledProposition{The union of a collection of open sets is an open set.}{union-of-open-sets-is-an-open-set}
-		\begin{proof}
-			Let $I$ be some indexing set and ${ \setc{U_i}{i \in I} }$ be an indexed collection of sets. Then, if each $U_i$ is an open set, then we have, by the definition of an open set (\ref{def:open-set}), for all ${ i \in I }$,
-			\[ \forall x \in U_i \logicsep \exists \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \subseteq U_i. \]
-			But also
-			\[ (x - \epsilon, x + \epsilon) \subseteq U_i \; \implies \; (x - \epsilon, x + \epsilon) \subseteq \bigcup_{i \in I} U_i. \]
-			Therefore, if each $U_i$ is an open set it follows that $\bigcup_{i \in I} U_i$ is an open set also.
-		\end{proof}
-	
+		\subsubsubsection{Bounded Subsets of $\R{m}$}\label{ssssection:bounded-subsets-of-Rm}
+		\nl[2]
 		\bigskip
-		\labeledProposition{The intersection of a collection of finitely many open sets is an open set.}{intersection-of-finitely-many-open-sets-is-an-open-set}
-		\begin{proof}
-			Let ${ I = \N{}_n = \{ 1, 2, \dots, n \} }$ and let every set in the indexed family ${ \setc{A_i}{i \in I} }$ be an open set. Then, if ${ x \in \bigcap_{i \in I} A_i }$ it follows that, for each ${ i \in I }$,
-			\[ x \in A_i \; \implies \; \exists \epsilon_i \logicsep (x - \epsilon_i, x + \epsilon_i) \subseteq A_i. \]
-			Since there are a finite number, $n$, of sets $A_i$ and so the set ${ \setc{\epsilon_i}{i \in I} }$ is also finite, then it has a minimum. If we take
-			\[ \epsilon = \min \setc{\epsilon_i}{i \in I} \]
-			then we have,
-			\[ \forall i \in I \logicsep (x - \epsilon, x + \epsilon) \subseteq A_i \; \implies \; (x - \epsilon, x + \epsilon) \subseteq \bigcap_{i \in I} A_i.  \qedhere \]
-		\end{proof}
-	
-		\bigskip
-		\labeledProposition{The intersection of a collection of infinitely many open sets is not, in general, an open set.}{intersection-of-infinitely-many-open-sets-is-not-necessarily-an-open-set}
-		\begin{proof}
-			Let ${ \setc{U_i}{i \in \N{}} }$ be a family of open sets such that ${ U_i = (-1/i, 1/i) }$. Then, for ${ x \in \bigcap_{i \in I} U_i }$ it follows that, for each ${ i \in I }$,
-			\[ x \in U_i \; \implies \; \exists \epsilon_i \logicsep (x - \epsilon_i, x + \epsilon_i) \subseteq U_i. \]
-			However, in this case, if we take the minimum of the $\epsilon_i$, there is no minimum and instead we have an infimum,
-			\[ \inf \setc{\epsilon_i}{i \in I} = \inf \setc{1/i}{i \in \N{}} = 0. \]
-			Therefore, the widest neighbourhood that is contained in all the $U_i$ is ${ (x - 0, x + 0) }$ which is to say, no neighbourhood. So there is only a single element in ${ x \in \bigcap_{i \in I} U_i }$ and the only element that it can be is 0.
-		\end{proof}
-	
+		\boxeddefinition{\textbf{(Bounded Subset of $\R{m}$)} A subset $B$ of $\R{m}$ is described as \textit{bounded} iff
+			\[ \exists M \geq 0 \in \R{} \logicsep \forall \x,\y \in B \logicsep \norm{\x - \y} \leq M \]
+			where ${ \norm{\x - \y} }$ denotes the Euclidean norm (\ref{def:euclidean-norm}).
+		}\label{def:bounded-subset-of-euclidean-m-space}
 		
+		
+		\biggerskip
+		\subheading{Intuition of Bounded Subsets in $\R{2}$}
 		\bigskip
-		\labeledProposition{A set ${ C \subset \R{} }$ is closed iff its complement ${ \R{}\setminus C }$ is open.}{subset-of-R-is-closed-iff-complement-is-open}
-		\begin{proof}
-			Assume $C$ is closed. Then, by the definition of a closed set (\ref{def:closed-set}), for every sequence $(x_n)$,
-			\[ \forall n \in \N{} \logicsep x_n \in C \; \implies \; \lim_{n \to \infty} x_n \; \in C. \]
-			Suppose, for contradiction, that ${ \R{} \setminus C }$ is not open so that, negating the definition of an open set (\ref{def:open-set}), there exists some ${ x \in \R{} \setminus C }$ such that,
-			\[ \forall \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \centernot\subseteq \R{} \setminus C. \]
-			But then, there exists some sequence $(x_n)$ with ${ \abs{x_n - x} = 1/n = \epsilon }$ such that
-			\[ \forall n \in \N{} \logicsep x_n \in C \; \land \; \lim_{n \to \infty} x_n = x \; \centernot\in C. \]
-			This contradicts the hypothesis that $C$ is a closed set and so ${ \R{} \setminus C }$ is open.\\
+		Figures \ref{fig:bounded-subset-of-Rm-around-origin} and \ref{fig:bounded-subset-of-Rm-not-around-origin} show two bounded subsets: one around the origin and the other not containing the origin.
+		\note{Note that there is no reason that an arbitrary subset need be circular even though the examples here are.}
+		Notice that, whether the subset is centred on the origin or not, ${ \x - \y }$ and ${ \x - \z }$ are the same vector in both cases with the maximum length vector being ${ \x - \z }$. So both subsets have the same $M$ such that ${ \forall \x,\y \logicsep \norm{\x - \y} \leq M }$.\\
+		
+		Addition of vectors, however, does not exhibit the same invariance as can be seen by the difference in ${ \x + \y }$ in the two subsets.
+		
+		\begin{figure}[h!]
+			\begin{minipage}{0.9\textwidth} 
+				\includegraphics[width=\linewidth]{\resourceDir/img/Analysis/bounded_subset_of_Rm_centred_on_the_origin.png}    
+				\caption{A bounded subset of $\R{m}$ centred on the origin.}
+				\label{fig:bounded-subset-of-Rm-around-origin}  
+			\end{minipage}
 			
+			\vspace{0.75cm}
+			\begin{minipage}{0.9\textwidth} 
+				\includegraphics[width=\linewidth]{\resourceDir/img/Analysis/bounded_subset_of_Rm_not_centred_on_the_origin.png}    
+				\caption{A bounded subset of $\R{m}$ not centred on the origin.}
+				\label{fig:bounded-subset-of-Rm-not-around-origin}   
+			\end{minipage}			
+		\end{figure}
+		
+		\biggerskip
+		\labeledProposition{A subset $B$ of $\R{m}$ is bounded iff
+			\[ \exists M \geq 0 \in \R{} \logicsep \forall \x \in B \logicsep \norm{\x} \leq M. \]
+		}{bounded-subset-contains-bounded-length-vectors}
+		\begin{proof}
+			Using the unique additive inverse of a vector (\autoref{prop:unique_additive_inverse}) and the general norm properties (\autoref{prop:norm-properties}), for any ${ \x,\y \in \R{m} }$,
+			\[\begin{aligned}
+				&& \norm{\x} &= \norm{\x - \y + \y} &\sidecomment{by additive inverse of vectors}\\
+				&\iff & \norm{\x} &\leq \norm{\x - \y} + \norm{\y} &\sidecomment{by triangle inequality of norms} \\
+				&\iff & \norm{\x} - \norm{\y} &\leq \norm{\x - \y}  &(1)
+			\end{aligned}\]
+			and
+			\[\begin{aligned}
+				&& \norm{\x - \y} &= \norm{\x + (-\y)} &\sidecomment{by additive inverse of vectors}\\
+				&\iff & \norm{\x - \y} &\leq \norm{\x} + \norm{-\y} &\sidecomment{by triangle inequality of norms} \\
+				&\iff & \norm{\x - \y} &\leq \norm{\x} + \abs{-1}\norm{\y} &\sidecomment{by norm properties} \\
+				&\iff & \norm{\x - \y} &\leq \norm{\x} + \norm{\y}.  &(2)
+			\end{aligned}\]
 			\nl
-			Conversely, suppose ${ \R{} \setminus C }$ is open and suppose, for contradiction, that $C$ is not closed. Then there exists some sequence $(x_n)$, such that
-			\[ \forall n \in \N{} \logicsep x_n \in C \; \land \; \lim_{n \to \infty} x_n \; \centernot\in C. \]
-			But then there is some ${ y = \lim_{n \to \infty} x_n \in \R{} \setminus C }$ with, for every ${ \epsilon > 0 }$, some $x_n$ such that
-			\[ \abs{x_n - y} < \epsilon \; \implies \; x_n \in (y - \epsilon, y + \epsilon) \]
-			which, since ${ x_n \in C }$, implies that
-			\[ (y - \epsilon, y + \epsilon) \centernot\subseteq \R{} \setminus C \]
-			contradicting the hypothesis that ${ \R{} \setminus C }$ is open. Therefore $C$ is closed.
-		\end{proof}
-	
-		
-		\nl[6]
-		\sep
-		\begin{exe}
-			\ex Any open interval is an open set but the reverse is not, in general, the case. For example,
-			\[ S = (1,2) \cup (3,4) \]
-			is an open set but is not an open interval (it is not an interval at all).
-			
-			\bigskip
-			\ex Let ${ I = (1,\infty) }$ be an indexing set and define the indexed collection of sets,
-			\[ C = \setc{A_i}{i \in I} \suchthat A_i = (1/i, 2]. \]
-			Then,
-			\[ \bigcup_{i \in I} A_i = (0, 2]. \]
-			
-			\nl[12]
-			For any ${ A_i \in C }$ we have ${ A_i \subseteq (0, 2] }$ and
-			\[ \forall i \in I \logicsep A_i \subseteq (0, 2] \; \implies \; \bigcup_{i \in I} A_i \subseteq (0, 2]. \]
-			Conversely, if ${ x \in (0, 2] }$ then ${ 0 < x \leq 2 }$. Since ${ I = (1,\infty) }$, for any ${ x \in (0, 2] }$, there exists ${ i \in I }$ such that
-			\[ i > 1/x \; \implies \; 1/i < x \leq 2 \; \implies \; x \in A_i \; \implies \; x \in \bigcup_{i \in I} A_i. \]
-			Therefore ${ (0, 2] \subseteq \bigcup_{i \in I} A_i }$.
-		\end{exe}
-	
-	
-		\nl[16]
-		\subsubsubsection{Open and Closed Sets in \texorpdfstring{$\R{m}$}{Rm}}
-		\nl[4]
-		\boxeddefinition{\textbf{(Open Ball)} For ${ \x \in \R{m} }$ and ${ \epsilon > 0 \in \R{} }$, the \textit{open ball of radius $\epsilon$ around $\x$} is defined as the set,
-		\[ B_{\epsilon}(\x) = \setc{\y}{ \norm{\x - \y} < \epsilon }. \]
-		\label{def:open-ball}}
-	
-		\boxeddefinition{\textbf{(Open Set in $\R{m}$)} A set ${ X \subseteq \R{m} }$ is \textit{open} iff, for any ${ \x \in X }$, there exists ${ \epsilon > 0 }$ such that,
-			\[ B_{\epsilon}(\x) \subseteq X. \]
-		\label{def:open-set-in-Rm}}
-	
-		\biggerskip
-		\labeledProposition{Any open ball is an open set.}{open-ball-is-open-set}
-		\begin{proof}
-			Let ${ B_\epsilon(\x) }$ be an open ball around an element ${ \x \in X \subseteq \R{m} }$. Then for any ${ \y \in B_\epsilon(\x) }$ there exists
-			\[ \delta = \epsilon - \norm{\x - \y} > 0 \]
-			such that, for any ${ \z \in B_\delta(\y) }$,
-			\[ \norm{\x - \z} = \norm{\x - \y + \y - \z} \leq \norm{\x - \y} + \norm{\y - \z} < \norm{\x - \y} + \delta = \epsilon. \]
-			Therefore ${ \z \in B_\epsilon(\x) }$ and so
-			\[ B_\delta(\y) \subseteq B_\epsilon(\x). \]
-			So ${ B_\epsilon(\x) }$ is an open set.
-		\end{proof}
-	
-		\bigskip
-		\labeledProposition{Theorem 5.7}{}
-		\begin{proof}
-			\nl[6]\TODO{complete this}
-		\end{proof}
-	
-	
-		\biggerskip
-		\subsubsection{Compactness}
-		\bigskip
-		\boxeddefinition{\textbf{(Compact Set)} A set ${ C \subseteq \R{m} }$ is \textit{compact} iff, any sequence with all its terms in $C$, has a convergent subsequence converging to a point in $C$.
-		\label{def:compact-set}}
-	
-		\biggerskip
-		\labeledTheorem{\textbf{(Heine-Borel Theorem)} A set ${ C \subseteq \R{m} }$ is \textit{compact} iff it is both closed and bounded.}{heine-borel}
-		\begin{proof}
-			\nl[6]\TODO{complete this}
-		\end{proof}
-	
-		\labeledTheorem{Theorem 5.11}{}
-		\begin{proof}
-			\nl[6]\TODO{complete this}
+			If, ranging over ${ \x \in B }$, $\norm{\x}$ is unbounded then, for some fixed $\y$ and $\norm{\y}$, ${ \norm{\x} - \norm{\y} }$ is unbounded. But then (1) tells us that ${ \norm{\x - \y} }$ is also unbounded. Therefore, the definition of a bounded subset of $\R{m}$ (\ref{def:bounded-subset-of-euclidean-m-space}) implies the proposition,
+			\[ \exists M \logicsep \forall \x,\y \in B \logicsep \norm{\x - \y} \leq M \; \implies \; \exists K \logicsep \forall \x \in B \logicsep \norm{\x} \leq K. \]
+			Conversely, if $\norm{\x}$ is bounded by a constant $K$ then ${ \norm{\x} + \norm{\y} }$ is bounded by $2K$. Then (2) allows us to deduce that the proposition also implies the definition of a bounded subset of $\R{m}$,
+			\[ \norm{\x - \y} \leq \norm{\x} + \norm{\y} \leq 2K \; \implies \; \exists M = 2K \logicsep \forall \x,\y \in B \logicsep \norm{\x} + \norm{\y} \leq M. \]
 		\end{proof}
 	}
 
@@ -306,6 +216,11 @@
 		}
 		\notation{A sequence may be denoted $(f(n))_{n=1}^\infty$ or $(f(n))$, where $f$ is the function that defines the sequence or, a more informal notation is common where $(a_n)_{n=1}^\infty$ or $(a_n)$ (or sometimes $\{a_n\}$) is used to denote the sequence with $a_n$ referring to the $n$-th term.
 		}
+	
+		\boxeddefinition{\textbf{(Sequence in a Set)} If $X$ is a set then a sequence in $X$ refers to a sequence $(x_n)$ such that
+			\[ \forall n \in \N{} \logicsep x_n \in X. \] 
+		\label{def:sequence-in-a-set}}
+		
 		
 		\bigskip
 		\boxeddefinition{\textbf{(Bounded Sequence)} If $a_n$ is a sequence and $ S = \setc{a_n}{n \in \N{}} $ then $a_n$ is said to be \textbf{bounded below} if $S$ has a lower bound and \textbf{bounded above} if $S$ has an upper bound, and \textbf{bounded} if it is bounded above and below.
@@ -791,7 +706,7 @@
 				\end{enumerate}
 			}\label{ex:geom_prog_common_ratio_less_than_one_tends_to_zero}
 		\end{exe}
-	}
+
 
 
 
@@ -810,7 +725,7 @@
 		\medskip
 		\labeledProposition{If $a_n$ is a sequence that tends to a limit, then any subsequence of it tends to the same limit.}{subseq-tends-to-same-limit}
 		\begin{proof}
-			Firstly, notice that if the $n$th index of some subsequence is $k_n$ then $k_n \geq n$ (because the subsequence can only skip terms of the original - it can't add in terms). So then, if we have a sequence $a_n$ that tends to a limit $a$ and an arbitrary subsequence $a_{k_n}$ then,
+			Firstly, notice that if the $n$th index of some subsequence is $k_n$ then, by \autoref{prop:strictly-increasing-function-over-naturals-has-value-geq-argument}, $k_n \geq n$. So then, if we have a sequence $a_n$ that tends to a limit $a$ and an arbitrary subsequence $a_{k_n}$ then,
 			\[ \forall \epsilon > 0 \logicsep \exists N \logicsep \forall n > N \in \N{} \logicsep \abs{a_n - a} < \epsilon \implies \abs{a_{k_n} - a} < \epsilon \]
 			because ${ k_n \geq n > N }$.
 		\end{proof}
@@ -946,64 +861,6 @@
 		\biggerskip
 		\subsubsection{Sequences in Euclidean m-space}
 		\bigskip
-		\boxeddefinition{\textbf{(Bounded Subset of $\R{m}$)} A subset $B$ of $\R{m}$ is described as \textit{bounded} iff
-			\[ \exists M \geq 0 \in \R{} \logicsep \forall \x,\y \in B \logicsep \norm{\x - \y} \leq M \]
-			where ${ \norm{\x - \y} }$ denotes the Euclidean norm (\ref{def:euclidean-norm}).
-		}\label{def:bounded-subset-of-euclidean-m-space}
-	
-	
-		\biggerskip
-		\subheading{Intuition of Bounded Subsets in $\R{2}$}
-		\bigskip
-		Figures \ref{fig:bounded-subset-of-Rm-around-origin} and \ref{fig:bounded-subset-of-Rm-not-around-origin} show two bounded subsets: one around the origin and the other not containing the origin.
-		\note{Note that there is no reason that an arbitrary subset need be circular even though the examples here are.}
-		Notice that, whether the subset is centred on the origin or not, ${ \x - \y }$ and ${ \x - \z }$ are the same vector in both cases with the maximum length vector being ${ \x - \z }$. So both subsets have the same $M$ such that ${ \forall \x,\y \logicsep \norm{\x - \y} \leq M }$.\\
-		
-		Addition of vectors, however, does not exhibit the same invariance as can be seen by the difference in ${ \x + \y }$ in the two subsets.
-		
-		\begin{figure}[h!]
-			\begin{minipage}{0.9\textwidth} 
-				\includegraphics[width=\linewidth]{\resourceDir/img/Analysis/bounded_subset_of_Rm_centred_on_the_origin.png}    
-				\caption{A bounded subset of $\R{m}$ centred on the origin.}
-				\label{fig:bounded-subset-of-Rm-around-origin}  
-			\end{minipage}
-			  
-			\vspace{0.75cm}
-			\begin{minipage}{0.9\textwidth} 
-				\includegraphics[width=\linewidth]{\resourceDir/img/Analysis/bounded_subset_of_Rm_not_centred_on_the_origin.png}    
-				\caption{A bounded subset of $\R{m}$ not centred on the origin.}
-				\label{fig:bounded-subset-of-Rm-not-around-origin}   
-			\end{minipage}			
-		\end{figure}
-
-		\biggerskip
-		\labeledProposition{A subset $B$ of $\R{m}$ is bounded iff
-			\[ \exists M \geq 0 \in \R{} \logicsep \forall \x \in B \logicsep \norm{\x} \leq M. \]
-		}{bounded-subset-contains-bounded-length-vectors}
-		\begin{proof}
-			Using the unique additive inverse of a vector (\autoref{prop:unique_additive_inverse}) and the general norm properties (\autoref{prop:norm-properties}), for any ${ \x,\y \in \R{m} }$,
-			\[\begin{aligned}
-				&& \norm{\x} &= \norm{\x - \y + \y} &\sidecomment{by additive inverse of vectors}\\
-				&\iff & \norm{\x} &\leq \norm{\x - \y} + \norm{\y} &\sidecomment{by triangle inequality of norms} \\
-				&\iff & \norm{\x} - \norm{\y} &\leq \norm{\x - \y}  &(1)
-			\end{aligned}\]
-			and
-			\[\begin{aligned}
-				&& \norm{\x - \y} &= \norm{\x + (-\y)} &\sidecomment{by additive inverse of vectors}\\
-				&\iff & \norm{\x - \y} &\leq \norm{\x} + \norm{-\y} &\sidecomment{by triangle inequality of norms} \\
-				&\iff & \norm{\x - \y} &\leq \norm{\x} + \abs{-1}\norm{\y} &\sidecomment{by norm properties} \\
-				&\iff & \norm{\x - \y} &\leq \norm{\x} + \norm{\y}.  &(2)
-			\end{aligned}\]
-			\nl
-			If, ranging over ${ \x \in B }$, $\norm{\x}$ is unbounded then, for some fixed $\y$ and $\norm{\y}$, ${ \norm{\x} - \norm{\y} }$ is unbounded. But then (1) tells us that ${ \norm{\x - \y} }$ is also unbounded. Therefore, the definition of a bounded subset of $\R{m}$ (\ref{def:bounded-subset-of-euclidean-m-space}) implies the proposition,
-			\[ \exists M \logicsep \forall \x,\y \in B \logicsep \norm{\x - \y} \leq M \; \implies \; \exists K \logicsep \forall \x \in B \logicsep \norm{\x} \leq K. \]
-			Conversely, if $\norm{\x}$ is bounded by a constant $K$ then ${ \norm{\x} + \norm{\y} }$ is bounded by $2K$. Then (2) allows us to deduce that the proposition also implies the definition of a bounded subset of $\R{m}$,
-			\[ \norm{\x - \y} \leq \norm{\x} + \norm{\y} \leq 2K \; \implies \; \exists M = 2K \logicsep \forall \x,\y \in B \logicsep \norm{\x} + \norm{\y} \leq M. \]
-		\end{proof}
-	
-	
-	
-		\biggerskip
 		\subheading{Convergence of Sequences in $\R{m}$}
 		\nl[6]
 		\boxeddefinition{\textbf{(Sequence Convergence in $\R{m}$)} Sequence convergence in $\R{m}$ is similar to convergence in $\R{}$ except that the absolute value becomes the vector norm. So, the sequence $(\x_n)$ \textit{tends to} $\y$ iff
@@ -1060,6 +917,8 @@
 			\[ \norm{x_{in} - y_i} < \epsilon \]
 			which shows that convergence of $\x_n$ to $\y$ implies convergence of each $x_{in}$ to each $y_i$.
 		\end{proof}
+	
+	}
 
 
 % -------------- break ----------------
@@ -2855,6 +2714,9 @@
 		
 		\nl[12]
 		\subsubsection{Differentiation in \texorpdfstring{$\R{n}$}{Rn}}
+		{\tiny 
+			\hyperref[ssssection:differentiation-Rn-Rm]{differentiation $\R{n} \longmapsto \R{m}$} \hspace{20pt} \hyperref[]{}\\
+		}
 		\biggerskip
 		
 		\subsubsubsection{Differentiation $\R{n} \longmapsto \R{}$}
@@ -2909,10 +2771,10 @@
 		
 		\nl[24]
 		\group{
-		\subsubsubsection{Differentiation $\R{n} \longmapsto \R{m}$}
+		\subsubsubsection{Differentiation $\R{n} \longmapsto \R{m}$}\label{ssssection:differentiation-Rn-Rm}
 		
 		\boxeddefinition{\textbf{(Derivative ${ \R{n} \longmapsto \R{m} }$)} A function ${ f: \R{n} \longmapsto \R{m} }$ is said to be \textit{differentiable} if there exists a matrix ${ A \in \R{m \times n} }$ that describes a linear function ${ \x \longmapsto A\x }$ from ${ \R{n} \longmapsto \R{m} }$ such that
-			\[ \lim_{h \to 0} \frac{ f(\a + \V{h}) - f(\a) - A\V{h} }{ \norm{\V{h}} } = 0. \]
+			\[ \lim_{h \to 0} \frac{ f(\a + \V{h}) - f(\a) - A\V{h} }{ \norm{\V{h}} } = \0. \]
 			The matrix $A$ and the linear function it describes are known as the \textit{derivative of $f$} or the \textit{Jacobian of $f$} at $\a$ and are denoted $\Dif f(\a)$.
 			\[
 				\Dif f(\a) = \begin{bmatrix}
@@ -2965,6 +2827,209 @@
 			\[ \lim_{t \to 0} f(t, t^2) = \frac{ t^4 }{ 2 t^4 } = \frac{1}{2} \neq 0 \]
 			so $f$ is discontinuous at $\0$. By (iii) of \autoref{prop:derivative-Rn-to-Rm-properties}, it follows that $f$ is not differentiable.
 		\end{exe}
+	}
+
+
+% -------------- break ----------------
+\pagebreak
+
+
+	\searchableSubsection{Topology and Metric Spaces}{analysis, real analysis}{
+		\bigskip
+		\subsubsection{Open and Closed Sets in \texorpdfstring{$\R{}$}{R}}
+		\bigskip
+		\boxeddefinition{\textbf{(Neighbourhood)} The interval $ (L - \epsilon, L + \epsilon) $ is called the \textit{\mbox{$\epsilon$-neighbourhood of $L$}}.}
+		
+		\boxeddefinition{\textbf{(Open Sets in $\R{}$)} A set ${ X \subseteq \R{} }$ is an \textit{open set} iff every ${ x \in X }$ has an $\epsilon$-neighbourhood around it that is wholly contained in the set. That's to say,
+			\[ \exists \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \subseteq X. \]
+			\label{def:open-set}}
+		
+		\boxeddefinition{\textbf{(Closed Set)} A set is a \textit{closed set} iff every convergent sequence of values in the set converges to a value contained in the set.\\
+			
+			Formally, if a set ${ X \subseteq \R{} }$ is a \textit{closed set} then every convergent sequence $(x_n)$ with ${ x_n \in X }$ for all ${ n \in \N{} }$ has
+			\[ \lim_{n \to \infty} x_n \; \in X. \]
+			\label{def:closed-set}}
+		
+		\note{Note that sets may be both open and closed or neither open or closed. For example:
+			\begin{itemize}
+				\item The set of all real numbers $\R{}$ is both open and closed as is the empty set (note that these two are complements of each other); and
+				\item the interval ${ (0,1] }$ is neither open nor closed.
+			\end{itemize}
+			It's also worth noting that ${ [1, \infty) }$ may appear to be neither open nor closed but is, in fact, closed.
+		}
+		
+		
+		\nl[12]
+		\labeledProposition{The union of a collection of open sets is an open set.}{union-of-open-sets-is-an-open-set}
+		\begin{proof}
+			Let $I$ be some indexing set and ${ \setc{U_i}{i \in I} }$ be an indexed collection of sets. Then, if each $U_i$ is an open set, then we have, by the definition of an open set (\ref{def:open-set}), for all ${ i \in I }$,
+			\[ \forall x \in U_i \logicsep \exists \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \subseteq U_i. \]
+			But also
+			\[ (x - \epsilon, x + \epsilon) \subseteq U_i \; \implies \; (x - \epsilon, x + \epsilon) \subseteq \bigcup_{i \in I} U_i. \]
+			Therefore, if each $U_i$ is an open set it follows that $\bigcup_{i \in I} U_i$ is an open set also.
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{The intersection of a collection of finitely many open sets is an open set.}{intersection-of-finitely-many-open-sets-is-an-open-set}
+		\begin{proof}
+			Let ${ I = \N{}_n = \{ 1, 2, \dots, n \} }$ and let every set in the indexed family ${ \setc{A_i}{i \in I} }$ be an open set. Then, if ${ x \in \bigcap_{i \in I} A_i }$ it follows that, for each ${ i \in I }$,
+			\[ x \in A_i \; \implies \; \exists \epsilon_i \logicsep (x - \epsilon_i, x + \epsilon_i) \subseteq A_i. \]
+			Since there are a finite number, $n$, of sets $A_i$ and so the set ${ \setc{\epsilon_i}{i \in I} }$ is also finite, then it has a minimum. If we take
+			\[ \epsilon = \min \setc{\epsilon_i}{i \in I} \]
+			then we have,
+			\[ \forall i \in I \logicsep (x - \epsilon, x + \epsilon) \subseteq A_i \; \implies \; (x - \epsilon, x + \epsilon) \subseteq \bigcap_{i \in I} A_i.  \qedhere \]
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{The intersection of a collection of infinitely many open sets is not, in general, an open set.}{intersection-of-infinitely-many-open-sets-is-not-necessarily-an-open-set}
+		\begin{proof}
+			Let ${ \setc{U_i}{i \in \N{}} }$ be a family of open sets such that ${ U_i = (-1/i, 1/i) }$. Then, for ${ x \in \bigcap_{i \in I} U_i }$ it follows that, for each ${ i \in I }$,
+			\[ x \in U_i \; \implies \; \exists \epsilon_i \logicsep (x - \epsilon_i, x + \epsilon_i) \subseteq U_i. \]
+			However, in this case, if we take the minimum of the $\epsilon_i$, there is no minimum and instead we have an infimum,
+			\[ \inf \setc{\epsilon_i}{i \in I} = \inf \setc{1/i}{i \in \N{}} = 0. \]
+			Therefore, the widest neighbourhood that is contained in all the $U_i$ is ${ (x - 0, x + 0) }$ which is to say, no neighbourhood. So there is only a single element in ${ x \in \bigcap_{i \in I} U_i }$ and the only element that it can be is 0.
+		\end{proof}
+		
+		
+		\bigskip
+		\labeledProposition{A set ${ C \subset \R{} }$ is closed iff its complement ${ \R{}\setminus C }$ is open.}{subset-of-R-is-closed-iff-complement-is-open}
+		\begin{proof}
+			Assume $C$ is closed. Then, by the definition of a closed set (\ref{def:closed-set}), for every sequence $(x_n)$,
+			\[ \forall n \in \N{} \logicsep x_n \in C \; \implies \; \lim_{n \to \infty} x_n \; \in C. \]
+			Suppose, for contradiction, that ${ \R{} \setminus C }$ is not open so that, negating the definition of an open set (\ref{def:open-set}), there exists some ${ x \in \R{} \setminus C }$ such that,
+			\[ \forall \epsilon > 0 \logicsep (x - \epsilon, x + \epsilon) \centernot\subseteq \R{} \setminus C. \]
+			But then, there exists some sequence $(x_n)$ with ${ \abs{x_n - x} = 1/n = \epsilon }$ such that
+			\[ \forall n \in \N{} \logicsep x_n \in C \; \land \; \lim_{n \to \infty} x_n = x \; \centernot\in C. \]
+			This contradicts the hypothesis that $C$ is a closed set and so ${ \R{} \setminus C }$ is open.\\
+			
+			\nl
+			Conversely, suppose ${ \R{} \setminus C }$ is open and suppose, for contradiction, that $C$ is not closed. Then there exists some sequence $(x_n)$, such that
+			\[ \forall n \in \N{} \logicsep x_n \in C \; \land \; \lim_{n \to \infty} x_n \; \centernot\in C. \]
+			But then there is some ${ y = \lim_{n \to \infty} x_n \in \R{} \setminus C }$ with, for every ${ \epsilon > 0 }$, some $x_n$ such that
+			\[ \abs{x_n - y} < \epsilon \; \implies \; x_n \in (y - \epsilon, y + \epsilon) \]
+			which, since ${ x_n \in C }$, implies that
+			\[ (y - \epsilon, y + \epsilon) \centernot\subseteq \R{} \setminus C \]
+			contradicting the hypothesis that ${ \R{} \setminus C }$ is open. Therefore $C$ is closed.
+		\end{proof}
+		
+		
+		\nl[6]
+		\sep
+		\begin{exe}
+			\ex Any open interval is an open set but the reverse is not, in general, the case. For example,
+			\[ S = (1,2) \cup (3,4) \]
+			is an open set but is not an open interval (it is not an interval at all).
+			
+			\bigskip
+			\ex Let ${ I = (1,\infty) }$ be an indexing set and define the indexed collection of sets,
+			\[ C = \setc{A_i}{i \in I} \suchthat A_i = (1/i, 2]. \]
+			Then,
+			\[ \bigcup_{i \in I} A_i = (0, 2]. \]
+			
+			\nl[12]
+			For any ${ A_i \in C }$ we have ${ A_i \subseteq (0, 2] }$ and
+			\[ \forall i \in I \logicsep A_i \subseteq (0, 2] \; \implies \; \bigcup_{i \in I} A_i \subseteq (0, 2]. \]
+			Conversely, if ${ x \in (0, 2] }$ then ${ 0 < x \leq 2 }$. Since ${ I = (1,\infty) }$, for any ${ x \in (0, 2] }$, there exists ${ i \in I }$ such that
+			\[ i > 1/x \; \implies \; 1/i < x \leq 2 \; \implies \; x \in A_i \; \implies \; x \in \bigcup_{i \in I} A_i. \]
+			Therefore ${ (0, 2] \subseteq \bigcup_{i \in I} A_i }$.
+		\end{exe}
+		
+		
+		\nl[16]
+		\subsubsubsection{Open and Closed Sets in \texorpdfstring{$\R{m}$}{Rm}}
+		\nl[4]
+		\boxeddefinition{\textbf{(Open Ball)} For ${ \x \in \R{m} }$ and ${ \epsilon > 0 \in \R{} }$, the \textit{open ball of radius $\epsilon$ around $\x$} is defined as the set,
+			\[ B_{\epsilon}(\x) = \setc{\y}{ \norm{\x - \y} < \epsilon }. \]
+			\label{def:open-ball}}
+		
+		\boxeddefinition{\textbf{(Open Set in $\R{m}$)} A set ${ X \subseteq \R{m} }$ is \textit{open} iff, for any ${ \x \in X }$, there exists ${ \epsilon > 0 }$ such that,
+			\[ B_{\epsilon}(\x) \subseteq X. \]
+			\label{def:open-set-in-Rm}}
+		
+		\boxeddefinition{\textbf{(Continuity over Open Balls)} Continuity (\ref{def:continuity}) can be expressed in $\R{m}$ over open balls as: If a function ${ f: \R{n} \longmapsto \R{m} }$ is continuous at ${ \a \in \R{n} }$ then, for any open ball ${ B_\epsilon(f(\a)) }$ around $f(\a)$ of radius $\epsilon$, there exists some ${ \delta > 0 }$ such that
+			\[ f(B_\delta(\a)) \subseteq B_\epsilon(f(\a)). \]
+		\label{def:continuity-over-open-balls}}
+		
+		\biggerskip
+		\labeledProposition{Any open ball is an open set.}{open-ball-is-open-set}
+		\begin{proof}
+			Let ${ B_\epsilon(\x) }$ be an open ball around an element ${ \x \in X \subseteq \R{m} }$. Then for any ${ \y \in B_\epsilon(\x) }$ there exists
+			\[ \delta = \epsilon - \norm{\x - \y} > 0 \]
+			such that, for any ${ \z \in B_\delta(\y) }$,
+			\[ \norm{\x - \z} = \norm{\x - \y + \y - \z} \leq \norm{\x - \y} + \norm{\y - \z} < \norm{\x - \y} + \delta = \epsilon. \]
+			Therefore ${ \z \in B_\epsilon(\x) }$ and so
+			\[ B_\delta(\y) \subseteq B_\epsilon(\x). \]
+			So ${ B_\epsilon(\x) }$ is an open set.
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{Let ${ f: \R{n} \longmapsto \R{m} }$. Then $f$ is continuous iff every open set ${ U \subseteq \R{m} }$ has a pre-image
+			\[ \inv{f}(U) \subseteq \R{n} \]
+			that is also an open set.
+		}{}
+		\begin{proof}
+			Assume $f$ is continuous over all $\R{n}$ and that ${ U \subseteq \R{m} }$ is an open set. For any ${ \x \in U }$, either its pre-image ${ \inv{f}(\x) }$ is empty or it's non-empty. If it's empty then it's open because the empty set is open. If it's non-empty then, for any ${ \epsilon > 0 }$, there exists some ${ \delta > 0 }$ such that
+			\[ f(B_\delta(\x)) \subseteq B_\epsilon(f(\x)). \]
+			This implies that whenever there is an $\epsilon$-neighbourhood (open-ball) around $f(\x)$ in $U$, then there is a $\delta$-radius open ball around $\x$ in $\inv{f}(U)$. Since $U$ is an open set, there is always an $\epsilon$-radius open-ball around any element in $U$. Therefore, there is always a $\delta$-radius open ball around any element in the pre-image $\inv{f}(U)$ and so $\inv{f}(U)$ is an open set.\\
+			
+			Conversely, suppose that whenever a subset of $\R{m}$ is an open set, its pre-image is an open set also. Then, if an open set ${ U \subseteq \R{m} }$ contains $f(\x)$, an element in the image of $f$, since the set is open, there must be some $\epsilon$-radius open ball $B_\epsilon(f\x)$ around $f(\x)$. But then, since $B_\epsilon(f\x)$ is an open ball and hence an open set, by hypothesis, the pre-image ${ \inv{f}(B_\epsilon(f\x)) }$ is an open set. Clearly, $\x$ is in this pre-image and, since it's an open set, there must be some $\delta$-radius open ball around $\x$,
+			\[ B_\delta(\x) \subseteq \inv{f}(B_\epsilon(f\x)). \]
+			From this it follows by definition of the pre-image (\ref{def:function-pre-image}) that
+			\[ f(B_\delta(\x)) \subseteq B_\epsilon(f\x) \]
+			which is to say (\ref{def:continuity-over-open-balls}) that $f$ is continuous.
+		\end{proof}
+		
+		
+		\biggerskip
+		\subsubsection{Compactness}
+		\bigskip
+		\boxeddefinition{\textbf{(Compact Set)} A set ${ C \subseteq \R{m} }$ is \textit{compact} iff, any sequence with all its terms in $C$, has a convergent subsequence converging to a point in $C$.
+		\label{def:compact-set}}
+		
+		\biggerskip
+		\labeledTheorem{\textbf{(Heine-Borel Theorem)} A set ${ C \subseteq \R{m} }$ is \textit{compact} iff it is both closed and bounded.}{heine-borel}
+		\begin{proof}
+			Assume $C$ is closed and bounded. Then, by the bounded property of $C$ and \autoref{prop:bounded-subset-contains-bounded-length-vectors}, there exists some ${ M \in \R{} }$ such that
+			\[ \forall \x \in C \logicsep \norm{\x} \leq M. \]
+			It follows that, every sequence $(\x_n)$ in $C$ has
+			\[ \forall n \in \N{} \logicsep \norm{\x_n} \leq M \]
+			and so the sequence is bounded by the bounds of $C$. So, by \autoref{theo:every_bounded_seq_has_convergent_subseq}, $(\x_n)$ has a convergent subsequence $(\x_{k_n})$. Since $C$ is closed, then $(\x_{k_n})$ converges to a limit in $C$. Therefore, $C$ is compact.\\
+			
+			Conversely, assume $C$ is compact. For contradiction, suppose that $C$ is unbounded and let $(\x_n)$ be a sequence in $C$ such that ${ \norm{\x_n} > n }$. By the compact property of $C$ (\ref{def:compact-set}), $(\x_n)$ has a convergent subsequence $(\x_{k_n})$ that converges to a limit in $C$. By the definition of a subsequence (\ref{def:subsequence}), $k_n$ is a strictly increasing function of $n$ and by \autoref{prop:strictly-increasing-function-over-naturals-has-value-geq-argument}, we have
+			\[ k_n \geq n \; \implies \; \norm{\x_{k_n}} \geq \norm{\x_n} > n. \tag{1} \]
+			But then if $(\x_{k_n})$ converges to a limit ${ \y \in \R{m} }$, then, choosing any arbitrary ${ \epsilon > 0 }$, there exists some $N$ such that
+			\[ \forall n > N \in \N{}\logicsep \norm{\x_{k_n} - \y} < \epsilon \]
+			but, by norm properties (\ref{prop:norm-properties}), this implies
+			\[ \norm{\x_{k_n}} = \norm{\x_{k_n} - \y + \y} \leq \norm{\x_{k_n} - \y} + \norm{\y} < \epsilon + \norm{\y}.  \tag{2} \]
+			Since ${ \epsilon + \norm{\y} }$ is just some constant, result (2) tells us that $\norm{\x_{k_n}}$ is bounded above while (1) implies
+			\[ \norm{\x_{k_n}} > n \; \implies \; \lim_{n \to \infty} \norm{\x_{k_n}} = \infty \]
+			which is clearly a contradiction. Therefore $C$ is bounded.\\
+			
+			Now suppose that $(\x_n)$ is a convergent sequence in $C$. Then, by the compact property, it has a convergent subsequence that converges to a limit ${ \y \in C }$. But, for a convergent sequence, by \autoref{prop:subseq-tends-to-same-limit}, all subsequences tend to the same limit as the original sequence. Therefore, the original sequence tends to $\y$ also. It follows that $C$ is closed.
+		\end{proof}
+		
+		\bigskip
+		\labeledProposition{Continuous functions on Euclidean spaces map compact sets to compact sets.}{continuous-functions-on-Rm-map-compact-sets-to-compact-sets}
+		\begin{proof}
+			Let ${ f: \R{n} \longmapsto \R{m} }$ be a continuous function and let ${ C \subseteq \R{n} }$ be compact. For any sequence $(\y_n)$ in $f(C)$ the image of $C$ under $f$, for every $n$ there exists some ${ \x_n \in C }$ such that ${ \y_n = f(\x_n) }$.\\
+			
+			Consider the sequence $(\x_n)$ in $C$. By the definition of compactness (\ref{def:compact-set}) of $C$, $(\x_n)$ has a convergent subsequence $(\x_{k_n})$ that converges to a limit in $C$. Let ${ \y = \lim_{n \to \infty} \x_{k_n} }$. Then, by continuity of $f$ (\ref{def:continuity-over-open-balls}), for all ${ \epsilon > 0 \in \R{} }$, there exists some ${ \delta > 0 \in \R{} }$ such that
+			\[ f(B_\delta(\y)) \subseteq B_\epsilon(f(\y)). \]
+			Since $(\x_n)$ tends to $\y$, there exists $N$ such that for all ${ n > N \in \N{} }$,
+			\[\begin{aligned}
+				&& \norm{\x_n - \y} < \delta &\implies \norm{f(\x_n) - f(\y)} < \epsilon  \\
+				&\iff & \norm{\x_n - \y} < \delta &\implies \norm{\y_n - f(\y)} < \epsilon.
+			\end{aligned}\]
+			So the sequence $(\y_n)$ in $f(C)$ converges to ${ f(\y) \in f(C) }$. It follows that $f(C)$ is compact.
+		\end{proof}
+		\note{Note that the converse is not true: a function on Euclidean spaces that maps compact sets to compact sets is not, in general, continuous. By \autoref{theo:heine-borel}, any closed and bounded set in a Euclidean space, is compact. So any image of a function that is closed and bounded is a compact set. Therefore, a function, for example, that contains a jump discontinuity, still has an image that is compact even though it is not continuous.}
+		\begin{corollary}
+			Extreme Value Theorem (\autoref{theo:extreme-value-theorem}) is a particular case of \autoref{prop:continuous-functions-on-Rm-map-compact-sets-to-compact-sets} for a continuous function ${ \R{n} \longmapsto \R{} }$.
+		\end{corollary}
+		\begin{proof}
+			The image of a continuous function ${ \R{n} \longmapsto \R{} }$ is a compact subset of $\R{}$. Therefore, by \autoref{theo:heine-borel}, it is closed and bounded and so it achieves its supremum and infimum.
+		\end{proof}
+
 	}
   
 \end{document}

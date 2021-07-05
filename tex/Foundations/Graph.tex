@@ -1,0 +1,21 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+
+	\searchableSection{Graph Theory}{Discrete Maths, Graph Theory}{
+		\biggerskip
+		\boxeddefinition{\textbf{(Graph)} A \textit{graph} is a pair of sets $(V,E)$ where $V$ is a set of objects referred to as \textit{vertices} and $E$ is a set of objects referred to as \textit{edges} and is a relation over $V$. That's to say,
+			\[ E \subseteq V \times V = \setc{ (x,y) }{ x,y \in V \; \land \; x \neq y }. \]
+		\label{def:graph}}
+	
+		\notation{The cartesian product of the vertex set $V$, in the context of graph theory, is often denoted
+			\[ \begin{pmatrix}V \\ 2\end{pmatrix}  \eqword{or} V^{(2)}. \]
+			In which case, the edge,
+			\[ E \subseteq \begin{pmatrix}V \\ 2\end{pmatrix} = V^{(2)}. \]
+		}
+	
+		\boxeddefinition{\textbf{(Complete Graph)} A \textit{complete graph} is a graph such that the edge set is a total relation over the set of vertices. \label{def:complete-graph}}
+	}
+\end{document}

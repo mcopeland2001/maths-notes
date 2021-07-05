@@ -1,0 +1,32 @@
+\documentclass[../MathsNotesBase.tex]{subfiles}
+
+\date{\vspace{-6ex}}
+
+\begin{document}
+	Confirmation Bias was found to more accurately be described as "a tendency to test ideas in a one-sided way, focusing on one possibility and ignoring alternatives" [source: \href{https://en.wikipedia.org/wiki/Confirmation_bias}{Wikipedia}]. Because alternative hypotheses may be contradictory, ignoring them means ignoring the possibility of potentially contradictory explanations for the same events. The result of this is that the very same data point may be considered, by different people with different viewpoints, to support opposing and contradictory hypotheses.\\
+	
+	For example, when a US prosecutor indicts Donald Trump for financial crimes, Trump's detractors consider this to be further evidence that Trump is a fraud: that he is, in contra to his crafted public image, not a skilled businessman but in fact a crook. On the other hand, Trump's diehard supporters react to the same event as further evidence that the Deep State is out to get Trump.\\
+	
+	So there are opposing hypotheses attempting to explain why Trump is indicted: the hypothesis that the prosecutors are honestly and fairly applying the law and that Trump is a crook; and the hypothesis that the prosecutors are motivated by political opposition to Trump's politics to corruptly apply the law to attack Trump and so Trump is innocent.\\
+	
+	We can express this in propositional logic using:\\
+	
+	\begin{tabular}[h!]{*2l}
+		$h$: & the prosecutors are honest \\
+		$c$: & Trump is a crook \\
+		$\lnot h$: & the prosecutors are corrupt \\
+		$\lnot c$: & Trump is innocent.
+	\end{tabular}\\
+
+	So we have,
+	\[\begin{aligned}
+		h &\implies c \\
+		\lnot h &\implies \lnot c.
+	\end{aligned}\]
+
+	So Trump says, "I'm innocent, these prosecutors are out to get me for political reasons" and then any following indictment can be taken as evidence that Trump was telling the truth. On the other hand, if you believe that Trump is a crook and a liar, then you disbelieve his statement that he's innocent, and any subsequent indictment is taken to be further evidence that you were right that Trump is a crook.\\
+	
+	To anyone entertaining the possibility of both hypotheses simultaneously, the fact that Trump is indicted does not lend weight to either hypothesis. But to anyone entertaining the possibility of only one of the contradictory hypotheses, the fact supports the hypothesis that they are entertaining. Hence Confirmation Bias.\\
+	
+	Note that this is always likely to be a problem with Frequentist hypothesis testing where only a single hypothesis is being tested as opposed to Bayesian methods where a prior distribution family of possible hypotheses is assumed. However, even when using Bayesian methods, the issue may still arise due to directly contradictory hypotheses not being included in the same prior distribution of possible hypotheses.
+\end{document}

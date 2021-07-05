@@ -1,18 +1,23 @@
-\documentclass[MathsNotesBase.tex]{subfiles}
+\documentclass[../MathsNotesBase.tex]{subfiles}
 
 \date{\vspace{-6ex}}
 
 \begin{document}	
 	
-	\searchableSubsection{The Axiom of Choice}{set theory}{
+	\searchableSubsection{ZFC Set Theory}{set theory}{
+		
 		\biggerskip
-		\subsubsection{Statement of the Problem - Intuitive}
+		\subsubsection{The Axiom of Choice}
+		\bigskip
+		\subsubsubsection{Statement of the Problem - Intuitive}
+		\nl
 		The problem that the Axiom of Choice addresses was famously described by Bertrand Russell using the example of choosing from an infinite number of pairs of shoes and an infinite number of pairs of socks. From pairs of shoes it is easy to see how you can have a strategy for making a choice but for pairs of identical socks it is not at all obvious how to achieve the same thing.\\
 		
 		In fact, a set like a pair of socks cannot exist because the definition of a set of objects requires that the objects are distinguishable. As a result, just looking at Bertrand Russell's example, it is tempting to think that the problem wouldn't arise. However, we can instead think of an infinite collection of non-empty sets containing \textit{distinguishable} objects: In this case we \textit{still} cannot develop a choice function because there is no single strategy that can be applied to make choices from all the sets. This is a more important point than it may at first seem because the problem of choosing a strategy for each of the infinite sets is a problem of making an arbitrary choice for an infinite number of sets - i.e. the very same problem that the Axiom of Choice is attempting to address!
 		
 		\bigskip
-		\subsubsection{Statement of the Problem - Formal}
+		\subsubsubsection{Statement of the Problem - Formal}
+		\nl
 		If a set $B$ is non-empty then this can be expressed in first-order predicate logic as the truth of
 		\[ \phi(B) := (\exists x)(x \in B). \]
 		Then, through the use of \textit{existential instantiation} we can posit an element, say ${ c \in B }$.\\
@@ -30,14 +35,16 @@
 		However, the first-order logic that is the standard for the logical formalization of mathematics is not able to model infinite domains as the \href{https://en.wikipedia.org/wiki/Compactness_theorem}{Compactness Theorem} implies that first-order logic cannot uniquely determine infinite sets. We cannot, therefore, use the same logical approach to formalize a choice from an infinite number of sets. For this reason the capability needs to be introduced as an axiom.
 		
 		\bigskip
-		\subsubsection{The Axiom of Choice}\label{sssection:axiom-of-choice}
+		\subsubsubsection{The Axiom of Choice}\label{sssection:axiom-of-choice}
+		\nl
 		\boxeddefinition{Let $A$ be a non-empty set of non-empty sets. A \textbf{choice function} on $A$ is a function,
 			\[ f: A \longmapsto \bigcup_{a \in A} \suchthat \forall a \in A, \; f(a) \in a. \]
 		}
 		
 		\boxedaxiom{\textbf{(The Axiom of Choice)} If $A$ is a non-empty set of non-empty sets then there exists a choice function for $A$.}
 		
-		\subsubsection{The Well-Ordering Theorem (a.k.a Zermelo's Theorem)}\label{sssection:well-ordering-theorem}
+		\subsubsubsection{The Well-Ordering Theorem (a.k.a Zermelo's Theorem)}\label{sssection:well-ordering-theorem}
+		\nl
 		\boxeddefinition{A set is \textbf{well-ordered} by a strict total order if every non-empty subset has a minimal element under the ordering.}
 		\boxedaxiom{\textbf{(Well-Ordering Theorem)} Every set can be well-ordered.}
 		
@@ -51,7 +58,9 @@
 		
 		For uncountable sets the well-ordering may be inexpressible. Specfically, in the case of the reals $\R{}$, it has been proven that any well-ordering of $\R{}$ must be inexpressible.
 		
-		\subsubsection{Zorn's Lemma}
+		\bigskip
+		\subsubsubsection{Zorn's Lemma}
+		\nl
 		To understand Zorn's Lemma some concepts relating to partial orders are needed.\\
 		
 		\subsubsubsection{Partial Orders}

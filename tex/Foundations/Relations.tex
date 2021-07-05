@@ -3,6 +3,17 @@
 \date{\vspace{-6ex}}
 
 \begin{document}
+	
+	\searchableSubsection{Relations}{Discrete Maths}{
+		
+	}
+
+
+
+% -------------- break ----------------
+\pagebreak
+
+
 
 	\searchableSubsection{Functions}{Discrete Maths}{
 		\biggerskip
@@ -49,7 +60,7 @@
 		\boxeddefinition{\textbf{(Function Pre-Image)} Let ${ f: X \longmapsto Y }$ and let ${ Z \subset Y }$. Then the set ${ P \subseteq X }$ such that,
 			\[ P = \setc{x \in X}{\exists z \in Z \logicsep f(x) = z} \]
 			is known as the \textit{pre-image} or \textit{inverse image} of $Z$ under $f$.
-		}
+		\label{def:function-pre-image}}
 		
 		\notation{The most common notation for the pre-image of a set $Z$ is $\inv{f}(Z)$ but care must be taken not to confuse this notation with an inverse function; the pre-image is a set and, in fact, the function $f$ may be uninvertible.
 		}
@@ -329,6 +340,28 @@
 			Therefore, there is no ${ i \in \N{}_n }$ such that ${ f(i) = m }$ which contradicts the surjectivity of $f$ and therefore also the bijectivity of $f$.
 		\end{proof}
 		\note{Note a certain similarity here between this proof and Euler's proof of the infinitude of the primes.}
+		
+		
+		
+		\biggerskip
+		\subsubsection{Ordering}
+		\boxeddefinition{\textbf{(Monotonic Function)} Let $<$ be a total order on a set $X$ and let ${ f: X \longmapsto X }$. Then $f$ is described as \textit{strictly monotonically increasing} if, for any ${ x,y \in X }$,
+			\[ x < y \iff f(x) < f(y) \]
+		and \textit{strictly monotonically decreasing} if
+			\[ x < y \iff f(x) > f(y). \]
+		In both cases $f$ can be described as \textit{monotonic}.
+		\label{def:monotonic-function}}
+	
+		\biggerskip
+		\labeledProposition{If a function ${ f: \N{} \longmapsto \N{} }$ is strictly monotonically increasing then, for any ${ n \in \N{} }$,
+			\[ f(n) \geq n. \]
+		}{strictly-increasing-function-over-naturals-has-value-geq-argument}
+		\begin{proof}
+			Since, for all ${ n \in \N{} }$ we have ${ n \geq 1 }$, then it follows that ${ f(1) \geq 1 }$.	But by the monotonically increasing property (\ref{def:monotonic-function}), for all ${ a, b \in \N{} }$,
+			\[ a < b \iff f(a) < f(b). \]
+			So, inductively, if ${ f(n) \geq n }$ then
+			\[ f(n+1) > f(n) \geq n \; \implies \; f(n+1) > n \; \implies \; f(n+1) \geq n+1. \qedhere \]
+		\end{proof}
 		
 	}
 \end{document}

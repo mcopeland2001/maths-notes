@@ -4,11 +4,888 @@
 
 \begin{document}
 
-	\searchableSubsection{Logic}{logic}{
+	\searchableSubsection{Logic and Sets}{logic}{
+	
+	\biggerskip
+	\subsubsection{Laws of Thought}
+	\boxeddefinition{\textbf{(Laws of Thought)} Early western logic was based on what became known as the \textit{three laws of thought}: \href{https://en.wikipedia.org/wiki/Law_of_thought\#Three_traditional_laws:_identity,_non-contradiction,_excluded_middle}{wikipedia}.
+	\label{def:laws-of-thought}}
+
+	\bigskip
+	\labeledProposition{For binary propositions $A$ and $B$, if ${ A \neq B }$ then ${ A = \lnot B }$ and ${ \lnot A = B }$.}{binary-values-A-neq-B-then-A-eq-not-B}
+	\begin{proof}
+		By the law of the excluded middle we have ${ A \lor \lnot A }$ and ${ B \lor \lnot B }$. So either $A$ is true or $\lnot A$ is true, in which case $A$ is false. So, the law of the excluded middle amounts to saying that $A$ is either true or false. Then if ${ A \neq B }$, we have either
+		\[ A = T \eqand B = F \]
+		or
+		\[ A = F \eqand B = T. \]
+		In both cases ${ A = \lnot B }$ and ${ \lnot A = B }$.
+	\end{proof}
+
+
+
+	
+% -------------- break ----------------
+\pagebreak
+
+
+
+	\subsubsection{Boolean Algebra}
+	\boxeddefinition{\textbf{(Boolean Algebra)} A \textit{Boolean algebra} is an algebra of the logical operations
+		\[ \land, \, \lor, \, \lnot, \]
+		over objects representing the values True and False (or 1 and 0), that satisfies the following axioms.
+	\label{def:boolean-algebra}}
+	
+	\nl[8]
+	\subsubsubsection{Axioms that conform to scalar fields}
+	\boxedaxiom{(Associativity) \[ A \lor (B \lor C) = (A \lor B) \lor C  \eqand A \land (B \land C) = (A \land B) \land C \]}
+	\boxedaxiom{(Commutativity) ${ A \lor B = B \lor A  \eqand A \land B = B \land A }$}
+	\boxedaxiom{(Distributivity of $\land$ over $\lor$)  \[ A \land (B \lor C) = (A \land B) \lor (A \land C) \]}
+	\boxedaxiom{(Identity) ${ A \land 1 = A  \eqand  A \lor 0 = A }$}
+	\boxedaxiom{(Unit for $\land$) ${ A \land 0 = 0 }$}
+	
+	\nl[4]
+	\subsubsubsection{Axioms that don't conform to scalar fields}
+	\boxedaxiom{(Distributivity of $\lor$ over $\land$) \[ A \lor (B \land C) = (A \lor B) \land (A \lor C) \]}
+	\boxedaxiom{(Unit for $\lor$) ${ A \lor 1 = 1 }$ \label{axiom:boolean-unit-for-or}}
+	\boxedaxiom{(Idempotence) ${ A \lor A = A  \eqand  A \land A = A }$}
+	\boxedaxiom{(Absorption) ${ A \lor (A \land B) = A  \eqand  A \land (A \lor B) = A }$ \label{axiom:boolean-absorption}}
+	
+	\nl[4]
+	\subsubsubsection{Non-Monotone Laws}
+	\boxedaxiom{(Complements) ${ A \lor \lnot A = 1  \eqand  A \land \lnot A = 0 }$}
+	\boxedaxiom{(Double Negation) ${ \lnot (\lnot A) = A }$}
+	\boxedaxiom{(De Morgan) \[ \lnot(A \lor B) = \lnot A \; \land \lnot B  \eqand \lnot(A \land B) = \lnot A \; \lor \lnot B \]}
+	
+	%\medskip
+	\note{Note that the boolean absorption axiom (\ref{axiom:boolean-absorption}) looks like it might be provable from the distributivity laws but
+		\[\begin{aligned}
+			A \lor (A \land B) &\equiv (A \lor A) \land (A \lor B) \\
+			&\equiv A \land (A \lor B) \\
+			&\equiv (A \land A) \lor (A \land B)
+			&\equiv A \lor (A \land B).
+		\end{aligned}\]
+		So the distributivity laws allow us to prove the equivalence of the disjunctive and conjunctive normal forms. Absorption has to be shown with truth tables:\\\\		
+		\begin{tabular}[h!]{|c|c|c|c|}
+			\cline{1-4}%
+			$A$ & $B$ & ${ A \land B }$ & ${ A \lor (A \land B) }$\\
+			\cline{1-4}%
+			$T$ & $T$ & $T$ & $T$ \\
+			$T$ & $F$ & $F$ & $T$ \\
+			$F$ & $F$ & $F$ & $F$ \\
+			$F$ & $T$ & $F$ & $F$ \\
+			\cline{1-4}%						
+		\end{tabular}
+		\hspace{47pt}
+		\begin{tabular}[h!]{|c|c|c|c|}
+			\cline{1-4}%
+			$A$ & $B$ & ${ A \lor B }$ & ${ A \land (A \lor B) }$\\
+			\cline{1-4}%
+			$T$ & $T$ & $T$ & $T$ \\
+			$T$ & $F$ & $T$ & $T$ \\
+			$F$ & $F$ & $F$ & $F$ \\
+			$F$ & $T$ & $T$ & $F$ \\
+			\cline{1-4}%						
+		\end{tabular}
+	}
+	
+	\nl[12]
+	\subsubsection{Algebra of Sets}
+	\bigskip
+	\boxeddefinition{\textbf{(Basic Set Operations)} Let $S$ be a set and ${ A,B \subseteq S }$. Then the \textit{intersection} of $A$ and $B$ is defined as
+		\[ A \cap B = \setc{x \in S}{x \in A \; \land \; x \in B} \]
+		and the \textit{union} of $A$ and $B$ is defined as
+		\[ A \cup B = \setc{x \in S}{x \in A \; \lor \; x \in B}. \]
+		The \textit{complement} of the set $A$ in $S$ is defined as
+		\[ A^c = \setc{x \in S}{ x \centernot\in A } \]
+		while set \textit{minus} of $B$ from $A$ is defined as
+		\[ A \setminus B = \setc{x \in S}{ x \in A \; \land \; x \centernot\in B }. \]
+		\label{def:basic-set-operations}}
+	
+	\boxeddefinition{\textbf{(Collection/Family of Sets)} Let $S$ be a set and $I$ be a non-empty indexing set (see: \href{https://en.wikipedia.org/wiki/Index_set}{wikipedia}) such that for each ${ i \in I }$ there exists ${ A_i \subseteq S }$. Then the set of sets,
+		\[ \setc{A_i}{i \in I} \]
+		is known as a \textit{collection} or \textit{family} of sets.
+	}
+	\notation{We denote the intersection of an indexed family of sets,
+		\[ \bigcap_{i \in I} A_i = \setc{x}{ \forall i \in I \logicsep x \in A_i } \]
+		and the union,
+		\[ \bigcup_{i \in I} A_i = \setc{x}{ \exists i \in I \logicsep x \in A_i }. \]
+	}
+	
+	\biggerskip
+	\labeledTheorem{\textbf{(De Morgan Laws for Sets)} Let $S$ be a set and $I$ be a non-empty indexing set such that for each ${ i \in I }$ there exists ${ A_i \subseteq S }$. Then
+		\begin{enumerate}[label=(\roman*)]
+			\item  ${  S \setminus (\bigcap_I A_i) = \bigcup_I (S \setminus A_i)  }$
+			\item  ${ S \setminus (\bigcup_I A_i) = \bigcap_I (S \setminus A_i).  }$
+		\end{enumerate}
+	}{set-de-morgan-laws}
+	\begin{proof}\nl
+		\begin{enumerate}[label=(\roman*)]
+			\item  
+			\[\begin{aligned}
+				&S \setminus \bigcap_I A_i \\
+				&= \setc{x}{ x \in S \; \land \lnot (x \in A_1 \land x \in A_2 \land \cdots \land x \in A_n) } \\
+				&= \setc{x}{ x \in S \; \land [ \lnot (x \in A_1) \lor \lnot (x \in A_2) \lor \cdots \lor \lnot (x \in A_n) ] }  &\sidecomment{} \\
+				&= \setc{x}{ [x \in S \; \land \lnot (x \in A_1)] \lor \cdots \lor [x \in S \; \land \lnot (x \in A_n)] }  &\sidecomment{} \\
+				&= \bigcup_I (S \setminus A_i).
+			\end{aligned}\]
+			
+			\bigskip
+			\item
+			\[\begin{aligned}
+				&S \setminus (\bigcup_I A_i) \\
+				&= \setc{x}{ x \in S \; \land \lnot (x \in A_1 \lor x \in A_2 \lor \cdots \lor x \in A_n) } &\sidecomment{} \\
+				&= \setc{x}{ x \in S \; \land [\lnot (x \in A_1) \land \cdots \land \lnot (x \in A_n)] } &\sidecomment{} \\
+				&= \setc{x}{ [x \in S \; \land \lnot (x \in A_1)] \land \cdots \land [x \in S \; \land \lnot (x \in A_n)] } &\sidecomment{} \\
+				&= \bigcap_I (S \setminus A_i).
+			\end{aligned}\]
+		\end{enumerate}
+	\end{proof}
+	
+	
+	\biggerskip
+	\subsubsubsection{Set Extensions}
+	\nl
+	\boxeddefinition{\textbf{(Extension of a Property)} A boolean property $P(x)$ for ${ x \in U }$ determines a subset of $U$ referred to as its \textit{extension} set,
+		\[ S = \setc{x \in U}{P(x)}. \]
+	\label{def:extension-of-a-property}}
+	
+	\TODO{mention that the set operations form a boolean algebra over the sets with the empty set = 0 and the universal set = 1}
+	
+	\note{Predicate logic can expressed as set operations on the extension sets of the predicates,
+		\[\begin{aligned}
+			P(x) \land Q(x) &= \setc{x \in U}{P(x) \; \land \; Q(x)} \\
+			&= \setc{x \in U}{P(x)} \; \cap \; \setc{x \in U}{Q(x)} &\sidecomment{by \ref{def:basic-set-operations}} \\
+		\end{aligned}\]
+		\[\begin{aligned}
+			P(x) \lor Q(x) &= \setc{x \in U}{P(x) \; \lor \; Q(x)} \\
+			&= \setc{x \in U}{P(x)} \; \cup \; \setc{x \in U}{Q(x)} &\sidecomment{by \ref{def:basic-set-operations}} \\
+		\end{aligned}\]
+	}
+
+
+
+
+		
+% -------------- break ----------------
+\pagebreak
+
+
+
+
+		\subsubsection{Formal Systems}
+		\bigskip
+		\boxeddefinition{\textbf{(Formal System)}  A \textit{formal system} defines a \textit{formal language} to be used for the purpose of inferring theorems from axioms according to a set of rules defined by the system. These rules are described as the \textit{logical calculus} of the formal system.\\
+			
+		A formal system consists of:
+		\begin{enumerate}[label=(\roman*)]
+			\item A finite set of symbols, known as the \textit{alphabet}, that comprise formulas in the formal language;
+			\item A grammar consisting of \textit{rules of formation} that determine permitted ways to build up formulas from simpler formulas. A formula is described as \textit{well-formed}, or a wff (abbreviating \textit{well-formed formula}), if it can be formed by application of the rules of formation to the alphabet;
+			\item A set of \textit{axioms} or \textit{axiom schemata} consisting of wff's;
+			\item A set of \textit{rules of inference} for deriving other wff's --- known as \textit{theorems} --- from the axioms.
+		\end{enumerate}
+		\label{def:formal-system}}
+	
+		\boxeddefinition{\textbf{(Formal Language)} A \textit{formal language} consists of the alphabet (i) and the grammar (ii) elements of a formal system and also has two aspects:
+		\begin{itemize}
+			\item \textit{syntax}, which is the set of all possible wff's in this language and is determined by the alphabet and the grammar; and
+			\item \textit{semantics}, which may be formalized in different ways in different formal systems but is only partially defined within the system itself; it is completed by an interpretation of the system. Usually the rules of inference are designed to preserve some semantic property, for example, truth or logical equivalence.
+		\end{itemize}
+		\label{def:formal-language}}
+	
+		\boxeddefinition{\textbf{(Sentence in a Formal Language)} A \textit{sentence} in a formal language is an assertion that must be either true or false.
+		\label{def:sentence-in-formal-language}}
+	
+		\boxeddefinition{\textbf{(Logical and Non-logical symbols)} In a formal language there exist \textit{logical symbols}, such as the connectives in propositional logic,
+		\[ \lnot, \lor, \land, \implies, \iff \]
+		that have semantics fixed in the definition of the formal system. The \textit{non-logical symbols} on the other hand, for example literals $P$ and $Q$ in propositional logic, need to have their semantic meaning set by an interpretation. Although, in propositional logic we can assume that the interpretation will be a truth-functional assignment.
+		\label{def:logical-and-non-logical-symbols}}
+	
+		\boxeddefinition{\textbf{(Interpretation of a Formal System)} Formal systems are defined purely syntactically even if many are designed with particular semantics in mind. An \textit{interpretation} of a formal system is then a mapping of the non-logical symbols of the formal language to some other set of objects which then become the subjects of the inferences made in the system. The logical symbols have semantics that are invariant to different interpretations and so are referred to as \textit{logical constants}.\\
+		 
+		It is generally assumed that knowing the meaning of a sentence in a language implies knowing its truth value. Under this assumption, applying an interpretation to a formal language results in an assignment of truth value to every sentence in the language but this is not always the case.\\
+		
+		Typically, formal systems have interpretations that are admissable and interpretations that are ruled out as inadmissable. Those formal systems that have been designed with a particular semantics in mind naturally have that semantics as a standard interpretation but other types of interpretation may be regarded as inadmissable. For example, propositional logic is standardly interpreted as a truth-functional system where every non-logical symbol is assigned a value of either True or False and non-bivalue assignments (such as 3-valued logic) would be inadmissable.
+		\label{def:interpretation-of-formal-system}}
+	
+		\boxeddefinition{\textbf{(Syntactic and Semantic Consequence)} If in a language $L$, there exists a rule of inference that, when applied to $A$, produces $B$, we say that $B$ is \textit{derivable} from $A$ or is a \textit{syntactic consequence} of $A$ and write
+		\[ A \vdash B. \]
+		If, under any interpretation such that $A$ is true, $B$ is also true then we say that $B$ is a \textit{semantic consequence} of $A$ and write
+		\[ A \models B. \] 
+		\label{def:syntactic-and-semantic-consequence}}
+	
+		\boxeddefinition{\textbf{(Soundness and Completeness)} If in a language $L$, whenever we have ${ A \vdash B }$ we also have ${ A \models B }$ then $L$ is said to be \textit{sound}. On the other hand, if in $L$ whenever we have ${ A \models B }$ we also have ${ A \vdash B }$, then we say that $L$ is \textit{complete}.
+		\label{def:soundness-and-completeness}}
+	
+		\boxeddefinition{\textbf{(Deductive System)} A \textit{deductive system} --- or a \textit{logic} or \textit{deductive apparatus} --- consists of the axioms or axiom schemata (iii) and rules of inference (iv) elements of a formal system.\\
+			
+		Although rules of inference are usually designed to preserve a semantic property, they are defined solely over the syntax of the formal language and as a result, derivations in the deductive system are independent of any particular interpretation and consist solely of steps of syntactic consequence. It is for this reason that formal systems may not be sound or complete: the transitive closure of syntactic consequence may not exactly equal the transitive closure of semantic consequence.
+		\label{def:deductive-system}}
+	
+		\boxeddefinition{\textbf{(Logical System)} There are many kinds of formal systems but the most common type is often referred to as a \textit{logical system}. Loosely defined, a logical system is a formal system in which the sentences are assigned truth values by an interpretation. Any interpretation which satisfies the axioms of the logical system is known as a model for the system.
+		\label{def:logical-system}}
+		
+		\note{Note that:
+			\begin{itemize}
+				\item The term "formalism" is often referring to a formal system but may also be referring to a particular notation for some mathematical object.
+				\item The term "axiomatic system" refers to a system of deriving theorems from an initial set of axioms. As such, formal systems as defined above qualify as a (particulary strictly defined) type of axiomatic system.\\\\ However, axiomatic systems need not be formal systems. For example: Euclid's Elements is an axiomatic system but not a formal system whereas Peano Arithmetic (\ref{def:peano-arithmetic}) is both axiomatic and formal.\\\\ Ultimately, axiomatic versus non-axiomatic is about whether our first theorems can rely on an assumed set of propositions (axioms) in addition to the rules of inference or only on the rules of inference. Whereas formal versus informal is about how rigourously we define each of these elements of the system.
+			\end{itemize}	
+		}
+	
+		
+		\nl[12]
+		\sep
+		\begin{exe}
+			\ex If $A$ and $B$ are letters in a language of propositional logic then, according to the grammar of propositional logic,
+			\[ C = A \land B \]
+			is well-formed and so is a formula in the syntax of the language. But if we start to make the inference that $C$ is true iff both $A$ and $B$ are true, then we are using the semantics of the connective $\land$, one of the logical constants of the language of propositional logic.\\
+			
+			Meanwhile $A$, $B$ and $C$ are non-logical symbols and can be mapped to any kind of object in a domain of discourse by an interpretation. However, propositional logic has a standard interpretation as a truth-functional system and so, in practice, only interpretations that map the values True or False to the non-logical symbols are considered admissable. For this reason, in propositional logic, interpretations are often referred to as \textit{truth assignments}.
+			
+			\bigskip
+			\ex In predicate logic (first-order logic), \question{Both sentences and predicates with free-variables have an extension over the domain. If the extension of a sentence is not the entire domain then there is some subset over which the sentence is true. So how does an interpretation assign a truth-value to a sentence? For a unary predicate, an interpretation defines the domain of discourse which implicitly defines the extension of the predicate as the subset of the domain over which the predicate holds true. But a sentence is always either true or false, why? Because its extension is always the entire domain?}
+			\nl\TODO{predicate logic}
+			
+			\bigskip
+			\ex An example of a logical system is Peano Arithmetic (\ref{def:peano-arithmetic}) with the natural numbers as its model.
+		\end{exe}
+		
+
+
+
+
+% -------------- break ----------------
+\pagebreak
+		
+
+
+
+		\subsubsection{Propositional Logic}
+		\bigskip
+		\boxeddefinition{\textbf{(Propositional Language)} A \textit{propositional language} $L$ is a set of \textit{propositional atoms} identified by letters, e.g. ${ p, q, r, A, B, \dots }$. An \textit{atomic $L$-formula} is an atom of $L$.}
+		
+		\boxeddefinition{\textbf{(Propositional Connectives)} The \textit{propositional connectives} are:
+			\begin{itemize}
+				\item the unary connective \textit{negation} $\lnot$; and
+				\item the binary connectives: \textit{disjunction} $\lor$, \textit{conjunction} $\land$, \textit{implication} $\implies$ and \textit{biimplication} $\iff$.
+			\end{itemize}
+		That's to say, the connectives of boolean algebra (\ref{def:boolean-algebra}) plus implication and biimplication.
+		\label{def:propositional-connectives}}
+		\note{Note the (informally agreed) operator precedence rules for logical operators: \href{http://intrologic.stanford.edu/intrologic/glossary/operator_precedence.html}{Stanford}.}
+		
+		\boxeddefinition{\textbf{(L-formula)} The set of \textit{L-formulas} is generated inductively using the following rules:
+			\begin{enumerate}
+				\item If $p$ is an atomic $L$-formula then $p$ is an $L$-formula.
+				\item If $p$ is an $L$-formula then $\lnot p$ is an $L$-formula.
+				\item If $p$ and $q$ are $L$-formulas and $R$ is any of the binary propositional connectives, then ${ p R q }$ is an $L$-formula.
+			\end{enumerate}
+		\label{def:L-formula}}
+		\note{In computer science this is often expressed as
+			\[ A, B, \dots ::= p,q,r, \dots, T \mid F \mid A \lor B \mid A \land B \mid \lnot A \]
+			which is to say that formulas ${ A,B,\dots }$ are either: propositional atoms ${ p,q,r,\dots }$; or the literals True or False; or expressions of two formula operands related by a binary connective.
+		}
+		
+		\boxeddefinition{\textbf{(Truth Values)} There are two \textit{truth values} $T$ and $F$ or 1 and 0, representing truth and falsity respectively.
+		\label{def:truth-values}}
+		\boxeddefinition{\textbf{(Truth Assignment)} A \textit{truth assignment on $L$} or an \textit{$L$-assignment}, is a mapping
+			\[ L \longmapsto \{ T, F \}. \]
+			If $L$ has $n$ distinct atoms then there are $2^n$ possible such assignments.
+		 \label{def:truth-assignment}}
+	 
+	 	\bigskip
+	 	\labeledProposition{Given an $L$-assignment
+	 		\[ M: L \longmapsto \{T, F\}, \]
+	 		there is a unique $L$-valuation
+	 		\[ v_M: \setc{A}{A \text{ is an $L$-formula}} \longmapsto \{T, F\} \]
+	 		given by the following rules:
+ 			\[\begin{aligned}
+ 				v_M(\lnot A) &= \begin{cases}
+ 					T & v_M(A) = F\\
+ 					F & v_M(A) = T
+ 				\end{cases} \nnn
+ 				v_M(A \lor B) &= \begin{cases}
+ 					T & v_M(A) = T, v_M(B) = T\\
+ 					F & v_M(A) = v_M(B) = F
+ 				\end{cases} \nnn
+ 				v_M(A \land B) &= \begin{cases}
+ 					T & v_M(A) = v_M(B) = T\\
+ 					F & v_M(A) = F, v_M(B) = F
+ 				\end{cases} \nnn
+ 				v_M(A \implies B) &= v_M(\lnot(A \land \lnot B)) \nnn
+ 				v_M(A \iff B) &= \begin{cases}
+ 					T & v_M(A) = v_M(B)\\
+ 					F & v_M(A) \neq v_M(B)
+ 				\end{cases}.
+ 			\end{aligned}\]
+	 	}{L-valuation}
+	 	\begin{proof}
+	 		The truth value of an arbitrary $L$-formula $A$ is given by recursion on the $L$-formulas that are the operands of the connectives that comprise $A$.
+	 	\end{proof}
+ 		\note{Note that the evaluation rule of ${ A \implies B }$ involves a convention for the case that the antecedent $A$ is false: see  \href{https://en.wikipedia.org/wiki/Material_implication_(rule_of_inference)\#Partial_proof}{wikipedia}.}
+ 	
+ 		
+ 		
+ 		\nl[12]
+ 		\subsubsubsection{Satisfiability, Entailment and Validity}
+ 		\note{Assume a fixed propositional language $L$ so that we can refer to an $L$-formula as a formula and an $L$-assignment as an assignment, etc.}
+ 		
+ 		\boxeddefinition{\textbf{(Truth Under Assignment)} If $A$ is a formula and $M$ is an assignment, then $A$ is said to be \textit{true under $M$} iff ${ v_M(A) = T }$ and \textit{false under $M$} iff ${ v_M(A) = F }$. \label{def:truth-under-assignment}}
+ 		
+ 		\boxeddefinition{\textbf{(Logically Valid)} A formula is \textit{logically valid} (or a \textit{tautology}) iff it is true under any assignment. \label{def:tautology}}
+ 		
+ 		\boxeddefinition{\textbf{(Satisfiability)} A set of formulas is said to be \textit{satisfiable} iff there exists some assignment such that every formula in the set is true under the assignment. Formally, let
+ 			\[ S = \setc{A}{A \text{ is a formula }}. \]
+ 		Then $S$ is satisfiable iff there exists some assignment $M$ such that,
+ 		\[ \forall A \in S \logicsep v_M(A) = T \]
+ 		which is also to say that
+ 		\[ \setc{A \in S}{v_M(A) = T} = S. \]
+ 		\label{def:satisfiability}}
+ 	
+ 		\boxeddefinition{\textbf{(Logical Consequence)} Let $S$ be a set of formulas and $A$ be a formula. If $A$ is true under every assignment that satisfies $S$ then $A$ is a \textit{logical consequence} of $S$.
+ 		\label{def:logical-consequence}}
+ 		
+ 				
+ 		\biggerskip
+ 		\labeledProposition{A formula $A$ is logically valid iff $\lnot A$ is not satisfiable.}{A-is-valid-iff-not-A-is-not-satisfiable}
+ 		\begin{proof}
+ 			If $A$ is logically valid then it is true under any assignment and so $\lnot A$ is false under all assignments. Therefore $\lnot A$ is not satisfiable. Conversely, if $\lnot A$ is not satisfiable then it is false under all assignments which makes $A$ true under all assignments and, therefore, logically valid.
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledProposition{The empty set is a tautology (logically valid).}{empty-set-is-tautology}
+ 		\begin{proof}
+ 			Let ${ S = \emptyset }$. Then for any assignment $M$,
+ 			\[ \setc{A \in S}{v_M(A) = T} = \emptyset = S. \qedhere \]
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledProposition{A formula $B$ is a logical consequence of the set of formulas ${ S = \setc{A_i}{1 \leq i \leq n} }$ iff the formula
+ 			\[ (A_1 \land \cdots \land A_n) \implies B \]
+ 			is logically valid.
+ 		}{B-is-logical-consequence-of-set-S-iff-conjunction-of-members-of-S-implies-B-is-valid}
+ 		\begin{proof}
+ 			Let $P$ denote the formula ${ A_1 \land \cdots \land A_n }$. Then, by definition (\ref{def:satisfiability}), under any assignment that satisfies $S$, each $A_i$ is true, and so it follows that $P$ is true; and under any assignment that does not satisfy $S$, there exists some $i$ such that $A_i$ is false and so $P$ is false.\\
+ 			
+ 			Assume $B$ is a logical consequence of $S$. Then by definition (\ref{def:logical-consequence}), under every assignment that satisfies $S$, $B$ is also true. So if $M_1$ is an assignment that satisfies $S$, then under $M_1$, $P$ is true and $B$ is also. So we have
+ 			\[ v_{M_1}(P) = T \; \eqand \; v_{M_1}(B) = T. \]
+ 			On the other hand, if $M_2$ is an assignment that does not satisfy $S$ then we have
+ 			\[ v_{M_2}(P) = F \; \eqand \; v_{M_2}(B) \in \{T, F\}. \]
+ 			Therefore, over all assignments $M$, we never have $P$ true and $B$ false and so,
+ 			\[  v_M( \lnot( P \; \land \; \lnot B ) ) = T = v_M( P \implies B ). \]
+ 			
+ 			Conversely, if we assume that the formula ${ P \implies B }$ is logically valid, then there is no assignment under which $P$ is true and $B$ is false. In other words, under any assignment such that $P$ is true, $B$ is also true. It follows that any assignment that satisfies $S$, also satisfies $B$ and so $B$ is a logical consequence of $S$.
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledProposition{A formula is logically valid iff it is a logical consequence of the empty set.}{tautology-iff-logical-consequence-of-empty-set}
+ 		\begin{proof}
+ 			If a formula $A$ is a logical consequence of the empty set then, by the definition of logical consequence (\ref{def:logical-consequence}), it is true under any assignment that satisfies the empty set. By \autoref{prop:empty-set-is-tautology}, any assignment satisfies the empty set. It therefore follows that $A$ is true under assignment, which is to say that $A$ is logically valid.\\
+ 			Conversely, if a formula $A$ is logically valid, by definition (\ref{def:tautology}) then it is true under all assignments. Since the empty set is satisfied by any assignment, under any assignment, the empty set is satisfied and $A$ is true. Therefore $A$ is a logical consequence of the empty set.
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledProposition{Any tautology is a logical consequence of any other tautology.}{any-tautology-is-logical-consequence-of-any-other-tautology}
+ 		\begin{proof} 
+ 			If $A$ and $B$ are both tautologies then both are true under all assignments and so, trivially, under any assignment that satisfies $\{A\}$, the formula $B$ is true and under any assignment that satisfies $\{B\}$, the formula $A$ is true.
+ 		\end{proof}
+ 		
+ 		
+ 		
+ 		
+ 		\nl[12]
+ 		\subsubsubsection{Logical Equivalence}
+ 		\nl
+ 		\boxeddefinition{\textbf{(Logical Equivalence)} Two formulas $A$ and $B$ are said to be \textit{logically equivalent}, denoted ${ A \equiv B }$, if they are each a logical consequence of the other. \label{def:logical-equivalence}}
+ 		
+ 		\boxeddefinition{\textbf{(Disjunctive Normal Form)} If ${ p_1, p_2, \dots, p_n }$ are formulas of the form
+ 			\[ q_1 \land q_2 \land \cdots \land q_m \]
+ 			where each $q_i$ for ${ 1 \leq i \leq m }$ is either a propositional atom or the negation of a propositional atom, then the formula
+ 			\[ p_1 \lor p_2 \lor \cdots \lor p_n \]
+ 			is said to be in \textit{disjunctive normal form}.
+ 		\label{def:disjunctive-normal-form}}
+ 		
+ 		\bigskip
+ 		\labeledProposition{${ A \equiv B }$ holds iff ${ A \iff B }$ is logically valid.}{A-logically-equiv-B-iff-A-biimplies-B-is-logically-valid}
+ 		\begin{proof}
+ 			By the definition of logical equivalence (\ref{def:logical-equivalence}), $A$ and $B$ are a logical consequence of each other. So under any assignment under which one of them is true, the other is also true. Therefore under any assignment $M$ we have
+ 			\[ v_M(A) = v_M(B) \]
+ 			and so, by \autoref{prop:L-valuation},
+ 			\[ v_M(A \iff B) = T.  \qedhere \]
+ 		\end{proof}
+ 		
+ 		\medskip
+ 		\begin{corollary}
+ 			All logically valid formulae are equivalent.
+ 		\end{corollary}
+ 		\begin{proof}
+ 			Let $A$ and $B$ be logically valid formulae. Then under any assignment $M$ we have
+ 			\[ v_M(A) = T = v_M(B) \]
+ 			and so, by \autoref{prop:L-valuation},
+ 			\[ v_M(A \iff B) = T. \qedhere \]
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\note{Formulae in the propositional calculus that do not include implication and biimplication therefore only involve the boolean connectives. These formulae exhibit the equivalences of boolean algebra (\ref{def:boolean-algebra}).}
+ 		\labeledProposition{\textbf{(Algebra of Implications)} Forumlae involving implication and biimplication have the following equivalences:
+ 			\begin{enumerate}[label=(\roman*)]
+ 				\item ${ A \implies B \; \equiv \; \lnot A \lor B }$
+ 				\nl
+ 				\item ${ A \implies B \; \equiv \; \lnot B \implies \lnot A }$
+ 				\nl
+ 				\item ${ A \iff B \; \equiv \; (A \implies B) \land (B \implies A) }$
+ 				\nl
+ 				\item ${ A \iff B \; \equiv \; B \iff A }$,\nn
+ 				${ A \iff (B \iff C) \; \equiv \; (A \iff B) \iff C }$
+ 				\nl
+ 				\item ${ \lnot(A \iff B) \; \equiv \; \lnot A \iff B \; \equiv \; A \iff \lnot B }$			
+ 				\nl
+ 				\item ${ A \implies (B \land C) \; \equiv \; (A \implies B) \land (A \implies C) }$,\nn
+ 				${ A \implies (B \lor C) \; \equiv \; (A \implies B) \lor (A \implies C) }$
+ 				\nl
+ 				\item ${ (A \land B) \implies C \; \equiv \; (A \implies C) \lor (B \implies C) }$,\nn
+ 				${ (A \lor B) \implies C \; \equiv \; (A \implies C) \land (B \implies C) }$
+ 			\end{enumerate}
+ 		}{algebra-of-implications}
+ 		\begin{proof}
+ 			\nl[6]
+ 			Let $M$ be an arbitrary assignment. We prove the equivalences using the valuation rules from \autoref{prop:L-valuation} of implication:
+ 			\[ v_M(A \implies B) = v_M( \lnot(A \land \lnot B) ) \]
+ 			and biimplication:
+ 			\[ 
+ 				v_M(A \iff B) = \begin{cases}
+					 				T & v_M(A) = v_M(B)\\
+					 				F & v_M(A) \neq v_M(B)
+					 			\end{cases}.
+ 			\]
+ 			\nl[2]
+ 			\begin{enumerate}[label=(\roman*)]
+ 				\item The valuation rule of ${ A \implies B }$ is a boolean algebra ((\ref{def:boolean-algebra}) expression and so we can apply De Morgan's law to it to obtain,
+ 					\[ \lnot(A \land \lnot B) = \lnot A \lor B.  \]
+ 					
+
+ 				\item Using (i) we can reduce ${ A \implies B }$ to the boolean expression ${ \lnot A \lor B }$ and then apply the De Morgan and commutative laws of boolean algebra to the valuation rule of ${ \lnot B \implies \lnot A }$ to obtain,
+ 					\[ \lnot(\lnot B \land A) \equiv B \lor \lnot A \equiv \lnot A \lor B. \]
+ 				
+
+ 				\item Reducing ${ A \implies B }$ and ${ B \implies A }$ to boolean expressions according to (i), and applying distributive laws and associative and identity laws of $lor$, we have
+ 					\[\begin{aligned}
+ 						(A \implies B) \land (B \implies A) &\equiv (\lnot A \lor B) \; \land \; (\lnot B \lor A)  \\
+ 						&\equiv (\lnot A \land (\lnot B \lor A)) \; \lor \; (B \land (\lnot B \lor A)) \\
+ 						&\equiv (\lnot A \land \lnot B) \lor (\lnot A \land A) \lor (B \land \lnot B) \lor (B \land A) \\
+ 						&\equiv (\lnot A \land \lnot B) \lor (A \land B)
+ 					\end{aligned}\]
+ 					which expression clearly has the same valuation rule as ${ A \iff B }$.
+ 					
+ 				\nl
+ 				\item The commutativity and associativity of $\iff$ follows from the commutativity and associativity of $=$ and $\neq$ in its valuation rule.
+ 				
+ 				\nl
+ 				\item By the valuation rule of $\lnot$ (\autoref{prop:L-valuation}),
+					\[ v_M( \lnot(A \iff B) ) = \begin{cases}
+							 						T & v_M(A \iff B) = F \\
+							 						F & v_M(A \iff B) = T
+						 						\end{cases}
+ 					\]
+ 					and substituting in the valuation rule of $A \iff B$,
+ 					\[ v_M( \lnot(A \iff B) ) = \begin{cases}
+							 						T & v_M(A) \neq v_M(B) \\
+							 						F & v_M(A) = v_M(B)
+							 					\end{cases}.
+ 					\]
+ 					By \autoref{prop:binary-values-A-neq-B-then-A-eq-not-B}, if ${ v_M(A) \neq v_M(B) }$ then ${ v_M(A) = v_M(\lnot B) }$. Therefore,
+ 					\[ v_M( \lnot(A \iff B) ) = \begin{cases}
+							 						T & v_M(A) = v_M(\lnot B) \\
+							 						F & v_M(A) \neq v_M(\lnot B)
+							 					\end{cases}
+ 					\]
+ 					and this is the valuation rule for ${ A \iff \not B }$. Also by \autoref{prop:binary-values-A-neq-B-then-A-eq-not-B}, if ${ v_M(A) \neq v_M(B) }$ then ${ v_M(\not A) = v_M(B) }$ and this results in the valuation rule for ${ \lnot A \iff B }$.
+ 				
+ 				\nl
+ 				\item This follows directly from the distributivity of the boolean connectives after reducing the implications to boolean expressions using (i),
+ 					\[ \lnot A \lor (B \land C) = (\lnot A \lor B) \land (\lnot A \lor C), \]
+ 					\[ \lnot A \lor (B \lor C) = (\lnot A \lor B) \lor (\lnot A \lor C). \]
+ 					
+ 				\nl
+ 				\item This also follows directly from the distributivity of the boolean connectives after reducing the implications to boolean expressions using (i) and then applying De Morgan's law to the first clause,
+ 				\[ \lnot(A \land B) \lor C = (\lnot A \lor \lnot B) \lor C = (\lnot A \lor B) \lor (\lnot A \lor C), \]
+ 				\[ \lnot(A \lor B) \lor C = (\lnot A \land \lnot B) \lor C = (\lnot A \lor C) \land (\lnot B \lor C). \]					
+ 			\end{enumerate}
+ 		\end{proof}
+ 		
+ 		\bigskip
+ 		\labeledProposition{Every formula is equivalent to a formula in disjunctive normal form.}{every-formula-equiv-to-a-formula-in-disjunctive-normal-form}
+ 		\begin{proof}
+ 			Let $L$ be a propositional language with $n$ atoms ${ q_1, q_2, \dots, q_n }$. As has been mentioned (\ref{def:truth-assignment}), there are $2^n$ possible $L$-assignments. Let ${ m = 2^n }$ and let
+ 			\[ U = \setc{M_i}{i \in \N{}_m} \]
+ 			be the set of all possible $L$-assignments. If we represent these assignments as a matrix with a column for each atom of $L$ and a row for each assignment, then we have an ${ m \times n }$ matrix and we can place a 1 in the $(i,j)$-th element if the $j$-th atom is assigned the value of true in the $i$-th assignment and 0 otherwise.
+ 			\[
+ 				\begin{bmatrix}
+ 					0 & 0 & 0 & 0 & 0 & \cdots \\
+ 					1 & 0 & 0 & 0 & 0 & \cdots \\
+ 					\vdots \\
+ 					0 & 1 & 1 & 0 & 1 & \cdots \\
+ 					\vdots
+ 				\end{bmatrix} 
+ 			\]
+ 			
+ 			Then, for example, if row $i$ of the matrix is
+ 			\[ \begin{bmatrix}0 & 1 & 1 & 0 & 1 & \cdots\end{bmatrix} \]
+ 			then this represents an assignment $M_i$ given by
+ 			\[ Fq_1, Tq_2, Tq_3, Fq_4, Tq_5, \dots \]
+ 			so that, under this assignment,
+ 			\[ v_{M_i}(\lnot q_1 \land q_2 \land q_3 \land \lnot q_4 \land q_5) = T. \]
+ 			Therefore, if we form a similar conjunctive clause and name it $p_i$ for each row $i$ of this matrix and then join them all with disjunctions
+ 			\[ A = p_1 \lor p_2 \lor \cdots \lor p_m \]
+ 			then for any possible assignment $M_i$ there exists a row $i$ of the matrix such that the clause $p_i$ in the formula $A$ is true under this assignment. Therefore, by induction on (\ref{axiom:boolean-unit-for-or}), $A$ is true under any possible assignment of the atoms of $L$.\\
+ 			
+ 			For any arbitrary $L$-formula $B$ there exists some subset of the set of all possible assignments under which $B$ is true. Let ${ I \subseteq \N{}_m }$ be an indexing set such that
+ 			\[ S = \setc{M_k \in U}{v_{M_k}(B) = T} = \setc{M_i \in U}{i \in I}. \]
+ 			Every assignment $M_i$ in this set has a corresponding clause $p_i$ in $A$. It follows then that if we form the formula
+ 			\[ B' = \bigvee_{i \in I} p_i  \]
+ 			then the resultant formula has a clause that is true for every assignment that satisfies $B$. Therefore $B'$ is true under assignment under which $B$ is true and is therefore a logical consequence of $B$. Since $B'$ consists of \textit{only} terms that are true under an assignment that also satisfies $B$, it follows that the reverse is also true: any assignment that satisfies $B'$ also satisfies $B$ and so $B$ is a logical consequence of $B'$.\\
+ 			
+ 			It follows that $B$ and $B'$ are logically equivalent.
+ 		\end{proof}
+ 	
+ 	
+ 		\note{Note that the set of assignments that satisfies a formula $B$
+ 			\[ S = \setc{M_k \in U}{v_{M_k}(B) = T} \]
+ 			can be thought of as the extension (\ref{def:extension-of-a-property}) of $B$ in the set of assignments.
+ 		}
+ 	
+ 	
+ 		\nl[12]
+ 		\subsubsubsection{Satisfiability Trees (a.k.a. Tableau)}
+ 		\nl
+ 		A \textit{satisfiability tree} is a binary tree used to explore the different states that a propositional formula can take up under different assignments. Formulae are successively broken down into subformulae and eventually into propositional atoms to determine the assignments that satisfy the original formula.\\
+ 			
+ 		Logical consequences of a set of formulae are expanded into a single child node, e.g.
+ 		\[ 
+	 		\begin{array}{*3c}
+	 			A & \land & B  \\
+	 			  &  |    & \\
+	 			  &  A    & \\
+	 			  &  B    & \\
+	 			  &\vdots &
+	 		\end{array}
+ 		\]
+ 			
+ 		on the other hand, for each choice of assignments, two child branches are formed, e.g.,
+ 			\[ 
+ 				\begin{array}{*3c}
+ 					A & \lor & B  \\
+ 					/ &      & \backslash \\
+ 					A &      & B
+ 				\end{array}
+ 			\]
+ 		So the following tree, for example,
+ 			\[ 
+	 			\begin{array}{*3c}
+	 				P & \implies & Q \\
+	 				  & \lnot L  & \\
+	 				A & \lor & B  \\
+	 				/ &      & \backslash \\
+	 				A &      & B
+	 			\end{array}
+ 			\]
+ 		would proceed with two child branches off each of the final $A$ and $B$ branches signifying $\lnot P$ or $Q$ possible assignments.\\
+ 		
+ 		\note{These rules for extending a satisfiability tree are equivalent to converting formulae into NNF, Negation Normal Form (\href{https://en.wikipedia.org/wiki/Negation_normal_form}{wikipedia}), and then for every $\land$ the operands are stacked within the same node and for every $\lor$ the operands are placed on two new branches.}
+ 		
+ 		In this way a tree can begin with a formula or set of formulae which must all hold and then break these down into subformulae which hold under different assignments. Each path of the tree either ends in a logical impasse where an assignment causes a contradiction or all subformulae have been broken down into propositional atoms without any contradiction arising.\\
+ 		
+ 		In the first case, where the tree path terminates in a contradiction, the path is described as \textit{closed}; and in the second case, where all the propositional atoms are assigned without contradiction, the path is described as \textit{open}. Every closed path represents an assignment that does \textit{not} satisfy the original formula while every open path represents an assignment that \textit{does} satisfy the original formula. A tree with only closed paths is described as closed and having \textit{closed off}.
+ 		
+ 		\note{Fundamentally, a satisfiability tree (as the name suggests) determines if a formula is satisfiable. If the completed tree has one or more open paths, then the formula is satisfiable. If we want to test if a formula $A$ is valid we can easily do so by testing the satisfiablity of $\lnot A$: if $\lnot A$ is satisfiable then $A$ is not true under all assignments and so is not valid. Similarly, if we want to test if $A$ and $B$ are logically equivalent we can test the satisfiability of ${ A \iff \lnot B }$: if they are logically equivalent then this must be unsatisfiable. Likewise we can test if $B$ is a logical consequence of $A$ by testing the satisfiability of ${ A \land \lnot B }$.}
+ 		
+ 		
+ 		\nl[12]
+ 		\subsubsubsection{Completeness of Tableau Method}
+ 		\nl
+ 		\boxeddefinition{\textbf{(Replete Tableau)} A path of a satisfiability tree is said to be \textit{replete} if, whenever it contains the top formula of a tableau rule, it contains at least one of the branches. A tree is said to be replete if all its paths are replete.
+ 		\label{def:replete-tableau}}
+ 		
+ 		\boxeddefinition{\textbf{(Open Tableau)} A tableau is \textit{open} if it has at least one open path. \label{def:open-tableau}}
+ 		
+ 		\boxeddefinition{\textbf{(Hintikka Set)} A set of formulae is a \textit{Hintikka set} if it satisfies:
+ 			\begin{itemize}
+ 				\item If $S$ contains a top formula of a tableau rule then it contains at least one of its branches;
+ 				\item $S$ doesn't contain any conjugate pair of atomic formulae (i.e. $p$ and $\lnot p$).
+ 			\end{itemize}
+ 		\label{def:}}
+ 		
+ 		
+ 		
+ 		\biggerskip
+ 		\labeledProposition{Any finite tableau can be extended to a finite replete tableau.}{finite-tableau-can-be-extended-to-finite-replete-tableau}
+ 		\begin{proof}
+ 			Apply the tableau rules until the leaves of the tableau don't contain any formulae that are top formulae of tableau rules, which is to say, until the leaves only contain atomic formulae or the negation of atomic formulae.
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledProposition{If a set of formulae $S$ is a Hintikka set then $S$ is satisfiable.}{hintikka-set-is-satisfiable}
+ 		\begin{proof}
+ 			Every formula in $S$ is either a top formula of a tableau rule or it isn't. If it isn't a top formula of a tableau rule then it must be either an atomic formula or the negation of an atomic formula.\\
+ 			
+ 			Let ${ P = \{p_1, p_2, \dots, p_n\} }$ denote every atomic formula or negation of an atomic formula in $S$. Since, by definition of the Hintikka set, there are no conjugate pairs of atomic formulae in $S$, the set $P$ is satisfiable. Let ${ Q = \{q_1, q_2, \dots, q_n\} }$ be the set of all tableau rule top formulae in $S$. By the definition of a Hintikka set, for each $q_i$, at least one branch of the corresponding tableau rule must also be in $S$.\\
+ 			
+ 			The tableau rules have the property that, satisfying all the formulae on at least one branch of the rule, satisfies the top formula of the rule. It's easy to see that every $p_i$ being true is either consistent with each $q_i$ being true (if it was not then one of the branches of the rule of $q_i$ would ultimately result in $\lnot p_i$) or $p_i$ satisfies some top formula $q_j$ which ultimately satisfies $q_i$.\\
+ 			
+ 			Therefore, $S$ is satisfiable.
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledProposition{If there exists an open replete satisfiability tree starting with the set of formulae
+ 			\[ S = \{X_1, X_2, \dots , X_n\} \]
+ 			then $S$ is satisfiable.}{open-replete-tableau-implies-satisfiability}
+ 		\begin{proof}
+ 			A replete tableau has every path replete and an open tableau has at least one open path. Therefore an open replete tableau has at least one open replete path. The formulae on such a path form a Hintikka set which, by \autoref{prop:hintikka-set-is-satisfiable}, is therefore satisfiable.{\tiny }
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledTheorem{\textbf{(Soundness of Tableau Method)} If there exists a finite closed tableau starting with the set of formulae
+ 				\[ S = \{X_1, X_2, \dots , X_n\} \]
+ 				then $S$ is not satisfiable.
+ 		}{propositional-logic-is-sound}
+ 		\begin{proof}
+ 			This follows directly from the semantic correctness of the rules of extension of satisfiability trees.
+ 		\end{proof}
+ 	
+ 		\bigskip
+ 		\labeledTheorem{\textbf{(Completeness of Tableau Method)} If a set of formulae
+ 			\[ S = \{X_1, X_2, \dots , X_n\} \]
+ 			is not satisfiable then there exists a finite closed tableau starting with $S$.
+ 		}{propositional-logic-is-complete}
+ 		\begin{proof}
+ 			By \autoref{prop:finite-tableau-can-be-extended-to-finite-replete-tableau}, any finite tableau can be made replete, and by \autoref{prop:open-replete-tableau-implies-satisfiability}, any finite replete tableau with an open path starts with a satisfiable set of formulae. Therefore, if $S$ is not satisfiable then there can be no finite replete open tableau starting with $S$ and so a finite tableau starting with $S$ must be closed.
+ 		\end{proof}
+ 	
+ 
+ 		
+		
+		\sep
+		\begin{exe}
+			\ex Using propositional logic we can formulate the following natural language argument as a propositional formula.
+				\begin{displayquote}
+					If it has snowed, it will be poor driving. If it is poor driving, I will be late unless I start early. Indeed, it has snowed. Therefore, I must start early to avoid being late.
+				\end{displayquote}
+				To describe this in propositional logic we need to create a propositional language $L$ with an atom for each proposition mentioned. Namely,
+				\begin{itemize}
+					\item \textit{s}: it has snowed;
+					\item \textit{p}: it will be poor driving;
+					\item \textit{l}: I will be late;
+					\item \textit{e}: I start early.
+				\end{itemize}
+				There usually are a number of ways to describe any situation in propositional logic (because of equivalences) even without any ambiguity of the natural language expressions. In this case there is also some ambiguity in the English as \textquote{I will be late unless I start early} can be interpreted as either:
+				\begin{itemize}
+					\item I \textit{definitely will} be late if I \textit{don't} start early but I \textit{may} also be late even if I \textit{do} start early; or
+					\item I \textit{definitely will} be late if I \textit{don't} start early and I \textit{definitely won't} be late if I \textit{do} start early.
+				\end{itemize}
+				These two cases, written as $L$-formulae, are
+				\[ \lnot e \implies l  \eqand  \lnot e \iff l \]
+				respectively. In this case, for this argument, it doesn't make any difference because the argument only uses the first part --- I \textit{definitely will} be late if I \textit{don't} start early --- and so we only need ${ \lnot e \implies l }$.\\
+				
+				So we can express the whole argument as
+				\[ \big[(s \implies p) \; \land \; (p \implies (\lnot e \implies l)) \big] \; \implies \; \big[s \implies (\lnot l \implies e) \big]. \]
+				But this is also equivalent to
+				\[ \big[(s \implies p) \; \land \; (p \implies (\lnot e \implies l)) \; \land \; s \; \land \; \lnot l \big] \; \implies \; e. \tag{*} \]
+				
+				The second form (*) makes it easier to see how we test this argument for validity: we negate (*) --- which means setting the antecedent true and the consequent false --- and test this negated formula for satisfiability. If it is not satisfiable, then the original formula is valid.\\
+				
+				So, using a satisfiability tree:
+				\[\begin{aligned}
+					s &\implies p  \\
+					p &\implies (e \lor l) \\
+					s \\
+					\lnot l \\
+					\lnot e \\
+					  & | \\
+					p \\
+					e &\lor l \\
+					/ &\hspace{10pt} \backslash \\
+					e &\hspace{10pt} l
+				\end{aligned}\]
+				we see that the tree closes off because all paths end in contradiction.
+			
+			
+			\nl[12]
+			\ex In digital circuits, non-cyclic (feed-forward) circuits are called \textit{combinational circuits} because they can be modelled using propositional logic formulae. However, cyclic (feedback) circuits are known as \textit{sequential circuits} because the value depends not just on the input but also on the last output value and so the logic is sequential. Reference \href{https://www2.southeastern.edu/Academics/Faculty/kyang/2018/Spring/CMPS375/ClassNotes/CMPS375ClassNotesChap03.pdf}{Boolean Algebra and Digital Logic.pdf}
+
+			
+			\nl[12]
+			\ex Imagine we have the following excerpt from an sql query:\\
+			\nl
+			\begin{tabular}[h!]{*2l}
+				CASE &  \\
+				     &WHERE ua LIKE '\%somestring\%' THEN 'w' \\
+				     &WHERE ua IS NULL AND pl = 'pc' THEN 'p' \\
+				     &WHERE ua IS NULL AND pl = 'sp' THEN 's' \\
+				     &WHERE ua IS NOT NULL AND dc IN ('0') THEN 'p' \\
+				     &WHERE ua IS NOT NULL AND dc IN ('11', '12') THEN 's' \\
+				     &WHERE ua IS NOT NULL AND dc IN ('21', '22') THEN 't' \\
+				     &ELSE 'unknown' \\
+				END
+			\end{tabular}\\
+		
+			We can create a propositional language $L$ to describe this consisting of the following atoms:
+			\begin{itemize}
+				\item \textit{n}: ua IS NULL;
+				\item \textit{l}: ua LIKE '\%somestring\%';
+				\item \textit{pc}: pl = 'pc';
+				\item \textit{sp}: pl = 'sp';
+				\item \textit{dc0}: dc IN ('0');
+				\item \textit{dc1}: dc IN ('11', '12');
+				\item \textit{dc2}: dc IN ('21', '22');
+				\item \textit{$r_1$}: 'w';
+				\item \textit{$r_2$}: 'p';
+				\item \textit{$r_3$}: 's';
+				\item \textit{$r_4$}: 't';
+				\item \textit{$r_5$}: 'unknown'.
+			\end{itemize}
+		
+			\nl[4]
+			The first line, expressed as an $L$-formula, is ${ l \implies r_1 }$ but we need to also take into account the fact that the contract of the sql LIKE operation stipulates that if either of the operands is null then the result is false. So we also implicitly have ${ n \implies \lnot l }$. Instinctively, there is the thought to refactor the line to:\\
+			
+			WHERE ua IS NOT NULL AND ua LIKE '\%somestring\%' THEN 'w'.\\
+			
+			In $L$-formulae this is represented as,
+			\[ (\lnot n \land l) \implies r_1.  \tag{1} \]
+			Note that this is \textit{not} logically equivalent to
+			\[ (n \implies \lnot l) \; \land \; (l \implies r_1) \tag{2} \]
+			but \textit{is} a logical consequence of (2). That's to say, under any assignment under which (2) is true, (1) is also true but under assignments under which (2) is false, the values of (1) and (2) differ. Since the subformulae in (2) are enforced by the sql code, we are not interested in assignments that do not satisfy them. Another way of thinking about this is that: there is no possible database record that could make (2) false. In fact, this applies to each line of the sql code: we can treat them as axioms.\\
+			
+			There is a further subtlety in this first line of sql: without any other information (without any semantic rules in the data) we have no reason to believe that it is not possible for a record to satisfy both $l$ and one of $dc0$ or $dc1$ or $dc2$ ($dc0$, $dc1$ and $dc2$ are themselves mutually excusive). That's to say, a record may make conditions\\
+			
+			ua IS NOT NULL AND ua LIKE '\%somestring\%' \\
+			ua IS NOT NULL AND dc IN ('0') \\
+			
+			both true simultaneously. In this case, the semantics of the sql expression dictate that the first condition to appear in the code is the guard that will be triggered. So the lines of code\\
+			
+			WHERE ua IS NOT NULL AND dc IN ('0') THEN 'p' \\
+			WHERE ua IS NOT NULL AND dc IN ('11', '12') THEN 's' \\
+			WHERE ua IS NOT NULL AND dc IN ('21', '22') THEN 't' \\
+			
+			need to be expressed in $L$ as
+			\[\begin{aligned}
+				(\lnot n \land \lnot l \land dc0) &\implies r_2 \\
+				(\lnot n \land \lnot l \land dc1) &\implies r_3 \\
+				(\lnot n \land \lnot l \land dc2) &\implies r_4.
+			\end{aligned}\]
+		
+			Furthermore, the mutual exclusivity of the conditions\\
+			
+			dc IN ('0') \\
+			dc IN ('11', '12') \\
+			dc IN ('21', '22') \\
+			
+			needs to be expressed as
+			\[ \lnot(dc0 \land dc1) \; \land \; \lnot(dc0 \land dc2) \; \land \; \lnot(dc1 \land dc2). \]
+			
+			Similarly for $pc$ and $sp$ we have,
+			\[ \lnot(pc \land sp). \]
+		
+			\nl[4]
+			Another condition implicit in the sql code is that there is only a single return value so this means that $r_1$, $r_2$, $r_3$, $r_4$ and $r_5$ are all mutually exclusive. Therefore,
+			
+			\[ \bigwedge_{1 \leq i \neq j \leq 5} \lnot(r_i \land r_j). \]
+			
+			\nl[4]
+			The final line of code,\\
+			
+			ELSE 'unknown'\\
+			
+			can be expressed as
+			\[ \lnot \big[ l \lor (n \land pc) \lor (n \land sp) \lor (\lnot n \land dc0) \lor (\lnot n \land dc1) \lor (\lnot n \land dc2) \big] \; \implies \; r_5. \]
+			
+			We can refactor the antecedent using repeated application of De Morgan's law to	obtain,		
+			\[\begin{aligned}
+				&\lnot l \land \lnot(n \land pc) \land \lnot(n \land sp) \land \lnot(\lnot n \land dc0) \land \lnot(\lnot n \land dc1) \land \lnot(\lnot n \land dc2) \\
+				&\equiv \lnot l \land (\lnot n \lor \lnot pc) \land (\lnot n \lor \lnot sp) \land (n \lor \lnot dc0) \land (n \lor \lnot dc1) \land (n \lor \lnot dc2).
+			\end{aligned}\]
+			Then using associativity, identity and absorption laws (\ref{def:boolean-algebra}),
+			\[ (\lnot n \lor \lnot pc) \land (\lnot n \lor \lnot sp) \equiv \lnot n \lor (\lnot pc \land \lnot sp) \]
+			and
+			\[ (n \lor \lnot dc0) \land (n \lor \lnot dc1) \land (n \lor \lnot dc2) \equiv n \lor (\lnot dc0 \land \lnot dc1 \land \lnot dc2). \]
+			
+			So we end up with
+			\[ \big[ \lnot l \land (\lnot n \lor (\lnot pc \land \lnot sp)) \land (n \lor (\lnot dc0 \land \lnot dc1 \land \lnot dc2)) \big] \; \implies \; r_5. \]
+			
+			
+			
+			\nl[4]
+			We end up with the following axioms.
+			\newcounter{myrow}
+			\[ 
+				\begin{array}{>{\stepcounter{myrow}(\themyrow)}lccc}
+					& (\lnot n \land l) & \implies & r_1 \\
+					& (n \land pc) & \implies & r_2  \\
+					& (n \land sp) & \implies & r_3  \\
+					& \lnot(pc \land sp) && \\
+					& (\lnot n \land \lnot l \land dc0) & \implies & r_2  \\
+					& (\lnot n \land \lnot l \land dc1) & \implies & r_3  \\
+					& (\lnot n \land \lnot l \land dc2) & \implies & r_4  \\
+					& \lnot(dc0 \land dc1) \; \land \; \lnot(dc0 \land dc2) \; \land \; \lnot(dc1 \land dc2) && \\
+					& \big[ (n \lor (\lnot l \land \lnot dc0 \land \lnot dc1 \land \lnot dc2)) \land (\lnot n \lor (\lnot pc \land \lnot sp)) \big] & \implies & r_5 \\
+					& \bigwedge_{1 \leq i \neq j \leq 5} \lnot(r_i \land r_j).
+				\end{array}
+			\]
+			
+			\nl[2]
+			We can split the assignment space by the value of $n$ (i.e. into assignments where $n$ is true and assignments where $n$ is false). Then, if $n$ is true we have,
+			
+			\[ 
+			\begin{array}{ccc}
+				pc & \implies & r_2  \nn
+				sp & \implies & r_3  \nn
+				\lnot(pc \land sp) && \nn
+				(\lnot pc \land \lnot sp) & \implies & r_5 \nn
+				\bigwedge_{1 \leq i \neq j \leq 5} \, \lnot(r_i \land r_j) \nn
+			\end{array}
+			\]
+			where (8) has been left out because it has no effect in this side of the assignment space. The assignments that satisfy these formulae are:
+			\[\begin{aligned}
+				\{ Tpc, Fsp, Fr_1, Tr_2, Fr_3, Fr_4, Fr_5 \}, \\
+				\{ Fpc, Tsp, Fr_1, Fr_2, Tr_3, Fr_4, Fr_5 \}, \\
+				\{ Fpc, Fsp, Fr_1, Fr_2, Fr_3, Fr_4, Tr_5 \}. \\
+			\end{aligned}\]
+			
+			The other side of the assigment space, where $n$ is false, is a little more complicated but can be analysed in the same way. Looking at the formula in the two sides of the assignment space in this manner leads to the following refactoring of the original sql snippet.
+			\nl
+			\begin{tabular}[h!]{*5l}
+				CASE&& \\
+					&WHERE &ua IS& NULL \\
+						  &&CASE& \\
+						  	&&&WHERE pl = 'pc' THEN 'p' \\
+						  	&&&WHERE pl = 'sp' THEN 's' \\
+						  	&&&ELSE 'unknown' \\
+						  &&END& \\
+					&ELSE& \\
+						  &&CASE& \\
+						  	&&&WHERE ua LIKE '\%somestring\%' THEN 'w' \\
+						  	&&&WHERE dc IN ('0') THEN 'p' \\
+						  	&&&WHERE dc IN ('11', '12') THEN 's' \\
+						  	&&&WHERE dc IN ('21', '22') THEN 't' \\
+						  	&&&ELSE 'unknown' \\
+						  &&END& \\
+				END&& \\
+			\end{tabular}\\
+		
+
+			
+			\nl[12]
+			\ex \TODO{(this will move either to set algebra and extensions section or to predicate logic) logistic regression true values as the extension of a predicate of the form ${ f(\x) < 0 }$ where $f$ is a classifier function.}
+		\end{exe}
+	
+	
+		
+	
+	
+	
 		\biggerskip
+		\TODO{what to do with this section?}
 		\subsubsection{Basic Identities}
 		
 		\subheading{Negation of Universals and Existentials}
+		\TODO{these are useful equivalences in predicate logic}
 		\[ \lnot (\forall n \logicsep P(n)) \equiv \exists n \logicsep \lnot P(n) \]
 		\[ \lnot (\exists n \logicsep P(n)) \equiv \forall n \logicsep \lnot P(n) \]
 		
@@ -19,56 +896,22 @@
 		\subheading{Implication}
 		\[ P \implies Q \equiv \lnot Q \lor P \]
 		\[ P \implies Q \equiv \lnot Q \implies \lnot P \]
-		\note{Note the (informally agreed) operator precedence rules for logical operators: \href{http://intrologic.stanford.edu/intrologic/glossary/operator_precedence.html}{Stanford}.}
+		
+		
+	
+	
+		
+% -------------- break ----------------
+\pagebreak
+		
+		
+		\subsubsection{Predicate Logic}
+		
+		
+		
+		
 	}
 
-	\nl[12]
-	\searchableSubsection{Sets}{set theory}{
-		\bigskip
-		\boxeddefinition{\textbf{(Intersection and Union)} Let $S$ be a set and ${ A,B \subseteq S }$. Then the intersection of $A$ and $B$ is defined as
-			\[ A \cap B = \setc{x}{x \in A \; \land \; x \in B} \]
-			and the union of $A$ and $B$ is defined as
-			\[ A \cup B = \setc{x}{x \in A \; \lor \; x \in B}. \]
-		}
 	
-		\boxeddefinition{\textbf{(Collection/Family of Sets)} Let $S$ be a set and $I$ be a non-empty indexing set (see: \href{https://en.wikipedia.org/wiki/Index_set}{wikipedia}) such that for each ${ i \in I }$ there exists ${ A_i \subseteq S }$. Then the set of sets,
-			\[ \setc{A_i}{i \in I} \]
-			is known as a \textit{collection} or \textit{family} of sets.
-		}
-		\notation{We denote the intersection of an indexed family of sets,
-			\[ \bigcap_{i \in I} A_i = \setc{x}{ \forall i \in I \logicsep x \in A_i } \]
-			and the union,
-			\[ \bigcup_{i \in I} A_i = \setc{x}{ \exists i \in I \logicsep x \in A_i }. \]
-		}
 	
-		\biggerskip
-		\labeledTheorem{\textbf{(De Morgan Laws for Sets)} Let $S$ be a set and $I$ be a non-empty indexing set such that for each ${ i \in I }$ there exists ${ A_i \subseteq S }$. Then
-			\begin{enumerate}[label=(\roman*)]
-				\item  ${  S \setminus (\bigcap_I A_i) = \bigcup_I (S \setminus A_i)  }$
-				\item  ${ S \setminus (\bigcup_I A_i) = \bigcap_I (S \setminus A_i).  }$
-			\end{enumerate}
-		}{set-de-morgan-laws}
-		\begin{proof}\nl
-			\begin{enumerate}[label=(\roman*)]
-				\item  
-				\[\begin{aligned}
-					&S \setminus \bigcap_I A_i \\
-					&= \setc{x}{ x \in S \; \land \lnot (x \in A_1 \land x \in A_2 \land \cdots \land x \in A_n) } \\
-					&= \setc{x}{ x \in S \; \land [ \lnot (x \in A_1) \lor \lnot (x \in A_2) \lor \cdots \lor \lnot (x \in A_n) ] }  &\sidecomment{} \\
-					&= \setc{x}{ [x \in S \; \land \lnot (x \in A_1)] \lor \cdots \lor [x \in S \; \land \lnot (x \in A_n)] }  &\sidecomment{} \\
-					&= \bigcup_I (S \setminus A_i).
-				\end{aligned}\]
-				
-				\bigskip
-				\item
-				\[\begin{aligned}
-					&S \setminus (\bigcup_I A_i) \\
-					&= \setc{x}{ x \in S \; \land \lnot (x \in A_1 \lor x \in A_2 \lor \cdots \lor x \in A_n) } &\sidecomment{} \\
-					&= \setc{x}{ x \in S \; \land [\lnot (x \in A_1) \land \cdots \land \lnot (x \in A_n)] } &\sidecomment{} \\
-					&= \setc{x}{ [x \in S \; \land \lnot (x \in A_1)] \land \cdots \land [x \in S \; \land \lnot (x \in A_n)] } &\sidecomment{} \\
-					&= \bigcap_I (S \setminus A_i).
-				\end{aligned}\]
-			\end{enumerate}
-		\end{proof}
-	}
 \end{document}
